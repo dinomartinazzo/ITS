@@ -1,0 +1,734 @@
+CMD
+
+cd  'C:\Users\Administrator\Desktop\ITS Gestione Dati\sqlite\'
+
+.help
+
+Creating a Database
+sqlite3 test.db
+
+create table test (id integer primary key, value text);
+insert into test (id, value) values(1, 'eenie');
+insert into test (id, value) values(2, 'meenie');
+insert into test (value) values('miny');
+insert into test (value) values('mo');
+
+
+.mode column
+.headers on
+
+select * from test;
+
+id  value
+--  ------
+1   eenie
+2   meenie
+3   miny
+4   mo
+
+select last_insert_rowid();
+
+create index test_idx on test (value);
+create view schema as select * from sqlite_master;
+.exit
+
+.tables
+.indices test
+.schema test
+.schema
+
+.mode column
+.headers on
+select type, name, tbl_name, sql from sqlite_master order by type;
+
+
+Exporting Data
+.output file.sql
+.dump
+.output stdout 
+This will create the file file.sql in your current working directory if it does not already exist. If a file
+by that name does exist, it will be overwritten.
+
+.output file.csv
+.separator ,
+select * from test;
+.output stdout
+
+.output text.csv
+.separator ,
+select * from test where value like 'm%';
+.output stdout
+
+
+Importing Data
+.show
+
+drop table test;
+drop view schema;
+.read file.sql
+
+	If you want to then import this CSV data into a similar table with the same structure as the test table (call it test2), do the following:
+	 create table test2(id integer primary key, value text);
+	 .import text.csv test2
+
+--------------------
+
+sqlite3.exe test.db .dump
+sqlite3 test.db .dump > test.sql
+sqlite3 test.db "select * from test"
+sqlite3 test2.db < test.sql
+
+
+sqlite3 test.db vacuum
+will free up any unused space created from
+deleted objects
+
+
+--------------------------------------
+esercizio
+
+CREATE TABLE COMPANY(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL
+);
+
+CREATE TABLE DEPARTMENT(
+ID INT PRIMARY KEY NOT NULL,
+DEPT CHAR(50) NOT NULL,
+EMP_ID INT NOT NULL
+);
+
+.tables
+
+schema COMPANY
+
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (1, 'Paul', 32, 'California', 20000.00 );
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (2, 'Allen', 25, 'Texas', 15000.00 );
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (5, 'David', 27, 'Texas', 85000.00 );
+
+INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (6, 'Kim', 22, 'South-Hall', 45000.00 );
+
+INSERT INTO COMPANY VALUES (7, 'James', 24, 'Houston', 10000.00 );
+
+
+.header on
+.mode column
+SELECT * FROM COMPANY;
+SELECT ID, NAME, SALARY FROM COMPANY;
+
+.width 10, 20, 10
+SELECT * FROM COMPANY;
+
+
+
+.mode line
+select 10 + 20;
+10 + 20 = 30
+select 10 - 20;
+10 - 20 = -10
+select 10 * 20;
+10 * 20 = 200
+select 10 / 5;
+10 / 5 = 2
+select 12 % 5;
+12 % 5 = 2
+
+SELECT * FROM COMPANY WHERE SALARY > 50000;
+SELECT * FROM COMPANY WHERE SALARY = 20000;
+SELECT * FROM COMPANY WHERE SALARY != 20000;
+SELECT * FROM COMPANY WHERE SALARY <> 20000;
+SELECT * FROM COMPANY WHERE SALARY >= 65000;
+SELECT * FROM COMPANY WHERE AGE >= 25 AND SALARY >= 65000;
+SELECT * FROM COMPANY WHERE AGE >= 25 OR SALARY >= 65000;
+SELECT * FROM COMPANY WHERE AGE IS NOT NULL;
+SELECT * FROM COMPANY WHERE NAME LIKE 'Ki%';
+SELECT * FROM COMPANY WHERE NAME GLOB 'Ki*';
+SELECT * FROM COMPANY WHERE AGE IN ( 25, 27 ); value is either 25 or 27:
+SELECT * FROM COMPANY WHERE AGE NOT IN ( 25, 27 );
+SELECT * FROM COMPANY WHERE AGE BETWEEN 25 AND 27;
+
+SELECT AGE FROM COMPANY
+WHERE EXISTS (SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+
+SELECT * FROM COMPANY
+WHERE AGE > (SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+
+
+SELECT * FROM COMPANY WHERE SALARY = 10000;
+
+SELECT COUNT(*) AS "RECORDS" FROM COMPANY;
+SELECT CURRENT_TIMESTAMP;
+
+ 
+
+SELECT * FROM COMPANY;
+UPDATE COMPANY SET ADDRESS = 'Texas' WHERE ID = 6;
+
+
+modify all ADDRESS and SALARY
+UPDATE COMPANY SET ADDRESS = 'Texas', SALARY = 20000.00;
+
+DELETE FROM COMPANY WHERE ID = 7;
+DELETE FROM COMPANY;
+
+
+SELECT FROM table_name
+WHERE SALARY LIKE '200%' Finds any values that start with 200
+WHERE SALARY LIKE '%200%' Finds any values that have 200 in any position
+WHERE SALARY LIKE '_00%' Finds any values that have 00 in the second and third positions
+WHERE SALARY LIKE '2_%_%' Finds any values that start with 2 and are at least 3 characters in length
+WHERE SALARY LIKE '%2' Finds any values that end with 2
+WHERE SALARY LIKE '_2%3' Finds any values that have a 2 in the second position and end with a 3
+WHERE SALARY LIKE '2___3' Finds any values in a five-digit number that start with 2 and end with 3
+
+SELECT * FROM COMPANY LIMIT 6;
+
+SELECT * FROM COMPANY ORDER BY SALARY ASC;
+SELECT * FROM COMPANY ORDER BY NAME, SALARY ASC;
+SELECT * FROM COMPANY ORDER BY NAME DESC;
+
+
+
+If you want to know the total amount of salary on each customer
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME;
+
+INSERT INTO COMPANY VALUES (8, 'Paul', 24, 'Houston', 20000.00 );
+INSERT INTO COMPANY VALUES (9, 'James', 44, 'Norway', 5000.00 );
+INSERT INTO COMPANY VALUES (10, 'James', 45, 'Texas', 5000.00 );
+
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME;
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME;
+
+HAVING clause enables you to specify conditions that filter which group results appear in the final
+results.
+
+name count is less than 2:
+SELECT * FROM COMPANY GROUP BY name HAVING count(name) < 2;
+SELECT * FROM COMPANY GROUP BY name HAVING count(name) > 2;
+
+
+DISTINCT keyword is used in conjunction with SELECT statement to eliminate all the
+duplicate records and fetching only unique records
+
+
+SELECT name FROM COMPANY;
+SELECT DISTINCT name FROM COMPANY;
+
+
+
+
+Constraints are the rules enforced on data columns on table.
+
+NOT NULL
+
+CREATE TABLE COMPANY(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL
+);
+
+CREATE TABLE COMPANY(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL DEFAULT 50000.00
+);
+
+CREATE TABLE COMPANY(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL UNIQUE,
+ADDRESS CHAR(50),
+SALARY REAL DEFAULT 50000.00
+);
+
+CREATE TABLE COMPANY3(
+ID INT PRIMARY KEY NOT NULL,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL CHECK(SALARY > 0)
+);
+
+
+SQLite Joins
+
+? The CROSS JOIN
+? The INNER JOIN
+? The OUTER JOIN
+
+SELECT * FROM COMPANY;
+
+CREATE TABLE DEPARTMENT(
+ID INT PRIMARY KEY NOT NULL,
+DEPT CHAR(50) NOT NULL,
+EMP_ID INT NOT NULL
+);
+
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (1, 'IT Billing', 1 );
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (2, 'Engineering', 2 );
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (3, 'Finance', 7 );
+
+
+.header on
+.mode column
+SELECT * FROM department;
+
+
+A CROSS JOIN matches every row of the first table with every row of the second table
+SELECT EMP_ID, NAME, DEPT FROM COMPANY CROSS JOIN DEPARTMENT;
+
+
+A INNER JOIN creates a new result table by combining column values of two tables (table1 and table2) based
+upon the join-predicate. The query compares each row of table1 with each row of table2 to find all pairs of rows,
+which satisfy the join-predicate. When the join-predicate is satisfied, column values for each matched pair of rows
+of A and B are combined into a result row.
+
+SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+ON COMPANY.ID = DEPARTMENT.EMP_ID;
+
+The OUTER JOIN is an extension of the INNER JOIN. Though SQL standard defines three types of OUTER
+JOINs: LEFT, RIGHT and FULL but SQLite only supports the LEFT OUTER JOIN.
+
+
+The SQLite UNION clause/operator is used to combine the results of two or more SELECT statements without returning any duplicate rows.
+To use UNION, each SELECT must have the same number of columns selected, the same number of column
+expressions, the same data type, and have them in the same order, but they do not have to be the same length.
+
+
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (1, 'IT Billing', 1);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (2, 'Engineering', 2);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (3, 'Finance',7);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (4, 'Engineering',3);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (5, 'Finance', 4);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (6, 'Engineering', 5);
+INSERT INTO DEPARTMENT(ID,DEPT,EMP_ID)
+VALUES (7, 'Finance', 6);
+
+select * from COMPANY;
+SELECT * FROM department;
+
+SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+ON COMPANY.ID = DEPARTMENT.EMP_ID
+UNION
+SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+ON COMPANY.ID = DEPARTMENT.EMP_ID;
+
+SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+ON COMPANY.ID = DEPARTMENT.EMP_ID
+UNION ALL
+SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+ON COMPANY.ID = DEPARTMENT.EMP_ID;
+
+
+
+
+UPDATE COMPANY SET ADDRESS = NULL, SALARY = NULL where ID IN(6,7);
+
+SELECT ID, NAME, AGE, ADDRESS, SALARY
+FROM COMPANY
+WHERE SALARY IS NOT NULL;
+
+SELECT ID, NAME, AGE, ADDRESS, SALARY
+FROM COMPANY
+WHERE SALARY IS NULL;
+
+
+SELECT C.ID, C.NAME, C.AGE, D.DEPT
+FROM COMPANY AS C, DEPARTMENT AS D
+WHERE C.ID = D.EMP_ID;
+
+SELECT C.ID AS COMPANY_ID, C.NAME AS COMPANY_NAME, C.AGE, D.DEPT
+FROM COMPANY AS C, DEPARTMENT AS D
+WHERE C.ID = D.EMP_ID;
+
+-------------
+ALTER TABLE COMPANY RENAME TO OLD_COMPANY;
+ALTER TABLE OLD_COMPANY ADD COLUMN SEX char(1);
+
+
+DELETE FROM COMPANY;
+VACUUM;
+------------
+
+SELECT *
+FROM COMPANY
+WHERE ID IN (SELECT ID
+FROM COMPANY
+WHERE SALARY > 45000) ;
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+CREATE TABLE COMPANY(
+ID INTEGER PRIMARY KEY AUTOINCREMENT,
+NAME TEXT NOT NULL,
+AGE INT NOT NULL,
+ADDRESS CHAR(50),
+SALARY REAL
+);
+
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Paul', 32, 'California', 20000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ('Allen', 25, 'Texas', 15000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ('Teddy', 23, 'Norway', 20000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Mark', 25, 'Rich-Mond ', 65000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'David', 27, 'Texas', 85000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Kim', 22, 'South-Hall', 45000.00 );
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'James', 24, 'Houston', 10000.00 );
+
+
+.header on
+.mode column
+SELECT * FROM COMPANY;
+
+-----
+
+SELECT date('now');
+SELECT date('now','start of month','+1 month','-1 day');
+
+ 
+SQLite COUNT Function
+The SQLite COUNT aggregate function is used to count the number of rows in a database table.
+ 
+SQLite MAX Function
+The SQLite MAX aggregate function allows us to select the highest (maximum) value for a certain
+column.
+ 
+SQLite MIN Function
+The SQLite MIN aggregate function allows us to select the lowest (minimum) value for a certain column.
+ 
+SQLite AVG Function
+The SQLite AVG aggregate function selects the average value for certain table column.
+ 
+SQLite SUM Function
+The SQLite SUM aggregate function allows selecting the total for a numeric column.
+ 
+SQLite RANDOM Function
+The SQLite RANDOM function returns a pseudo-random integer between -9223372036854775808 and
++9223372036854775807.
+SELECT random() AS Random;
+ 
+SQLite ABS Function
+The SQLite ABS function returns the absolute value of the numeric argument.
+SELECT abs(5), abs(-15), abs(NULL), abs(0), abs('ABC');
+ 
+SQLite UPPER Function
+The SQLite UPPER function converts a string into upper-case letters.
+ 
+SQLite LOWER Function
+The SQLite LOWER function converts a string into lower-case letters.
+ 
+SQLite LENGTH Function
+The SQLite LENGTH function returns the length of a string.
+ 
+
+---------------------------------------------------------------------------------------------------
+istruzioni SQL per creare  due tabelle collegate: "Utenti" e "Ordini". La tabella "Utenti" ha una chiave primaria autoincrementante chiamata "ID", insieme a colonne per il nome, cognome e email degli utenti. La tabella "Ordini" ha una chiave primaria autoincrementante chiamata "ID", insieme a colonne per l'ID dell'utente che ha effettuato l'ordine, il nome del prodotto e la quantità ordinata. La chiave esterna "ID_Utente" nella tabella "Ordini" fa riferimento alla chiave primaria "ID" nella tabella "Utenti", creando così una relazione tra le due tabelle.
+---------------------------------------------------------------------------------------------------
+ 
+-- Creazione della tabella "Utenti"
+CREATE TABLE Utenti (
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  Nome VARCHAR(50),
+  Cognome VARCHAR(50),
+  Email VARCHAR(100)
+);
+
+-- Creazione della tabella "Ordini"
+CREATE TABLE Ordini (
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  ID_Utente INTEGER,
+  Prodotto VARCHAR(100),
+  Quantita INTEGER,
+  FOREIGN KEY (ID_Utente) REFERENCES Utenti(ID)
+);
+
+
+INSERT INTO Utenti (Nome, Cognome, Email) VALUES ('Mario', 'Rossi', 'mario.rossi@example.com');
+INSERT INTO Utenti (Nome, Cognome, Email) VALUES ('Laura', 'Bianchi', 'laura.bianchi@example.com');
+INSERT INTO Utenti (Nome, Cognome, Email) VALUES ('Giovanni', 'Verdi', 'giovanni.verdi@example.com');
+INSERT INTO Utenti (Nome, Cognome, Email) VALUES ('Federica', 'Russo', 'federica.russo@example.com');
+ 
+INSERT INTO Utenti (Nome, Cognome, Email)
+VALUES
+  ('Mario', 'Rossi', 'mario.rossi@example.com'),
+  ('Laura', 'Bianchi', 'laura.bianchi@example.com'),
+  ('Luca', 'Verdi', 'luca.verdi@example.com'),
+  ('Giulia', 'Neri', 'giulia.neri@example.com'),
+  ('Paolo', 'Gialli', 'paolo.gialli@example.com'),
+  ('Sara', 'Marrone', 'sara.marrone@example.com'),
+  ('Antonio', 'Russo', 'antonio.russo@example.com'),
+  ('Francesca', 'Ferrari', 'francesca.ferrari@example.com'),
+  ('Marco', 'Baldi', 'marco.baldi@example.com'),
+  ('Giorgia', 'Ricci', 'giorgia.ricci@example.com'),
+  ('Davide', 'Esposito', 'davide.esposito@example.com'),
+  ('Martina', 'Moretti', 'martina.moretti@example.com'),
+  ('Simone', 'Galli', 'simone.galli@example.com'),
+  ('Valentina', 'Villa', 'valentina.villa@example.com'),
+  ('Giovanni', 'Caruso', 'giovanni.caruso@example.com'),
+  ('Elena', 'Conti', 'elena.conti@example.com'),
+  ('Alessandro', 'Barbieri', 'alessandro.barbieri@example.com'),
+  ('Federica', 'Fabbri', 'federica.fabbri@example.com'),
+  ('Andrea', 'Bruno', 'andrea.bruno@example.com'),
+  ('Chiara', 'Galli', 'chiara.galli@example.com');
+ 
+.mode column
+.headers on
+
+select * from Utenti ;
+
+
+-- Inserimento dei dati degli ordini per ogni cliente
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT 
+  ID,
+  (
+    CASE 
+      WHEN RANDOM() % 3 = 0 THEN 'Prodotto A'
+      WHEN RANDOM() % 3 = 1 THEN 'Prodotto B'
+      ELSE 'Prodotto C'
+    END
+  ) AS Prodotto,
+  ROUND(RANDOM() * 5) + 5 AS Quantita
+FROM Utenti;
+
+-- Inserimento dei dati degli ordini per ogni cliente
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT 
+  ID,
+  (
+    CASE 
+      WHEN RANDOM() % 3 = 0 THEN 'Prodotto A'
+      WHEN RANDOM() % 3 = 1 THEN 'Prodotto B'
+      ELSE 'Prodotto C'
+    END
+  ) AS Prodotto,
+  CAST((RANDOM() % 6) + 5 AS INTEGER) AS Quantita
+FROM Utenti;
+
+
+
+SELECT o.ID, u.Nome, u.Cognome, o.Prodotto, o.Quantita
+FROM Ordini o
+JOIN Utenti u ON o.ID_Utente = u.ID
+WHERE u.ID = 1;
+
+Nel codice SQL sopra, stiamo selezionando i campi desiderati dalla tabella "Ordini" e facendo una join con la tabella "Utenti" utilizzando la chiave esterna "ID_Utente" nella tabella "Ordini" e la chiave primaria "ID" nella tabella "Utenti". Stiamo anche impostando una condizione WHERE per selezionare solo gli ordini dell'utente con ID 1. Puoi sostituire il valore 1 con l'ID dell'utente desiderato.
+
+
+SELECT u.ID, u.Nome, u.Cognome, COUNT(*) AS Totale_Ordini
+FROM Utenti u
+JOIN Ordini o ON u.ID = o.ID_Utente
+GROUP BY u.ID, u.Nome, u.Cognome;
+
+Nel codice SQL sopra, stiamo selezionando l'ID, il nome, il cognome dell'utente e contando il numero totale di ordini per ogni utente. Stiamo facendo una join tra le tabelle "Utenti" e "Ordini" utilizzando la chiave esterna "ID_Utente" nella tabella "Ordini" e la chiave primaria "ID" nella tabella "Utenti". Successivamente, stiamo raggruppando i risultati per ID, nome e cognome dell'utente utilizzando la clausola GROUP BY.
+
+
+-- Inserimento dei dati degli ordini per utenti scelti a caso
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT
+  ID,
+  (
+    CASE
+      WHEN RANDOM() % 3 = 0 THEN 'Prodotto A'
+      WHEN RANDOM() % 3 = 1 THEN 'Prodotto B'
+      ELSE 'Prodotto C'
+    END
+  ) AS Prodotto,
+  ROUND(RANDOM() * 5) + 5 AS Quantita
+FROM Utenti
+WHERE ID IN (
+  SELECT ID
+  FROM Utenti
+  ORDER BY RANDOM()
+  LIMIT 5 -- Numero di utenti scelti a caso
+);
+
+
+Nell'esempio sopra, stiamo selezionando casualmente 5 utenti dalla tabella "Utenti" utilizzando la clausola ORDER BY RANDOM() seguita da LIMIT 5. Quindi, per ogni utente selezionato, stiamo inserendo un numero casuale di ordini (da 5 a 10) nella tabella "Ordini" utilizzando la stessa logica descritta in precedenza.
+
+
+
+-- Inserimento dei dati degli ordini per utenti scelti a caso con numero casuale di ripetizioni
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT
+  ID,
+  (
+    CASE
+      WHEN RANDOM() % 3 = 0 THEN 'Prodotto A'
+      WHEN RANDOM() % 3 = 1 THEN 'Prodotto B'
+      ELSE 'Prodotto C'
+    END
+  ) AS Prodotto,
+  ROUND(RANDOM() * 5) + 5 AS Quantita
+FROM Utenti
+WHERE ID IN (
+  SELECT ID
+  FROM Utenti
+  ORDER BY RANDOM()
+  LIMIT 1 -- Numero di utenti scelti a caso
+)
+LIMIT ROUND(RANDOM() * 9) + 1; -- Numero casuale di ripetizioni tra 1 e 10
+
+Nell'esempio sopra, stiamo selezionando casualmente 1 utente dalla tabella "Utenti" utilizzando la clausola ORDER BY RANDOM() seguita da LIMIT 1. Quindi, stiamo inserendo un numero casuale di ordini (da 5 a 10) per l'utente selezionato nella tabella "Ordini". Il numero casuale di ripetizioni è generato utilizzando la logica ROUND(RANDOM() * 9) + 1, che restituisce un numero intero casuale compreso tra 1 e 10.
+
+
+-- Inserimento dei dati degli ordini per utenti scelti a caso con 10 ordini per utente
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT
+  ID,
+  (
+    CASE
+      WHEN RANDOM() % 20 = 0 THEN 'Prodotto 1'
+      WHEN RANDOM() % 20 = 1 THEN 'Prodotto 2'
+      WHEN RANDOM() % 20 = 2 THEN 'Prodotto 3'
+      -- Aggiungi i restanti prodotti fino a 20
+      ELSE 'Prodotto 20'
+    END
+  ) AS Prodotto,
+  ROUND(RANDOM() * 5) + 5 AS Quantita
+FROM Utenti
+WHERE ID IN (
+  SELECT ID
+  FROM Utenti
+  ORDER BY RANDOM()
+  LIMIT 5 -- Numero di utenti scelti a caso
+)
+LIMIT 100; -- Numero di ordini per utente
+
+
+
+-- Inserimento dei dati degli ordini per l'utente 1 con 10 ordini
+INSERT INTO Ordini (ID_Utente, Prodotto, Quantita)
+SELECT
+  1, -- ID dell'utente desiderato
+  (
+    CASE
+      WHEN RANDOM() % 5 = 0 THEN 'Prodotto 1'
+      WHEN RANDOM() % 5 = 1 THEN 'Prodotto 2'
+      WHEN RANDOM() % 5 = 2 THEN 'Prodotto 3'
+      WHEN RANDOM() % 5 = 3 THEN 'Prodotto 4'
+      ELSE 'Prodotto 5'
+    END
+  ) AS Prodotto,
+  ROUND(RANDOM() * 5) + 5 AS Quantita
+FROM (
+  SELECT 1 -- Utilizziamo una subquery per generare 10 righe
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+  UNION ALL SELECT 1
+)
+LIMIT 10; -- Numero di ordini per l'utente
+
+Nell'esempio sopra, stiamo inserendo 10 ordini nella tabella "Ordini" per l'utente con ID 1. Il tipo di prodotto è scelto casualmente tra i 5 prodotti disponibili utilizzando la logica CASE. La quantità degli ordini è generata casualmente come mostrato in precedenza.
+
+SELECT *
+FROM Ordini;
+
+SELECT *
+FROM Ordini
+WHERE ID_Utente = 1; -- Sostituisci con l'ID dell'utente desiderato
+
+SELECT ID_Utente, Prodotto, COUNT(*) AS NumeroOrdini
+FROM Ordini
+GROUP BY ID_Utente, Prodotto;
+
+per tutti gli utenti  raggruppati per prodotto con dati utente associati
+
+SELECT O.Prodotto, O.Quantita, U.Nome, U.Cognome, U.Email
+FROM Ordini AS O
+JOIN Utenti AS U ON O.ID_Utente = U.ID
+ORDER BY O.Prodotto;
+
+
+SELECT O.Prodotto, U.ID AS ID_Utente, U.Nome, U.Cognome
+FROM Ordini O
+JOIN Utenti U ON O.ID_Utente = U.ID
+GROUP BY O.Prodotto, U.ID;
+
+SELECT O.Prodotto, U.ID, U.Nome, U.Cognome, U.Email
+FROM Ordini O
+JOIN Utenti U ON O.ID_Utente = U.ID
+GROUP BY O.Prodotto, U.ID, U.Nome, U.Cognome, U.Email;
+
+
+SELECT COUNT(*) AS TotaleOrdini
+FROM Ordini;
+
+SELECT SUM(Quantita) AS TotaleQuantita
+FROM Ordini;
+
+SELECT Prodotto, COUNT(*) AS TotaleOrdini
+FROM Ordini
+GROUP BY Prodotto
+ORDER BY TotaleOrdini DESC;
+
+SELECT AVG(Quantita) AS MediaQuantita
+FROM Ordini;
+
+SELECT *
+FROM Ordini
+WHERE Prodotto = 'Prodotto C'; -- Sostituisci con il nome del prodotto desiderato
+
+SELECT O.*, U.ID, U.Nome, U.Cognome, U.Email
+FROM Ordini O
+JOIN Utenti U ON O.ID_Utente = U.ID
+WHERE O.Prodotto = 'Prodotto C';
+
+CREATE TEMPORARY TABLE TempOrdini AS
+SELECT O.*, U.ID, U.Nome, U.Cognome, U.Email
+FROM Ordini O
+JOIN Utenti U ON O.ID_Utente = U.ID
+WHERE O.Prodotto = 'Prodotto C';
+
+DROP TABLE IF EXISTS TempOrdini;
+
+SELECT O.*, U.ID, U.Nome, U.Cognome, U.Email
+FROM Ordini O
+JOIN Utenti U ON O.ID_Utente = U.ID
+GROUP BY O.ID, U.ID;
+
+
+
+
+
