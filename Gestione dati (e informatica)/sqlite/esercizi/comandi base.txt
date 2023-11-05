@@ -1,0 +1,57 @@
+Creating a Database
+sqlite3 test.db
+
+.help
+.databases 	**List names and files of attached databases
+.show
+
+.tables		**.tables ?TABLE?          List names of tables matching LIKE pattern TABLE
+.schema
+
+.mode column
+.headers on
+
+
+Exporting Data
+.output file.sql
+.dump
+.output stdout 
+This will create the file file.sql in your current working directory if it does not already exist. If a file
+by that name does exist, it will be overwritten.
+
+.output file.csv
+.separator ,
+select * from test;
+.output stdout
+
+.output text.csv
+.separator ,
+select * from test where value like 'm%';
+.output stdout
+
+
+Importing Data
+.show
+
+drop table test;
+drop view schema;
+.read file.sql
+
+	If you want to then import this CSV data into a similar table with the same structure as the test table (call it test2), do the following:
+	 create table test2(id integer primary key, value text);
+	 .import text.csv test2
+
+--------------------
+
+sqlite3.exe test.db .dump
+sqlite3 test.db .dump > test.sql
+sqlite3 test.db "select * from test"
+sqlite3 test2.db < test.sql
+
+
+sqlite3 test.db vacuum
+will free up any unused space created from
+deleted objects
+
+
+--------------------------------------
