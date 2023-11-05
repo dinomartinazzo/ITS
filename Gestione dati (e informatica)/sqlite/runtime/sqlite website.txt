@@ -1,1 +1,2 @@
 https://www.sqlite.org/download.html
+https://www.sqlite.org/2023/sqlite-tools-win-x64-3440000.zip
