@@ -1,4 +1,4 @@
-
+﻿
  Design a database schema for an online store.
  
 Designing a database schema for an online merchandise store involves organizing the data that will be stored in the database, ensuring that it can efficiently handle the store's operations. Below is a simplified example of a database schema for an online merchandise store. Please note that this is a basic representation, and a real-world application may require additional tables and fields to meet specific requirements.
@@ -277,7 +277,15 @@ VALUES
     (9, 9, 4, 'Solid truck', '2023-10-27'),
     (10, 10, 5, 'Awesome record', '2023-10-26');
 
--- Insert
+-- Insert items into the cart (replace cart_id and product_id with actual values)
+-- Add 2 units of the product with ID 2 to the cart
+-- Add 3 units of the product with ID 5 to the cart
+
+INSERT INTO Cart_Items (cart_id, product_id, quantity)
+VALUES
+    (1, 2, 2), 
+    (1, 5, 3);
+
 ```
 
  ***
