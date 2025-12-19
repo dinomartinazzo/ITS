@@ -1,0 +1,268 @@
+================================================================================
+                    COME FUNZIONANO LE LIBRERIE IN C
+                          Esempio Semplice
+================================================================================
+
+==================
+CHE COS'È UNA LIBRERIA?
+==================
+
+Una libreria è un insieme di funzioni RIUTILIZZABILI che puoi usare in
+diversi programmi senza dover riscrivere il codice ogni volta.
+
+Esempio: Hai scritto una funzione somma(). Invece di copiarla in ogni
+programma, la metti in una libreria e la usi quando serve!
+
+
+==================
+STRUTTURA DI UNA LIBRERIA IN C
+==================
+
+Una libreria in C è composta da 3 FILE:
+
+1. FILE HEADER (.h)     →  calculator.h
+   - Contiene le DICHIARAZIONI (prototipi) delle funzioni
+   - È come un "indice" che dice quali funzioni esistono
+   - Non contiene il codice vero e proprio
+
+2. FILE IMPLEMENTAZIONE (.c)  →  calculator.c
+   - Contiene il CODICE VERO delle funzioni
+   - Qui c'è la logica che fa funzionare tutto
+
+3. FILE PRINCIPALE (main.c)   →  test_calc.c
+   - Contiene il main() del tuo programma
+   - USA le funzioni della libreria
+   - Include l'header con #include
+
+
+==================
+ESEMPIO PRATICO: LIBRERIA CALCULATOR
+==================
+
++-----------------------+
+| 1. FILE HEADER        |
+| calculator.h          |
++-----------------------+
+
+Contiene:
+- #ifndef CALCULATOR_H      (guardia per evitare inclusioni multiple)
+- int somma(int a, int b);  (prototipo della funzione)
+- int sottrazione(int a, int b);
+- int moltiplica(int a, int b);
+- int dividi(int a, int b);
+- #endif
+
+NOTA: Qui non c'è il codice, solo le "firme" delle funzioni!
+
+
++-----------------------+
+| 2. FILE IMPLEMENTAZIONE|
+| calculator.c          |
++-----------------------+
+
+Contiene:
+- #include "calculator.h"   (include il proprio header)
+- int somma(int a, int b) { return a + b; }  (codice vero!)
+- int sottrazione(int a, int b) { return a - b; }
+- int moltiplica(int a, int b) { return a * b; }
+- int dividi(int a, int b) {
+      if (b == 0) return 0;
+      return a / b;
+  }
+
+NOTA: Qui c'è il CODICE VERO che fa funzionare le operazioni!
+
+
++-----------------------+
+| 3. FILE PRINCIPALE    |
+| test_calc.c           |
++-----------------------+
+
+Contiene:
+- #include <stdio.h>         (libreria standard per printf)
+- #include "calculator.h"    (la nostra libreria!)
+- int main(void) {
+      int risultato = somma(5, 3);
+      printf("Risultato: %d\n", risultato);
+      return 0;
+  }
+
+NOTA: Questo file USA le funzioni della libreria!
+
+
+==================
+COME SI COMPILA?
+==================
+
+IMPORTANTE: Devi compilare TUTTI i file .c insieme!
+
+Comando:
+--------
+gcc -std=c99 -Wall -Wextra -Wpedantic test_calc.c calculator.c -o programma
+
+
+Spiegazione:
+------------
+- gcc                    → il compilatore
+- -std=c99              → usa lo standard C99
+- -Wall -Wextra -Wpedantic  → attiva tutti i warning
+- test_calc.c           → il file principale
+- calculator.c          → il file della libreria
+- -o programma          → nome dell'eseguibile finale
+
+NOTA: Non compili il file .h! Solo i file .c!
+
+
+==================
+COME SI ESEGUE?
+==================
+
+Dopo la compilazione, esegui:
+
+Windows:
+--------
+programma.exe
+
+Linux/Mac:
+----------
+./programma
+
+
+==================
+PERCHÉ DIVIDERE IN 3 FILE?
+==================
+
+1. RIUTILIZZABILITÀ
+   Puoi usare calculator.c in tanti programmi diversi
+
+2. ORGANIZZAZIONE
+   Codice più pulito e facile da leggere
+
+3. COLLABORAZIONE
+   Un programmatore scrive calculator.c
+   Un altro scrive test_calc.c
+
+4. COMPILAZIONE SEPARATA
+   Se modifichi solo test_calc.c, non devi ricompilare calculator.c
+   (questo è utile in progetti grandi!)
+
+
+==================
+IL FILE HEADER (.h) IN DETTAGLIO
+==================
+
+COSA CONTIENE UN HEADER:
+------------------------
+- #ifndef/#define/#endif    (guardie di inclusione)
+- Prototipi di funzioni
+- Definizioni di costanti (#define)
+- Definizioni di struct/typedef
+- Commenti/documentazione
+
+COSA NON CONTIENE:
+------------------
+- Implementazioni di funzioni (quelle stanno nel .c!)
+- Variabili globali (solo extern se necessario)
+- Codice eseguibile
+
+
+ESEMPIO DI GUARDIE:
+-------------------
+#ifndef CALCULATOR_H      ← Se CALCULATOR_H non è definito...
+#define CALCULATOR_H      ← ...definiscilo
+
+/* ... contenuto ... */
+
+#endif                    ← Fine della guardia
+
+
+PERCHÉ LE GUARDIE?
+------------------
+Evitano che il file venga incluso più volte per errore.
+Senza guardie, avresti errori "ridefinizione di funzione".
+
+
+==================
+QUANDO USARE #include "..." vs #include <...>
+==================
+
+#include "calculator.h"  →  File TUOI (nella stessa cartella)
+#include <stdio.h>       →  File di SISTEMA (librerie standard)
+
+
+==================
+ESERCIZIO: PROVA TU!
+==================
+
+1. Leggi i 3 file: calculator.h, calculator.c, test_calc.c
+2. Compila con il comando sopra
+3. Esegui il programma
+4. Prova ad aggiungere una nuova funzione "modulo" alla libreria:
+   - Aggiungi il prototipo in calculator.h
+   - Aggiungi l'implementazione in calculator.c
+   - Usa la funzione in test_calc.c
+   - Ricompila tutto
+
+
+==================
+SCHEMA VISUALE
+==================
+
+                   +------------------+
+                   |  calculator.h    |
+                   |  (prototipi)     |
+                   +------------------+
+                           ↑
+                           | include
+           +---------------+---------------+
+           |                               |
+   +-------+--------+              +-------+--------+
+   | calculator.c   |              | test_calc.c    |
+   | (codice vero)  |              | (usa libreria) |
+   +----------------+              +----------------+
+           |                               |
+           +---------------+---------------+
+                           ↓
+                      COMPILAZIONE
+                    (gcc compila tutto)
+                           ↓
+                   +------------------+
+                   |   programma.exe  |
+                   |   (eseguibile)   |
+                   +------------------+
+
+
+==================
+DOMANDE FREQUENTI
+==================
+
+Q: Perché devo includere calculator.h in calculator.c?
+A: Per verificare che i prototipi e le implementazioni corrispondano!
+
+Q: Posso chiamare il file .h con un nome diverso dal .c?
+A: Sì, ma per convenzione si usa lo stesso nome (calculator.h e calculator.c)
+
+Q: Devo compilare il file .h?
+A: NO! Si compila solo i file .c. Il .h viene "incluso" automaticamente.
+
+Q: Cosa succede se dimentico #include "calculator.h" in test_calc.c?
+A: Il compilatore non conosce le funzioni e darà errore!
+
+Q: Posso avere più file .c in una libreria?
+A: Sì! In progetti grandi hai tanti file .c (es: math.c, io.c, string.c)
+
+
+==================
+PROSSIMI PASSI
+==================
+
+Dopo aver capito questo esempio semplice, puoi:
+1. Studiare la libreria "stats" (più complessa)
+2. Creare tue librerie personali
+3. Studiare le librerie standard C (stdio.h, stdlib.h, string.h, math.h)
+4. Imparare a creare librerie statiche (.a) e dinamiche (.so/.dll)
+
+
+================================================================================
+                              FINE GUIDA
+================================================================================
