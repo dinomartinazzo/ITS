@@ -1,0 +1,331 @@
+================================================================================
+                    PROGETTO: LIBRERIA GEOMETRIA
+                         Livello: Principiante
+================================================================================
+
+==================
+OBIETTIVO DEL PROGETTO
+==================
+
+Creare una libreria C che calcola area e perimetro di figure geometriche comuni:
+- Cerchio
+- Rettangolo
+- Triangolo
+- Quadrato
+
+Imparare:
+✓ Come organizzare codice in librerie (.h e .c)
+✓ Validazione input (parametri negativi, NULL)
+✓ Gestione errori con codici di ritorno
+✓ Test manuali con casi normali e casi limite
+
+
+==================
+FILE DEL PROGETTO
+==================
+
+geometria.h          → Header con prototipi e documentazione
+geometria.c          → Implementazione delle funzioni
+test_geometria.c     → Programma di test
+LEGGIMI_geometria.txt → Questa guida
+
+
+==================
+FUNZIONI DISPONIBILI
+==================
+
++-------------------+--------------------------------+------------------------+
+| Figura            | Funzione                       | Formula                |
++-------------------+--------------------------------+------------------------+
+| CERCHIO           | area_cerchio()                 | A = π * r²             |
+|                   | perimetro_cerchio()            | P = 2 * π * r          |
++-------------------+--------------------------------+------------------------+
+| RETTANGOLO        | area_rettangolo()              | A = base * altezza     |
+|                   | perimetro_rettangolo()         | P = 2(base + altezza)  |
++-------------------+--------------------------------+------------------------+
+| TRIANGOLO         | area_triangolo()               | A = (base * h) / 2     |
+|                   | perimetro_triangolo()          | P = l1 + l2 + l3       |
++-------------------+--------------------------------+------------------------+
+| QUADRATO          | area_quadrato()                | A = lato²              |
+|                   | perimetro_quadrato()           | P = 4 * lato           |
++-------------------+--------------------------------+------------------------+
+
+
+==================
+COME COMPILARE
+==================
+
+Comando Windows/Linux/Mac:
+--------------------------
+gcc -std=c99 -Wall -Wextra -Wpedantic test_geometria.c geometria.c -o test_geo
+
+Spiegazione parametri:
+----------------------
+-std=c99        → Standard C99
+-Wall           → Attiva tutti i warning
+-Wextra         → Warning extra
+-Wpedantic      → Rispetto rigoroso dello standard
+test_geometria.c → File principale
+geometria.c     → File libreria
+-o test_geo     → Nome eseguibile
+
+
+==================
+COME ESEGUIRE
+==================
+
+Windows:
+--------
+test_geo.exe
+
+Linux/Mac:
+----------
+./test_geo
+
+
+==================
+VALIDAZIONE INPUT
+==================
+
+Tutte le funzioni validano i parametri:
+
+ERRORI RILEVATI:
+✗ Dimensioni negative o zero (es: raggio = -5)
+✗ Puntatore output NULL
+✗ Triangolo invalido (non rispetta disuguaglianza triangolare)
+
+CODICI DI RITORNO:
+✓ 0  = operazione OK
+✗ -1 = errore rilevato
+
+
+==================
+ESEMPIO DI UTILIZZO
+==================
+
+#include <stdio.h>
+#include "geometria.h"
+
+int main(void) {
+    double area;
+
+    /* Calcola area cerchio con raggio 5 */
+    int rc = area_cerchio(5.0, &area);
+
+    if (rc == 0) {
+        printf("Area = %.2f\n", area);  /* Output: 78.54 */
+    } else {
+        printf("Errore!\n");
+    }
+
+    return 0;
+}
+
+
+==================
+SPIEGAZIONE DISUGUAGLIANZA TRIANGOLARE
+==================
+
+Un triangolo è VALIDO solo se:
+- Ogni lato < somma degli altri due
+
+Esempio VALIDO: lati 3, 4, 5
+  3 < 4+5 ✓
+  4 < 3+5 ✓
+  5 < 3+4 ✓
+
+Esempio INVALIDO: lati 1, 2, 10
+  10 >= 1+2 ✗  (10 >= 3, non va bene!)
+
+
+==================
+PIANO DI TEST
+==================
+
+TEST 1: Cerchio raggio 5
+------------------------
+Input:   raggio = 5.0
+Atteso:  area ≈ 78.54, perimetro ≈ 31.42
+Motivo:  Caso normale
+
+TEST 2: Rettangolo 8x5
+----------------------
+Input:   base = 8.0, altezza = 5.0
+Atteso:  area = 40.00, perimetro = 26.00
+Motivo:  Caso normale
+
+TEST 3: Triangolo con lati 3, 4, 5
+----------------------------------
+Input:   lati = 3.0, 4.0, 5.0
+Atteso:  perimetro = 12.00
+Motivo:  Triangolo rettangolo classico
+
+TEST 4: Triangolo con base 6, altezza 4
+----------------------------------------
+Input:   base = 6.0, altezza = 4.0
+Atteso:  area = 12.00
+Motivo:  Caso normale area
+
+TEST 5: Quadrato lato 7
+-----------------------
+Input:   lato = 7.0
+Atteso:  area = 49.00, perimetro = 28.00
+Motivo:  Caso normale
+
+TEST 6: Errore raggio negativo
+-------------------------------
+Input:   raggio = -3.0
+Atteso:  rc = -1 (errore)
+Motivo:  Validazione dimensioni negative
+
+TEST 7: Errore triangolo invalido
+----------------------------------
+Input:   lati = 1.0, 2.0, 10.0
+Atteso:  rc = -1 (errore)
+Motivo:  Disuguaglianza triangolare non rispettata
+
+TEST 8: Errore out = NULL
+--------------------------
+Input:   out = NULL
+Atteso:  rc = -1 (errore)
+Motivo:  Validazione puntatore NULL
+
+TEST 9: Caso limite cerchio piccolo
+------------------------------------
+Input:   raggio = 0.1
+Atteso:  area molto piccola
+Motivo:  Test precisione con valori piccoli
+
+TEST 10: Rettangolo con lati uguali
+------------------------------------
+Input:   base = 5.0, altezza = 5.0
+Atteso:  area = 25.00 (come quadrato)
+Motivo:  Caso limite rettangolo → quadrato
+
+
+==================
+CONCETTI MATEMATICI
+==================
+
+PI GRECO (π):
+-------------
+- Valore: 3.14159265359
+- Definito come costante: #define PI 3.14159265359
+- Usato per calcoli su cerchi
+
+AREA vs PERIMETRO:
+------------------
+- AREA = spazio interno della figura (unità²)
+- PERIMETRO = lunghezza del contorno (unità)
+
+TRIANGOLO RETTANGOLO:
+---------------------
+- Lati 3, 4, 5 formano un triangolo rettangolo
+- Rispetta teorema di Pitagora: 3² + 4² = 5²
+
+
+==================
+ESERCIZI PROPOSTI
+==================
+
+1. FACILE: Aggiungi una funzione per il trapezio
+   - area_trapezio(base_maggiore, base_minore, altezza, *out)
+   - Formula: A = ((B+b) * h) / 2
+
+2. MEDIO: Aggiungi funzione area_triangolo_erone()
+   - Usa formula di Erone: A = √(s(s-a)(s-b)(s-c))
+   - Dove s = (a+b+c)/2 (semiperimetro)
+
+3. AVANZATO: Aggiungi funzione volume_sfera()
+   - Formula: V = (4/3) * π * r³
+   - Estendi la libreria alle figure 3D
+
+
+==================
+DEBUG CON GDB
+==================
+
+Se hai errori, usa gdb:
+
+gdb ./test_geo
+
+Comandi utili:
+--------------
+(gdb) break area_cerchio        # Breakpoint sulla funzione
+(gdb) run                        # Esegui
+(gdb) print raggio              # Stampa valore raggio
+(gdb) print *out                # Stampa valore output
+(gdb) next                       # Passo successivo
+(gdb) quit                       # Esci
+
+
+==================
+ERRORI COMUNI
+==================
+
+ERRORE 1: "undefined reference to area_cerchio"
+CAUSA:   Non hai compilato geometria.c
+SOLUZIONE: gcc test_geometria.c geometria.c -o test_geo
+           (devi compilare ENTRAMBI i file .c!)
+
+ERRORE 2: "geometria.h: No such file or directory"
+CAUSA:   Il compilatore non trova l'header
+SOLUZIONE: Assicurati che geometria.h sia nella stessa cartella
+
+ERRORE 3: Warning "unused variable"
+CAUSA:   Hai dichiarato una variabile non usata
+SOLUZIONE: Rimuovi la variabile o usala
+
+ERRORE 4: Risultati strani nei calcoli
+CAUSA:   Forse hai dimenticato di controllare il codice di ritorno
+SOLUZIONE: Controlla sempre if (rc == 0) prima di usare il risultato
+
+
+==================
+DOMANDE FREQUENTI
+==================
+
+Q: Perché uso double invece di int?
+A: Le misure geometriche possono essere decimali (es: π, √2)
+
+Q: Cosa succede se passo raggio = 0?
+A: La funzione ritorna -1 (errore), perché 0 non è valido
+
+Q: Perché perimetro_triangolo ha 3 parametri e area_triangolo 2?
+A: Perimetro usa i 3 lati, area usa base e altezza
+
+Q: Posso calcolare area triangolo solo dai lati?
+A: Sì, con la formula di Erone (vedi esercizi proposti)
+
+Q: Come mai PI è definito con tante cifre decimali?
+A: Per precisione nei calcoli. Più cifre = più accuratezza
+
+
+==================
+NOTE IMPORTANTI
+==================
+
+1. Tutte le dimensioni sono in double (numeri decimali)
+2. Tutte le funzioni ritornano 0 se OK, -1 se errore
+3. L'output viene scritto solo se la validazione passa
+4. Le costanti (#define PI) vanno nell'header .h
+5. Le implementazioni stanno nel file .c
+6. Non usare scanf() - valori hard-coded nei test
+
+
+==================
+CHECKLIST COMPLETAMENTO
+==================
+
+□ Ho compilato senza errori
+□ Ho compilato senza warning
+□ Tutti i test passano
+□ Ho testato casi di errore (input invalidi)
+□ Ho capito come funziona ogni funzione
+□ Ho provato a modificare il codice
+□ Ho aggiunto almeno 1 funzione nuova (opzionale)
+
+
+================================================================================
+                              BUON LAVORO!
+================================================================================

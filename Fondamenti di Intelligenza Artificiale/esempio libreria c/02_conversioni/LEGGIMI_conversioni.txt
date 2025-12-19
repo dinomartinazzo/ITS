@@ -1,0 +1,461 @@
+================================================================================
+                    PROGETTO: LIBRERIA CONVERSIONI
+                         Livello: Principiante
+================================================================================
+
+==================
+OBIETTIVO DEL PROGETTO
+==================
+
+Creare una libreria C che converte unità di misura:
+- Temperature (Celsius, Fahrenheit, Kelvin)
+- Distanze (metri, chilometri, miglia)
+- Valute (Euro, USD, GBP)
+
+Imparare:
+✓ Conversioni tra unità di misura
+✓ Validazione input (valori fisicamente impossibili)
+✓ Uso di costanti e formule matematiche
+✓ Test con conversioni a catena
+
+
+==================
+FILE DEL PROGETTO
+==================
+
+conversioni.h            → Header con prototipi
+conversioni.c            → Implementazione
+test_conversioni.c       → Programma di test
+LEGGIMI_conversioni.txt  → Questa guida
+
+
+==================
+FUNZIONI DISPONIBILI
+==================
+
++-------------------+--------------------------------+------------------------+
+| Categoria         | Funzione                       | Formula                |
++-------------------+--------------------------------+------------------------+
+| TEMPERATURE       | celsius_to_fahrenheit()        | F = (C * 9/5) + 32     |
+|                   | fahrenheit_to_celsius()        | C = (F - 32) * 5/9     |
+|                   | celsius_to_kelvin()            | K = C + 273.15         |
+|                   | kelvin_to_celsius()            | C = K - 273.15         |
+|                   | fahrenheit_to_kelvin()         | K = (F-32)*5/9+273.15  |
+|                   | kelvin_to_fahrenheit()         | F = (K-273.15)*9/5+32  |
++-------------------+--------------------------------+------------------------+
+| DISTANZE          | metri_to_km()                  | km = m / 1000          |
+|                   | km_to_metri()                  | m = km * 1000          |
+|                   | km_to_miglia()                 | mi = km * 0.621371     |
+|                   | miglia_to_km()                 | km = mi * 1.60934      |
+|                   | metri_to_miglia()              | mi = m * 0.000621371   |
++-------------------+--------------------------------+------------------------+
+| VALUTE            | euro_to_usd()                  | Tasso: 1 EUR = 1.10 USD|
+| (tassi esempio)   | usd_to_euro()                  | Tasso: 1 USD = 0.91 EUR|
+|                   | euro_to_gbp()                  | Tasso: 1 EUR = 0.86 GBP|
+|                   | gbp_to_euro()                  | Tasso: 1 GBP = 1.16 EUR|
++-------------------+--------------------------------+------------------------+
+
+
+==================
+COME COMPILARE
+==================
+
+Comando:
+--------
+gcc -std=c99 -Wall -Wextra -Wpedantic test_conversioni.c conversioni.c -o test_conv
+
+Spiegazione:
+------------
+-std=c99        → Standard C99
+-Wall -Wextra   → Warning attivi
+-Wpedantic      → Rispetto rigoroso standard
+-o test_conv    → Nome eseguibile
+
+
+==================
+COME ESEGUIRE
+==================
+
+Windows:
+--------
+test_conv.exe
+
+Linux/Mac:
+----------
+./test_conv
+
+
+==================
+VALIDAZIONE INPUT
+==================
+
+TEMPERATURE:
+✗ Sotto zero assoluto:
+  - Celsius   < -273.15°C
+  - Fahrenheit < -459.67°F
+  - Kelvin    < 0 K
+
+DISTANZE:
+✗ Valori negativi (le distanze non possono essere negative)
+
+VALUTE:
+✗ Importi negativi (no valute negative)
+
+CODICI DI RITORNO:
+✓ 0  = conversione OK
+✗ -1 = errore (valore invalido o out=NULL)
+
+
+==================
+ZERO ASSOLUTO - SPIEGAZIONE
+==================
+
+Lo ZERO ASSOLUTO è la temperatura più bassa possibile nell'universo:
+- 0 Kelvin (K)
+- -273.15 gradi Celsius (°C)
+- -459.67 gradi Fahrenheit (°F)
+
+A questa temperatura, le particelle hanno energia cinetica minima.
+Non può esistere una temperatura inferiore!
+
+La libreria RIFIUTA temperature sotto zero assoluto perché
+sono fisicamente IMPOSSIBILI.
+
+
+==================
+SCALE DI TEMPERATURA
+==================
+
+CELSIUS (°C):
+- Usata nella maggior parte del mondo
+- 0°C = acqua congela
+- 100°C = acqua bolle (a pressione atmosferica)
+
+FAHRENHEIT (°F):
+- Usata principalmente in USA
+- 32°F = acqua congela
+- 212°F = acqua bolle
+
+KELVIN (K):
+- Scala assoluta (usata in fisica)
+- 0 K = zero assoluto
+- 273.15 K = acqua congela
+- 373.15 K = acqua bolle
+- Nota: si dice "kelvin" non "gradi kelvin"
+
+
+==================
+CONVERSIONI DISTANZE
+==================
+
+METRI (m):
+- Unità base del Sistema Internazionale
+
+CHILOMETRI (km):
+- 1 km = 1000 m
+
+MIGLIA (mi):
+- Usata in USA e UK
+- 1 miglio = 1.60934 km = 1609.34 m
+- 1 km = 0.621371 miglia
+
+ESEMPI:
+- Maratona: 42.195 km ≈ 26.22 miglia
+- Velocità auto: 100 km/h ≈ 62 mph
+
+
+==================
+CONVERSIONI VALUTE
+==================
+
+IMPORTANTE: I tassi di cambio nella libreria sono ESEMPI FISSI!
+
+Nella realtà, i tassi cambiano ogni giorno in base a:
+- Mercati finanziari
+- Economia dei paesi
+- Politica
+- Eventi mondiali
+
+Per applicazioni reali, usa API di tassi di cambio aggiornate
+(es: exchangerate-api.com, fixer.io)
+
+
+==================
+ESEMPIO DI UTILIZZO
+==================
+
+#include <stdio.h>
+#include "conversioni.h"
+
+int main(void) {
+    double risultato;
+
+    /* Converti 25°C in Fahrenheit */
+    int rc = celsius_to_fahrenheit(25.0, &risultato);
+
+    if (rc == 0) {
+        printf("25°C = %.1f°F\n", risultato);  /* Output: 77.0 */
+    } else {
+        printf("Errore nella conversione!\n");
+    }
+
+    return 0;
+}
+
+
+==================
+PIANO DI TEST
+==================
+
+TEST 1: Celsius → Fahrenheit (0°C e 100°C)
+-------------------------------------------
+Input:   0°C, 100°C
+Atteso:  32°F, 212°F
+Motivo:  Punti di congelamento ed ebollizione acqua
+
+TEST 2: Fahrenheit → Celsius (32°F e 212°F)
+--------------------------------------------
+Input:   32°F, 212°F
+Atteso:  0°C, 100°C
+Motivo:  Conversione inversa, verifica consistenza
+
+TEST 3: Celsius → Kelvin (zero assoluto)
+-----------------------------------------
+Input:   -273.15°C
+Atteso:  0 K
+Motivo:  Zero assoluto, caso limite
+
+TEST 4: Metri → Chilometri (1000m)
+-----------------------------------
+Input:   1000 m
+Atteso:  1 km
+Motivo:  Conversione base
+
+TEST 5: Km → Miglia (10 km)
+----------------------------
+Input:   10 km
+Atteso:  ~6.21 miglia
+Motivo:  Conversione metrica → imperiale
+
+TEST 6: Euro → USD (100 EUR)
+-----------------------------
+Input:   100 EUR
+Atteso:  110 USD (tasso 1.10)
+Motivo:  Conversione valuta
+
+TEST 7: Errore temperatura sotto zero assoluto
+-----------------------------------------------
+Input:   -300°C
+Atteso:  rc = -1 (errore)
+Motivo:  Temperatura impossibile
+
+TEST 8: Errore distanza negativa
+---------------------------------
+Input:   -100 m
+Atteso:  rc = -1 (errore)
+Motivo:  Distanza negativa non valida
+
+TEST 9: Conversioni a catena
+-----------------------------
+Input:   25°C → °F → K
+Atteso:  Risultato coerente con conversione diretta 25°C → K
+Motivo:  Verifica consistenza tra conversioni multiple
+
+TEST 10: Casi pratici
+----------------------
+- Febbre: 37.5°C in °F
+- Maratona: 42.195 km in miglia
+- Shopping: 50 EUR in USD
+
+
+==================
+FORMULE MATEMATICHE
+==================
+
+TEMPERATURE:
+
+Celsius ↔ Fahrenheit:
+  F = (C × 9/5) + 32
+  C = (F - 32) × 5/9
+
+Celsius ↔ Kelvin:
+  K = C + 273.15
+  C = K - 273.15
+
+Fahrenheit ↔ Kelvin:
+  K = (F - 32) × 5/9 + 273.15
+  F = (K - 273.15) × 9/5 + 32
+
+DISTANZE:
+
+Metri ↔ Chilometri:
+  km = m ÷ 1000
+  m = km × 1000
+
+Chilometri ↔ Miglia:
+  mi = km × 0.621371
+  km = mi × 1.60934
+
+VALUTE:
+  (tassi fissi di esempio, non reali)
+
+
+==================
+ESERCIZI PROPOSTI
+==================
+
+1. FACILE: Aggiungi conversione centimetri ↔ pollici
+   - 1 pollice = 2.54 cm
+
+2. MEDIO: Aggiungi conversione litri ↔ galloni
+   - 1 gallone USA = 3.78541 litri
+   - 1 gallone UK = 4.54609 litri
+
+3. AVANZATO: Modifica le funzioni valuta per accettare tasso come parametro
+   - euro_to_usd(euro, tasso, *out)
+   - Permette di usare tassi aggiornati
+
+4. SFIDA: Aggiungi conversioni velocità
+   - km/h ↔ m/s
+   - km/h ↔ mph (miglia per ora)
+
+
+==================
+DEBUG CON GDB
+==================
+
+Se hai errori:
+
+gdb ./test_conv
+
+Comandi:
+--------
+(gdb) break celsius_to_fahrenheit
+(gdb) run
+(gdb) print celsius
+(gdb) print *out
+(gdb) next
+(gdb) quit
+
+
+==================
+ERRORI COMUNI
+==================
+
+ERRORE 1: Risultati strani nelle conversioni
+CAUSA:   Divisione intera invece che double
+         Esempio: 9/5 = 1 (intero), 9.0/5.0 = 1.8 (double)
+SOLUZIONE: Usa sempre .0 per numeri decimali: 9.0/5.0
+
+ERRORE 2: Temperature "impossibili" accettate
+CAUSA:   Validazione mancante o errata
+SOLUZIONE: Controlla limiti: celsius >= -273.15
+
+ERRORE 3: "undefined reference to celsius_to_fahrenheit"
+CAUSA:   Non hai compilato conversioni.c
+SOLUZIONE: gcc test_conversioni.c conversioni.c -o test_conv
+
+ERRORE 4: Conversioni a catena non coerenti
+CAUSA:   Arrotondamenti o formule sbagliate
+SOLUZIONE: Verifica le formule, usa debug per tracciare valori
+
+
+==================
+DOMANDE FREQUENTI
+==================
+
+Q: Perché i tassi di cambio sono fissi?
+A: Per semplicità. Nella realtà, usa API per tassi aggiornati.
+
+Q: Posso aggiungere altre valute (Yen, Yuan, etc.)?
+A: Sì! Basta aggiungere funzioni con i tassi appropriati.
+
+Q: Come mai le miglia sono diverse da km?
+A: Sistema metrico (Europa) vs imperiale (USA/UK).
+
+Q: Perché Kelvin non ha il simbolo °?
+A: È una scala assoluta, si dice "kelvin" non "gradi kelvin".
+
+Q: Cosa succede se converto 0°C → °F → K → °C?
+A: Dovresti ottenere ~0°C. Piccole differenze sono dovute ad arrotondamenti.
+
+Q: Le distanze negative hanno senso matematicamente?
+A: Sì (come vettore direzione), ma non come lunghezza fisica.
+
+
+==================
+CURIOSITÀ
+==================
+
+1. Lo zero assoluto non è mai stato raggiunto completamente.
+   Il record è ~0.000000000001 K (pochi picokelvins).
+
+2. La temperatura più alta mai registrata sulla Terra:
+   56.7°C (134°F) nella Death Valley, USA, 1913
+
+3. La temperatura più fredda registrata sulla Terra:
+   -89.2°C (-128.6°F) in Antartide, 1983
+
+4. Il Sole ha una temperatura superficiale di ~5500°C (5773 K)
+
+5. Un miglio nautico (1852 m) è diverso da un miglio terrestre (1609 m)
+
+6. La velocità della luce: ~299,792 km/s (~186,282 mi/s)
+
+
+==================
+APPLICAZIONI REALI
+==================
+
+TEMPERATURE:
+- Meteo (previsioni, temperature città)
+- Cucina (ricette internazionali)
+- Scienza (esperimenti, fisica)
+
+DISTANZE:
+- Navigazione GPS
+- Fitness tracker (corsa, ciclismo)
+- Aviazione (altitudine)
+
+VALUTE:
+- E-commerce internazionale
+- Viaggi (cambio valuta)
+- Finanza (trading, investimenti)
+
+
+==================
+CHECKLIST COMPLETAMENTO
+==================
+
+□ Ho compilato senza errori e warning
+□ Tutti i test passano
+□ Ho testato casi di errore (valori impossibili)
+□ Ho capito lo zero assoluto
+□ Ho capito le formule di conversione
+□ Ho provato conversioni a catena
+□ Ho aggiunto almeno 1 nuova conversione (opzionale)
+
+
+==================
+ESTENSIONE: CONVERSIONI COMPOSITE
+==================
+
+Puoi creare funzioni "composite" che usano le esistenti:
+
+Esempio: Celsius direttamente a Fahrenheit passando per Kelvin
+
+int celsius_to_fahrenheit_via_kelvin(double celsius, double *out) {
+    double kelvin;
+    int rc1 = celsius_to_kelvin(celsius, &kelvin);
+    if (rc1 != 0) return rc1;
+
+    int rc2 = kelvin_to_fahrenheit(kelvin, out);
+    return rc2;
+}
+
+Questo dimostra il RIUSO del codice!
+
+
+================================================================================
+                              BUON LAVORO!
+================================================================================
