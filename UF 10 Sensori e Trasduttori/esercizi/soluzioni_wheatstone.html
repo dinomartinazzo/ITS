@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soluzioni – Ponte di Wheatstone</title>
+<style>
+  :root {
+    --blu: #1a3a5c;
+    --azzurro: #2e7bc4;
+    --celeste: #d6eaf8;
+    --verde: #1a7a3c;
+    --verde-chiaro: #d4edda;
+    --rosso: #c0392b;
+    --arancio: #c76b00;
+    --arancio-chiaro: #fff3cd;
+    --grigio: #f4f6f8;
+    --bordo: #cdd3db;
+    --viola: #6c3483;
+    --viola-chiaro: #e8daef;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #222; background: #fff; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #1a7a3c 0%, #2e7bc4 100%);
+    color: white; padding: 36px 40px 26px;
+  }
+  .header h1 { font-size: 2em; margin-bottom: 4px; }
+  .header .sub { opacity: 0.85; font-size: 0.95em; }
+  .badges { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 4px 14px; font-size: 0.82em; }
+
+  .container { max-width: 940px; margin: 0 auto; padding: 10px 24px 50px; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--blu); color: white;
+    padding: 12px 20px; border-radius: 8px; margin: 36px 0 18px;
+  }
+  .section-header .icon { font-size: 1.4em; }
+  .section-header h2 { font-size: 1.15em; margin: 0; }
+  .section-header .count { margin-left: auto; background: rgba(255,255,255,0.2); border-radius: 12px; padding: 2px 10px; font-size: 0.85em; }
+
+  .card { border: 1.5px solid var(--bordo); border-radius: 10px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .card-header { display: flex; align-items: center; gap: 12px; padding: 11px 18px; font-weight: bold; border-bottom: 1.5px solid var(--bordo); }
+  .card-header .num { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9em; flex-shrink: 0; }
+  .card-header .title { flex: 1; }
+  .card-header .diff { font-size: 0.75em; padding: 3px 10px; border-radius: 12px; font-weight: normal; text-transform: uppercase; letter-spacing: 0.5px; }
+  .diff.facile { background: var(--verde-chiaro); color: var(--verde); }
+  .diff.medio  { background: var(--arancio-chiaro); color: var(--arancio); }
+
+  .tipo-calcolo .card-header { background: #eaf3fb; }
+  .tipo-calcolo .card-header .num { background: var(--azzurro); color: white; }
+  .tipo-schema .card-header { background: #fdf0e6; }
+  .tipo-schema .card-header .num { background: var(--arancio); color: white; }
+  .tipo-arduino .card-header { background: #e8f8ee; }
+  .tipo-arduino .card-header .num { background: var(--verde); color: white; }
+  .tipo-teoria .card-header { background: var(--viola-chiaro); }
+  .tipo-teoria .card-header .num { background: var(--viola); color: white; }
+
+  .card-body { padding: 18px 20px; }
+
+  /* Blocchi soluzione */
+  .sol-step {
+    border-left: 4px solid var(--azzurro);
+    background: var(--celeste);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px; margin: 10px 0;
+  }
+  .sol-step.verde { border-color: var(--verde); background: var(--verde-chiaro); }
+  .sol-step.arancio { border-color: var(--arancio); background: var(--arancio-chiaro); }
+  .sol-step.viola { border-color: var(--viola); background: var(--viola-chiaro); }
+  .sol-step.rosso { border-color: var(--rosso); background: #fde8e8; }
+
+  .domanda-label {
+    font-weight: bold; color: var(--blu);
+    font-size: 0.95em; margin: 16px 0 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .domanda-label::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--azzurro); flex-shrink: 0; }
+
+  .formula-inline {
+    font-family: 'Courier New', monospace;
+    background: #1e1e1e; color: #e0e0ff;
+    padding: 10px 14px; border-radius: 6px;
+    margin: 8px 0; font-size: 0.92em; line-height: 1.8;
+  }
+  .formula-inline .ris { color: #4ec9b0; font-weight: bold; }
+  .formula-inline .step { color: #7ec8e3; }
+  .formula-inline .ok { color: #4ec9b0; }
+  .formula-inline .err { color: #f44747; }
+
+  pre.code {
+    background: #1e1e1e; color: #d4d4d4;
+    border-radius: 8px; padding: 16px; overflow-x: auto;
+    font-family: 'Courier New', monospace; font-size: 0.83em;
+    line-height: 1.6; margin: 12px 0;
+  }
+  .kw { color: #569cd6; }
+  .cm { color: #6a9955; font-style: italic; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .fn { color: #dcdcaa; }
+  .fix { color: #4ec9b0; font-weight: bold; }
+
+  .risposta-corretta {
+    background: var(--verde-chiaro); border: 2px solid var(--verde);
+    border-radius: 6px; padding: 8px 14px; margin: 6px 0;
+    font-weight: bold; color: var(--verde);
+  }
+  .attenzione {
+    background: var(--arancio-chiaro); border-left: 4px solid var(--arancio);
+    border-radius: 0 6px 6px 0; padding: 8px 14px; margin: 8px 0;
+    font-size: 0.9em;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.93em; }
+  th { background: var(--blu); color: white; padding: 8px 12px; text-align: left; }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--bordo); }
+  tr:nth-child(even) td { background: var(--grigio); }
+  .vero { color: var(--verde); font-weight: bold; }
+  .falso { color: var(--rosso); font-weight: bold; }
+
+  footer { background: var(--blu); color: rgba(255,255,255,0.65); text-align: center; padding: 18px; font-size: 0.82em; margin-top: 40px; }
+
+  @media print {
+    .header { background: var(--blu) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-header { background: var(--blu) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✅ Soluzioni — Ponte di Wheatstone</h1>
+  <div class="sub">Documento riservato al docente — Foglio esercizi ITS Elettronica e Automazione</div>
+  <div class="badges">
+    <span class="badge">📐 Sezione A — Calcoli (5)</span>
+    <span class="badge">🔌 Sezione B — Schemi (3)</span>
+    <span class="badge">⚙️ Sezione C — Arduino (3)</span>
+    <span class="badge">💬 Sezione D — Teoria (4)</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════
+     SEZIONE A – CALCOLI
+══════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">📐</span>
+  <h2>Sezione A — Calcoli e Formule</h2>
+  <span class="count">5 esercizi</span>
+</div>
+
+<!-- A1 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A1</div>
+    <div class="title">Condizione di equilibrio</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R1 = 1000 Ω, R2 = 2200 Ω, R3 = 680 Ω, Vcc = 5 V</p>
+
+    <div class="domanda-label">a) Calcolo di Rx di equilibrio</div>
+    <div class="formula-inline">
+      <span class="step">Formula:</span>  Rx = (R2 × R3) / R1<br>
+      Rx = (2200 × 680) / 1000<br>
+      Rx = 1.496.000 / 1000<br>
+      <span class="ris">Rx = 1496 Ω</span>
+    </div>
+
+    <div class="domanda-label">b) Verifica prodotto incrociato</div>
+    <div class="formula-inline">
+      R1 × Rx = 1000 × 1496 = 1.496.000<br>
+      R2 × R3 = 2200 × 680 = 1.496.000<br>
+      <span class="ok">✓ I due prodotti sono uguali → equilibrio verificato</span>
+    </div>
+
+    <div class="domanda-label">c) La tensione Vcc influisce su Rx di equilibrio?</div>
+    <div class="sol-step verde">
+      <strong>No.</strong> La condizione di equilibrio R1 × Rx = R2 × R3 non contiene Vcc: dipende solo dai rapporti tra le resistenze. Vcc influisce sull'ampiezza di Vout quando il ponte è sbilanciato, ma non sul punto di bilanciamento. Questo è uno dei vantaggi fondamentali del ponte di Wheatstone.
+    </div>
+  </div>
+</div>
+
+<!-- A2 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A2</div>
+    <div class="title">Calcolo della tensione di squilibrio</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R1 = R2 = R3 = 4700 Ω, Rx = 5100 Ω, Vcc = 5 V</p>
+
+    <div class="domanda-label">a) Calcolo V_B e V_C</div>
+    <div class="formula-inline">
+      <span class="step">Nodo B (partitore R1–R3):</span><br>
+      V_B = Vcc × R3 / (R1 + R3) = 5 × 4700 / (4700 + 4700)<br>
+      V_B = 5 × 4700 / 9400 = 5 × 0,5000<br>
+      <span class="ris">V_B = 2,500 V</span><br><br>
+      <span class="step">Nodo C (partitore R2–Rx):</span><br>
+      V_C = Vcc × Rx / (R2 + Rx) = 5 × 5100 / (4700 + 5100)<br>
+      V_C = 5 × 5100 / 9800 = 5 × 0,5204<br>
+      <span class="ris">V_C = 2,602 V</span>
+    </div>
+
+    <div class="domanda-label">b) Calcolo Vout e interpretazione</div>
+    <div class="formula-inline">
+      Vout = V_B − V_C = 2,500 − 2,602<br>
+      <span class="ris">Vout = −0,102 V</span>
+    </div>
+    <div class="sol-step arancio">
+      Vout è <strong>negativo</strong>: il nodo C è a potenziale maggiore del nodo B. Significa che Rx &gt; R3, quindi il ramo destro "pesa di più" e abbassa il punto medio C. Il ponte è sbilanciato verso Rx.
+    </div>
+
+    <div class="domanda-label">c) Se Rx torna a 4700 Ω</div>
+    <div class="sol-step verde">
+      V_C = 5 × 4700/9400 = 2,500 V = V_B → <strong>Vout = 0 V</strong>. Il ponte torna in equilibrio perfetto perché i due rami sono identici (ponte simmetrico).
+    </div>
+  </div>
+</div>
+
+<!-- A3 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A3</div>
+    <div class="title">Risalire a Rx dalla tensione misurata</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R1 = R2 = R3 = 10 kΩ, Vcc = 5 V, V_C misurato = 1,85 V</p>
+
+    <div class="domanda-label">a) Ricavare Rx da V_C</div>
+    <div class="formula-inline">
+      <span class="step">Dal partitore: V_C = Vcc × Rx / (R2 + Rx)</span><br>
+      → V_C × (R2 + Rx) = Vcc × Rx<br>
+      → V_C × R2 + V_C × Rx = Vcc × Rx<br>
+      → V_C × R2 = Rx × (Vcc − V_C)<br>
+      → Rx = R2 × V_C / (Vcc − V_C)<br><br>
+      Rx = 10000 × 1,85 / (5 − 1,85)<br>
+      Rx = 18500 / 3,15<br>
+      <span class="ris">Rx = 5873 Ω ≈ 5,87 kΩ</span>
+    </div>
+
+    <div class="domanda-label">b) Il ponte è bilanciato?</div>
+    <div class="sol-step arancio">
+      Rx_equilibrio = (R2 × R3)/R1 = (10k × 10k)/10k = <strong>10.000 Ω</strong><br>
+      Rx misurato = 5873 Ω ≠ 10.000 Ω → <strong>il ponte è sbilanciato</strong>.
+    </div>
+
+    <div class="domanda-label">c) Calcolo Vout</div>
+    <div class="formula-inline">
+      V_B = Vcc × R3 / (R1+R3) = 5 × 10000/20000 = <span class="ris">2,500 V</span><br>
+      Vout = V_B − V_C = 2,500 − 1,850 = <span class="ris">+0,650 V</span><br><br>
+      <span class="ok">Vout positivo → B è a potenziale maggiore di C → Rx &lt; R (coerente: 5873 &lt; 10000) ✓</span>
+    </div>
+  </div>
+</div>
+
+<!-- A4 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A4</div>
+    <div class="title">Sensibilità e linearizzazione</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R = 10.000 Ω, Vcc = 5 V, ΔRx = +500 Ω → Rx = 10.500 Ω</p>
+
+    <div class="domanda-label">a) Sensibilità del ponte</div>
+    <div class="formula-inline">
+      S = Vcc / (4 × R) = 5 / (4 × 10000)<br>
+      S = 5 / 40000<br>
+      <span class="ris">S = 0,000125 V/Ω = 0,125 mV/Ω = 1,25 mV per 10 Ω</span><br>
+      <span class="step">In mV/kΩ: S = 125 mV/kΩ</span>
+    </div>
+
+    <div class="domanda-label">b) Vout linearizzato con ΔRx = +500 Ω</div>
+    <div class="formula-inline">
+      ΔVout ≈ −(Vcc/4) × (ΔRx/R)<br>
+      <span class="step">(segno negativo perché Rx &gt; R → V_C sale → Vout = V_B−V_C scende)</span><br>
+      ΔVout ≈ −(5/4) × (500/10000) = −1,25 × 0,05<br>
+      <span class="ris">ΔVout ≈ −0,0625 V = −62,5 mV</span>
+    </div>
+
+    <div class="domanda-label">c) Vout esatto e confronto</div>
+    <div class="formula-inline">
+      V_B = 5 × 10000/20000 = 2,5000 V<br>
+      V_C = 5 × 10500/(10000+10500) = 5 × 10500/20500 = 2,5610 V<br>
+      Vout_esatto = 2,5000 − 2,5610 = <span class="ris">−0,0610 V = −61,0 mV</span><br><br>
+      <span class="step">Errore linearizzazione:</span><br>
+      |−62,5 − (−61,0)| / |−61,0| × 100 = 1,5/61,0 × 100 ≈ <span class="ris">2,5%</span>
+    </div>
+    <div class="sol-step verde">
+      Con ΔRx/R = 500/10000 = 5%, l'errore di linearizzazione è circa 2,5%. Regola pratica: l'errore percentuale di linearizzazione è circa la metà di ΔRx/R%. Per ΔRx/R &lt; 5% l'approssimazione è generalmente accettabile in ambito industriale.
+    </div>
+  </div>
+</div>
+
+<!-- A5 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A5</div>
+    <div class="title">Scelta delle resistenze di un ponte</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: Rx_equilibrio = 4700 Ω, Vcc = 5 V, serie E12</p>
+
+    <div class="domanda-label">a) Scelta R1, R2, R3</div>
+    <div class="sol-step verde">
+      <strong>Soluzione più semplice — ponte simmetrico:</strong><br>
+      R1 = R2 = R3 = <strong>4700 Ω</strong> (valore 4,7k presente nella serie E12)<br>
+      Verifica: Rx_eq = (R2 × R3)/R1 = (4700 × 4700)/4700 = <strong>4700 Ω ✓</strong><br><br>
+      <em>Nota: qualsiasi valore E12 uguale per tutte e tre funziona (1k, 10k, ecc.) ma 4,7k è il più "abbinato" al sensore.</em>
+    </div>
+
+    <div class="domanda-label">b) Vout con NTC = 2200 Ω (temperatura alta)</div>
+    <div class="formula-inline">
+      V_B = 5 × 4700/(4700+4700) = <span class="ris">2,500 V</span><br>
+      V_C = 5 × 2200/(4700+2200) = 5 × 2200/6900 = <span class="ris">1,594 V</span><br>
+      Vout = 2,500 − 1,594 = <span class="ris">+0,906 V</span>
+    </div>
+
+    <div class="domanda-label">c) Vout con NTC = 10.000 Ω (temperatura bassa)</div>
+    <div class="formula-inline">
+      V_C = 5 × 10000/(4700+10000) = 5 × 10000/14700 = <span class="ris">3,401 V</span><br>
+      Vout = 2,500 − 3,401 = <span class="ris">−0,901 V</span>
+    </div>
+    <div class="sol-step arancio">
+      <strong>Commento sul segno:</strong> a temperatura alta, l'NTC si abbassa → V_C scende → Vout diventa <em>positivo</em>. A temperatura bassa, l'NTC cresce → V_C sale → Vout diventa <em>negativo</em>. Il segno di Vout indica direttamente se la temperatura è sopra o sotto il punto di taratura (25°C). Attenzione: Vout negativo non è leggibile direttamente dall'ADC di Arduino (range 0–5V) → serve un amplificatore con offset oppure leggere V_B e V_C separatamente.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SEZIONE B – SCHEMI
+══════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">🔌</span>
+  <h2>Sezione B — Schemi Circuitali</h2>
+  <span class="count">3 esercizi</span>
+</div>
+
+<!-- B1 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B1</div>
+    <div class="title">Identifica i nodi e i rami</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R1 = 1 kΩ, R2 = 2,2 kΩ, R3 = 1 kΩ, Rx = ?, Vcc = 9 V</p>
+
+    <div class="domanda-label">a) Posizione delle resistenze</div>
+    <table>
+      <tr><th>Componente</th><th>Ramo</th><th>Nodi</th></tr>
+      <tr><td>R1 = 1 kΩ</td><td>Alto sinistro</td><td>A → B</td></tr>
+      <tr><td>R2 = 2,2 kΩ</td><td>Alto destro</td><td>A → C</td></tr>
+      <tr><td>R3 = 1 kΩ</td><td>Basso sinistro</td><td>B → D</td></tr>
+      <tr><td>Rx</td><td>Basso destro</td><td>C → D</td></tr>
+    </table>
+
+    <div class="domanda-label">b) Galvanometro G</div>
+    <div class="sol-step">
+      G è collegato tra i nodi <strong>B e C</strong> (i due nodi centrali del ponte). Misura la <strong>corrente di squilibrio</strong> (o la tensione differenziale Vout = V_B − V_C). Quando Vout = 0 il galvanometro è a zero → ponte in equilibrio.
+    </div>
+
+    <div class="domanda-label">c) Calcolo Rx di equilibrio</div>
+    <div class="formula-inline">
+      Rx = (R2 × R3) / R1 = (2200 × 1000) / 1000<br>
+      Rx = 2.200.000 / 1000<br>
+      <span class="ris">Rx = 2200 Ω = 2,2 kΩ</span>
+    </div>
+
+    <div class="domanda-label">d) Voltmetro con Rin = 1 MΩ</div>
+    <div class="sol-step verde">
+      L'impatto è <strong>trascurabile</strong>. La resistenza del voltmetro (1 MΩ) è circa 500 volte maggiore delle resistenze del ponte (2,2 kΩ). La corrente di carico che scorre attraverso il voltmetro è minima e non altera significativamente le tensioni V_B e V_C. In generale, più alta è l'impedenza dello strumento di misura, più accurata è la lettura del ponte.
+    </div>
+  </div>
+</div>
+
+<!-- B2 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B2</div>
+    <div class="title">Schema con NTC — interpreta il circuito</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: R1 = R2 = R3 = 10 kΩ, Vcc = 5 V, NTC(25°C) = 10 kΩ, NTC(50°C) = 3900 Ω</p>
+
+    <div class="domanda-label">a) A 25°C — ponte bilanciato?</div>
+    <div class="formula-inline">
+      V_B = 5 × 10000/20000 = 2,500 V<br>
+      V_C = 5 × 10000/20000 = 2,500 V<br>
+      Vout = 2,500 − 2,500 = <span class="ris">0,000 V → BILANCIATO ✓</span><br>
+      <span class="step">(NTC = R3 = 10 kΩ → ponte simmetrico → equilibrio perfetto)</span>
+    </div>
+
+    <div class="domanda-label">b) A 50°C — NTC = 3900 Ω</div>
+    <div class="formula-inline">
+      V_B = 5 × 10000/20000 = 2,500 V  <span class="step">(invariato)</span><br>
+      V_C = 5 × 3900/(10000+3900) = 5 × 3900/13900 = <span class="ris">1,403 V</span><br>
+      Vout = 2,500 − 1,403 = <span class="ris">+1,097 V</span>
+    </div>
+
+    <div class="domanda-label">c) Vout aumenta o diminuisce al crescere della temperatura?</div>
+    <div class="sol-step verde">
+      <strong>Vout aumenta</strong> (diventa più positivo) all'aumentare della temperatura.<br>
+      Motivo fisico: l'NTC ha coefficiente negativo → T↑ causa R_NTC↓ → V_C = Vcc·R_NTC/(R2+R_NTC) diminuisce → Vout = V_B − V_C aumenta. La relazione non è lineare, ma per piccole variazioni di temperatura si può linearizzare.
+    </div>
+
+    <div class="domanda-label">d) Applicazione pratica</div>
+    <div class="sol-step viola">
+      Esempi: <strong>termostato digitale</strong>, controllo temperatura di un forno o di un impianto di riscaldamento, monitoraggio temperatura in un quadro elettrico, rilevazione di surriscaldamento in motori o trasformatori. Il segnale Vout può essere collegato a un comparatore per generare un allarme o a un PLC tramite ingresso analogico.
+    </div>
+  </div>
+</div>
+
+<!-- B3 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B3</div>
+    <div class="title">Completa lo schema</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: Rx_equilibrio = 10 kΩ, R1 = 10 kΩ, ponte simmetrico, Vcc = 5 V</p>
+
+    <div class="domanda-label">a) Valori mancanti R2 e R3</div>
+    <div class="sol-step verde">
+      Ponte simmetrico → R2 = R3 = R1 = <strong>10.000 Ω (10 kΩ, presente in serie E12)</strong><br>
+      Verifica: Rx_eq = (R2 × R3)/R1 = (10k × 10k)/10k = 10.000 Ω ✓
+    </div>
+
+    <div class="domanda-label">b) Collegamento a Arduino</div>
+    <div class="sol-step">
+      Nodo B → <strong>A0</strong> (o A1, è indifferente)<br>
+      Nodo C → <strong>A1</strong> (o A0)<br>
+      La scelta è indifferente perché nel codice calcoliamo Vout = V_B − V_C: se scambiamo i pin basta cambiare il segno nella formula software. L'importante è essere consistenti tra schema e codice. GND del ponte → GND Arduino; 5V alimentazione → pin 5V Arduino.
+    </div>
+
+    <div class="domanda-label">c) Vout con NTC = 5 kΩ</div>
+    <div class="formula-inline">
+      V_B = 5 × 10000/20000 = 2,500 V<br>
+      V_C = 5 × 5000/(10000+5000) = 5 × 5000/15000 = <span class="ris">1,667 V</span><br>
+      Vout = 2,500 − 1,667 = <span class="ris">+0,833 V</span>
+    </div>
+    <div class="sol-step verde">
+      V_C = 1,667 V è nel range 0–5 V → <strong>Arduino può leggerlo direttamente su A1</strong>. Vout = +0,833 V è positivo, quindi leggendo V_B (su A0) e V_C (su A1) separatamente e facendo la differenza via software, si ottiene il risultato corretto. Arduino non può leggere tensioni negative, quindi è sempre preferibile leggere i nodi singolarmente e fare la differenza nel codice.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SEZIONE C – ARDUINO
+══════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">⚙️</span>
+  <h2>Sezione C — Codice Arduino</h2>
+  <span class="count">3 esercizi</span>
+</div>
+
+<!-- C1 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C1</div>
+    <div class="title">Leggi e spiega il codice</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+
+    <div class="domanda-label">a) Riga di conversione ADC</div>
+    <div class="sol-step">
+      <code>float V_B = (rawB / 1023.0) * VCC</code><br><br>
+      L'ADC di Arduino è a <strong>10 bit</strong>: i valori raw vanno da 0 (0 V) a 1023 (5 V). Dividendo per 1023.0 si normalizza il valore nell'intervallo 0–1, moltiplicando poi per VCC si ottiene la tensione in Volt.<br><br>
+      Si divide per <strong>1023</strong> e non per 1024 perché i valori discreti sono 1024 (da 0 a 1023), ma il valore massimo corrisponde a Vcc: il fondo scala è 1023, non 1024. Dividere per 1024 causerebbe una tensione massima di 4,980 V invece di 5,000 V (errore dello 0,4%).
+    </div>
+
+    <div class="domanda-label">b) rawC = 512 → calcolo manuale e output atteso</div>
+    <div class="formula-inline">
+      V_C = (512 / 1023.0) × 5.0 = 0,5005 × 5 = <span class="ris">2,502 V</span><br>
+      V_B = (rawB / 1023.0) × 5  <span class="step">(dipende da rawB, ipotizziamo rawB = 512 → V_B = 2,502 V)</span><br>
+      Vout = 2,502 − 2,502 = <span class="ris">0,000 V</span><br>
+      Rx = 10000 × 2,502 / (5,0 − 2,502) = 25020/2,498 = <span class="ris">≈ 10017 Ω</span><br><br>
+      <span class="step">Output Serial Monitor atteso:</span><br>
+      <span style="color:#ce9178;">Vout = 0.000 V  |  Rx = 10017</span>
+    </div>
+    <div class="attenzione">Nota: con rawB = rawC = 512 il ponte è quasi bilanciato (piccola differenza per arrotondamento dell'ADC).</div>
+
+    <div class="domanda-label">c) Serial.begin(9600) in setup()</div>
+    <div class="sol-step">
+      <code>setup()</code> viene eseguito <strong>una sola volta</strong> all'avvio. <code>loop()</code> si ripete continuamente. Se <code>Serial.begin()</code> fosse in <code>loop()</code>, verrebbe reinizializzata la comunicazione seriale ad ogni iterazione, causando interruzioni, reset del buffer e comportamento imprevedibile. L'inizializzazione va sempre in <code>setup()</code>.
+    </div>
+
+    <div class="domanda-label">d) V_C = 5,0 V — divisione per zero?</div>
+    <div class="sol-step rosso">
+      Se V_C = VCC = 5,0 V, la formula <code>Rx = R2 * V_C / (VCC - V_C)</code> diventerebbe <code>R2 * 5.0 / 0.0</code> → <strong>divisione per zero</strong>. In C++ su Arduino questo produce il valore speciale <code>inf</code> (infinito) o un risultato indeterminato. Il codice non si blocca, ma stampa un valore privo di senso. Una buona pratica è aggiungere un controllo: <code>if (VCC - V_C &gt; 0.01) { ... }</code> come mostrato nella dispensa.
+    </div>
+  </div>
+</div>
+
+<!-- C2 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C2</div>
+    <div class="title">Trova e correggi i bug</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+
+    <div class="domanda-label">Bug 1 — const int VCC = 5</div>
+    <div class="sol-step rosso">
+      <strong>Problema:</strong> VCC è dichiarato come <code>int</code>. Quando viene usato in espressioni come <code>(rawB / 1023.0) * VCC</code>, il compilatore promuove VCC a float, quindi qui il problema è meno critico. Tuttavia, se usato in divisioni intere (es. in altri calcoli) può causare perdita di decimali. Soprattutto, semanticamente VCC è una tensione fisica → deve essere float.<br><br>
+      <strong>Correzione:</strong> <code style="color:#4ec9b0;">const float VCC = 5.0;</code>
+    </div>
+
+    <div class="domanda-label">Bug 2 — rawB / 1023</div>
+    <div class="sol-step rosso">
+      <strong>Problema:</strong> <code>rawB</code> è <code>int</code> e <code>1023</code> è una costante intera → la divisione è <strong>intera</strong>. Poiché rawB è sempre compreso tra 0 e 1023, il risultato è sempre 0 (eccetto quando rawB = 1023, dove dà 1). Quindi V_B sarà sempre 0 V oppure 5 V, mai un valore intermedio.<br><br>
+      <strong>Correzione:</strong> <code style="color:#4ec9b0;">float V_B = (rawB / 1023.0) * VCC;</code> (aggiungere il <code>.0</code> forza la divisione float)
+    </div>
+
+    <div class="domanda-label">Bug 3 — VCC + V_C invece di VCC − V_C</div>
+    <div class="sol-step rosso">
+      <strong>Problema:</strong> La formula corretta è <code>Rx = R2 * V_C / (VCC - V_C)</code> derivata dal partitore. Con il segno <code>+</code>:<br>
+      Con V_C = 2,5 V: Rx_sbagliato = 10000 × 2,5 / (5 + 2,5) = 25000/7,5 = <strong>3333 Ω</strong> (ERRATO)<br>
+      Con formula corretta: Rx = 10000 × 2,5 / (5 − 2,5) = 25000/2,5 = <strong>10000 Ω</strong> (CORRETTO)<br><br>
+      <strong>Correzione:</strong> <code style="color:#4ec9b0;">float Rx = R2 * V_C / (VCC - V_C);</code>
+    </div>
+
+    <div class="domanda-label">Bug 4 — if (Rx = 10000) invece di ==</div>
+    <div class="sol-step rosso">
+      <strong>Problema:</strong> <code>=</code> è l'operatore di <strong>assegnazione</strong>, <code>==</code> è l'operatore di <strong>confronto</strong>. La riga <code>if (Rx = 10000)</code> assegna 10000 a Rx e poi valuta la condizione: poiché 10000 è diverso da 0, la condizione è sempre vera → il messaggio "Ponte bilanciato!" viene stampato sempre, indipendentemente dal valore reale di Rx.<br><br>
+      <strong>Correzione con tolleranza ±100 Ω:</strong>
+      <code style="color:#4ec9b0;">if (abs(Rx - 10000.0) &lt; 100.0)</code>
+    </div>
+
+    <p style="margin-top: 14px;">Codice corretto completo:</p>
+<pre class="code"><span class="kw">const</span> <span class="fix">float</span> VCC = <span class="num">5.0</span>;          <span class="fix">// FIX 1: float</span>
+<span class="kw">const float</span> R1 = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R2 = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R3 = <span class="num">10000.0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() { Serial.<span class="fn">begin</span>(<span class="num">9600</span>); }
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> rawB = <span class="fn">analogRead</span>(A0);
+  <span class="kw">int</span> rawC = <span class="fn">analogRead</span>(A1);
+
+  <span class="kw">float</span> V_B = (rawB / <span class="fix">1023.0</span>) * VCC;   <span class="fix">// FIX 2: 1023.0</span>
+  <span class="kw">float</span> V_C = (rawC / <span class="num">1023.0</span>) * VCC;
+  <span class="kw">float</span> Rx  = R2 * V_C / (VCC <span class="fix">-</span> V_C);  <span class="fix">// FIX 3: segno meno</span>
+
+  <span class="kw">if</span> (<span class="fn">abs</span>(Rx <span class="fix">==</span> <span class="num">10000.0</span>) < <span class="num">100.0</span>) {     <span class="fix">// FIX 4: == e tolleranza</span>
+    Serial.<span class="fn">println</span>(<span class="str">"Ponte bilanciato!"</span>);
+  }
+  Serial.<span class="fn">print</span>(<span class="str">"Rx = "</span>); Serial.<span class="fn">println</span>(Rx);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+  </div>
+</div>
+
+<!-- C3 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C3</div>
+    <div class="title">Scrivi il codice — media su più campioni</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+
+    <div class="domanda-label">a) Codice completo con media su N = 10 campioni</div>
+<pre class="code"><span class="kw">const float</span> VCC  = <span class="num">5.0</span>;
+<span class="kw">const float</span> R2   = <span class="num">10000.0</span>;
+<span class="kw">const int</span>   N    = <span class="num">10</span>;       <span class="cm">// numero di campioni per la media</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"rawB_avg | rawC_avg | V_B | V_C | Vout | Rx"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Accumulo N letture</span>
+  <span class="kw">long</span> sumB = <span class="num">0</span>, sumC = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i < N; i++) {
+    sumB += <span class="fn">analogRead</span>(A0);
+    sumC += <span class="fn">analogRead</span>(A1);
+    <span class="fn">delay</span>(<span class="num">2</span>);  <span class="cm">// piccola pausa tra letture consecutive</span>
+  }
+
+  <span class="cm">// Calcolo medie (float per non perdere decimali)</span>
+  <span class="kw">float</span> avgB = (<span class="kw">float</span>)sumB / N;
+  <span class="kw">float</span> avgC = (<span class="kw">float</span>)sumC / N;
+
+  <span class="cm">// Conversione in tensione</span>
+  <span class="kw">float</span> V_B = (avgB / <span class="num">1023.0</span>) * VCC;
+  <span class="kw">float</span> V_C = (avgC / <span class="num">1023.0</span>) * VCC;
+
+  <span class="cm">// Squilibrio e resistenza incognita</span>
+  <span class="kw">float</span> Vout = V_B - V_C;
+  <span class="kw">float</span> Rx = <span class="num">-1</span>;
+  <span class="kw">if</span> (VCC - V_C > <span class="num">0.01</span>)
+    Rx = R2 * V_C / (VCC - V_C);
+
+  <span class="cm">// Output</span>
+  Serial.<span class="fn">print</span>(avgB, <span class="num">1</span>); Serial.<span class="fn">print</span>(<span class="str">" | "</span>);
+  Serial.<span class="fn">print</span>(avgC, <span class="num">1</span>); Serial.<span class="fn">print</span>(<span class="str">" | "</span>);
+  Serial.<span class="fn">print</span>(V_B, <span class="num">3</span>);  Serial.<span class="fn">print</span>(<span class="str">"V | "</span>);
+  Serial.<span class="fn">print</span>(V_C, <span class="num">3</span>);  Serial.<span class="fn">print</span>(<span class="str">"V | "</span>);
+  Serial.<span class="fn">print</span>(Vout, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"V | "</span>);
+  Serial.<span class="fn">println</span>(Rx, <span class="num">0</span>);
+
+  <span class="fn">delay</span>(<span class="num">1000</span> - N * <span class="num">2</span>);  <span class="cm">// compensa il tempo delle letture</span>
+}</pre>
+    <div class="attenzione">
+      <strong>Nota importante:</strong> usare <code>long</code> (non <code>int</code>) per <code>sumB</code> e <code>sumC</code> per evitare overflow: con N=10 il valore massimo è 10×1023 = 10230, che supera il range di <code>int</code> a 8 bit ma non quello a 16 bit. Con N=100 la somma massima è 102300 → necessario <code>long</code>.
+    </div>
+
+    <div class="domanda-label">b) Vantaggio della media</div>
+    <div class="sol-step verde">
+      La media di N campioni riduce il <strong>rumore casuale</strong> (bianco) dell'ADC di un fattore √N. Con N=10: riduzione rumore di √10 ≈ 3,16×. Il valore di Rx risulta più stabile e meno "tremolante" sul Serial Monitor, specialmente utile in ambienti con disturbi elettromagnetici. Lo svantaggio è una minore velocità di campionamento (il risultato è disponibile ogni N misure).
+    </div>
+
+    <div class="domanda-label">c) N = 100 — rischi?</div>
+    <div class="sol-step arancio">
+      <strong>Overflow:</strong> Con N=100, somma massima = 100 × 1023 = 102.300. <code>int</code> su Arduino è a 16 bit (max 32767) → overflow garantito! Soluzione: usare <code>long</code> (32 bit, max ~2 miliardi). ✓ già nel codice proposto.<br><br>
+      <strong>Tempo di esecuzione:</strong> Con <code>delay(2)</code> tra letture, 100 campioni richiedono ~200 ms solo per le letture, più il delay finale. Il periodo totale diventa &gt;1 secondo. Se l'applicazione richiede aggiornamenti veloci, N = 100 potrebbe essere troppo lento.<br><br>
+      <strong>Conclusione:</strong> N = 10÷32 è un buon compromesso tra riduzione del rumore e velocità di risposta per la maggior parte delle applicazioni industriali lente (temperatura, peso).
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SEZIONE D – TEORIA
+══════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">💬</span>
+  <h2>Sezione D — Domande Teoriche</h2>
+  <span class="count">4 domande</span>
+</div>
+
+<!-- D1 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D1</div>
+    <div class="title">Vero o falso</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <table>
+      <tr><th>#</th><th>Affermazione</th><th>V/F</th><th>Motivazione</th></tr>
+      <tr>
+        <td>1</td>
+        <td>"Quando il ponte è in equilibrio, la corrente attraverso il galvanometro è zero."</td>
+        <td><span class="vero">VERO</span></td>
+        <td>All'equilibrio V_B = V_C → nessuna differenza di potenziale ai capi del galvanometro → I = 0.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>"Aumentando Vcc, il valore di Rx di equilibrio aumenta proporzionalmente."</td>
+        <td><span class="falso">FALSO</span></td>
+        <td>Rx_eq = (R2×R3)/R1: non contiene Vcc. La tensione di alimentazione non influisce sul punto di equilibrio.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>"Il ponte può misurare solo resistenze Rx minori di R1."</td>
+        <td><span class="falso">FALSO</span></td>
+        <td>Rx può essere qualsiasi valore: Rx = (R2×R3)/R1. Scegliendo R2 &gt; R1 si ottiene Rx &gt; R3, senza limiti teorici.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>"Se R1 = R2, allora all'equilibrio Rx = R3."</td>
+        <td><span class="vero">VERO</span></td>
+        <td>Rx = (R2×R3)/R1 = (R1×R3)/R1 = R3. Con R1=R2 i due rapporti si semplificano e Rx deve essere uguale a R3.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>"La formula linearizzata ΔVout ≈ (Vcc/4)·(ΔRx/R) è valida per qualsiasi valore di ΔRx."</td>
+        <td><span class="falso">FALSO</span></td>
+        <td>È un'approssimazione valida solo per ΔRx &lt;&lt; R (tipicamente ΔRx/R &lt; 5–10%). Per variazioni maggiori l'errore di linearizzazione diventa significativo e si deve usare la formula esatta.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- D2 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D2</div>
+    <div class="title">Scelta multipla</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+
+    <div class="domanda-label">Domanda 1 — Rx aumenta del 10%</div>
+    <div class="risposta-corretta">✅ Risposta corretta: C — Vout diventa negativo</div>
+    <div class="sol-step">
+      Se Rx↑ → V_C = Vcc·Rx/(R2+Rx) aumenta → Vout = V_B − V_C diminuisce → <strong>Vout diventa negativo</strong>. Il nodo C è ora a potenziale maggiore di B.
+    </div>
+
+    <div class="domanda-label">Domanda 2 — Quale applicazione NON usa il ponte di Wheatstone?</div>
+    <div class="risposta-corretta">✅ Risposta corretta: C — Rilevatore di metalli a induzione</div>
+    <div class="sol-step">
+      Il rilevatore di metalli a induzione funziona per variazione di induttanza/frequenza di risonanza di un circuito LC, non tramite variazione di resistenza. Celle di carico, NTC e strain gauge utilizzano tutti variazioni di resistenza → ponte di Wheatstone.
+    </div>
+
+    <div class="domanda-label">Domanda 3 — Limitazione della formula linearizzata</div>
+    <div class="risposta-corretta">✅ Risposta corretta: B — Introduce errore crescente all'aumentare di ΔRx/R</div>
+    <div class="sol-step">
+      La linearizzazione è una approssimazione al primo ordine dello sviluppo in serie di Taylor. L'errore relativo è proporzionale a (ΔRx/R)²: piccolo per variazioni piccole, significativo per variazioni grandi. Non dipende da Vcc (A), né ignora R2 e R3 (C), né dalla temperatura (D).
+    </div>
+  </div>
+</div>
+
+<!-- D3 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D3</div>
+    <div class="title">Domanda aperta — confronto tra metodi</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+
+    <div class="domanda-label">a) Vantaggi e svantaggi</div>
+    <table>
+      <tr><th></th><th>Soluzione A — Ohmmetro</th><th>Soluzione B — Ponte + Arduino</th></tr>
+      <tr>
+        <td><strong>Vantaggi</strong></td>
+        <td>
+          1. Immediato, nessuna progettazione<br>
+          2. Lettura diretta in Ω<br>
+          3. Portatile, economico
+        </td>
+        <td>
+          1. Misura continua e automatizzabile<br>
+          2. Immune a disturbi di modo comune<br>
+          3. Integrabile in sistemi di controllo
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Svantaggi</strong></td>
+        <td>
+          1. Lettura manuale, non automatizzabile<br>
+          2. Impossibile monitorare in continuo<br>
+          3. Non immune ai disturbi del cablaggio
+        </td>
+        <td>
+          1. Richiede progettazione e calibrazione<br>
+          2. Non legge direttamente in Ω<br>
+          3. ADC introduce quantizzazione
+        </td>
+      </tr>
+    </table>
+
+    <div class="domanda-label">b) Quando scegliere il ponte + Arduino in ambito industriale</div>
+    <div class="sol-step viola">
+      Si sceglie il ponte quando il sensore è lontano dall'unità di misura (il cavo lungo introduce resistenza e rumore), quando serve <strong>monitoraggio continuo</strong> (temperatura di un forno, peso su nastro), quando più sensori devono essere letti in parallelo, oppure quando il segnale deve essere integrato in un PLC o sistema SCADA. Esempi: celle di carico in linee di produzione, termometria di quadri elettrici, misura di deformazione su strutture.
+    </div>
+
+    <div class="domanda-label">c) Misura differenziale e cancellazione del rumore</div>
+    <div class="sol-step verde">
+      Una misura <strong>differenziale</strong> rileva la <em>differenza</em> tra due segnali (V_B − V_C) invece di misurarne uno rispetto a GND. I disturbi che si sommano ugualmente a entrambi i nodi (rumore di alimentazione, interferenze EMI sul cablaggio, deriva termica delle resistenze di riferimento) si <strong>cancellano</strong> nella sottrazione: questo si chiama <em>reiezione del modo comune</em> (CMRR). Il risultato è un segnale molto più pulito, specialmente in ambienti industriali rumorosi.
+    </div>
+  </div>
+</div>
+
+<!-- D4 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D4</div>
+    <div class="title">Cella di carico industriale</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Dati: sensibilità = 2 mV/V, Vcc = 10 V, fondo scala = 100 kg</p>
+
+    <div class="domanda-label">a) Calcolo Vout al fondo scala e a metà scala</div>
+    <div class="formula-inline">
+      <span class="step">Vout massimo (100 kg, fondo scala):</span><br>
+      Vout = sensibilità × Vcc = 2 mV/V × 10 V = <span class="ris">20 mV</span><br><br>
+      <span class="step">Vout a metà scala (50 kg):</span><br>
+      Vout = 20 mV × (50/100) = <span class="ris">10 mV</span><br><br>
+      <span class="step">Risoluzione per chilogrammo:</span><br>
+      20 mV / 100 kg = <span class="ris">0,2 mV/kg</span>
+    </div>
+
+    <div class="domanda-label">b) Leggibilità con ADC di Arduino</div>
+    <div class="sol-step rosso">
+      <strong>No, non direttamente.</strong> Il segnale massimo è 20 mV: con ADC Arduino a 10 bit e range 0–5V, la risoluzione è 5000 mV / 1024 = 4,88 mV/bit. L'intero fondo scala (20 mV) corrisponde a soli 20/4,88 ≈ <strong>4 bit</strong> di variazione: risoluzione praticamente inutilizzabile.<br><br>
+      <strong>Serve un amplificatore strumentale</strong> (es. <strong>HX711</strong>, dedicato alle celle di carico, con guadagno 128× e ADC 24 bit integrato) o un <strong>INA128/INA333</strong> con guadagno configurabile via resistenza esterna. Con guadagno 250×: 20 mV × 250 = 5 V → perfetto per l'ADC di Arduino.
+    </div>
+
+    <div class="domanda-label">c) Ponte completo vs quarto di ponte</div>
+    <div class="sol-step verde">
+      <strong>Sensibilità quadruplicata:</strong> con 4 strain gauge attivi (2 in trazione + 2 in compressione disposti nei 4 rami), le variazioni si sommano invece di cancellarsi: ΔVout_4attivi = 4 × ΔVout_1attivo. Stessa deformazione → segnale 4 volte maggiore rispetto al quarto di ponte.<br><br>
+      <strong>Compensazione automatica della temperatura:</strong> se la temperatura varia, tutti e 4 gli strain gauge variano allo stesso modo (effetto di modo comune). Essendo su rami opposti del ponte, queste variazioni si <em>cancellano</em> automaticamente nel segnale di uscita: la lettura non risente delle variazioni termiche ambientali. Questo è cruciale in ambito industriale dove le temperature possono variare significativamente.
+    </div>
+  </div>
+</div>
+
+</div><!-- fine container -->
+
+<footer>
+  Soluzioni Foglio Esercizi – Ponte di Wheatstone &nbsp;|&nbsp; Documento riservato al docente<br>
+  Corso ITS Elettronica e Automazione Industriale
+</footer>
+
+</body>
+</html>

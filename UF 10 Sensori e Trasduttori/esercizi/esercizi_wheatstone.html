@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esercizi – Ponte di Wheatstone</title>
+<style>
+  :root {
+    --blu: #1a3a5c;
+    --azzurro: #2e7bc4;
+    --celeste: #d6eaf8;
+    --verde: #1a7a3c;
+    --verde-chiaro: #d4edda;
+    --rosso: #c0392b;
+    --arancio: #c76b00;
+    --arancio-chiaro: #fff3cd;
+    --grigio: #f4f6f8;
+    --bordo: #cdd3db;
+    --viola: #6c3483;
+    --viola-chiaro: #e8daef;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #222; background: #fff; line-height: 1.7; }
+
+  /* INTESTAZIONE */
+  .header {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2e7bc4 100%);
+    color: white; padding: 40px 40px 30px;
+  }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+  .header h1 { font-size: 2em; margin-bottom: 4px; }
+  .header .sub { opacity: 0.85; font-size: 0.95em; }
+  .header .info-box {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px; padding: 10px 16px; font-size: 0.85em; text-align: right;
+  }
+  .badges { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35); border-radius: 20px;
+    padding: 4px 14px; font-size: 0.82em;
+  }
+  .badge.facile { background: rgba(26,122,60,0.4); border-color: rgba(26,122,60,0.6); }
+  .badge.medio  { background: rgba(199,107,0,0.4); border-color: rgba(199,107,0,0.6); }
+
+  /* ISTRUZIONI */
+  .istruzioni {
+    max-width: 900px; margin: 24px auto; padding: 0 24px;
+    background: var(--celeste); border-left: 4px solid var(--azzurro);
+    border-radius: 4px; padding: 14px 20px;
+  }
+  .istruzioni p { margin: 0; }
+
+  /* SEZIONI */
+  .container { max-width: 940px; margin: 0 auto; padding: 10px 24px 40px; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--blu); color: white;
+    padding: 12px 20px; border-radius: 8px; margin: 36px 0 18px;
+  }
+  .section-header .icon { font-size: 1.4em; }
+  .section-header h2 { font-size: 1.15em; margin: 0; }
+  .section-header .count { margin-left: auto; background: rgba(255,255,255,0.2); border-radius: 12px; padding: 2px 10px; font-size: 0.85em; }
+
+  /* CARD ESERCIZIO */
+  .card {
+    border: 1.5px solid var(--bordo); border-radius: 10px;
+    margin-bottom: 24px; overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 18px; font-weight: bold;
+    border-bottom: 1.5px solid var(--bordo);
+  }
+  .card-header .num {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9em; flex-shrink: 0;
+  }
+  .card-header .title { flex: 1; }
+  .card-header .diff {
+    font-size: 0.75em; padding: 3px 10px; border-radius: 12px;
+    font-weight: normal; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  /* colori per tipo */
+  .tipo-calcolo .card-header { background: #eaf3fb; }
+  .tipo-calcolo .card-header .num { background: var(--azzurro); color: white; }
+  .tipo-schema .card-header { background: #fdf0e6; }
+  .tipo-schema .card-header .num { background: var(--arancio); color: white; }
+  .tipo-arduino .card-header { background: #e8f8ee; }
+  .tipo-arduino .card-header .num { background: var(--verde); color: white; }
+  .tipo-teoria .card-header { background: var(--viola-chiaro); }
+  .tipo-teoria .card-header .num { background: var(--viola); color: white; }
+
+  .diff.facile { background: var(--verde-chiaro); color: var(--verde); }
+  .diff.medio  { background: var(--arancio-chiaro); color: var(--arancio); }
+
+  .card-body { padding: 18px 20px; }
+  .card-body p { margin-bottom: 10px; }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  .dati {
+    background: var(--grigio); border: 1px solid var(--bordo);
+    border-radius: 5px; padding: 10px 14px; margin: 12px 0;
+    font-family: 'Courier New', monospace; font-size: 0.9em;
+  }
+  .dati span { display: inline-block; margin-right: 18px; }
+
+  .domande { list-style: none; padding: 0; margin: 10px 0; }
+  .domande li {
+    padding: 7px 12px 7px 32px; margin-bottom: 6px;
+    background: var(--grigio); border-radius: 5px; position: relative;
+  }
+  .domande li::before {
+    content: attr(data-q);
+    position: absolute; left: 10px;
+    font-weight: bold; color: var(--azzurro);
+  }
+
+  /* SVG schemi */
+  .schema-wrap { text-align: center; margin: 14px 0; }
+  svg { max-width: 100%; }
+
+  /* Codice */
+  pre.code {
+    background: #1e1e1e; color: #d4d4d4;
+    border-radius: 8px; padding: 16px; overflow-x: auto;
+    font-family: 'Courier New', monospace; font-size: 0.83em;
+    line-height: 1.6; margin: 12px 0;
+  }
+  .kw { color: #569cd6; }
+  .cm { color: #6a9955; font-style: italic; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .fn { color: #dcdcaa; }
+  .err { color: #f44747; font-weight: bold; }
+
+  /* Spazio risposta */
+  .risposta {
+    border: 1.5px dashed var(--bordo); border-radius: 6px;
+    min-height: 80px; margin-top: 14px; padding: 10px 14px;
+    color: #aaa; font-style: italic; font-size: 0.88em;
+    background: repeating-linear-gradient(
+      to bottom, transparent, transparent 27px, #e8ecf0 27px, #e8ecf0 28px
+    );
+  }
+  .risposta::before { content: "Spazio per la risposta..."; }
+
+  /* Teoria: opzioni scelta multipla */
+  .options { list-style: none; padding: 0; margin: 10px 0; }
+  .options li {
+    padding: 8px 12px 8px 40px; margin-bottom: 7px;
+    border: 1.5px solid var(--bordo); border-radius: 6px;
+    position: relative; cursor: default; background: white;
+  }
+  .options li .letter {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--viola); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8em; font-weight: bold;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--blu); color: rgba(255,255,255,0.65);
+    text-align: center; padding: 18px; font-size: 0.82em; margin-top: 40px;
+  }
+
+  /* Stampa */
+  @media print {
+    .header { background: var(--blu) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .card { break-inside: avoid; }
+    .section-header { background: var(--blu) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INTESTAZIONE -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>⚖️ Ponte di Wheatstone</h1>
+      <div class="sub">Foglio esercizi per studenti — Corso ITS Elettronica e Automazione</div>
+    </div>
+    <div class="info-box">
+      Nome: ________________________<br>
+      Data: ________________________<br>
+      Classe: ______________________
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge">📐 Calcoli &amp; Formule</span>
+    <span class="badge">🔌 Schemi circuitali</span>
+    <span class="badge">⚙️ Codice Arduino</span>
+    <span class="badge">💬 Domande teoriche</span>
+    <span class="badge facile">🟢 Facile</span>
+    <span class="badge medio">🟡 Medio</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="istruzioni">
+  <p>📌 <strong>Istruzioni:</strong> Per ogni esercizio leggi attentamente il testo, analizza i dati forniti e mostra tutti i passaggi del calcolo. Per le domande teoriche motiva la risposta. Per gli esercizi su Arduino indica anche cosa ti aspetti di vedere sul Serial Monitor.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEZIONE A – CALCOLI E FORMULE
+════════════════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">📐</span>
+  <h2>Sezione A — Calcoli e Formule</h2>
+  <span class="count">5 esercizi</span>
+</div>
+
+<!-- A1 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A1</div>
+    <div class="title">Condizione di equilibrio</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Un ponte di Wheatstone ha i seguenti valori di resistenza:</p>
+    <div class="dati">
+      <span>R1 = 1000 Ω</span><span>R2 = 2200 Ω</span><span>R3 = 680 Ω</span><span>Vcc = 5 V</span>
+    </div>
+    <ul class="domande">
+      <li data-q="a)">Calcola il valore di Rx che porta il ponte in equilibrio (Vout = 0).</li>
+      <li data-q="b)">Verifica il risultato usando la condizione del prodotto incrociato: R1 × Rx = R2 × R3.</li>
+      <li data-q="c)">La tensione Vcc influisce sul valore di Rx di equilibrio? Perché?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- A2 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A2</div>
+    <div class="title">Calcolo della tensione di squilibrio</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Un ponte simmetrico (R1 = R2 = R3 = 4700 Ω, Vcc = 5 V) viene leggermente sbilanciato portando Rx a 5100 Ω.</p>
+    <div class="dati">
+      <span>R1 = R2 = R3 = 4700 Ω</span><span>Rx = 5100 Ω</span><span>Vcc = 5 V</span>
+    </div>
+    <ul class="domande">
+      <li data-q="a)">Calcola V_B (tensione al nodo B) e V_C (tensione al nodo C).</li>
+      <li data-q="b)">Calcola Vout = V_B − V_C. Il risultato è positivo o negativo? Cosa significa?</li>
+      <li data-q="c)">Se Rx tornasse a 4700 Ω, cosa succederebbe a Vout?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- A3 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A3</div>
+    <div class="title">Risalire a Rx dalla tensione misurata</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Su un banco di laboratorio misuri con un voltmetro la tensione al nodo C di un ponte: V_C = 1,85 V. I componenti del ponte sono:</p>
+    <div class="dati">
+      <span>R1 = 10 kΩ</span><span>R2 = 10 kΩ</span><span>R3 = 10 kΩ</span><span>Vcc = 5 V</span><span>V_C misurato = 1,85 V</span>
+    </div>
+    <ul class="domande">
+      <li data-q="a)">Usa la formula del partitore per ricavare Rx dalla misura di V_C.</li>
+      <li data-q="b)">Il ponte è bilanciato o sbilanciato? Giustifica numericamente.</li>
+      <li data-q="c)">Calcola Vout sapendo che V_B = Vcc × R3 / (R1 + R3).</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- A4 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A4</div>
+    <div class="title">Sensibilità e linearizzazione</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Un ponte simmetrico con R = 10 kΩ e Vcc = 5 V viene usato per misurare piccole variazioni di resistenza ΔRx.</p>
+    <div class="dati">
+      <span>R1 = R2 = R3 = R = 10000 Ω</span><span>Vcc = 5 V</span>
+    </div>
+    <ul class="domande">
+      <li data-q="a)">Calcola la sensibilità del ponte: S = Vcc / (4 × R)  [mV/kΩ].</li>
+      <li data-q="b)">Usa la formula linearizzata ΔVout ≈ (Vcc/4) × (ΔRx/R) per calcolare Vout quando ΔRx = +500 Ω.</li>
+      <li data-q="c)">Calcola Vout esatto con ΔRx = +500 Ω (Rx = 10500 Ω) e confronta con il valore linearizzato. Quanto vale l'errore percentuale?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- A5 -->
+<div class="card tipo-calcolo">
+  <div class="card-header">
+    <div class="num">A5</div>
+    <div class="title">Scelta delle resistenze di un ponte</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Devi progettare un ponte che si bilanci quando il sensore NTC ha una resistenza di 4700 Ω (corrispondente a 25°C). Hai a disposizione solo resistenze dalla serie E12:</p>
+    <p style="font-family: monospace; font-size: 0.9em; background: var(--grigio); padding: 8px 12px; border-radius: 4px;">
+      1k · 1.2k · 1.5k · 1.8k · 2.2k · 2.7k · 3.3k · 3.9k · 4.7k · 5.6k · 6.8k · 8.2k · 10k
+    </p>
+    <div class="dati">
+      <span>Rx_equilibrio = 4700 Ω</span><span>Vcc = 5 V</span><span>Resistenze disponibili: serie E12</span>
+    </div>
+    <ul class="domande">
+      <li data-q="a)">Scegli R1, R2, R3 dalla serie E12 in modo che il ponte si bilanci a Rx = 4700 Ω. (Suggerimento: la soluzione più semplice è un ponte simmetrico.)</li>
+      <li data-q="b)">Con i valori scelti, calcola Vout quando la temperatura sale e l'NTC vale 2200 Ω.</li>
+      <li data-q="c)">E quando l'NTC vale 10 kΩ (temperatura più bassa)? Commenta il segno di Vout nei due casi.</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SEZIONE B – SCHEMI CIRCUITALI
+════════════════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">🔌</span>
+  <h2>Sezione B — Schemi Circuitali</h2>
+  <span class="count">3 esercizi</span>
+</div>
+
+<!-- B1 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B1</div>
+    <div class="title">Identifica i nodi e i rami</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Osserva lo schema del ponte di Wheatstone qui sotto. Le resistenze hanno valori: R1 = 1 kΩ, R2 = 2,2 kΩ, R3 = 1 kΩ, Rx = ? Vcc = 9 V.</p>
+
+    <div class="schema-wrap">
+      <svg width="380" height="300" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="300" fill="#fdf6ee" rx="8"/>
+        <!-- Nodo A (alto) -->
+        <circle cx="190" cy="30" r="7" fill="#1a3a5c"/>
+        <text x="190" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">A</text>
+        <!-- Nodo D (basso) -->
+        <circle cx="190" cy="270" r="7" fill="#1a3a5c"/>
+        <text x="190" y="290" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">D</text>
+        <!-- Nodo B (sx) -->
+        <circle cx="70" cy="150" r="7" fill="#2e7bc4"/>
+        <text x="42" y="155" text-anchor="middle" font-size="13" font-weight="bold" fill="#2e7bc4">B</text>
+        <!-- Nodo C (dx) -->
+        <circle cx="310" cy="150" r="7" fill="#c76b00"/>
+        <text x="338" y="155" text-anchor="middle" font-size="13" font-weight="bold" fill="#c76b00">C</text>
+
+        <!-- Fili -->
+        <line x1="190" y1="30" x2="70" y2="150" stroke="#888" stroke-width="2"/>
+        <line x1="190" y1="30" x2="310" y2="150" stroke="#888" stroke-width="2"/>
+        <line x1="70" y1="150" x2="190" y2="270" stroke="#888" stroke-width="2"/>
+        <line x1="310" y1="150" x2="190" y2="270" stroke="#888" stroke-width="2"/>
+        <!-- Galvanometro -->
+        <line x1="70" y1="150" x2="145" y2="150" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="190" cy="150" r="18" fill="white" stroke="#555" stroke-width="1.5"/>
+        <text x="190" y="155" text-anchor="middle" font-size="13" fill="#333">G</text>
+        <line x1="235" y1="150" x2="310" y2="150" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <!-- Etichette resistenze -->
+        <rect x="90" y="68" width="44" height="22" rx="4" fill="#2e7bc4"/>
+        <text x="112" y="83" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R1=1k</text>
+
+        <rect x="244" y="68" width="50" height="22" rx="4" fill="#c76b00"/>
+        <text x="269" y="83" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R2=2.2k</text>
+
+        <rect x="90" y="200" width="44" height="22" rx="4" fill="#2e7bc4"/>
+        <text x="112" y="215" text-anchor="middle" font-size="11" fill="white" font-weight="bold">R3=1k</text>
+
+        <rect x="244" y="200" width="44" height="22" rx="4" fill="#c0392b"/>
+        <text x="266" y="215" text-anchor="middle" font-size="11" fill="white" font-weight="bold">Rx = ?</text>
+
+        <!-- Alimentazione -->
+        <text x="190" y="52" text-anchor="middle" font-size="11" fill="#555">Vcc = 9V</text>
+      </svg>
+    </div>
+
+    <ul class="domande">
+      <li data-q="a)">Indica su quale ramo si trova ciascuna resistenza (es. "R1 è nel ramo A–B").</li>
+      <li data-q="b)">Il galvanometro G è collegato tra quali nodi? Cosa misura?</li>
+      <li data-q="c)">Calcola il valore di Rx che porta il ponte in equilibrio con i valori indicati.</li>
+      <li data-q="d)">Se al posto del galvanometro usassimo un voltmetro con resistenza interna 1 MΩ, il risultato cambia significativamente? Perché?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- B2 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B2</div>
+    <div class="title">Schema con NTC — interpreta il circuito</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Lo schema seguente mostra un ponte di Wheatstone in cui Rx è sostituito da un <strong>termistore NTC</strong> (resistenza che <em>diminuisce</em> al crescere della temperatura). R1 = R2 = R3 = 10 kΩ, Vcc = 5 V. A 25°C l'NTC vale 10 kΩ.</p>
+
+    <div class="schema-wrap">
+      <svg width="400" height="310" viewBox="0 0 400 310" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="310" fill="#f0faf4" rx="8"/>
+        <!-- Struttura -->
+        <circle cx="200" cy="30" r="7" fill="#1a3a5c"/>
+        <text x="200" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">A (+5V)</text>
+        <circle cx="200" cy="280" r="7" fill="#1a3a5c"/>
+        <text x="200" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a3a5c">D (GND)</text>
+        <circle cx="80" cy="155" r="7" fill="#2e7bc4"/>
+        <text x="48" y="160" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7bc4">B</text>
+        <circle cx="320" cy="155" r="7" fill="#c76b00"/>
+        <text x="352" y="160" text-anchor="middle" font-size="12" font-weight="bold" fill="#c76b00">C</text>
+        <!-- Linee -->
+        <line x1="200" y1="30" x2="80" y2="155" stroke="#888" stroke-width="2"/>
+        <line x1="200" y1="30" x2="320" y2="155" stroke="#888" stroke-width="2"/>
+        <line x1="80" y1="155" x2="200" y2="280" stroke="#888" stroke-width="2"/>
+        <line x1="320" y1="155" x2="200" y2="280" stroke="#888" stroke-width="2"/>
+        <!-- Resistenze -->
+        <rect x="98" y="72" width="46" height="22" rx="4" fill="#2e7bc4"/>
+        <text x="121" y="87" text-anchor="middle" font-size="11" fill="white">R1 10k</text>
+        <rect x="256" y="72" width="46" height="22" rx="4" fill="#c76b00"/>
+        <text x="279" y="87" text-anchor="middle" font-size="11" fill="white">R2 10k</text>
+        <rect x="98" y="207" width="46" height="22" rx="4" fill="#2e7bc4"/>
+        <text x="121" y="222" text-anchor="middle" font-size="11" fill="white">R3 10k</text>
+        <!-- NTC -->
+        <rect x="256" y="207" width="46" height="22" rx="4" fill="#1a7a3c" stroke="#0d5228" stroke-width="1.5"/>
+        <text x="279" y="218" text-anchor="middle" font-size="10" fill="white" font-weight="bold">NTC</text>
+        <text x="279" y="228" text-anchor="middle" font-size="9" fill="white">10kΩ@25°C</text>
+        <!-- Freccia temperatura -->
+        <text x="340" y="225" font-size="18" fill="#c0392b">🌡</text>
+        <!-- Uscita Vout -->
+        <line x1="80" y1="155" x2="155" y2="155" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="155" y="143" width="90" height="24" rx="4" fill="white" stroke="#555" stroke-width="1.5"/>
+        <text x="200" y="159" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">VOUT → ADC</text>
+        <line x1="245" y1="155" x2="320" y2="155" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+      </svg>
+    </div>
+
+    <ul class="domande">
+      <li data-q="a)">A 25°C (NTC = 10 kΩ): il ponte è bilanciato? Calcola Vout.</li>
+      <li data-q="b)">La temperatura sale a 50°C e l'NTC vale 3900 Ω. Calcola V_C e Vout.</li>
+      <li data-q="c)">Vout aumenta o diminuisce al crescere della temperatura? Spiega il motivo fisico.</li>
+      <li data-q="d)">In quale applicazione pratica potrebbe essere utile questo circuito?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- B3 -->
+<div class="card tipo-schema">
+  <div class="card-header">
+    <div class="num">B3</div>
+    <div class="title">Completa lo schema</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Lo schema seguente è incompleto: mancano i valori di tre componenti e i collegamenti ai pin di Arduino. Completa il progetto sapendo che:</p>
+    <ul style="margin: 8px 0 8px 20px; line-height: 1.9;">
+      <li>Il ponte deve bilanciarsi a Rx = 10 kΩ</li>
+      <li>R1 = 10 kΩ (già presente)</li>
+      <li>Il ponte deve essere simmetrico</li>
+      <li>Vcc = 5V di Arduino</li>
+      <li>Vout deve essere letto da due pin analogici di Arduino</li>
+    </ul>
+
+    <div class="schema-wrap">
+      <svg width="420" height="330" viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg">
+        <rect width="420" height="330" fill="#f8f0ff" rx="8"/>
+        <!-- Arduino -->
+        <rect x="300" y="120" width="110" height="100" rx="6" fill="#1a7a3c"/>
+        <text x="355" y="144" text-anchor="middle" font-size="11" fill="white" font-weight="bold">ARDUINO</text>
+        <text x="355" y="160" text-anchor="middle" font-size="10" fill="white">UNO</text>
+        <!-- Pin -->
+        <rect x="297" y="172" width="6" height="12" fill="#ddd" rx="1"/>
+        <text x="294" y="182" text-anchor="end" font-size="10" fill="#555">A0</text>
+        <rect x="297" y="192" width="6" height="12" fill="#ddd" rx="1"/>
+        <text x="294" y="202" text-anchor="end" font-size="10" fill="#555">A1</text>
+        <rect x="297" y="212" width="6" height="12" fill="#ddd" rx="1"/>
+        <text x="294" y="222" text-anchor="end" font-size="10" fill="#555">GND</text>
+        <rect x="297" y="232" width="6" height="12" fill="#ddd" rx="1"/>
+        <text x="294" y="242" text-anchor="end" font-size="10" fill="#555">5V</text>
+
+        <!-- Nodi ponte -->
+        <circle cx="70" cy="50" r="7" fill="#1a3a5c"/>
+        <text x="70" y="36" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a3a5c">A</text>
+        <circle cx="70" cy="280" r="7" fill="#1a3a5c"/>
+        <text x="70" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a3a5c">D</text>
+        <circle cx="20" cy="165" r="7" fill="#2e7bc4"/>
+        <text x="10" y="162" text-anchor="end" font-size="12" font-weight="bold" fill="#2e7bc4">B</text>
+        <circle cx="140" cy="165" r="7" fill="#c76b00"/>
+        <text x="155" y="162" font-size="12" font-weight="bold" fill="#c76b00">C</text>
+
+        <!-- Fili -->
+        <line x1="70" y1="50" x2="20" y2="165" stroke="#888" stroke-width="2"/>
+        <line x1="70" y1="50" x2="140" y2="165" stroke="#888" stroke-width="2"/>
+        <line x1="20" y1="165" x2="70" y2="280" stroke="#888" stroke-width="2"/>
+        <line x1="140" y1="165" x2="70" y2="280" stroke="#888" stroke-width="2"/>
+
+        <!-- R1 con valore -->
+        <rect x="14" y="84" width="44" height="22" rx="4" fill="#2e7bc4"/>
+        <text x="36" y="99" text-anchor="middle" font-size="11" fill="white">R1=10k</text>
+
+        <!-- R2 con ??? -->
+        <rect x="100" y="84" width="44" height="22" rx="4" fill="#ddd" stroke="#aaa" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="122" y="99" text-anchor="middle" font-size="12" fill="#c76b00" font-weight="bold">R2=?</text>
+
+        <!-- R3 con ??? -->
+        <rect x="14" y="228" width="44" height="22" rx="4" fill="#ddd" stroke="#aaa" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="36" y="243" text-anchor="middle" font-size="12" fill="#2e7bc4" font-weight="bold">R3=?</text>
+
+        <!-- Rx NTC -->
+        <rect x="100" y="228" width="44" height="22" rx="4" fill="#1a7a3c"/>
+        <text x="122" y="240" text-anchor="middle" font-size="10" fill="white">NTC</text>
+        <text x="122" y="250" text-anchor="middle" font-size="9" fill="white">Rx=10k</text>
+
+        <!-- Collegamento ??? a Arduino -->
+        <line x1="20" y1="165" x2="190" y2="165" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="210" y="161" font-size="10" fill="#c0392b" font-weight="bold">→ A? ???</text>
+        <line x1="140" y1="165" x2="190" y2="185" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="210" y="189" font-size="10" fill="#c0392b" font-weight="bold">→ A? ???</text>
+
+        <!-- Frecce VCC e GND -->
+        <line x1="70" y1="50" x2="270" y2="50" stroke="#c00" stroke-width="1.5"/>
+        <line x1="270" y1="50" x2="297" y2="238" stroke="#c00" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="230" y="45" font-size="10" fill="#c00">→ 5V</text>
+        <line x1="70" y1="280" x2="240" y2="280" stroke="#555" stroke-width="1.5"/>
+        <line x1="240" y1="280" x2="297" y2="218" stroke="#555" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="195" y="294" font-size="10" fill="#555">→ GND</text>
+      </svg>
+    </div>
+
+    <ul class="domande">
+      <li data-q="a)">Scrivi i valori mancanti di R2 e R3 (usa valori dalla serie E12).</li>
+      <li data-q="b)">Indica a quali pin di Arduino (A0 o A1) vanno collegati i nodi B e C, e perché quella scelta è valida indifferentemente.</li>
+      <li data-q="c)">Se il NTC scende a 5 kΩ, calcola Vout. Arduino riesce a leggere questo valore? (ADC range: 0–5 V)</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SEZIONE C – CODICE ARDUINO
+════════════════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">⚙️</span>
+  <h2>Sezione C — Codice Arduino</h2>
+  <span class="count">3 esercizi</span>
+</div>
+
+<!-- C1 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C1</div>
+    <div class="title">Leggi e spiega il codice</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Leggi attentamente il seguente sketch Arduino per la lettura di un ponte di Wheatstone e rispondi alle domande.</p>
+<pre class="code"><span class="kw">const float</span> VCC = <span class="num">5.0</span>;
+<span class="kw">const float</span> R1  = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R2  = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R3  = <span class="num">10000.0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> rawB = <span class="fn">analogRead</span>(A0);
+  <span class="kw">int</span> rawC = <span class="fn">analogRead</span>(A1);
+
+  <span class="kw">float</span> V_B = (rawB / <span class="num">1023.0</span>) * VCC;
+  <span class="kw">float</span> V_C = (rawC / <span class="num">1023.0</span>) * VCC;
+  <span class="kw">float</span> Vout = V_B - V_C;
+
+  <span class="kw">float</span> Rx = R2 * V_C / (VCC - V_C);
+
+  Serial.<span class="fn">print</span>(<span class="str">"Vout = "</span>); Serial.<span class="fn">print</span>(Vout, <span class="num">3</span>);
+  Serial.<span class="fn">print</span>(<span class="str">" V  |  Rx = "</span>); Serial.<span class="fn">println</span>(Rx, <span class="num">0</span>);
+
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+    <ul class="domande">
+      <li data-q="a)">A cosa serve la riga <code>float V_B = (rawB / 1023.0) * VCC</code>? Perché si divide per 1023 e non per 1024?</li>
+      <li data-q="b)">Se rawC = 512, calcola a mano V_C e poi Rx. Cosa ti aspetti di vedere sul Serial Monitor?</li>
+      <li data-q="c)">Perché viene usato <code>Serial.begin(9600)</code> in <code>setup()</code> e non in <code>loop()</code>?</li>
+      <li data-q="d)">Cosa succederebbe se V_C fosse esattamente uguale a VCC (5,0 V)? Il codice darebbe un errore? Perché?</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- C2 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C2</div>
+    <div class="title">Trova e correggi i bug</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Il seguente codice contiene <strong>4 errori</strong> (evidenziati con <span style="color:#f44747;font-weight:bold;">commenti rossi</span>). Trovali, spiega il problema e riscrivi la riga corretta per ognuno.</p>
+<pre class="code"><span class="kw">const int</span> VCC = <span class="num">5</span>;          <span class="err">// BUG 1</span>
+<span class="kw">const float</span> R1 = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R2 = <span class="num">10000.0</span>;
+<span class="kw">const float</span> R3 = <span class="num">10000.0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> rawB = <span class="fn">analogRead</span>(A0);
+  <span class="kw">int</span> rawC = <span class="fn">analogRead</span>(A1);
+
+  <span class="kw">float</span> V_B = (rawB / <span class="num">1023</span>) * VCC;   <span class="err">// BUG 2</span>
+  <span class="kw">float</span> V_C = (rawC / <span class="num">1023.0</span>) * VCC;
+
+  <span class="kw">float</span> Rx = R2 * V_C / (VCC + V_C);  <span class="err">// BUG 3</span>
+
+  <span class="kw">if</span> (Rx = <span class="num">10000</span>) {                    <span class="err">// BUG 4</span>
+    Serial.<span class="fn">println</span>(<span class="str">"Ponte bilanciato!"</span>);
+  }
+
+  Serial.<span class="fn">print</span>(<span class="str">"Rx = "</span>); Serial.<span class="fn">println</span>(Rx);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+    <ul class="domande">
+      <li data-q="Bug 1">Qual è il problema con <code>const int VCC = 5</code>? Come si corregge e perché è importante per i calcoli successivi?</li>
+      <li data-q="Bug 2">Perché <code>rawB / 1023</code> dà sempre 0? Come si corregge?</li>
+      <li data-q="Bug 3">La formula di Rx usa <code>VCC + V_C</code> invece di <code>VCC - V_C</code>. Qual è il valore numerico errato se V_C = 2,5 V? E quello corretto?</li>
+      <li data-q="Bug 4">Qual è la differenza tra <code>=</code> e <code>==</code> in C++? Riscrivi la condizione corretta per verificare il bilanciamento (considera una tolleranza di ±100 Ω).</li>
+    </ul>
+    <div class="risposta"></div>
+  </div>
+</div>
+
+<!-- C3 -->
+<div class="card tipo-arduino">
+  <div class="card-header">
+    <div class="num">C3</div>
+    <div class="title">Scrivi il codice — media su più campioni</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>I segnali ADC di Arduino sono soggetti a rumore. Una tecnica semplice è fare la <strong>media di N letture consecutive</strong> prima di calcolare la tensione. Scrivi un programma che:</p>
+    <ul style="margin: 8px 0 8px 20px; line-height: 1.9;">
+      <li>Legge <code>N = 10</code> volte i pin A0 e A1 in rapida successione</li>
+      <li>Calcola la media dei 10 valori raw per ciascun pin</li>
+      <li>Converte le medie in tensione V_B e V_C</li>
+      <li>Calcola Vout e Rx</li>
+      <li>Stampa su Serial Monitor: media rawB, media rawC, V_B, V_C, Vout, Rx</li>
+      <li>Si ripete ogni secondo</li>
+    </ul>
+    <p>Usa i seguenti parametri: R1 = R2 = R3 = 10 kΩ, Vcc = 5 V.</p>
+    <ul class="domande">
+      <li data-q="a)">Scrivi il codice completo (puoi usare lo spazio sotto o un foglio separato).</li>
+      <li data-q="b)">Rispetto al codice senza media: come cambia il comportamento? Qual è il vantaggio?</li>
+      <li data-q="c)">Se N = 100 invece di 10, il programma funziona ancora bene? Ci sono rischi? (Suggerimento: pensa al tempo di esecuzione e all'overflow di variabili int.)</li>
+    </ul>
+    <div class="risposta" style="min-height: 160px;"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SEZIONE D – DOMANDE TEORICHE
+════════════════════════════════════════════════ -->
+<div class="section-header">
+  <span class="icon">💬</span>
+  <h2>Sezione D — Domande Teoriche</h2>
+  <span class="count">4 domande</span>
+</div>
+
+<!-- D1 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D1</div>
+    <div class="title">Vero o falso — giustifica</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p>Per ciascuna affermazione indica se è <strong>Vera (V)</strong> o <strong>Falsa (F)</strong> e motiva brevemente la risposta:</p>
+    <ul class="domande">
+      <li data-q="1.">"Quando il ponte è in equilibrio, la corrente attraverso il galvanometro è zero."</li>
+      <li data-q="2.">"Aumentando Vcc, il valore di Rx di equilibrio aumenta proporzionalmente."</li>
+      <li data-q="3.">"Il ponte di Wheatstone può misurare solo resistenze incognite Rx minori di R1."</li>
+      <li data-q="4.">"Se R1 = R2, allora all'equilibrio Rx = R3."</li>
+      <li data-q="5.">"La formula linearizzata ΔVout ≈ (Vcc/4)·(ΔRx/R) è valida per qualsiasi valore di ΔRx."</li>
+    </ul>
+    <div class="risposta" style="min-height: 120px;"></div>
+  </div>
+</div>
+
+<!-- D2 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D2</div>
+    <div class="title">Scelta multipla</div>
+    <span class="diff facile">Facile</span>
+  </div>
+  <div class="card-body">
+    <p><strong>Domanda 1.</strong> In un ponte di Wheatstone simmetrico (R1=R2=R3=Rx=R), se Rx aumenta del 10%:</p>
+    <ul class="options">
+      <li><span class="letter">A</span>Vout rimane zero perché il ponte è simmetrico</li>
+      <li><span class="letter">B</span>Vout diventa positivo</li>
+      <li><span class="letter">C</span>Vout diventa negativo</li>
+      <li><span class="letter">D</span>Vout dipende solo da Vcc, non da ΔRx</li>
+    </ul>
+    <p style="margin-top:14px;"><strong>Domanda 2.</strong> Quale delle seguenti applicazioni NON usa tipicamente un ponte di Wheatstone?</p>
+    <ul class="options">
+      <li><span class="letter">A</span>Cella di carico per la pesatura</li>
+      <li><span class="letter">B</span>Sensore di temperatura con NTC</li>
+      <li><span class="letter">C</span>Rilevatore di metalli a induzione</li>
+      <li><span class="letter">D</span>Estensimetro per la misura di deformazioni</li>
+    </ul>
+    <p style="margin-top:14px;"><strong>Domanda 3.</strong> Qual è la principale limitazione della formula linearizzata ΔVout ≈ (Vcc/4)·(ΔRx/R)?</p>
+    <ul class="options">
+      <li><span class="letter">A</span>Vale solo per Vcc ≤ 5 V</li>
+      <li><span class="letter">B</span>Introduce errore crescente all'aumentare di ΔRx/R</li>
+      <li><span class="letter">C</span>Non tiene conto di R2 e R3</li>
+      <li><span class="letter">D</span>È valida solo per temperature inferiori a 50°C</li>
+    </ul>
+    <div class="risposta" style="min-height: 60px;"></div>
+  </div>
+</div>
+
+<!-- D3 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D3</div>
+    <div class="title">Domanda aperta — confronto tra metodi</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Hai bisogno di misurare la resistenza di un sensore che varia tra 1 kΩ e 100 kΩ. Ti vengono proposte due soluzioni:</p>
+    <ul style="margin: 10px 0 10px 20px; line-height: 1.9;">
+      <li><strong>Soluzione A:</strong> Misura diretta con ohmmetro digitale (risoluzione 1 Ω)</li>
+      <li><strong>Soluzione B:</strong> Ponte di Wheatstone con lettura ADC tramite Arduino</li>
+    </ul>
+    <ul class="domande">
+      <li data-q="a)">Elenca almeno 2 vantaggi e 2 svantaggi per ciascuna soluzione.</li>
+      <li data-q="b)">In quale situazione industriale sceglieresti la Soluzione B? Motiva.</li>
+      <li data-q="c)">Cosa si intende per misura "differenziale" e perché riduce il rumore?</li>
+    </ul>
+    <div class="risposta" style="min-height: 130px;"></div>
+  </div>
+</div>
+
+<!-- D4 -->
+<div class="card tipo-teoria">
+  <div class="card-header">
+    <div class="num">D4</div>
+    <div class="title">Collega concetti — applicazione industriale</div>
+    <span class="diff medio">Medio</span>
+  </div>
+  <div class="card-body">
+    <p>Un impianto industriale usa una <strong>cella di carico</strong> basata su un ponte di Wheatstone completo (4 strain gauge) per misurare il peso di materiale su un nastro trasportatore. L'uscita è nominalmente 2 mV/V (cioè 2 mV di Vout per ogni Volt di alimentazione al fondo scala di 100 kg). Il ponte è alimentato a Vcc = 10 V.</p>
+    <ul class="domande">
+      <li data-q="a)">Calcola la tensione Vout massima (a 100 kg) e quella a metà scala (50 kg).</li>
+      <li data-q="b)">Puoi leggere questo segnale direttamente con l'ADC di Arduino (range 0–5 V, 10 bit)? Cosa ti servirebbe in più?</li>
+      <li data-q="c)">Spiega in breve perché si usa un ponte completo (4 elementi attivi) invece di un quarto di ponte: qual è il vantaggio in termini di sensibilità e compensazione della temperatura?</li>
+    </ul>
+    <div class="risposta" style="min-height: 120px;"></div>
+  </div>
+</div>
+
+<!-- RIQUADRO FORMULE -->
+<div style="background: #1a1a2e; color: #e0e0ff; border-radius: 10px; padding: 20px 24px; margin: 36px 0 10px; font-family: 'Courier New', monospace; font-size: 0.92em; line-height: 2;">
+  <div style="color: #7ec8e3; font-size: 0.85em; margin-bottom: 8px; font-family: Arial;">📐 Formulario di riferimento</div>
+  <span style="color:#b5cea8;">Equilibrio:</span>  R1 × Rx = R2 × R3  →  Rx = (R2 × R3) / R1<br>
+  <span style="color:#b5cea8;">Nodo B:</span>  V_B = Vcc × R3 / (R1 + R3)<br>
+  <span style="color:#b5cea8;">Nodo C:</span>  V_C = Vcc × Rx / (R2 + Rx)<br>
+  <span style="color:#b5cea8;">Squilibrio:</span>  Vout = V_B − V_C<br>
+  <span style="color:#b5cea8;">Rx da V_C:</span>  Rx = R2 × V_C / (Vcc − V_C)<br>
+  <span style="color:#b5cea8;">Linearizzato:</span>  ΔVout ≈ (Vcc/4) × (ΔRx/R)  &nbsp;&nbsp; [ponte simmetrico, ΔRx &lt;&lt; R]<br>
+  <span style="color:#b5cea8;">ADC Arduino:</span>  V = (rawADC / 1023.0) × Vcc
+</div>
+
+</div><!-- fine container -->
+
+<footer>
+  Foglio Esercizi – Ponte di Wheatstone &nbsp;|&nbsp; Corso ITS Elettronica e Automazione Industriale<br>
+  Sezione A: Calcoli (5) &nbsp;·&nbsp; Sezione B: Schemi (3) &nbsp;·&nbsp; Sezione C: Arduino (3) &nbsp;·&nbsp; Sezione D: Teoria (4) &nbsp;·&nbsp; Tot. 15 esercizi
+</footer>
+
+</body>
+</html>

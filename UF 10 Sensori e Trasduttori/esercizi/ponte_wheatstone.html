@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponte di Wheatstone – Dispensa ITS</title>
+<style>
+  :root {
+    --blu: #1a3a5c;
+    --azzurro: #2e7bc4;
+    --celeste: #d6eaf8;
+    --verde: #1e7e34;
+    --verde-chiaro: #d4edda;
+    --arancio: #c76b00;
+    --arancio-chiaro: #fff3cd;
+    --grigio: #f4f6f8;
+    --bordo: #cdd3db;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #222; background: #fff; line-height: 1.7; }
+  .cover {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2e7bc4 100%);
+    color: white; padding: 60px 40px; text-align: center;
+  }
+  .cover h1 { font-size: 2.6em; margin-bottom: 10px; letter-spacing: 1px; }
+  .cover h2 { font-size: 1.3em; font-weight: 300; margin-bottom: 20px; opacity: 0.9; }
+  .cover .badge {
+    display: inline-block; background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 20px;
+    padding: 6px 18px; font-size: 0.9em; margin: 4px;
+  }
+  .toc { background: var(--grigio); border-left: 4px solid var(--azzurro); padding: 20px 30px; margin: 30px auto; max-width: 800px; }
+  .toc h3 { color: var(--blu); margin-bottom: 10px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--azzurro); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 30px; }
+  h2.section-title {
+    color: white; background: var(--blu);
+    padding: 12px 20px; border-radius: 6px;
+    font-size: 1.3em; margin: 40px 0 20px;
+  }
+  h3 { color: var(--blu); font-size: 1.1em; margin: 25px 0 10px; border-bottom: 2px solid var(--celeste); padding-bottom: 4px; }
+  p { margin-bottom: 12px; }
+  .infobox {
+    background: var(--celeste); border-left: 4px solid var(--azzurro);
+    padding: 14px 18px; border-radius: 4px; margin: 15px 0;
+  }
+  .infobox.verde { background: var(--verde-chiaro); border-color: var(--verde); }
+  .infobox.arancio { background: var(--arancio-chiaro); border-color: var(--arancio); }
+  .formula-box {
+    background: #1a1a2e; color: #e0e0ff;
+    border-radius: 8px; padding: 20px 24px; margin: 20px 0;
+    font-family: 'Courier New', monospace; font-size: 1.05em;
+    border-left: 4px solid var(--azzurro);
+  }
+  .formula-box .label { color: #7ec8e3; font-size: 0.85em; margin-bottom: 6px; }
+  .formula-box .formula { font-size: 1.15em; color: #fffbe6; }
+  .formula-box .note { color: #aaa; font-size: 0.85em; margin-top: 8px; }
+  /* Schema circuito SVG */
+  .circuit-wrap { text-align: center; margin: 25px 0; }
+  /* Tabella */
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
+  th { background: var(--blu); color: white; padding: 10px 12px; text-align: left; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--bordo); }
+  tr:nth-child(even) td { background: var(--grigio); }
+  /* Codice Arduino */
+  pre.code {
+    background: #1e1e1e; color: #d4d4d4;
+    border-radius: 8px; padding: 20px; overflow-x: auto;
+    font-family: 'Courier New', monospace; font-size: 0.88em;
+    line-height: 1.6; margin: 15px 0;
+  }
+  .kw { color: #569cd6; }
+  .cm { color: #6a9955; font-style: italic; }
+  .str { color: #ce9178; }
+  .num { color: #b5cea8; }
+  .fn { color: #dcdcaa; }
+  /* Esercizi */
+  .exercise {
+    border: 2px solid var(--azzurro); border-radius: 8px;
+    margin: 25px 0; overflow: hidden;
+  }
+  .exercise-header {
+    background: var(--azzurro); color: white;
+    padding: 10px 18px; font-weight: bold; font-size: 1em;
+  }
+  .exercise-body { padding: 18px 20px; }
+  .exercise-body .dati { background: var(--grigio); border-radius: 5px; padding: 12px; margin: 10px 0; font-family: monospace; }
+  details.soluzione { margin-top: 15px; }
+  details.soluzione summary {
+    cursor: pointer; background: var(--verde); color: white;
+    padding: 8px 15px; border-radius: 5px; font-weight: bold;
+    list-style: none; user-select: none;
+  }
+  details.soluzione summary::-webkit-details-marker { display: none; }
+  details.soluzione summary::before { content: "▶ "; }
+  details[open].soluzione summary::before { content: "▼ "; }
+  .sol-content {
+    background: var(--verde-chiaro); border: 1px solid var(--verde);
+    border-top: none; border-radius: 0 0 5px 5px;
+    padding: 15px 18px; font-family: monospace; font-size: 0.95em;
+  }
+  .sol-content p { font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 8px; }
+  .step { color: var(--blu); font-weight: bold; }
+  footer { background: var(--blu); color: rgba(255,255,255,0.7); text-align: center; padding: 20px; font-size: 0.85em; margin-top: 50px; }
+  @media print {
+    .cover { background: var(--blu) !important; -webkit-print-color-adjust: exact; }
+    details.soluzione[open] .sol-content { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COPERTINA -->
+<div class="cover">
+  <h1>⚖️ Ponte di Wheatstone</h1>
+  <h2>Dispensa didattica completa</h2>
+  <div><span class="badge">📐 Teoria</span> <span class="badge">🧮 Formule & Calcoli</span> <span class="badge">🔧 Simulazione Arduino/Wokwi</span> <span class="badge">📝 Esercizi con Soluzioni</span></div>
+  <p style="margin-top:20px; opacity:0.8; font-size:0.9em;">Corso ITS – Elettronica e Automazione Industriale</p>
+</div>
+
+<!-- INDICE -->
+<div class="container">
+<div class="toc">
+  <h3>📋 Indice</h3>
+  <ol>
+    <li><a href="#storia">Contesto storico</a></li>
+    <li><a href="#principio">Principio di funzionamento</a></li>
+    <li><a href="#schema">Schema circuitale</a></li>
+    <li><a href="#formule">Formule fondamentali</a></li>
+    <li><a href="#equilibrio">Condizione di equilibrio</a></li>
+    <li><a href="#sbilanciamento">Ponte sbilanciato – misura di Rx</a></li>
+    <li><a href="#sensibilita">Sensibilità del ponte</a></li>
+    <li><a href="#applicazioni">Applicazioni industriali</a></li>
+    <li><a href="#arduino">Simulazione Arduino su Wokwi</a></li>
+    <li><a href="#esercizi">Esercizi con soluzioni</a></li>
+  </ol>
+</div>
+
+<!-- 1. STORIA -->
+<h2 class="section-title" id="storia">1. Contesto storico</h2>
+<p>Il <strong>Ponte di Wheatstone</strong> prende il nome dal fisico britannico Sir Charles Wheatstone (1802–1875), che lo rese celebre nel 1843, sebbene fosse stato originariamente ideato da <strong>Samuel Hunter Christie</strong> nel 1833. È uno dei circuiti più eleganti dell'elettrotecnica classica.</p>
+<div class="infobox">
+  <strong>Perché è ancora importante oggi?</strong> Nonostante sia un circuito "antico", il principio del ponte di Wheatstone è alla base di trasduttori modernissimi: celle di carico, estensimetri (strain gauge), sensori di pressione, termistori in configurazione a ponte. È imprescindibile in qualsiasi corso di strumentazione industriale.
+</div>
+
+<!-- 2. PRINCIPIO -->
+<h2 class="section-title" id="principio">2. Principio di funzionamento</h2>
+<p>Un ponte di Wheatstone è un <strong>divisore di tensione differenziale</strong> formato da quattro resistenze collegate in modo da creare due rami in parallelo, ciascuno con due resistenze in serie. La tensione di alimentazione viene applicata ai nodi di ingresso, e la tensione di uscita (o "di squilibrio") viene misurata tra i due nodi centrali.</p>
+<p>Il concetto chiave è la <strong>comparazione</strong>: invece di misurare direttamente una resistenza incognita, si confronta il rapporto di due resistenze note con il rapporto tra la resistenza incognita e un'altra nota. Quando i rapporti sono uguali, il ponte è in <em>equilibrio</em> e la tensione di uscita è zero.</p>
+
+<div class="infobox verde">
+  <strong>Vantaggio principale:</strong> La misura è <em>differenziale</em>, quindi gli errori comuni ai due rami (variazioni di temperatura, rumore di alimentazione) si cancellano. Questo rende il ponte molto preciso e immune ai disturbi di modo comune.
+</div>
+
+<!-- 3. SCHEMA -->
+<h2 class="section-title" id="schema">3. Schema circuitale</h2>
+<div class="circuit-wrap">
+<svg width="420" height="360" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+  <!-- Sfondo -->
+  <rect width="420" height="360" fill="#f8fafc" rx="10"/>
+  
+  <!-- Nodi principali: A(210,40) B(50,180) C(370,180) D(210,320) -->
+  <!-- Resistenze colorate -->
+  <!-- R1: A→B (lato sinistro alto) -->
+  <line x1="210" y1="40" x2="90" y2="110" stroke="#555" stroke-width="2"/>
+  <rect x="70" y="100" width="60" height="25" rx="5" fill="#2e7bc4" stroke="#1a3a5c" stroke-width="1.5"/>
+  <text x="100" y="117" text-anchor="middle" fill="white" font-size="12" font-weight="bold">R1</text>
+  <line x1="130" y1="112" x2="160" y2="130" stroke="#555" stroke-width="2"/>
+  <line x1="160" y1="130" x2="160" y2="180" stroke="#555" stroke-width="2"/>
+  
+  <!-- R3: B→D (lato sinistro basso) -->
+  <line x1="160" y1="180" x2="90" y2="250" stroke="#555" stroke-width="2"/>
+  <rect x="70" y="240" width="60" height="25" rx="5" fill="#2e7bc4" stroke="#1a3a5c" stroke-width="1.5"/>
+  <text x="100" y="257" text-anchor="middle" fill="white" font-size="12" font-weight="bold">R3</text>
+  <line x1="130" y1="252" x2="160" y2="270" stroke="#555" stroke-width="2"/>
+  <line x1="160" y1="270" x2="210" y2="320" stroke="#555" stroke-width="2"/>
+
+  <!-- R2: A→C (lato destro alto) -->
+  <line x1="210" y1="40" x2="270" y2="80" stroke="#555" stroke-width="2"/>
+  <line x1="270" y1="80" x2="270" y2="110" stroke="#555" stroke-width="2"/>
+  <line x1="270" y1="110" x2="300" y2="128" stroke="#555" stroke-width="2"/>
+  <rect x="290" y="118" width="60" height="25" rx="5" fill="#c76b00" stroke="#8b4c00" stroke-width="1.5"/>
+  <text x="320" y="135" text-anchor="middle" fill="white" font-size="12" font-weight="bold">R2</text>
+  <line x1="290" y1="130" x2="270" y2="142" stroke="#555" stroke-width="2"/>
+  <line x1="270" y1="142" x2="270" y2="180" stroke="#555" stroke-width="2"/>
+
+  <!-- Rx: C→D (lato destro basso) -->
+  <line x1="270" y1="180" x2="300" y2="198" stroke="#555" stroke-width="2"/>
+  <rect x="290" y="188" width="60" height="25" rx="5" fill="#c0392b" stroke="#8b0000" stroke-width="1.5"/>
+  <text x="320" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Rx</text>
+  <line x1="290" y1="200" x2="270" y2="212" stroke="#555" stroke-width="2"/>
+  <line x1="270" y1="212" x2="210" y2="320" stroke="#555" stroke-width="2"/>
+
+  <!-- Galvanometro / Vout tra B e C -->
+  <line x1="160" y1="180" x2="210" y2="180" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <circle cx="210" cy="180" r="15" fill="white" stroke="#555" stroke-width="1.5"/>
+  <text x="210" y="185" text-anchor="middle" font-size="13" fill="#333">G</text>
+  <line x1="225" y1="180" x2="270" y2="180" stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="210" y="162" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="bold">Vout</text>
+
+  <!-- Alimentazione -->
+  <!-- Nodo A -->
+  <circle cx="210" cy="40" r="7" fill="#1a3a5c"/>
+  <text x="210" y="28" text-anchor="middle" font-size="13" fill="#1a3a5c" font-weight="bold">A (+)</text>
+  <!-- Nodo D -->
+  <circle cx="210" cy="320" r="7" fill="#1a3a5c"/>
+  <text x="210" y="345" text-anchor="middle" font-size="13" fill="#1a3a5c" font-weight="bold">D (−)</text>
+  <!-- Nodo B -->
+  <circle cx="160" cy="180" r="6" fill="#2e7bc4"/>
+  <text x="130" y="185" text-anchor="middle" font-size="13" fill="#2e7bc4" font-weight="bold">B</text>
+  <!-- Nodo C -->
+  <circle cx="270" cy="180" r="6" fill="#c76b00"/>
+  <text x="300" y="185" text-anchor="middle" font-size="13" fill="#c76b00" font-weight="bold">C</text>
+
+  <!-- Alimentazione Vcc frecce -->
+  <text x="60" y="50" font-size="11" fill="#333">Vcc</text>
+  <line x1="80" y1="40" x2="130" y2="40" stroke="#333" stroke-width="1.5"/>
+  <line x1="130" y1="40" x2="203" y2="40" stroke="#333" stroke-width="1.5"/>
+
+  <!-- Legenda -->
+  <rect x="10" y="300" width="14" height="10" fill="#2e7bc4" rx="2"/>
+  <text x="28" y="310" font-size="10" fill="#333">Resistenze note (R1, R2, R3)</text>
+  <rect x="10" y="318" width="14" height="10" fill="#c0392b" rx="2"/>
+  <text x="28" y="328" font-size="10" fill="#333">Resistenza incognita (Rx)</text>
+</svg>
+</div>
+
+<table>
+  <tr><th>Componente</th><th>Posizione</th><th>Tipo</th><th>Note</th></tr>
+  <tr><td><strong>R1</strong></td><td>Ramo A–B (alto sinistro)</td><td>Nota</td><td>Resistenza di riferimento fissa</td></tr>
+  <tr><td><strong>R2</strong></td><td>Ramo A–C (alto destro)</td><td>Nota</td><td>Può essere variabile (potenziometro)</td></tr>
+  <tr><td><strong>R3</strong></td><td>Ramo B–D (basso sinistro)</td><td>Nota</td><td>Resistenza di riferimento fissa</td></tr>
+  <tr><td><strong>Rx</strong></td><td>Ramo C–D (basso destro)</td><td>Incognita</td><td>Resistenza da misurare o trasduttore</td></tr>
+  <tr><td><strong>Vcc</strong></td><td>Tra A e D</td><td>Alimentazione</td><td>Tensione di eccitazione del ponte</td></tr>
+  <tr><td><strong>G / Vout</strong></td><td>Tra B e C</td><td>Rilevatore</td><td>Galvanometro o amplificatore differenziale</td></tr>
+</table>
+
+<!-- 4. FORMULE -->
+<h2 class="section-title" id="formule">4. Formule fondamentali</h2>
+
+<h3>4.1 Tensione sui nodi intermedi</h3>
+<p>Applicando il principio del partitore di tensione ai due rami:</p>
+
+<div class="formula-box">
+  <div class="label">Tensione al nodo B (ramo sinistro):</div>
+  <div class="formula">V_B = Vcc · R3 / (R1 + R3)</div>
+  <div class="note">Frazione della tensione di alimentazione sul ramo R1–R3</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Tensione al nodo C (ramo destro):</div>
+  <div class="formula">V_C = Vcc · Rx / (R2 + Rx)</div>
+  <div class="note">Frazione della tensione di alimentazione sul ramo R2–Rx</div>
+</div>
+
+<h3>4.2 Tensione di uscita (squilibrio)</h3>
+<div class="formula-box">
+  <div class="label">Tensione differenziale di uscita:</div>
+  <div class="formula">Vout = V_B − V_C</div>
+  <div class="formula" style="margin-top:10px;">Vout = Vcc · [ R3/(R1+R3) − Rx/(R2+Rx) ]</div>
+  <div class="note">Positiva quando B è a potenziale maggiore di C, negativa nel caso contrario</div>
+</div>
+
+<!-- 5. EQUILIBRIO -->
+<h2 class="section-title" id="equilibrio">5. Condizione di equilibrio</h2>
+<p>Il ponte è in <strong>equilibrio</strong> quando Vout = 0, ovvero quando non scorre corrente attraverso il galvanometro. Imponendo Vout = 0:</p>
+
+<div class="formula-box">
+  <div class="label">Condizione di equilibrio (Vout = 0):</div>
+  <div class="formula">R3/(R1+R3) = Rx/(R2+Rx)</div>
+  <div class="formula" style="margin-top:10px; color: #7ec8e3;">Forma compatta:  R1 · Rx = R2 · R3</div>
+  <div class="note">Prodotto dei rami opposti uguali → "prodotto incrociato"</div>
+</div>
+
+<div class="infobox verde">
+  <strong>Regola mnemonica:</strong> Al bilanciamento, il prodotto delle resistenze di un ramo diagonale è uguale al prodotto dell'altro ramo diagonale: <br>
+  <em>R1 × Rx = R2 × R3</em>
+</div>
+
+<h3>5.1 Ricavare Rx dalla condizione di equilibrio</h3>
+<div class="formula-box">
+  <div class="label">Resistenza incognita:</div>
+  <div class="formula">Rx = (R2 · R3) / R1</div>
+  <div class="note">Valida solo quando il ponte è perfettamente bilanciato (Vout = 0)</div>
+</div>
+
+<h3>5.2 Esempio numerico – equilibrio</h3>
+<div class="infobox arancio">
+  <strong>Dati:</strong> R1 = 1000 Ω, R2 = 2200 Ω, R3 = 470 Ω, Vcc = 5 V<br><br>
+  <strong>Rx di equilibrio:</strong><br>
+  Rx = (R2 × R3) / R1 = (2200 × 470) / 1000 = 1034000 / 1000 = <strong>1034 Ω</strong><br><br>
+  <strong>Verifica:</strong> R1 × Rx = 1000 × 1034 = 1.034 MΩ ; R2 × R3 = 2200 × 470 = 1.034 MΩ ✓
+</div>
+
+<!-- 6. SBILANCIAMENTO -->
+<h2 class="section-title" id="sbilanciamento">6. Ponte sbilanciato – misura di Rx</h2>
+<p>In molte applicazioni pratiche (trasduttori, NTC, estensimetri) il ponte non viene portato esattamente in equilibrio ma si misura la tensione di squilibrio Vout. Da essa si risale a Rx.</p>
+
+<h3>6.1 Calcolo di Rx da Vout misurata</h3>
+<div class="formula-box">
+  <div class="label">Dalla formula di Vout, invertendo:</div>
+  <div class="formula">Rx = R2 · [R3·Vcc − Vout·(R1+R3)] / [Vcc·(R1+R3) + Vout·(R1+R3) · ... ]</div>
+  <div class="note">Formula completa (approccio diretto): conviene spesso risolvere numericamente</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Forma esplicita ricavata algebricamente:</div>
+  <div class="formula">Rx = (R2 · R3 · Vcc) / (R1 · Vcc − Vout · (R1+R3) + R3 · Vcc)</div>
+  <div class="note">Applicabile con galvanometro ad alta impedenza (corrente di uscita trascurabile)</div>
+</div>
+
+<div class="infobox arancio">
+  <strong>Approccio pratico più semplice:</strong><br>
+  Misuro Vout → calcolo V_B e V_C → ricavo Rx:<br>
+  V_B = Vcc · R3/(R1+R3) &nbsp; [costante, dipende solo dalle resistenze fisse]<br>
+  V_C = V_B − Vout<br>
+  Rx = R2 · V_C / (Vcc − V_C)
+</div>
+
+<h3>6.2 Esempio numerico – ponte sbilanciato</h3>
+<div class="infobox arancio">
+  <strong>Dati:</strong> R1 = 1000 Ω, R2 = 1000 Ω, R3 = 1000 Ω, Vcc = 5 V, Vout misurato = +0,25 V<br><br>
+  <strong>Passo 1 – V_B:</strong><br>
+  V_B = 5 · 1000/(1000+1000) = 5 · 0,5 = 2,500 V<br><br>
+  <strong>Passo 2 – V_C:</strong><br>
+  V_C = V_B − Vout = 2,500 − 0,250 = 2,250 V<br><br>
+  <strong>Passo 3 – Rx:</strong><br>
+  Rx = R2 · V_C / (Vcc − V_C) = 1000 · 2,250 / (5 − 2,250) = 2250 / 2,750 ≈ <strong>818 Ω</strong><br><br>
+  <strong>Verifica con formula diretta:</strong><br>
+  Vout = 5·[1000/(2000) − 818/(1000+818)] = 5·[0,500 − 0,4499] ≈ 5·0,0501 ≈ 0,250 V ✓
+</div>
+
+<!-- 7. SENSIBILITA' -->
+<h2 class="section-title" id="sensibilita">7. Sensibilità del ponte</h2>
+<p>La <strong>sensibilità</strong> indica di quanto varia Vout per una variazione unitaria di Rx. È massima quando il ponte è in condizione simmetrica (R1=R2=R3=Rx).</p>
+
+<div class="formula-box">
+  <div class="label">Sensibilità differenziale (ponte simmetrico R1=R2=R3=R):</div>
+  <div class="formula">S = dVout/dRx ≈ Vcc / (4·R)  &nbsp;&nbsp; [V/Ω]</div>
+  <div class="note">Con ΔRx piccolo rispetto a R, Vout ≈ Vcc/4 · (ΔRx/R)</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Variazione di Vout per piccola variazione ΔRx (linearizzazione):</div>
+  <div class="formula">ΔVout ≈ (Vcc/4) · (ΔRx/R)</div>
+  <div class="note">Valida per ΔRx &lt;&lt; R. L'errore di linearità cresce con ΔRx/R</div>
+</div>
+
+<h3>7.1 Configurazioni a più elementi attivi</h3>
+<table>
+  <tr><th>Configurazione</th><th>Elementi attivi</th><th>Sensibilità relativa</th><th>Uso tipico</th></tr>
+  <tr><td>Quarto di ponte</td><td>1 (solo Rx varia)</td><td>1×</td><td>Misura semplice NTC, fotoresistenza</td></tr>
+  <tr><td>Mezzo ponte</td><td>2 (ramo opposto)</td><td>2×</td><td>Celle di carico, flessione trave</td></tr>
+  <tr><td>Ponte intero</td><td>4 (tutti variano)</td><td>4×</td><td>Massima sensibilità, strain gauge</td></tr>
+</table>
+
+<!-- 8. APPLICAZIONI -->
+<h2 class="section-title" id="applicazioni">8. Applicazioni industriali</h2>
+
+<h3>8.1 Misura di temperatura con NTC</h3>
+<p>Una resistenza NTC (Negative Temperature Coefficient) ha resistenza che decresce all'aumentare della temperatura. Inserita come Rx in un ponte di Wheatstone, la variazione di temperatura produce uno squilibrio di tensione proporzionale (in prima approssimazione) alla variazione di temperatura.</p>
+<p>Equazione di Steinhart-Hart semplificata per NTC:</p>
+<div class="formula-box">
+  <div class="formula">1/T = 1/T0 + (1/B) · ln(R/R0)</div>
+  <div class="note">T in Kelvin, T0 = 298.15 K (25°C), B = costante NTC (tipico 3000–5000 K), R0 = resistenza a 25°C</div>
+</div>
+
+<h3>8.2 Estensimetro (Strain Gauge)</h3>
+<p>Uno strain gauge è una resistenza che varia proporzionalmente alla deformazione meccanica. Il <strong>Gauge Factor (GF)</strong> descrive la sensibilità:</p>
+<div class="formula-box">
+  <div class="formula">ΔR/R = GF · ε</div>
+  <div class="note">ε = deformazione unitaria (strain), GF ≈ 2 per strain gauge in metallo, ≈ 100-150 per semiconduttore</div>
+</div>
+
+<h3>8.3 Cella di carico</h3>
+<p>Le celle di carico commerciali contengono internamente un ponte di Wheatstone completo (4 strain gauge). L'uscita è tipicamente 1–3 mV/V (mV di Vout per Volt di alimentazione) al fondo scala. Un amplificatore strumentale (INA128, HX711) amplifica il segnale differenziale di uscita.</p>
+
+<table>
+  <tr><th>Applicazione</th><th>Trasduttore in Rx</th><th>Grandezza misurata</th><th>Vout tipico</th></tr>
+  <tr><td>Termometria</td><td>NTC / PT100</td><td>Temperatura</td><td>0–500 mV</td></tr>
+  <tr><td>Pesatura</td><td>Cella di carico</td><td>Forza / Peso</td><td>0–30 mV</td></tr>
+  <tr><td>Pressione</td><td>Sensore piezo-resistivo</td><td>Pressione</td><td>0–100 mV</td></tr>
+  <tr><td>Deformazione</td><td>Strain gauge</td><td>Strain / Stress</td><td>0–10 mV</td></tr>
+  <tr><td>Luminosità</td><td>LDR (fotoresistenza)</td><td>Illuminamento</td><td>0–2,5 V</td></tr>
+</table>
+
+<!-- 9. ARDUINO WOKWI -->
+<h2 class="section-title" id="arduino">9. Simulazione Arduino su Wokwi</h2>
+
+<div class="infobox">
+  <strong>Obiettivo della simulazione:</strong> Realizzare un ponte di Wheatstone con una fotoresistenza (LDR) come Rx e tre resistenze fisse. Arduino legge la tensione di squilibrio con l'ADC e calcola il valore di Rx, visualizzando il risultato su Serial Monitor. Si può simulare direttamente su <a href="https://wokwi.com" target="_blank">wokwi.com</a> con il codice seguente.
+</div>
+
+<h3>9.1 Schema di collegamento</h3>
+<div class="infobox arancio">
+  <strong>Connessioni:</strong><br>
+  • R1 = 10 kΩ tra 5V e nodo B<br>
+  • R3 = 10 kΩ tra nodo B e GND<br>
+  • R2 = 10 kΩ tra 5V e nodo C<br>
+  • Rx (LDR) tra nodo C e GND<br>
+  • Nodo B → Arduino A0<br>
+  • Nodo C → Arduino A1<br>
+  • 5V Arduino → alimentazione ponte<br>
+  • GND Arduino → riferimento comune
+</div>
+
+<h3>9.2 Codice Arduino</h3>
+<pre class="code"><span class="cm">// =====================================================
+// PONTE DI WHEATSTONE - Misura con Arduino
+// Simulabile su Wokwi: https://wokwi.com
+// =====================================================
+// Schema:
+//   5V ---+--- R1 ---+--- R3 --- GND    (ramo sinistro)
+//         |          |
+//         +--- R2 ---+--- Rx --- GND    (ramo destro)
+//                    |           |
+//                   A0          A1  (pin analogici)
+// Vout = V_A0 - V_A1
+// =====================================================</span>
+
+<span class="kw">const int</span> PIN_B = A0;      <span class="cm">// Nodo B (tra R1 e R3)</span>
+<span class="kw">const int</span> PIN_C = A1;      <span class="cm">// Nodo C (tra R2 e Rx)</span>
+
+<span class="kw">const float</span> VCC   = <span class="num">5.0</span>;   <span class="cm">// Tensione di alimentazione [V]</span>
+<span class="kw">const float</span> R1    = <span class="num">10000.0</span>; <span class="cm">// [Ω]</span>
+<span class="kw">const float</span> R2    = <span class="num">10000.0</span>; <span class="cm">// [Ω]</span>
+<span class="kw">const float</span> R3    = <span class="num">10000.0</span>; <span class="cm">// [Ω]</span>
+<span class="kw">const int</span>   ADC_RES = <span class="num">1023</span>;  <span class="cm">// Risoluzione ADC (10 bit)</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"=== Ponte di Wheatstone ==="</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"Legenda: VB=tensione nodo B, VC=nodo C, Vout=squilibrio, Rx=incognita"</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"---------------------------------------------"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// 1. Lettura ADC</span>
+  <span class="kw">int</span> rawB = <span class="fn">analogRead</span>(PIN_B);
+  <span class="kw">int</span> rawC = <span class="fn">analogRead</span>(PIN_C);
+  
+  <span class="cm">// 2. Conversione in tensione</span>
+  <span class="kw">float</span> V_B = (rawB / (<span class="kw">float</span>)ADC_RES) * VCC;
+  <span class="kw">float</span> V_C = (rawC / (<span class="kw">float</span>)ADC_RES) * VCC;
+  
+  <span class="cm">// 3. Tensione di squilibrio</span>
+  <span class="kw">float</span> Vout = V_B - V_C;
+  
+  <span class="cm">// 4. Calcolo Rx dalla tensione V_C
+  //    Rx = R2 * V_C / (VCC - V_C)
+  //    (da partitore: V_C = VCC * Rx/(R2+Rx))</span>
+  <span class="kw">float</span> Rx = <span class="num">-1</span>;
+  <span class="kw">if</span> (VCC - V_C > <span class="num">0.01</span>) {  <span class="cm">// evita divisione per zero</span>
+    Rx = R2 * V_C / (VCC - V_C);
+  }
+  
+  <span class="cm">// 5. Stima equilibrio</span>
+  <span class="kw">float</span> Rx_eq = (R2 * R3) / R1;  <span class="cm">// Rx che bilancea il ponte</span>
+  
+  <span class="cm">// 6. Output seriale</span>
+  Serial.<span class="fn">print</span>(<span class="str">"ADC_B="</span>); Serial.<span class="fn">print</span>(rawB);
+  Serial.<span class="fn">print</span>(<span class="str">" | ADC_C="</span>); Serial.<span class="fn">print</span>(rawC);
+  Serial.<span class="fn">print</span>(<span class="str">" | V_B="</span>); Serial.<span class="fn">print</span>(V_B, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"V"</span>);
+  Serial.<span class="fn">print</span>(<span class="str">" | V_C="</span>); Serial.<span class="fn">print</span>(V_C, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"V"</span>);
+  Serial.<span class="fn">print</span>(<span class="str">" | Vout="</span>); Serial.<span class="fn">print</span>(Vout, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"V"</span>);
+  
+  <span class="kw">if</span> (Rx >= <span class="num">0</span>) {
+    Serial.<span class="fn">print</span>(<span class="str">" | Rx="</span>); Serial.<span class="fn">print</span>(Rx, <span class="num">0</span>); Serial.<span class="fn">print</span>(<span class="str">"Ω"</span>);
+    Serial.<span class="fn">print</span>(<span class="str">" | Rx_eq="</span>); Serial.<span class="fn">print</span>(Rx_eq, <span class="num">0</span>); Serial.<span class="fn">print</span>(<span class="str">"Ω"</span>);
+    
+    <span class="cm">// Indicatore equilibrio (±5%)</span>
+    <span class="kw">float</span> err = <span class="fn">abs</span>(Rx - Rx_eq) / Rx_eq * <span class="num">100.0</span>;
+    <span class="kw">if</span> (err < <span class="num">5.0</span>) Serial.<span class="fn">print</span>(<span class="str">" [BILANCIATO!]"</span>);
+    <span class="kw">else if</span> (Vout > <span class="num">0</span>) Serial.<span class="fn">print</span>(<span class="str">" [Rx < Rx_eq]"</span>);
+    <span class="kw">else</span> Serial.<span class="fn">print</span>(<span class="str">" [Rx > Rx_eq]"</span>);
+  }
+  Serial.<span class="fn">println</span>();
+  
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}
+</pre>
+
+<h3>9.3 File di configurazione Wokwi (diagram.json)</h3>
+<p>Crea un nuovo progetto Arduino Uno su Wokwi e sostituisci il contenuto di <code>diagram.json</code> con:</p>
+<pre class="code">{
+  <span class="str">"version"</span>: 1,
+  <span class="str">"author"</span>: <span class="str">"ITS Wheatstone Lab"</span>,
+  <span class="str">"editor"</span>: <span class="str">"wokwi"</span>,
+  <span class="str">"parts"</span>: [
+    { <span class="str">"type"</span>: <span class="str">"wokwi-arduino-uno"</span>, <span class="str">"id"</span>: <span class="str">"uno"</span>, <span class="str">"top"</span>: 0, <span class="str">"left"</span>: 0, <span class="str">"attrs"</span>: {} },
+    { <span class="str">"type"</span>: <span class="str">"wokwi-resistor"</span>, <span class="str">"id"</span>: <span class="str">"R1"</span>, <span class="str">"top"</span>: -80, <span class="str">"left"</span>: 200, <span class="str">"attrs"</span>: { <span class="str">"value"</span>: <span class="str">"10000"</span> } },
+    { <span class="str">"type"</span>: <span class="str">"wokwi-resistor"</span>, <span class="str">"id"</span>: <span class="str">"R2"</span>, <span class="str">"top"</span>: -80, <span class="str">"left"</span>: 300, <span class="str">"attrs"</span>: { <span class="str">"value"</span>: <span class="str">"10000"</span> } },
+    { <span class="str">"type"</span>: <span class="str">"wokwi-resistor"</span>, <span class="str">"id"</span>: <span class="str">"R3"</span>, <span class="str">"top"</span>: 20, <span class="str">"left"</span>: 200, <span class="str">"attrs"</span>: { <span class="str">"value"</span>: <span class="str">"10000"</span> } },
+    { <span class="str">"type"</span>: <span class="str">"wokwi-photoresistor-sensor"</span>, <span class="str">"id"</span>: <span class="str">"ldr1"</span>, <span class="str">"top"</span>: 20, <span class="str">"left"</span>: 300, <span class="str">"attrs"</span>: {} }
+  ],
+  <span class="str">"connections"</span>: [
+    [ <span class="str">"uno:5V"</span>, <span class="str">"R1:1"</span>, <span class="str">"red"</span>, [] ],
+    [ <span class="str">"uno:5V"</span>, <span class="str">"R2:1"</span>, <span class="str">"red"</span>, [] ],
+    [ <span class="str">"R1:2"</span>, <span class="str">"R3:1"</span>, <span class="str">"blue"</span>, [] ],
+    [ <span class="str">"R1:2"</span>, <span class="str">"uno:A0"</span>, <span class="str">"blue"</span>, [] ],
+    [ <span class="str">"R2:2"</span>, <span class="str">"ldr1:VCC"</span>, <span class="str">"orange"</span>, [] ],
+    [ <span class="str">"R2:2"</span>, <span class="str">"uno:A1"</span>, <span class="str">"orange"</span>, [] ],
+    [ <span class="str">"R3:2"</span>, <span class="str">"uno:GND.1"</span>, <span class="str">"black"</span>, [] ],
+    [ <span class="str">"ldr1:GND"</span>, <span class="str">"uno:GND.1"</span>, <span class="str">"black"</span>, [] ]
+  ]
+}
+</pre>
+
+<div class="infobox verde">
+  <strong>Come usare la simulazione:</strong>
+  <ol style="margin-top:8px; padding-left:20px;">
+    <li>Vai su <a href="https://wokwi.com/projects/new/arduino-uno" target="_blank">wokwi.com</a> e crea un nuovo progetto Arduino Uno</li>
+    <li>Incolla il codice nel tab <code>sketch.ino</code></li>
+    <li>Sostituisci <code>diagram.json</code> con il JSON sopra</li>
+    <li>Premi ▶ Play e apri il Serial Monitor</li>
+    <li>Clicca sulla fotoresistenza per variarne il valore e osserva Vout e Rx variare</li>
+  </ol>
+</div>
+
+<!-- 10. ESERCIZI -->
+<h2 class="section-title" id="esercizi">10. Esercizi con soluzioni</h2>
+
+<div class="infobox">
+  Per ogni esercizio, prova a risolverlo prima di aprire la soluzione. Usa le formule delle sezioni precedenti.
+</div>
+
+<!-- Esercizio 1 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 1 – Condizione di equilibrio</div>
+  <div class="exercise-body">
+    <p>Un ponte di Wheatstone ha R1 = 560 Ω, R2 = 1200 Ω, R3 = 820 Ω. Vcc = 9 V.</p>
+    <p><strong>a)</strong> Calcola il valore di Rx che porta il ponte in equilibrio.<br>
+    <strong>b)</strong> Verifica con la condizione di prodotto incrociato.</p>
+    <div class="dati">R1 = 560 Ω | R2 = 1200 Ω | R3 = 820 Ω | Vcc = 9 V</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">a) Formula: Rx = (R2 × R3) / R1</p>
+        Rx = (1200 × 820) / 560<br>
+        Rx = 984000 / 560<br>
+        <strong>Rx = 1757,14 Ω ≈ 1757 Ω</strong><br><br>
+        <p class="step">b) Verifica prodotto incrociato: R1 × Rx = R2 × R3</p>
+        R1 × Rx = 560 × 1757,14 = 984000<br>
+        R2 × R3 = 1200 × 820 = 984000 ✓<br><br>
+        <p class="step">Nota:</p>
+        Vout = 0 al bilanciamento → la tensione di alimentazione (9 V) non influisce sul valore di Rx di equilibrio!
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Esercizio 2 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 2 – Tensione di squilibrio</div>
+  <div class="exercise-body">
+    <p>Un ponte ha R1 = 1 kΩ, R2 = 1 kΩ, R3 = 1 kΩ, Rx = 1,2 kΩ. Vcc = 5 V.</p>
+    <p><strong>a)</strong> Calcola V_B e V_C.<br>
+    <strong>b)</strong> Calcola Vout e indica se il ponte è bilanciato.<br>
+    <strong>c)</strong> Se Rx aumenta (es. NTC che si raffredda), Vout aumenta o diminuisce?</p>
+    <div class="dati">R1 = 1000 Ω | R2 = 1000 Ω | R3 = 1000 Ω | Rx = 1200 Ω | Vcc = 5 V</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">a) Tensioni ai nodi:</p>
+        V_B = Vcc × R3/(R1+R3) = 5 × 1000/2000 = <strong>2,500 V</strong><br>
+        V_C = Vcc × Rx/(R2+Rx) = 5 × 1200/2200 = 5 × 0,5455 = <strong>2,727 V</strong><br><br>
+        <p class="step">b) Tensione di squilibrio:</p>
+        Vout = V_B − V_C = 2,500 − 2,727 = <strong>−0,227 V</strong><br>
+        Il ponte è SBILANCIATO (Vout ≠ 0). C è a potenziale maggiore di B.<br><br>
+        <p class="step">c) Effetto dell'aumento di Rx:</p>
+        Se Rx ↑ → V_C = 5·Rx/(1000+Rx) ↑ → Vout = V_B − V_C diventa ancora più negativo.<br>
+        → Vout <strong>diminuisce</strong> (diventa più negativo).
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Esercizio 3 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 3 – Misura di Rx da Vout</div>
+  <div class="exercise-body">
+    <p>Il tuo multimetro misura una tensione di squilibrio Vout = +0,38 V su un ponte con R1 = 4700 Ω, R2 = 4700 Ω, R3 = 4700 Ω, Vcc = 5 V.</p>
+    <p>Calcola il valore di Rx.</p>
+    <div class="dati">R1 = R2 = R3 = 4700 Ω | Vcc = 5 V | Vout = +0,38 V</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">Metodo passo-passo:</p>
+        V_B = Vcc × R3/(R1+R3) = 5 × 4700/9400 = <strong>2,500 V</strong><br><br>
+        V_C = V_B − Vout = 2,500 − 0,380 = <strong>2,120 V</strong><br><br>
+        Rx = R2 × V_C / (Vcc − V_C)<br>
+        Rx = 4700 × 2,120 / (5 − 2,120)<br>
+        Rx = 9964 / 2,880<br>
+        <strong>Rx ≈ 3460 Ω</strong><br><br>
+        <p class="step">Verifica:</p>
+        Vout = 5 × [4700/9400 − 3460/(4700+3460)]<br>
+        = 5 × [0,5 − 3460/8160]<br>
+        = 5 × [0,5 − 0,424] = 5 × 0,076 = 0,380 V ✓<br><br>
+        <p class="step">Interpretazione:</p>
+        Vout > 0 → V_B > V_C → Rx &lt; R3 = 4700 Ω (risultato coerente: 3460 &lt; 4700) ✓
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Esercizio 4 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 4 – Sensore di temperatura NTC</div>
+  <div class="exercise-body">
+    <p>Un NTC 10 kΩ (a 25°C, B = 3950 K) è usato come Rx in un ponte con R1 = R2 = R3 = 10 kΩ, Vcc = 3,3 V.</p>
+    <p><strong>a)</strong> A 25°C il ponte è bilanciato? Calcola Vout.<br>
+    <strong>b)</strong> A 50°C, l'NTC vale circa 3977 Ω. Calcola Vout.<br>
+    <strong>c)</strong> Con un ADC a 10 bit (0–3,3 V), quanti bit corrisponde ΔVout tra 25°C e 50°C?</p>
+    <div class="dati">R1=R2=R3 = 10000 Ω | NTC(25°C)=10000 Ω | NTC(50°C)=3977 Ω | Vcc=3,3 V | ADC 10bit</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">a) A 25°C (Rx = 10000 Ω):</p>
+        V_B = 3,3 × 10000/20000 = 1,650 V<br>
+        V_C = 3,3 × 10000/20000 = 1,650 V<br>
+        Vout = 1,650 − 1,650 = <strong>0,000 V → BILANCIATO!</strong><br><br>
+        <p class="step">b) A 50°C (Rx = 3977 Ω):</p>
+        V_B = 3,3 × 10000/20000 = 1,650 V<br>
+        V_C = 3,3 × 3977/(10000+3977) = 3,3 × 3977/13977 = 3,3 × 0,2845 = 0,939 V<br>
+        Vout = 1,650 − 0,939 = <strong>+0,711 V</strong><br><br>
+        <p class="step">c) Risoluzione ADC e ΔVout:</p>
+        Risoluzione ADC = Vcc / 2^10 = 3,3 / 1024 = 3,223 mV/bit<br>
+        ΔVout = 0,711 − 0,000 = 0,711 V<br>
+        ΔCode = 0,711 / 0,003223 ≈ <strong>220 bit</strong><br><br>
+        → La variazione da 25°C a 50°C produce una variazione di ~220 conteggi ADC: ottima risoluzione!
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Esercizio 5 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 5 – Linearizzazione e errore</div>
+  <div class="exercise-body">
+    <p>Ponte simmetrico: R1=R2=R3=R=2 kΩ, Vcc=5 V. La resistenza Rx varia di ΔRx = +200 Ω rispetto al valore di equilibrio (2 kΩ).</p>
+    <p><strong>a)</strong> Calcola Vout esatto.<br>
+    <strong>b)</strong> Calcola Vout con la formula linearizzata: ΔVout ≈ (Vcc/4)·(ΔRx/R).<br>
+    <strong>c)</strong> Calcola l'errore percentuale di linearizzazione.</p>
+    <div class="dati">R = 2000 Ω | ΔRx = +200 Ω → Rx = 2200 Ω | Vcc = 5 V</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">a) Vout esatto:</p>
+        V_B = 5 × 2000/(2000+2000) = 2,500 V<br>
+        V_C = 5 × 2200/(2000+2200) = 5 × 2200/4200 = 2,619 V<br>
+        Vout = V_B − V_C = 2,500 − 2,619 = <strong>−0,119 V</strong><br><br>
+        <p class="step">b) Vout linearizzato:</p>
+        ΔVout ≈ −(Vcc/4) × (ΔRx/R)<br>
+        ΔVout ≈ −(5/4) × (200/2000) = −1,25 × 0,1 = <strong>−0,125 V</strong><br>
+        (Il segno negativo: Rx > R → V_C > V_B → Vout negativo)<br><br>
+        <p class="step">c) Errore di linearizzazione:</p>
+        Errore = |(-0,125) − (-0,119)| / |(-0,119)| × 100<br>
+        Errore = 0,006 / 0,119 × 100 ≈ <strong>5,0%</strong><br><br>
+        → Con ΔRx/R = 10%, l'errore di linearizzazione è ~5%. Per ΔRx/R &lt; 5% l'errore è accettabile (&lt;1%).
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- Esercizio 6 -->
+<div class="exercise">
+  <div class="exercise-header">📝 Esercizio 6 – Progetto completo: scelta delle resistenze</div>
+  <div class="exercise-body">
+    <p>Devi misurare una fotoresistenza LDR che varia tra 500 Ω (piena luce) e 50 kΩ (buio). Vuoi che il ponte sia bilanciato nella condizione intermedia di Rx = 5 kΩ. Vcc = 5 V.</p>
+    <p><strong>a)</strong> Scegli R1, R2, R3 tra i valori E12 disponibili (1k, 1.2k, 1.5k, 1.8k, 2.2k, 2.7k, 3.3k, 3.9k, 4.7k, 5.6k, 6.8k, 8.2k, 10k) in modo da avere equilibrio a Rx = 5 kΩ.<br>
+    <strong>b)</strong> Con i valori scelti, calcola Vout a Rx = 500 Ω e Vout a Rx = 50 kΩ.<br>
+    <strong>c)</strong> Il segnale è leggibile con Arduino (ADC 0–5V, 10 bit)?</p>
+    <div class="dati">LDR: 500 Ω ÷ 50000 Ω | Equilibrio a Rx = 5000 Ω | Vcc = 5 V | E12</div>
+    <details class="soluzione">
+      <summary>Mostra soluzione</summary>
+      <div class="sol-content">
+        <p class="step">a) Scelta delle resistenze:</p>
+        Per equilibrio: Rx = R2·R3/R1 → dobbiamo avere R2·R3/R1 = 5000<br>
+        Scelta più semplice (ponte simmetrico): R1 = R2 = R3 = 4700 Ω (E12 disponibile = 4.7k)<br>
+        Verifica: Rx_eq = (4700 × 4700)/4700 = <strong>4700 Ω</strong><br>
+        → non è esattamente 5000 Ω ma è il più vicino con valori E12 identici.<br><br>
+        Alternativa asimmetrica: R1 = 10k, R2 = 10k, R3 = 5k → Rx_eq = 5000 Ω (esatto)<br>
+        Ma 5k non è in E12 → usa R3 = 4700 + 330 Ω in serie = 5030 Ω ≈ 5k ✓<br><br>
+        <strong>Scelta pratica: R1=R2=R3 = 4700 Ω (equilibrio a 4700 Ω)</strong><br><br>
+        <p class="step">b) Vout agli estremi:</p>
+        V_B = 5 × 4700/9400 = 2,500 V (costante)<br><br>
+        <em>Piena luce (Rx = 500 Ω):</em><br>
+        V_C = 5 × 500/(4700+500) = 5 × 500/5200 = 0,481 V<br>
+        Vout = 2,500 − 0,481 = <strong>+2,019 V</strong><br><br>
+        <em>Buio (Rx = 50000 Ω):</em><br>
+        V_C = 5 × 50000/(4700+50000) = 5 × 50000/54700 = 4,570 V<br>
+        Vout = 2,500 − 4,570 = <strong>−2,070 V</strong><br><br>
+        <p class="step">c) Leggibilità con Arduino:</p>
+        ADC di Arduino legge solo 0–5 V → Vout negativo NON è leggibile direttamente!<br>
+        <strong>Soluzione:</strong> leggere V_B (pin A0) e V_C (pin A1) separatamente e calcolare la differenza via software (come nel codice della simulazione), oppure aggiungere un amplificatore differenziale con offset (es. INA128) che traslà il segnale nel range 0–5V.<br><br>
+        Range di V_C: 0,481 V ÷ 4,570 V → tutto nel range ADC 0–5V ✓<br>
+        Risoluzione: 5/1024 = 4,88 mV/bit → variazione di V_C di 4,089 V = 838 bit ✓ ottima!
+      </div>
+    </details>
+  </div>
+</div>
+
+<h3>Riepilogo formule chiave</h3>
+<table>
+  <tr><th>Formula</th><th>Descrizione</th><th>Condizioni</th></tr>
+  <tr><td><code>R1 · Rx = R2 · R3</code></td><td>Equilibrio (Vout = 0)</td><td>Qualsiasi configurazione</td></tr>
+  <tr><td><code>Rx = (R2 · R3) / R1</code></td><td>Rx da equilibrio</td><td>Vout = 0</td></tr>
+  <tr><td><code>Vout = Vcc·[R3/(R1+R3) − Rx/(R2+Rx)]</code></td><td>Squilibrio</td><td>Impedenza di carico alta</td></tr>
+  <tr><td><code>Rx = R2 · V_C / (Vcc − V_C)</code></td><td>Rx da V_C misurato</td><td>Misura diretta nodo C</td></tr>
+  <tr><td><code>ΔVout ≈ (Vcc/4) · (ΔRx/R)</code></td><td>Linearizzazione</td><td>ΔRx &lt;&lt; R, ponte simmetrico</td></tr>
+</table>
+
+</div>
+<footer>
+  Dispensa didattica – Ponte di Wheatstone | Corso ITS Elettronica e Automazione Industriale<br>
+  Contenuto verificabile e liberamente utilizzabile per scopi didattici
+</footer>
+
+</body>
+</html>
