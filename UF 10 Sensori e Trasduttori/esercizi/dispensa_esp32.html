@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispensa — Misure Elettroniche con ESP32</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'\\(',right:'\\)',display:false}
+  ],throwOnError:false});"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #0d2137;
+  --navy-2:    #163352;
+  --blue:      #1b5e8a;
+  --blue-l:    #2980b9;
+  --teal:      #0e7c7b;
+  --accent:    #b8721e;
+  --accent-l:  #d4903a;
+  --cream:     #f9f6f0;
+  --paper:     #f3efe6;
+  --paper-2:   #e8e2d5;
+  --ink:       #1a1714;
+  --ink-2:     #3c3830;
+  --ink-3:     #6b6257;
+  --green:     #165a2f;
+  --green-bg:  #eaf3ed;
+  --gold-bg:   #fdf4e0;
+  --red-bg:    #fdf0ee;
+  --red:       #9b2c1a;
+  --sidebar-w: 290px;
+  --hdr-h:     58px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--cream); color: var(--ink); line-height: 1.8;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 3px; }
+
+/* ── Header ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--hdr-h); background: var(--navy);
+  border-bottom: 3px solid var(--accent);
+  display: flex; align-items: center; padding: 0 1.5rem; gap: 1rem;
+}
+.hdr-logo { font-family:'Libre Baskerville',serif; font-size:1rem; font-weight:700; color:#fff; white-space:nowrap; }
+.hdr-sep  { width:1px; height:26px; background:rgba(255,255,255,.18); flex-shrink:0; }
+.hdr-sub  { font-family:'Crimson Pro',serif; font-size:.9rem; font-weight:300; color:rgba(255,255,255,.6); font-style:italic; }
+.hdr-chip {
+  margin-left:auto; font-family:'JetBrains Mono',monospace;
+  font-size:.63rem; font-weight:600; background:var(--teal); color:#fff;
+  padding:3px 10px; border-radius:20px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+}
+
+/* ── Sidebar ── */
+aside.sb {
+  position:fixed; top:var(--hdr-h); left:0; bottom:0;
+  width:var(--sidebar-w); background:var(--navy-2);
+  overflow-y:auto; padding:1.5rem 0 3rem;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.sb-lbl {
+  font-family:'JetBrains Mono',monospace; font-size:.59rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent-l);
+  padding:1.2rem 1.4rem .4rem;
+}
+aside.sb a {
+  display:block; text-decoration:none;
+  font-family:'Crimson Pro',serif; font-size:.91rem; font-weight:300;
+  color:rgba(255,255,255,.65); padding:.28rem 1.4rem .28rem 1.8rem;
+  border-left:3px solid transparent;
+  transition:color .17s, background .17s, border-color .17s; line-height:1.4;
+}
+aside.sb a:hover { color:#fff; background:rgba(255,255,255,.06); border-left-color:var(--accent); }
+aside.sb a.active { color:#fff; border-left-color:var(--accent); background:rgba(255,255,255,.08); font-weight:400; }
+aside.sb a.sub { padding-left:2.6rem; font-size:.82rem; color:rgba(255,255,255,.44); }
+aside.sb a.sub:hover, aside.sb a.sub.active { color:rgba(255,255,255,.9); }
+
+/* ── Main ── */
+main { margin-left:var(--sidebar-w); margin-top:var(--hdr-h); padding:4rem 5.5rem 7rem; max-width:calc(var(--sidebar-w) + 860px); }
+
+/* ── Cover ── */
+.cover { padding-bottom:3rem; margin-bottom:3.5rem; border-bottom:1px solid var(--paper-2); position:relative; }
+.cover::after { content:'ESP32'; position:absolute; right:0; bottom:2rem; font-family:'Libre Baskerville',serif; font-size:7rem; font-weight:700; color:rgba(13,33,55,.06); line-height:1; }
+.cover-kicker { font-family:'JetBrains Mono',monospace; font-size:.67rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:.8rem; }
+.cover h1 { font-family:'Libre Baskerville',serif; font-size:3rem; font-weight:700; line-height:1.15; color:var(--navy); margin-bottom:.7rem; }
+.cover-tagline { font-size:1.1rem; font-weight:300; font-style:italic; color:var(--ink-2); max-width:600px; margin-bottom:2rem; }
+.mc-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.mc { background:var(--navy); border-radius:5px; border-left:5px solid var(--accent); padding:1rem 1.3rem; }
+.mc-tag { font-family:'JetBrains Mono',monospace; font-size:.61rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-l); margin-bottom:.4rem; }
+.mc-title { font-family:'Libre Baskerville',serif; font-size:.93rem; color:#fff; line-height:1.35; }
+
+/* ── Module banner ── */
+.mod-banner {
+  background:var(--navy); border-radius:6px; border-left:6px solid var(--accent);
+  padding:1.8rem 2rem; margin:3rem 0 2.5rem; position:relative; overflow:hidden;
+}
+.mod-banner::after { content:attr(data-n); position:absolute; right:1.5rem; top:50%; transform:translateY(-50%); font-family:'Libre Baskerville',serif; font-size:9rem; font-weight:700; color:rgba(255,255,255,.04); line-height:1; }
+.mb-tag  { font-family:'JetBrains Mono',monospace; font-size:.61rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-l); margin-bottom:.4rem; }
+.mb-h2   { font-family:'Libre Baskerville',serif; font-size:1.9rem; color:#fff; line-height:1.2; }
+.mb-sub  { font-size:.87rem; color:rgba(255,255,255,.55); margin-top:.4rem; font-style:italic; }
+
+/* ── Headings ── */
+h2.s {
+  font-family:'Libre Baskerville',serif; font-size:1.43rem; font-weight:700;
+  color:var(--navy); margin:2.5rem 0 1rem; padding-bottom:.4rem;
+  border-bottom:2px solid var(--paper-2);
+  display:flex; align-items:baseline; gap:.7rem;
+}
+h2.s .sn { font-family:'JetBrains Mono',monospace; font-size:.68rem; font-weight:500; color:var(--blue-l); letter-spacing:.05em; flex-shrink:0; }
+h3.ss { font-family:'Crimson Pro',serif; font-size:1.08rem; font-weight:600; color:var(--navy-2); margin:1.8rem 0 .55rem; display:flex; align-items:center; gap:.5rem; }
+h3.ss::before { content:''; display:inline-block; width:4px; height:1em; background:var(--accent); border-radius:2px; flex-shrink:0; }
+
+p { margin-bottom:.9rem; font-size:1.02rem; }
+strong { font-weight:600; color:var(--ink); }
+code.ic { font-family:'JetBrains Mono',monospace; font-size:.82em; background:var(--paper); color:var(--blue); padding:1px 5px; border-radius:3px; }
+
+/* ── Math blocks ── */
+.math-block {
+  background:#fff; border:1px solid var(--paper-2); border-left:4px solid var(--blue);
+  border-radius:0 6px 6px 0; padding:1.3rem 2rem; margin:1.4rem 0; overflow-x:auto;
+}
+.derivation { background:#fff; border:1px solid var(--paper-2); border-radius:6px; margin:1.4rem 0; overflow:hidden; }
+.dr { display:flex; align-items:center; padding:.58rem 1.5rem; gap:1rem; border-bottom:1px solid var(--paper-2); }
+.dr:last-child { border-bottom:none; }
+.dr:nth-child(even) { background:var(--paper); }
+.dr-lbl { font-family:'JetBrains Mono',monospace; font-size:.62rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); min-width:110px; flex-shrink:0; }
+.dr-math { flex:1; overflow-x:auto; }
+.dr-note { font-family:'Crimson Pro',serif; font-size:.83rem; font-style:italic; color:var(--ink-3); min-width:150px; text-align:right; flex-shrink:0; }
+
+/* ── Callout boxes ── */
+.result {
+  background:var(--green-bg); border-left:5px solid var(--green); border-radius:0 6px 6px 0;
+  padding:.82rem 1.4rem; margin:1rem 0 1.7rem; display:flex; gap:.9rem; align-items:flex-start;
+}
+.ri { color:var(--green); font-size:1rem; flex-shrink:0; margin-top:.15rem; }
+.rt { font-family:'Crimson Pro',serif; font-size:1rem; color:#0c3d1f; }
+.rt .rv { font-family:'JetBrains Mono',monospace; font-size:.88rem; font-weight:600; color:var(--green); }
+
+.note { background:var(--gold-bg); border-left:5px solid var(--accent); border-radius:0 6px 6px 0; padding:.88rem 1.4rem; margin:1rem 0 1.5rem; }
+.note-tag { font-family:'JetBrains Mono',monospace; font-size:.59rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.3rem; }
+.note p { font-size:.93rem; font-style:italic; color:#4a3200; margin:0; line-height:1.6; }
+
+.warn { background:var(--red-bg); border-left:5px solid var(--red); border-radius:0 6px 6px 0; padding:.88rem 1.4rem; margin:1rem 0 1.5rem; }
+.warn-tag { font-family:'JetBrains Mono',monospace; font-size:.59rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:.3rem; }
+.warn p { font-size:.93rem; color:#4a1010; margin:0; line-height:1.6; }
+
+.def { background:#eef4fb; border-left:4px solid var(--blue-l); border-radius:0 5px 5px 0; padding:.72rem 1.4rem; margin:.9rem 0; font-size:.97rem; color:var(--ink-2); }
+.def strong { color:var(--navy); }
+
+/* ── Tables ── */
+.tw { margin:1.4rem 0 2rem; overflow-x:auto; }
+table.dt { width:100%; border-collapse:collapse; font-size:.91rem; }
+table.dt thead tr { background:var(--navy); }
+table.dt thead th { font-family:'JetBrains Mono',monospace; font-size:.65rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,.85); padding:.6rem 1rem; text-align:left; white-space:nowrap; }
+table.dt tbody tr { border-bottom:1px solid var(--paper-2); }
+table.dt tbody tr:hover { background:var(--paper); }
+table.dt td { padding:.53rem 1rem; color:var(--ink-2); vertical-align:top; }
+table.dt td.s { font-family:'JetBrains Mono',monospace; font-size:.81rem; color:var(--blue); }
+table.dt td.v { font-family:'JetBrains Mono',monospace; font-size:.81rem; font-weight:600; color:var(--navy); }
+table.dt .alt { background:var(--paper); }
+table.dt tfoot td { background:var(--navy); color:#fff; font-weight:600; padding:.6rem 1rem; }
+table.dt tfoot td.v { color:var(--accent-l); }
+.tag-y { display:inline-block; background:var(--green-bg); color:var(--green); font-family:'JetBrains Mono',monospace; font-size:.65rem; font-weight:600; padding:2px 7px; border-radius:3px; }
+.tag-n { display:inline-block; background:var(--red-bg); color:var(--red); font-family:'JetBrains Mono',monospace; font-size:.65rem; font-weight:600; padding:2px 7px; border-radius:3px; }
+.tag-p { display:inline-block; background:var(--gold-bg); color:#7a4800; font-family:'JetBrains Mono',monospace; font-size:.65rem; font-weight:600; padding:2px 7px; border-radius:3px; }
+
+/* ── ESP32 Pin Diagram ── */
+.pin-diagram {
+  background:var(--navy); border-radius:8px; padding:1.6rem 1.8rem; margin:1.4rem 0 2rem; color:#fff;
+}
+.pin-diagram .pd-title { font-family:'JetBrains Mono',monospace; font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-l); margin-bottom:1.2rem; }
+.pin-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:.6rem; }
+.pin-card { background:rgba(255,255,255,.06); border-radius:5px; padding:.7rem 1rem; border-left:3px solid var(--teal); }
+.pin-num { font-family:'JetBrains Mono',monospace; font-size:.7rem; font-weight:600; color:var(--teal); }
+.pin-name { font-family:'JetBrains Mono',monospace; font-size:.8rem; color:#fff; margin:.1rem 0; }
+.pin-note { font-family:'Crimson Pro',serif; font-size:.82rem; color:rgba(255,255,255,.55); font-style:italic; }
+.pin-card.highlight { border-left-color:var(--accent-l); }
+.pin-card.highlight .pin-num { color:var(--accent-l); }
+
+/* ── ADC Attenuation visual ── */
+.atten-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:.6rem; margin:1.2rem 0 1.8rem; }
+.ac {
+  background:#fff; border:1px solid var(--paper-2); border-top:3px solid var(--blue-l);
+  border-radius:0 0 5px 5px; padding:.8rem .9rem; text-align:center;
+}
+.ac.sel { border-top-color:var(--accent); background:var(--gold-bg); }
+.ac-name { font-family:'JetBrains Mono',monospace; font-size:.72rem; font-weight:600; color:var(--navy); }
+.ac-range { font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--blue); margin:.3rem 0; }
+.ac-note { font-family:'Crimson Pro',serif; font-size:.8rem; color:var(--ink-3); font-style:italic; }
+.ac.sel .ac-name { color:var(--accent); }
+
+/* ── Quantization canvas ── */
+.qdiag { background:#fff; border:1px solid var(--paper-2); border-radius:6px; padding:1.3rem 1.6rem; margin:1.3rem 0; }
+.qdiag-title { font-family:'JetBrains Mono',monospace; font-size:.61rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.8rem; }
+
+/* ── ADC scale ── */
+.adc-vis { background:var(--navy); border-radius:8px; padding:1.6rem 1.8rem; margin:1.4rem 0; }
+.adc-vis-title { font-family:'JetBrains Mono',monospace; font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-l); margin-bottom:1.2rem; }
+.adc-bar-wrap { position:relative; height:56px; }
+.adc-bar-bg { position:absolute; top:50%; transform:translateY(-50%); left:0; right:0; height:8px; background:linear-gradient(to right, var(--blue), #4db8e8); border-radius:4px; }
+.adc-tick { position:absolute; top:50%; transform:translate(-50%,-50%); width:2px; background:rgba(255,255,255,.35); }
+.adc-tick-lbl { position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:.58rem; color:rgba(255,255,255,.55); white-space:nowrap; }
+.adc-dot { position:absolute; top:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:var(--accent); border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 4px rgba(184,114,30,.4); z-index:2; }
+.adc-dot-lbl { position:absolute; top:-30px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--accent-l); white-space:nowrap; background:rgba(0,0,0,.5); padding:2px 7px; border-radius:3px; }
+.adc-legend-row { display:flex; gap:1.5rem; margin-top:1.5rem; flex-wrap:wrap; font-family:'Crimson Pro',serif; font-size:.87rem; color:rgba(255,255,255,.6); }
+.adc-legend-row span { color:var(--accent-l); font-family:'JetBrains Mono',monospace; font-size:.78rem; font-weight:600; }
+
+/* ── Code blocks ── */
+.code-wrap { margin:1.8rem 0 2rem; border-radius:8px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.14); }
+.code-hdr { background:#071320; padding:.58rem 1.1rem; display:flex; align-items:center; gap:.7rem; }
+.code-dots { display:flex; gap:5px; }
+.code-dots span { width:11px; height:11px; border-radius:50%; }
+.code-dots span:nth-child(1){background:#ff5f57;} .code-dots span:nth-child(2){background:#febc2e;} .code-dots span:nth-child(3){background:#28c840;}
+.code-fn { font-family:'JetBrains Mono',monospace; font-size:.69rem; color:rgba(255,255,255,.38); margin-left:auto; }
+pre.code { background:#0d1f2e; margin:0; padding:1.3rem 1.5rem; overflow-x:auto; font-family:'JetBrains Mono',monospace; font-size:.79rem; line-height:1.75; }
+.kw{color:#79b8ff;} .ty{color:#ffab70;} .cn{color:#56d8b0;} .cm{color:#587a58;font-style:italic;}
+.st{color:#f0a070;} .nu{color:#b5cea8;} .fn{color:#c8d8f8;} .pp{color:#c586c0;} .op{color:#ffc66d;}
+
+/* ── Misc ── */
+ul.dl { padding-left:0; list-style:none; margin:.8rem 0 1.2rem; }
+ul.dl li { padding:.3rem 0 .3rem 1.5rem; position:relative; color:var(--ink-2); font-size:.98rem; border-bottom:1px solid var(--paper); }
+ul.dl li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.dl li:last-child { border-bottom:none; }
+hr.div { border:none; border-top:1px solid var(--paper-2); margin:3rem 0; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+.ic { background:var(--paper); border:1px solid var(--paper-2); border-top:3px solid var(--blue); border-radius:0 0 5px 5px; padding:1rem 1.2rem; }
+.ic h4 { font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.09em; text-transform:uppercase; color:var(--blue); margin-bottom:.5rem; }
+.ic p { font-size:.9rem; color:var(--ink-2); margin:0; }
+
+/* ── Grade list ── */
+.grade-list { list-style:none; margin:1.2rem 0 1.8rem; }
+.grade-list li { display:flex; justify-content:space-between; align-items:center; padding:.58rem 1rem; border-bottom:1px solid var(--paper-2); font-size:.95rem; }
+.grade-list li:hover { background:var(--paper); }
+.gl-pts { font-family:'JetBrains Mono',monospace; font-size:.98rem; font-weight:600; color:var(--navy); background:var(--paper-2); padding:2px 10px; border-radius:3px; flex-shrink:0; }
+.grade-list li.tot { background:var(--navy); color:#fff; border-radius:4px; margin-top:.4rem; }
+.grade-list li.tot .gl-pts { background:rgba(255,255,255,.12); color:var(--accent-l); font-size:1.1rem; }
+
+/* ── Voto scale ── */
+.voto-row { display:flex; margin:1.4rem 0 2rem; border-radius:6px; overflow:hidden; border:1px solid var(--paper-2); }
+.vc { flex:1; padding:.85rem .5rem; text-align:center; border-right:1px solid var(--paper-2); }
+.vc:last-child { border-right:none; }
+.vc-num { font-family:'Libre Baskerville',serif; font-size:1.25rem; font-weight:700; color:var(--navy); display:block; }
+.vc-lbl { font-family:'JetBrains Mono',monospace; font-size:.57rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); display:block; margin:.2rem 0; }
+.vc-bar { height:3px; border-radius:2px; margin:.3rem auto 0; }
+.vc1 .vc-bar{background:#e74c3c;width:25%;} .vc2 .vc-bar{background:#e67e22;width:50%;}
+.vc3 .vc-bar{background:#2980b9;width:68%;} .vc4 .vc-bar{background:#27ae60;width:84%;}
+.vc5 .vc-bar{background:var(--accent);width:100%;}
+
+@media (max-width:860px) {
+  aside.sb { display:none; }
+  main { margin-left:0; padding:2rem 1.4rem; max-width:100%; }
+  .mc-grid, .two-col, .atten-cards { grid-template-columns:1fr; }
+  .pin-grid { grid-template-columns:1fr 1fr; }
+  .voto-row { flex-wrap:wrap; }
+}
+@media print { aside.sb, header { display:none; } main { margin:0; padding:2rem; max-width:100%; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">ITS — Dispensa Tecnica</div>
+  <div class="hdr-sep"></div>
+  <div class="hdr-sub">Misure Elettroniche &amp; Condizionamento dei Segnali — A.A. 2025–2026</div>
+  <span class="hdr-chip">ESP32 Edition</span>
+</header>
+
+<aside class="sb">
+  <div class="sb-lbl">Introduzione</div>
+  <a href="#cover">Copertina</a>
+
+  <div class="sb-lbl">Modulo 1 — LM35 su ESP32</div>
+  <a href="#m1-esp32" class="sub">1.1 Perché ESP32 cambia tutto</a>
+  <a href="#m1-lm35" class="sub">1.2 Il sensore LM35</a>
+  <a href="#m1-adc" class="sub">1.3 ADC dell'ESP32</a>
+  <a href="#m1-atten" class="sub">1.4 Attenuazione e range</a>
+  <a href="#m1-sar" class="sub">1.5 Funzionamento ADC SAR</a>
+  <a href="#m1-pins" class="sub">1.6 GPIO e pin ADC validi</a>
+  <a href="#m1-es1" class="sub">1.7 Es.1 — Risoluzione e e_q</a>
+  <a href="#m1-adc512" class="sub">1.8 Es.1 — Decodifica codice 512</a>
+  <a href="#m1-es2" class="sub">1.9 Es.2 — Saturazione</a>
+  <a href="#m1-es3" class="sub">1.10 Es.3 — Sketch base</a>
+  <a href="#m1-es4" class="sub">1.11 Es.4 — Media digitale</a>
+  <a href="#m1-es5" class="sub">1.12 Es.5 — Calibrazione</a>
+  <a href="#m1-grade" class="sub">1.13 Griglia di valutazione</a>
+
+  <div class="sb-lbl">Modulo 2 — Ponte di Wheatstone</div>
+  <a href="#m2-ponte" class="sub">2.1 Il ponte di Wheatstone</a>
+  <a href="#m2-sg" class="sub">2.2 L'estensimetro</a>
+  <a href="#m2-es1" class="sub">2.3 Es.1 — Variazione ΔR</a>
+  <a href="#m2-es2" class="sub">2.4 Es.2 — Tensione V_out</a>
+  <a href="#m2-es3" class="sub">2.5 Es.3 — Conversione ADC</a>
+  <a href="#m2-es4" class="sub">2.6 Es.4 — Analisi metrologica</a>
+  <a href="#m2-sketch" class="sub">2.7 Sketch ESP32</a>
+  <a href="#m2-grade" class="sub">2.8 Griglia di valutazione</a>
+
+  <div class="sb-lbl">Scala dei voti</div>
+  <a href="#scale">Valutazione finale</a>
+</aside>
+
+<main>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover">
+    <div class="cover-kicker">ITS – Istituto Tecnico Superiore &nbsp;·&nbsp; Corso Biennale</div>
+    <h1>Misure Elettroniche<br>con ESP32</h1>
+    <p class="cover-tagline">ADC a 12 bit, attenuazione programmabile, GPIO dedicati — analisi quantitativa della catena di misura, riduzione del rumore e calibrazione lineare.</p>
+    <div class="mc-grid">
+      <div class="mc"><div class="mc-tag">Modulo 1</div><div class="mc-title">Sensore di temperatura LM35 con ESP32 — ADC 12 bit, attenuazione, media, calibrazione</div></div>
+      <div class="mc"><div class="mc-tag">Modulo 2</div><div class="mc-title">Ponte di Wheatstone con estensimetro — analisi metrologica, risoluzione effettiva</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     MODULO 1
+════════════════════════════════════════════════════════════════════════════ -->
+<section>
+<div class="mod-banner" data-n="1">
+  <div class="mb-tag">Modulo 1</div>
+  <div class="mb-h2">Catena di Misura con Sensore LM35 su ESP32</div>
+  <div class="mb-sub">ADC 12 bit · Attenuazione programmabile · Media digitale · Calibrazione lineare</div>
+</div>
+
+<p>Questo modulo analizza in dettaglio la catena di misura completa per la temperatura con il sensore LM35, questa volta su piattaforma <strong>ESP32</strong>. Rispetto ad Arduino UNO esistono differenze sostanziali: l'ADC è a <strong>12 bit</strong> invece di 10, la tensione di riferimento è <strong>3.3 V</strong> invece di 5 V, l'ingresso analogico è configurabile con diversi livelli di <strong>attenuazione</strong>, e solo alcuni GPIO possono essere usati come ingressi ADC. Tutte queste differenze modificano significativamente i calcoli e le scelte progettuali.</p>
+
+<!-- 1.1 Perché ESP32 cambia tutto -->
+<h2 class="s" id="m1-esp32"><span class="sn">1.1</span>Perché l'ESP32 Cambia Tutto Rispetto ad Arduino UNO</h2>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Caratteristica</th><th>Arduino UNO (ATmega328P)</th><th>ESP32</th></tr></thead>
+  <tbody>
+    <tr><td>Risoluzione ADC</td><td class="v">10 bit (1024 livelli)</td><td class="v">12 bit (4096 livelli)</td></tr>
+    <tr class="alt"><td>Tensione di riferimento</td><td class="v">5.0 V (fisso)</td><td class="v">3.3 V (fisso)</td></tr>
+    <tr><td>Risoluzione in tensione (1 LSB)</td><td class="v">≈ 4.88 mV</td><td class="v">≈ 0.805 mV</td></tr>
+    <tr class="alt"><td>Attenuazione ingresso</td><td>Non configurabile</td><td class="v">0 dB / 2.5 dB / 6 dB / 11 dB</td></tr>
+    <tr><td>Range ingresso (default)</td><td>0 ÷ 5 V</td><td class="v">0 ÷ 1.1 V (0 dB) / 0 ÷ 3.9 V (11 dB)</td></tr>
+    <tr class="alt"><td>Pin ADC</td><td>A0÷A5 (tutti usabili)</td><td class="v">Solo ADC1 quando WiFi è attivo</td></tr>
+    <tr><td>Numero canali ADC</td><td>6</td><td class="v">18 (ADC1: 8 canali, ADC2: 10 canali)</td></tr>
+    <tr class="alt"><td>Non-linearità tipica</td><td>≈ ±1 LSB</td><td class="v">≈ ±2–4 LSB (più rumoroso)</td></tr>
+    <tr><td>Architettura ADC</td><td>SAR 10 bit</td><td class="v">SAR 12 bit con Σ-Δ opzionale</td></tr>
+    <tr class="alt"><td>Frequenza campionamento max</td><td>≈ 10 kSPS</td><td class="v">≈ 1 MSPS (senza WiFi)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="warn"><div class="warn-tag">Problema critico — ADC2 e WiFi</div>
+<p>Il modulo <strong>ADC2</strong> dell'ESP32 è condiviso con il driver WiFi e Bluetooth. Quando la radio wireless è attiva, ADC2 non è utilizzabile per misure affidabili. <strong>Usare sempre ADC1</strong> per le misure analogiche: GPIO32, GPIO33, GPIO34, GPIO35, GPIO36, GPIO37, GPIO38, GPIO39.</p></div>
+
+<!-- 1.2 LM35 -->
+<h2 class="s" id="m1-lm35"><span class="sn">1.2</span>Il Sensore LM35</h2>
+<p>Il <strong>LM35</strong> (Texas Instruments) genera una tensione d'uscita linearmente proporzionale alla temperatura in gradi Celsius: \(V_{\text{out}}(T) = S \cdot T\) con sensibilità \(S = 10\,\text{mV/°C}\).</p>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Parametro</th><th>Simbolo</th><th>Valore</th><th>Unità</th></tr></thead>
+  <tbody>
+    <tr><td>Sensibilità</td><td class="s">S</td><td class="v">10</td><td>mV/°C</td></tr>
+    <tr class="alt"><td>Range operativo</td><td class="s">T</td><td class="v">−55 ÷ +150</td><td>°C</td></tr>
+    <tr><td>Alimentazione consigliata con ESP32</td><td class="s">V<sub>CC</sub></td><td class="v">3.3</td><td>V (pin 3V3 ESP32)</td></tr>
+    <tr class="alt"><td>Uscita a temperatura ambiente (25 °C)</td><td class="s">V<sub>out</sub></td><td class="v">250</td><td>mV</td></tr>
+    <tr><td>Uscita massima (150 °C)</td><td class="s">V<sub>out,max</sub></td><td class="v">1500</td><td>mV = 1.50 V</td></tr>
+    <tr class="alt"><td>Non-linearità tipica</td><td class="s">ε<sub>NL</sub></td><td class="v">±¼</td><td>°C</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note"><div class="note-tag">Compatibilità LM35 con ESP32</div>
+<p>Il LM35 alimentato a 3.3 V (pin <code class="ic">3V3</code> dell'ESP32) produce tensioni da 0 V (a 0 °C) a 1.50 V (a 150 °C). Questo range è <strong>completamente interno all'intervallo 0–3.3 V</strong> dell'ADC ESP32, quindi non servono resistori di partizione. Con attenuazione a 0 dB (range 0–1.1 V) il segnale copre fino a 110 °C senza saturare — scelta ottimale per la maggior parte delle applicazioni.</p></div>
+
+<!-- 1.3 ADC ESP32 -->
+<h2 class="s" id="m1-adc"><span class="sn">1.3</span>L'ADC dell'ESP32 — Caratteristiche Dettagliate</h2>
+<p>L'ESP32 monta un ADC SAR (<em>Successive Approximation Register</em>) a <strong>12 bit</strong> con architettura multi-canale multiplexata. La tensione di riferimento interna è nominalmente <strong>3.3 V</strong>, ma il range effettivo in ingresso dipende dal livello di attenuazione selezionato.</p>
+
+<p>La relazione di trasferimento ideale è:</p>
+<div class="math-block">$$D = \left\lfloor \frac{V_{\text{in}}}{V_{\text{ref}}} \cdot (2^{12} - 1) \right\rfloor = \left\lfloor \frac{V_{\text{in}}}{3.3\,\text{V}} \cdot 4095 \right\rfloor$$</div>
+
+<p>e la relazione inversa per ricostruire la tensione:</p>
+<div class="math-block">$$V_{\text{in}} = \frac{D}{2^{12} - 1} \cdot V_{\text{ref}} = \frac{D}{4095} \cdot 3.3\,\text{V}$$</div>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Parametro</th><th>Valore</th></tr></thead>
+  <tbody>
+    <tr><td>Architettura</td><td>SAR — Successive Approximation Register</td></tr>
+    <tr class="alt"><td>Risoluzione</td><td>12 bit (configurabile: 9, 10, 11, 12 bit)</td></tr>
+    <tr><td>Numero di livelli (N)</td><td>\(2^{12} = 4096\)</td></tr>
+    <tr class="alt"><td>Tensione di riferimento interna</td><td>\(V_{\text{ref}} = 3.3\,\text{V}\)</td></tr>
+    <tr><td>Risoluzione in tensione (1 LSB, 12 bit)</td><td>\(3.3\,\text{V} / 4095 \approx 0.805\,\text{mV}\)</td></tr>
+    <tr class="alt"><td>Codice di uscita</td><td>intero senza segno, 0 ÷ 4095</td></tr>
+    <tr><td>Canali ADC1 (sicuri con WiFi)</td><td>GPIO 32, 33, 34, 35, 36, 37, 38, 39</td></tr>
+    <tr class="alt"><td>Frequenza campionamento max</td><td>\(\approx 1\,\text{MSPS}\) (senza WiFi attivo)</td></tr>
+    <tr><td>ENOB tipica</td><td>≈ 10–11 bit su 12 (rumore interno)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 1.4 Attenuazione -->
+<h2 class="s" id="m1-atten"><span class="sn">1.4</span>Attenuazione Programmabile — Scelta del Range di Ingresso</h2>
+
+<p>Una caratteristica unica dell'ESP32, assente in Arduino UNO, è la possibilità di impostare l'<strong>attenuazione del preamplificatore</strong> in ingresso all'ADC tramite <code class="ic">analogSetAttenuation()</code>. Questo modifica il range di tensione accettabile sull'ingresso analogico:</p>
+
+<div class="atten-cards">
+  <div class="ac sel">
+    <div class="ac-name">ADC_0db</div>
+    <div class="ac-range">0 ÷ 1.1 V</div>
+    <div class="ac-note">Massima precisione, minimo rumore — ideale per segnali fino a ~110 °C con LM35</div>
+  </div>
+  <div class="ac">
+    <div class="ac-name">ADC_2_5db</div>
+    <div class="ac-range">0 ÷ 1.5 V</div>
+    <div class="ac-note">Copre l'intero range LM35 (0÷150 °C = 0÷1.5 V)</div>
+  </div>
+  <div class="ac">
+    <div class="ac-name">ADC_6db</div>
+    <div class="ac-range">0 ÷ 2.2 V</div>
+    <div class="ac-note">Range intermedio, meno usato per LM35</div>
+  </div>
+  <div class="ac">
+    <div class="ac-name">ADC_11db</div>
+    <div class="ac-range">0 ÷ 3.9 V</div>
+    <div class="ac-note">Range completo — necessario per segnali prossimi a 3.3 V</div>
+  </div>
+</div>
+
+<div class="note"><div class="note-tag">Scelta ottimale per questo esercizio</div>
+<p>Con il LM35 alimentato a 3.3 V, l'uscita massima è 1.50 V (a 150 °C). La scelta ottimale è <code class="ic">ADC_2_5db</code> (range 0–1.5 V): copre l'intero range del sensore con la massima risoluzione effettiva. Se si vuole misurare solo fino a 110 °C, si può usare <code class="ic">ADC_0db</code> (range 0–1.1 V) per avere ancora meno rumore. L'attenuazione va impostata <strong>prima</strong> della prima <code class="ic">analogRead()</code>.</p></div>
+
+<p>La scelta dell'attenuazione modifica direttamente la costante \(V_{\text{ref,eff}}\) nella formula di conversione, sostituendo 3.3 V con il limite superiore del range selezionato:</p>
+<div class="math-block">$$V_{\text{in}} = \frac{D}{4095} \cdot V_{\text{ref,eff}}$$</div>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Attenuazione</th><th>V_ref,eff</th><th>1 LSB</th><th>Adatto a LM35 fino a</th></tr></thead>
+  <tbody>
+    <tr><td class="s">ADC_0db</td><td class="v">1.1 V</td><td class="v">0.269 mV</td><td>110 °C</td></tr>
+    <tr class="alt"><td class="s">ADC_2_5db</td><td class="v">1.5 V</td><td class="v">0.366 mV</td><td>150 °C ✓ range completo</td></tr>
+    <tr><td class="s">ADC_6db</td><td class="v">2.2 V</td><td class="v">0.537 mV</td><td>150 °C (ma meno preciso)</td></tr>
+    <tr class="alt"><td class="s">ADC_11db</td><td class="v">3.9 V</td><td class="v">0.952 mV</td><td>150 °C (meno preciso ancora)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 1.5 SAR -->
+<h2 class="s" id="m1-sar"><span class="sn">1.5</span>Funzionamento dell'ADC SAR — Passo per Passo</h2>
+<p>Il convertitore SAR opera con un algoritmo di <strong>bisezione binaria iterativa</strong>: ad ogni ciclo di clock confronta la tensione campionata con il valore generato da un DAC interno, aggiornando un registro a scorrimento bit per bit, dal più significativo (MSB, bit 11) al meno significativo (LSB, bit 0).</p>
+
+<p>Per un ADC a 12 bit il processo richiede <strong>12 confronti successivi</strong> più overhead, per un totale tipico di 15–16 cicli di clock per conversione:</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Ciclo 1 (MSB)</div><div class="dr-math">Il DAC produce \(V_D = V_{\text{ref}}/2 = 1.65\,\text{V}\). Se \(V_{\text{in}} > 1.65\,\text{V}\) → bit 11 = 1, altrimenti → bit 11 = 0.</div><div class="dr-note">½ del range</div></div>
+  <div class="dr"><div class="dr-lbl">Ciclo 2</div><div class="dr-math">Il DAC aggiunge o sottrae \(V_{\text{ref}}/4 = 0.825\,\text{V}\). Il confronto determina il bit 10.</div><div class="dr-note">¼ del range</div></div>
+  <div class="dr"><div class="dr-lbl">Ciclo k</div><div class="dr-math">Il DAC aggiusta di \(V_{\text{ref}}/2^k\). Il confronto determina il bit \((12-k)\).</div><div class="dr-note">\(1/2^k\) del range</div></div>
+  <div class="dr"><div class="dr-lbl">Ciclo 12 (LSB)</div><div class="dr-math">Il DAC aggiusta di \(V_{\text{ref}}/4096 \approx 0.805\,\text{mV}\). Determina il bit 0.</div><div class="dr-note">risoluzione finale</div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">Il registro a 12 bit contiene il codice digitale finale, accessibile con \(\texttt{analogRead()}\).</div><div class="dr-note"></div></div>
+</div>
+
+<!-- 1.6 Pin ADC -->
+<h2 class="s" id="m1-pins"><span class="sn">1.6</span>GPIO e Pin ADC Validi sull'ESP32</h2>
+<p>Non tutti i GPIO dell'ESP32 possono essere usati come ingressi ADC. I canali <strong>ADC1</strong> sono i soli sicuri in presenza di WiFi/Bluetooth attivo. I pin GPIO34–GPIO39 sono <strong>input-only</strong> (nessun resistore di pull-up/pull-down interno, nessuna funzione di uscita): sono i più adatti per le misure analogiche perché privi di disturbi da commutazione digitale.</p>
+
+<div class="pin-diagram">
+  <div class="pd-title">Canali ADC1 dell'ESP32 — raccomandati per misure analogiche</div>
+  <div class="pin-grid">
+    <div class="pin-card highlight">
+      <div class="pin-num">ADC1_CH0</div>
+      <div class="pin-name">GPIO 36</div>
+      <div class="pin-note">SVP — input-only, preferito</div>
+    </div>
+    <div class="pin-card highlight">
+      <div class="pin-num">ADC1_CH3</div>
+      <div class="pin-name">GPIO 39</div>
+      <div class="pin-note">SVN — input-only, preferito</div>
+    </div>
+    <div class="pin-card highlight">
+      <div class="pin-num">ADC1_CH6</div>
+      <div class="pin-name">GPIO 34</div>
+      <div class="pin-note">input-only — usato in questo esercizio</div>
+    </div>
+    <div class="pin-card highlight">
+      <div class="pin-num">ADC1_CH7</div>
+      <div class="pin-name">GPIO 35</div>
+      <div class="pin-note">input-only</div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-num">ADC1_CH4</div>
+      <div class="pin-name">GPIO 32</div>
+      <div class="pin-note">bidirezionale, usabile</div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-num">ADC1_CH5</div>
+      <div class="pin-name">GPIO 33</div>
+      <div class="pin-note">bidirezionale, usabile</div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-num">ADC1_CH1</div>
+      <div class="pin-name">GPIO 37</div>
+      <div class="pin-note">input-only</div>
+    </div>
+    <div class="pin-card">
+      <div class="pin-num">ADC1_CH2</div>
+      <div class="pin-name">GPIO 38</div>
+      <div class="pin-note">input-only</div>
+    </div>
+  </div>
+</div>
+
+<div class="warn"><div class="warn-tag">Non usare ADC2 con WiFi attivo</div>
+<p>I GPIO 0, 2, 4, 12–15, 25, 26, 27 appartengono ad ADC2. Quando WiFi o Bluetooth sono attivi (incluso il solo inizializzare <code class="ic">WiFi.begin()</code>), queste letture restituiscono valori casuali. Per evitare problemi: usare <strong>sempre GPIO 34–39</strong> (ADC1, input-only) per le misure analogiche.</p></div>
+
+<!-- 1.7 Esercizio 1 -->
+<h2 class="s" id="m1-es1"><span class="sn">1.7</span>Esercizio 1 — Risoluzione e Errore di Quantizzazione (ESP32, 12 bit)</h2>
+
+<h3 class="ss">Risoluzione in tensione con attenuazione ADC_2_5db</h3>
+<p>Con l'attenuazione <code class="ic">ADC_2_5db</code> il range effettivo è \(V_{\text{ref,eff}} = 1.5\,\text{V}\). Il valore di 1 LSB è la variazione minima di tensione che provoca un cambiamento di un'unità nel codice digitale:</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Definizione</div><div class="dr-math">$$\text{LSB} = \frac{V_{\text{ref,eff}}}{2^n - 1}$$</div><div class="dr-note">formula generale</div></div>
+  <div class="dr"><div class="dr-lbl">Sostituzione</div><div class="dr-math">$$\text{LSB} = \frac{1.5\,\text{V}}{4095} = 3.663 \times 10^{-4}\,\text{V}$$</div><div class="dr-note">n=12, V_ref,eff=1.5 V</div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">$$\boxed{\text{LSB} \approx 0.366\,\text{mV}}$$</div><div class="dr-note"></div></div>
+</div>
+
+<h3 class="ss">Risoluzione in temperatura</h3>
+<p>Invertendo la relazione del LM35 (\(V_{\text{out}} = S \cdot T\), con \(S = 10\,\text{mV/°C} = 0.01\,\text{V/°C}\)):</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Relazione</div><div class="dr-math">$$\Delta T_{\min} = \frac{\text{LSB}}{S} = \frac{0.366\,\text{mV}}{10\,\text{mV/°C}}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">$$\boxed{\Delta T_{\min} = 0.0366\,\text{°C} \approx 0.037\,\text{°C per LSB}}$$</div><div class="dr-note">~13× più preciso di Arduino UNO</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Risoluzione in temperatura con <span class="rv">ADC_2_5db</span>: <span class="rv">ΔT ≈ 0.037 °C / LSB</span> — circa 13 volte migliore rispetto ad Arduino UNO (0.49 °C/LSB).</div></div>
+
+<h3 class="ss">Errore massimo di quantizzazione</h3>
+<p>L'errore di quantizzazione è sempre ±½ LSB, indipendentemente dalla risoluzione:</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">In tensione</div><div class="dr-math">$$e_{q,\max} = \pm\frac{\text{LSB}}{2} = \pm\frac{0.366\,\text{mV}}{2} = \pm 0.183\,\text{mV}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">In temperatura</div><div class="dr-math">$$e_{q,\max} = \pm\frac{0.037\,\text{°C}}{2} \approx \pm 0.018\,\text{°C}$$</div><div class="dr-note"></div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Errore massimo di quantizzazione: <span class="rv">e_q = ±0.018 °C</span></div></div>
+
+<div class="qdiag">
+  <div class="qdiag-title">Errore di quantizzazione — confronto visivo Arduino UNO vs ESP32</div>
+  <canvas id="quantCanvas" style="display:block;width:100%;height:150px;"></canvas>
+  <p style="font-size:.82rem;color:var(--ink-3);margin:.6rem 0 0;font-style:italic;">La scala a gradini più fine (ESP32, blu scuro) segue molto più da vicino la rampa analogica (arancione) rispetto all'ADC a 10 bit (grigio). L'errore \(e_q\) è visivamente quasi trascurabile con 12 bit.</p>
+</div>
+
+<!-- 1.8 Decodifica 512 -->
+<h2 class="s" id="m1-adc512"><span class="sn">1.8</span>Esercizio 1 — Decodifica del Codice ADC 512 su ESP32</h2>
+
+<p>Il codice 512 sull'ESP32 (ADC 12 bit, range 0–4095) ha un significato fisico molto diverso rispetto allo stesso codice su Arduino UNO (ADC 10 bit, range 0–1023). Dobbiamo rifare il calcolo con i parametri corretti dell'ESP32.</p>
+
+<div class="def"><strong>Procedura:</strong> dato il codice \(D = 512\) da <code class="ic">analogRead()</code> su ESP32, si percorre la catena: \(D \xrightarrow{(1)} V_{\text{in}} \xrightarrow{(2)} T\). Il denominatore è ora 4095, non 1023.</div>
+
+<h3 class="ss">Passo 1 — Dal codice digitale alla tensione (con ADC_2_5db)</h3>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Formula inversa</div><div class="dr-math">$$V_{\text{in}} = \frac{D}{2^{12} - 1} \cdot V_{\text{ref,eff}}$$</div><div class="dr-note">12 bit, V_ref,eff dipende dall'attenuazione</div></div>
+  <div class="dr"><div class="dr-lbl">Sostituzione</div><div class="dr-math">$$V_{\text{in}} = \frac{512}{4095} \cdot 1.5\,\text{V}$$</div><div class="dr-note">D=512, ADC_2_5db → V_ref,eff=1.5 V</div></div>
+  <div class="dr"><div class="dr-lbl">Quoziente</div><div class="dr-math">$$\frac{512}{4095} = 0.12503\ldots$$</div><div class="dr-note">512 è circa ⅛ del range 0–4095</div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">$$V_{\text{in}} = 0.12503 \times 1.5\,\text{V} = 0.1875\,\text{V} = 187.5\,\text{mV}$$</div><div class="dr-note"></div></div>
+</div>
+
+<h3 class="ss">Passo 2 — Dalla tensione alla temperatura</h3>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Inversione LM35</div><div class="dr-math">$$T = \frac{V_{\text{in}}}{S} = \frac{187.5\,\text{mV}}{10\,\text{mV/°C}}$$</div><div class="dr-note">S = 10 mV/°C</div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">$$\boxed{T = 18.75\,\text{°C}}$$</div><div class="dr-note">temperatura ambiente realistica!</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Codice ADC 512 su ESP32 (ADC_2_5db) → <span class="rv">V_in = 187.5 mV</span> → <span class="rv">T = 18.75 °C</span></div></div>
+
+<div class="note"><div class="note-tag">Confronto con Arduino UNO — stesso codice, temperatura completamente diversa</div>
+<p>Su Arduino UNO, il codice 512 corrispondeva a 2.502 V → 250.2 °C (fisicamente impossibile per il LM35). Sull'ESP32 con ADC_2_5db, lo <em>stesso codice 512</em> corrisponde a soli 187.5 mV → <strong>18.75 °C</strong>, una temperatura perfettamente normale e misurabile! Questo illustra come la scelta della piattaforma e dell'attenuazione cambi radicalmente l'interpretazione dei dati.</p></div>
+
+<!-- Visualizzazione scala ADC ESP32 -->
+<div class="adc-vis">
+  <div class="adc-vis-title">Posizione del codice 512 sulla scala ADC ESP32 (12 bit, ADC_2_5db)</div>
+  <div class="adc-bar-wrap" id="adcScale32"></div>
+  <div class="adc-legend-row">
+    <div>Codice <span>0</span> → 0.0 mV → 0.0 °C</div>
+    <div>Codice <span>512</span> → 187.5 mV → 18.75 °C ✓</div>
+    <div>Codice <span>1500</span> → 549 mV → 54.9 °C</div>
+    <div>Codice <span>4095</span> → 1500 mV → 150.0 °C</div>
+  </div>
+</div>
+
+<h3 class="ss">Tabella dei codici ADC realistici su ESP32 con LM35 (ADC_2_5db)</h3>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Temperatura</th><th>V_out LM35</th><th>Codice D (ESP32)</th><th>Percentuale del range</th></tr></thead>
+  <tbody>
+    <tr><td>0 °C</td><td>0.0 mV</td><td class="v">0</td><td>0 %</td></tr>
+    <tr class="alt"><td>18.75 °C</td><td>187.5 mV</td><td class="v">512</td><td>12.5 %</td></tr>
+    <tr><td>25 °C</td><td>250.0 mV</td><td class="v">683</td><td>16.7 %</td></tr>
+    <tr class="alt"><td>37 °C (corpo umano)</td><td>370.0 mV</td><td class="v">1010</td><td>24.7 %</td></tr>
+    <tr><td>100 °C</td><td>1000.0 mV</td><td class="v">2730</td><td>66.7 %</td></tr>
+    <tr class="alt"><td>150 °C (massimo)</td><td>1500.0 mV</td><td class="v">4095</td><td>100 % ✓</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Con l'attenuazione <code class="ic">ADC_2_5db</code> il range dell'ADC viene <strong>sfruttato al 100%</strong> — il codice 4095 corrisponde esattamente al limite massimo del LM35 a 150 °C. Questa è la configurazione ideale per questo sensore.</p>
+
+<!-- 1.9 Saturazione -->
+<h2 class="s" id="m1-es2"><span class="sn">1.9</span>Esercizio 2 — Saturazione e Range Dinamico</h2>
+
+<h3 class="ss">Temperatura teorica di saturazione ADC (ADC_2_5db)</h3>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Condizione</div><div class="dr-math">$$V_{\text{in}} = V_{\text{ref,eff}} = 1.5\,\text{V}$$</div><div class="dr-note">D = 4095 → saturazione</div></div>
+  <div class="dr"><div class="dr-lbl">Temperatura</div><div class="dr-math">$$T_{\text{max,ADC}} = \frac{V_{\text{ref,eff}}}{S} = \frac{1500\,\text{mV}}{10\,\text{mV/°C}} = 150\,\text{°C}$$</div><div class="dr-note">esattamente il limite del LM35!</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Con ADC_2_5db, la saturazione avviene esattamente a <span class="rv">T = 150 °C</span> — il limite fisico del LM35. ADC e sensore sono perfettamente abbinati.</div></div>
+
+<h3 class="ss">Confronto tra attenuazioni sulla temperatura di saturazione</h3>
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Attenuazione</th><th>V_ref,eff</th><th>T saturazione ADC</th><th>Valutazione</th></tr></thead>
+  <tbody>
+    <tr><td class="s">ADC_0db</td><td>1.1 V</td><td class="v">110 °C</td><td>Range limitato, ma massima precisione</td></tr>
+    <tr class="alt"><td class="s">ADC_2_5db</td><td>1.5 V</td><td class="v">150 °C</td><td>✅ Perfetto per LM35, range al 100%</td></tr>
+    <tr><td class="s">ADC_6db</td><td>2.2 V</td><td class="v">150 °C</td><td>Satura a 220 °C → ADC non sfruttato (68%)</td></tr>
+    <tr class="alt"><td class="s">ADC_11db</td><td>3.9 V</td><td class="v">150 °C</td><td>Satura a 390 °C → ADC molto poco sfruttato (38%)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 1.10 Sketch -->
+<h2 class="s" id="m1-es3"><span class="sn">1.10</span>Esercizio 3 — Sketch ESP32: Lettura Istantanea LM35</h2>
+
+<div class="code-wrap">
+  <div class="code-hdr"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-fn">lm35_esp32_basic.ino</span></div>
+  <pre class="code"><code><span class="cm">/**
+ * lm35_esp32_basic.ino
+ * ─────────────────────────────────────────────────────────────────────────
+ * Lettura della temperatura LM35 su ESP32 — GPIO34 (ADC1_CH6, input-only).
+ * Attenuazione ADC_2_5db → range 0–1.5 V → copre l'intero range LM35.
+ *
+ * Catena di conversione:
+ *   analogRead() → D (0÷4095)
+ *   V_in  = D / (2^12 - 1) * V_REF_EFF            [V]
+ *   T     = V_in / SENSITIVITY                     [°C]
+ *
+ * Output CSV:  t[ms], D[raw], V[mV], T[degC]
+ * ─────────────────────────────────────────────────────────────────────────
+ */</span>
+<span class="pp">#include</span> <span class="st">&lt;Arduino.h&gt;</span>
+
+<span class="cm">// ── Configurazione hardware ───────────────────────────────────────────────</span>
+<span class="kw">static constexpr</span> <span class="ty">uint8_t</span>   <span class="cn">PIN_LM35</span>         = <span class="nu">34</span>;        <span class="cm">// GPIO34 = ADC1_CH6, input-only</span>
+<span class="kw">static constexpr</span> <span class="ty">uint8_t</span>   <span class="cn">ADC_BITS</span>         = <span class="nu">12</span>;        <span class="cm">// risoluzione: 9, 10, 11 o 12</span>
+<span class="kw">static constexpr</span> <span class="ty">uint16_t</span>  <span class="cn">ADC_MAX_CODE</span>     = <span class="nu">4095U</span>;     <span class="cm">// 2^12 - 1</span>
+
+<span class="cm">// ── Parametri dell'attenuazione ───────────────────────────────────────────</span>
+<span class="cm">// ADC_0db  → range 0–1.1 V  → copertura LM35 fino a 110 °C</span>
+<span class="cm">// ADC_2_5db → range 0–1.5 V  → copertura LM35 completa (0–150 °C) ← SCELTA OTTIMALE</span>
+<span class="cm">// ADC_6db  → range 0–2.2 V  → ADC non sfruttato al 100%</span>
+<span class="cm">// ADC_11db → range 0–3.9 V  → bassa precisione per LM35</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">V_REF_EFF</span>        = <span class="nu">1.5f</span>;      <span class="cm">// [V] — coerente con ADC_2_5db</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">SENSITIVITY</span>      = <span class="nu">0.010f</span>;   <span class="cm">// [V/°C]  10 mV/°C del LM35</span>
+<span class="kw">static constexpr</span> <span class="ty">uint32_t</span>  <span class="cn">SAMPLE_PERIOD_MS</span> = <span class="nu">1000UL</span>;
+
+<span class="ty">void</span> <span class="fn">setup</span>() {
+    Serial.<span class="fn">begin</span>(<span class="nu">115200</span>);
+
+    <span class="cm">// Imposta risoluzione ADC a 12 bit (default ESP32, ma esplicitarlo è buona norma)</span>
+    <span class="fn">analogReadResolution</span>(<span class="cn">ADC_BITS</span>);
+
+    <span class="cm">// Imposta attenuazione: ADC_2_5db → range 0–1.5 V, ottimale per LM35 su 3.3 V</span>
+    <span class="fn">analogSetPinAttenuation</span>(<span class="cn">PIN_LM35</span>, ADC_2_5db);
+
+    Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"# t[ms],  D[raw],  V[mV],  T[degC]"</span>));
+}
+
+<span class="ty">void</span> <span class="fn">loop</span>() {
+    <span class="cm">// Passo 1 — Lettura codice ADC grezzo (0–4095 con 12 bit)</span>
+    <span class="kw">const</span> <span class="ty">uint16_t</span> rawCode = <span class="fn">analogRead</span>(<span class="cn">PIN_LM35</span>);
+
+    <span class="cm">// Passo 2 — Conversione codice → tensione analogica [V]</span>
+    <span class="cm">//   V_in = D / (2^n - 1) * V_ref_eff</span>
+    <span class="kw">const</span> <span class="ty">float</span> voltage = (<span class="kw">static_cast</span>&lt;<span class="ty">float</span>&gt;(rawCode) / <span class="cn">ADC_MAX_CODE</span>) * <span class="cn">V_REF_EFF</span>;
+
+    <span class="cm">// Passo 3 — Conversione tensione → temperatura [°C]</span>
+    <span class="cm">//   T = V_in / S  (inversione di V_out = S * T)</span>
+    <span class="kw">const</span> <span class="ty">float</span> tempC = voltage / <span class="cn">SENSITIVITY</span>;
+
+    <span class="cm">// Output CSV</span>
+    Serial.<span class="fn">print</span>(<span class="fn">millis</span>());
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>)); Serial.<span class="fn">print</span>(rawCode);
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>)); Serial.<span class="fn">print</span>(voltage * <span class="nu">1000.0f</span>, <span class="nu">2</span>);  <span class="cm">// [mV]</span>
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>)); Serial.<span class="fn">println</span>(tempC, <span class="nu">2</span>);             <span class="cm">// [°C]</span>
+
+    <span class="fn">delay</span>(<span class="cn">SAMPLE_PERIOD_MS</span>);
+}</code></pre>
+</div>
+
+<!-- 1.11 Media -->
+<h2 class="s" id="m1-es4"><span class="sn">1.11</span>Esercizio 4 — Media Digitale e Riduzione del Rumore</h2>
+
+<h3 class="ss">Modello statistico della media campionaria</h3>
+<p>Ogni campione \(x_i\) si modella come \(x_i = \mu + \eta_i\), dove \(\mu\) è il segnale utile e \(\eta_i\) è il rumore con \(E[\eta_i]=0\) e varianza \(\sigma^2_x\). La media su \(N\) campioni:</p>
+
+<div class="math-block">$$\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i \qquad \Rightarrow \qquad \sigma_{\bar{x}} = \frac{\sigma_x}{\sqrt{N}}$$</div>
+
+<p>Per N = 50 campioni:</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Riduzione σ</div><div class="dr-math">$$\sigma_{\bar{x}} = \frac{\sigma_x}{\sqrt{50}} \approx \frac{\sigma_x}{7.07}$$</div><div class="dr-note">fattore di riduzione ≈ 7×</div></div>
+  <div class="dr"><div class="dr-lbl">In dB</div><div class="dr-math">$$\text{Attenuazione} = 20\log_{10}\!\left(\sqrt{50}\right) \approx 17\,\text{dB}$$</div><div class="dr-note"></div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Media su <span class="rv">N = 50</span> campioni: rumore casuale ridotto di <span class="rv">√50 ≈ 7.07×</span> (≈ 17 dB)</div></div>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Componente di errore</th><th>Natura</th><th>Ridotta dalla media?</th></tr></thead>
+  <tbody>
+    <tr><td>Rumore bianco ADC (termico + switching)</td><td>Casuale, media nulla</td><td><span class="tag-y">SÌ — ∝ 1/√N</span></td></tr>
+    <tr class="alt"><td>Offset sistematico di guadagno</td><td>Deterministico, costante</td><td><span class="tag-n">NO</span></td></tr>
+    <tr><td>Non-linearità INL/DNL dell'ADC ESP32</td><td>Strutturale, fissa</td><td><span class="tag-n">NO</span></td></tr>
+    <tr class="alt"><td>Disturbo a 50 Hz (rete)</td><td>Periodico deterministico</td><td><span class="tag-p">Solo se N·Tₛ = k/50 Hz</span></td></tr>
+    <tr><td>Drift termico del sensore</td><td>Lentamente variabile</td><td><span class="tag-n">NO</span></td></tr>
+    <tr class="alt"><td>Rumore switching del regolatore ESP32</td><td>Periodico ad alta frequenza</td><td><span class="tag-y">SÌ — se f_sw ≫ f_s</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="code-wrap">
+  <div class="code-hdr"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-fn">lm35_esp32_averaged.ino</span></div>
+  <pre class="code"><code><span class="cm">/**
+ * lm35_esp32_averaged.ino
+ * ─────────────────────────────────────────────────────────────────────────
+ * Media su N_SAMPLES campioni + calibrazione lineare.
+ * T_cal = CAL_A * T_raw + CAL_B
+ * ─────────────────────────────────────────────────────────────────────────
+ */</span>
+<span class="pp">#include</span> <span class="st">&lt;Arduino.h&gt;</span>
+
+<span class="kw">static constexpr</span> <span class="ty">uint8_t</span>   <span class="cn">PIN_LM35</span>         = <span class="nu">34</span>;
+<span class="kw">static constexpr</span> <span class="ty">uint16_t</span>  <span class="cn">ADC_MAX_CODE</span>     = <span class="nu">4095U</span>;
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">V_REF_EFF</span>        = <span class="nu">1.5f</span>;      <span class="cm">// [V] — ADC_2_5db</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">SENSITIVITY</span>      = <span class="nu">0.010f</span>;   <span class="cm">// [V/°C]</span>
+<span class="kw">static constexpr</span> <span class="ty">uint16_t</span>  <span class="cn">N_SAMPLES</span>        = <span class="nu">50U</span>;
+<span class="kw">static constexpr</span> <span class="ty">uint32_t</span>  <span class="cn">INTER_SAMPLE_US</span>  = <span class="nu">500UL</span>;    <span class="cm">// [µs] pausa tra campioni</span>
+
+<span class="cm">// Coefficienti di calibrazione: T_cal = CAL_A * T_raw + CAL_B</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">CAL_A</span> = <span class="nu">1.0178f</span>;           <span class="cm">// pendenza (adimensionale)</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">CAL_B</span> = <span class="nu">0.46f</span>;            <span class="cm">// offset residuo [°C]</span>
+
+<span class="kw">static</span> <span class="ty">float</span> <span class="fn">acquireAverage</span>() {
+    <span class="ty">uint32_t</span> acc = <span class="nu">0</span>;
+    <span class="kw">for</span> (<span class="ty">uint16_t</span> i = <span class="nu">0</span>; i &lt; <span class="cn">N_SAMPLES</span>; ++i) {
+        acc += <span class="fn">analogRead</span>(<span class="cn">PIN_LM35</span>);
+        <span class="fn">delayMicroseconds</span>(<span class="cn">INTER_SAMPLE_US</span>);
+    }
+    <span class="kw">return</span> <span class="kw">static_cast</span>&lt;<span class="ty">float</span>&gt;(acc) / <span class="cn">N_SAMPLES</span>;
+}
+
+<span class="ty">void</span> <span class="fn">setup</span>() {
+    Serial.<span class="fn">begin</span>(<span class="nu">115200</span>);
+    <span class="fn">analogReadResolution</span>(<span class="nu">12</span>);
+    <span class="fn">analogSetPinAttenuation</span>(<span class="cn">PIN_LM35</span>, ADC_2_5db);
+    Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"# t[ms],  T_raw[degC],  T_cal[degC]"</span>));
+}
+
+<span class="ty">void</span> <span class="fn">loop</span>() {
+    <span class="kw">const</span> <span class="ty">float</span> avgCode = <span class="fn">acquireAverage</span>();
+    <span class="kw">const</span> <span class="ty">float</span> voltage = (avgCode / <span class="cn">ADC_MAX_CODE</span>) * <span class="cn">V_REF_EFF</span>;
+    <span class="kw">const</span> <span class="ty">float</span> tempRaw = voltage / <span class="cn">SENSITIVITY</span>;
+    <span class="kw">const</span> <span class="ty">float</span> tempCal = <span class="cn">CAL_A</span> * tempRaw + <span class="cn">CAL_B</span>;
+
+    Serial.<span class="fn">print</span>(<span class="fn">millis</span>());
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>));  Serial.<span class="fn">print</span>(tempRaw, <span class="nu">2</span>);
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>));  Serial.<span class="fn">println</span>(tempCal, <span class="nu">2</span>);
+    <span class="fn">delay</span>(<span class="nu">1000</span>);
+}</code></pre>
+</div>
+
+<!-- 1.12 Calibrazione -->
+<h2 class="s" id="m1-es5"><span class="sn">1.12</span>Esercizio 5 — Calibrazione Lineare per Due Punti</h2>
+<p>Il modello affine \(T_{\text{corr}} = a \cdot T_{\text{mis}} + b\). I coefficienti si determinano dai due punti sperimentali:</p>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Punto</th><th>T_mis (°C)</th><th>T_reale (°C)</th><th>Errore residuo</th></tr></thead>
+  <tbody>
+    <tr><td>P₁</td><td class="v">19.2</td><td class="v">20.0</td><td>−0.8 °C</td></tr>
+    <tr class="alt"><td>P₂</td><td class="v">58.5</td><td class="v">60.0</td><td>−1.5 °C</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Pendenza a</div><div class="dr-math">$$a = \frac{T_{\text{reale},2} - T_{\text{reale},1}}{T_{\text{mis},2} - T_{\text{mis},1}} = \frac{60.0 - 20.0}{58.5 - 19.2} = \frac{40.0}{39.3} = \mathbf{1.0178}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">Intercetta b</div><div class="dr-math">$$b = T_{\text{reale},1} - a \cdot T_{\text{mis},1} = 20.0 - 1.0178 \times 19.2 = 20.0 - 19.54 = \mathbf{0.46\,°C}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">Verifica P₂</div><div class="dr-math">$$T_{\text{corr}} = 1.0178 \times 58.5 + 0.46 = 59.54 + 0.46 = 60.00\,°\text{C} \checkmark$$</div><div class="dr-note">errore residuo = 0</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt"><span class="rv">a = 1.0178</span> &nbsp;·&nbsp; <span class="rv">b = 0.46 °C</span> &nbsp;→&nbsp; T_corr = 1.0178 · T_mis + 0.46</div></div>
+
+<!-- 1.13 Griglia -->
+<h2 class="s" id="m1-grade"><span class="sn">1.13</span>Griglia di Valutazione — Modulo 1</h2>
+<ul class="grade-list">
+  <li><span>Correttezza dei calcoli teorici (ADC 12 bit, attenuazione)</span><span class="gl-pts">8</span></li>
+  <li><span>Comprensione errore di quantizzazione e confronto con Arduino UNO</span><span class="gl-pts">5</span></li>
+  <li><span>Codice ESP32 corretto (pin ADC1, attenuazione, 12 bit)</span><span class="gl-pts">7</span></li>
+  <li><span>Media digitale implementata correttamente</span><span class="gl-pts">5</span></li>
+  <li><span>Calibrazione lineare corretta</span><span class="gl-pts">4</span></li>
+  <li><span>Chiarezza della relazione tecnica</span><span class="gl-pts">1</span></li>
+  <li class="tot"><span>Totale</span><span class="gl-pts">30</span></li>
+</ul>
+</section>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     MODULO 2
+════════════════════════════════════════════════════════════════════════════ -->
+<section>
+<div class="mod-banner" data-n="2">
+  <div class="mb-tag">Modulo 2</div>
+  <div class="mb-h2">Ponte di Wheatstone con Estensimetro</div>
+  <div class="mb-sub">ADC 12 bit ESP32 · Analisi metrologica · Risoluzione effettiva e limiti pratici</div>
+</div>
+
+<p>Analizziamo la catena di misura per la <strong>deformazione meccanica</strong> mediante un estensimetro in configurazione a quarto di ponte, con lettura tramite ADC a 12 bit dell'ESP32. L'obiettivo centrale è quantificare perché un segnale di pochi millivolt non possa essere misurato direttamente senza amplificazione e calcolare la risoluzione metrologica del sistema.</p>
+
+<!-- 2.1 Ponte -->
+<h2 class="s" id="m2-ponte"><span class="sn">2.1</span>Il Ponte di Wheatstone</h2>
+<p>Il <strong>ponte di Wheatstone</strong> rileva variazioni relative di resistenza con alta sensibilità, eliminando i disturbi comuni (<em>common-mode rejection</em>). In configurazione a quarto di ponte, tre rami sono resistenze fisse \(R_1 = R_2 = R_3 = R_0\), il quarto è l'estensimetro \(R_g = R_0 + \Delta R\).</p>
+
+<div class="math-block">$$V_{\text{out}} = V_{\text{exc}} \left[\frac{R_g}{R_1 + R_g} - \frac{R_2}{R_3 + R_2}\right]$$</div>
+
+<p>Per \(\Delta R \ll R_0\), lo sviluppo al primo ordine fornisce:</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Forma esatta</div><div class="dr-math">$$V_{\text{out}} = V_{\text{exc}} \cdot \frac{\Delta R / R_0}{4 + 2(\Delta R / R_0)}$$</div><div class="dr-note">semplificazione con R₁=R₂=R₃=R₀</div></div>
+  <div class="dr"><div class="dr-lbl">Linearizzata</div><div class="dr-math">$$V_{\text{out}} \approx \frac{V_{\text{exc}}}{4} \cdot \frac{\Delta R}{R_0}$$</div><div class="dr-note">errore ∝ (ΔR/R₀)² ≈ 0.0001% per ε=1000 µε</div></div>
+</div>
+
+<!-- 2.2 Estensimetro -->
+<h2 class="s" id="m2-sg"><span class="sn">2.2</span>L'Estensimetro — Modello e Parametri</h2>
+<p>Il Gauge Factor GF quantifica la sensibilità dell'estensimetro: \(\Delta R / R_0 = GF \cdot \varepsilon\)</p>
+
+<div class="tw">
+<table class="dt">
+  <thead><tr><th>Parametro</th><th>Simbolo</th><th>Valore</th><th>Unità</th></tr></thead>
+  <tbody>
+    <tr><td>Resistenza nominale</td><td class="s">R₀</td><td class="v">120</td><td>Ω</td></tr>
+    <tr class="alt"><td>Gauge Factor</td><td class="s">GF</td><td class="v">2</td><td>adimensionale</td></tr>
+    <tr><td>Deformazione applicata</td><td class="s">ε</td><td class="v">1000</td><td>µε = 10⁻³</td></tr>
+    <tr class="alt"><td>Tensione di eccitazione</td><td class="s">V<sub>exc</sub></td><td class="v">3.3</td><td>V</td></tr>
+    <tr><td>Risoluzione ADC (12 bit, ADC_11db)</td><td class="s">LSB</td><td class="v">0.805</td><td>mV</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 2.3 ΔR -->
+<h2 class="s" id="m2-es1"><span class="sn">2.3</span>Esercizio 1 — Variazione Resistiva</h2>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">GF · ε</div><div class="dr-math">$$\frac{\Delta R}{R_0} = GF \cdot \varepsilon = 2 \times 10^{-3}$$</div><div class="dr-note">GF=2, ε=10⁻³</div></div>
+  <div class="dr"><div class="dr-lbl">ΔR</div><div class="dr-math">$$\Delta R = 2 \times 10^{-3} \times 120\,\Omega = 0.24\,\Omega$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">R_g</div><div class="dr-math">$$R_g = 120 + 0.24 = 120.24\,\Omega$$</div><div class="dr-note">variazione dello 0.2‰</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt"><span class="rv">ΔR = 0.24 Ω</span> &nbsp;/&nbsp; <span class="rv">ΔR/R₀ = 0.2%</span></div></div>
+
+<!-- 2.4 Vout -->
+<h2 class="s" id="m2-es2"><span class="sn">2.4</span>Esercizio 2 — Tensione di Uscita del Ponte</h2>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">Formula</div><div class="dr-math">$$V_{\text{out}} \approx \frac{V_{\text{exc}}}{4} \cdot \frac{\Delta R}{R_0} = \frac{3.3\,\text{V}}{4} \times 2 \times 10^{-3}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">Calcolo</div><div class="dr-math">$$V_{\text{out}} = 0.825\,\text{V} \times 2 \times 10^{-3} = 1.65 \times 10^{-3}\,\text{V}$$</div><div class="dr-note"></div></div>
+  <div class="dr"><div class="dr-lbl">Risultato</div><div class="dr-math">$$\boxed{V_{\text{out}} = 1.65\,\text{mV}}$$</div><div class="dr-note"></div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt"><span class="rv">V_out = 1.65 mV</span> — segnale differenziale per ε = 1000 µε</div></div>
+
+<!-- 2.5 ADC -->
+<h2 class="s" id="m2-es3"><span class="sn">2.5</span>Esercizio 3 — Conversione ADC con ESP32 (ADC_11db)</h2>
+
+<p>Per il ponte di Wheatstone si usa l'attenuazione <code class="ic">ADC_11db</code> (range 0–3.9 V) perché il segnale può essere amplificato con un INA e occorre coprire un range più ampio.</p>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">1 LSB</div><div class="dr-math">$$\text{LSB} = \frac{V_{\text{exc}}}{2^{12}-1} = \frac{3.3\,\text{V}}{4095} \approx 0.805\,\text{mV}$$</div><div class="dr-note">con ADC_11db, V_ref,eff ≈ 3.3 V</div></div>
+  <div class="dr"><div class="dr-lbl">N_LSB</div><div class="dr-math">$$N_{\text{LSB}} = \frac{V_{\text{out}}}{\text{LSB}} = \frac{1.65\,\text{mV}}{0.805\,\text{mV}} \approx 2.05\,\text{LSB}$$</div><div class="dr-note"></div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Il segnale occupa <span class="rv">≈ 2 LSB</span> → misura non affidabile senza amplificazione (INA necessario)</div></div>
+
+<div class="warn"><div class="warn-tag">Misura inaffidabile senza INA</div>
+<p>Con soli 2 LSB, l'errore di quantizzazione è ±½ LSB = ±25% del segnale utile. Il rumore intrinseco dell'ADC ESP32 (1–3 LSB RMS) è comparabile con il segnale → SNR &lt; 0 dB. Serve un INA (es. INA128) con guadagno G ≥ 100× per portare il segnale a ≈ 165 mV (≈ 200 LSB).</p></div>
+
+<!-- 2.6 Metrologica -->
+<h2 class="s" id="m2-es4"><span class="sn">2.6</span>Esercizio 4 — Analisi Metrologica</h2>
+
+<h3 class="ss">Minima deformazione teoricamente rilevabile</h3>
+
+<div class="derivation">
+  <div class="dr"><div class="dr-lbl">V_out,min = 1 LSB</div><div class="dr-math">$$V_{\text{out,min}} = 0.805\,\text{mV}$$</div><div class="dr-note">1 passo minimo ADC</div></div>
+  <div class="dr"><div class="dr-lbl">ΔR/R min</div><div class="dr-math">$$\left(\frac{\Delta R}{R_0}\right)_{\min} = \frac{4 \times 0.805\,\text{mV}}{3300\,\text{mV}} = 9.76 \times 10^{-4}$$</div><div class="dr-note">inversione formula ponte</div></div>
+  <div class="dr"><div class="dr-lbl">ε min</div><div class="dr-math">$$\varepsilon_{\min} = \frac{9.76 \times 10^{-4}}{2} = 4.88 \times 10^{-4} \approx 488\,\mu\varepsilon$$</div><div class="dr-note">inversione rel. GF</div></div>
+</div>
+
+<div class="result"><span class="ri">▶</span><div class="rt">Minima deformazione teorica rilevabile: <span class="rv">ε_min ≈ 488 µε ≈ 500 µε</span></div></div>
+
+<h3 class="ss">Fattori che degradano la risoluzione reale</h3>
+<ul class="dl">
+  <li><strong>Rumore ADC ESP32 (1–3 LSB RMS):</strong> causato da rumore termico e switching noise del regolatore DC-DC integrato. La ENOB effettiva è ≈ 10–11 bit su 12 → risoluzione reale ≈ 4× peggiore della teorica.</li>
+  <li><strong>Non-linearità integrale (INL ±2–4 LSB):</strong> deviazioni sistematiche dalla retta ideale, non eliminabili con la media.</li>
+  <li><strong>Instabilità di V_exc:</strong> ogni variazione di 1% di V_exc produce un errore di 1% sulla misura di deformazione.</li>
+  <li><strong>Rumore termico (Johnson–Nyquist):</strong> \(v_n = \sqrt{4k_BT R \Delta f}\) — per R=120 Ω, T=300 K, Δf=10 kHz: \(v_n \approx 4.5\,\text{nV}/\sqrt{\text{Hz}}\).</li>
+  <li><strong>Drift termico del ponte:</strong> il TCR delle resistenze altera l'equilibrio anche senza deformazione (zero drift).</li>
+  <li><strong>Interferenze EMI:</strong> pickup su connettori non schermati — critico con segnali sub-millivolt.</li>
+</ul>
+
+<div class="note"><div class="note-tag">Soluzione industriale</div>
+<p>Catena professionale: INA (G ≥ 100×, CMRR &gt; 100 dB) → filtro anti-aliasing 4° ordine → ADC dedicato 24 bit (AD7124, ADS1256) → riferimento di tensione a basso drift (&lt;3 ppm/°C). Risoluzione effettiva raggiungibile: ≈ 1 µε.</p></div>
+
+<!-- 2.7 Sketch -->
+<h2 class="s" id="m2-sketch"><span class="sn">2.7</span>Sketch ESP32 — Acquisizione e Decodifica Strain Gauge</h2>
+
+<div class="code-wrap">
+  <div class="code-hdr"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-fn">wheatstone_esp32.ino</span></div>
+  <pre class="code"><code><span class="cm">/**
+ * wheatstone_esp32.ino
+ * ─────────────────────────────────────────────────────────────────────────
+ * Lettura estensimetro a quarto di ponte — ADC1 GPIO34, 12 bit, ADC_11db.
+ *
+ * Catena di misura inversa:
+ *   D (ADC) → V_out [V] → ΔR/R₀ → ε [µε]
+ *
+ * NOTA PROGETTUALE: senza INA il segnale occupa ~2 LSB (SNR < 0 dB).
+ * In un sistema reale: aggiungere INA128 (G=100) prima del pin ADC,
+ * e usare ADC_0db (range 0–1.1 V) per massima precisione sul segnale amplificato.
+ * ─────────────────────────────────────────────────────────────────────────
+ */</span>
+<span class="pp">#include</span> <span class="st">&lt;Arduino.h&gt;</span>
+
+<span class="kw">static constexpr</span> <span class="ty">uint8_t</span>   <span class="cn">PIN_BRIDGE</span>       = <span class="nu">34</span>;        <span class="cm">// ADC1_CH6 — input-only</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">V_EXC</span>            = <span class="nu">3.3f</span>;      <span class="cm">// [V] eccitazione ponte</span>
+<span class="kw">static constexpr</span> <span class="ty">uint16_t</span>  <span class="cn">ADC_MAX_CODE</span>     = <span class="nu">4095U</span>;     <span class="cm">// 2^12 - 1</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">V_REF_EFF</span>        = <span class="nu">3.3f</span>;      <span class="cm">// [V] range ADC_11db ≈ 3.9 V, usiamo V_EXC</span>
+<span class="kw">static constexpr</span> <span class="ty">float</span>     <span class="cn">GAUGE_FACTOR</span>     = <span class="nu">2.0f</span>;      <span class="cm">// GF strain gauge metallico</span>
+<span class="kw">static constexpr</span> <span class="ty">uint16_t</span>  <span class="cn">N_SAMPLES</span>        = <span class="nu">128U</span>;
+<span class="kw">static constexpr</span> <span class="ty">uint32_t</span>  <span class="cn">INTER_SAMPLE_US</span>  = <span class="nu">200UL</span>;
+
+<span class="kw">static</span> <span class="ty">float</span> <span class="fn">acquireAverage</span>() {
+    <span class="ty">uint32_t</span> acc = <span class="nu">0</span>;
+    <span class="kw">for</span> (<span class="ty">uint16_t</span> i = <span class="nu">0</span>; i &lt; <span class="cn">N_SAMPLES</span>; ++i) {
+        acc += <span class="fn">analogRead</span>(<span class="cn">PIN_BRIDGE</span>);
+        <span class="fn">delayMicroseconds</span>(<span class="cn">INTER_SAMPLE_US</span>);
+    }
+    <span class="kw">return</span> <span class="kw">static_cast</span>&lt;<span class="ty">float</span>&gt;(acc) / <span class="cn">N_SAMPLES</span>;
+}
+
+<span class="ty">void</span> <span class="fn">setup</span>() {
+    Serial.<span class="fn">begin</span>(<span class="nu">115200</span>);
+    <span class="fn">analogReadResolution</span>(<span class="nu">12</span>);
+    <span class="fn">analogSetPinAttenuation</span>(<span class="cn">PIN_BRIDGE</span>, ADC_11db);   <span class="cm">// range 0–3.9 V per il segnale del ponte</span>
+    Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"# t[ms],  V_out[mV],  epsilon[microstrain]"</span>));
+}
+
+<span class="ty">void</span> <span class="fn">loop</span>() {
+    <span class="cm">// 1. Acquisizione e conversione in tensione</span>
+    <span class="kw">const</span> <span class="ty">float</span> avgCode = <span class="fn">acquireAverage</span>();
+    <span class="kw">const</span> <span class="ty">float</span> vOut    = (avgCode / <span class="cn">ADC_MAX_CODE</span>) * <span class="cn">V_REF_EFF</span>;   <span class="cm">// [V]</span>
+
+    <span class="cm">// 2. Inversione modello ponte (linearizzato, ΔR/R ≪ 1):</span>
+    <span class="cm">//    V_out = (V_exc/4)·(ΔR/R)  →  ΔR/R = 4·V_out / V_exc</span>
+    <span class="kw">const</span> <span class="ty">float</span> dRoverR  = (<span class="nu">4.0f</span> * vOut) / <span class="cn">V_EXC</span>;
+
+    <span class="cm">// 3. Calcolo deformazione:</span>
+    <span class="cm">//    ΔR/R = GF·ε  →  ε = (ΔR/R) / GF</span>
+    <span class="kw">const</span> <span class="ty">float</span> eps_ue   = (dRoverR / <span class="cn">GAUGE_FACTOR</span>) * <span class="nu">1.0e6f</span>;   <span class="cm">// [µε]</span>
+
+    Serial.<span class="fn">print</span>(<span class="fn">millis</span>());
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>));  Serial.<span class="fn">print</span>(vOut * <span class="nu">1000.0f</span>, <span class="nu">3</span>);   <span class="cm">// [mV]</span>
+    Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">",  "</span>));  Serial.<span class="fn">println</span>(eps_ue, <span class="nu">1</span>);           <span class="cm">// [µε]</span>
+    <span class="fn">delay</span>(<span class="nu">500</span>);
+}</code></pre>
+</div>
+
+<!-- 2.8 Griglia -->
+<h2 class="s" id="m2-grade"><span class="sn">2.8</span>Griglia di Valutazione — Modulo 2</h2>
+<ul class="grade-list">
+  <li><span>Es. 1 — Calcolo corretto di ΔR</span><span class="gl-pts">3</span></li>
+  <li><span>Es. 1 — Calcolo corretto di ΔR/R₀</span><span class="gl-pts">3</span></li>
+  <li><span>Es. 2 — Formula del ponte enunciata e motivata</span><span class="gl-pts">3</span></li>
+  <li><span>Es. 2 — Calcolo numerico di V_out</span><span class="gl-pts">5</span></li>
+  <li><span>Es. 3 — Risoluzione ADC 12 bit calcolata correttamente</span><span class="gl-pts">3</span></li>
+  <li><span>Es. 3 — Numero di LSB calcolato correttamente</span><span class="gl-pts">3</span></li>
+  <li><span>Es. 3 — Valutazione critica dell'affidabilità</span><span class="gl-pts">2</span></li>
+  <li><span>Es. 4 — Calcolo della deformazione minima rilevabile</span><span class="gl-pts">4</span></li>
+  <li><span>Es. 4 — Discussione tecnica dei fattori limitanti</span><span class="gl-pts">4</span></li>
+  <li class="tot"><span>Totale</span><span class="gl-pts">30</span></li>
+</ul>
+</section>
+
+<hr class="div">
+
+<!-- SCALA -->
+<section id="scale">
+<h2 class="s"><span class="sn">§</span>Scala di Valutazione</h2>
+<div class="voto-row">
+  <div class="vc vc1"><span class="vc-num">18</span><span class="vc-lbl">Sufficiente</span><div class="vc-bar"></div></div>
+  <div class="vc vc2"><span class="vc-num">21–23</span><span class="vc-lbl">Discreto</span><div class="vc-bar"></div></div>
+  <div class="vc vc3"><span class="vc-num">24–26</span><span class="vc-lbl">Buono</span><div class="vc-bar"></div></div>
+  <div class="vc vc4"><span class="vc-num">27–28</span><span class="vc-lbl">Molto buono</span><div class="vc-bar"></div></div>
+  <div class="vc vc5"><span class="vc-num">29–30</span><span class="vc-lbl">Ottimo</span><div class="vc-bar"></div></div>
+</div>
+<div class="two-col">
+  <div class="ic"><h4>18 — Sufficiente</h4><p>Calcoli corretti ma con errori nei parametri ESP32 (usa 1023 invece di 4095, o 5V invece di 3.3V). Comprende il concetto di quantizzazione.</p></div>
+  <div class="ic"><h4>21–23 — Discreto</h4><p>Parametri ESP32 corretti; qualche imprecisione sulla scelta dell'attenuazione o sul pin ADC. Sketch funzionante.</p></div>
+  <div class="ic"><h4>24–26 — Buono</h4><p>Calcoli sviluppati correttamente con attenuazione motivata. Sketch con commenti adeguati. Calibrazione applicata.</p></div>
+  <div class="ic"><h4>27–28 — Molto Buono</h4><p>Padronanza solida inclusa la scelta ottimale dell'attenuazione per LM35. Analisi critica della risoluzione.</p></div>
+</div>
+<div class="ic" style="border-top-color:var(--accent);margin-top:.6rem;">
+  <h4>29–30 — Ottimo / Lode</h4>
+  <p>Eccellenza su tutti gli aspetti: calcoli rigorosi, scelta motivata dell'attenuazione e del pin ADC, confronto quantitativo con Arduino UNO, analisi SNR, sketch C++ professionale con documentazione completa, discussione dei limiti ENOB e del problema ADC2/WiFi.</p>
+</div>
+<p style="margin-top:3rem;font-size:.82rem;color:var(--ink-3);text-align:center;font-style:italic;">
+  ITS – Istituto Tecnico Superiore &nbsp;·&nbsp; Corso Biennale – Misure Elettroniche e Condizionamento dei Segnali &nbsp;·&nbsp; A.A. 2025–2026
+</p>
+</section>
+</main>
+
+<script>
+/* ── Sidebar active ──────────────────────────────────────────────────────── */
+const navLinks = document.querySelectorAll('aside.sb a');
+const anchors  = Array.from(document.querySelectorAll('[id]'));
+function updateNav() {
+  let cur = '';
+  anchors.forEach(el => { if (window.scrollY >= el.offsetTop - 130) cur = el.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+}
+window.addEventListener('scroll', updateNav, { passive:true });
+updateNav();
+
+/* ── ADC scale ESP32 (12 bit, ADC_2_5db) ───────────────────────────────── */
+window.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.getElementById('adcScale32');
+  if (!wrap) return;
+
+  const bg = document.createElement('div');
+  bg.className = 'adc-bar-bg';
+  wrap.appendChild(bg);
+
+  const MAX = 4095;
+  const ticks = [0, 512, 683, 1010, 2730, 4095];
+  ticks.forEach(c => {
+    const pct = c / MAX * 100;
+    const t = document.createElement('div');
+    t.className = 'adc-tick';
+    t.style.cssText = `left:${pct}%;height:${[0,4095].includes(c)?28:18}px;`;
+    if ([0, 512, 4095].includes(c)) {
+      const l = document.createElement('div');
+      l.className = 'adc-tick-lbl';
+      l.textContent = c;
+      t.appendChild(l);
+    }
+    wrap.appendChild(t);
+  });
+
+  // Dot at 512
+  const dot = document.createElement('div');
+  dot.className = 'adc-dot';
+  dot.style.left = (512/4095*100) + '%';
+  const dl = document.createElement('div');
+  dl.className = 'adc-dot-lbl';
+  dl.textContent = '512 → 18.75 °C';
+  dot.appendChild(dl);
+  wrap.appendChild(dot);
+});
+
+/* ── Quantization canvas — Arduino UNO vs ESP32 ─────────────────────────── */
+window.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('quantCanvas');
+  if (!canvas) return;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 150;
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  const pad = {l:44, r:16, t:18, b:28};
+  const pw = W - pad.l - pad.r;
+  const ph = H - pad.t - pad.b;
+
+  ctx.strokeStyle = '#ddd'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, pad.t+ph); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t+ph); ctx.lineTo(pad.l+pw, pad.t+ph); ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = '#999'; ctx.font = '9px JetBrains Mono,monospace'; ctx.textAlign = 'center';
+  ctx.fillText('Tensione →', pad.l + pw/2, H - 4);
+  ctx.save(); ctx.translate(10, pad.t + ph/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Codice D', 0, 0); ctx.restore();
+
+  // Analog ramp
+  ctx.strokeStyle = '#b8721e'; ctx.lineWidth = 2; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t+ph); ctx.lineTo(pad.l+pw, pad.t); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Arduino UNO staircase (10 bit, few steps)
+  const N10 = 7;
+  ctx.strokeStyle = 'rgba(100,140,180,0.45)'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for (let i = 0; i < N10; i++) {
+    const x0 = pad.l + i/N10*pw, x1 = pad.l + (i+1)/N10*pw;
+    const y  = pad.t + ph - (i+0.5)/N10*ph;
+    if (i===0) ctx.moveTo(x0, y); else ctx.lineTo(x0, y);
+    ctx.lineTo(x1, y);
+  }
+  ctx.stroke();
+
+  // ESP32 staircase (12 bit, many steps)
+  const N12 = 28;
+  ctx.strokeStyle = '#163352'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for (let i = 0; i < N12; i++) {
+    const x0 = pad.l + i/N12*pw, x1 = pad.l + (i+1)/N12*pw;
+    const y  = pad.t + ph - (i+0.5)/N12*ph;
+    if (i===0) ctx.moveTo(x0, y); else ctx.lineTo(x0, y);
+    ctx.lineTo(x1, y);
+  }
+  ctx.stroke();
+
+  // Legend
+  const ly = pad.t + 8;
+  ctx.fillStyle = 'rgba(100,140,180,0.7)'; ctx.fillRect(pad.l+4, ly, 22, 3);
+  ctx.fillStyle = '#163352'; ctx.fillRect(pad.l+4, ly+12, 22, 3);
+  ctx.fillStyle = '#b8721e'; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(pad.l+4, ly+24+1); ctx.lineTo(pad.l+26, ly+24+1); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#777'; ctx.font = '9px JetBrains Mono,monospace'; ctx.textAlign = 'left';
+  ctx.fillText('Arduino UNO (10 bit)', pad.l+30, ly+4);
+  ctx.fillText('ESP32 (12 bit)', pad.l+30, ly+16);
+  ctx.fillText('Segnale analogico', pad.l+30, ly+28);
+});
+</script>
+</body>
+</html>
