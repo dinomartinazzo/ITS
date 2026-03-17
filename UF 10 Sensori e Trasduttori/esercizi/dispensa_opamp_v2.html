@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amplificatori Operazionali – Dispensa ITS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root {
+  --ink:       #1c1917;
+  --paper:     #faf9f6;
+  --warm:      #f5f0e8;
+  --blu:       #1e3a5f;
+  --azzurro:   #2563a8;
+  --rosso:     #c0392b;
+  --verde:     #1a6b3c;
+  --oro:       #b8860b;
+  --grigio:    #6b7280;
+  --bordo:     #d4c9b8;
+  --codebg:    #0f1117;
+  --shadow:    0 2px 12px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+/* ── COPERTINA ── */
+.copertina {
+  background: var(--blu);
+  color: #f0ead8;
+  padding: 0;
+  min-height: 320px;
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  overflow: hidden;
+}
+.cop-stripe {
+  background: repeating-linear-gradient(
+    180deg,
+    var(--rosso) 0px, var(--rosso) 40px,
+    var(--oro) 40px, var(--oro) 80px,
+    #2563a8 80px, #2563a8 120px
+  );
+}
+.cop-content {
+  padding: 52px 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cop-istituto {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 32px;
+}
+.cop-h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3.8em;
+  font-weight: 700;
+  line-height: 1.0;
+  color: #f0ead8;
+  letter-spacing: 1px;
+}
+.cop-h1 span { color: #f4c56a; }
+.cop-sub {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 1.25em;
+  opacity: 0.7;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.cop-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+.badge-rosso  { background: var(--rosso);  color: #fff; }
+.badge-oro    { background: var(--oro);    color: #fff; }
+.badge-azzurro{ background: #2563a8;       color: #fff; }
+.badge-verde  { background: var(--verde);  color: #fff; }
+.cop-meta {
+  font-size: 12px;
+  opacity: 0.45;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* ── LAYOUT ── */
+.contenuto {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 44px 36px 100px;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--warm);
+  border: 1px solid var(--bordo);
+  border-radius: 4px;
+  padding: 24px 28px;
+  margin: 32px 0;
+  column-count: 2;
+  column-gap: 40px;
+}
+.toc-title {
+  column-span: all;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grigio);
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--bordo);
+  padding-bottom: 8px;
+}
+.toc ol { margin-left: 18px; }
+.toc li { margin-bottom: 4px; font-size: 15px; break-inside: avoid; }
+.toc a  { color: var(--azzurro); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* ── TIPOGRAFIA ── */
+h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9em;
+  font-weight: 700;
+  color: var(--blu);
+  margin: 56px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid var(--blu);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+h2 .num {
+  font-size: 0.7em;
+  color: var(--rosso);
+  font-weight: 700;
+  min-width: 32px;
+}
+h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.35em;
+  font-weight: 600;
+  color: var(--azzurro);
+  margin: 32px 0 10px;
+  letter-spacing: 0.3px;
+}
+h4 {
+  font-size: 1.05em;
+  font-style: italic;
+  color: var(--ink);
+  margin: 20px 0 6px;
+}
+p { margin-bottom: 13px; }
+ul, ol { margin: 10px 0 14px 24px; }
+li { margin-bottom: 5px; }
+
+/* ── FORMULE ── */
+.formula-box {
+  background: #f0f4fb;
+  border: 1.5px solid #93b4d8;
+  border-radius: 4px;
+  padding: 16px 24px 12px;
+  margin: 16px 0;
+  overflow-x: auto;
+  text-align: center;
+}
+.formula-box .fl { font-size: 12px; color: var(--grigio); font-style: italic; margin-top: 6px; }
+.formula-box.derivazione {
+  background: #f8f4ee;
+  border-color: var(--oro);
+}
+.formula-box.risultato {
+  background: #eef6ee;
+  border-color: var(--verde);
+  border-width: 2px;
+}
+
+/* ── RIQUADRI ── */
+.riquadro {
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 18px 0;
+  font-size: 15.5px;
+}
+.riq-blu   { background: #e8f0f8; border-left: 4px solid var(--azzurro); }
+.riq-rosso { background: #fdf0ee; border-left: 4px solid var(--rosso); }
+.riq-verde { background: #eef6ee; border-left: 4px solid var(--verde); }
+.riq-oro   { background: #fdf6e3; border-left: 4px solid var(--oro); }
+.riq-grigio{ background: var(--warm); border-left: 4px solid var(--grigio); }
+.riq-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grigio);
+  margin-bottom: 8px;
+}
+
+/* ── TABELLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 22px;
+  font-size: 15px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+th {
+  background: var(--blu);
+  color: #f0ead8;
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+td { padding: 9px 14px; border-bottom: 1px solid #e8e4de; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--warm); }
+td.hl { font-weight: 700; color: var(--rosso); font-family: 'JetBrains Mono', monospace; }
+td.verde { color: var(--verde); font-weight: 600; }
+
+/* ── CANVAS ── */
+canvas {
+  display: block;
+  margin: 18px auto;
+  border-radius: 4px;
+  border: 1px solid var(--bordo);
+  background: white;
+}
+.canvas-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--grigio);
+  font-style: italic;
+  margin-top: -10px;
+  margin-bottom: 18px;
+}
+
+/* ── CODICE ── */
+pre {
+  background: var(--codebg);
+  color: #e2e8f0;
+  padding: 20px 22px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  overflow-x: auto;
+  line-height: 1.6;
+  margin: 14px 0 20px;
+}
+.kw  { color: #c792ea; }
+.cm  { color: #546e7a; font-style: italic; }
+.str { color: #c3e88d; }
+.num { color: #f78c6c; }
+.fn  { color: #82aaff; }
+.pp  { color: #f07178; }
+.tp  { color: #89ddff; }
+
+/* ── CONFIGURAZIONI GRID ── */
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+}
+.config-card {
+  background: white;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.config-card .cc-head {
+  background: var(--blu);
+  color: #f0ead8;
+  padding: 10px 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+.config-card .cc-body { padding: 14px 16px; font-size: 14.5px; }
+
+/* ── ESERCIZI ── */
+.esercizio {
+  background: white;
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  margin: 20px 0;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.es-head {
+  background: var(--ink);
+  color: #f0ead8;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.es-num {
+  background: var(--rosso);
+  color: white;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+.es-titolo { font-size: 1.1em; letter-spacing: 0.5px; }
+.es-body { padding: 16px 20px; }
+.es-data { background: var(--warm); padding: 10px 14px; border-radius: 4px; margin: 10px 0; font-size: 14.5px; }
+.es-risp {
+  margin-top: 12px;
+  border-top: 1px dashed var(--bordo);
+  padding-top: 10px;
+}
+.es-risp summary {
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--azzurro);
+  padding: 4px 0;
+}
+.es-risp summary:hover { color: var(--rosso); }
+.es-sol { margin-top: 10px; background: #f0f8f0; border-radius: 4px; padding: 12px 16px; font-size: 15px; }
+
+/* ── STEP ── */
+.steps { counter-reset: st; margin: 14px 0; }
+.step {
+  counter-increment: st;
+  position: relative;
+  padding: 6px 6px 6px 46px;
+  margin-bottom: 10px;
+}
+.step::before {
+  content: counter(st);
+  position: absolute; left: 0; top: 6px;
+  width: 28px; height: 28px;
+  background: var(--azzurro); color: white;
+  border-radius: 50%; text-align: center; line-height: 28px;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+}
+
+/* ── TABS ── */
+.tabs { display: flex; gap: 0; border-bottom: 2px solid var(--azzurro); margin: 4px 0 0; }
+.tab-btn {
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
+  border: 1px solid var(--bordo); border-bottom: none;
+  background: var(--warm); color: var(--grigio);
+  border-radius: 4px 4px 0 0; margin-right: 3px;
+  transition: all 0.15s;
+}
+.tab-btn.active { background: var(--azzurro); color: white; border-color: var(--azzurro); }
+.tab-pane { display: none; background: white; border: 1px solid var(--bordo); border-top: none; padding: 20px; border-radius: 0 0 4px 4px; }
+.tab-pane.active { display: block; }
+
+/* ── NOTA ── */
+.nota {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  padding: 10px 16px;
+  font-size: 14.5px;
+  margin: 12px 0;
+}
+.nota::before { content: "📌 "; }
+
+/* ── SLIDER INTERATTIVO ── */
+.slider-wrap {
+  background: var(--warm);
+  border: 1px solid var(--bordo);
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.slider-wrap label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9em; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--grigio);
+}
+.slider-wrap input[type=range] {
+  width: 100%; margin: 8px 0;
+  accent-color: var(--azzurro);
+}
+.slider-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3em; font-weight: 600;
+  color: var(--rosso);
+}
+
+@media print {
+  body { background: white; font-size: 14px; }
+  .contenuto { padding: 20px; }
+  canvas { max-width: 100%; }
+}
+
+/* ── SVG SCHEMI ── */
+.svg-schema {
+  margin: 18px auto;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--bordo);
+  background: white;
+  overflow: visible;
+}
+.svg-schema svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* SVG component styles */
+.w  { stroke: #1e3a5f; stroke-width: 2; fill: none; stroke-linecap: square; }
+.w1 { stroke: #1e3a5f; stroke-width: 1.5; fill: none; stroke-linecap: square; }
+.comp { stroke: #1e3a5f; stroke-width: 1.8; fill: white; }
+.comp-fill { stroke: #1e3a5f; stroke-width: 1.8; fill: #e8f0f8; }
+.lbl { font-family: 'Crimson Pro', serif; font-size: 13px; fill: #1c1917; }
+.lbl-sm { font-family: 'Crimson Pro', serif; font-size: 11px; fill: #6b7280; }
+.lbl-comp { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #1e3a5f; }
+.lbl-val { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #6b7280; }
+.lbl-vin { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #2563a8; font-weight:600; }
+.lbl-vout { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #c0392b; font-weight:600; }
+.lbl-plus { font-family: 'Crimson Pro', serif; font-size: 15px; fill: #1a6b3c; font-weight:700; }
+.lbl-minus { font-family: 'Crimson Pro', serif; font-size: 17px; fill: #c0392b; font-weight:700; }
+.node { fill: #1e3a5f; }
+.node-v { fill: #c0392b; }
+.arrow { fill: #1a6b3c; }
+.fb { stroke: #c0392b; stroke-width: 1.8; fill: none; stroke-dasharray: 5,3; }
+.cur { stroke: #1a6b3c; stroke-width: 1.5; fill: none; marker-end: url(#arrowG); }
+.vcc-line { stroke: #c0392b; stroke-width: 1.5; stroke-dasharray: 4,3; fill:none; }
+.gnd-line { stroke: #444; stroke-width: 1.8; fill: none; }
+
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════ COPERTINA -->
+<div class="copertina">
+  <div class="cop-stripe"></div>
+  <div class="cop-content">
+    <div class="cop-istituto">ITS Academy Meccatronico Veneto · Montebelluna (TV) · UF10</div>
+    <div>
+      <div class="cop-h1">Amplificatori<br><span>Operazionali</span></div>
+      <div class="cop-sub">Teoria, configurazioni di base, analisi e applicazioni pratiche</div>
+      <div class="cop-badges">
+        <span class="badge badge-rosso">TEORIA</span>
+        <span class="badge badge-oro">CIRCUITI</span>
+        <span class="badge badge-azzurro">DERIVAZIONI</span>
+        <span class="badge badge-verde">ESERCIZI</span>
+      </div>
+    </div>
+    <div class="cop-meta">Anno Formativo 2024-2025 &nbsp;·&nbsp; Docente: Davanzo Giancarlo &nbsp;·&nbsp; Prerequisiti: Leggi di Kirchhoff, partitore di tensione, concetto di guadagno</div>
+  </div>
+</div>
+
+<div class="contenuto">
+
+<!-- ════ TOC -->
+<div class="toc">
+  <div class="toc-title">Indice</div>
+  <ol>
+    <li><a href="#s1">Introduzione storica e contesto</a></li>
+    <li><a href="#s2">Modello ideale dell'op-amp</a></li>
+    <li><a href="#s3">Regole d'oro per l'analisi</a></li>
+    <li><a href="#s4">Amplificatore invertente</a></li>
+    <li><a href="#s5">Amplificatore non invertente</a></li>
+    <li><a href="#s6">Buffer (voltage follower)</a></li>
+    <li><a href="#s7">Sommatore invertente</a></li>
+    <li><a href="#s8">Amplificatore differenziale</a></li>
+    <li><a href="#s9">Comparatore</a></li>
+    <li><a href="#s10">Confronto configurazioni</a></li>
+    <li><a href="#s11">Limiti reali dell'op-amp</a></li>
+    <li><a href="#s12">Esercizi</a></li>
+  </ol>
+</div>
+
+<!-- ════════════════════════════════════ SEZ 1 -->
+<h2 id="s1"><span class="num">01</span>Introduzione storica e contesto</h2>
+
+<p>L'<strong>amplificatore operazionale</strong> (op-amp, dall'inglese <em>operational amplifier</em>) è il componente analogico più diffuso nell'elettronica moderna. Il nome deriva dalla sua origine: negli anni '40, i primi amplificatori di questo tipo venivano usati nei calcolatori analogici per eseguire operazioni matematiche (somma, sottrazione, integrazione, derivazione) su tensioni elettriche.</p>
+
+<p>Il primo op-amp commerciale a valvole termoioniche risale al <strong>1941</strong> (Karl D. Swartzel Jr., Bell Labs). La svolta avvenne nel <strong>1963</strong> con il <strong>μA702</strong> di Bob Widlar (Fairchild Semiconductor), il primo op-amp monolitico integrato su silicio. Il suo successore, il <strong>μA741</strong> (1968), divenne lo standard industriale per decenni ed è tuttora prodotto e usato come riferimento didattico.</p>
+
+<div class="riquadro riq-blu">
+  <div class="riq-title">Op-amp oggi</div>
+  <p>Milioni di op-amp differenti sono disponibili sul mercato, da dispositivi general-purpose (LM741, TL071, LM358) a op-amp di precisione, alta velocità, rail-to-rail, a basso rumore, a basso consumo. Il principio di funzionamento e le configurazioni di base rimangono identici per tutti.</p>
+</div>
+
+<h3>1.1 Dove si trovano gli op-amp</h3>
+<p>Gli amplificatori operazionali sono presenti in quasi ogni sistema elettronico analogico:</p>
+<ul>
+  <li>Condizionamento dei segnali da sensori (amplificazione, filtraggio)</li>
+  <li>Conversione corrente–tensione (I→V) e tensione–corrente (V→I come visto con il 4-20 mA)</li>
+  <li>Filtri attivi (passa-basso, passa-alto, banda stretta)</li>
+  <li>Comparatori di tensione e trigger di Schmitt</li>
+  <li>Oscillatori e generatori di funzione</li>
+  <li>Regolatori di tensione e sorgenti di corrente</li>
+</ul>
+
+<!-- ════════════════════════════════════ SEZ 2 -->
+<h2 id="s2"><span class="num">02</span>Modello ideale dell'op-amp</h2>
+
+<h3>2.1 Il simbolo e i terminali</h3>
+<div class="svg-schema" id="svgSimbolo"></div>
+<div class="canvas-label">Fig. 1 – Simbolo circuitale dell'op-amp con i pin principali</div>
+
+<p>Un op-amp ha <strong>cinque terminali fondamentali</strong>:</p>
+
+<table>
+  <tr><th>Terminale</th><th>Simbolo</th><th>Funzione</th></tr>
+  <tr><td>Ingresso invertente</td><td class="hl">V⁻</td><td>Segnale in ingresso con fase invertita all'uscita</td></tr>
+  <tr><td>Ingresso non invertente</td><td class="hl">V⁺</td><td>Segnale in ingresso con fase conservata all'uscita</td></tr>
+  <tr><td>Uscita</td><td class="hl">V_out</td><td>Tensione amplificata</td></tr>
+  <tr><td>Alimentazione positiva</td><td class="hl">+V_cc</td><td>Tipicamente +15 V o +5 V</td></tr>
+  <tr><td>Alimentazione negativa</td><td class="hl">−V_cc</td><td>Tipicamente −15 V o 0 V (single supply)</td></tr>
+</table>
+
+<h3>2.2 Parametri del modello ideale</h3>
+<p>Per l'analisi didattica si usa il modello <strong>ideale</strong>, in cui si assumono quattro proprietà limite:</p>
+
+<table>
+  <tr><th>Parametro</th><th>Simbolo</th><th>Valore ideale</th><th>Valore tipico reale (μA741)</th></tr>
+  <tr><td>Guadagno ad anello aperto</td><td class="hl">A_ol</td><td>→ ∞</td><td>200 000 (106 dB)</td></tr>
+  <tr><td>Resistenza di ingresso</td><td class="hl">R_in</td><td>→ ∞ Ω</td><td>2 MΩ</td></tr>
+  <tr><td>Resistenza di uscita</td><td class="hl">R_out</td><td>→ 0 Ω</td><td>75 Ω</td></tr>
+  <tr><td>Banda passante</td><td class="hl">BW</td><td>→ ∞ Hz</td><td>1 MHz (GBW)</td></tr>
+</table>
+
+<h3>2.3 Equazione fondamentale ad anello aperto</h3>
+<p>L'uscita dell'op-amp ideale vale:</p>
+
+<div class="formula-box">
+  \[ V_{out} = A_{ol} \cdot (V^+ - V^-) \]
+  <div class="fl">Con A_ol → ∞, qualsiasi differenza infinitesima tra V⁺ e V⁻ porta l'uscita in saturazione</div>
+</div>
+
+<p>Questo comportamento ad anello aperto è <em>inutilizzabile</em> nella pratica: basta 1 μV di differenza perché l'uscita raggiunga la tensione di alimentazione. Per questo quasi tutti i circuiti op-amp impiegano la <strong>retroazione negativa</strong> (negative feedback), che stabilizza il guadagno a un valore determinato dai componenti esterni.</p>
+
+<!-- ════════════════════════════════════ SEZ 3 -->
+<h2 id="s3"><span class="num">03</span>Regole d'oro per l'analisi</h2>
+
+<p>Con retroazione negativa applicata, il comportamento dell'op-amp ideale si descrive con due regole semplificate, dette <strong>regole d'oro</strong> (golden rules):</p>
+
+<div class="riquadro riq-rosso">
+  <div class="riq-title">Regola d'oro 1 – Cortocircuito virtuale (Virtual Short)</div>
+  <p>Con retroazione negativa, l'op-amp regola la propria uscita in modo da mantenere:</p>
+  \[ V^+ = V^- \]
+  <p style="margin-top:8px;">I due ingressi sono allo stesso potenziale. Non è un cortocircuito reale (non scorre corrente tra di essi), ma un <em>cortocircuito virtuale</em>.</p>
+</div>
+
+<div class="riquadro riq-blu">
+  <div class="riq-title">Regola d'oro 2 – Nessuna corrente in ingresso</div>
+  <p>Poiché R_in → ∞, nessuna corrente entra nei terminali V⁺ e V⁻:</p>
+  \[ I^+ = I^- = 0 \]
+  <p style="margin-top:8px;">Tutta la corrente che arriva a un nodo di ingresso deve provenire da (e tornare a) i componenti esterni.</p>
+</div>
+
+<div class="nota">Le due regole d'oro sono valide <strong>solo con retroazione negativa</strong>. In circuiti comparatori (anello aperto) o con retroazione positiva le regole non si applicano.</div>
+
+<p>Applicando sistematicamente queste due regole con le leggi di Kirchhoff alle correnti (KCL) si derivano le formule di tutte le configurazioni fondamentali.</p>
+
+<!-- ════════════════════════════════════ SEZ 4 -->
+<h2 id="s4"><span class="num">04</span>Amplificatore invertente</h2>
+
+<h3>4.1 Schema e funzione</h3>
+<div class="svg-schema" id="svgInvertente"></div>
+<div class="canvas-label">Fig. 2 – Amplificatore invertente. Retroazione tramite R_f tra uscita e ingresso invertente.</div>
+
+<p>Il segnale entra sull'ingresso <strong>invertente</strong> (V⁻) attraverso R_1. La resistenza R_f collega uscita e ingresso invertente (retroazione negativa). L'ingresso non invertente (V⁺) è collegato a GND.</p>
+
+<h3>4.2 Derivazione completa del guadagno</h3>
+<div class="steps">
+  <div class="step">
+    <strong>Regola 1:</strong> con retroazione negativa → \(V^+ = V^-\). Poiché \(V^+ = 0\,\text{V}\) (GND), segue:
+    \[ V^- = 0\,\text{V} \quad \text{(massa virtuale)} \]
+  </div>
+  <div class="step">
+    <strong>Regola 2:</strong> nessuna corrente entra in V⁻. Applicando KCL al nodo V⁻:
+    \[ I_1 + I_f = 0 \]
+  </div>
+  <div class="step">
+    Esprimere le correnti con la legge di Ohm:
+    \[ I_1 = \frac{V_{in} - V^-}{R_1} = \frac{V_{in}}{R_1} \qquad I_f = \frac{V_{out} - V^-}{R_f} = \frac{V_{out}}{R_f} \]
+  </div>
+  <div class="step">
+    Sostituire nella KCL:
+    \[ \frac{V_{in}}{R_1} + \frac{V_{out}}{R_f} = 0 \]
+  </div>
+  <div class="step">
+    Ricavare il guadagno:
+    \[ V_{out} = -\frac{R_f}{R_1} \cdot V_{in} \]
+  </div>
+</div>
+
+<div class="formula-box risultato">
+  \[ \boxed{A_v = \frac{V_{out}}{V_{in}} = -\frac{R_f}{R_1}} \]
+  <div class="fl">Il segno negativo indica inversione di fase. Il modulo del guadagno è R_f / R_1.</div>
+</div>
+
+<h3>4.3 Resistenza di ingresso e bilanciamento</h3>
+<p>La resistenza d'ingresso vista dal generatore di segnale è:</p>
+<div class="formula-box">
+  \[ R_{in,circuit} = R_1 \]
+  <div class="fl">Punto critico: R_1 carica la sorgente del segnale. Scegliere R_1 abbastanza grande da non disturbare la sorgente.</div>
+</div>
+<p>Per annullare gli errori dovuti alle correnti di polarizzazione (bias current), si aggiunge una resistenza di bilanciamento \(R_b\) sull'ingresso non invertente:</p>
+<div class="formula-box">
+  \[ R_b = R_1 \parallel R_f = \frac{R_1 \cdot R_f}{R_1 + R_f} \]
+</div>
+
+<h3>4.4 Simulatore interattivo</h3>
+<div class="slider-wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+    <div>
+      <label>R₁ (kΩ): <span class="slider-val" id="r1val">10</span></label>
+      <input type="range" id="sl_r1" min="1" max="100" value="10" oninput="aggiornaInv()">
+    </div>
+    <div>
+      <label>R_f (kΩ): <span class="slider-val" id="rfval">47</span></label>
+      <input type="range" id="sl_rf" min="1" max="200" value="47" oninput="aggiornaInv()">
+    </div>
+    <div>
+      <label>V_in (V): <span class="slider-val" id="vinval">1.0</span></label>
+      <input type="range" id="sl_vin" min="-5" max="5" step="0.1" value="1" oninput="aggiornaInv()">
+    </div>
+  </div>
+  <div style="margin-top:14px;font-size:15px;line-height:2;">
+    Guadagno: <strong id="av_inv" style="color:var(--azzurro);font-family:'JetBrains Mono',monospace;"></strong> &nbsp;|&nbsp;
+    V_out = <strong id="vout_inv" style="color:var(--rosso);font-family:'JetBrains Mono',monospace;"></strong> V
+    <span id="sat_inv" style="color:var(--rosso);font-weight:700;"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ SEZ 5 -->
+<h2 id="s5"><span class="num">05</span>Amplificatore non invertente</h2>
+
+<h3>5.1 Schema</h3>
+<div class="svg-schema" id="svgNonInv"></div>
+<div class="canvas-label">Fig. 3 – Amplificatore non invertente. Il segnale entra su V⁺; retroazione su V⁻.</div>
+
+<p>Il segnale entra sull'ingresso <strong>non invertente</strong> (V⁺). Il partitore R_1–R_f fornisce la retroazione negativa all'ingresso invertente.</p>
+
+<h3>5.2 Derivazione</h3>
+<div class="steps">
+  <div class="step">
+    <strong>Regola 1:</strong> \(V^- = V^+ = V_{in}\)
+  </div>
+  <div class="step">
+    Il partitore R_1–R_f divide V_out su V⁻. Poiché \(I^- = 0\), il partitore è non caricato:
+    \[ V^- = V_{out} \cdot \frac{R_1}{R_1 + R_f} \]
+  </div>
+  <div class="step">
+    Uguagliare \(V^- = V_{in}\):
+    \[ V_{in} = V_{out} \cdot \frac{R_1}{R_1 + R_f} \]
+  </div>
+  <div class="step">
+    Ricavare il guadagno:
+    \[ V_{out} = V_{in} \cdot \frac{R_1 + R_f}{R_1} \]
+  </div>
+</div>
+
+<div class="formula-box risultato">
+  \[ \boxed{A_v = 1 + \frac{R_f}{R_1}} \]
+  <div class="fl">Il guadagno è sempre ≥ 1. Nessuna inversione di fase. La resistenza di ingresso è elevatissima (≈ R_in dell'op-amp).</div>
+</div>
+
+<div class="riquadro riq-oro">
+  <div class="riq-title">Confronto invertente vs non invertente</div>
+  <table style="margin:8px 0;">
+    <tr><th>Proprietà</th><th>Invertente</th><th>Non invertente</th></tr>
+    <tr><td>Inversione fase</td><td class="hl">Sì (180°)</td><td class="verde">No</td></tr>
+    <tr><td>Guadagno minimo</td><td>0 (R_f = 0)</td><td class="hl">1</td></tr>
+    <tr><td>Resistenza ingresso</td><td>= R_1</td><td class="verde">≈ ∞</td></tr>
+    <tr><td>Massa virtuale</td><td class="verde">Sì (utile)</td><td>No</td></tr>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════ SEZ 6 -->
+<h2 id="s6"><span class="num">06</span>Buffer – Voltage Follower</h2>
+
+<div class="svg-schema" id="svgBuffer"></div>
+<div class="canvas-label">Fig. 4 – Buffer (voltage follower). Uscita direttamente collegata a V⁻.</div>
+
+<p>Il <strong>buffer</strong> è il caso limite del non invertente con \(R_f = 0\) e \(R_1 = \infty\) (cioè assente). L'uscita è cortocircuitata direttamente all'ingresso invertente.</p>
+
+<div class="formula-box risultato">
+  \[ \boxed{V_{out} = V_{in} \qquad A_v = 1} \]
+  <div class="fl">Guadagno unitario – nessuna amplificazione in tensione.</div>
+</div>
+
+<p>L'utilità del buffer non è nell'amplificazione ma nell'<strong>adattamento di impedenza</strong>:</p>
+<ul>
+  <li>L'ingresso del buffer ha resistenza quasi infinita → non carica la sorgente</li>
+  <li>L'uscita ha resistenza quasi zero → può pilotare carichi bassi senza caduta di tensione</li>
+</ul>
+<div class="nota">Applicazione tipica: separare il ponte di Wheatstone dall'ADC. Senza buffer, la resistenza di ingresso dell'ADC carderebbe il ponte alterando l'equilibrio.</div>
+
+<!-- ════════════════════════════════════ SEZ 7 -->
+<h2 id="s7"><span class="num">07</span>Sommatore invertente</h2>
+
+<div class="svg-schema" id="svgSommatore"></div>
+<div class="canvas-label">Fig. 5 – Sommatore invertente con tre ingressi.</div>
+
+<p>Estensione naturale dell'invertente: più resistenze di ingresso convergono al nodo di massa virtuale. Poiché \(V^- = 0\) e le correnti non si influenzano a vicenda (la sorgente di un canale non vede le altre per via della massa virtuale), si può sommare algebricamente:</p>
+
+<div class="steps">
+  <div class="step">Masse virtuali: \(V^- = 0\)</div>
+  <div class="step">KCL al nodo V⁻: \(I_1 + I_2 + I_3 + I_f = 0\)</div>
+  <div class="step">
+    \[ \frac{V_1}{R_1} + \frac{V_2}{R_2} + \frac{V_3}{R_3} + \frac{V_{out}}{R_f} = 0 \]
+  </div>
+</div>
+
+<div class="formula-box risultato">
+  \[ \boxed{V_{out} = -R_f \left(\frac{V_1}{R_1} + \frac{V_2}{R_2} + \frac{V_3}{R_3}\right)} \]
+  <div class="fl">Con R_1 = R_2 = R_3 = R_f si ottiene V_out = −(V_1 + V_2 + V_3) — sommatore puro.</div>
+</div>
+
+<div class="riquadro riq-verde">
+  <div class="riq-title">Applicazione – mixer audio / DAC pesato</div>
+  <p>Scegliendo R_1 = R, R_2 = 2R, R_3 = 4R si assegna peso binario ai tre ingressi: questa è la topologia del <strong>DAC a resistori pesati</strong> (weighted resistor DAC), precursore del DAC R-2R.</p>
+</div>
+
+<!-- ════════════════════════════════════ SEZ 8 -->
+<h2 id="s8"><span class="num">08</span>Amplificatore differenziale</h2>
+
+<div class="svg-schema" id="svgDiff"></div>
+<div class="canvas-label">Fig. 6 – Amplificatore differenziale con quattro resistori.</div>
+
+<p>L'amplificatore differenziale amplifica la <strong>differenza</strong> tra due segnali, rigettando il segnale di modo comune (rumore presente su entrambe le linee).</p>
+
+<h3>8.1 Derivazione con il principio di sovrapposizione</h3>
+<p>Si analizza il circuito applicando separatamente V_1 (con V_2 = 0) e V_2 (con V_1 = 0), poi si sommano i contributi.</p>
+
+<h4>Contributo di V_1 (V_2 = 0):</h4>
+<p>V_2 = 0 porta V⁺ = 0. Il circuito diventa un invertente puro:</p>
+<div class="formula-box derivazione">
+  \[ V_{out,1} = -\frac{R_4}{R_3} \cdot V_1 \]
+</div>
+
+<h4>Contributo di V_2 (V_1 = 0):</h4>
+<p>V_1 = 0. Il partitore R_1–R_2 determina V⁺; poi si applica la formula del non invertente:</p>
+<div class="formula-box derivazione">
+  \[ V^+ = V_2 \cdot \frac{R_2}{R_1 + R_2} \qquad V_{out,2} = V^+ \cdot \left(1 + \frac{R_4}{R_3}\right) \]
+</div>
+
+<h4>Risultato (R_1 = R_3 = R, R_2 = R_4 = R_f):</h4>
+<div class="formula-box risultato">
+  \[ \boxed{V_{out} = \frac{R_f}{R}(V_2 - V_1)} \]
+  <div class="fl">Il guadagno differenziale è R_f / R. CMRR ideale = ∞ (i resistori devono essere accoppiati con tolleranza 0.1% o meglio).</div>
+</div>
+
+<div class="riquadro riq-blu">
+  <div class="riq-title">CMRR – Common Mode Rejection Ratio</div>
+  <p>Il <strong>CMRR</strong> misura la capacità del circuito di rigettare i segnali uguali su entrambe le linee (interferenze, rumore di modo comune). Si esprime in dB:</p>
+  \[ \text{CMRR} = 20 \log_{10}\left(\frac{A_{diff}}{A_{cm}}\right) \quad \text{[dB]} \]
+  <p style="margin-top:8px;">Per un μA741 tipico: CMRR ≈ 90 dB. Un INA128 (instrumentation amplifier): CMRR ≈ 120 dB.</p>
+</div>
+
+<!-- ════════════════════════════════════ SEZ 9 -->
+<h2 id="s9"><span class="num">09</span>Comparatore</h2>
+
+<div class="svg-schema" id="svgComparatore"></div>
+<div class="canvas-label">Fig. 7 – Comparatore con tensione di riferimento V_ref su V⁺.</div>
+
+<p>Il comparatore è l'unica configurazione <strong>senza retroazione negativa</strong>. L'op-amp lavora ad anello aperto con guadagno A_ol → ∞. La risposta è binaria: l'uscita va in saturazione positiva o negativa.</p>
+
+<div class="formula-box risultato">
+  \[ V_{out} = \begin{cases} +V_{sat} \approx +V_{cc} - 1.5\,\text{V} & \text{se } V^+ > V^- \\ -V_{sat} \approx -V_{cc} + 1.5\,\text{V} & \text{se } V^+ < V^- \end{cases} \]
+  <div class="fl">La tensione di saturazione è circa 1-2 V inferiore all'alimentazione per i comparatori standard (op-amp general purpose).</div>
+</div>
+
+<div class="nota">Per applicazioni veloci preferire comparatori dedicati (LM393, LM311) anziché op-amp general purpose: questi ultimi non sono ottimizzati per la commutazione rapida e possono avere slew rate limitato.</div>
+
+<!-- ════════════════════════════════════ SEZ 10 -->
+<h2 id="s10"><span class="num">10</span>Confronto configurazioni</h2>
+
+<table>
+  <tr>
+    <th>Configurazione</th>
+    <th>Guadagno A_v</th>
+    <th>Fase</th>
+    <th>R_in</th>
+    <th>Retroazione</th>
+    <th>Uso tipico</th>
+  </tr>
+  <tr>
+    <td><strong>Invertente</strong></td>
+    <td class="hl">−R_f / R_1</td>
+    <td>180°</td>
+    <td>= R_1</td>
+    <td>Negativa</td>
+    <td>Amplif. con massa virtuale</td>
+  </tr>
+  <tr>
+    <td><strong>Non invertente</strong></td>
+    <td class="hl">1 + R_f/R_1</td>
+    <td>0°</td>
+    <td>≈ ∞</td>
+    <td>Negativa</td>
+    <td>Amplif. ad alta Z_in</td>
+  </tr>
+  <tr>
+    <td><strong>Buffer</strong></td>
+    <td class="hl">1</td>
+    <td>0°</td>
+    <td>≈ ∞</td>
+    <td>Negativa (100%)</td>
+    <td>Adattamento impedenza</td>
+  </tr>
+  <tr>
+    <td><strong>Sommatore</strong></td>
+    <td class="hl">−R_f/R_n</td>
+    <td>180°</td>
+    <td>= R_n</td>
+    <td>Negativa</td>
+    <td>Mixer, DAC pesato</td>
+  </tr>
+  <tr>
+    <td><strong>Differenziale</strong></td>
+    <td class="hl">R_f/R</td>
+    <td>0°</td>
+    <td>= 2R</td>
+    <td>Negativa</td>
+    <td>Misure differenziali</td>
+  </tr>
+  <tr>
+    <td><strong>Comparatore</strong></td>
+    <td class="hl">±V_sat</td>
+    <td>—</td>
+    <td>≈ ∞</td>
+    <td>Nessuna</td>
+    <td>Soglie, allarmi</td>
+  </tr>
+</table>
+
+<!-- ════════════════════════════════════ SEZ 11 -->
+<h2 id="s11"><span class="num">11</span>Limiti reali dell'op-amp</h2>
+
+<p>Il modello ideale è sufficiente per la progettazione di base, ma il progettista deve conoscere i principali <strong>parametri non ideali</strong> che possono influenzare il comportamento del circuito reale.</p>
+
+<table>
+  <tr><th>Parametro</th><th>Simbolo</th><th>Definizione</th><th>μA741 tipico</th><th>Effetto</th></tr>
+  <tr>
+    <td>Tensione di offset</td><td class="hl">V_os</td>
+    <td>Differenza di tensione da applicare agli ingressi per avere V_out = 0</td>
+    <td>±2 mV</td>
+    <td>Errore DC in uscita amplificato da A_v</td>
+  </tr>
+  <tr>
+    <td>Corrente di bias</td><td class="hl">I_B</td>
+    <td>Corrente media assorbita dai due ingressi</td>
+    <td>80 nA</td>
+    <td>Caduta su R_f → errore DC</td>
+  </tr>
+  <tr>
+    <td>Slew Rate</td><td class="hl">SR</td>
+    <td>Velocità massima di variazione di V_out [V/μs]</td>
+    <td>0.5 V/μs</td>
+    <td>Distorsione su segnali veloci</td>
+  </tr>
+  <tr>
+    <td>GBW Product</td><td class="hl">GBW</td>
+    <td>Prodotto guadagno × banda (costante)</td>
+    <td>1 MHz</td>
+    <td>Con A_v = 100, BW = 10 kHz</td>
+  </tr>
+  <tr>
+    <td>CMRR</td><td class="hl">CMRR</td>
+    <td>Rapporto rigetto modo comune</td>
+    <td>90 dB</td>
+    <td>Rumore di modo comune all'uscita</td>
+  </tr>
+</table>
+
+<h3>11.1 GBW Product e limite di banda</h3>
+<p>Il prodotto guadagno-larghezza di banda è <strong>costante</strong> per ogni op-amp:</p>
+<div class="formula-box">
+  \[ \text{GBW} = A_v \cdot BW = \text{costante} \]
+</div>
+<p>Per un LM741 con GBW = 1 MHz:</p>
+<ul>
+  <li>Se \(A_v = 1\) → BW = 1 MHz</li>
+  <li>Se \(A_v = 10\) → BW = 100 kHz</li>
+  <li>Se \(A_v = 100\) → BW = 10 kHz</li>
+</ul>
+<div class="nota">Per misure su sensori industriali (segnali tipicamente &lt; 1 kHz), il μA741 è adeguato anche con guadagni elevati. Per audio o segnali veloci servono op-amp con GBW ≥ 10 MHz.</div>
+
+<!-- ════════════════════════════════════ SEZ 12 -->
+<h2 id="s12"><span class="num">12</span>Esercizi</h2>
+
+<!-- ES 1 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">1</div>
+    <div class="es-titolo">Amplificatore invertente – calcolo guadagno e V_out</div>
+  </div>
+  <div class="es-body">
+    <p>Un amplificatore invertente è realizzato con:</p>
+    <div class="es-data">
+      R_1 = 10 kΩ &nbsp;|&nbsp; R_f = 82 kΩ &nbsp;|&nbsp; V_in = +0.5 V &nbsp;|&nbsp; alimentazione ±15 V
+    </div>
+    <p><strong>Calcolare:</strong> (a) guadagno A_v; (b) tensione di uscita V_out; (c) verificare se l'uscita è in saturazione; (d) resistenza di bilanciamento R_b.</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p><strong>(a)</strong> \(A_v = -R_f/R_1 = -82/10 = -8.2\)</p>
+        <p><strong>(b)</strong> \(V_{out} = A_v \cdot V_{in} = -8.2 \times 0.5 = -4.1\,\text{V}\)</p>
+        <p><strong>(c)</strong> Saturazione a circa ±13.5 V. \(|-4.1\,\text{V}| < 13.5\,\text{V}\) → <span style="color:var(--verde);font-weight:700;">non in saturazione ✓</span></p>
+        <p><strong>(d)</strong> \(R_b = R_1 \parallel R_f = \frac{10 \times 82}{10+82} = \frac{820}{92} \approx 8.9\,\text{k}\Omega\)</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ES 2 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">2</div>
+    <div class="es-titolo">Amplificatore invertente – dimensionamento di R_f</div>
+  </div>
+  <div class="es-body">
+    <p>Si deve amplificare il segnale di un sensore con guadagno \(A_v = -15\). Si sceglie \(R_1 = 6.8\,\text{k}\Omega\).</p>
+    <div class="es-data">
+      A_v richiesto = −15 &nbsp;|&nbsp; R_1 = 6.8 kΩ
+    </div>
+    <p><strong>Calcolare:</strong> R_f necessaria. Poi scegliere il valore commerciale più vicino (serie E24) e calcolare il guadagno effettivo.</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p>\(R_f = |A_v| \cdot R_1 = 15 \times 6.8 = 102\,\text{k}\Omega\)</p>
+        <p>Valore E24 più vicino: <strong>100 kΩ</strong></p>
+        <p>Guadagno effettivo: \(A_v = -100/6.8 = -14.7\) (errore: −2%)</p>
+        <p>Oppure E24 = <strong>110 kΩ</strong>: \(A_v = -110/6.8 = -16.2\) (errore: +8%)</p>
+        <p>→ 100 kΩ è la scelta migliore.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ES 3 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">3</div>
+    <div class="es-titolo">Non invertente – condizionamento segnale LM35</div>
+  </div>
+  <div class="es-body">
+    <p>Un sensore LM35 produce 10 mV/°C. Si vuole ottenere 100 mV/°C per facilitare la lettura da un ADC 0-5V. Il guadagno richiesto è \(A_v = 10\). Usare un non invertente con \(R_1 = 10\,\text{k}\Omega\).</p>
+    <div class="es-data">
+      Sensibilità LM35 = 10 mV/°C &nbsp;|&nbsp; Sensibilità richiesta = 100 mV/°C &nbsp;|&nbsp; A_v = 10 &nbsp;|&nbsp; R_1 = 10 kΩ
+    </div>
+    <p><strong>Calcolare:</strong> (a) R_f; (b) V_out per T = 25°C; (c) temperatura massima leggibile prima della saturazione (V_cc = ±12 V).</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p><strong>(a)</strong> \(A_v = 1 + R_f/R_1 \Rightarrow R_f = (A_v - 1) \cdot R_1 = 9 \times 10\,\text{k} = 90\,\text{k}\Omega\) (usare 91 kΩ E24)</p>
+        <p><strong>(b)</strong> \(V_{in} = 25 \times 10\,\text{mV} = 250\,\text{mV}\); \(V_{out} = 10 \times 0.250 = 2.5\,\text{V}\)</p>
+        <p><strong>(c)</strong> \(V_{sat} \approx 10.5\,\text{V}\); \(T_{max} = V_{sat} / (A_v \times 10\,\text{mV/°C}) = 10.5 / 0.1 = 105\,°\text{C}\)</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ES 4 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">4</div>
+    <div class="es-titolo">Sommatore invertente – DAC a 3 bit</div>
+  </div>
+  <div class="es-body">
+    <p>Realizzare un DAC a 3 bit con un sommatore invertente. I tre ingressi rappresentano i bit B2 (MSB), B1, B0 (LSB) con tensioni 0 V o 5 V. Si vuole V_out = −1 V per ogni passo LSB.</p>
+    <div class="es-data">
+      V_bit = 5 V (logica 1) oppure 0 V (logica 0) &nbsp;|&nbsp; R_f = 10 kΩ &nbsp;|&nbsp; peso LSB = 1 V/passo
+    </div>
+    <p><strong>Calcolare:</strong> R_0 (per B0), R_1 (per B1), R_2 (per B2). Verificare con la combinazione 101₂.</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p>Per avere peso binario: \(V_{out} = -R_f\left(\frac{B_2}{R_2} + \frac{B_1}{R_1} + \frac{B_0}{R_0}\right)\)</p>
+        <p>LSB (B0): \(R_0 = R_f \cdot V_{bit} / 1\,\text{V} = 10\,\text{k} \times 5 = 50\,\text{k}\Omega\)</p>
+        <p>B1 (peso 2×): \(R_1 = R_0/2 = 25\,\text{k}\Omega\)</p>
+        <p>B2 (peso 4×): \(R_2 = R_0/4 = 12.5\,\text{k}\Omega\)</p>
+        <p>Verifica 101₂ = 5 decimale: \(V_{out} = -10\,\text{k}\left(\frac{5}{12.5\text{k}} + 0 + \frac{5}{50\text{k}}\right) = -(4 + 1) = -5\,\text{V}\) ✓</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ES 5 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">5</div>
+    <div class="es-titolo">Differenziale – misura con rumore di modo comune</div>
+  </div>
+  <div class="es-body">
+    <p>Un amplificatore differenziale con R = 10 kΩ, R_f = 100 kΩ riceve i segnali:</p>
+    <div class="es-data">
+      V_1 = 2.48 V &nbsp;|&nbsp; V_2 = 2.53 V &nbsp;|&nbsp; (entrambi sovrapposti a un rumore di modo comune di 2.5 V)
+    </div>
+    <p><strong>Calcolare:</strong> (a) guadagno differenziale; (b) segnale differenziale; (c) V_out; (d) cosa succederebbe con un amplificatore non invertente su V_2 da solo?</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p><strong>(a)</strong> \(A_{diff} = R_f/R = 100/10 = 10\)</p>
+        <p><strong>(b)</strong> \(V_{diff} = V_2 - V_1 = 2.53 - 2.48 = 0.05\,\text{V} = 50\,\text{mV}\)</p>
+        <p><strong>(c)</strong> \(V_{out} = A_{diff} \times V_{diff} = 10 \times 0.05 = 0.5\,\text{V}\) (il modo comune da 2.5 V è rigettato)</p>
+        <p><strong>(d)</strong> Un non invertente su V_2 amplificherebbe anche il modo comune: \(V_{out} = 10 \times 2.53 = 25.3\,\text{V}\) → saturazione! Il segnale utile sarebbe irrecuperabile.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ES 6 -->
+<div class="esercizio">
+  <div class="es-head">
+    <div class="es-num">6</div>
+    <div class="es-titolo">GBW Product – verifica di banda</div>
+  </div>
+  <div class="es-body">
+    <p>Si usa un LM358 (GBW = 1 MHz) in configurazione invertente con A_v = −50 per amplificare un segnale di temperatura con componenti fino a 5 kHz.</p>
+    <div class="es-data">
+      GBW = 1 MHz &nbsp;|&nbsp; |A_v| = 50 &nbsp;|&nbsp; f_segnale = 0 ÷ 5 kHz
+    </div>
+    <p><strong>Valutare:</strong> (a) banda disponibile con questo guadagno; (b) il circuito è adeguato? (c) se no, quale op-amp scegliere?</p>
+    <details class="es-risp">
+      <summary>▶ Mostra soluzione</summary>
+      <div class="es-sol">
+        <p><strong>(a)</strong> \(BW = GBW / |A_v| = 1\,\text{MHz} / 50 = 20\,\text{kHz}\)</p>
+        <p><strong>(b)</strong> \(20\,\text{kHz} > 5\,\text{kHz}\) → <span style="color:var(--verde);font-weight:700;">adeguato ✓</span> con margine 4×.</p>
+        <p><strong>(c)</strong> Se si richiedesse A_v = 200 → BW = 5 kHz = f_segnale: margine zero, non utilizzabile. Servirebbero GBW ≥ 10 MHz (es. TL071: GBW = 3 MHz; NE5532: GBW = 10 MHz).</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="riquadro riq-grigio" style="margin-top:48px;">
+  <div class="riq-title">Collegamento al percorso</div>
+  <p>Le configurazioni studiate in questa dispensa sono il fondamento di tutti i circuiti di condizionamento del segnale: il trasmettitore 4-20 mA visto nella dispensa precedente usa un op-amp come convertitore V→I (transconduttore). L'amplificatore differenziale è il blocco interno dell'INA128 usato con il ponte di Wheatstone. Il comparatore sarà alla base dei circuiti di soglia e allarme nei sistemi di controllo industriale.</p>
+</div>
+
+</div><!-- fine contenuto -->
+
+<script>
+// ── KaTeX ──────────────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left:"$$",right:"$$",display:true},
+      {left:"\\[",right:"\\]",display:true},
+      {left:"\\(",right:"\\)",display:false},
+      {left:"$",right:"$",display:false}
+    ],
+    throwOnError: false
+  });
+  aggiornaInv();
+});
+
+// ── SLIDER INVERTENTE ──────────────────────────────────────────
+function aggiornaInv() {
+  const r1 = parseFloat(document.getElementById('sl_r1').value);
+  const rf = parseFloat(document.getElementById('sl_rf').value);
+  const vin = parseFloat(document.getElementById('sl_vin').value);
+  document.getElementById('r1val').textContent = r1;
+  document.getElementById('rfval').textContent = rf;
+  document.getElementById('vinval').textContent = vin.toFixed(1);
+  const av = -(rf/r1);
+  let vout = av * vin;
+  let satMsg = '';
+  if (Math.abs(vout) > 13.5) {
+    satMsg = '  ⚠ SATURAZIONE!';
+    vout = vout > 0 ? 13.5 : -13.5;
+  }
+  document.getElementById('av_inv').textContent = av.toFixed(2);
+  document.getElementById('vout_inv').textContent = vout.toFixed(3);
+  document.getElementById('sat_inv').textContent = satMsg;
+}
+
+// ── DRAW ALL ──────────────────────────────────────────────────
+function drawAll() {
+  drawSimbolo();
+  drawInvertente();
+  drawNonInv();
+  drawBuffer();
+  drawSommatore();
+  drawDiff();
+  drawComparatore();
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  SVG SCHEMI CIRCUITALI – Op-Amp Dispensa ITS
+//  Tutte le misure su griglia 10px. Componenti standardizzati.
+// ═══════════════════════════════════════════════════════════════
+
+function makeSVG(w, h) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+  svg.setAttribute('xmlns', ns);
+
+  // Defs: arrowheads
+  const defs = document.createElementNS(ns, 'defs');
+  defs.innerHTML = `
+    <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1e3a5f"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1a6b3c"/>
+    </marker>
+    <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/>
+    </marker>`;
+  svg.appendChild(defs);
+  return svg;
+}
+
+// ── Primitivi SVG ────────────────────────────────────────────
+
+function el(tag, attrs, text) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const e = document.createElementNS(ns, tag);
+  for (const [k,v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function line(x1,y1,x2,y2,cls) {
+  return el('line',{x1,y1,x2,y2,class:cls||'w'});
+}
+function path(d, cls) {
+  return el('path',{d,class:cls||'w'});
+}
+function rect(x,y,w,h,cls,rx) {
+  const a = {x,y,width:w,height:h,class:cls||'comp'};
+  if(rx) a.rx = rx;
+  return a;
+}
+function text(x,y,t,cls,anchor) {
+  return el('text',{x,y,class:cls||'lbl','text-anchor':anchor||'middle','dominant-baseline':'central'},t);
+}
+function circle(cx,cy,r,cls) {
+  return el('circle',{cx,cy,r,class:cls||'node'});
+}
+
+// ── Componenti standardizzati ─────────────────────────────────
+
+// Resistore orizzontale: centro a (cx,cy), larghezza corpo 40px, piedini 15px per lato
+// Ritorna gruppo SVG. Pin sinistro = (cx-35, cy), pin destro = (cx+35, cy)
+function resistorH(cx,cy,label,value) {
+  const g = el('g',{});
+  g.appendChild(line(cx-35,cy, cx-20,cy));           // filo sinistro
+  g.appendChild(el('rect',{x:cx-20,y:cy-8,width:40,height:16,class:'comp'}));
+  g.appendChild(line(cx+20,cy, cx+35,cy));           // filo destro
+  if(label) g.appendChild(text(cx, cy-14, label, 'lbl-comp','middle'));
+  if(value) g.appendChild(text(cx, cy+20, value, 'lbl-val','middle'));
+  return g;
+}
+
+// Resistore verticale: centro a (cx,cy). Pin top=(cx,cy-35), pin bot=(cx,cy+35)
+function resistorV(cx,cy,label,value,labelRight) {
+  const g = el('g',{});
+  g.appendChild(line(cx,cy-35, cx,cy-20));
+  g.appendChild(el('rect',{x:cx-8,y:cy-20,width:16,height:40,class:'comp'}));
+  g.appendChild(line(cx,cy+20, cx,cy+35));
+  const lx = labelRight ? cx+14 : cx-14;
+  const anchor = labelRight ? 'start' : 'end';
+  if(label) g.appendChild(text(lx, cy-4, label, 'lbl-comp', anchor));
+  if(value) g.appendChild(text(lx, cy+12, value, 'lbl-val', anchor));
+  return g;
+}
+
+// Triangolo op-amp: apice a destra. 
+// Ingresso + (non-inv) = pin superiore sinistro
+// Ingresso - (inv)     = pin inferiore sinistro  
+// Uscita               = pin destro
+// pinPlus = (ox-60, oy-25), pinMinus = (ox-60, oy+25), pinOut = (ox+30, oy)
+function opAmp(ox, oy) {
+  const g = el('g',{});
+  // triangolo
+  const poly = el('polygon',{
+    points: `${ox-60},${oy-50} ${ox-60},${oy+50} ${ox+30},${oy}`,
+    class: 'comp-fill'
+  });
+  g.appendChild(poly);
+  // + label
+  g.appendChild(text(ox-46, oy-22, '+', 'lbl-plus','middle'));
+  // − label
+  g.appendChild(text(ox-46, oy+22, '−', 'lbl-minus','middle'));
+  // pin stubs interni — linee verso i pin
+  g.appendChild(line(ox-60, oy-25, ox-50, oy-25, 'w1'));
+  g.appendChild(line(ox-60, oy+25, ox-50, oy+25, 'w1'));
+  g.appendChild(line(ox+20, oy, ox+30, oy, 'w1'));
+  return g;
+}
+
+// GND simbolo: punta in alto a (cx,cy)
+function gndSym(cx,cy) {
+  const g = el('g',{});
+  g.appendChild(line(cx,cy, cx,cy+12,'gnd-line'));
+  g.appendChild(line(cx-14,cy+12, cx+14,cy+12,'gnd-line'));
+  g.appendChild(line(cx-9, cy+18, cx+9, cy+18,'gnd-line'));
+  g.appendChild(line(cx-4, cy+24, cx+4, cy+24,'gnd-line'));
+  return g;
+}
+
+// VCC simbolo: freccia verso l'alto a (cx,cy) = punta
+function vccSym(cx,cy,label) {
+  const g = el('g',{});
+  g.appendChild(line(cx,cy,cx,cy+14,'vcc-line'));
+  // freccia su
+  g.appendChild(el('polygon',{points:`${cx},${cy} ${cx-6},${cy+10} ${cx+6},${cy+10}`,fill:'#c0392b'}));
+  g.appendChild(text(cx,cy-10,label||'+Vcc','lbl-vout','middle'));
+  return g;
+}
+
+// nodo (pallino)
+function dot(x,y) { return circle(x,y,4,'node'); }
+function dotV(x,y) { return circle(x,y,4,'node-v'); }  // rosso per massa virtuale
+
+// sorgente di tensione (cerchio con +)
+function vsource(cx,cy,label) {
+  const g = el('g',{});
+  g.appendChild(el('circle',{cx,cy,r:18,class:'comp'}));
+  g.appendChild(text(cx,cy,'~','lbl','middle'));
+  if(label) g.appendChild(text(cx,cy-30,label,'lbl-vin','middle'));
+  // morsetti
+  g.appendChild(line(cx,cy-18,cx,cy-35,'w'));
+  g.appendChild(line(cx,cy+18,cx,cy+35,'w'));
+  // segno + sul morsetto superiore
+  g.appendChild(text(cx+6,cy-28,'+','lbl-sm','start'));
+  return g;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 1 – SIMBOLO OP-AMP
+// ══════════════════════════════════════════════════════════════
+function buildSimbolo() {
+  const svg = makeSVG(820, 220);
+  const ox=420, oy=110;
+
+  const g = el('g',{});
+
+  // Op-amp
+  g.appendChild(opAmp(ox,oy));
+
+  // Pin + : (ox-60, oy-25) — filo a sinistra
+  g.appendChild(line(ox-60,oy-25, ox-60-60,oy-25,'w'));
+  g.appendChild(text(ox-60-70, oy-25, 'V⁺  ingresso non invertente', 'lbl','end'));
+
+  // Pin − : (ox-60, oy+25)
+  g.appendChild(line(ox-60,oy+25, ox-60-60,oy+25,'w'));
+  g.appendChild(text(ox-60-70, oy+25, 'V⁻  ingresso invertente', 'lbl','end'));
+
+  // Pin out : (ox+30, oy)
+  g.appendChild(line(ox+30,oy, ox+30+60,oy,'w'));
+  g.appendChild(text(ox+30+70, oy, 'V_out', 'lbl-vout','start'));
+
+  // Alimentazione +Vcc sopra
+  g.appendChild(line(ox-15, oy-50, ox-15, oy-80, 'w1'));
+  g.appendChild(vccSym(ox-15, oy-80, '+Vcc'));
+
+  // Alimentazione −Vcc sotto
+  g.appendChild(line(ox-15, oy+50, ox-15, oy+80, 'w1'));
+  g.appendChild(gndSym(ox-15, oy+80));
+  g.appendChild(text(ox-15+18, oy+96, '−Vcc', 'lbl-sm','start'));
+
+  // Annotazione A_ol
+  g.appendChild(el('rect',{x:ox-30,y:oy-14,width:60,height:28,rx:4,fill:'#e8f0f8',stroke:'#2563a8','stroke-width':1}));
+  g.appendChild(text(ox, oy+5, 'A_ol→∞','lbl-comp','middle'));
+
+  // Frecce indicatrici sugli ingressi
+  g.appendChild(el('polygon',{points:`${ox-62},${oy-25} ${ox-62-10},${oy-25-4} ${ox-62-10},${oy-25+4}`,fill:'#1a6b3c'}));
+  g.appendChild(el('polygon',{points:`${ox-62},${oy+25} ${ox-62-10},${oy+25-4} ${ox-62-10},${oy+25+4}`,fill:'#c0392b'}));
+  // freccia su uscita
+  g.appendChild(el('polygon',{points:`${ox+32},${oy} ${ox+32+8},${oy-4} ${ox+32+8},${oy+4}`,fill:'#2563a8'}));
+
+  svg.appendChild(g);
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 2 – AMPLIFICATORE INVERTENTE
+// ══════════════════════════════════════════════════════════════
+function buildInvertente() {
+  const svg = makeSVG(820, 300);
+  // Op-amp centrato
+  const ox=530, oy=160;
+
+  // Nodi chiave
+  const NX = ox-60-70;   // nodo V⁻ (massa virtuale)
+  const NY = oy-25;
+
+  // ── Op-amp
+  svg.appendChild(opAmp(ox,oy));
+
+  // ── V_in sorgente a sinistra
+  svg.appendChild(vsource(80, oy-25, 'V_in'));
+  // filo da sorgente (+) a R1
+  svg.appendChild(line(80, oy-25-35, 80, 80,'w'));
+  svg.appendChild(line(80, 80, 180, 80, 'w'));
+
+  // ── R1 orizzontale sul filo superiore
+  const r1g = resistorH(250, 80, 'R₁');
+  svg.appendChild(r1g);
+  // filo da R1 al nodo NX
+  svg.appendChild(line(285, 80, NX, 80,'w'));
+  svg.appendChild(line(NX, 80, NX, NY,'w'));
+  // filo nodo → pin V⁻
+  svg.appendChild(line(NX, NY, ox-60, NY,'w'));
+  svg.appendChild(dot(NX, NY));
+
+  // ── Rf in alto (feedback) — percorso: nodo NX → su → destra → giù → pin uscita
+  const fbY = 30;
+  svg.appendChild(line(NX, NY, NX, fbY,'w'));           // su
+  svg.appendChild(line(NX, fbY, ox+30, fbY,'w'));       // destra
+  svg.appendChild(line(ox+30, fbY, ox+30, oy,'w'));     // giù a uscita
+  svg.appendChild(dot(ox+30, oy));
+  // R_f centrata sul tratto orizzontale in cima
+  const rfCx = (NX + ox+30)/2;
+  const rfg = resistorH(rfCx, fbY, 'R_f');
+  svg.appendChild(rfg);
+
+  // ── Pin V⁺ → GND
+  svg.appendChild(line(ox-60, oy+25, ox-60-60, oy+25,'w'));
+  svg.appendChild(gndSym(ox-60-60, oy+25));
+
+  // ── GND sorgente
+  svg.appendChild(line(80, oy-25+35, 80, oy+25+30,'w'));
+  svg.appendChild(gndSym(80, oy+25+30));
+
+  // ── Uscita
+  svg.appendChild(line(ox+30, oy, ox+30+80, oy,'w'));
+  svg.appendChild(text(ox+30+90, oy, 'V_out', 'lbl-vout','start'));
+
+  // ── Etichetta massa virtuale
+  svg.appendChild(dotV(NX, NY));
+  svg.appendChild(el('rect',{x:NX-38,y:NY-30,width:76,height:18,rx:3,fill:'#fdf0ee',stroke:'#c0392b','stroke-width':1}));
+  svg.appendChild(text(NX, NY-21, 'massa virtuale','lbl-sm','middle'));
+
+  // ── Frecce corrente I1, If
+  // I1
+  svg.appendChild(el('polygon',{points:`${175},${80} ${165},${76} ${165},${84}`,fill:'#1a6b3c'}));
+  svg.appendChild(text(175,70,'I₁','lbl-sm','middle'));
+  // If  (direzione da NX verso destra in cima)
+  const ifX = NX + 60;
+  svg.appendChild(el('polygon',{points:`${ifX},${fbY} ${ifX-10},${fbY-4} ${ifX-10},${fbY+4}`,fill:'#1a6b3c'}));
+  svg.appendChild(text(ifX+5, fbY-12,'I_f','lbl-sm','start'));
+
+  // ── Formula
+  svg.appendChild(el('rect',{x:ox-20,y:oy+70,width:120,height:30,rx:4,fill:'#eef6ee',stroke:'#1a6b3c','stroke-width':1.5}));
+  svg.appendChild(text(ox+40, oy+85,'Aᵥ = −R_f / R₁','lbl-comp','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 3 – NON INVERTENTE
+// ══════════════════════════════════════════════════════════════
+function buildNonInv() {
+  const svg = makeSVG(820, 290);
+  const ox=500, oy=150;
+
+  svg.appendChild(opAmp(ox,oy));
+
+  // V_in → pin V⁺
+  svg.appendChild(line(60,oy-25, ox-60,oy-25,'w'));
+  svg.appendChild(text(50,oy-25,'V_in','lbl-vin','end'));
+  // freccia ingresso
+  svg.appendChild(el('polygon',{points:`${ox-62},${oy-25} ${ox-72},${oy-29} ${ox-72},${oy-21}`,fill:'#2563a8'}));
+
+  // Nodo feedback su V⁻
+  const FX = ox-60-80;   // x del nodo sul filo di V⁻
+  const FY = oy+25;
+
+  // filo V⁻
+  svg.appendChild(line(ox-60, FY, FX, FY,'w'));
+  svg.appendChild(dot(FX, FY));
+
+  // R_f verticale dal nodo FX su fino a un nodo alto, poi filo fino a uscita
+  const FBTOP = 40;
+  svg.appendChild(line(FX, FY, FX, FY-40,'w'));    // nodo → R_f
+  // Rf verticale centrata
+  svg.appendChild(resistorV(FX, FY-40-35, 'R_f', null, true));
+  svg.appendChild(line(FX, FBTOP, FX, FBTOP,'w'));
+  // percorso alto da FX fino all'uscita
+  svg.appendChild(line(FX, FBTOP, ox+30, FBTOP,'w'));
+  svg.appendChild(line(ox+30, FBTOP, ox+30, oy,'w'));
+  svg.appendChild(dot(ox+30,oy));
+
+  // R_1 verticale da FX verso GND
+  svg.appendChild(resistorV(FX, FY+35, 'R₁', null, false));
+  svg.appendChild(gndSym(FX, FY+35+35));
+
+  // Uscita
+  svg.appendChild(line(ox+30,oy,ox+30+100,oy,'w'));
+  svg.appendChild(text(ox+30+110,oy,'V_out','lbl-vout','start'));
+
+  // GND filo V+ basso (sorgente non necessaria—solo filo)
+  // Etichette nodi
+  svg.appendChild(text(FX, FY+16,'nodo FB','lbl-sm','middle'));
+  svg.appendChild(dot(FX,FY));
+
+  // Formula
+  svg.appendChild(el('rect',{x:ox-30,y:oy+70,width:140,height:30,rx:4,fill:'#eef6ee',stroke:'#1a6b3c','stroke-width':1.5}));
+  svg.appendChild(text(ox+40,oy+85,'Aᵥ = 1 + R_f / R₁','lbl-comp','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 4 – BUFFER
+// ══════════════════════════════════════════════════════════════
+function buildBuffer() {
+  const svg = makeSVG(820, 220);
+  const ox=410, oy=110;
+
+  svg.appendChild(opAmp(ox,oy));
+
+  // V_in
+  svg.appendChild(line(60,oy-25, ox-60,oy-25,'w'));
+  svg.appendChild(text(50,oy-25,'V_in','lbl-vin','end'));
+  svg.appendChild(el('polygon',{points:`${ox-62},${oy-25} ${ox-72},${oy-29} ${ox-72},${oy-21}`,fill:'#2563a8'}));
+
+  // Pin V⁻ — filo verso destra e poi giù fino all'uscita
+  const FBY = oy+25;
+  svg.appendChild(line(ox-60, FBY, ox-60-40, FBY,'w'));
+  // giro sotto
+  svg.appendChild(line(ox-60-40, FBY, ox-60-40, oy+80,'w'));
+  svg.appendChild(line(ox-60-40, oy+80, ox+30+60, oy+80,'w'));
+  svg.appendChild(line(ox+30+60, oy+80, ox+30+60, oy,'w'));
+  svg.appendChild(dot(ox+30+60, oy));
+  svg.appendChild(line(ox+30, oy, ox+30+60, oy,'w'));
+
+  // Uscita label
+  svg.appendChild(line(ox+30+60, oy, ox+30+130, oy,'w'));
+  svg.appendChild(text(ox+30+140,oy,'V_out','lbl-vout','start'));
+
+  // Indicazione feedback
+  svg.appendChild(el('rect',{x:ox-60,y:oy+90,width:180,height:20,rx:3,fill:'#fffbeb',stroke:'#b8860b','stroke-width':1}));
+  svg.appendChild(text(ox-60+90,oy+100,'feedback 100% — A = 1','lbl-sm','middle'));
+
+  // Formula
+  svg.appendChild(el('rect',{x:ox+80,y:oy-40,width:120,height:30,rx:4,fill:'#eef6ee',stroke:'#1a6b3c','stroke-width':1.5}));
+  svg.appendChild(text(ox+80+60,oy-25,'V_out = V_in','lbl-comp','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 5 – SOMMATORE INVERTENTE
+// ══════════════════════════════════════════════════════════════
+function buildSommatore() {
+  const svg = makeSVG(820, 320);
+  const ox=540, oy=160;
+
+  svg.appendChild(opAmp(ox,oy));
+
+  // Tre ingressi
+  const inputs = [
+    {vy:80,  label:'V₁', r:'R₁'},
+    {vy:160, label:'V₂', r:'R₂'},
+    {vy:240, label:'V₃', r:'R₃'},
+  ];
+
+  // Nodo sommatore (V⁻)
+  const NX = ox-60-90;
+
+  inputs.forEach(inp => {
+    // Label ingresso
+    svg.appendChild(text(50,inp.vy,inp.label,'lbl-vin','end'));
+    svg.appendChild(line(60,inp.vy, 160,inp.vy,'w'));
+    // Resistore orizzontale
+    svg.appendChild(resistorH(215,inp.vy,inp.r));
+    // Filo da resistore al nodo
+    svg.appendChild(line(250,inp.vy, NX,inp.vy,'w'));
+    // Filo verticale al nodo sommatore
+    svg.appendChild(line(NX,inp.vy, NX,oy-25,'w'));
+    svg.appendChild(dot(NX,inp.vy));
+  });
+
+  // Nodo sommatore su pin V⁻
+  svg.appendChild(dot(NX,oy-25));
+  svg.appendChild(line(NX,oy-25, ox-60,oy-25,'w'));
+
+  // Etichetta massa virtuale
+  svg.appendChild(el('rect',{x:NX-38,y:oy-25-28,width:76,height:18,rx:3,fill:'#fdf0ee',stroke:'#c0392b','stroke-width':1}));
+  svg.appendChild(text(NX,oy-25-19,'massa virtuale','lbl-sm','middle'));
+
+  // Rf in cima
+  const fbY = 30;
+  svg.appendChild(line(NX,oy-25, NX,fbY,'w'));
+  svg.appendChild(line(NX,fbY, ox+30,fbY,'w'));
+  svg.appendChild(line(ox+30,fbY, ox+30,oy,'w'));
+  svg.appendChild(dot(ox+30,oy));
+  const rfCx = (NX+ox+30)/2;
+  svg.appendChild(resistorH(rfCx,fbY,'R_f'));
+
+  // Pin V⁺ → GND
+  svg.appendChild(line(ox-60,oy+25, ox-60-40,oy+25,'w'));
+  svg.appendChild(gndSym(ox-60-40,oy+25));
+
+  // Uscita
+  svg.appendChild(line(ox+30,oy, ox+30+90,oy,'w'));
+  svg.appendChild(text(ox+30+100,oy,'V_out','lbl-vout','start'));
+
+  // Formula
+  svg.appendChild(text(ox-10,290,'V_out = −R_f(V₁/R₁ + V₂/R₂ + V₃/R₃)','lbl-comp','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 6 – AMPLIFICATORE DIFFERENZIALE
+// ══════════════════════════════════════════════════════════════
+function buildDiff() {
+  const svg = makeSVG(820, 310);
+  const ox=530, oy=155;
+
+  svg.appendChild(opAmp(ox,oy));
+
+  // ── Ramo V⁻ (in alto): V₁ → R₃ → nodo_neg → pin V⁻
+  const N1X = ox-60-90, N1Y = oy-25;
+  svg.appendChild(text(50, N1Y,'V₁','lbl-vin','end'));
+  svg.appendChild(line(60,N1Y, 160,N1Y,'w'));
+  svg.appendChild(resistorH(215,N1Y,'R₃'));
+  svg.appendChild(line(250,N1Y, N1X,N1Y,'w'));
+  svg.appendChild(dot(N1X,N1Y));
+  svg.appendChild(line(N1X,N1Y, ox-60,N1Y,'w'));
+
+  // ── R₄ feedback: nodo N1X → su → uscita
+  const fbY = 28;
+  svg.appendChild(line(N1X,N1Y, N1X,fbY,'w'));
+  svg.appendChild(line(N1X,fbY, ox+30,fbY,'w'));
+  svg.appendChild(line(ox+30,fbY, ox+30,oy,'w'));
+  svg.appendChild(dot(ox+30,oy));
+  const r4cx = (N1X+ox+30)/2;
+  svg.appendChild(resistorH(r4cx,fbY,'R₄'));
+
+  // ── Ramo V⁺ (in basso): V₂ → R₁ → nodo_pos
+  const N2X = ox-60-90, N2Y = oy+25;
+  svg.appendChild(text(50,N2Y,'V₂','lbl-vin','end'));
+  svg.appendChild(line(60,N2Y, 160,N2Y,'w'));
+  svg.appendChild(resistorH(215,N2Y,'R₁'));
+  svg.appendChild(line(250,N2Y, N2X,N2Y,'w'));
+  svg.appendChild(dot(N2X,N2Y));
+  svg.appendChild(line(N2X,N2Y, ox-60,N2Y,'w'));
+
+  // ── R₂ da nodo V⁺ a GND
+  svg.appendChild(resistorV(N2X,N2Y+35,'R₂',null,true));
+  svg.appendChild(gndSym(N2X,N2Y+35+35));
+
+  // Uscita
+  svg.appendChild(line(ox+30,oy, ox+30+90,oy,'w'));
+  svg.appendChild(text(ox+30+100,oy,'V_out','lbl-vout','start'));
+
+  // Etichette CMRR
+  svg.appendChild(el('rect',{x:ox+70,y:oy+60,width:140,height:40,rx:4,fill:'#e8f0f8',stroke:'#2563a8','stroke-width':1}));
+  svg.appendChild(text(ox+70+70,oy+73,'Aᵥ = R_f / R','lbl-comp','middle'));
+  svg.appendChild(text(ox+70+70,oy+89,'(con R₁=R₃=R, R₂=R₄=Rᶠ)','lbl-sm','middle'));
+
+  // Condizione bilanciamento
+  svg.appendChild(el('rect',{x:10,y:270,width:300,height:22,rx:3,fill:'#fffbeb',stroke:'#b8860b','stroke-width':1}));
+  svg.appendChild(text(160,281,'⚠ bilanciamento: R₁/R₂ = R₃/R₄  (CMRR)','lbl-sm','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SCHEMA 7 – COMPARATORE
+// ══════════════════════════════════════════════════════════════
+function buildComparatore() {
+  const svg = makeSVG(820, 270);
+  const ox=400, oy=130;
+
+  svg.appendChild(opAmp(ox,oy));
+
+  // V_in su V⁻
+  svg.appendChild(line(60,oy-25, ox-60,oy-25,'w'));
+  svg.appendChild(text(50,oy-25,'V_in','lbl-vin','end'));
+
+  // V_ref su V⁺ (con resistori partitore opzionale — qui semplice linea)
+  svg.appendChild(line(60,oy+25, ox-60,oy+25,'w'));
+  svg.appendChild(text(50,oy+25,'V_ref','lbl-vin','end'));
+
+  // Uscita — nessun feedback
+  svg.appendChild(line(ox+30,oy, ox+30+130,oy,'w'));
+  svg.appendChild(text(ox+30+140,oy,'V_out','lbl-vout','start'));
+
+  // Grafico uscita bimodale a destra
+  const gx=620, gy=40, gw=160, gh=130;
+  svg.appendChild(el('rect',{x:gx,y:gy,width:gw,height:gh,rx:4,fill:'#fafafa',stroke:'#d4c9b8','stroke-width':1}));
+  // asse centrale
+  svg.appendChild(line(gx+10,gy+gh/2, gx+gw-10,gy+gh/2,'w1'));
+  // forma d'onda comparatore
+  const wp = el('polyline',{
+    points:`${gx+10},${gy+gh-15} ${gx+50},${gy+gh-15} ${gx+50},${gy+15} ${gx+100},${gy+15} ${gx+100},${gy+gh-15} ${gx+gw-10},${gy+gh-15}`,
+    stroke:'#c0392b','stroke-width':2.5,fill:'none','stroke-linejoin':'miter'
+  });
+  svg.appendChild(wp);
+  svg.appendChild(text(gx+gw/2,gy+8,'+V_sat','lbl-sm','middle'));
+  svg.appendChild(text(gx+gw/2,gy+gh-6,'−V_sat','lbl-sm','middle'));
+  svg.appendChild(text(gx+gw/2,gy+gh+14,'uscita comparatore','lbl-sm','middle'));
+
+  // Croce NO-FEEDBACK
+  svg.appendChild(el('rect',{x:ox-20,y:oy-65,width:120,height:22,rx:3,fill:'#fdf0ee',stroke:'#c0392b','stroke-width':1.2}));
+  svg.appendChild(text(ox-20+60,oy-54,'✗  nessuna retroazione','lbl-sm','middle'));
+
+  // Freccia uscita
+  svg.appendChild(el('polygon',{points:`${ox+32},${oy} ${ox+42},${oy-4} ${ox+42},${oy+4}`,fill:'#2563a8'}));
+
+  // Equazione uscita
+  svg.appendChild(text(ox-20,240,"V_out = +V_sat  se  V_in < V_ref   |   V_out = −V_sat  se  V_in > V_ref",'lbl-sm','middle'));
+
+  return svg;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INJECT into page
+// ══════════════════════════════════════════════════════════════
+function injectSVG(divId, builder) {
+  const div = document.getElementById(divId);
+  if (!div) return;
+  const svg = builder();
+  div.appendChild(svg);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  injectSVG('svgSimbolo',    buildSimbolo);
+  injectSVG('svgInvertente', buildInvertente);
+  injectSVG('svgNonInv',     buildNonInv);
+  injectSVG('svgBuffer',     buildBuffer);
+  injectSVG('svgSommatore',  buildSommatore);
+  injectSVG('svgDiff',       buildDiff);
+  injectSVG('svgComparatore',buildComparatore);
+});
+
+</script>

@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratorio 4-20 mA ESP32 - ITS</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#21262d;
+  --border:#30363d;--border2:#444c56;
+  --text:#e6edf3;--text2:#8b949e;--text3:#6e7681;
+  --acc:#f0a500;--acc2:#58a6ff;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:15px;line-height:1.75;color:var(--text);background:var(--bg);}
+
+.header{background:linear-gradient(135deg,#0d1117,#1c2128);border-bottom:1px solid var(--border);padding:48px 60px 40px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(240,165,0,.04) 39px,rgba(240,165,0,.04) 40px);pointer-events:none;}
+.htag{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.htag::before{content:'';display:inline-block;width:28px;height:2px;background:var(--acc);}
+.header h1{font-size:2.6em;font-weight:700;line-height:1.1;margin-bottom:8px;}
+.header h1 .hl{color:var(--acc);}
+.header .sub{font-size:1em;color:var(--text2);max-width:620px;margin-bottom:24px;}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.badge{font-family:var(--mono);font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;letter-spacing:.5px;}
+.bo{background:rgba(240,165,0,.15);color:var(--acc);border:1px solid rgba(240,165,0,.3);}
+.bb{background:rgba(88,166,255,.12);color:var(--acc2);border:1px solid rgba(88,166,255,.25);}
+.bg{background:rgba(63,185,80,.12);color:var(--green);border:1px solid rgba(63,185,80,.25);}
+.br{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.25);}
+.hmeta{font-family:var(--mono);font-size:11px;color:var(--text3);border-top:1px solid var(--border);padding-top:14px;display:flex;gap:24px;flex-wrap:wrap;}
+
+.main{max-width:1020px;margin:0 auto;padding:36px 40px 100px;}
+
+.pnav{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0;}
+.pni{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;display:block;text-decoration:none;transition:all .2s;}
+.pni:hover{border-color:var(--acc);background:var(--surface2);}
+.pnn{font-family:var(--mono);font-size:10px;color:var(--acc);letter-spacing:2px;margin-bottom:4px;}
+.pnt{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
+.diff{font-family:var(--mono);font-size:11px;margin-top:6px;color:var(--acc);}
+
+.es{margin:44px 0;scroll-margin-top:20px;}
+.esh{display:flex;align-items:flex-start;gap:20px;margin-bottom:22px;}
+.esn{width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:20px;flex-shrink:0;}
+.estipo{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.estit{font-size:1.45em;font-weight:700;line-height:1.2;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin:14px 0;}
+.card.acc{border-left:3px solid var(--acc);}
+.card.blu{border-left:3px solid var(--acc2);}
+.card.grn{border-left:3px solid var(--green);}
+.card.red{border-left:3px solid var(--red);}
+.card.yel{border-left:3px solid var(--yellow);}
+.ctit{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;}
+
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.oi{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:11px 14px;font-size:14px;color:var(--text2);display:flex;gap:10px;align-items:flex-start;}
+
+.steps{counter-reset:st;margin:14px 0;}
+.step{counter-increment:st;display:flex;gap:14px;margin-bottom:12px;align-items:flex-start;}
+.step::before{content:counter(st);background:var(--surface2);border:1px solid var(--border2);color:var(--acc);font-family:var(--mono);font-size:12px;font-weight:600;min-width:27px;height:27px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sb{font-size:14px;color:var(--text2);}
+.sb strong{color:var(--text);}
+
+.ctbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;border-radius:6px;overflow:hidden;border:1px solid var(--border);}
+.ctbl th{background:var(--surface2);color:var(--text2);font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.ctbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2);}
+.ctbl tr:last-child td{border-bottom:none;}
+.mc{font-family:var(--mono);color:var(--acc2);font-size:12px;}
+.qty{font-family:var(--mono);color:var(--acc);font-weight:600;}
+
+.sw{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;margin:14px 0;}
+.sw svg{display:block;width:100%;height:auto;}
+.stit{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+
+.cb{background:#010409;border:1px solid var(--border);border-radius:8px;margin:14px 0;overflow:hidden;}
+.ch{background:var(--surface2);border-bottom:1px solid var(--border);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;}
+.cl{font-family:var(--mono);font-size:11px;color:var(--acc);letter-spacing:1px;}
+.cf{font-family:var(--mono);font-size:11px;color:var(--text3);}
+pre.code{padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.65;overflow-x:auto;color:#c9d1d9;margin:0;}
+.kw{color:#ff7b72}.cm{color:#6e7781;font-style:italic}.str{color:#a5d6ff}.num{color:#79c0ff}.fn{color:#d2a8ff}.pp{color:#ffa657}.tp{color:#7ee787}
+
+.dtbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+.dtbl th{background:var(--surface2);color:var(--text2);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 12px;text-align:center;border-bottom:2px solid var(--border);}
+.dtbl td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);color:var(--text2);}
+.dtbl td.fill{background:rgba(240,165,0,.04);color:var(--text3);font-style:italic;}
+.dtbl td.giv{color:var(--acc2);}
+.dtbl tr:last-child td{border-bottom:none;}
+
+.dq{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:14px 0;}
+.dqt{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.dqt::before{content:'?';background:var(--yellow);color:#000;width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.dq ol{margin-left:18px;} .dq li{margin-bottom:9px;font-size:14px;color:var(--text2);} .dq li strong{color:var(--text);}
+
+.nota{background:rgba(210,153,34,.08);border:1px solid rgba(210,153,34,.25);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--text2);margin:10px 0;display:flex;gap:10px;}
+.nicon{color:var(--yellow);flex-shrink:0;}
+
+.divider{height:1px;background:var(--border);margin:44px 0;position:relative;}
+.divider::after{content:attr(data-label);position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--bg);font-family:var(--mono);font-size:10px;color:var(--text3);padding:0 12px;letter-spacing:2px;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+@media(max-width:700px){.pnav{grid-template-columns:1fr 1fr;}.split{grid-template-columns:1fr;}.ogrid{grid-template-columns:1fr;}.main{padding:20px 16px 60px;}.header{padding:30px 20px 26px;}.header h1{font-size:1.8em;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="htag">ITS Academy Meccatronico Veneto &middot; UF10</div>
+  <h1>Laboratorio <span class="hl">4&ndash;20 mA</span><br>con ESP32</h1>
+  <p class="sub">4 esercitazioni progressive simulate in Wokwi &mdash; dal ricevitore base alla catena industriale completa con allarmi</p>
+  <div class="badges">
+    <span class="badge bo">ESP32</span>
+    <span class="badge bb">WOKWI</span>
+    <span class="badge bg">GUIDATO</span>
+    <span class="badge br">ADC 12-bit</span>
+  </div>
+  <div class="hmeta">
+    <span>Anno 2024-2025</span>
+    <span>Docente: Dino Martinazzo</span>
+    <span>Prerequisiti: ADC, loop 4-20mA, op-amp base</span>
+    <span>Durata: 10 &times; 45 min</span>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="pnav" style="grid-template-columns:repeat(5,1fr);">
+  <a class="pni" href="#es1"><div class="pnn">ES 01</div><div class="pnt">Ricevitore base</div><div class="diff">&#9679;&#9675;&#9675;&#9675;</div></a>
+  <a class="pni" href="#es2"><div class="pnn">ES 02</div><div class="pnt">Trasmettitore simulato</div><div class="diff">&#9679;&#9679;&#9675;&#9675;</div></a>
+  <a class="pni" href="#es3"><div class="pnn">ES 03</div><div class="pnt">Catena TX &rarr; RX</div><div class="diff">&#9679;&#9679;&#9679;&#9675;</div></a>
+  <a class="pni" href="#es4"><div class="pnn">ES 04</div><div class="pnt">Allarmi e soglie</div><div class="diff">&#9679;&#9679;&#9679;&#9679;</div></a>
+  <a class="pni" href="#es5"><div class="pnn">ES 05</div><div class="pnt">Calibrazione 2 punti</div><div class="diff">&#9679;&#9679;&#9675;&#9675;</div></a>
+</div>
+<div class="pnav" style="grid-template-columns:repeat(5,1fr);margin-top:0;">
+  <a class="pni" href="#es6"><div class="pnn">ES 06</div><div class="pnt">Oversampling &amp; ENOB</div><div class="diff">&#9679;&#9679;&#9679;&#9675;</div></a>
+  <a class="pni" href="#es7"><div class="pnn">ES 07</div><div class="pnt">Pressione 0-10 bar</div><div class="diff">&#9679;&#9679;&#9675;&#9675;</div></a>
+  <a class="pni" href="#es8"><div class="pnn">ES 08</div><div class="pnt">Display OLED</div><div class="diff">&#9679;&#9679;&#9679;&#9675;</div></a>
+  <a class="pni" href="#es9"><div class="pnn">ES 09</div><div class="pnt">Datalogger SD card</div><div class="diff">&#9679;&#9679;&#9679;&#9675;</div></a>
+  <a class="pni" href="#es10"><div class="pnn">ES 10</div><div class="pnt">MQTT / WiFi dashboard</div><div class="diff">&#9679;&#9679;&#9679;&#9679;</div></a>
+</div>
+
+<!-- ===================== ES1 ===================== -->
+<div class="es" id="es1">
+  <div class="esh">
+    <div class="esn" style="background:var(--acc);color:#000;">01</div>
+    <div>
+      <div class="estipo" style="color:var(--acc);">Esercizio 1 &middot; Ricevitore</div>
+      <div class="estit">Ricevitore 4-20&nbsp;mA &mdash; lettura e ricostruzione misura</div>
+    </div>
+  </div>
+
+  <div class="card acc">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Leggere la tensione su R_shunt con l&rsquo;ADC 12-bit dell&rsquo;ESP32</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Calcolare la corrente di loop I_loop in mA</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Ricostruire la grandezza fisica (temperatura 0&ndash;100&deg;C)</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Rilevare il guasto &ldquo;loop aperto&rdquo; (I &lt; 2&nbsp;mA)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Componenti Wokwi</div>
+    <table class="ctbl">
+      <tr><th>Componente</th><th>Valore</th><th>Q.</th><th>Note</th></tr>
+      <tr><td>ESP32 DevKit V1</td><td class="mc">ESP32</td><td class="qty">1</td><td>Usare GPIO34 (ADC1 only-input)</td></tr>
+      <tr><td>Potenziometro</td><td class="mc">10&nbsp;k&Omega;</td><td class="qty">1</td><td>Simula il trasmettitore 4-20&nbsp;mA</td></tr>
+      <tr><td>Resistore shunt</td><td class="mc">150&nbsp;&Omega;</td><td class="qty">1</td><td>150&Omega;&times;20mA = 3.0V &lt; 3.3V &#10003;</td></tr>
+      <tr><td>Resistore serie</td><td class="mc">630&nbsp;&Omega;</td><td class="qty">1</td><td>Limita corrente massima dal pot</td></tr>
+    </table>
+  </div>
+
+  <div class="sw">
+    <div class="stit">Schema circuitale &mdash; Ricevitore ES1</div>
+    <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ag" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L7,3 z" fill="#3fb950"/>
+        </marker>
+      </defs>
+      <!-- Rails -->
+      <line x1="55" y1="38" x2="710" y2="38" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="55" y1="175" x2="710" y2="175" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <text x="28" y="42" font-family="IBM Plex Mono" font-size="11" fill="#f85149" text-anchor="middle">3.3V</text>
+      <text x="28" y="179" font-family="IBM Plex Mono" font-size="11" fill="#8b949e" text-anchor="middle">GND</text>
+      <!-- POT block -->
+      <rect x="62" y="62" width="90" height="90" rx="6" fill="#21262d" stroke="#444c56" stroke-width="1.5"/>
+      <text x="107" y="84"  font-family="IBM Plex Mono" font-size="10" fill="#f0a500" text-anchor="middle">POT</text>
+      <text x="107" y="97"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">10k&#8486;</text>
+      <text x="107" y="110" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">simula TX</text>
+      <line x1="107" y1="62"  x2="107" y2="38"  stroke="#e6edf3" stroke-width="2"/>
+      <line x1="107" y1="152" x2="107" y2="175" stroke="#e6edf3" stroke-width="2"/>
+      <line x1="152" y1="107" x2="195" y2="107" stroke="#f0a500" stroke-width="2"/>
+      <circle cx="195" cy="107" r="4" fill="#f0a500"/>
+      <text x="158" y="100" font-family="IBM Plex Mono" font-size="9" fill="#f0a500">cursor</text>
+      <!-- R_serie 630 -->
+      <rect x="195" y="95" width="60" height="24" rx="3" fill="#21262d" stroke="#58a6ff" stroke-width="1.5"/>
+      <text x="225" y="107" font-family="IBM Plex Mono" font-size="10" fill="#58a6ff" text-anchor="middle">630&#8486;</text>
+      <line x1="255" y1="107" x2="320" y2="107" stroke="#e6edf3" stroke-width="2"/>
+      <!-- Nodo A -->
+      <circle cx="320" cy="107" r="5" fill="#58a6ff"/>
+      <text x="320" y="93" font-family="IBM Plex Mono" font-size="10" fill="#58a6ff" text-anchor="middle">A</text>
+      <!-- R_shunt 150 verticale -->
+      <line x1="320" y1="107" x2="320" y2="122" stroke="#e6edf3" stroke-width="2"/>
+      <rect x="308" y="122" width="24" height="40" rx="3" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+      <text x="320" y="138" font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">150&#8486;</text>
+      <line x1="320" y1="162" x2="320" y2="175" stroke="#e6edf3" stroke-width="2"/>
+      <!-- ADC wire to ESP32 -->
+      <line x1="320" y1="107" x2="455" y2="107" stroke="#58a6ff" stroke-width="2" stroke-dasharray="7,3"/>
+      <line x1="455" y1="107" x2="455" y2="75"  stroke="#58a6ff" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- ESP32 box -->
+      <rect x="455" y="50" width="230" height="110" rx="8" fill="#21262d" stroke="#f0a500" stroke-width="2"/>
+      <text x="570" y="73" font-family="IBM Plex Mono" font-size="12" fill="#f0a500" text-anchor="middle" font-weight="600">ESP32</text>
+      <text x="570" y="88" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">ADC1 &middot; 12-bit &middot; 3.3V</text>
+      <circle cx="455" cy="75" r="4" fill="#58a6ff"/>
+      <text x="462" y="69" font-family="IBM Plex Mono" font-size="9" fill="#58a6ff">GPIO34</text>
+      <rect x="478" y="100" width="180" height="28" rx="4" fill="#0d1117" stroke="#30363d"/>
+      <text x="568" y="111" font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">Serial Monitor 115200</text>
+      <text x="568" y="122" font-family="IBM Plex Mono" font-size="8" fill="#6e7681" text-anchor="middle">raw | V_sh | I_loop | T(&#xb0;C) | stato</text>
+      <line x1="570" y1="160" x2="570" y2="175" stroke="#8b949e" stroke-width="2"/>
+      <circle cx="570" cy="175" r="3" fill="#8b949e"/>
+      <!-- Corrente freccia -->
+      <line x1="280" y1="101" x2="306" y2="101" stroke="#3fb950" stroke-width="1.5" marker-end="url(#ag)"/>
+      <text x="288" y="95" font-family="IBM Plex Mono" font-size="9" fill="#3fb950">I_loop</text>
+      <!-- Formule -->
+      <text x="390" y="104" font-family="IBM Plex Mono" font-size="9" fill="#58a6ff" text-anchor="middle">&#x2192; ADC</text>
+      <text x="390" y="116" font-family="IBM Plex Mono" font-size="8" fill="#6e7681" text-anchor="middle">V=I&times;150&#8486;</text>
+    </svg>
+  </div>
+
+  <div class="card blu">
+    <div class="ctit">Montaggio su Wokwi &mdash; passo per passo</div>
+    <div class="steps">
+      <div class="step"><div class="sb"><strong>Apri</strong> wokwi.com &rarr; <em>New Project &rarr; ESP32</em></div></div>
+      <div class="step"><div class="sb">Aggiungi <strong>Potentiometer</strong>: pin sinistro &rarr; <code>3.3V</code>, pin destro &rarr; <code>GND</code>, cursore &rarr; nodo A (filo arancio).</div></div>
+      <div class="step"><div class="sb">Aggiungi <strong>Resistor 630&thinsp;&Omega;</strong> tra nodo A e nodo B in serie.</div></div>
+      <div class="step"><div class="sb">Aggiungi <strong>Resistor 150&thinsp;&Omega;</strong> (R_shunt) tra nodo B e <code>GND</code>.</div></div>
+      <div class="step"><div class="sb">Collega nodo B a <strong>GPIO34</strong> dell&rsquo;ESP32. GPIO34 &egrave; input-only &mdash; perfetto per ADC, non pu&ograve; essere usato come output per errore.</div></div>
+      <div class="step"><div class="sb">Incolla il codice qui sotto, clicca <strong>Start Simulation</strong>, apri il Serial Monitor.</div></div>
+    </div>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; Arduino / ESP32</span><span class="cf">es1_ricevitore.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES1 &ndash; Ricevitore 4-20 mA su ESP32
+ * Il potenziometro simula il trasmettitore industriale.
+ * R_shunt = 150&thinsp;&Omega; converte la corrente in tensione per l&rsquo;ADC.
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>    PIN_ADC      = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>    ADC_MAX      = <span class="num">4095</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  VREF         = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  R_SHUNT      = <span class="num">150.0f</span>;   <span class="cm">// &Omega;</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MIN        = <span class="num">4.0f</span>;     <span class="cm">// mA &ndash; live zero</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MAX        = <span class="num">20.0f</span>;    <span class="cm">// mA &ndash; fondo scala</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MIN     = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MAX     = <span class="num">100.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>    N_SAMPLES    = <span class="num">16</span>;       <span class="cm">// oversampling</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);  <span class="cm">// range 0&ndash;3.1 V</span>
+  Serial.<span class="fn">println</span>(<span class="str">"=== ES1 Ricevitore ==="</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"raw\t\tV_sh(V)\t\tI(mA)\t\tT(C)\t\tStato"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// 1. Oversampling</span>
+  <span class="tp">long</span> acc = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="num">0</span>; i &lt; N_SAMPLES; ++i) acc += <span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">int</span>   raw     = (<span class="tp">int</span>)(acc / N_SAMPLES);
+
+  <span class="cm">// 2. ADC &rarr; tensione</span>
+  <span class="kw">const</span> <span class="tp">float</span> v_sh    = (<span class="tp">float</span>)raw / ADC_MAX * VREF;
+
+  <span class="cm">// 3. Tensione &rarr; corrente</span>
+  <span class="kw">const</span> <span class="tp">float</span> i_loop  = (v_sh / R_SHUNT) * <span class="num">1000.0f</span>;
+
+  <span class="cm">// 4. Corrente &rarr; grandezza fisica</span>
+  <span class="kw">const</span> <span class="tp">float</span> frac    = <span class="fn">constrain</span>((i_loop - I_MIN)/(I_MAX - I_MIN), <span class="num">0.f</span>, <span class="num">1.f</span>);
+  <span class="kw">const</span> <span class="tp">float</span> temp    = TEMP_MIN + (TEMP_MAX - TEMP_MIN) * frac;
+
+  <span class="cm">// 5. Diagnostica</span>
+  <span class="kw">const</span> <span class="tp">char</span>* stato =
+    (i_loop &lt; <span class="num">2.0f</span>) ? <span class="str">"LOOP APERTO"</span> :
+    (i_loop &lt; I_MIN) ? <span class="str">"SOTTO SCALA"</span> :
+    (i_loop &gt; I_MAX) ? <span class="str">"SATURAZIONE"</span> : <span class="str">"OK"</span>;
+
+  Serial.<span class="fn">print</span>(raw);       Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(v_sh,  <span class="num">4</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(i_loop,<span class="num">3</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(temp,  <span class="num">2</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">println</span>(stato);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella dati &mdash; da compilare</div>
+    <table class="dtbl">
+      <tr><th>Posizione pot</th><th>raw ADC</th><th>V_shunt (V)</th><th>I_loop (mA)</th><th>Temp (&deg;C)</th><th>Stato</th></tr>
+      <tr><td class="giv">0 %</td>  <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">25 %</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">50 %</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">75 %</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">100 %</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </table>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Cosa succede al valore <code>raw</code> con il pot a 0%? Quale corrente corrisponde? Il codice riconosce correttamente il guasto?</li>
+      <li>Calcola manualmente V_shunt e I_loop per posizione 50% e confronta con il valore letto. Coincidono? Perch&eacute; potrebbero differire?</li>
+      <li><strong>Modifica:</strong> cambia <code>TEMP_MAX = 200.0f</code>. Cosa cambia nella colonna Temp? Perch&eacute; I_loop non cambia?</li>
+      <li>Se R_SHUNT fosse 250&thinsp;&Omega; (standard), quale sarebbe la tensione massima ai capi con 20&thinsp;mA? L&rsquo;ESP32 si danneggerebbe? Giustifica.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 02"></div>
+
+<!-- ===================== ES2 ===================== -->
+<div class="es" id="es2">
+  <div class="esh">
+    <div class="esn" style="background:var(--acc2);color:#000;">02</div>
+    <div>
+      <div class="estipo" style="color:var(--acc2);">Esercizio 2 &middot; Trasmettitore</div>
+      <div class="estit">Trasmettitore simulato &mdash; sensore temperatura &rarr; 4-20&nbsp;mA</div>
+    </div>
+  </div>
+
+  <div class="card blu">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Usare il DAC interno dell&rsquo;ESP32 (GPIO25, 8-bit) per simulare l&rsquo;uscita del trasmettitore</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Convertire una temperatura simulata nel corrispondente valore DAC</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Leggere il segnale con il secondo canale ADC sullo stesso ESP32</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Misurare e tabulare l&rsquo;errore TX&rarr;RX su tutta la scala</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Componenti Wokwi</div>
+    <table class="ctbl">
+      <tr><th>Componente</th><th>Valore</th><th>Q.</th><th>Funzione</th></tr>
+      <tr><td>ESP32 DevKit V1</td><td class="mc">ESP32</td><td class="qty">1</td><td>TX: GPIO25 (DAC) &mdash; RX: GPIO34 (ADC)</td></tr>
+      <tr><td>Resistore shunt</td><td class="mc">150&nbsp;&Omega;</td><td class="qty">1</td><td>Converte I &rarr; V per ADC</td></tr>
+    </table>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>L&rsquo;ESP32 ha due uscite DAC su <strong>GPIO25</strong> e <strong>GPIO26</strong> (8-bit, 0&ndash;3.3V). In questo esercizio usiamo il DAC invece del PWM filtrato: &egrave; pi&ugrave; preciso e non richiede il filtro RC. La relazione &egrave;: <code>DAC_val = (V_dac / 3.3) &times; 255</code>.</span>
+  </div>
+
+  <div class="sw">
+    <div class="stit">Schema ES2 &mdash; DAC interno &rarr; R_shunt &rarr; ADC (stesso chip)</div>
+    <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
+      <!-- ESP32 box unico -->
+      <rect x="30" y="35" width="700" height="110" rx="10" fill="#21262d" stroke="#f0a500" stroke-width="2"/>
+      <text x="380" y="57" font-family="IBM Plex Mono" font-size="13" fill="#f0a500" text-anchor="middle" font-weight="600">ESP32 &mdash; TX e RX sullo stesso chip</text>
+      <!-- TX side label -->
+      <rect x="50" y="68" width="160" height="60" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1.5"/>
+      <text x="130" y="87"  font-family="IBM Plex Mono" font-size="10" fill="#3fb950" text-anchor="middle">LATO TX</text>
+      <text x="130" y="101" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">calcola temp simulata</text>
+      <text x="130" y="114" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">dacWrite(25, val)</text>
+      <!-- freccia DAC -->
+      <line x1="210" y1="100" x2="280" y2="100" stroke="#58a6ff" stroke-width="2"/>
+      <polygon points="280,95 293,100 280,105" fill="#58a6ff"/>
+      <text x="245" y="93" font-family="IBM Plex Mono" font-size="9" fill="#58a6ff" text-anchor="middle">GPIO25</text>
+      <!-- R_shunt -->
+      <rect x="293" y="88" width="24" height="40" rx="3" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+      <text x="305" y="103" font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">150</text>
+      <text x="305" y="114" font-family="IBM Plex Mono" font-size="8" fill="#3fb950" text-anchor="middle">&Omega;</text>
+      <!-- nodo + GND -->
+      <circle cx="293" cy="100" r="5" fill="#f0a500"/>
+      <line x1="305" y1="128" x2="305" y2="140" stroke="#8b949e" stroke-width="2"/>
+      <line x1="293" y1="140" x2="317" y2="140" stroke="#8b949e" stroke-width="1.5"/>
+      <line x1="297" y1="145" x2="313" y2="145" stroke="#8b949e" stroke-width="1.5"/>
+      <line x1="301" y1="150" x2="309" y2="150" stroke="#8b949e" stroke-width="1.5"/>
+      <!-- ADC wire -->
+      <line x1="293" y1="100" x2="210" y2="100" stroke="#bc8cff" stroke-width="1.5" stroke-dasharray="0"/>
+      <!-- tratto da nodo a RX box -->
+      <line x1="293" y1="100" x2="350" y2="100" stroke="#bc8cff" stroke-width="2"/>
+      <polygon points="350,95 363,100 350,105" fill="#bc8cff"/>
+      <text x="320" y="93" font-family="IBM Plex Mono" font-size="9" fill="#bc8cff" text-anchor="middle">GPIO34</text>
+      <!-- RX side -->
+      <rect x="363" y="68" width="200" height="60" rx="6" fill="#0d1117" stroke="#bc8cff" stroke-width="1.5"/>
+      <text x="463" y="87"  font-family="IBM Plex Mono" font-size="10" fill="#bc8cff" text-anchor="middle">LATO RX</text>
+      <text x="463" y="101" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">analogRead(34) &rarr; I_loop</text>
+      <text x="463" y="114" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">confronto I_TX vs I_RX</text>
+      <!-- output serial -->
+      <rect x="590" y="68" width="120" height="60" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="650" y="87"  font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">Serial Monitor</text>
+      <text x="650" y="101" font-family="IBM Plex Mono" font-size="8" fill="#6e7681" text-anchor="middle">T_TX | DAC | V_tx</text>
+      <text x="650" y="113" font-family="IBM Plex Mono" font-size="8" fill="#6e7681" text-anchor="middle">I_TX | I_RX | err</text>
+    </svg>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32</span><span class="cf">es2_trasmettitore.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES2 &ndash; Trasmettitore + Ricevitore sullo stesso ESP32
+ * GPIO25 = DAC output  (simula il trasmettitore)
+ * GPIO34 = ADC input   (simula il ricevitore con R_shunt)
+ * Scansione automatica 0&rarr;100&deg;C a passi di 10&deg;C
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   DAC_PIN  = <span class="num">25</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   ADC_PIN  = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF     = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SHUNT  = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN    = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX    = <span class="num">20.0f</span>;
+
+<span class="cm">// Converte temperatura [0-100 C] in valore DAC [0-255]</span>
+<span class="tp">uint8_t</span> <span class="fn">tempToDAC</span>(<span class="tp">float</span> temp) {
+  <span class="kw">const</span> <span class="tp">float</span> i   = I_MIN + (I_MAX - I_MIN) * (temp / <span class="num">100.0f</span>);
+  <span class="kw">const</span> <span class="tp">float</span> v   = (i / <span class="num">1000.0f</span>) * R_SHUNT;
+  <span class="kw">return</span> (<span class="tp">uint8_t</span>) <span class="fn">constrain</span>(v / VREF * <span class="num">255.0f</span>, <span class="num">0</span>, <span class="num">255</span>);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  Serial.<span class="fn">println</span>(<span class="str">"T_TX\tDAC\tV_TX(V)\tI_TX(mA)\tI_RX(mA)\tErrore"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="tp">float</span> t = <span class="num">0.0f</span>; t &lt;= <span class="num">100.0f</span>; t += <span class="num">10.0f</span>) {
+
+    <span class="cm">// &mdash; TX &mdash;</span>
+    <span class="kw">const</span> <span class="tp">uint8_t</span> dv  = <span class="fn">tempToDAC</span>(t);
+    <span class="fn">dacWrite</span>(DAC_PIN, dv);
+    <span class="fn">delay</span>(<span class="num">80</span>);  <span class="cm">// stabilizzazione</span>
+    <span class="kw">const</span> <span class="tp">float</span> v_tx  = dv / <span class="num">255.0f</span> * VREF;
+    <span class="kw">const</span> <span class="tp">float</span> i_tx  = (v_tx / R_SHUNT) * <span class="num">1000.0f</span>;
+
+    <span class="cm">// &mdash; RX &mdash;</span>
+    <span class="tp">long</span> acc = <span class="num">0</span>;
+    <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>; i&lt;<span class="num">16</span>; ++i) acc += <span class="fn">analogRead</span>(ADC_PIN);
+    <span class="kw">const</span> <span class="tp">float</span> v_rx  = (<span class="tp">float</span>)(acc/<span class="num">16</span>) / <span class="num">4095.0f</span> * VREF;
+    <span class="kw">const</span> <span class="tp">float</span> i_rx  = (v_rx / R_SHUNT) * <span class="num">1000.0f</span>;
+
+    Serial.<span class="fn">print</span>(t,    <span class="num">1</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+    Serial.<span class="fn">print</span>(dv);       Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+    Serial.<span class="fn">print</span>(v_tx, <span class="num">4</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+    Serial.<span class="fn">print</span>(i_tx, <span class="num">3</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(i_rx, <span class="num">3</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">println</span>(i_rx - i_tx, <span class="num">3</span>);
+  }
+  Serial.<span class="fn">println</span>(<span class="str">"---"</span>); <span class="fn">delay</span>(<span class="num">2000</span>);
+}</pre>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Il DAC &egrave; a 8 bit (0&ndash;255). Quanti livelli distinti pu&ograve; generare nell&rsquo;intervallo 4&ndash;20&thinsp;mA? Qual &egrave; la risoluzione in mA per passo?</li>
+      <li>Osserva la colonna <strong>Errore</strong>. L&rsquo;errore &egrave; costante o varia con la temperatura? Cosa lo causa?</li>
+      <li><strong>Modifica:</strong> aggiungi <code>+5.0f</code> alla temperatura dentro <code>tempToDAC()</code> (errore intenzionale). Di quanto cambia il DAC a 50&deg;C? Il ricevitore lo rileva?</li>
+      <li>Perch&eacute; &egrave; necessario il <code>delay(80)</code> dopo <code>dacWrite()</code>?</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 03"></div>
+
+<!-- ===================== ES3 ===================== -->
+<div class="es" id="es3">
+  <div class="esh">
+    <div class="esn" style="background:var(--green);color:#000;">03</div>
+    <div>
+      <div class="estipo" style="color:var(--green);">Esercizio 3 &middot; Catena TX&rarr;RX</div>
+      <div class="estit">Catena completa &mdash; due ESP32 comunicano via loop 4-20&nbsp;mA</div>
+    </div>
+  </div>
+
+  <div class="card grn">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--green)">&#9656;</span>ESP32_A genera il segnale (trasmettitore)</div>
+      <div class="oi"><span style="color:var(--green)">&#9656;</span>ESP32_B riceve e decodifica la misura (ricevitore)</div>
+      <div class="oi"><span style="color:var(--green)">&#9656;</span>Simulare la &ldquo;lunghezza del cavo&rdquo; con un resistore R_cavo in serie</div>
+      <div class="oi"><span style="color:var(--green)">&#9656;</span>Verificare sperimentalmente l&rsquo;immunit&agrave; al rumore del loop in corrente</div>
+    </div>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>In Wokwi puoi inserire <strong>due ESP32</strong> nella stessa simulazione. Aggiungi un <strong>Potentiometer 10k</strong> in serie tra i due come R_cavo variabile (0&ndash;10k&Omega;) per simulare diverse lunghezze di cavo industriale.</span>
+  </div>
+
+  <div class="sw">
+    <div class="stit">Schema catena TX &rarr; R_cavo &rarr; RX</div>
+    <svg viewBox="0 0 760 185" xmlns="http://www.w3.org/2000/svg">
+      <!-- ESP32_A TX -->
+      <rect x="20" y="42" width="150" height="100" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="2"/>
+      <text x="95" y="64"  font-family="IBM Plex Mono" font-size="11" fill="#3fb950" text-anchor="middle" font-weight="600">ESP32_A</text>
+      <text x="95" y="78"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">TRASMETTITORE</text>
+      <text x="95" y="91"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">GPIO25 DAC</text>
+      <text x="95" y="104" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">onda triangolare</text>
+      <text x="95" y="117" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">0&rarr;100&rarr;0 &deg;C</text>
+      <line x1="170" y1="92" x2="210" y2="92" stroke="#e6edf3" stroke-width="2"/>
+      <circle cx="170" cy="92" r="4" fill="#3fb950"/>
+      <!-- I_loop freccia -->
+      <text x="270" y="80" font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">&rarr; I_loop &rarr;</text>
+      <!-- R_cavo (dashed, variabile) -->
+      <rect x="210" y="80" width="120" height="24" rx="3" fill="#21262d" stroke="#f85149" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="270" y="91" font-family="IBM Plex Mono" font-size="10" fill="#f85149" text-anchor="middle">R_cavo</text>
+      <text x="270" y="101" font-family="IBM Plex Mono" font-size="8" fill="#6e7681" text-anchor="middle">0&ndash;100&thinsp;&Omega; (pot)</text>
+      <line x1="330" y1="92" x2="380" y2="92" stroke="#e6edf3" stroke-width="2"/>
+      <!-- nodo B -->
+      <circle cx="380" cy="92" r="5" fill="#58a6ff"/>
+      <text x="380" y="78" font-family="IBM Plex Mono" font-size="9" fill="#58a6ff" text-anchor="middle">nodo B</text>
+      <!-- R_shunt 150 verticale -->
+      <line x1="380" y1="92"  x2="380" y2="108" stroke="#e6edf3" stroke-width="2"/>
+      <rect x="368" y="108" width="24" height="36" rx="3" fill="#21262d" stroke="#3fb950" stroke-width="1.5"/>
+      <text x="380" y="122" font-family="IBM Plex Mono" font-size="9" fill="#3fb950" text-anchor="middle">150&thinsp;&Omega;</text>
+      <line x1="380" y1="144" x2="380" y2="158" stroke="#8b949e" stroke-width="2"/>
+      <!-- GND shunt -->
+      <line x1="366" y1="158" x2="394" y2="158" stroke="#8b949e" stroke-width="1.5"/>
+      <line x1="370" y1="163" x2="390" y2="163" stroke="#8b949e" stroke-width="1.5"/>
+      <line x1="374" y1="168" x2="386" y2="168" stroke="#8b949e" stroke-width="1.5"/>
+      <!-- ADC wire -->
+      <line x1="380" y1="92" x2="455" y2="92" stroke="#bc8cff" stroke-width="2" stroke-dasharray="7,3"/>
+      <line x1="455" y1="92" x2="455" y2="65" stroke="#bc8cff" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- ESP32_B RX -->
+      <rect x="455" y="42" width="150" height="100" rx="8" fill="#21262d" stroke="#bc8cff" stroke-width="2"/>
+      <text x="530" y="64"  font-family="IBM Plex Mono" font-size="11" fill="#bc8cff" text-anchor="middle" font-weight="600">ESP32_B</text>
+      <text x="530" y="78"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">RICEVITORE</text>
+      <text x="530" y="91"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">GPIO34 ADC</text>
+      <text x="530" y="104" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">decodifica T (&deg;C)</text>
+      <text x="530" y="117" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">stampa errore</text>
+      <circle cx="455" cy="65" r="4" fill="#bc8cff"/>
+      <!-- Riquadro immunita' -->
+      <rect x="625" y="42" width="125" height="100" rx="6" fill="rgba(248,81,73,.08)" stroke="rgba(248,81,73,.3)" stroke-width="1"/>
+      <text x="687" y="64"  font-family="IBM Plex Mono" font-size="10" fill="#f85149" text-anchor="middle" font-weight="600">Effetto cavo</text>
+      <text x="687" y="80"  font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">Con V:</text>
+      <text x="687" y="92"  font-family="IBM Plex Mono" font-size="9"  fill="#f85149" text-anchor="middle">&#916;V=I&times;R_cavo</text>
+      <text x="687" y="106" font-family="IBM Plex Mono" font-size="9"  fill="#8b949e" text-anchor="middle">Con I:</text>
+      <text x="687" y="118" font-family="IBM Plex Mono" font-size="9"  fill="#3fb950" text-anchor="middle">I = costante!</text>
+      <text x="687" y="132" font-family="IBM Plex Mono" font-size="8"  fill="#6e7681" text-anchor="middle">(immune)</text>
+    </svg>
+  </div>
+
+  <div class="split">
+    <div class="cb">
+      <div class="ch"><span class="cl">ESP32_A &mdash; TX</span><span class="cf">es3_tx.ino</span></div>
+      <pre class="code" style="font-size:11.5px"><span class="cm">/* ES3 TX: onda triangolare 0&rarr;100&rarr;0 &deg;C */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   DAC  = <span class="num">25</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> RSH  = <span class="num">150.f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VR   = <span class="num">3.3f</span>;
+
+<span class="tp">uint8_t</span> <span class="fn">toDAC</span>(<span class="tp">float</span> t){
+  <span class="kw">float</span> i=<span class="num">4.f</span>+<span class="num">16.f</span>*(t/<span class="num">100.f</span>);
+  <span class="kw">return</span> (<span class="tp">uint8_t</span>)(i/<span class="num">1000.f</span>*RSH/VR*<span class="num">255.f</span>);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>(){Serial.<span class="fn">begin</span>(<span class="num">115200</span>);}
+
+<span class="kw">void</span> <span class="fn">loop</span>(){
+  <span class="kw">for</span>(<span class="tp">float</span> t=<span class="num">0</span>;t&lt;=<span class="num">100</span>;t+=<span class="num">5</span>){
+    <span class="fn">dacWrite</span>(DAC,<span class="fn">toDAC</span>(t));
+    Serial.<span class="fn">print</span>(<span class="str">"TX="</span>);
+    Serial.<span class="fn">println</span>(t);
+    <span class="fn">delay</span>(<span class="num">500</span>);
+  }
+  <span class="kw">for</span>(<span class="tp">float</span> t=<span class="num">100</span>;t&gt;=<span class="num">0</span>;t-=<span class="num">5</span>){
+    <span class="fn">dacWrite</span>(DAC,<span class="fn">toDAC</span>(t));
+    Serial.<span class="fn">print</span>(<span class="str">"TX="</span>);
+    Serial.<span class="fn">println</span>(t);
+    <span class="fn">delay</span>(<span class="num">500</span>);
+  }
+}</pre>
+    </div>
+    <div class="cb">
+      <div class="ch"><span class="cl">ESP32_B &mdash; RX</span><span class="cf">es3_rx.ino</span></div>
+      <pre class="code" style="font-size:11.5px"><span class="cm">/* ES3 RX: legge loop, stampa T e errore */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   ADC = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> RSH = <span class="num">150.f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VR  = <span class="num">3.3f</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>(){
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  Serial.<span class="fn">println</span>(<span class="str">"V_sh\tI\tT_rx"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>(){
+  <span class="tp">long</span> a=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;<span class="num">16</span>;++i)
+    a+=<span class="fn">analogRead</span>(ADC);
+  <span class="tp">float</span> v=(<span class="tp">float</span>)(a/<span class="num">16</span>)/<span class="num">4095.f</span>*VR;
+  <span class="tp">float</span> i=(v/RSH)*<span class="num">1000.f</span>;
+  <span class="tp">float</span> t=<span class="fn">constrain</span>(
+    (i-<span class="num">4.f</span>)/<span class="num">16.f</span>*<span class="num">100.f</span>,<span class="num">0</span>,<span class="num">100</span>);
+  Serial.<span class="fn">print</span>(v,<span class="num">4</span>); Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">print</span>(i,<span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">println</span>(t,<span class="num">2</span>);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella effetto R_cavo &mdash; T_TX fissa = 50&deg;C</div>
+    <table class="dtbl">
+      <tr><th>R_cavo (&Omega;)</th><th>I_TX teorica (mA)</th><th>V_sh RX (V)</th><th>I_RX (mA)</th><th>T_RX (&deg;C)</th><th>Errore &Delta;T</th></tr>
+      <tr><td class="giv">0</td>  <td class="giv">12.000</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">10</td> <td class="giv">12.000</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">50</td> <td class="giv">12.000</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">100</td><td class="giv">12.000</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </table>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Cosa osservi nella colonna Errore &Delta;T al variare di R_cavo? Il loop &egrave; davvero immune alla resistenza del cavo?</li>
+      <li>Con R_cavo = 100&thinsp;&Omega; e I = 12&thinsp;mA: quanto vale la caduta &#916;V sul cavo? Se il sistema fosse a tensione, quanti &deg;C di errore introdurrebbe?</li>
+      <li>Ripeti la misura <em>senza</em> R_shunt &mdash; collegando GPIO25 direttamente a GPIO34 (segnale in tensione). L&rsquo;errore cambia con R_cavo? Confronta i due risultati.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 04"></div>
+
+<!-- ===================== ES4 ===================== -->
+<div class="es" id="es4">
+  <div class="esh">
+    <div class="esn" style="background:var(--red);color:#fff;">04</div>
+    <div>
+      <div class="estipo" style="color:var(--red);">Esercizio 4 &middot; Sistema di allarme</div>
+      <div class="estit">Soglie di allarme con isteresi &mdash; LED su loop 4-20&nbsp;mA</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Definire tre soglie: BASSA (20&deg;C), ALTA (80&deg;C), GUASTO (&lt;2&thinsp;mA)</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Pilotare 4 LED (verde/giallo/rosso/blu) per ogni stato</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Implementare isteresi (&plusmn;2&deg;C) per evitare flicker sulle soglie</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Distinguere allarme da guasto fisico del loop (live zero)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Componenti Wokwi</div>
+    <table class="ctbl">
+      <tr><th>Componente</th><th>Valore</th><th>Q.</th><th>Funzione</th></tr>
+      <tr><td>ESP32 DevKit V1</td><td class="mc">ESP32</td><td class="qty">1</td><td>Ricevitore + logica allarme</td></tr>
+      <tr><td>Potenziometro</td><td class="mc">10 k&Omega;</td><td class="qty">1</td><td>Simula trasmettitore (come ES1)</td></tr>
+      <tr><td>Resistore shunt</td><td class="mc">150 &Omega;</td><td class="qty">1</td><td>Converte I &rarr; V per ADC</td></tr>
+      <tr><td>LED verde</td><td class="mc">&mdash;</td><td class="qty">1</td><td>GPIO2 &mdash; stato OK</td></tr>
+      <tr><td>LED giallo</td><td class="mc">&mdash;</td><td class="qty">1</td><td>GPIO4 &mdash; T BASSA</td></tr>
+      <tr><td>LED rosso</td><td class="mc">&mdash;</td><td class="qty">1</td><td>GPIO5 &mdash; T ALTA</td></tr>
+      <tr><td>LED blu</td><td class="mc">&mdash;</td><td class="qty">1</td><td>GPIO18 &mdash; GUASTO CAVO</td></tr>
+      <tr><td>Resistori LED</td><td class="mc">330 &Omega;</td><td class="qty">4</td><td>Limitazione corrente &sim;9&thinsp;mA</td></tr>
+    </table>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32</span><span class="cf">es4_allarmi.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES4 &ndash; Sistema di allarme 4-20 mA con isteresi
+ * Soglie: T_LOW=20&deg;C, T_HIGH=80&deg;C, GUASTO &lt;2mA
+ * Isteresi: 2&deg;C (banda morta) per evitare oscillazioni
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC   = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   LED_OK    = <span class="num">2</span>;   <span class="cm">// verde</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   LED_LOW   = <span class="num">4</span>;   <span class="cm">// giallo</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   LED_HIGH  = <span class="num">5</span>;   <span class="cm">// rosso</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   LED_FAULT = <span class="num">18</span>;  <span class="cm">// blu &ndash; guasto cavo</span>
+
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF      = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SHUNT   = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN     = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX     = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> TEMP_MIN  = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> TEMP_MAX  = <span class="num">100.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_LOW     = <span class="num">20.0f</span>;    <span class="cm">// soglia bassa</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> T_HIGH    = <span class="num">80.0f</span>;    <span class="cm">// soglia alta</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> ISTERESI  = <span class="num">2.0f</span>;     <span class="cm">// &deg;C banda morta</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> I_FAULT   = <span class="num">2.0f</span>;     <span class="cm">// mA soglia guasto</span>
+
+<span class="kw">enum class</span> Stato { OK, BASSA, ALTA, GUASTO };
+Stato stato_prec = Stato::OK;
+
+<span class="kw">void</span> <span class="fn">setLEDs</span>(Stato s) {
+  <span class="fn">digitalWrite</span>(LED_OK,    s==Stato::OK     ? HIGH:LOW);
+  <span class="fn">digitalWrite</span>(LED_LOW,   s==Stato::BASSA  ? HIGH:LOW);
+  <span class="fn">digitalWrite</span>(LED_HIGH,  s==Stato::ALTA   ? HIGH:LOW);
+  <span class="fn">digitalWrite</span>(LED_FAULT, s==Stato::GUASTO ? HIGH:LOW);
+}
+
+Stato <span class="fn">valuta</span>(<span class="tp">float</span> iloop, <span class="tp">float</span> t, Stato prec) {
+  <span class="kw">if</span> (iloop &lt; I_FAULT) <span class="kw">return</span> Stato::GUASTO;
+  <span class="cm">// isteresi soglia alta</span>
+  <span class="kw">if</span> (prec==Stato::ALTA  && t &gt; T_HIGH-ISTERESI) <span class="kw">return</span> Stato::ALTA;
+  <span class="kw">if</span> (prec!=Stato::ALTA  && t &gt; T_HIGH+ISTERESI) <span class="kw">return</span> Stato::ALTA;
+  <span class="cm">// isteresi soglia bassa</span>
+  <span class="kw">if</span> (prec==Stato::BASSA && t &lt; T_LOW+ISTERESI)  <span class="kw">return</span> Stato::BASSA;
+  <span class="kw">if</span> (prec!=Stato::BASSA && t &lt; T_LOW-ISTERESI)  <span class="kw">return</span> Stato::BASSA;
+  <span class="kw">return</span> Stato::OK;
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  <span class="kw">for</span> (<span class="tp">int</span> p : {LED_OK, LED_LOW, LED_HIGH, LED_FAULT})
+    <span class="fn">pinMode</span>(p, OUTPUT);
+  Serial.<span class="fn">println</span>(<span class="str">"I(mA)\tT(C)\tStato"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">long</span> acc=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;<span class="num">16</span>;++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">float</span> v  = (<span class="tp">float</span>)(acc/<span class="num">16</span>)/<span class="num">4095.f</span>*VREF;
+  <span class="kw">const</span> <span class="tp">float</span> il = v/R_SHUNT*<span class="num">1000.f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> t  = TEMP_MIN +
+    (TEMP_MAX-TEMP_MIN)*<span class="fn">constrain</span>((il-I_MIN)/(I_MAX-I_MIN),<span class="num">0.f</span>,<span class="num">1.f</span>);
+
+  <span class="kw">const</span> Stato s = <span class="fn">valuta</span>(il, t, stato_prec);
+  stato_prec = s;
+  <span class="fn">setLEDs</span>(s);
+
+  <span class="kw">const</span> <span class="tp">char</span>* n =
+    s==Stato::OK    ?<span class="str">"OK"</span>          :
+    s==Stato::BASSA ?<span class="str">"T BASSA"</span>    :
+    s==Stato::ALTA  ?<span class="str">"T ALTA"</span>     :<span class="str">"GUASTO CAVO"</span>;
+
+  Serial.<span class="fn">print</span>(il,<span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">print</span>(t, <span class="num">2</span>); Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">println</span>(n);
+  <span class="fn">delay</span>(<span class="num">300</span>);
+}</pre>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella verifica soglie &mdash; da compilare</div>
+    <table class="dtbl">
+      <tr><th>Pos. pot</th><th>I_loop (mA)</th><th>T (&deg;C)</th><th>LED acceso</th><th>Stato atteso</th><th>&#10003;/&#10007;</th></tr>
+      <tr><td class="giv">0% (minimo)</td><td class="giv">&#8776;0</td><td class="giv">&mdash;</td><td class="fill">______</td><td class="giv">GUASTO</td><td class="fill">__</td></tr>
+      <tr><td class="giv">10%</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="giv">BASSA</td><td class="fill">__</td></tr>
+      <tr><td class="giv">50%</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="giv">OK</td><td class="fill">__</td></tr>
+      <tr><td class="giv">90%</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="giv">ALTA</td><td class="fill">__</td></tr>
+      <tr><td class="giv">100%</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="giv">ALTA</td><td class="fill">__</td></tr>
+    </table>
+  </div>
+
+  <div class="card yel">
+    <div class="ctit">Procedura verifica isteresi</div>
+    <div class="steps">
+      <div class="step"><div class="sb">Porta lentamente il pot verso <strong>T_HIGH = 80&deg;C</strong>. Annota il valore di T a cui si accende il LED rosso (soglia di entrata).</div></div>
+      <div class="step"><div class="sb">Abbassa lentamente il pot. Annota il valore di T a cui si spegne il LED rosso (soglia di uscita). La differenza deve essere &#8776; <strong>4&deg;C = 2&times;ISTERESI</strong>.</div></div>
+      <div class="step"><div class="sb">Ripeti per la soglia bassa T_LOW = 20&deg;C. Verifica la banda morta inferiore.</div></div>
+      <div class="step"><div class="sb"><strong>Modifica:</strong> imposta <code>ISTERESI = 0.0f</code>. Osserva il LED vicino alla soglia. Conta le commutazioni in 10 secondi &mdash; confronta con <code>ISTERESI = 2.0f</code>.</div></div>
+    </div>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Perch&eacute; il guasto &egrave; rilevato con I &lt; 2&thinsp;mA e non I &lt; 4&thinsp;mA? Cosa succederebbe usando 4&thinsp;mA come soglia?</li>
+      <li>Spiega il meccanismo di isteresi nel codice. Perch&eacute; il confronto usa <code>T_HIGH&plusmn;ISTERESI</code> a seconda dello stato precedente?</li>
+      <li><strong>Modifica avanzata:</strong> aggiungi un <code>int contatore_allarmi</code> che si incrementa ogni volta che si entra in stato ALTA o BASSA. Stampa il contatore sul Serial Monitor. Quante transizioni avvengono senza isteresi in 30 secondi vicino alla soglia?</li>
+      <li>Come modificheresti il codice per misurare <strong>pressione 0&ndash;10 bar</strong> invece della temperatura? Elenca tutte le costanti da cambiare.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 05"></div>
+
+<!-- ===================== ES5 ===================== -->
+<div class="es" id="es5">
+  <div class="esh">
+    <div class="esn" style="background:#a371f7;color:#000;">05</div>
+    <div>
+      <div class="estipo" style="color:#a371f7;">Esercizio 5 &middot; Calibrazione</div>
+      <div class="estit">Calibrazione a due punti &mdash; correzione non-linearit&agrave; ADC</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid #a371f7;">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:#a371f7">&#9656;</span>Misurare l&rsquo;errore di offset e guadagno dell&rsquo;ADC ESP32</div>
+      <div class="oi"><span style="color:#a371f7">&#9656;</span>Acquisire due punti di calibrazione (4&thinsp;mA e 20&thinsp;mA)</div>
+      <div class="oi"><span style="color:#a371f7">&#9656;</span>Applicare la correzione lineare: <code>I_cal = m &times; raw + q</code></div>
+      <div class="oi"><span style="color:#a371f7">&#9656;</span>Confrontare l&rsquo;errore prima e dopo la calibrazione</div>
+    </div>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>L&rsquo;ADC interno dell&rsquo;ESP32 ha una non-linearit&agrave; integrale (INL) tipica di &plusmn;10&thinsp;LSB e un offset variabile da chip a chip. La calibrazione a due punti corregge l&rsquo;errore di guadagno e di offset con una semplice regressione lineare su due valori noti.</span>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Procedura di calibrazione &mdash; passi</div>
+    <div class="steps">
+      <div class="step"><div class="sb"><strong>Punto LOW (4&thinsp;mA):</strong> regola il potenziometro finch&eacute; il Serial Monitor mostra I_loop &asymp; 4.00&thinsp;mA (calcolato da V_shunt). Leggi e annota <code>raw_low</code>. Il valore atteso &egrave; V_shunt = 4&thinsp;mA &times; 150&thinsp;&Omega; = 0.600&thinsp;V &rarr; raw_teorico = 0.600/3.3 &times; 4095 &asymp; <strong>744</strong>.</div></div>
+      <div class="step"><div class="sb"><strong>Punto HIGH (20&thinsp;mA):</strong> porta il pot al massimo (I_loop &asymp; 20&thinsp;mA). Annota <code>raw_high</code>. Atteso: V = 3.0&thinsp;V &rarr; raw &asymp; <strong>3723</strong>.</div></div>
+      <div class="step"><div class="sb">Calcola coefficienti: <code>m = (20.0 - 4.0) / (raw_high - raw_low)</code> e <code>q = 4.0 - m &times; raw_low</code>.</div></div>
+      <div class="step"><div class="sb">Inserisci i valori nelle costanti <code>CAL_M</code> e <code>CAL_Q</code> nel codice e riavvia la simulazione.</div></div>
+      <div class="step"><div class="sb">Confronta la colonna <strong>I_raw</strong> (non calibrata) con <strong>I_cal</strong> (calibrata). Calcola l&rsquo;errore in entrambi i casi.</div></div>
+    </div>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32</span><span class="cf">es5_calibrazione.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES5 &ndash; Calibrazione a due punti dell&rsquo;ADC ESP32
+ * I_loop = m * raw + q
+ * m e q vengono determinati misurando due punti noti:
+ * LOW = 4 mA (live zero), HIGH = 20 mA (fondo scala)
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC  = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF     = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SHUNT  = <span class="num">150.0f</span>;
+
+<span class="cm">// ── Punti di calibrazione (da misurare e inserire) ────────</span>
+<span class="cm">// Fase 1: lascia CAL_M=1.0 e CAL_Q=0.0, misura raw_low e raw_high</span>
+<span class="cm">// Fase 2: calcola m e q e sostituisci qui sotto</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> RAW_LOW  = <span class="num">744.0f</span>;   <span class="cm">// raw a 4 mA  (da misurare)</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> RAW_HIGH = <span class="num">3723.0f</span>;  <span class="cm">// raw a 20 mA (da misurare)</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> I_LOW    = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_HIGH   = <span class="num">20.0f</span>;
+
+<span class="cm">// Coefficienti calcolati dalla calibrazione</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> CAL_M = (I_HIGH - I_LOW) / (RAW_HIGH - RAW_LOW);
+<span class="kw">constexpr</span> <span class="tp">float</span> CAL_Q = I_LOW - CAL_M * RAW_LOW;
+
+<span class="kw">float</span> <span class="fn">rawToI_uncal</span>(<span class="tp">int</span> raw) {
+  <span class="cm">// Conversione senza calibrazione (formula base)</span>
+  <span class="kw">return</span> ((<span class="tp">float</span>)raw / <span class="num">4095.0f</span> * VREF / R_SHUNT) * <span class="num">1000.0f</span>;
+}
+
+<span class="kw">float</span> <span class="fn">rawToI_cal</span>(<span class="tp">int</span> raw) {
+  <span class="cm">// Conversione con calibrazione a due punti</span>
+  <span class="kw">return</span> CAL_M * (<span class="tp">float</span>)raw + CAL_Q;
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  Serial.<span class="fn">print</span>(<span class="str">"CAL_M = "</span>); Serial.<span class="fn">println</span>(CAL_M, <span class="num">6</span>);
+  Serial.<span class="fn">print</span>(<span class="str">"CAL_Q = "</span>); Serial.<span class="fn">println</span>(CAL_Q, <span class="num">4</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"raw\t\tI_raw(mA)\tI_cal(mA)\terr_raw\t\terr_cal"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">long</span> acc = <span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>; i&lt;<span class="num">64</span>; ++i) acc += <span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">int</span>   raw    = (<span class="tp">int</span>)(acc / <span class="num">64</span>);
+  <span class="kw">const</span> <span class="tp">float</span> i_raw  = <span class="fn">rawToI_uncal</span>(raw);
+  <span class="kw">const</span> <span class="tp">float</span> i_cal  = <span class="fn">rawToI_cal</span>(raw);
+  <span class="cm">// Valore "vero" stimato dalla posizione pot (da confrontare manualmente)</span>
+  Serial.<span class="fn">print</span>(raw);            Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(i_raw,  <span class="num">4</span>);     Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(i_cal,  <span class="num">4</span>);     Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(i_raw - i_cal, <span class="num">4</span>); Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">println</span>(<span class="num">0.0f</span>, <span class="num">4</span>);  <span class="cm">// err_cal = 0 per definizione sui punti di cal</span>
+  <span class="fn">delay</span>(<span class="num">400</span>);
+}</pre>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella calibrazione &mdash; da compilare</div>
+    <table class="dtbl">
+      <tr><th>I_teorica (mA)</th><th>raw misurato</th><th>I_raw (mA)</th><th>I_cal (mA)</th><th>Errore raw (mA)</th><th>Errore cal (mA)</th></tr>
+      <tr><td class="giv">4.00</td>  <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">8.00</td>  <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">12.00</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">16.00</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">20.00</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </table>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Qual &egrave; il valore di <code>CAL_M</code> stampato sul Serial Monitor? Di quanto si discosta da <code>(I_HIGH - I_LOW) / (RAW_HIGH - RAW_LOW)</code> teorico (16 mA / 2979 LSB &asymp; 0.00537 mA/LSB)?</li>
+      <li>L&rsquo;errore nella colonna <strong>Errore raw</strong> &egrave; costante su tutta la scala o varia? Che tipo di errore indica se &egrave; costante? Se varia?</li>
+      <li><strong>Modifica:</strong> prova a sostituire <code>RAW_LOW</code> e <code>RAW_HIGH</code> con i valori letti effettivamente dalla simulazione. L&rsquo;errore si riduce dopo questa calibrazione personalizzata?</li>
+      <li>Perch&eacute; si usano 64 campioni di oversampling in questo esercizio invece di 16? Calcola il miglioramento teorico in ENOB.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 06"></div>
+
+<!-- ===================== ES6 ===================== -->
+<div class="es" id="es6">
+  <div class="esh">
+    <div class="esn" style="background:#39d353;color:#000;">06</div>
+    <div>
+      <div class="estipo" style="color:#39d353;">Esercizio 6 &middot; Oversampling</div>
+      <div class="estit">Oversampling &amp; ENOB &mdash; confronto 1, 16, 64, 256 campioni</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid #39d353;">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:#39d353">&#9656;</span>Misurare il rumore ADC con 1 campione e con oversampling crescente</div>
+      <div class="oi"><span style="color:#39d353">&#9656;</span>Calcolare la deviazione standard del segnale per ogni N</div>
+      <div class="oi"><span style="color:#39d353">&#9656;</span>Verificare la legge teorica: ENOB aumenta di 0.5 bit per ogni 4&times; campioni</div>
+      <div class="oi"><span style="color:#39d353">&#9656;</span>Trovare il compromesso N ottimale per la velocit&agrave; di campionamento richiesta</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Teoria &mdash; oversampling e ENOB</div>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:8px;">Mediando N campioni indipendenti il rumore si riduce di &radic;N. Quadruplicare N dimezza il rumore, guadagnando 1 bit di risoluzione effettiva (ENOB):</p>
+    <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:12px 18px;margin:10px 0;text-align:center;font-family:var(--mono);color:#79c0ff;font-size:13px;">
+      ENOB = N_bits + 0.5 &times; log&#8322;(N_campioni) &nbsp;&nbsp;&nbsp; [bit]
+    </div>
+    <p style="color:var(--text2);font-size:13px;">Esempio ESP32 (12-bit): con N=16 &rarr; ENOB = 12 + 0.5&times;4 = <strong>14 bit effettivi</strong>. Con N=256 &rarr; ENOB = 16 bit &mdash; equivalente a un ADC esterno di precisione.</p>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32</span><span class="cf">es6_oversampling.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES6 &ndash; Studio dell&rsquo;oversampling sull&rsquo;ADC ESP32
+ * Per ogni N: acquisisce WINDOW campioni mediati, calcola
+ * media e deviazione standard, stampa noise_rms in mA
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;cmath&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF    = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SH    = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   WINDOW  = <span class="num">128</span>;   <span class="cm">// campioni per calcolo std dev</span>
+
+<span class="kw">constexpr</span> <span class="tp">float</span> <span class="fn">rawToI</span>(<span class="tp">float</span> r) {
+  <span class="kw">return</span> r / <span class="num">4095.0f</span> * VREF / R_SH * <span class="num">1000.0f</span>;
+}
+
+<span class="cm">// Acquisisce WINDOW valori mediati con N campioni ciascuno,
+// ritorna {media, std_dev} della corrente in mA</span>
+<span class="kw">struct</span> Stats { <span class="tp">float</span> mean, stddev; };
+
+Stats <span class="fn">measure</span>(<span class="tp">int</span> N) {
+  <span class="tp">float</span> vals[WINDOW];
+  <span class="kw">for</span>(<span class="tp">int</span> w=<span class="num">0</span>; w&lt;WINDOW; ++w) {
+    <span class="tp">long</span> acc=<span class="num">0</span>;
+    <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>; i&lt;N; ++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+    vals[w] = <span class="fn">rawToI</span>((<span class="tp">float</span>)(acc/N));
+  }
+  <span class="cm">// Calcolo media</span>
+  <span class="tp">float</span> sum=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;WINDOW;++i) sum+=vals[i];
+  <span class="kw">const</span> <span class="tp">float</span> mean = sum/WINDOW;
+  <span class="cm">// Calcolo deviazione standard</span>
+  <span class="tp">float</span> var=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;WINDOW;++i) var+=(vals[i]-mean)*(vals[i]-mean);
+  <span class="kw">return</span> {mean, <span class="fn">sqrtf</span>(var/WINDOW)};
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  Serial.<span class="fn">println</span>(<span class="str">"N\tI_mean(mA)\tNoise_rms(mA)\tENOB_teorico"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">const</span> <span class="tp">int</span> Nlist[] = {<span class="num">1</span>, <span class="num">4</span>, <span class="num">16</span>, <span class="num">64</span>, <span class="num">256</span>};
+  <span class="kw">for</span> (<span class="tp">int</span> N : Nlist) {
+    <span class="kw">const</span> Stats s = <span class="fn">measure</span>(N);
+    <span class="kw">const</span> <span class="tp">float</span> enob = <span class="num">12.0f</span> + <span class="num">0.5f</span>*<span class="fn">log2f</span>((<span class="tp">float</span>)N);
+    Serial.<span class="fn">print</span>(N);            Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+    Serial.<span class="fn">print</span>(s.mean,  <span class="num">4</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(s.stddev,<span class="num">5</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">println</span>(enob,   <span class="num">1</span>);
+  }
+  Serial.<span class="fn">println</span>(<span class="str">"---"</span>); <span class="fn">delay</span>(<span class="num">3000</span>);
+}</pre>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella oversampling &mdash; da compilare (pot fisso a 50%)</div>
+    <table class="dtbl">
+      <tr><th>N campioni</th><th>I_mean (mA)</th><th>Noise_rms (mA)</th><th>ENOB teorico (bit)</th><th>Riduzione rumore rispetto N=1</th></tr>
+      <tr><td class="giv">1</td>  <td class="fill">______</td><td class="fill">______</td><td class="giv">12.0</td><td class="giv">&times;1 (riferimento)</td></tr>
+      <tr><td class="giv">4</td>  <td class="fill">______</td><td class="fill">______</td><td class="giv">13.0</td><td class="fill">______</td></tr>
+      <tr><td class="giv">16</td> <td class="fill">______</td><td class="fill">______</td><td class="giv">14.0</td><td class="fill">______</td></tr>
+      <tr><td class="giv">64</td> <td class="fill">______</td><td class="fill">______</td><td class="giv">15.0</td><td class="fill">______</td></tr>
+      <tr><td class="giv">256</td><td class="fill">______</td><td class="fill">______</td><td class="giv">16.0</td><td class="fill">______</td></tr>
+    </table>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Il rumore si dimezza davvero passando da N=1 a N=4? Calcola il rapporto Noise(N=1)/Noise(N=4) dalla tabella e confrontalo con il valore teorico &radic;4 = 2.</li>
+      <li>Qual &egrave; il <strong>costo in tempo</strong> di N=256? Se ogni <code>analogRead()</code> richiede ~10&thinsp;&mu;s, quanto impiega un&rsquo;acquisizione a N=256? &Egrave; accettabile per un controllo a 100&thinsp;ms?</li>
+      <li>A partire da quale N il miglioramento del rumore diventa trascurabile in pratica (rendimento decrescente)?</li>
+      <li><strong>Modifica:</strong> sostituisci <code>sqrtf(var/WINDOW)</code> con <code>sqrtf(var/(WINDOW-1))</code>. Quale formula statistica &egrave; pi&ugrave; corretta? Perch&eacute;?</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 07"></div>
+
+<!-- ===================== ES7 ===================== -->
+<div class="es" id="es7">
+  <div class="esh">
+    <div class="esn" style="background:#58a6ff;color:#000;">07</div>
+    <div>
+      <div class="estipo" style="color:#58a6ff;">Esercizio 7 &middot; Adattamento scala</div>
+      <div class="estit">Sensore di pressione 0&ndash;10 bar &mdash; adattamento del ricevitore</div>
+    </div>
+  </div>
+
+  <div class="card blu">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Adattare il codice del ricevitore (ES1) a un trasmettitore di pressione</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Capire che il loop 4-20&thinsp;mA &egrave; indipendente dalla grandezza fisica misurata</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Calcolare la risoluzione in bar per la scala 0-10 bar</div>
+      <div class="oi"><span style="color:var(--acc2)">&#9656;</span>Aggiungere unit&agrave; ingegneristiche e allarmi di pressione</div>
+    </div>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>Il trasmettitore di pressione (PT = Pressure Transmitter) invia esattamente lo stesso segnale 4-20&thinsp;mA del trasmettitore di temperatura. Il ricevitore cambia <strong>solo le costanti PHYS_MIN e PHYS_MAX</strong> &mdash; il circuito hardware rimane identico all&rsquo;ES1.</span>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32</span><span class="cf">es7_pressione.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES7 &ndash; Ricevitore 4-20 mA per sensore di pressione 0-10 bar
+ * Circuito identico a ES1: potenziometro + R_shunt 150 ohm + GPIO34
+ * Si cambia solo il range della grandezza fisica
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC   = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF      = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SHUNT   = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN     = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX     = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   N_SAMPLES = <span class="num">16</span>;
+
+<span class="cm">// ── Solo queste due costanti cambiano rispetto a ES1 ─────</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> PHYS_MIN  = <span class="num">0.0f</span>;    <span class="cm">// bar &ndash; pressione a 4 mA</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> PHYS_MAX  = <span class="num">10.0f</span>;   <span class="cm">// bar &ndash; pressione a 20 mA</span>
+<span class="kw">constexpr</span> <span class="tp">char</span>  UNIT[]    = <span class="str">"bar"</span>;
+<span class="kw">constexpr</span> <span class="tp">char</span>  SENSOR[]  = <span class="str">"PT"</span>;    <span class="cm">// Pressure Transmitter</span>
+
+<span class="cm">// Soglie di allarme pressione</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> P_LOW_ALARM  = <span class="num">1.0f</span>;   <span class="cm">// bar</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> P_HIGH_ALARM = <span class="num">8.5f</span>;   <span class="cm">// bar</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  <span class="cm">// Risoluzione in bar</span>
+  <span class="kw">const</span> <span class="tp">float</span> lsb_mA   = (I_MAX - I_MIN) / <span class="num">4095.0f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> lsb_bar  = lsb_mA / (I_MAX - I_MIN) * (PHYS_MAX - PHYS_MIN);
+  Serial.<span class="fn">print</span>(<span class="str">"Risoluzione: "</span>); Serial.<span class="fn">print</span>(lsb_bar*<span class="num">1000</span>,<span class="num">2</span>); Serial.<span class="fn">println</span>(<span class="str">" mbar/LSB"</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"I(mA)\t\tP(bar)\t\tStato"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">long</span> acc=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;N_SAMPLES;++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">float</span> v     = (<span class="tp">float</span>)(acc/N_SAMPLES)/<span class="num">4095.f</span>*VREF;
+  <span class="kw">const</span> <span class="tp">float</span> i_lp  = v/R_SHUNT*<span class="num">1000.f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> phys  = PHYS_MIN +
+    (PHYS_MAX-PHYS_MIN)*<span class="fn">constrain</span>((i_lp-I_MIN)/(I_MAX-I_MIN),<span class="num">0.f</span>,<span class="num">1.f</span>);
+
+  <span class="kw">const</span> <span class="tp">char</span>* stato =
+    (i_lp  &lt; <span class="num">2.0f</span>)        ? <span class="str">"GUASTO CAVO"</span>     :
+    (phys  &lt; P_LOW_ALARM)  ? <span class="str">"PRESSIONE BASSA"</span> :
+    (phys  &gt; P_HIGH_ALARM) ? <span class="str">"PRESSIONE ALTA"</span>  : <span class="str">"OK"</span>;
+
+  Serial.<span class="fn">print</span>(SENSOR); Serial.<span class="fn">print</span>(<span class="str">" "</span>);
+  Serial.<span class="fn">print</span>(i_lp, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+  Serial.<span class="fn">print</span>(phys,  <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">" "</span>); Serial.<span class="fn">print</span>(UNIT);
+  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>); Serial.<span class="fn">println</span>(stato);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}</pre>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Tabella pressione &mdash; da compilare</div>
+    <table class="dtbl">
+      <tr><th>Pos. pot</th><th>I_loop (mA)</th><th>Pressione (bar)</th><th>Stato</th><th>Verifica calcolo manuale</th></tr>
+      <tr><td class="giv">0%</td>  <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">25%</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">50%</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">85%</td> <td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="giv">100%</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </table>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Qual &egrave; la risoluzione stampata all&rsquo;avvio (mbar/LSB)? Confrontala con quella in &deg;C/LSB dell&rsquo;ES1. Il range fisico influisce sulla risoluzione?</li>
+      <li>Il circuito hardware &egrave; identico all&rsquo;ES1. Elenca esattamente le righe di codice che hai dovuto modificare per passare da temperatura a pressione.</li>
+      <li><strong>Sfida:</strong> adatta il codice per un flussimetro 0&ndash;500 L/h. Quante righe cambiano? Qual &egrave; la risoluzione in L/h per LSB?</li>
+      <li>Spiega perch&eacute; il loop 4-20&thinsp;mA viene chiamato &ldquo;standard universale&rdquo;: cosa rende lo stesso ricevitore hardware compatibile con sensori di temperatura, pressione, portata, livello?</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 08"></div>
+
+<!-- ===================== ES8 ===================== -->
+<div class="es" id="es8">
+  <div class="esh">
+    <div class="esn" style="background:#e3b341;color:#000;">08</div>
+    <div>
+      <div class="estipo" style="color:#e3b341;">Esercizio 8 &middot; Display OLED</div>
+      <div class="estit">Visualizzazione su OLED SSD1306 &mdash; valore numerico e barra di livello</div>
+    </div>
+  </div>
+
+  <div class="card yel">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--yellow)">&#9656;</span>Collegare un display OLED 128&times;64 I&sup2;C a ESP32 in Wokwi</div>
+      <div class="oi"><span style="color:var(--yellow)">&#9656;</span>Mostrare il valore numerico di I_loop e la grandezza fisica</div>
+      <div class="oi"><span style="color:var(--yellow)">&#9656;</span>Disegnare una barra di livello proporzionale alla corrente</div>
+      <div class="oi"><span style="color:var(--yellow)">&#9656;</span>Visualizzare lo stato di allarme con simboli grafici</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Componenti aggiuntivi Wokwi</div>
+    <table class="ctbl">
+      <tr><th>Componente</th><th>Valore</th><th>Q.</th><th>Collegamento</th></tr>
+      <tr><td>Display OLED</td><td class="mc">SSD1306 128&times;64 I&sup2;C</td><td class="qty">1</td><td>SDA &rarr; GPIO21, SCL &rarr; GPIO22</td></tr>
+      <tr><td>+ circuito ES1</td><td class="mc">pot + 150&Omega; + 630&Omega;</td><td class="qty">&mdash;</td><td>Identico a ES1</td></tr>
+    </table>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>In Wokwi: aggiungi il componente <strong>&ldquo;SSD1306&rdquo;</strong> e collegalo con I&sup2;C (SDA=GPIO21, SCL=GPIO22). La libreria <code>Adafruit_SSD1306</code> &egrave; disponibile direttamente nell&rsquo;environment Wokwi senza installazione.</span>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32 + OLED</span><span class="cf">es8_oled.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES8 &ndash; Display OLED 128x64 per ricevitore 4-20 mA
+ * Layout schermo:
+ *   Riga 0: "4-20mA Monitor"  (titolo)
+ *   Riga 1: "I: 12.345 mA"   (corrente)
+ *   Riga 2: "T: 52.16 C"     (grandezza fisica)
+ *   Riga 3: [==========  ] barra livello
+ *   Riga 4: "OK" / "T ALTA" / "GUASTO"
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;Adafruit_GFX.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;Adafruit_SSD1306.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC  = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF     = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SHUNT  = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN    = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX    = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MIN    = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MAX    = <span class="num">100.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_LOW    = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_HIGH   = <span class="num">80.0f</span>;
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   OLED_W   = <span class="num">128</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   OLED_H   = <span class="num">64</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   OLED_ADDR = <span class="num">0x3C</span>;
+
+Adafruit_SSD1306 <span class="fn">display</span>(OLED_W, OLED_H, &Wire, <span class="num">-1</span>);
+
+<span class="kw">void</span> <span class="fn">drawDisplay</span>(<span class="tp">float</span> i_loop, <span class="tp">float</span> temp, <span class="kw">const</span> <span class="tp">char</span>* stato) {
+  display.<span class="fn">clearDisplay</span>();
+  display.<span class="fn">setTextSize</span>(<span class="num">1</span>);
+  display.<span class="fn">setTextColor</span>(SSD1306_WHITE);
+
+  <span class="cm">// Titolo</span>
+  display.<span class="fn">setCursor</span>(<span class="num">20</span>, <span class="num">0</span>);
+  display.<span class="fn">print</span>(<span class="str">"4-20mA Monitor"</span>);
+  display.<span class="fn">drawLine</span>(<span class="num">0</span>, <span class="num">9</span>, <span class="num">127</span>, <span class="num">9</span>, SSD1306_WHITE);
+
+  <span class="cm">// Corrente</span>
+  display.<span class="fn">setCursor</span>(<span class="num">0</span>, <span class="num">13</span>);
+  display.<span class="fn">print</span>(<span class="str">"I: "</span>); display.<span class="fn">print</span>(i_loop, <span class="num">3</span>); display.<span class="fn">print</span>(<span class="str">" mA"</span>);
+
+  <span class="cm">// Grandezza fisica</span>
+  display.<span class="fn">setCursor</span>(<span class="num">0</span>, <span class="num">23</span>);
+  display.<span class="fn">print</span>(<span class="str">"T: "</span>); display.<span class="fn">print</span>(temp, <span class="num">1</span>); display.<span class="fn">print</span>(<span class="str">" C"</span>);
+
+  <span class="cm">// Barra di livello (larghezza proporzionale a frac 4-20mA)</span>
+  <span class="kw">const</span> <span class="tp">float</span> frac = <span class="fn">constrain</span>((i_loop-I_MIN)/(I_MAX-I_MIN), <span class="num">0.f</span>, <span class="num">1.f</span>);
+  <span class="kw">const</span> <span class="tp">int</span>   bw   = (<span class="tp">int</span>)(frac * <span class="num">110</span>);
+  display.<span class="fn">drawRect</span> (<span class="num">0</span>, <span class="num">35</span>, <span class="num">112</span>, <span class="num">10</span>, SSD1306_WHITE);  <span class="cm">// bordo barra</span>
+  display.<span class="fn">fillRect</span> (<span class="num">1</span>, <span class="num">36</span>, bw,  <span class="num">8</span>,  SSD1306_WHITE);  <span class="cm">// riempimento</span>
+  display.<span class="fn">setCursor</span>(<span class="num">115</span>, <span class="num">35</span>);
+  display.<span class="fn">print</span>((<span class="tp">int</span>)(frac*<span class="num">100</span>)); display.<span class="fn">print</span>(<span class="str">"%"</span>);
+
+  <span class="cm">// Stato allarme</span>
+  display.<span class="fn">setCursor</span>(<span class="num">0</span>, <span class="num">50</span>);
+  display.<span class="fn">setTextSize</span>(<span class="num">1</span>);
+  display.<span class="fn">print</span>(<span class="str">"&gt; "</span>); display.<span class="fn">print</span>(stato);
+
+  display.<span class="fn">display</span>();
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  <span class="kw">if</span> (!display.<span class="fn">begin</span>(SSD1306_SWITCHCAPVCC, OLED_ADDR))
+    <span class="kw">while</span>(<span class="num">1</span>) { Serial.<span class="fn">println</span>(<span class="str">"OLED fail"</span>); <span class="fn">delay</span>(<span class="num">1000</span>); }
+  display.<span class="fn">clearDisplay</span>(); display.<span class="fn">display</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">long</span> acc=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;<span class="num">16</span>;++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">float</span> v  = (<span class="tp">float</span>)(acc/<span class="num">16</span>)/<span class="num">4095.f</span>*VREF;
+  <span class="kw">const</span> <span class="tp">float</span> il = v/R_SHUNT*<span class="num">1000.f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> t  = T_MIN+(T_MAX-T_MIN)*<span class="fn">constrain</span>((il-I_MIN)/(I_MAX-I_MIN),<span class="num">0.f</span>,<span class="num">1.f</span>);
+  <span class="kw">const</span> <span class="tp">char</span>* s  =
+    (il &lt; <span class="num">2.f</span>)  ? <span class="str">"GUASTO CAVO"</span> :
+    (t  &gt; T_HIGH)? <span class="str">"!! T ALTA !!"</span>:
+    (t  &lt; T_LOW) ? <span class="str">"!! T BASSA"</span> : <span class="str">"OK"</span>;
+  <span class="fn">drawDisplay</span>(il, t, s);
+  <span class="fn">delay</span>(<span class="num">200</span>);
+}</pre>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>La barra di livello usa la variabile <code>frac</code> calcolata su I_loop. Perch&eacute; si usa la corrente e non direttamente la temperatura come input della barra?</li>
+      <li><strong>Modifica:</strong> aggiungi una seconda riga di testo grande (<code>setTextSize(2)</code>) con solo il valore numerico della temperatura. Come cambia il layout? Quanti pixel occupa ogni carattere a size 2?</li>
+      <li>Il display OLED si aggiorna ogni 200&thinsp;ms. Se la frequenza di campionamento ADC &egrave; 500&thinsp;Hz (con N=1), quanti campioni vengono &ldquo;persi&rdquo; tra un refresh e l&rsquo;altro?</li>
+      <li><strong>Sfida:</strong> aggiungi un cursore grafico (piccolo triangolo) sulla barra che indica la posizione delle soglie T_LOW e T_HIGH. Hint: usa <code>display.drawTriangle()</code>.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 09"></div>
+
+<!-- ===================== ES9 ===================== -->
+<div class="es" id="es9">
+  <div class="esh">
+    <div class="esn" style="background:#f0a500;color:#000;">09</div>
+    <div>
+      <div class="estipo" style="color:#f0a500;">Esercizio 9 &middot; Datalogger</div>
+      <div class="estit">Datalogger su SD card &mdash; registrazione timestampata in formato CSV</div>
+    </div>
+  </div>
+
+  <div class="card acc">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Collegare un modulo SD SPI a ESP32 in Wokwi</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Salvare ogni campione con timestamp (millis) in formato CSV</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Implementare rotazione file (nuovo file ogni 1000 righe)</div>
+      <div class="oi"><span style="color:var(--acc)">&#9656;</span>Aprire il CSV generato in LibreOffice/Excel e tracciare il grafico</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Componenti aggiuntivi Wokwi</div>
+    <table class="ctbl">
+      <tr><th>Componente</th><th>Connessione</th><th>Note</th></tr>
+      <tr><td>SD Card Module (SPI)</td><td class="mc">CS&rarr;GPIO5, MOSI&rarr;GPIO23, MISO&rarr;GPIO19, SCK&rarr;GPIO18</td><td>Libreria SD.h inclusa</td></tr>
+      <tr><td>+ circuito ES1</td><td class="mc">pot + 150&Omega;</td><td>Invariato</td></tr>
+    </table>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32 + SD</span><span class="cf">es9_datalogger.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES9 &ndash; Datalogger 4-20 mA su SD card
+ * Salva su /log_NNN.csv: timestamp_ms, raw, I_mA, T_C, stato
+ * Nuovo file ogni MAX_ROWS righe. LED rosso = scrittura SD.
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;SD.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;SPI.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC   = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_SD_CS = <span class="num">5</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   LED_SD    = <span class="num">2</span>;   <span class="cm">// lampeggia durante scrittura</span>
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF      = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SH      = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN     = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX     = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MIN     = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MAX     = <span class="num">100.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>   MAX_ROWS  = <span class="num">1000</span>;  <span class="cm">// righe per file</span>
+<span class="kw">constexpr</span> <span class="tp">unsigned long</span> T_LOG = <span class="num">1000</span>; <span class="cm">// ms tra campioni</span>
+
+<span class="tp">int</span>    file_idx   = <span class="num">0</span>;
+<span class="tp">int</span>    row_count  = <span class="num">0</span>;
+File   logFile;
+
+String <span class="fn">fileName</span>() {
+  <span class="kw">return</span> String(<span class="str">"/log_"</span>) + String(file_idx, DEC) + String(<span class="str">".csv"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">openNewFile</span>() {
+  <span class="kw">if</span> (logFile) logFile.<span class="fn">close</span>();
+  logFile = SD.<span class="fn">open</span>(<span class="fn">fileName</span>(), FILE_WRITE);
+  <span class="kw">if</span> (logFile) {
+    logFile.<span class="fn">println</span>(<span class="str">"timestamp_ms,raw,I_mA,T_C,stato"</span>);
+    Serial.<span class="fn">print</span>(<span class="str">"Nuovo file: "</span>); Serial.<span class="fn">println</span>(<span class="fn">fileName</span>());
+  } <span class="kw">else</span> {
+    Serial.<span class="fn">println</span>(<span class="str">"ERRORE apertura file SD!"</span>);
+  }
+  row_count = <span class="num">0</span>;
+  file_idx++;
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  <span class="fn">pinMode</span>(LED_SD, OUTPUT);
+  <span class="kw">if</span> (!SD.<span class="fn">begin</span>(PIN_SD_CS))
+    Serial.<span class="fn">println</span>(<span class="str">"SD non trovata! Verifica cablaggio."</span>);
+  <span class="fn">openNewFile</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">static</span> <span class="tp">unsigned long</span> last = <span class="num">0</span>;
+  <span class="kw">if</span> (<span class="fn">millis</span>() - last &lt; T_LOG) <span class="kw">return</span>;
+  last = <span class="fn">millis</span>();
+
+  <span class="cm">// Lettura ADC</span>
+  <span class="tp">long</span> acc=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;<span class="num">16</span>;++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">int</span>   raw  = (<span class="tp">int</span>)(acc/<span class="num">16</span>);
+  <span class="kw">const</span> <span class="tp">float</span> v    = (<span class="tp">float</span>)raw/<span class="num">4095.f</span>*VREF;
+  <span class="kw">const</span> <span class="tp">float</span> il   = v/R_SH*<span class="num">1000.f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> t    = T_MIN+(T_MAX-T_MIN)*<span class="fn">constrain</span>((il-I_MIN)/(I_MAX-I_MIN),<span class="num">0.f</span>,<span class="num">1.f</span>);
+  <span class="kw">const</span> <span class="tp">char</span>* s    = (il&lt;<span class="num">2.f</span>) ? <span class="str">"GUASTO"</span> : (t&gt;<span class="num">80.f</span>) ? <span class="str">"ALTA"</span> : (t&lt;<span class="num">20.f</span>) ? <span class="str">"BASSA"</span> : <span class="str">"OK"</span>;
+
+  <span class="cm">// Scrittura CSV</span>
+  <span class="fn">digitalWrite</span>(LED_SD, HIGH);
+  <span class="kw">if</span> (logFile) {
+    logFile.<span class="fn">print</span>(<span class="fn">millis</span>()); logFile.<span class="fn">print</span>(<span class="str">","</span>);
+    logFile.<span class="fn">print</span>(raw);      logFile.<span class="fn">print</span>(<span class="str">","</span>);
+    logFile.<span class="fn">print</span>(il, <span class="num">4</span>);    logFile.<span class="fn">print</span>(<span class="str">","</span>);
+    logFile.<span class="fn">print</span>(t,  <span class="num">2</span>);    logFile.<span class="fn">print</span>(<span class="str">","</span>);
+    logFile.<span class="fn">println</span>(s);
+    logFile.<span class="fn">flush</span>();  <span class="cm">// garantisce scrittura su SD</span>
+    row_count++;
+    <span class="kw">if</span> (row_count &gt;= MAX_ROWS) <span class="fn">openNewFile</span>();
+  }
+  <span class="fn">digitalWrite</span>(LED_SD, LOW);
+
+  Serial.<span class="fn">print</span>(<span class="fn">millis</span>()); Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">print</span>(il,<span class="num">3</span>);    Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">print</span>(t, <span class="num">2</span>);    Serial.<span class="fn">print</span>(<span class="str">"\t"</span>);
+  Serial.<span class="fn">print</span>(s);       Serial.<span class="fn">print</span>(<span class="str">"\t righe: "</span>);
+  Serial.<span class="fn">println</span>(row_count);
+}</pre>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Perch&eacute; &egrave; necessario chiamare <code>logFile.flush()</code> dopo ogni scrittura? Cosa succederebbe senza, se l&rsquo;alimentazione venisse tolta improvvisamente?</li>
+      <li>Con T_LOG = 1000 ms e MAX_ROWS = 1000, dopo quanti minuti viene creato un nuovo file? Quanti file si creano in 24 ore?</li>
+      <li><strong>Modifica:</strong> cambia T_LOG a 100 ms. Come cambia il numero di file al giorno? Qual &egrave; la dimensione stimata di ogni file CSV (bytes)?</li>
+      <li>Il LED lampeggia durante la scrittura su SD. Perch&eacute; in un sistema industriale reale questo tipo di indicatore &egrave; importante? Cosa potrebbe causare un LED che rimane fisso su ON?</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="ES 10"></div>
+
+<!-- ===================== ES10 ===================== -->
+<div class="es" id="es10">
+  <div class="esh">
+    <div class="esn" style="background:#f85149;color:#fff;">10</div>
+    <div>
+      <div class="estipo" style="color:#f85149;">Esercizio 10 &middot; IoT &mdash; MQTT/WiFi</div>
+      <div class="estit">Invio dati via MQTT su WiFi &mdash; dashboard remota in tempo reale</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="ctit">Obiettivi</div>
+    <div class="ogrid">
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Connettere l&rsquo;ESP32 al WiFi simulato di Wokwi</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Pubblicare I_loop e temperatura su topic MQTT</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Ricevere comandi di soglia via MQTT (subscribe)</div>
+      <div class="oi"><span style="color:var(--red)">&#9656;</span>Collegare a un broker pubblico (test.mosquitto.org)</div>
+    </div>
+  </div>
+
+  <div class="nota">
+    <span class="nicon">&#128161;</span>
+    <span>Wokwi supporta il WiFi simulato. Usa il broker MQTT pubblico <strong>test.mosquitto.org</strong> (porta 1883, no autenticazione) per i test. Per visualizzare i dati puoi usare <strong>MQTT Explorer</strong> (desktop) o <strong>HiveMQ WebSocket Client</strong> (browser, gratis).</span>
+  </div>
+
+  <div class="card">
+    <div class="ctit">Topic MQTT utilizzati</div>
+    <table class="ctbl">
+      <tr><th>Direzione</th><th>Topic</th><th>Payload</th><th>Frequenza</th></tr>
+      <tr><td>Publish</td><td class="mc">its/4_20mA/current</td><td>float I_mA</td><td>1 Hz</td></tr>
+      <tr><td>Publish</td><td class="mc">its/4_20mA/temp</td><td>float T_C</td><td>1 Hz</td></tr>
+      <tr><td>Publish</td><td class="mc">its/4_20mA/status</td><td>string OK/BASSA/ALTA/GUASTO</td><td>on change</td></tr>
+      <tr><td>Subscribe</td><td class="mc">its/4_20mA/cmd/t_high</td><td>float nuova soglia alta</td><td>on demand</td></tr>
+      <tr><td>Subscribe</td><td class="mc">its/4_20mA/cmd/t_low</td><td>float nuova soglia bassa</td><td>on demand</td></tr>
+    </table>
+  </div>
+
+  <div class="cb">
+    <div class="ch"><span class="cl">C++ &middot; ESP32 + WiFi + MQTT</span><span class="cf">es10_mqtt.ino</span></div>
+    <pre class="code"><span class="cm">/*
+ * ES10 &ndash; 4-20 mA su MQTT via WiFi
+ * Broker: test.mosquitto.org:1883
+ * Publish: its/4_20mA/current, /temp, /status
+ * Subscribe: its/4_20mA/cmd/t_high, /t_low
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;WiFi.h&gt;</span>
+<span class="pp">#include</span> <span class="str">&lt;PubSubClient.h&gt;</span>
+
+<span class="cm">// ── WiFi ──────────────────────────────────────────────────</span>
+<span class="kw">const</span> <span class="tp">char</span>* SSID     = <span class="str">"Wokwi-GUEST"</span>;  <span class="cm">// rete simulata Wokwi</span>
+<span class="kw">const</span> <span class="tp">char</span>* PASSWORD = <span class="str">""</span>;
+
+<span class="cm">// ── MQTT broker ───────────────────────────────────────────</span>
+<span class="kw">const</span> <span class="tp">char</span>* BROKER   = <span class="str">"test.mosquitto.org"</span>;
+<span class="kw">const</span> <span class="tp">int</span>   PORT     = <span class="num">1883</span>;
+<span class="kw">const</span> <span class="tp">char</span>* CLIENT_ID= <span class="str">"esp32_4_20mA_001"</span>;
+
+<span class="cm">// ── Costanti fisiche ───────────────────────────────────────</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>   PIN_ADC = <span class="num">34</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> VREF    = <span class="num">3.3f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> R_SH    = <span class="num">150.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MIN   = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> I_MAX   = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MIN   = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span> T_MAX   = <span class="num">100.0f</span>;
+
+<span class="tp">float</span> t_high = <span class="num">80.0f</span>;   <span class="cm">// soglia modificabile via MQTT</span>
+<span class="tp">float</span> t_low  = <span class="num">20.0f</span>;
+
+WiFiClient   espClient;
+PubSubClient <span class="fn">mqtt</span>(espClient);
+
+<span class="cm">// Callback: riceve messaggi dai topic sottoscritti</span>
+<span class="kw">void</span> <span class="fn">mqttCallback</span>(<span class="tp">char</span>* topic, <span class="tp">byte</span>* payload, <span class="tp">unsigned int</span> len) {
+  <span class="tp">char</span> buf[16] = {};
+  <span class="fn">memcpy</span>(buf, payload, <span class="fn">min</span>(len, (<span class="tp">unsigned int</span>)<span class="num">15</span>));
+  <span class="kw">const</span> <span class="tp">float</span> val = <span class="fn">atof</span>(buf);
+  <span class="kw">if</span> (<span class="fn">strcmp</span>(topic, <span class="str">"its/4_20mA/cmd/t_high"</span>) == <span class="num">0</span>) {
+    t_high = val;
+    Serial.<span class="fn">print</span>(<span class="str">"Nuova soglia alta: "</span>); Serial.<span class="fn">println</span>(t_high);
+  } <span class="kw">else</span> <span class="kw">if</span> (<span class="fn">strcmp</span>(topic, <span class="str">"its/4_20mA/cmd/t_low"</span>) == <span class="num">0</span>) {
+    t_low = val;
+    Serial.<span class="fn">print</span>(<span class="str">"Nuova soglia bassa: "</span>); Serial.<span class="fn">println</span>(t_low);
+  }
+}
+
+<span class="kw">void</span> <span class="fn">reconnect</span>() {
+  <span class="kw">while</span> (!mqtt.<span class="fn">connected</span>()) {
+    Serial.<span class="fn">print</span>(<span class="str">"MQTT connect..."</span>);
+    <span class="kw">if</span> (mqtt.<span class="fn">connect</span>(CLIENT_ID)) {
+      Serial.<span class="fn">println</span>(<span class="str">" OK"</span>);
+      mqtt.<span class="fn">subscribe</span>(<span class="str">"its/4_20mA/cmd/t_high"</span>);
+      mqtt.<span class="fn">subscribe</span>(<span class="str">"its/4_20mA/cmd/t_low"</span>);
+    } <span class="kw">else</span> {
+      Serial.<span class="fn">print</span>(<span class="str">"fail rc="</span>); Serial.<span class="fn">print</span>(mqtt.<span class="fn">state</span>()); <span class="fn">delay</span>(<span class="num">3000</span>);
+    }
+  }
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">analogReadResolution</span>(<span class="num">12</span>);
+  <span class="fn">analogSetAttenuation</span>(ADC_ATTEN_DB_11);
+  WiFi.<span class="fn">begin</span>(SSID, PASSWORD);
+  Serial.<span class="fn">print</span>(<span class="str">"WiFi"</span>);
+  <span class="kw">while</span>(WiFi.<span class="fn">status</span>() != WL_CONNECTED) { <span class="fn">delay</span>(<span class="num">500</span>); Serial.<span class="fn">print</span>(<span class="str">"."</span>); }
+  Serial.<span class="fn">println</span>(<span class="str">" connesso: "</span> + WiFi.<span class="fn">localIP</span>().<span class="fn">toString</span>());
+  mqtt.<span class="fn">setServer</span>(BROKER, PORT);
+  mqtt.<span class="fn">setCallback</span>(mqttCallback);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (!mqtt.<span class="fn">connected</span>()) <span class="fn">reconnect</span>();
+  mqtt.<span class="fn">loop</span>();
+
+  <span class="kw">static</span> <span class="tp">unsigned long</span> last = <span class="num">0</span>;
+  <span class="kw">if</span> (<span class="fn">millis</span>() - last &lt; <span class="num">1000</span>) <span class="kw">return</span>;
+  last = <span class="fn">millis</span>();
+
+  <span class="tp">long</span> acc=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="num">0</span>;i&lt;<span class="num">16</span>;++i) acc+=<span class="fn">analogRead</span>(PIN_ADC);
+  <span class="kw">const</span> <span class="tp">float</span> v  = (<span class="tp">float</span>)(acc/<span class="num">16</span>)/<span class="num">4095.f</span>*VREF;
+  <span class="kw">const</span> <span class="tp">float</span> il = v/R_SH*<span class="num">1000.f</span>;
+  <span class="kw">const</span> <span class="tp">float</span> t  = T_MIN+(T_MAX-T_MIN)*<span class="fn">constrain</span>((il-I_MIN)/(I_MAX-I_MIN),<span class="num">0.f</span>,<span class="num">1.f</span>);
+  <span class="kw">const</span> <span class="tp">char</span>* s  = (il&lt;<span class="num">2.f</span>) ? <span class="str">"GUASTO"</span>:(t&gt;t_high)?<span class="str">"ALTA"</span>:(t&lt;t_low)?<span class="str">"BASSA"</span>:<span class="str">"OK"</span>;
+
+  <span class="tp">char</span> buf[16];
+  <span class="fn">snprintf</span>(buf, <span class="kw">sizeof</span>(buf), <span class="str">"%.4f"</span>, il);
+  mqtt.<span class="fn">publish</span>(<span class="str">"its/4_20mA/current"</span>, buf);
+  <span class="fn">snprintf</span>(buf, <span class="kw">sizeof</span>(buf), <span class="str">"%.2f"</span>, t);
+  mqtt.<span class="fn">publish</span>(<span class="str">"its/4_20mA/temp"</span>, buf);
+  mqtt.<span class="fn">publish</span>(<span class="str">"its/4_20mA/status"</span>, s);
+
+  Serial.<span class="fn">printf</span>(<span class="str">"MQTT &gt;&gt; I=%.3f mA  T=%.2f C  [%s]\n"</span>, il, t, s);
+}</pre>
+  </div>
+
+  <div class="dq">
+    <div class="dqt">Domande di analisi</div>
+    <ol>
+      <li>Apri <strong>HiveMQ WebSocket Client</strong> (hivemq.com/demos/websocket-client) e sottoscrivi <code>its/4_20mA/#</code>. Cosa vedi arrivare? Ogni quanti secondi?</li>
+      <li>Invia il messaggio MQTT <code>its/4_20mA/cmd/t_high</code> con payload <code>60.0</code> dal client web. Cosa succede al comportamento degli allarmi sull&rsquo;ESP32?</li>
+      <li>Il <code>CLIENT_ID</code> deve essere <strong>unico</strong> su tutto il broker. Cosa succede se due ESP32 usano lo stesso CLIENT_ID contemporaneamente? Prova aggiungendo un secondo ESP32 con lo stesso ID in Wokwi.</li>
+      <li><strong>Progetto finale:</strong> combina ES8 (OLED) + ES9 (SD) + ES10 (MQTT) in un unico sketch. Quali problemi di timing si presentano? Come li risolveresti con un task scheduler?</li>
+    </ol>
+  </div>
+</div>
+
+<div class="divider" data-label="RIEPILOGO"></div>
+
+<div class="card acc" style="margin-top:28px;">
+  <div class="ctit">Riepilogo competenze acquisite</div>
+  <table class="ctbl">
+    <tr><th>Esercizio</th><th>Competenza</th><th>Concetto chiave</th></tr>
+    <tr><td style="color:var(--acc);font-family:var(--mono);">ES1</td><td>Ricevitore ADC 12-bit</td><td>V_shunt = I &times; R_sh &rarr; ADC &rarr; grandezza fisica</td></tr>
+    <tr><td style="color:var(--acc2);font-family:var(--mono);">ES2</td><td>Trasmettitore DAC 8-bit</td><td>Grandezza fisica &rarr; corrente &rarr; tensione DAC</td></tr>
+    <tr><td style="color:var(--green);font-family:var(--mono);">ES3</td><td>Catena industriale TX&rarr;RX</td><td>Immunit&agrave; al rumore del loop in corrente vs tensione</td></tr>
+    <tr><td style="color:var(--red);font-family:var(--mono);">ES4</td><td>Logica di allarme</td><td>Soglie, live zero, isteresi, macchina a stati</td></tr>
+    <tr><td style="color:#a371f7;font-family:var(--mono);">ES5</td><td>Calibrazione a due punti</td><td>Correzione offset e guadagno ADC: I_cal = m&times;raw + q</td></tr>
+    <tr><td style="color:#39d353;font-family:var(--mono);">ES6</td><td>Oversampling &amp; ENOB</td><td>ENOB = 12 + 0.5&times;log&#8322;(N) &mdash; rumore &divide;&radic;N</td></tr>
+    <tr><td style="color:var(--acc2);font-family:var(--mono);">ES7</td><td>Adattamento scala fisica</td><td>Loop universale: solo PHYS_MIN/MAX cambia per ogni sensore</td></tr>
+    <tr><td style="color:var(--yellow);font-family:var(--mono);">ES8</td><td>Display OLED SSD1306</td><td>Valore numerico + barra livello + stato allarme grafico</td></tr>
+    <tr><td style="color:var(--acc);font-family:var(--mono);">ES9</td><td>Datalogger SD card CSV</td><td>Timestamp + rotazione file + flush garantito</td></tr>
+    <tr><td style="color:var(--red);font-family:var(--mono);">ES10</td><td>MQTT / WiFi IoT</td><td>Publish telemetria + subscribe comandi soglia in remoto</td></tr>
+  </table>
+</div>
+
+<div class="card" style="margin-top:14px;">
+  <div class="ctit">Collegamento &rarr; Norme ISA e P&amp;ID</div>
+  <p style="color:var(--text2);font-size:14px;">La catena realizzata in questi esercizi corrisponde esattamente a un <strong>loop ISA standard</strong>: <em>TT (Temperature Transmitter) &rarr; cavo &rarr; TIC (Temperature Indicating Controller) &rarr; attuatori</em>. La prossima dispensa mostrer&agrave; come questi blocchi vengono rappresentati negli schemi <strong>P&amp;ID</strong> secondo la norma ISA-5.1 e come si codificano secondo la codifica letterale strumenti.</p>
+</div>
+
+</div>
+</body>
+</html>

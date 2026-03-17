@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Segnale Standard 4-20 mA – Dispensa ITS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --blu: #0a2a4a;
+    --azzurro: #1565c0;
+    --accento: #e65100;
+    --verde: #2e7d32;
+    --grigio: #eceff1;
+    --testo: #1a1a2e;
+    --bordo: #b0bec5;
+    --codebg: #1e1e2e;
+    --codefg: #cdd6f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--testo);
+    background: #f5f6fa;
+  }
+  .copertina {
+    background: linear-gradient(135deg, var(--blu) 0%, #1a3a6a 60%, #0d47a1 100%);
+    color: white;
+    padding: 60px 48px 50px;
+    border-bottom: 6px solid var(--accento);
+  }
+  .copertina .istituto { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
+  .copertina h1 { font-size: 2.4em; font-weight: bold; line-height: 1.2; margin-bottom: 6px; }
+  .copertina .sottotitolo { font-size: 1.1em; opacity: 0.85; margin-bottom: 24px; }
+  .copertina .meta { font-size: 12px; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; margin-top: 16px; }
+  .badge {
+    display: inline-block;
+    background: var(--accento);
+    color: white;
+    font-size: 11px;
+    font-family: monospace;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-right: 8px;
+    letter-spacing: 1px;
+  }
+
+  .contenuto { max-width: 920px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  h2 {
+    font-size: 1.45em;
+    color: var(--blu);
+    border-left: 5px solid var(--accento);
+    padding-left: 14px;
+    margin: 48px 0 18px;
+  }
+  h3 {
+    font-size: 1.15em;
+    color: var(--azzurro);
+    margin: 28px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--bordo);
+  }
+  h4 {
+    font-size: 1em;
+    color: var(--testo);
+    font-style: italic;
+    margin: 20px 0 8px;
+  }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 10px 0 14px 24px; }
+  li { margin-bottom: 5px; }
+
+  .riquadro {
+    background: white;
+    border: 1px solid var(--bordo);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .riquadro.blu { border-left: 4px solid var(--azzurro); background: #e3f2fd; }
+  .riquadro.arancio { border-left: 4px solid var(--accento); background: #fff3e0; }
+  .riquadro.verde { border-left: 4px solid var(--verde); background: #e8f5e9; }
+  .riquadro.grigio { border-left: 4px solid #607d8b; background: var(--grigio); }
+  .riquadro .titolo-riquadro { font-weight: bold; font-size: 0.92em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: var(--blu); }
+
+  .formula-box {
+    background: #f8f9ff;
+    border: 1.5px solid var(--azzurro);
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin: 16px 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .formula-box .label { font-size: 11px; color: #888; margin-top: 8px; font-style: italic; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  th {
+    background: var(--blu);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid #e0e0e0; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f5f5f5; }
+  td.hl { font-weight: bold; color: var(--accento); }
+
+  canvas {
+    display: block;
+    margin: 16px auto;
+    border: 1px solid var(--bordo);
+    border-radius: 6px;
+    background: white;
+  }
+
+  pre {
+    background: var(--codebg);
+    color: var(--codefg);
+    padding: 20px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: 14px 0 20px;
+  }
+  .kw { color: #cba6f7; }
+  .cm { color: #6c7086; font-style: italic; }
+  .str { color: #a6e3a1; }
+  .num { color: #fab387; }
+  .fn { color: #89b4fa; }
+  .pp { color: #f38ba8; }
+  .tp { color: #89dceb; }
+
+  .tabs { display: flex; gap: 0; margin: 0 0 0; border-bottom: 2px solid var(--azzurro); }
+  .tab-btn {
+    padding: 10px 22px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid var(--bordo);
+    border-bottom: none;
+    background: #e8eaf6;
+    color: var(--blu);
+    border-radius: 6px 6px 0 0;
+    margin-right: 4px;
+    transition: background 0.2s;
+  }
+  .tab-btn.active { background: var(--azzurro); color: white; }
+  .tab-content { display: none; background: white; border: 1px solid var(--bordo); border-top: none; border-radius: 0 0 6px 6px; padding: 0; }
+  .tab-content.active { display: block; }
+
+  .step {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 18px;
+  }
+  .step::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0; top: 0;
+    width: 30px; height: 30px;
+    background: var(--azzurro);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .steps { counter-reset: step-counter; margin: 16px 0; }
+
+  .confronto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .scheda-piattaforma {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--bordo);
+  }
+  .scheda-piattaforma .header {
+    padding: 12px 16px;
+    font-weight: bold;
+    color: white;
+    font-size: 1em;
+  }
+  .scheda-piattaforma.uno .header { background: #1565c0; }
+  .scheda-piattaforma.esp .header { background: #2e7d32; }
+  .scheda-piattaforma .body { padding: 14px 16px; font-size: 13.5px; }
+
+  .nota-bene {
+    background: #fffde7;
+    border: 1.5px solid #f9a825;
+    border-radius: 6px;
+    padding: 12px 18px;
+    font-size: 14px;
+    margin: 14px 0;
+  }
+  .nota-bene::before { content: "⚠️  "; }
+
+  .domande ol { counter-reset: none; }
+  .domande li { margin-bottom: 10px; }
+
+  .toc { background: white; border: 1px solid var(--bordo); border-radius: 6px; padding: 20px 24px; margin: 28px 0; }
+  .toc h4 { margin-bottom: 12px; font-size: 1em; color: var(--blu); text-transform: uppercase; letter-spacing: 1px; }
+  .toc ol { margin-left: 20px; }
+  .toc li { margin-bottom: 4px; font-size: 14px; }
+  .toc a { color: var(--azzurro); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  @media print {
+    body { background: white; }
+    .contenuto { padding: 20px; }
+    pre { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="copertina">
+  <div class="istituto">ITS Academy Meccatronico Veneto – Montebelluna (TV)</div>
+  <h1>Il Segnale Standard Industriale<br>4 – 20 mA</h1>
+  <div class="sottotitolo">Teoria, circuiti trasmettitore/ricevitore e implementazione Arduino UNO vs ESP32</div>
+  <div style="margin-top:20px;">
+    <span class="badge">UF10</span>
+    <span class="badge">ISA</span>
+    <span class="badge">LABORATORIO SIMULATO</span>
+  </div>
+  <div class="meta">Anno Formativo 2024-2025 &nbsp;|&nbsp; Docente: Davanzo Giancarlo &nbsp;|&nbsp; Prerequisiti: Ponte di Wheatstone, ADC, Op-Amp base</div>
+</div>
+
+<div class="contenuto">
+
+<div class="toc">
+  <h4>Indice</h4>
+  <ol>
+    <li><a href="#s1">Perché la corrente? Motivazioni del segnale 4-20 mA</a></li>
+    <li><a href="#s2">Definizione e caratteristica del loop di corrente</a></li>
+    <li><a href="#s3">Trasmettitore: conversione V→I con Op-Amp</a></li>
+    <li><a href="#s4">Ricevitore: conversione I→V con resistenza di shunt</a></li>
+    <li><a href="#s5">Errori e risoluzione: Arduino UNO vs ESP32</a></li>
+    <li><a href="#s6">Codice commentato – confronto piattaforme</a></li>
+    <li><a href="#s7">Schema Wokwi per la simulazione</a></li>
+    <li><a href="#s8">Tabella dati e domande di analisi</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 1 -->
+<h2 id="s1">1 · Perché la corrente? Motivazioni del segnale 4-20 mA</h2>
+
+<p>Nella strumentazione industriale il segnale trasmesso tra sensore e controllore deve percorrere cavi che possono misurare decine o centinaia di metri. La scelta di <strong>usare una corrente</strong> anziché una tensione come grandezza di segnale non è arbitraria: è il risultato di precise considerazioni di ingegneria del sistema.</p>
+
+<h3>1.1 Immunità al rumore resistivo del cavo</h3>
+<p>Un cavo reale possiede una resistenza distribuita \(R_{cavo}\). Se il segnale fosse una tensione \(V_s\), il ricevitore misurerebbe:</p>
+<div class="formula-box">
+  \[ V_{ric} = V_s - I \cdot R_{cavo} \]
+  <div class="label">La caduta su \(R_{cavo}\) introduce un errore proporzionale alla corrente e alla lunghezza del cavo</div>
+</div>
+<p>Se invece il trasmettitore impone una <strong>corrente costante</strong> \(I_s\) (generatore di corrente ideale → impedenza d'uscita infinita), quella stessa corrente circola in ogni punto del loop indipendentemente da \(R_{cavo}\):</p>
+<div class="formula-box">
+  \[ I_{ric} = I_s \quad \forall \, R_{cavo} \]
+  <div class="label">La corrente è invariante rispetto alla resistenza del cavo: nessun errore introdotto</div>
+</div>
+
+<h3>1.2 Rilevamento della rottura del cavo – il valore vivo di 4 mA</h3>
+<p>Il range inizia a <strong>4 mA</strong> e non a 0 mA per una ragione fondamentale: in condizioni normali, anche con il sensore al minimo di scala, il loop trasporta 4 mA. Un valore di 0 mA indica univocamente una <strong>rottura del cavo</strong> o un guasto al trasmettitore, distinguibile automaticamente dal minimo di misura.</p>
+
+<div class="riquadro arancio">
+  <div class="titolo-riquadro">Definizione – Segnale vivo (Live Zero)</div>
+  Si dice <em>live zero</em> il fatto che lo zero di misura corrisponda a 4 mA &gt; 0. Il valore 0 mA è riservato alla diagnostica di guasto. Questa è una delle caratteristiche chiave che ha reso il 4-20 mA lo standard de facto nella process automation (IEC 60381-1).
+</div>
+
+<h3>1.3 Alimentazione remota del trasmettitore</h3>
+<p>Il loop a due fili permette di alimentare il trasmettitore con la stessa coppia di conduttori che trasporta il segnale. Poiché il trasmettitore consuma sempre almeno 4 mA, il controllore fornisce continuamente potenza al dispositivo remoto senza cavi aggiuntivi. Questo schema è detto <strong>loop-powered</strong> o <strong>2-wire transmitter</strong>.</p>
+
+<canvas id="cLoopPowered" width="820" height="200"></canvas>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 2 -->
+<h2 id="s2">2 · Definizione e caratteristica del loop di corrente</h2>
+
+<h3>2.1 Equazione di mappatura lineare</h3>
+<p>Il segnale 4-20 mA segue una relazione lineare tra la grandezza fisica misurata \(x\) e la corrente di loop \(I_{loop}\). Detti \(x_{min}\) e \(x_{max}\) i limiti di scala del sensore:</p>
+
+<div class="formula-box">
+  \[ I_{loop}(x) = 4\,\text{mA} + 16\,\text{mA} \cdot \frac{x - x_{min}}{x_{max} - x_{min}} \]
+  <div class="label">Relazione lineare generica grandezza fisica → corrente di loop</div>
+</div>
+
+<p>Invertendo, la ricostruzione della misura dal lato ricevitore:</p>
+<div class="formula-box">
+  \[ x = x_{min} + (x_{max} - x_{min}) \cdot \frac{I_{loop} - 4\,\text{mA}}{16\,\text{mA}} \]
+  <div class="label">Ricostruzione della grandezza fisica dalla corrente misurata</div>
+</div>
+
+<h3>2.2 Tabella dei valori notevoli</h3>
+<table>
+  <tr><th>Condizione</th><th>Corrente (mA)</th><th>% di scala</th><th>Tensione su 250 Ω (V)</th></tr>
+  <tr><td>Guasto / cavo interrotto</td><td class="hl">0</td><td>—</td><td>0</td></tr>
+  <tr><td>Minimo di scala (0%)</td><td class="hl">4</td><td>0%</td><td>1.000</td></tr>
+  <tr><td>25% di scala</td><td>8</td><td>25%</td><td>2.000</td></tr>
+  <tr><td>50% di scala</td><td>12</td><td>50%</td><td>3.000</td></tr>
+  <tr><td>75% di scala</td><td>16</td><td>75%</td><td>4.000</td></tr>
+  <tr><td>Massimo di scala (100%)</td><td class="hl">20</td><td>100%</td><td>5.000</td></tr>
+  <tr><td>Saturazione alta (allarme)</td><td>21 – 22</td><td>&gt;100%</td><td>&gt;5.000</td></tr>
+</table>
+
+<h3>2.3 Grafico interattivo della caratteristica</h3>
+<canvas id="cCaratteristica" width="820" height="300"></canvas>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 3 -->
+<h2 id="s3">3 · Il trasmettitore: conversione V → I con Op-Amp</h2>
+
+<p>Il trasmettitore deve convertire la tensione d'uscita di un sensore (tipicamente 0-5 V o 0-10 V) in una corrente di loop 4-20 mA. Il componente chiave è un <strong>amplificatore operazionale</strong> configurato come <em>convertitore tensione-corrente</em> (V-to-I converter, anche detto <em>transconduttore</em>).</p>
+
+<h3>3.1 Circuito di Howland (Howland Current Pump)</h3>
+<p>Una delle topologie più utilizzate è il <strong>generatore di corrente di Howland</strong>. Con quattro resistori uguali \(R\) e un resistore di programmazione \(R_L\) (il carico / cavo), il circuito produce:</p>
+
+<div class="formula-box">
+  \[ I_{out} = \frac{V_{in}}{R} \]
+  <div class="label">Howland pump con resistori bilanciati: la corrente d'uscita è indipendente dal carico</div>
+</div>
+
+<h3>3.2 Circuito semplificato con Op-Amp + BJT (per carichi elevati)</h3>
+<p>Per loop con tensioni di alimentazione industriali (12-24 V), si usa frequentemente la configurazione seguente, che può erogare correnti fino a 20 mA senza sovraccaricare l'op-amp:</p>
+
+<canvas id="cCircuito" width="820" height="340"></canvas>
+
+<h4>Analisi nodale del circuito</h4>
+<p>La retroazione negativa dell'op-amp porta i suoi due ingressi allo stesso potenziale. L'ingresso invertente è connesso all'emettitore del BJT attraverso il resistore \(R_E\), quindi:</p>
+<div class="formula-box">
+  \[ V^- = V^+ = V_{in} \]
+</div>
+<p>La corrente nell'emettitore vale:</p>
+<div class="formula-box">
+  \[ I_E = \frac{V_{in} - 0}{R_E} = \frac{V_{in}}{R_E} \]
+</div>
+<p>Poiché \(I_C \approx I_E\) per \(\beta \gg 1\) (tipicamente \(\beta > 100\) per un BC547):</p>
+<div class="formula-box">
+  \[ \boxed{I_{loop} = I_C \approx \frac{V_{in}}{R_E}} \]
+  <div class="label">Relazione di transconduttanza del circuito: la corrente di loop è proporzionale a V_in e inversamente a R_E</div>
+</div>
+
+<h3>3.3 Dimensionamento di R_E per il range 4-20 mA</h3>
+<p>Si sceglie \(V_{in}\) nell'intervallo 1-5 V (generato da un DAC o da un partitore, nel nostro caso da Arduino con PWM filtrato o direttamente DAC dell'ESP32).</p>
+
+<div class="riquadro blu">
+  <div class="titolo-riquadro">Derivazione di R_E</div>
+  <p>Per \(V_{in} = 1\,\text{V}\) deve corrispondere \(I_{loop} = 4\,\text{mA}\):</p>
+  \[ R_E = \frac{V_{in,min}}{I_{loop,min}} = \frac{1\,\text{V}}{4\,\text{mA}} = 250\,\Omega \]
+  <p style="margin-top:10px;">Verifica al massimo: \(I_{loop,max} = \frac{V_{in,max}}{R_E} = \frac{5\,\text{V}}{250\,\Omega} = 20\,\text{mA}\) ✓</p>
+</div>
+
+<div class="nota-bene">Il valore commerciale standard è R_E = 249 Ω (serie E96, tolleranza 1%). La resistenza va scelta di precisione per non introdurre guadagno d'errore nella conversione.</div>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 4 -->
+<h2 id="s4">4 · Il ricevitore: conversione I → V con resistenza di shunt</h2>
+
+<p>Dal lato del controllore (PLC, Arduino, ESP32) è necessario riconvertire la corrente in una tensione misurabile dall'ADC. La tecnica più semplice e comune è inserire in serie al loop una <strong>resistenza di shunt</strong> \(R_{shunt}\) e misurare la caduta di tensione ai suoi capi.</p>
+
+<h3>4.1 Scelta della resistenza di shunt</h3>
+<p>Il valore standard è \(R_{shunt} = 250\,\Omega\), scelto affinché il range 4-20 mA si converta esattamente in 1-5 V:</p>
+
+<div class="formula-box">
+  \[ V_{shunt} = I_{loop} \cdot R_{shunt} \]
+  \[ V_{min} = 4\,\text{mA} \times 250\,\Omega = 1.000\,\text{V} \]
+  \[ V_{max} = 20\,\text{mA} \times 250\,\Omega = 5.000\,\text{V} \]
+</div>
+
+<div class="riquadro verde">
+  <div class="titolo-riquadro">Nota sulla compatibilità con ESP32</div>
+  <p>L'ESP32 ha un ADC con tensione massima di ingresso di <strong>3.3 V</strong>. Collegare direttamente 5 V all'ADC può danneggiare il chip! Opzioni:</p>
+  <ul>
+    <li>Usare \(R_{shunt} = 150\,\Omega\) → range 0.6 V – 3.0 V (con margine)</li>
+    <li>Usare un partitore resistivo 5V → 3.3V</li>
+    <li>Usare attenuazione ADC interna (ADC_ATTEN_DB_11 → max ~3.1V)</li>
+  </ul>
+  <p style="margin-top:8px;">Nella simulazione Wokwi useremo <strong>R_shunt = 150 Ω</strong> per ESP32 e <strong>R_shunt = 250 Ω</strong> per Arduino UNO.</p>
+</div>
+
+<h3>4.2 Formula di ricostruzione della misura</h3>
+<p>Conoscendo il valore letto dall'ADC \(N_{ADC}\) (intero senza segno), la tensione è:</p>
+<div class="formula-box">
+  \[ V_{ADC} = \frac{N_{ADC}}{2^n - 1} \cdot V_{ref} \]
+  <div class="label">Dove n è il numero di bit dell'ADC e V_ref è la tensione di riferimento</div>
+</div>
+<p>La corrente di loop:</p>
+<div class="formula-box">
+  \[ I_{loop} = \frac{V_{ADC}}{R_{shunt}} \]
+</div>
+<p>La grandezza fisica (esempio: temperatura 0-100 °C):</p>
+<div class="formula-box">
+  \[ x = x_{min} + (x_{max} - x_{min}) \cdot \frac{I_{loop} - 4\,\text{mA}}{16\,\text{mA}} \]
+</div>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 5 -->
+<h2 id="s5">5 · Errori e risoluzione: Arduino UNO vs ESP32</h2>
+
+<h3>5.1 Risoluzione dell'ADC e LSB</h3>
+<p>La risoluzione in corrente del sistema di ricezione dipende dalla risoluzione dell'ADC. Il <strong>Least Significant Bit (LSB)</strong> in corrente vale:</p>
+<div class="formula-box">
+  \[ \Delta I_{LSB} = \frac{I_{range}}{2^n} = \frac{16\,\text{mA}}{2^n} \]
+  <div class="label">Risoluzione in corrente del sistema di misura (I_range = 20-4 = 16 mA)</div>
+</div>
+
+<table>
+  <tr>
+    <th>Parametro</th>
+    <th>Arduino UNO</th>
+    <th>ESP32</th>
+  </tr>
+  <tr><td>Bit ADC</td><td>10 bit</td><td>12 bit</td></tr>
+  <tr><td>Passi totali</td><td>1024</td><td>4096</td></tr>
+  <tr><td>V_ref</td><td>5.0 V</td><td>3.3 V</td></tr>
+  <tr><td>R_shunt consigliata</td><td>250 Ω</td><td>150 Ω</td></tr>
+  <tr><td>LSB in tensione</td><td>4.88 mV</td><td>0.805 mV</td></tr>
+  <tr><td>LSB in corrente</td><td class="hl">19.5 μA</td><td class="hl">5.37 μA</td></tr>
+  <tr><td>Risoluzione su scala piena</td><td>820 passi utili</td><td>~2979 passi utili</td></tr>
+  <tr><td>Non-linearità DNL tipica</td><td>±0.5 LSB</td><td>±1-2 LSB (varia con attenuazione)</td></tr>
+</table>
+
+<h3>5.2 Calcolo esplicito del LSB</h3>
+
+<div class="confronto-grid">
+  <div class="scheda-piattaforma uno">
+    <div class="header">Arduino UNO – ADC 10 bit</div>
+    <div class="body">
+      <p>\(V_{LSB} = \frac{5.0\,\text{V}}{1024} \approx 4.88\,\text{mV}\)</p>
+      <p>\(\Delta I = \frac{V_{LSB}}{R_{shunt}} = \frac{4.88\,\text{mV}}{250\,\Omega} \approx 19.5\,\mu\text{A}\)</p>
+      <p>Su scala fisica 0-100°C:<br>
+      \(\Delta T = 100 \cdot \frac{19.5\,\mu\text{A}}{16\,\text{mA}} \approx \mathbf{0.122\,°C}\)</p>
+    </div>
+  </div>
+  <div class="scheda-piattaforma esp">
+    <div class="header">ESP32 – ADC 12 bit</div>
+    <div class="body">
+      <p>\(V_{LSB} = \frac{3.3\,\text{V}}{4096} \approx 0.806\,\text{mV}\)</p>
+      <p>\(\Delta I = \frac{V_{LSB}}{R_{shunt}} = \frac{0.806\,\text{mV}}{150\,\Omega} \approx 5.37\,\mu\text{A}\)</p>
+      <p>Su scala fisica 0-100°C:<br>
+      \(\Delta T = 100 \cdot \frac{5.37\,\mu\text{A}}{16\,\text{mA}} \approx \mathbf{0.034\,°C}\)</p>
+    </div>
+  </div>
+</div>
+
+<canvas id="cRisoluzione" width="820" height="280"></canvas>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 6 -->
+<h2 id="s6">6 · Codice commentato – confronto piattaforme</h2>
+
+<p>Entrambi i codici simulano la <strong>ricezione</strong> del segnale 4-20 mA: leggono la tensione ai capi della resistenza di shunt, calcolano la corrente di loop e ricostruiscono la grandezza fisica (temperatura 0-100 °C).</p>
+
+<div class="tabs" id="tabCode">
+  <div class="tab-btn active" onclick="showTab('uno')">Arduino UNO</div>
+  <div class="tab-btn" onclick="showTab('esp')">ESP32</div>
+</div>
+
+<div id="tab-uno" class="tab-content active">
+<pre><span class="cm">/*
+ * Ricevitore 4-20 mA – Arduino UNO
+ * ADC: 10 bit, V_ref = 5.0 V
+ * R_shunt = 250 Ω (in serie al loop)
+ * Grandezza: Temperatura 0-100 °C
+ */</span>
+
+<span class="kw">constexpr</span> <span class="tp">float</span>  VREF         = <span class="num">5.0f</span>;     <span class="cm">// V – tensione di riferimento ADC</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    ADC_BITS     = <span class="num">10</span>;       <span class="cm">// risoluzione ADC</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    ADC_MAX      = (<span class="num">1</span> &lt;&lt; ADC_BITS) - <span class="num">1</span>;  <span class="cm">// 1023</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  R_SHUNT      = <span class="num">250.0f</span>;   <span class="cm">// Ω – resistenza di shunt</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MIN_mA     = <span class="num">4.0f</span>;     <span class="cm">// mA – corrente a fondo scala bassa</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MAX_mA     = <span class="num">20.0f</span>;    <span class="cm">// mA – corrente a fondo scala alta</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MIN     = <span class="num">0.0f</span>;     <span class="cm">// °C – minimo scala fisica</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MAX     = <span class="num">100.0f</span>;   <span class="cm">// °C – massimo scala fisica</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    PIN_ADC      = A0;       <span class="cm">// pin di lettura</span>
+<span class="kw">constexpr</span> <span class="tp">unsigned long</span> T_MS = <span class="num">500</span>;      <span class="cm">// ms – periodo di campionamento</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"Ricevitore 4-20mA – Arduino UNO"</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"ADC[raw]\tV_shunt[V]\tI_loop[mA]\tTemperatura[°C]"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// 1. Lettura grezza ADC</span>
+  <span class="kw">const</span> <span class="tp">int</span>   raw     = analogRead(PIN_ADC);
+
+  <span class="cm">// 2. Conversione ADC → tensione</span>
+  <span class="kw">const</span> <span class="tp">float</span> v_shunt = (<span class="tp">float</span>)raw / ADC_MAX * VREF;
+
+  <span class="cm">// 3. Calcolo corrente di loop in mA</span>
+  <span class="kw">const</span> <span class="tp">float</span> i_loop_mA = (v_shunt / R_SHUNT) * <span class="num">1000.0f</span>;
+
+  <span class="cm">// 4. Ricostruzione grandezza fisica (con clamp per robustezza)</span>
+  <span class="kw">const</span> <span class="tp">float</span> frac = (i_loop_mA - I_MIN_mA) / (I_MAX_mA - I_MIN_mA);
+  <span class="kw">const</span> <span class="tp">float</span> frac_clamped = constrain(frac, <span class="num">0.0f</span>, <span class="num">1.0f</span>);
+  <span class="kw">const</span> <span class="tp">float</span> temperatura = TEMP_MIN + (TEMP_MAX - TEMP_MIN) * frac_clamped;
+
+  <span class="cm">// 5. Diagnostica guasto cavo (I < 2 mA = rottura probabile)</span>
+  <span class="kw">if</span> (i_loop_mA &lt; <span class="num">2.0f</span>) {
+    Serial.<span class="fn">println</span>(<span class="str">"[ERRORE] Loop aperto o trasmettitore non alimentato!"</span>);
+  } <span class="kw">else</span> {
+    Serial.<span class="fn">print</span>(raw);        Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(v_shunt, <span class="num">4</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(i_loop_mA, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">println</span>(temperatura, <span class="num">2</span>);
+  }
+
+  delay(T_MS);
+}</pre>
+</div>
+
+<div id="tab-esp" class="tab-content">
+<pre><span class="cm">/*
+ * Ricevitore 4-20 mA – ESP32
+ * ADC: 12 bit, V_ref ≈ 3.3 V
+ * R_shunt = 150 Ω (per restare entro 3.0 V con 20 mA)
+ * Attenuazione: ADC_ATTEN_DB_11 → range ~0-3.1 V
+ * Pin ADC1 consigliati: GPIO34, GPIO35, GPIO36, GPIO39
+ */</span>
+
+<span class="pp">#include</span> <span class="str">&lt;Arduino.h&gt;</span>
+
+<span class="kw">constexpr</span> <span class="tp">float</span>  VREF         = <span class="num">3.3f</span>;     <span class="cm">// V – tensione di riferimento nominale</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    ADC_BITS     = <span class="num">12</span>;       <span class="cm">// risoluzione ADC ESP32</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    ADC_MAX      = (<span class="num">1</span> &lt;&lt; ADC_BITS) - <span class="num">1</span>;  <span class="cm">// 4095</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  R_SHUNT      = <span class="num">150.0f</span>;   <span class="cm">// Ω – shunt ridotto per 3.3 V</span>
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MIN_mA     = <span class="num">4.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  I_MAX_mA     = <span class="num">20.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MIN     = <span class="num">0.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">float</span>  TEMP_MAX     = <span class="num">100.0f</span>;
+<span class="kw">constexpr</span> <span class="tp">int</span>    PIN_ADC      = <span class="num">34</span>;       <span class="cm">// GPIO34 – solo ADC1</span>
+<span class="kw">constexpr</span> <span class="tp">int</span>    N_SAMPLES    = <span class="num">16</span>;       <span class="cm">// media su N campioni (oversampling)</span>
+<span class="kw">constexpr</span> <span class="tp">unsigned long</span> T_MS = <span class="num">500</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="cm">// Imposta risoluzione ADC a 12 bit</span>
+  analogReadResolution(<span class="num">12</span>);
+  <span class="cm">// Attenuazione 11 dB: ingresso ~0-3.1 V</span>
+  analogSetAttenuation(ADC_ATTEN_DB_11);
+  Serial.<span class="fn">println</span>(<span class="str">"Ricevitore 4-20mA – ESP32"</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"ADC[raw]\tV_shunt[V]\tI_loop[mA]\tTemperatura[°C]"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// 1. Oversampling: media di N_SAMPLES letture per ridurre rumore</span>
+  <span class="tp">long</span> acc = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="num">0</span>; i &lt; N_SAMPLES; ++i) {
+    acc += analogRead(PIN_ADC);
+  }
+  <span class="kw">const</span> <span class="tp">int</span>   raw     = (<span class="tp">int</span>)(acc / N_SAMPLES);
+
+  <span class="cm">// 2. Conversione lineare ADC → tensione</span>
+  <span class="cm">// Nota: l'ADC ESP32 non è perfettamente lineare; in produzione</span>
+  <span class="cm">// usare esp_adc_cal per calibrazione effettiva.</span>
+  <span class="kw">const</span> <span class="tp">float</span> v_shunt = (<span class="tp">float</span>)raw / ADC_MAX * VREF;
+
+  <span class="cm">// 3. Corrente di loop</span>
+  <span class="kw">const</span> <span class="tp">float</span> i_loop_mA = (v_shunt / R_SHUNT) * <span class="num">1000.0f</span>;
+
+  <span class="cm">// 4. Ricostruzione grandezza fisica</span>
+  <span class="kw">const</span> <span class="tp">float</span> frac = constrain(
+    (i_loop_mA - I_MIN_mA) / (I_MAX_mA - I_MIN_mA),
+    <span class="num">0.0f</span>, <span class="num">1.0f</span>
+  );
+  <span class="kw">const</span> <span class="tp">float</span> temperatura = TEMP_MIN + (TEMP_MAX - TEMP_MIN) * frac;
+
+  <span class="cm">// 5. Diagnostica</span>
+  <span class="kw">if</span> (i_loop_mA &lt; <span class="num">2.0f</span>) {
+    Serial.<span class="fn">println</span>(<span class="str">"[ERRORE] Loop aperto!"</span>);
+  } <span class="kw">else</span> {
+    Serial.<span class="fn">print</span>(raw);        Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(v_shunt, <span class="num">4</span>);  Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">print</span>(i_loop_mA, <span class="num">3</span>); Serial.<span class="fn">print</span>(<span class="str">"\t\t"</span>);
+    Serial.<span class="fn">println</span>(temperatura, <span class="num">2</span>);
+  }
+
+  delay(T_MS);
+}</pre>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 7 -->
+<h2 id="s7">7 · Schema Wokwi per la simulazione</h2>
+
+<p>Nella simulazione Wokwi un <strong>potenziometro</strong> sostituisce il trasmettitore reale: variando la sua posizione si genera una tensione tra 0 e V_cc che applicata alla resistenza di shunt simula le correnti del loop.</p>
+
+<div class="riquadro grigio">
+  <div class="titolo-riquadro">Connessioni Wokwi – Arduino UNO</div>
+  <div class="steps">
+    <div class="step">Collegare il cursore del potenziometro (pin centrale) al nodo A del partitore su A0</div>
+    <div class="step">Inserire R_shunt = 250 Ω tra il nodo A e GND</div>
+    <div class="step">Collegare un resistore da 750 Ω tra 5V e il nodo A (simula la sorgente di corrente: con pot a fondo scala → V_A = 5V·250/(250+750) = 1.25V... aggiustare i valori per ottenere 1-5V)</div>
+    <div class="step">In alternativa: usare il pin del pot direttamente come generatore di tensione variabile 0-5V, collegato a R_shunt verso GND → V_A si legge su A0</div>
+    <div class="step">Caricare il codice e aprire il Serial Monitor (115200 baud)</div>
+  </div>
+</div>
+
+<div class="riquadro blu">
+  <div class="titolo-riquadro">Link simulazione Wokwi</div>
+  <p>Il progetto Wokwi con entrambi i circuiti (UNO e ESP32) può essere costruito partendo da: <strong>wokwi.com → New Project → Arduino UNO</strong> oppure <strong>ESP32</strong>.</p>
+  <p>Incollare il codice della sezione precedente e aggiungere i componenti:<br>
+  <code>Potentiometer</code> · <code>Resistor (250Ω o 150Ω)</code> · <code>Serial Monitor</code></p>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SEZIONE 8 -->
+<h2 id="s8">8 · Tabella dati e domande di analisi</h2>
+
+<h3>8.1 Tabella da completare durante l'esercitazione</h3>
+
+<table>
+  <tr>
+    <th>Posizione pot (%)</th>
+    <th>N_ADC UNO (raw)</th>
+    <th>V_shunt UNO (V)</th>
+    <th>I_loop UNO (mA)</th>
+    <th>N_ADC ESP32 (raw)</th>
+    <th>V_shunt ESP32 (V)</th>
+    <th>I_loop ESP32 (mA)</th>
+    <th>T ricostruita (°C)</th>
+  </tr>
+  <tr><td>0%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>25%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>50%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>75%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>100%</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<h3>8.2 Domande di analisi</h3>
+<div class="domande">
+<ol>
+  <li>Perché nel codice ESP32 si usa N_SAMPLES = 16 per la media? Che effetto ha sulla risoluzione effettiva? (suggerimento: oversampling e ENOB)</li>
+  <li>Calcolare la risoluzione in °C per entrambe le piattaforme e verificare con i valori della tabella 5.2.</li>
+  <li>Cosa restituisce il programma se il cavo del loop si interrompe fisicamente? Qual è il valore di N_ADC? È possibile distinguere un guasto da una misura a zero scala?</li>
+  <li>Un trasmettitore misura pressione 0-10 bar. Scrivere la formula che converte i_loop_mA in pressione, modificando le costanti nel codice.</li>
+  <li>Perché nell'ESP32 si usa R_shunt = 150 Ω invece di 250 Ω? Quale sarebbe la tensione massima ai capi di uno shunt da 250 Ω con 20 mA?</li>
+  <li>(Avanzato) L'ADC dell'ESP32 presenta non-linearità sistematiche. Proporre un metodo di calibrazione a due punti e scrivere il codice corrispondente.</li>
+</ol>
+</div>
+
+<div class="riquadro arancio" style="margin-top:40px;">
+  <div class="titolo-riquadro">Collegamento con i prossimi argomenti</div>
+  <p>Il segnale 4-20 mA è il punto di partenza per comprendere le <strong>Norme ISA</strong> e la simbolistica P&amp;ID. Il trasmettitore che abbiamo analizzato è esattamente il blocco funzionale indicato con il simbolo cerchiato nella strumentazione di processo. Nel prossimo modulo vedremo come questi trasmettitori vengono rappresentati negli schemi P&amp;ID e come si codificano secondo la norma ISA-5.1.</p>
+</div>
+
+</div><!-- fine contenuto -->
+
+<script>
+// ─── KaTeX auto-render ────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left:"$$",right:"$$",display:true},
+      {left:"\\[",right:"\\]",display:true},
+      {left:"\\(",right:"\\)",display:false},
+      {left:"$",right:"$",display:false}
+    ],
+    throwOnError: false
+  });
+  drawAll();
+});
+
+// ─── TAB switcher ────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── CANVAS drawings ─────────────────────────────────────────
+function drawAll() {
+  drawLoopPowered();
+  drawCaratteristica();
+  drawCircuito();
+  drawRisoluzione();
+}
+
+function drawLoopPowered() {
+  const c = document.getElementById('cLoopPowered');
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, c.width, c.height);
+
+  // colori
+  const col = { line: '#1565c0', fill: '#e3f2fd', text: '#0a2a4a', accent: '#e65100', green: '#2e7d32' };
+
+  // filo superiore
+  ctx.strokeStyle = col.line; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(60, 60); ctx.lineTo(760, 60); ctx.stroke();
+  // filo inferiore
+  ctx.beginPath(); ctx.moveTo(60, 140); ctx.lineTo(760, 140); ctx.stroke();
+  // vertici sinistra
+  ctx.beginPath(); ctx.moveTo(60, 60); ctx.lineTo(60, 140); ctx.stroke();
+  // vertici destra
+  ctx.beginPath(); ctx.moveTo(760, 60); ctx.lineTo(760, 140); ctx.stroke();
+
+  // Trasmettitore (sinistra)
+  ctx.fillStyle = col.fill; ctx.strokeStyle = col.line; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect(80, 40, 130, 120, 8); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = col.text; ctx.font = 'bold 13px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('TRASMETTITORE', 145, 78);
+  ctx.font = '11px Georgia';
+  ctx.fillText('Sensore + V→I', 145, 96);
+  ctx.fillText('2-wire / loop-powered', 145, 114);
+  ctx.fillText('4 – 20 mA', 145, 133);
+
+  // Ricevitore (destra)
+  ctx.fillStyle = col.fill; ctx.strokeStyle = col.line; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect(590, 40, 150, 120, 8); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = col.text; ctx.font = 'bold 13px Georgia';
+  ctx.fillText('RICEVITORE', 665, 78);
+  ctx.font = '11px Georgia';
+  ctx.fillText('PLC / Arduino / ESP32', 665, 96);
+  ctx.fillText('R_shunt = 250 Ω', 665, 114);
+  ctx.fillText('ADC → misura', 665, 133);
+
+  // Frecce corrente
+  ctx.fillStyle = col.accent; ctx.strokeStyle = col.accent; ctx.lineWidth = 2;
+  // freccia su filo superiore (sinistra→destra)
+  for (let x = 260; x < 580; x += 100) {
+    ctx.beginPath(); ctx.moveTo(x, 55); ctx.lineTo(x+20, 60); ctx.lineTo(x, 65); ctx.fill();
+  }
+  // etichetta corrente
+  ctx.font = 'bold 13px Georgia'; ctx.fillStyle = col.accent; ctx.textAlign = 'center';
+  ctx.fillText('I_loop  →  4 – 20 mA', 400, 45);
+
+  // Alimentazione (indicata)
+  ctx.font = '11px Georgia'; ctx.fillStyle = col.green;
+  ctx.fillText('+ V_alimentazione (24 V tipici)', 400, 175);
+
+  // Cavo
+  ctx.font = '11px Georgia'; ctx.fillStyle = '#607d8b';
+  ctx.fillText('Cavo  (R_cavo non influisce)', 400, 100);
+}
+
+function drawCaratteristica() {
+  const c = document.getElementById('cCaratteristica');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const mg = { l: 70, r: 40, t: 30, b: 50 };
+  const pw = W - mg.l - mg.r;
+  const ph = H - mg.t - mg.b;
+
+  // griglia
+  ctx.strokeStyle = '#e0e0e0'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    const y = mg.t + ph - i * ph / 5;
+    ctx.beginPath(); ctx.moveTo(mg.l, y); ctx.lineTo(mg.l + pw, y); ctx.stroke();
+    ctx.fillStyle = '#607d8b'; ctx.font = '11px Georgia'; ctx.textAlign = 'right';
+    ctx.fillText((i * 4).toFixed(0) + '%', mg.l - 6, y + 4);
+  }
+  for (let i = 0; i <= 5; i++) {
+    const x = mg.l + i * pw / 5;
+    ctx.beginPath(); ctx.moveTo(x, mg.t); ctx.lineTo(x, mg.t + ph); ctx.stroke();
+    ctx.fillStyle = '#607d8b'; ctx.font = '11px Georgia'; ctx.textAlign = 'center';
+    ctx.fillText((4 + i * 4).toFixed(0), x, mg.t + ph + 18);
+  }
+
+  // assi
+  ctx.strokeStyle = '#333'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(mg.l, mg.t); ctx.lineTo(mg.l, mg.t + ph); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(mg.l, mg.t + ph); ctx.lineTo(mg.l + pw, mg.t + ph); ctx.stroke();
+
+  // etichette assi
+  ctx.fillStyle = '#1a1a2e'; ctx.font = 'bold 13px Georgia'; ctx.textAlign = 'center';
+  ctx.fillText('Corrente di loop I_loop (mA)', mg.l + pw/2, H - 5);
+  ctx.save(); ctx.translate(16, mg.t + ph/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Grandezza fisica (% scala)', 0, 0); ctx.restore();
+
+  // linea caratteristica
+  const x4  = mg.l;
+  const x20 = mg.l + pw;
+  const y0  = mg.t + ph;
+  const y100 = mg.t;
+
+  ctx.strokeStyle = '#1565c0'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(x4, y0); ctx.lineTo(x20, y100); ctx.stroke();
+
+  // zona live-zero (0-4 mA)
+  ctx.fillStyle = 'rgba(230, 81, 0, 0.08)';
+  const x0mA = mg.l - pw * 4 / 16; // posizione 0 mA (fuori range, clamp a mg.l)
+  ctx.fillRect(mg.l - 15, mg.t, 15, ph);
+
+  // punti notevoli
+  const punti = [
+    { i_mA: 4, pct: 0, col: '#e65100' },
+    { i_mA: 8, pct: 25, col: '#1565c0' },
+    { i_mA: 12, pct: 50, col: '#1565c0' },
+    { i_mA: 16, pct: 75, col: '#1565c0' },
+    { i_mA: 20, pct: 100, col: '#e65100' },
+  ];
+  punti.forEach(p => {
+    const px = mg.l + (p.i_mA - 4) / 16 * pw;
+    const py = mg.t + ph - p.pct / 100 * ph;
+    ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI * 2);
+    ctx.fillStyle = p.col; ctx.fill();
+    ctx.strokeStyle = 'white'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#1a1a2e'; ctx.font = '11px Georgia'; ctx.textAlign = 'left';
+    ctx.fillText(p.i_mA + ' mA = ' + p.pct + '%', px + 8, py - 4);
+  });
+
+  // "live zero" label
+  ctx.fillStyle = '#e65100'; ctx.font = 'italic 11px Georgia'; ctx.textAlign = 'center';
+  ctx.fillText('live zero', mg.l - 7, mg.t + ph - 20);
+}
+
+function drawCircuito() {
+  const c = document.getElementById('cCircuito');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.clearRect(0, 0, W, H);
+
+  ctx.font = '13px Georgia';
+  ctx.textAlign = 'center';
+
+  const LS = '#1565c0'; // line color
+  const LW = 2;
+
+  function line(x1,y1,x2,y2,col,lw) {
+    ctx.strokeStyle = col||LS; ctx.lineWidth=lw||LW;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  }
+  function label(txt,x,y,col,sz,align) {
+    ctx.fillStyle=col||'#1a1a2e'; ctx.font=(sz||13)+'px Georgia';
+    ctx.textAlign=align||'center'; ctx.fillText(txt,x,y);
+  }
+  function resistor(x,y,vert) {
+    // vert: false=horizontal
+    ctx.strokeStyle=LS; ctx.lineWidth=LW;
+    if (!vert) {
+      line(x,y,x+15,y); // left wire
+      ctx.strokeRect(x+15,y-10,40,20);
+      line(x+55,y,x+70,y);
+    } else {
+      line(x,y,x,y+15);
+      ctx.strokeRect(x-10,y+15,20,40);
+      line(x,y+55,x,y+70);
+    }
+  }
+  function opamp(cx,cy) {
+    ctx.strokeStyle=LS; ctx.lineWidth=LW; ctx.fillStyle='#e3f2fd';
+    ctx.beginPath();
+    ctx.moveTo(cx-30,cy-35); ctx.lineTo(cx-30,cy+35); ctx.lineTo(cx+30,cy); ctx.closePath();
+    ctx.fill(); ctx.stroke();
+    label('+',cx-22,cy-12,'#2e7d32',11);
+    label('−',cx-22,cy+16,'#e65100',14);
+    label('A',cx,cy+4,'#1a1a2e',13);
+  }
+  function bjt(cx,cy) {
+    ctx.strokeStyle=LS; ctx.lineWidth=LW; ctx.fillStyle='#fff3e0';
+    ctx.beginPath(); ctx.arc(cx,cy,22,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    // base
+    line(cx-22,cy,cx-8,cy);
+    // colletor
+    line(cx,cy-22,cx,cy-8);
+    line(cx-8,cy-4,cx+8,cy-16); // line col
+    // emitter
+    line(cx,cy+8,cx,cy+22);
+    line(cx-8,cy+4,cx+8,cy+16); // line emit
+    label('Q1',cx+28,cy+4,'#1a1a2e',11,'left');
+    label('NPN',cx+28,cy+16,'#607d8b',10,'left');
+  }
+
+  // ─── Op-Amp ───────────────────────────────────────
+  const oax=220, oay=170;
+  opamp(oax,oay);
+
+  // V_in (sinistra)
+  line(30,oay-20,oax-30,oay-20); // + input
+  line(30,oay+20,oax-30,oay+20); // - input
+  label('V_in',30,oay-30,'#1565c0',12);
+  // ground simbolo
+  ctx.strokeStyle=LS; ctx.lineWidth=1.5;
+  [0,5,10].forEach((o,i)=>{
+    const w=20-i*6;
+    line(30-w/2+5,oay+25+o*6,30+w/2+5,oay+25+o*6);
+  });
+  line(35,oay+20,35,oay+25);
+
+  // BJT
+  const qx=390, qy=120;
+  bjt(qx,qy);
+
+  // op-amp output → BJT base
+  line(oax+30,oay,370,oay); line(370,oay,370,qy); line(370,qy,qx-22,qy);
+
+  // BJT collector → V_cc
+  line(qx,qy-22,qx,40);
+  label('+V_cc (12-24V)',qx,28,'#e65100',11);
+
+  // BJT emitter → R_E
+  line(qx,qy+22,qx,qy+50);
+  resistor(qx-35,qy+50+35);  // resistor horizontal... better vertical
+  // R_E verticale
+  ctx.strokeStyle=LS; ctx.lineWidth=LW;
+  line(qx,qy+50,qx,qy+65);
+  ctx.strokeRect(qx-10,qy+65,20,40);
+  line(qx,qy+105,qx,qy+130);
+  label('R_E = 250 Ω',qx+28,qy+88,'#1a1a2e',11,'left');
+
+  // nodo FB: emitter → input invertente op-amp
+  line(qx,qy+112,500,qy+112); line(500,qy+112,500,oay+20); line(500,oay+20,oax-30,oay+20);
+  label('retroazione',490,oay+12,'#e65100',10,'right');
+
+  // R_E → GND
+  line(qx,qy+130,qx,qy+155);
+  ctx.strokeStyle='#333'; ctx.lineWidth=1.5;
+  [0,5,10].forEach((o,i)=>{const w=20-i*6; line(qx-w/2,qy+155+o*6,qx+w/2,qy+155+o*6);});
+
+  // Loop corrente: da V_cc → Q_C → Q_E → R_E → GND → cavo → shunt → back to tx
+  // Mostriamo il loop in modo semplificato come uscita verso il carico
+  line(qx,qy-22,qx,40);
+  // freccia corrente loop
+  ctx.fillStyle='#e65100';
+  ctx.beginPath(); ctx.moveTo(qx+15,50); ctx.lineTo(qx,40); ctx.lineTo(qx-15,50); ctx.fill();
+
+  // Carico / cavo indicato
+  ctx.strokeStyle='#2e7d32'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+  line(550,40,700,40); line(700,40,700,300); line(550,300,700,300);
+  ctx.setLineDash([]);
+  ctx.strokeRect(570,130,100,50);
+  label('R_carico',620,162,'#2e7d32',11);
+  label('(cavo + shunt)',620,175,'#2e7d32',10);
+  label('I_loop = V_in / R_E',620,220,'#1565c0',12);
+
+  // formule
+  label('Equazione chiave:', 130, 290, '#0a2a4a', 13);
+  label('I_loop = V_in / R_E   (V_in = 1..5 V → I = 4..20 mA)', 360, 290, '#1565c0', 12);
+  label('R_E = 250 Ω  →  Transconduttanza = 4 mA/V', 360, 310, '#607d8b', 11);
+}
+
+function drawRisoluzione() {
+  const c = document.getElementById('cRisoluzione');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const mg = { l: 80, r: 40, t: 30, b: 50 };
+  const pw = W - mg.l - mg.r;
+  const ph = H - mg.t - mg.b;
+
+  // Visualizza gli step quantizzati per UNO e ESP32 sovrapposti
+
+  // sfondi bande
+  ctx.fillStyle = 'rgba(21,101,192,0.05)';
+  ctx.fillRect(mg.l, mg.t, pw/2 - 4, ph);
+  ctx.fillStyle = 'rgba(46,125,50,0.05)';
+  ctx.fillRect(mg.l + pw/2 + 4, mg.t, pw/2 - 4, ph);
+
+  ctx.fillStyle = '#1565c0'; ctx.font = 'bold 12px Georgia'; ctx.textAlign = 'center';
+  ctx.fillText('Arduino UNO  (10-bit, ~820 passi utili)', mg.l + pw/4, mg.t + 14);
+  ctx.fillStyle = '#2e7d32';
+  ctx.fillText('ESP32  (12-bit, ~2979 passi utili)', mg.l + 3*pw/4, mg.t + 14);
+
+  // disegna scalino quantizzazione UNO (semplificato, 12 step)
+  const N_UNO = 12, N_ESP = 16;
+  const xLeft = mg.l + 20, xRight = mg.l + pw/2 - 20;
+  const xELeft = mg.l + pw/2 + 20, xERight = mg.l + pw - 20;
+
+  function drawStaircase(x0, xw, n, color) {
+    const stepW = xw / n;
+    const stepH = ph / n;
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const sx = x0 + i * stepW;
+      const sy = mg.t + ph - i * stepH - stepH;
+      if (i === 0) ctx.moveTo(sx, sy + stepH);
+      ctx.lineTo(sx, sy);
+      ctx.lineTo(sx + stepW, sy);
+    }
+    ctx.stroke();
+    // ideal line
+    ctx.strokeStyle = color + '44'; ctx.lineWidth = 1; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(x0, mg.t+ph); ctx.lineTo(x0+xw, mg.t); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  drawStaircase(xLeft, xRight - xLeft, N_UNO, '#1565c0');
+  drawStaircase(xELeft, xERight - xELeft, N_ESP, '#2e7d32');
+
+  // assi
+  ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(mg.l, mg.t); ctx.lineTo(mg.l, mg.t + ph); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(mg.l, mg.t + ph); ctx.lineTo(mg.l + pw, mg.t + ph); ctx.stroke();
+
+  ctx.fillStyle = '#1a1a2e'; ctx.font = '12px Georgia'; ctx.textAlign = 'center';
+  ctx.fillText('Ingresso analogico (% scala piena)', mg.l + pw/2, H - 8);
+  ctx.save(); ctx.translate(16, mg.t + ph/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Valore digitale (% scala)', 0, 0); ctx.restore();
+
+  // LSB labels
+  ctx.fillStyle = '#1565c0'; ctx.font = '11px Georgia';
+  ctx.fillText('LSB ≈ 19.5 μA  |  ΔT ≈ 0.12 °C', mg.l + pw/4, mg.t + ph - 10);
+  ctx.fillStyle = '#2e7d32';
+  ctx.fillText('LSB ≈ 5.37 μA  |  ΔT ≈ 0.034 °C', mg.l + 3*pw/4, mg.t + ph - 10);
+}
+</script>
+</body>
+</html>
