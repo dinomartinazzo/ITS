@@ -1,2 +1,5 @@
 # Configurazione locale Claude Code, mai da versionare
 .claude/
+
+# File temporanei creati dal filesystem FUSE del mount di rete/USB
+.fuse_hidden*
