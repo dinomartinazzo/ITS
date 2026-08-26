@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>MODULO 6 - VERIFICA FINALE E CERTIFICAZIONE</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">MODULO 6 - VERIFICA FINALE E CERTIFICAZIONE</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>MODULO_6_VERIFICA_FINALE.md</dd></div>
+<div><dt>Cartella</dt><dd>CookBooks/ITS/Fondamenti di Intelligenza Artificiale/old2</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="fondamenti-di-intelligenza-artificiale-per-la-programmazione">Fondamenti di Intelligenza Artificiale per la Programmazione</h2>
+<h3 id="corso-its-2025---assessment-completo">Corso ITS 2025 - Assessment Completo</h3>
+<hr />
+<h2 id="indice">INDICE</h2>
+<ol type="1">
+<li><a href="#struttura-dellesame">Struttura dell&#39;Esame</a></li>
+<li><a href="#parte-teorica">Parte Teorica - 40 Punti</a></li>
+<li><a href="#parte-pratica">Parte Pratica - 60 Punti</a></li>
+<li><a href="#progetti-desame">Progetti d&#39;Esame</a></li>
+<li><a href="#criteri-di-valutazione">Criteri di Valutazione</a></li>
+<li><a href="#materiali-di-preparazione">Materiali di Preparazione</a></li>
+<li><a href="#portfolio-professionale">Portfolio Professionale</a></li>
+<li><a href="#simulazioni-desame">Simulazioni d&#39;Esame</a></li>
+<li><a href="#certificazione-e-career-path">Certificazione e Career Path</a></li>
+</ol>
+<hr />
+<h2 id="struttura-dellesame">STRUTTURA DELL&#39;ESAME</h2>
+<h3 id="panoramica-generale">Panoramica Generale</h3>
+<p>L&#39;esame finale si articola in <strong>due parti complementari</strong> che valutano competenze teoriche e pratiche acquisite durante il corso.</p>
+<h4 id="distribuzione-dei-punti">Distribuzione dei Punti</h4>
+<pre><code>┌─────────────────────────────────────────┐
+│ PARTE TEORICA              40 punti     │
+├─────────────────────────────────────────┤
+│ - Quiz a risposta multipla  20 punti    │
+│ - Domande aperte            10 punti    │
+│ - Analisi critica           10 punti    │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│ PARTE PRATICA              60 punti     │
+├─────────────────────────────────────────┤
+│ - Implementazione progetto  35 punti    │
+│ - Documentazione tecnica    10 punti    │
+│ - Presentazione orale       10 punti    │
+│ - Uso AI e metodologia       5 punti    │
+└─────────────────────────────────────────┘
+
+TOTALE: 100 punti
+Soglia minima: 60/100 (sufficienza)</code></pre>
+<h3 id="tempistiche">Tempistiche</h3>
+<ul>
+<li><strong>Parte Teorica</strong>: 90 minuti</li>
+<li><strong>Pausa</strong>: 15 minuti</li>
+<li><strong>Parte Pratica</strong>: 4 ore (sviluppo)</li>
+<li><strong>Presentazione</strong>: 15 minuti per candidato</li>
+</ul>
+<p><strong>Totale tempo d&#39;esame</strong>: circa 6 ore</p>
+<hr />
+<h2 id="parte-teorica---40-punti">PARTE TEORICA - 40 PUNTI</h2>
+<h3 id="sezione-a-quiz-a-risposta-multipla-20-punti">Sezione A: Quiz a Risposta Multipla (20 punti)</h3>
+<p><strong>20 domande, 1 punto ciascuna</strong></p>
+<h4 id="blocco-1-fondamenti-di-ia-domande-1-5">Blocco 1: Fondamenti di IA (Domande 1-5)</h4>
+<p><strong>Domanda 1</strong><br />
+Quale delle seguenti affermazioni descrive meglio un Large Language Model (LLM)?</p>
+<p>a) Un sistema che traduce solo tra lingue diverse<br />
+b) Un modello di rete neurale addestrato su grandi quantità di testo per comprendere e generare linguaggio naturale<br />
+c) Un database di risposte pre-programmate<br />
+d) Un motore di ricerca avanzato</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 2</strong><br />
+Cosa significa &quot;temperatura&quot; nei parametri di generazione di un LLM?</p>
+<p>a) La velocità di elaborazione del modello<br />
+b) Il livello di randomness nelle risposte generate<br />
+c) La dimensione del modello in GB<br />
+d) Il numero di token processati al secondo</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 3</strong><br />
+Qual è il principale vantaggio del &quot;prompt engineering&quot;?</p>
+<p>a) Rendere il codice più veloce<br />
+b) Ridurre il consumo di memoria<br />
+c) Ottenere risposte più precise e rilevanti dall&#39;IA senza modificare il modello<br />
+d) Compilare automaticamente il codice</p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<p><strong>Domanda 4</strong><br />
+Cosa rappresenta il &quot;contesto&quot; (context window) in un LLM?</p>
+<p>a) La quantità di informazioni che il modello può considerare in una singola interazione<br />
+b) Il tempo di risposta del modello<br />
+c) La qualità delle risposte generate<br />
+d) Il numero di utenti simultanei supportati</p>
+<p><strong>Risposta corretta</strong>: a)</p>
+<hr />
+<p><strong>Domanda 5</strong><br />
+Quale tecnica NON è consigliata per migliorare un prompt?</p>
+<p>a) Fornire esempi concreti (few-shot learning)<br />
+b) Specificare il formato di output desiderato<br />
+c) Usare solo parole chiave senza contesto<br />
+d) Descrivere il ruolo o persona dell&#39;IA</p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<h4 id="blocco-2-programmazione-c-domande-6-10">Blocco 2: Programmazione C (Domande 6-10)</h4>
+<p><strong>Domanda 6</strong><br />
+Quale funzione standard C deve essere usata per allocare dinamicamente memoria?</p>
+<p>a) <code>new()</code><br />
+b) <code>malloc()</code><br />
+c) <code>allocate()</code><br />
+d) <code>create()</code></p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 7</strong><br />
+Cosa succede se non si libera la memoria allocata dinamicamente con <code>free()</code>?</p>
+<p>a) Il programma va in crash immediatamente<br />
+b) Si verifica un memory leak<br />
+c) La memoria viene liberata automaticamente<br />
+d) Il compilatore genera un errore</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 8</strong><br />
+Qual è la differenza tra passaggio per valore e per riferimento (puntatore)?</p>
+<p>a) Nessuna differenza in C<br />
+b) Per valore copia i dati, per riferimento passa l&#39;indirizzo di memoria<br />
+c) Per valore è più veloce<br />
+d) Per riferimento funziona solo con interi</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 9</strong><br />
+Quale header file contiene le definizioni per le operazioni su stringhe in C?</p>
+<p>a) <code>&lt;stdio.h&gt;</code><br />
+b) <code>&lt;stdlib.h&gt;</code><br />
+c) <code>&lt;string.h&gt;</code><br />
+d) <code>&lt;ctype.h&gt;</code></p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<p><strong>Domanda 10</strong><br />
+Cosa fa l&#39;operatore <code>sizeof()</code> in C?</p>
+<p>a) Restituisce il valore di una variabile<br />
+b) Restituisce il numero di byte occupati da un tipo o variabile<br />
+c) Converte tipi di dati<br />
+d) Alloca memoria dinamicamente</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<h4 id="blocco-3-arduino-e-embedded-domande-11-15">Blocco 3: Arduino e Embedded (Domande 11-15)</h4>
+<p><strong>Domanda 11</strong><br />
+Quale funzione Arduino legge un valore analogico da un pin?</p>
+<p>a) <code>digitalRead()</code><br />
+b) <code>analogRead()</code><br />
+c) <code>readAnalog()</code><br />
+d) <code>getAnalogValue()</code></p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 12</strong><br />
+Qual è il range di valori restituiti da <code>analogRead()</code> su Arduino Uno?</p>
+<p>a) 0-255<br />
+b) 0-1023<br />
+c) 0-4095<br />
+d) 0-65535</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 13</strong><br />
+Quale protocollo di comunicazione usa solo 2 fili (SDA e SCL)?</p>
+<p>a) SPI<br />
+b) UART<br />
+c) I2C<br />
+d) CAN Bus</p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<p><strong>Domanda 14</strong><br />
+Perché è importante usare resistenze di pull-up in I2C?</p>
+<p>a) Per limitare la corrente<br />
+b) Per garantire livelli logici definiti quando le linee non sono guidate<br />
+c) Per aumentare la velocità di comunicazione<br />
+d) Non sono necessarie in I2C</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 15</strong><br />
+Cosa rappresenta il duty cycle in un segnale PWM?</p>
+<p>a) La frequenza del segnale<br />
+b) La percentuale di tempo in cui il segnale è alto rispetto al periodo totale<br />
+c) L&#39;ampiezza del segnale<br />
+d) Il numero di impulsi al secondo</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<h4 id="blocco-4-iot-e-sistemi-avanzati-domande-16-20">Blocco 4: IoT e Sistemi Avanzati (Domande 16-20)</h4>
+<p><strong>Domanda 16</strong><br />
+Quale protocollo è comunemente usato per la comunicazione IoT leggera e basata su publish/subscribe?</p>
+<p>a) HTTP<br />
+b) FTP<br />
+c) MQTT<br />
+d) SMTP</p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<p><strong>Domanda 17</strong><br />
+Cosa significa QoS (Quality of Service) in MQTT?</p>
+<p>a) La velocità di trasmissione dati<br />
+b) Il livello di garanzia di consegna dei messaggi (0, 1, o 2)<br />
+c) La qualità della connessione WiFi<br />
+d) Il numero di client connessi</p>
+<p><strong>Risposta corretta</strong>: b)</p>
+<hr />
+<p><strong>Domanda 18</strong><br />
+In un controllo PID, quale componente reagisce all&#39;errore attuale?</p>
+<p>a) Integrale (I)<br />
+b) Derivativo (D)<br />
+c) Proporzionale (P)<br />
+d) Tutti e tre insieme</p>
+<p><strong>Risposta corretta</strong>: c)</p>
+<hr />
+<p><strong>Domanda 19</strong><br />
+Quale piattaforma ESP32 supporta nativamente WiFi e Bluetooth?</p>
+<p>a) Arduino Uno<br />
+b) Arduino Nano<br />
+c) ESP8266<br />
+d) ESP32</p>
+<p><strong>Risposta corretta</strong>: d)</p>
+<hr />
+<p><strong>Domanda 20</strong><br />
+Cosa permette TensorFlow Lite Micro?</p>
+<p>a) Eseguire modelli di machine learning su microcontrollori<br />
+b) Creare interfacce grafiche<br />
+c) Gestire database SQL<br />
+d) Compilare codice più velocemente</p>
+<p><strong>Risposta corretta</strong>: a)</p>
+<hr />
+<h3 id="sezione-b-domande-aperte-10-punti">Sezione B: Domande Aperte (10 punti)</h3>
+<p><strong>5 domande, 2 punti ciascuna</strong></p>
+<h4 id="domanda-1-prompt-engineering">Domanda 1: Prompt Engineering</h4>
+<p><strong>Domanda</strong>: Spiega la differenza tra un prompt &quot;zero-shot&quot; e &quot;few-shot&quot; fornendo un esempio pratico per ciascuno nel contesto della generazione di codice C.</p>
+<p><strong>Risposta attesa</strong> (criteri di valutazione):</p>
+<ul>
+<li><strong>Zero-shot</strong> (1 punto): Definizione corretta - richiesta diretta senza esempi
+<ul>
+<li>Esempio: &quot;Scrivi una funzione C che calcola il fattoriale&quot;</li>
+</ul></li>
+<li><strong>Few-shot</strong> (1 punto): Definizione corretta - fornisce esempi prima della richiesta
+<ul>
+<li>Esempio: &quot;Ecco una funzione che somma due numeri: [codice]. Ecco una che moltiplica: [codice]. Ora scrivi una che calcola il fattoriale.&quot;</li>
+</ul></li>
+<li><strong>Bonus</strong>: Menzione del vantaggio del few-shot per task complessi (+0.5)</li>
+</ul>
+<hr />
+<h4 id="domanda-2-gestione-memoria">Domanda 2: Gestione Memoria</h4>
+<p><strong>Domanda</strong>: Descrivi il concetto di &quot;stack&quot; vs &quot;heap&quot; in C e quando è appropriato usare l&#39;allocazione dinamica (heap) invece dell&#39;allocazione automatica (stack).</p>
+<p><strong>Risposta attesa</strong>:</p>
+<ul>
+<li><strong>Stack</strong> (0.5 punti): Memoria automatica, LIFO, veloce, dimensione limitata</li>
+<li><strong>Heap</strong> (0.5 punti): Memoria dinamica, gestita manualmente, più grande, più lenta</li>
+<li><strong>Quando usare heap</strong> (1 punto):
+<ul>
+<li>Dimensione dati non nota a compile-time</li>
+<li>Dati che devono persistere oltre la funzione</li>
+<li>Strutture dati grandi (array estesi, liste)</li>
+<li>Esempio concreto</li>
+</ul></li>
+</ul>
+<hr />
+<h4 id="domanda-3-protocolli-di-comunicazione">Domanda 3: Protocolli di Comunicazione</h4>
+<p><strong>Domanda</strong>: Confronta I2C e SPI in termini di numero di fili, velocità, complessità e casi d&#39;uso tipici per progetti Arduino.</p>
+<p><strong>Risposta attesa</strong>:</p>
+<ul>
+<li><strong>I2C</strong> (1 punto):
+<ul>
+<li>2 fili (SDA, SCL) + alimentazione</li>
+<li>Velocità: 100kHz-400kHz (standard/fast mode)</li>
+<li>Indirizzamento, multi-master possibile</li>
+<li>Uso: sensori, display, RTC (molti dispositivi)</li>
+</ul></li>
+<li><strong>SPI</strong> (1 punto):
+<ul>
+<li>4+ fili (MISO, MOSI, SCK, CS per ogni slave)</li>
+<li>Velocità: fino a diversi MHz</li>
+<li>Full-duplex, comunicazione più veloce</li>
+<li>Uso: SD card, display TFT, moduli radio</li>
+</ul></li>
+</ul>
+<hr />
+<h4 id="domanda-4-controllo-pid">Domanda 4: Controllo PID</h4>
+<p><strong>Domanda</strong>: Spiega cosa causa l&#39;effetto &quot;integral windup&quot; in un controllore PID e come può essere mitigato nel codice.</p>
+<p><strong>Risposta attesa</strong>:</p>
+<ul>
+<li><strong>Causa</strong> (1 punto):
+<ul>
+<li>Accumulo eccessivo del termine integrale quando l&#39;attuatore è saturato</li>
+<li>Sistema non può raggiungere setpoint, errore continua ad accumularsi</li>
+</ul></li>
+<li><strong>Mitigazione</strong> (1 punto):
+<ul>
+<li>Clamping: limitare il valore dell&#39;integrale</li>
+<li>Back-calculation: ridurre integrale quando output è saturato</li>
+<li>Conditional integration: non integrare quando output saturato</li>
+<li>Esempio di codice con clamping</li>
+</ul></li>
+</ul>
+<hr />
+<h4 id="domanda-5-iot-security">Domanda 5: IoT Security</h4>
+<p><strong>Domanda</strong>: Elenca almeno tre misure di sicurezza essenziali da implementare in un dispositivo IoT che trasmette dati sensibili.</p>
+<p><strong>Risposta attesa</strong> (0.67 punti per misura, max 2 punti):</p>
+<ol type="1">
+<li><strong>Crittografia in transito</strong>: TLS/SSL per MQTT o HTTPS</li>
+<li><strong>Autenticazione</strong>: Certificati client, token, credenziali sicure</li>
+<li><strong>OTA sicuro</strong>: Verifica firma firmware, rollback su errori</li>
+<li><strong>Protezione credenziali</strong>: Non hardcodare password, usare secure storage</li>
+<li><strong>Principle of least privilege</strong>: Permessi minimi necessari</li>
+<li><strong>Aggiornamenti regolari</strong>: Patch vulnerabilità note</li>
+</ol>
+<hr />
+<h3 id="sezione-c-analisi-critica-10-punti">Sezione C: Analisi Critica (10 punti)</h3>
+<p><strong>2 casi, 5 punti ciascuno</strong></p>
+<h4 id="caso-1-debug-di-codice-arduino-con-ia">Caso 1: Debug di Codice Arduino con IA</h4>
+<p><strong>Scenario</strong>:<br />
+Uno studente ha scritto il seguente codice per leggere un sensore di temperatura DHT22 e visualizzarlo su display LCD, ma riceve errori di compilazione e comportamenti anomali:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;DHT.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_I2C.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTPIN </span><span class="dv">2</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTTYPE </span>DHT22</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>DHT dht<span class="op">(</span>DHTPIN<span class="op">,</span> DHTTYPE<span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>LiquidCrystal_I2C lcd<span class="op">(</span><span class="bn">0x27</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  dht<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>init<span class="op">();</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>backlight<span class="op">();</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> dht<span class="op">.</span>readTemperature<span class="op">();</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>setCursor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temp: &quot;</span><span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; C&quot;</span><span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">100</span><span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Lo studente chiede all&#39;IA: <em>&quot;Il mio codice non funziona, sistemalo&quot;</em></p>
+<p><strong>Domande</strong>:</p>
+<ol type="1">
+<li>Identifica almeno 3 problemi nel codice (1.5 punti)</li>
+<li>Critica il prompt usato dallo studente (1 punto)</li>
+<li>Scrivi un prompt migliore per ottenere aiuto dall&#39;IA (1.5 punti)</li>
+<li>Proponi il codice corretto (1 punto)</li>
+</ol>
+<p><strong>Risposta attesa</strong>:</p>
+<p><strong>1. Problemi nel codice</strong> (0.5 punti ciascuno):</p>
+<ul>
+<li>Delay troppo breve (100ms): DHT22 necessita almeno 2 secondi tra letture</li>
+<li>Nessun controllo su <code>isnan()</code>: temperatura potrebbe essere NaN se lettura fallisce</li>
+<li>LCD non viene pulito: testo si sovrappone, specialmente se lunghezza varia</li>
+<li>Nessuna gestione errori: se sensore non risponde, stampa valori invalidi</li>
+</ul>
+<p><strong>2. Critica del prompt</strong> (1 punto):</p>
+<ul>
+<li>Troppo generico: &quot;non funziona&quot; non descrive il problema</li>
+<li>Nessun contesto: tipo di errore (compilazione/runtime)</li>
+<li>Nessuna informazione hardware: collegamenti, alimentazione</li>
+<li>Non specifica comportamento atteso vs osservato</li>
+</ul>
+<p><strong>3. Prompt migliorato</strong> (1.5 punti):</p>
+<pre><code>Ho un Arduino Uno con sensore DHT22 su pin 2 e LCD I2C all&#39;indirizzo 0x27.
+Il codice compila senza errori, ma sul display vedo valori &quot;nan&quot; che si
+sovrappongono.
+
+Ecco il mio codice:
+[codice]
+
+Voglio:
+1. Visualizzare la temperatura in formato &quot;Temp: XX.X C&quot;
+2. Gestire errori di lettura sensore
+3. Aggiornare il display ogni 2 secondi senza sovrascritture
+
+Analizza il codice e suggerisci correzioni con spiegazioni.</code></pre>
+<p><strong>4. Codice corretto</strong> (1 punto):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;DHT.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_I2C.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTPIN </span><span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTTYPE </span>DHT22</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>DHT dht<span class="op">(</span>DHTPIN<span class="op">,</span> DHTTYPE<span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>LiquidCrystal_I2C lcd<span class="op">(</span><span class="bn">0x27</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  dht<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>init<span class="op">();</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>backlight<span class="op">();</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>setCursor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;DHT22 Ready&quot;</span><span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">2000</span><span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> dht<span class="op">.</span>readTemperature<span class="op">();</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  lcd<span class="op">.</span>clear<span class="op">();</span>  <span class="co">// Pulisce display</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>isnan<span class="op">(</span>temp<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>setCursor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Errore sensore!&quot;</span><span class="op">);</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Lettura fallita&quot;</span><span class="op">);</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>setCursor<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temp: &quot;</span><span class="op">);</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>print<span class="op">(</span>temp<span class="op">,</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// 1 decimale</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    lcd<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; C&quot;</span><span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temperatura: &quot;</span><span class="op">);</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">2000</span><span class="op">);</span>  <span class="co">// DHT22 richiede 2 sec tra letture</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h4 id="caso-2-scelta-architetturale-iot">Caso 2: Scelta Architetturale IoT</h4>
+<p><strong>Scenario</strong>:<br />
+Un&#39;azienda agricola vuole monitorare 50 serre distribuite su 10 ettari. Ogni serra necessita di:</p>
+<ul>
+<li>Temperatura, umidità aria, umidità suolo (3 sensori)</li>
+<li>Controllo irrigazione automatica</li>
+<li>Allarmi in caso di anomalie</li>
+<li>Storico dati per analisi mensili</li>
+<li>Budget limitato: 100€ per serra</li>
+</ul>
+<p>Due proposte:</p>
+<p><strong>Proposta A</strong>:</p>
+<ul>
+<li>ESP32 per ogni serra (WiFi)</li>
+<li>Invio dati ogni minuto a server cloud (ThingSpeak gratuito)</li>
+<li>Controllo attuatori tramite cloud</li>
+<li>App mobile per monitoraggio</li>
+</ul>
+<p><strong>Proposta B</strong>:</p>
+<ul>
+<li>Arduino Nano + modulo LoRa per ogni serra</li>
+<li>Gateway centrale LoRa + Raspberry Pi</li>
+<li>Database locale (InfluxDB)</li>
+<li>Controllo attuatori locale</li>
+<li>Dashboard web (Grafana)</li>
+</ul>
+<p><strong>Domande</strong>:</p>
+<ol type="1">
+<li>Analizza vantaggi e svantaggi di ciascuna proposta (2 punti)</li>
+<li>Quali sono i rischi principali per ciascuna soluzione? (1.5 punti)</li>
+<li>Quale proporresti e perché? (1 punto)</li>
+<li>Come useresti l&#39;IA per sviluppare la soluzione scelta? (0.5 punti)</li>
+</ol>
+<p><strong>Risposta attesa</strong>:</p>
+<p><strong>1. Vantaggi e Svantaggi</strong> (0.5 punti per voce, max 2 punti):</p>
+<p><em>Proposta A (ESP32 + Cloud)</em>:</p>
+<ul>
+<li>✅ Vantaggi:
+<ul>
+<li>Accesso remoto da ovunque</li>
+<li>Scalabilità facile</li>
+<li>Manutenzione software remota (OTA)</li>
+<li>Interfaccia pronta (ThingSpeak)</li>
+</ul></li>
+<li>❌ Svantaggi:
+<ul>
+<li>Dipendenza da connessione internet</li>
+<li>Costi dati se si supera piano gratuito</li>
+<li>Latenza nel controllo (cloud round-trip)</li>
+<li>Privacy: dati su server terzi</li>
+<li>Consumo energetico WiFi elevato</li>
+</ul></li>
+</ul>
+<p><em>Proposta B (LoRa + Locale)</em>:</p>
+<ul>
+<li>✅ Vantaggi:
+<ul>
+<li>Autonomia: funziona senza internet</li>
+<li>Basso consumo energetico</li>
+<li>Controllo in tempo reale (locale)</li>
+<li>Privacy: dati proprietari</li>
+<li>Costi operativi bassi</li>
+</ul></li>
+<li>❌ Svantaggi:
+<ul>
+<li>Accesso remoto complesso (VPN, DDNS)</li>
+<li>Manutenzione hardware centrale</li>
+<li>Scalabilità limitata da gateway</li>
+<li>Setup iniziale più complesso</li>
+</ul></li>
+</ul>
+<p><strong>2. Rischi principali</strong> (0.5 punti per rischio):</p>
+<p><em>Proposta A</em>:</p>
+<ul>
+<li>Interruzione connettività → sistema non funziona</li>
+<li>Limite rate ThingSpeak gratuito (15 sec tra update)</li>
+<li>Costo energetico: ESP32 WiFi consuma molto (batterie non durano)</li>
+</ul>
+<p><em>Proposta B</em>:</p>
+<ul>
+<li>Single point of failure: se gateway si guasta, tutte le serre offline</li>
+<li>Range LoRa: 10 ettari potrebbero richiedere più gateway</li>
+<li>Complessità manutentiva: server locale da gestire</li>
+</ul>
+<p><strong>3. Raccomandazione</strong> (1 punto - valutare giustificazione):</p>
+<p><strong>Soluzione ibrida consigliata</strong>:</p>
+<ul>
+<li>Base: Proposta B (LoRa + locale) per:
+<ul>
+<li>Autonomia operativa</li>
+<li>Controllo real-time irrigazione</li>
+<li>Basso consumo (batterie solari)</li>
+</ul></li>
+<li>Aggiunta: Connessione internet gateway per:
+<ul>
+<li>Backup cloud dati (1 volta/giorno)</li>
+<li>Notifiche allarmi via Telegram</li>
+<li>Accesso remoto occasionale</li>
+</ul></li>
+</ul>
+<p><strong>Giustificazione</strong>:<br />
+L&#39;agricoltura richiede affidabilità anche senza internet. Il controllo irrigazione deve essere real-time e locale. Il budget di 100€/serra è compatibile con Arduino Nano (3€) + LoRa (8€) + sensori (20€) + relay (5€) + pannello solare (15€) = ~50€, lasciando margine.</p>
+<p><strong>4. Uso IA nello sviluppo</strong> (0.5 punti):</p>
+<ul>
+<li>Generazione codice LoRa per Arduino</li>
+<li>Configurazione InfluxDB e Grafana dashboard</li>
+<li>Algoritmi di ottimizzazione irrigazione</li>
+<li>Script Python per analisi dati storici</li>
+<li>Debugging problemi comunicazione</li>
+<li>Documentazione tecnica automatica</li>
+</ul>
+<hr />
+<h2 id="parte-pratica---60-punti">PARTE PRATICA - 60 PUNTI</h2>
+<h3 id="modalità-di-svolgimento">Modalità di Svolgimento</h3>
+<p>La parte pratica consiste nello sviluppo completo di un progetto embedded/IoT scelto tra le opzioni proposte. Il candidato dovrà:</p>
+<ol type="1">
+<li><strong>Analizzare i requisiti</strong> (15 min)</li>
+<li><strong>Progettare la soluzione</strong> con aiuto IA (30 min)</li>
+<li><strong>Implementare il codice</strong> (2 ore)</li>
+<li><strong>Testare e debuggare</strong> (1 ora)</li>
+<li><strong>Documentare</strong> (30 min)</li>
+<li><strong>Preparare presentazione</strong> (15 min)</li>
+</ol>
+<h3 id="strumenti-consentiti">Strumenti Consentiti</h3>
+<ul>
+<li>✅ Accesso a LLM (ChatGPT, Claude, ecc.)</li>
+<li>✅ Documentazione ufficiale (Arduino, datasheets)</li>
+<li>✅ IDE Arduino / PlatformIO</li>
+<li>✅ Materiali del corso</li>
+<li>❌ Comunicazione con altri candidati</li>
+<li>❌ Codice pre-scritto personale (librerie pubbliche OK)</li>
+</ul>
+<h3 id="hardware-fornito">Hardware Fornito</h3>
+<p>Per tutti i progetti:</p>
+<ul>
+<li>Arduino Uno / Nano o ESP32 (a scelta)</li>
+<li>Breadboard, cavi jumper</li>
+<li>Alimentatore USB</li>
+<li>Computer con IDE preinstallato</li>
+</ul>
+<p>Componenti specifici per progetto (vedi sezione progetti)</p>
+<hr />
+<h2 id="progetti-desame">PROGETTI D&#39;ESAME</h2>
+<h3 id="progetto-1-sistema-di-monitoraggio-ambientale">Progetto 1: Sistema di Monitoraggio Ambientale</h3>
+<h4 id="descrizione">Descrizione</h4>
+<p>Realizzare un sistema che monitora temperatura, umidità e qualità dell&#39;aria, visualizza i dati su display LCD e invia allarmi quando valori superano soglie configurabili.</p>
+<h4 id="requisiti-funzionali">Requisiti Funzionali</h4>
+<p><strong>RF1 - Acquisizione Dati</strong> (10 punti)</p>
+<ul>
+<li>Leggere temperatura e umidità da sensore DHT22 ogni 2 secondi</li>
+<li>Leggere qualità aria da sensore MQ-135 ogni 5 secondi</li>
+<li>Validare letture (gestire errori sensore)</li>
+<li>Calcolare media mobile su 5 campioni per stabilizzare letture</li>
+</ul>
+<p><strong>RF2 - Visualizzazione</strong> (8 punti)</p>
+<ul>
+<li>Display LCD I2C 16x2 mostra:
+<ul>
+<li>Riga 1: <code>T:XX.XC H:XX%</code></li>
+<li>Riga 2: <code>Air:XXX [OK/WARN]</code></li>
+</ul></li>
+<li>Aggiornamento display ogni secondo</li>
+<li>Backlight lampeggia in caso di allarme</li>
+</ul>
+<p><strong>RF3 - Sistema Allarmi</strong> (10 punti)</p>
+<ul>
+<li>LED verde: tutto OK</li>
+<li>LED giallo: warning (un parametro fuori soglia)</li>
+<li>LED rosso + buzzer: allarme critico (più parametri fuori soglia)</li>
+<li>Soglie configurabili via costanti:
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> TEMP_MIN <span class="op">=</span> <span class="fl">18.0</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> TEMP_MAX <span class="op">=</span> <span class="fl">28.0</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> HUM_MIN <span class="op">=</span> <span class="fl">30.0</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> HUM_MAX <span class="op">=</span> <span class="fl">60.0</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> AIR_QUALITY_MAX <span class="op">=</span> <span class="dv">400</span><span class="op">;</span></span></code></pre></div></li>
+</ul>
+<p><strong>RF4 - Logging</strong> (7 punti)</p>
+<ul>
+<li>Salvare dati su SD card ogni 10 secondi in formato CSV</li>
+<li>Formato: <code>timestamp,temp,hum,air_quality,alarm_status</code></li>
+<li>Gestire errori SD card (LED dedicato)</li>
+<li>File naming: <code>LOG_GGMMAA.CSV</code></li>
+</ul>
+<h4 id="requisiti-non-funzionali">Requisiti Non Funzionali</h4>
+<ul>
+<li>Codice modulare con funzioni chiare</li>
+<li>Commenti esplicativi</li>
+<li>Gestione robusta degli errori</li>
+<li>Consumo memoria &lt; 70% SRAM disponibile</li>
+</ul>
+<h4 id="hardware-fornito-1">Hardware Fornito</h4>
+<ul>
+<li>Arduino Uno / ESP32</li>
+<li>Sensore DHT22</li>
+<li>Sensore MQ-135 (gas/qualità aria)</li>
+<li>Display LCD 16x2 I2C</li>
+<li>Modulo SD card</li>
+<li>3x LED (verde, giallo, rosso)</li>
+<li>Buzzer passivo</li>
+<li>Resistenze, cavi</li>
+</ul>
+<h4 id="schema-di-massima">Schema di Massima</h4>
+<pre><code>Arduino Uno:
+- DHT22 → Pin 2 (digitale)
+- MQ-135 → Pin A0 (analogico)
+- LCD I2C → SDA (A4), SCL (A5)
+- SD Card → SPI (MISO 12, MOSI 11, SCK 13, CS 10)
+- LED Verde → Pin 5 + resistenza 220Ω
+- LED Giallo → Pin 6 + resistenza 220Ω
+- LED Rosso → Pin 7 + resistenza 220Ω
+- Buzzer → Pin 8</code></pre>
+<h4 id="criteri-di-valutazione">Criteri di Valutazione</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Punti</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Funzionalità</strong></td>
+<td>35</td>
+<td></td>
+</tr>
+<tr>
+<td>- Lettura sensori corretta</td>
+<td>10</td>
+<td>Valori accurati, gestione errori</td>
+</tr>
+<tr>
+<td>- Display funzionante</td>
+<td>8</td>
+<td>Formattazione corretta, aggiornamenti</td>
+</tr>
+<tr>
+<td>- Sistema allarmi</td>
+<td>10</td>
+<td>Logica corretta, LED e buzzer</td>
+</tr>
+<tr>
+<td>- Logging SD card</td>
+<td>7</td>
+<td>File CSV valido, timestamp</td>
+</tr>
+<tr>
+<td><strong>Documentazione</strong></td>
+<td>10</td>
+<td></td>
+</tr>
+<tr>
+<td>- Schema circuito</td>
+<td>3</td>
+<td>Fritzing o disegno chiaro</td>
+</tr>
+<tr>
+<td>- Commenti codice</td>
+<td>3</td>
+<td>Funzioni documentate</td>
+</tr>
+<tr>
+<td>- README</td>
+<td>4</td>
+<td>Installazione, uso, troubleshooting</td>
+</tr>
+<tr>
+<td><strong>Presentazione</strong></td>
+<td>10</td>
+<td></td>
+</tr>
+<tr>
+<td>- Demo funzionante</td>
+<td>4</td>
+<td>Mostra tutte le funzionalità</td>
+</tr>
+<tr>
+<td>- Spiegazione tecnica</td>
+<td>4</td>
+<td>Scelte progettuali, difficoltà</td>
+</tr>
+<tr>
+<td>- Risposte domande</td>
+<td>2</td>
+<td>Chiarezza e correttezza</td>
+</tr>
+<tr>
+<td><strong>Uso IA</strong></td>
+<td>5</td>
+<td></td>
+</tr>
+<tr>
+<td>- Prompt efficaci</td>
+<td>2</td>
+<td>Documentati in file PROMPTS.md</td>
+</tr>
+<tr>
+<td>- Integrazione codice</td>
+<td>2</td>
+<td>IA usata per parti complesse</td>
+</tr>
+<tr>
+<td>- Personalizzazione</td>
+<td>1</td>
+<td>Non solo copia-incolla</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="progetto-2-data-logger-industriale">Progetto 2: Data Logger Industriale</h3>
+<h4 id="descrizione-1">Descrizione</h4>
+<p>Sistema di acquisizione dati ad alta frequenza per simulare un ambiente industriale, con campionamento di segnali analogici, calcolo statistico e trasmissione seriale.</p>
+<h4 id="requisiti-funzionali-1">Requisiti Funzionali</h4>
+<p><strong>RF1 - Acquisizione Multi-Canale</strong> (12 punti)</p>
+<ul>
+<li>Leggere 4 canali analogici (A0-A3) a 100 Hz</li>
+<li>Buffer circolare per 1000 campioni per canale</li>
+<li>Timestamp campioni con precisione millisecondo</li>
+<li>Interrupt-driven per garantire frequenza stabile</li>
+</ul>
+<p><strong>RF2 - Elaborazione Dati</strong> (10 punti)</p>
+<ul>
+<li>Calcolare ogni secondo per ogni canale:
+<ul>
+<li>Valore medio</li>
+<li>Valore minimo e massimo</li>
+<li>Deviazione standard</li>
+</ul></li>
+<li>Rilevare anomalie: valori fuori da ±2σ dalla media</li>
+<li>Contatore anomalie per canale</li>
+</ul>
+<p><strong>RF3 - Interfaccia Seriale</strong> (8 punti)</p>
+<ul>
+<li>Comunicazione UART a 115200 baud</li>
+<li>Comandi testuali:
+<ul>
+<li><code>START</code> - inizia acquisizione</li>
+<li><code>STOP</code> - ferma acquisizione</li>
+<li><code>STATUS</code> - mostra statistiche</li>
+<li><code>RESET</code> - azzera contatori</li>
+<li><code>DUMP</code> - scarica buffer ultimi 100 campioni</li>
+</ul></li>
+<li>Protocollo: comando + <code>\n</code>, risposta + checksum</li>
+</ul>
+<p><strong>RF4 - Visualizzazione</strong> (5 punti)</p>
+<ul>
+<li>LED per ogni canale: lampeggia a ogni anomalia</li>
+<li>Display OLED SSD1306 mostra:
+<pre><code>CH1: 512 [OK]
+CH2: 487 [!]
+CH3: 501 [OK]
+CH4: 523 [OK]
+Rate: 100 Hz</code></pre></li>
+</ul>
+<h4 id="criteri-di-valutazione-1">Criteri di Valutazione</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Punti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Funzionalità</strong></td>
+<td>35</td>
+</tr>
+<tr>
+<td>- Acquisizione 100 Hz stabile</td>
+<td>12</td>
+</tr>
+<tr>
+<td>- Calcoli statistici corretti</td>
+<td>10</td>
+</tr>
+<tr>
+<td>- Protocollo seriale completo</td>
+<td>8</td>
+</tr>
+<tr>
+<td>- Visualizzazione OLED</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Documentazione</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Presentazione</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Uso IA</strong></td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="progetto-3-controllore-pid-per-temperatura">Progetto 3: Controllore PID per Temperatura</h3>
+<h4 id="descrizione-2">Descrizione</h4>
+<p>Implementare un sistema di controllo PID per mantenere una temperatura target, utilizzando un elemento riscaldante (simulato con LED PWM) e un sensore di temperatura.</p>
+<h4 id="requisiti-funzionali-2">Requisiti Funzionali</h4>
+<p><strong>RF1 - Controllo PID</strong> (15 punti)</p>
+<ul>
+<li>Implementare controllore PID completo:
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> Kp <span class="op">*</span> error <span class="op">+</span> Ki <span class="op">*</span> integral <span class="op">+</span> Kd <span class="op">*</span> derivative</span></code></pre></div></li>
+<li>Parametri regolabili:
+<ul>
+<li>Kp (proporzionale): 2.0 - 10.0</li>
+<li>Ki (integrale): 0.1 - 2.0</li>
+<li>Kd (derivativo): 0.1 - 5.0</li>
+</ul></li>
+<li>Anti-windup per termine integrale</li>
+<li>Derivata filtrata (media mobile) per ridurre rumore</li>
+<li>Output limitato 0-255 (PWM)</li>
+</ul>
+<p><strong>RF2 - Interfaccia Utente</strong> (10 punti)</p>
+<ul>
+<li>Display LCD 20x4 mostra:
+<pre><code>Setpoint: 25.0 C
+Current:  24.3 C
+Output:   142 (55%)
+Kp:2.5 Ki:0.5 Kd:1.2</code></pre></li>
+<li>3 pulsanti per regolare:
+<ul>
+<li>Btn 1: Setpoint ±0.5°C</li>
+<li>Btn 2: Kp ±0.1</li>
+<li>Btn 3: Ki ±0.05</li>
+<li>Btn 4: Kd ±0.1</li>
+</ul></li>
+<li>Rotary encoder per navigazione menu</li>
+</ul>
+<p><strong>RF3 - Tuning Assistito</strong> (5 punti)</p>
+<ul>
+<li>Modalità auto-tuning (metodo Ziegler-Nichols):
+<ol type="1">
+<li>Aumenta Kp fino a oscillazione sostenuta</li>
+<li>Misura periodo oscillazione (Pu)</li>
+<li>Calcola: Kp=0.6Ku, Ki=1.2Ku/Pu, Kd=0.075KuPu</li>
+</ol></li>
+<li>Salva parametri ottimali in EEPROM</li>
+<li>Possibilità ripristino valori salvati</li>
+</ul>
+<hr />
+<h2 id="criteri-di-valutazione-dettagliati">CRITERI DI VALUTAZIONE DETTAGLIATI</h2>
+<h3 id="griglia-di-valutazione-parte-pratica">Griglia di Valutazione Parte Pratica</h3>
+<h4 id="1-funzionalità-35-punti">1. Funzionalità (35 punti)</h4>
+<p><strong>Eccellente (32-35 punti)</strong>:</p>
+<ul>
+<li>Tutti i requisiti funzionali implementati</li>
+<li>Codice robusto con gestione errori completa</li>
+<li>Performance ottimali (timing, memoria)</li>
+<li>Funzionalità aggiuntive pertinenti</li>
+</ul>
+<p><strong>Buono (28-31 punti)</strong>:</p>
+<ul>
+<li>Requisiti principali implementati</li>
+<li>Gestione errori presente ma non esaustiva</li>
+<li>Performance accettabili</li>
+<li>Alcune funzionalità mancanti non critiche</li>
+</ul>
+<p><strong>Sufficiente (21-27 punti)</strong>:</p>
+<ul>
+<li>Funzionalità di base implementate</li>
+<li>Gestione errori minima</li>
+<li>Performance limite</li>
+<li>Requisiti secondari mancanti</li>
+</ul>
+<p><strong>Insufficiente (&lt;21 punti)</strong>:</p>
+<ul>
+<li>Funzionalità incomplete</li>
+<li>Errori frequenti</li>
+<li>Performance inadeguate</li>
+</ul>
+<h4 id="2-documentazione-10-punti">2. Documentazione (10 punti)</h4>
+<p><strong>Componenti richiesti</strong>:</p>
+<p><strong>Schema Circuito (3 punti)</strong>:</p>
+<ul>
+<li>3 punti: Schema Fritzing o disegno chiaro con tutti i componenti, valori resistenze, collegamenti etichettati</li>
+<li>2 punti: Schema completo ma poco chiaro o senza valori</li>
+<li>1 punto: Schema parziale o confuso</li>
+<li>0 punti: Schema assente</li>
+</ul>
+<p><strong>Commenti Codice (3 punti)</strong>:</p>
+<ul>
+<li>3 punti: Tutte le funzioni documentate con scopo, parametri, return. Sezioni complesse spiegate</li>
+<li>2 punti: Funzioni principali documentate, commenti presenti</li>
+<li>1 punto: Commenti sporadici</li>
+<li>0 punti: Codice senza commenti</li>
+</ul>
+<p><strong>README.md (4 punti)</strong>:<br />
+Deve contenere:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nome Progetto</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Descrizione</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Breve descrizione del progetto e obiettivi</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hardware Richiesto</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lista componenti con quantità</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Collegamenti (riferimento a schema)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Librerie necessarie (con versioni)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Istruzioni installazione</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Utilizzo</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Procedura di avvio</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Comandi/interfaccia disponibili</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Esempi di output</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Troubleshooting</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Problemi comuni e soluzioni</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note di Sviluppo</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Difficoltà incontrate</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Come l&#39;IA ha aiutato (riferimento a PROMPTS.md)</span></code></pre></div>
+<h4 id="3-presentazione-10-punti">3. Presentazione (10 punti)</h4>
+<p><strong>Demo Funzionante (4 punti)</strong>:</p>
+<ul>
+<li>4: Demo completa di tutte le funzionalità, fluida, senza errori</li>
+<li>3: Demo funziona ma con qualche imperfezione</li>
+<li>2: Demo parziale, funzionalità limitate</li>
+<li>1: Demo problematica, molti errori</li>
+<li>0: Demo non funzionante</li>
+</ul>
+<p><strong>Spiegazione Tecnica (4 punti)</strong>:<br />
+Valuta:</p>
+<ul>
+<li>Chiarezza nell&#39;esporre architettura software</li>
+<li>Giustificazione scelte progettuali</li>
+<li>Spiegazione parti complesse (PID, interrupt, protocolli)</li>
+<li>Discussione difficoltà e soluzioni</li>
+</ul>
+<p><strong>Risposte Domande (2 punti)</strong>:<br />
+La commissione farà 3-5 domande su:</p>
+<ul>
+<li>Dettagli implementazione</li>
+<li>Alternative progettuali</li>
+<li>Modifiche future</li>
+<li>Concetti teorici applicati</li>
+</ul>
+<h4 id="4-uso-ia-e-metodologia-5-punti">4. Uso IA e Metodologia (5 punti)</h4>
+<p><strong>PROMPTS.md richiesto</strong>:<br />
+Il candidato deve documentare i prompt usati:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prompt Utilizzati</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fase 1: Analisi Requisiti</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>**Prompt**: &quot;Analizza questi requisiti per un sistema di <span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>          Suggerisci architettura software modulare e componenti hardware&quot;</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>**Risultato**: <span class="co">[</span><span class="ot">sintesi risposta IA</span><span class="co">]</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>**Utilizzato**: <span class="co">[</span><span class="ot">cosa hai preso dalla risposta</span><span class="co">]</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fase 2: Implementazione Buffer Circolare</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>**Prompt**: &quot;Implementa una classe C++ per buffer circolare thread-safe</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>          per Arduino, con 1000 elementi per 4 canali. Deve supportare <span class="co">[</span><span class="ot">...</span><span class="co">]</span>&quot;</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>**Risultato**: <span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>**Modifiche**: Ho modificato <span class="co">[</span><span class="ot">...</span><span class="co">]</span> perché <span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fase 3: Debug Errore I2C</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>**Problema**: Display OLED non inizializza</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>**Prompt**: &quot;Display OLED SSD1306 su Arduino Uno non risponde.</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>          Indirizzo I2C 0x3C, libreria Adafruit_SSD1306. Codice: <span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>          Scanner I2C non trova dispositivo. Come debuggare?&quot;</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>**Soluzione**: <span class="co">[</span><span class="ot">...</span><span class="co">]</span></span></code></pre></div>
+<p><strong>Valutazione</strong>:</p>
+<ul>
+<li>5 punti: Prompt ben strutturati, IA usata strategicamente, codice personalizzato</li>
+<li>3-4: Prompt discreti, integrazione buona, alcune modifiche</li>
+<li>1-2: Prompt generici, copia-incolla con modifiche minime</li>
+<li>0: Nessuna documentazione uso IA o non utilizzata</li>
+</ul>
+<hr />
+<h2 id="materiali-di-preparazione">MATERIALI DI PREPARAZIONE</h2>
+<h3 id="checklist-pre-esame">Checklist Pre-Esame</h3>
+<p><strong>1 Settimana Prima</strong>:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Ripassare teoria LLM e prompt engineering</label></li>
+<li><label><input type="checkbox"></input>Rivedere tutti i progetti del corso</label></li>
+<li><label><input type="checkbox"></input>Testare hardware su tutti i progetti proposti</label></li>
+<li><label><input type="checkbox"></input>Installare librerie necessarie</label></li>
+<li><label><input type="checkbox"></input>Preparare template documentazione</label></li>
+</ul>
+<p><strong>3 Giorni Prima</strong>:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Simulazione parte teorica (quiz completo)</label></li>
+<li><label><input type="checkbox"></input>Implementare un progetto simile da zero in 4 ore</label></li>
+<li><label><input type="checkbox"></input>Esercitarsi su presentazioni (timing 15 min)</label></li>
+</ul>
+<p><strong>1 Giorno Prima</strong>:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Verificare IDE funzionante e aggiornato</label></li>
+<li><label><input type="checkbox"></input>Account LLM attivo e funzionante</label></li>
+<li><label><input type="checkbox"></input>Ripassare formule (PID, conversioni ADC, ecc.)</label></li>
+<li><label><input type="checkbox"></input>Dormire bene!</label></li>
+</ul>
+<h3 id="quiz-di-auto-valutazione">Quiz di Auto-Valutazione</h3>
+<h4 id="set-aggiuntivo-domande-multiple-per-esercitazione">Set Aggiuntivo Domande Multiple (per esercitazione)</h4>
+<p><strong>21.</strong> Quale funzione C permette di allocare memoria inizializzata a zero?</p>
+<ul>
+<li>a) <code>malloc()</code></li>
+<li>b) <code>calloc()</code></li>
+<li>c) <code>realloc()</code></li>
+<li>d) <code>alloc()</code></li>
+</ul>
+<p><strong>Risposta</strong>: b) <code>calloc()</code></p>
+<hr />
+<p><strong>22.</strong> In Arduino, quale funzione configura un pin come output?</p>
+<ul>
+<li>a) <code>setOutput(pin)</code></li>
+<li>b) <code>pinMode(pin, OUTPUT)</code></li>
+<li>c) <code>configPin(pin, OUT)</code></li>
+<li>d) <code>pinOutput(pin)</code></li>
+</ul>
+<p><strong>Risposta</strong>: b)</p>
+<hr />
+<p><strong>23.</strong> Qual è la tensione di riferimento predefinita per l&#39;ADC di Arduino Uno?</p>
+<ul>
+<li>a) 3.3V</li>
+<li>b) 5V</li>
+<li>c) 1.1V</li>
+<li>d) 2.5V</li>
+</ul>
+<p><strong>Risposta</strong>: b) 5V (può essere cambiata con <code>analogReference()</code>)</p>
+<hr />
+<p><strong>24.</strong> Quale libreria Arduino supporta il protocollo I2C?</p>
+<ul>
+<li>a) <code>SPI.h</code></li>
+<li>b) <code>Wire.h</code></li>
+<li>c) <code>Serial.h</code></li>
+<li>d) <code>I2C.h</code></li>
+</ul>
+<p><strong>Risposta</strong>: b) <code>Wire.h</code></p>
+<hr />
+<p><strong>25.</strong> In un controllo PID, il termine derivativo serve a:</p>
+<ul>
+<li>a) Correggere errori accumulati nel tempo</li>
+<li>b) Anticipare variazioni future basandosi sulla velocità di cambiamento</li>
+<li>c) Reagire all&#39;errore attuale</li>
+<li>d) Filtrare il rumore</li>
+</ul>
+<p><strong>Risposta</strong>: b)</p>
+<hr />
+<h3 id="esercizi-pratici-di-preparazione">Esercizi Pratici di Preparazione</h3>
+<h4 id="esercizio-1-debouncing-pulsante">Esercizio 1: Debouncing Pulsante</h4>
+<p><strong>Obiettivo</strong>: Implementare debouncing software per pulsante senza usare <code>delay()</code>.</p>
+<p><strong>Requisiti</strong>:</p>
+<ul>
+<li>Pulsante su pin 2 con pull-up interno</li>
+<li>LED su pin 13 che togola a ogni pressione</li>
+<li>Debounce time: 50 ms</li>
+<li>Usare tecnica con timestamp <code>millis()</code></li>
+</ul>
+<p><strong>Soluzione</strong>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> buttonPin <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> ledPin <span class="op">=</span> <span class="dv">13</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> ledState <span class="op">=</span> LOW<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> lastButtonState <span class="op">=</span> HIGH<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> currentButtonState <span class="op">=</span> HIGH<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> lastDebounceTime <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">long</span> debounceDelay <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>buttonPin<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>ledPin<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>ledPin<span class="op">,</span> ledState<span class="op">);</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Leggi stato pulsante</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bool</span> reading <span class="op">=</span> digitalRead<span class="op">(</span>buttonPin<span class="op">);</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Se lo stato è cambiato, resetta timer debounce</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>reading <span class="op">!=</span> lastButtonState<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    lastDebounceTime <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Se è passato abbastanza tempo, considera il nuovo stato</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>millis<span class="op">()</span> <span class="op">-</span> lastDebounceTime<span class="op">)</span> <span class="op">&gt;</span> debounceDelay<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Se lo stato è davvero cambiato</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>reading <span class="op">!=</span> currentButtonState<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>      currentButtonState <span class="op">=</span> reading<span class="op">;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Solo sul fronte di discesa (pressione)</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>currentButtonState <span class="op">==</span> LOW<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        ledState <span class="op">=</span> <span class="op">!</span>ledState<span class="op">;</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        digitalWrite<span class="op">(</span>ledPin<span class="op">,</span> ledState<span class="op">);</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  lastButtonState <span class="op">=</span> reading<span class="op">;</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h4 id="esercizio-2-media-mobile">Esercizio 2: Media Mobile</h4>
+<p><strong>Obiettivo</strong>: Filtrare lettura sensore analogico con media mobile.</p>
+<p><strong>Requisiti</strong>:</p>
+<ul>
+<li>Potenziometro su A0</li>
+<li>Calcolare media su 10 campioni</li>
+<li>Stampare valore raw e filtrato su Serial</li>
+<li>Update 10 volte al secondo</li>
+</ul>
+<p><strong>Soluzione</strong>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> sensorPin <span class="op">=</span> A0<span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> numReadings <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> readings<span class="op">[</span>numReadings<span class="op">];</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> readIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> average <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Inizializza array a 0</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numReadings<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    readings<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Sottrai lettura vecchia</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  total <span class="op">=</span> total <span class="op">-</span> readings<span class="op">[</span>readIndex<span class="op">];</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Leggi nuovo valore</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  readings<span class="op">[</span>readIndex<span class="op">]</span> <span class="op">=</span> analogRead<span class="op">(</span>sensorPin<span class="op">);</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Aggiungi nuova lettura</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  total <span class="op">=</span> total <span class="op">+</span> readings<span class="op">[</span>readIndex<span class="op">];</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Avanza indice circolare</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  readIndex <span class="op">=</span> <span class="op">(</span>readIndex <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> numReadings<span class="op">;</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Calcola media</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  average <span class="op">=</span> total <span class="op">/</span> numReadings<span class="op">;</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampa risultati</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Raw: &quot;</span><span class="op">);</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span>readings<span class="op">[(</span>readIndex <span class="op">-</span> <span class="dv">1</span> <span class="op">+</span> numReadings<span class="op">)</span> <span class="op">%</span> numReadings<span class="op">]);</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; | Filtered: &quot;</span><span class="op">);</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span>average<span class="op">);</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">100</span><span class="op">);</span>  <span class="co">// 10 Hz</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="portfolio-professionale">PORTFOLIO PROFESSIONALE</h2>
+<h3 id="struttura-portfolio">Struttura Portfolio</h3>
+<p>Il portfolio è un elemento fondamentale per presentarsi nel mondo del lavoro. Deve mostrare competenze concrete attraverso progetti realizzati.</p>
+<h4 id="repository-github">Repository GitHub</h4>
+<p><strong>Organizzazione consigliata</strong>:</p>
+<pre><code>github.com/tuousername/
+├── embedded-environmental-monitor/
+│   ├── README.md
+│   ├── hardware/
+│   │   ├── schematic.png
+│   │   ├── fritzing_diagram.fzz
+│   │   └── BOM.csv
+│   ├── firmware/
+│   │   ├── src/
+│   │   ├── lib/
+│   │   └── platformio.ini
+│   ├── docs/
+│   │   ├── user_manual.pdf
+│   │   └── technical_report.md
+│   └── media/
+│       ├── demo_video.mp4
+│       └── photos/
+├── industrial-data-logger/
+│   └── ...
+└── pid-temperature-controller/
+    └── ...</code></pre>
+<hr />
+<h2 id="simulazioni-desame">SIMULAZIONI D&#39;ESAME</h2>
+<h3 id="simulazione-completa-1">Simulazione Completa 1</h3>
+<p><strong>Tempo: 6 ore</strong></p>
+<h4 id="parte-teorica-90-minuti">Parte Teorica (90 minuti)</h4>
+<p><strong>Quiz</strong>: Usa il set di 30 domande fornito, seleziona casualmente 20</p>
+<p><strong>Domande Aperte</strong> (scegli 3 su 5):</p>
+<ol type="1">
+<li>Spiega cosa sono i token in un LLM e perché limitano la lunghezza delle interazioni</li>
+<li>Descrivi il ciclo di vita della memoria in C: stack, heap, memoria statica</li>
+<li>Confronta UART, I2C e SPI: velocità, complessità, applicazioni</li>
+<li>Cos&#39;è un watchdog timer e perché è importante in sistemi embedded?</li>
+<li>Descrivi l&#39;architettura di un sistema IoT completo (device → cloud → app)</li>
+</ol>
+<p><strong>Analisi Critica</strong>:<br />
+Caso: Debug di un sistema con ESP32 che perde pacchetti WiFi quando legge da sensore I2C.</p>
+<h4 id="parte-pratica-4-ore">Parte Pratica (4 ore)</h4>
+<p><strong>Progetto</strong>: Realizza un sistema di allarme con:</p>
+<ul>
+<li>Sensore movimento PIR</li>
+<li>Sensore porta (reed switch)</li>
+<li>Tastierino 4x4 per codice accesso</li>
+<li>Sirena (buzzer)</li>
+<li>Display LCD con stato sistema</li>
+<li>LED RGB per indicazione stato (verde=disarmato, giallo=armato, rosso=allarme)</li>
+</ul>
+<p><strong>Funzionalità</strong>:</p>
+<ol type="1">
+<li>Sistema si arma/disarma con codice 4 cifre</li>
+<li>Se rileva movimento o porta aperta quando armato → allarme</li>
+<li>Delay 30 secondi per inserire codice prima dell&#39;allarme</li>
+<li>Storico ultimi 10 eventi su SD card</li>
+<li>Cambio codice via menu su tastierino</li>
+</ol>
+<p><strong>Documenta</strong>:</p>
+<ul>
+<li>Schema Fritzing</li>
+<li>Codice commentato</li>
+<li>README con istruzioni</li>
+<li>PROMPTS.md con interazioni IA</li>
+</ul>
+<hr />
+<h2 id="certificazione-e-career-path">CERTIFICAZIONE E CAREER PATH</h2>
+<h3 id="certificato-its">Certificato ITS</h3>
+<p>Al superamento dell&#39;esame (≥60/100) viene rilasciato:</p>
+<p><strong>Certificato di Competenza</strong>:</p>
+<pre><code>ISTITUTO TECNICO SUPERIORE [Nome]
+
+Certifica che
+
+[Nome Cognome]
+
+ha completato con successo il corso
+
+FONDAMENTI DI INTELLIGENZA ARTIFICIALE
+PER LA PROGRAMMAZIONE
+
+Durata: 80 ore
+Anno: 2025
+Votazione: XX/100
+
+Competenze acquisite:
+✓ Prompt Engineering e uso strategico di Large Language Models
+✓ Programmazione C (standard C99, gestione memoria, puntatori)
+✓ Sviluppo firmware Arduino (Uno, Mega, Nano)
+✓ Sistemi Embedded e IoT (ESP32, protocolli I2C/SPI/UART)
+✓ Integrazione sensori e attuatori
+✓ Controllo PID e automazione
+✓ Cloud connectivity (MQTT, HTTP)
+✓ Data logging e visualizzazione
+✓ Debugging e testing sistemi real-time
+
+[Data]                                    [Firma Direttore]</code></pre>
+<h3 id="livelli-di-merito">Livelli di Merito</h3>
+<ul>
+<li><strong>100/100</strong>: Eccellenza - con lode</li>
+<li><strong>90-99</strong>: Ottimo - menzione speciale</li>
+<li><strong>75-89</strong>: Buono</li>
+<li><strong>60-74</strong>: Sufficiente</li>
+</ul>
+<h3 id="sbocchi-professionali">Sbocchi Professionali</h3>
+<p><strong>Ruoli Entry-Level</strong>:</p>
+<ol type="1">
+<li><p><strong>Junior Embedded Developer</strong></p>
+<ul>
+<li>Sviluppo firmware per dispositivi IoT</li>
+<li>Testing e debugging</li>
+<li>RAL: 22.000-28.000€</li>
+</ul></li>
+<li><p><strong>IoT Technician</strong></p>
+<ul>
+<li>Installazione e configurazione sistemi</li>
+<li>Manutenzione dispositivi</li>
+<li>RAL: 20.000-26.000€</li>
+</ul></li>
+<li><p><strong>Technical Support Specialist (Embedded)</strong></p>
+<ul>
+<li>Assistenza clienti su prodotti embedded</li>
+<li>Troubleshooting remoto</li>
+<li>RAL: 20.000-25.000€</li>
+</ul></li>
+<li><p><strong>Automation Technician</strong></p>
+<ul>
+<li>Programmazione PLC e microcontrollori</li>
+<li>Integrazione sistemi industriali</li>
+<li>RAL: 24.000-30.000€</li>
+</ul></li>
+</ol>
+<p><strong>Aziende Tipiche</strong>:</p>
+<ul>
+<li>Produttori dispositivi IoT</li>
+<li>System integrator automazione industriale</li>
+<li>Startup hardware/IoT</li>
+<li>Aziende domotica</li>
+<li>Automotive (sistemi embedded)</li>
+</ul>
+<h3 id="percorsi-di-crescita">Percorsi di Crescita</h3>
+<p><strong>Dopo 2-3 anni esperienza</strong>:</p>
+<ul>
+<li><strong>Embedded Software Engineer</strong> (RAL 30.000-45.000€)</li>
+<li><strong>IoT Solution Architect</strong> (RAL 35.000-50.000€)</li>
+<li><strong>R&amp;D Engineer</strong> (RAL 32.000-48.000€)</li>
+</ul>
+<p><strong>Certificazioni aggiuntive consigliate</strong>:</p>
+<ul>
+<li>Arduino Certification (ufficiale)</li>
+<li>Certified LoRaWAN Professional</li>
+<li>AWS IoT Specialty</li>
+<li>Microsoft Azure IoT Developer</li>
+</ul>
+<h3 id="continuazione-studi">Continuazione Studi</h3>
+<p><strong>Università (Laurea Triennale)</strong>:</p>
+<ul>
+<li>Ingegneria Elettronica</li>
+<li>Ingegneria Informatica</li>
+<li>Computer Engineering</li>
+</ul>
+<p>Il certificato ITS può dare crediti formativi (CFU) riconosciuti da alcuni atenei.</p>
+<p><strong>Corsi Specializzazione</strong>:</p>
+<ul>
+<li>Master in IoT e Industry 4.0</li>
+<li>Corso avanzato Machine Learning su Edge</li>
+<li>Specializzazione RTOS (Real-Time Operating Systems)</li>
+</ul>
+<hr />
+<h2 id="risorse-aggiuntive">RISORSE AGGIUNTIVE</h2>
+<h3 id="siti-web-consigliati">Siti Web Consigliati</h3>
+<p><strong>Documentazione Tecnica</strong>:</p>
+<ul>
+<li><a href="https://www.arduino.cc/reference/">Arduino Reference</a> - Reference ufficiale funzioni</li>
+<li><a href="https://docs.espressif.com/">ESP32 Docs</a> - Documentazione Espressif</li>
+<li><a href="https://www.nongnu.org/avr-libc/">AVR Libc</a> - Libreria C per AVR</li>
+</ul>
+<p><strong>Community e Forum</strong>:</p>
+<ul>
+<li><a href="https://forum.arduino.cc/">Arduino Forum</a></li>
+<li><a href="https://www.esp32.com/">ESP32 Forum</a></li>
+<li><a href="https://www.reddit.com/r/arduino/">Reddit r/arduino</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/arduino">Stack Overflow - Arduino tag</a></li>
+</ul>
+<p><strong>Tutorial e Progetti</strong>:</p>
+<ul>
+<li><a href="https://learn.adafruit.com/">Adafruit Learn</a></li>
+<li><a href="https://learn.sparkfun.com/">SparkFun Tutorials</a></li>
+<li><a href="https://www.hackster.io/">Hackster.io</a></li>
+<li><a href="https://www.instructables.com/circuits/arduino/">Instructables - Arduino</a></li>
+</ul>
+<hr />
+<h2 id="note-finali-per-i-candidati">NOTE FINALI PER I CANDIDATI</h2>
+<h3 id="consigli-per-lesame">Consigli per l&#39;Esame</h3>
+<p><strong>Gestione del Tempo</strong>:</p>
+<ul>
+<li>Leggi TUTTI i requisiti prima di iniziare</li>
+<li>Pianifica: 30 min design, 2h coding core, 1h testing, 30 min docs</li>
+<li>Non perfezionare troppo una funzionalità a scapito di altre</li>
+</ul>
+<p><strong>Uso dell&#39;IA</strong>:</p>
+<ul>
+<li>✅ Usa IA per generare codice boilerplate</li>
+<li>✅ Usa IA per debugging errori specifici</li>
+<li>✅ Usa IA per capire datasheets e protocolli</li>
+<li>❌ Non copiare codice senza capirlo</li>
+<li>❌ Non dipendere 100% dall&#39;IA per la logica</li>
+</ul>
+<p><strong>Debugging</strong>:</p>
+<ul>
+<li>Usa Serial.print() generosamente durante sviluppo</li>
+<li>Testa una funzionalità alla volta</li>
+<li>Se bloccato su un bug &gt;20 min, documenta il problema e vai avanti</li>
+</ul>
+<p><strong>Documentazione</strong>:</p>
+<ul>
+<li>Scrivi README man mano che sviluppi, non alla fine</li>
+<li>Fai screenshot/foto del sistema funzionante</li>
+<li>Salva versioni intermedie del codice (git commit frequenti)</li>
+</ul>
+<h3 id="mindset-giusto">Mindset Giusto</h3>
+<p>Questo esame non valuta solo competenze tecniche, ma anche:</p>
+<ul>
+<li><strong>Problem solving</strong>: Affrontare problemi nuovi con metodo</li>
+<li><strong>Resourcefulness</strong>: Usare strumenti disponibili (IA, docs, forum)</li>
+<li><strong>Comunicazione</strong>: Spiegare scelte tecniche chiaramente</li>
+<li><strong>Pragmatismo</strong>: Soluzioni funzionanti &gt; soluzioni &quot;perfette&quot;</li>
+</ul>
+<p><strong>Ricorda</strong>: L&#39;obiettivo è dimostrare che sai sviluppare sistemi embedded reali, usando l&#39;IA come strumento professionale, non come stampella.</p>
+<h3 id="cosa-fare-se-non-passi">Cosa Fare se Non Passi</h3>
+<ul>
+<li>Revisiona correzioni con docente</li>
+<li>Identifica aree deboli (teoria vs pratica)</li>
+<li>Esercitati su progetti simili</li>
+<li>Seconda opportunità disponibile dopo 1 mese</li>
+</ul>
+<hr />
+<h2 id="appendice-formule-e-reference-rapido">APPENDICE: FORMULE E REFERENCE RAPIDO</h2>
+<h3 id="conversioni-adc">Conversioni ADC</h3>
+<p><strong>Arduino Uno (10-bit ADC, 5V reference)</strong>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> voltage <span class="op">=</span> analogRead<span class="op">(</span>pin<span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">5.0</span> <span class="op">/</span> <span class="fl">1023.0</span><span class="op">);</span></span></code></pre></div>
+<p><strong>ESP32 (12-bit ADC, 3.3V reference)</strong>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> voltage <span class="op">=</span> analogRead<span class="op">(</span>pin<span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">3.3</span> <span class="op">/</span> <span class="fl">4095.0</span><span class="op">);</span></span></code></pre></div>
+<h3 id="voltage-divider">Voltage Divider</h3>
+<pre><code>Vout = Vin * (R2 / (R1 + R2))</code></pre>
+<p>Calcolare R2 per Vout desiderato:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Esempio: Vin=5V, vogliamo Vout=3.3V per ESP32, R1=1kΩ</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> R2 <span class="op">=</span> R1 <span class="op">*</span> <span class="op">(</span>Vout <span class="op">/</span> <span class="op">(</span>Vin <span class="op">-</span> Vout<span class="op">));</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">// R2 = 1000 * (3.3 / (5.0 - 3.3)) = 1941Ω (usa 2kΩ standard)</span></span></code></pre></div>
+<h3 id="resistenza-led">Resistenza LED</h3>
+<pre><code>R = (Vsupply - Vled) / Iled
+
+Esempio LED rosso (Vled=2V, Iled=20mA, Vsupply=5V):
+R = (5 - 2) / 0.02 = 150Ω (usa 220Ω per sicurezza)</code></pre>
+<h3 id="pwm-duty-cycle">PWM Duty Cycle</h3>
+<pre><code>DutyCycle% = (Ton / Tperiod) * 100
+
+Arduino:
+analogWrite(pin, value);  // value: 0-255
+DutyCycle% = (value / 255) * 100</code></pre>
+<h3 id="pid-formule">PID Formule</h3>
+<p><strong>Formula completa</strong>:</p>
+<pre><code>output(t) = Kp * e(t) + Ki * ∫e(τ)dτ + Kd * (de(t)/dt)</code></pre>
+<p><strong>Implementazione discreta</strong>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>error <span class="op">=</span> setpoint <span class="op">-</span> measurement<span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> Kp <span class="op">*</span> error<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>integral <span class="op">+=</span> error <span class="op">*</span> dt<span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> Ki <span class="op">*</span> integral<span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>derivative <span class="op">=</span> <span class="op">(</span>error <span class="op">-</span> previous_error<span class="op">)</span> <span class="op">/</span> dt<span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> Kd <span class="op">*</span> derivative<span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> P <span class="op">+</span> I <span class="op">+</span> D<span class="op">;</span></span></code></pre></div>
+<p><strong>Ziegler-Nichols (metodo oscillazione)</strong>:</p>
+<pre><code>Ku = Kp critico (punto di oscillazione sostenuta)
+Tu = Periodo oscillazione
+
+Kp = 0.6 * Ku
+Ki = 1.2 * Ku / Tu
+Kd = 0.075 * Ku * Tu</code></pre>
+<hr />
+<h2 id="conclusione">CONCLUSIONE</h2>
+<p>Questo esame rappresenta la culminazione del percorso formativo <strong>&quot;Fondamenti di Intelligenza Artificiale per la Programmazione&quot;</strong>. Non è solo una verifica di conoscenze, ma un&#39;opportunità per dimostrare la capacità di affrontare problemi reali utilizzando le tecnologie moderne, inclusa l&#39;IA, come strumenti professionali.</p>
+<p>Le competenze acquisite - dal prompt engineering alla programmazione embedded, dal controllo PID all&#39;IoT - sono direttamente spendibili nel mercato del lavoro e costituiscono una solida base per ulteriori specializzazioni.</p>
+<p><strong>In bocca al lupo a tutti i candidati!</strong></p>
+<hr />
+<p><em>Documento redatto: Dicembre 2025</em><br />
+<em>Versione: 2.0</em><br />
+<em>ITS [Nome Istituto] - Corso Fondamenti IA 2025</em></p>
+<hr />
+<p><strong>FINE MODULO 6 - FINE CORSO</strong></p>
+</main>
+</body>
+</html>

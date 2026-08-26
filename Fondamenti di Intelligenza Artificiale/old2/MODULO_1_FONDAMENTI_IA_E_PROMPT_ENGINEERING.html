@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 MODULO 1</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 MODULO 1</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>MODULO_1_FONDAMENTI_IA_E_PROMPT_ENGINEERING.md</dd></div>
+<div><dt>Cartella</dt><dd>CookBooks/ITS/Fondamenti di Intelligenza Artificiale/old2</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h1 id="fondamenti-di-intelligenza-artificiale-e-prompt-engineering">Fondamenti di Intelligenza Artificiale e Prompt Engineering</h1>
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita-2025">Corso ITS - Intelligenza Artificiale e Programmazione Assistita 2025</h2>
+<h3 id="durata-3-ore--livello-base-intermedio">Durata: 3 ore | Livello: Base-Intermedio</h3>
+<hr />
+<h2 id="bookmark_tabs-indice-del-modulo">📑 Indice del Modulo</h2>
+<ol type="1">
+<li><a href="#1-introduzione-e-obiettivi">Introduzione e Obiettivi</a></li>
+<li><a href="#2-fondamenti-di-intelligenza-artificiale">Fondamenti di Intelligenza Artificiale</a></li>
+<li><a href="#3-large-language-models-llm">Large Language Models (LLM)</a></li>
+<li><a href="#4-limiti-rischi-e-uso-responsabile">Limiti, Rischi e Uso Responsabile</a></li>
+<li><a href="#5-prompt-engineering-professionale">Prompt Engineering Professionale</a></li>
+<li><a href="#6-framework-e-metodologie">Framework e Metodologie</a></li>
+<li><a href="#7-applicazioni-in-ambito-its">Applicazioni in Ambito ITS</a></li>
+<li><a href="#8-esercitazioni-pratiche">Esercitazioni Pratiche</a></li>
+</ol>
+<hr />
+<h2 id="1-introduzione-e-obiettivi">1. Introduzione e Obiettivi</h2>
+<h3 id="11-benvenuti-al-corso-2025">1.1 Benvenuti al Corso 2025</h3>
+<p>Benvenuti! Questo corso vi insegnerà a utilizzare l&#39;<strong>Intelligenza Artificiale come strumento professionale</strong> per la programmazione, con focus particolare su sistemi embedded e applicazioni ITS (Istituto Tecnico Superiore).</p>
+<p><strong>Perché questo corso è importante per voi?</strong></p>
+<p>Nel 2025, l&#39;IA non è più fantascienza o una tecnologia per pochi esperti. È diventata uno <strong>strumento di lavoro quotidiano</strong> per programmatori, ingegneri e tecnici. Immaginate di avere un collega esperto sempre disponibile 24/7, che può:</p>
+<ul>
+<li>Scrivere codice al vostro posto</li>
+<li>Spiegare concetti complessi in modo semplice</li>
+<li>Trovare bug nel vostro codice</li>
+<li>Suggerire soluzioni a problemi tecnici</li>
+</ul>
+<p>Ma attenzione: come ogni strumento potente, l&#39;IA va usata <strong>con intelligenza</strong>. Non è magia, ha limiti precisi, e può sbagliare. Questo corso vi insegnerà <strong>quando, come e perché</strong> usare l&#39;IA, e soprattutto <strong>come riconoscere quando sbaglia</strong>.</p>
+<p><strong>Novità 2025:</strong></p>
+<ul>
+<li><strong>Claude 3.5 Sonnet</strong>: il migliore per seguire istruzioni precise</li>
+<li><strong>GPT-4 Turbo</strong>: eccellente per codice e ragionamento complesso</li>
+<li><strong>Gemini 1.5 Pro</strong>: può &quot;leggere&quot; documenti lunghissimi (2 milioni di parole!)</li>
+<li><strong>GitHub Copilot</strong>: scrive codice mentre digitate nell&#39;IDE</li>
+<li><strong>TinyML</strong>: intelligenza artificiale che gira su Arduino!</li>
+</ul>
+<h3 id="12-obiettivi-di-apprendimento">1.2 Obiettivi di Apprendimento</h3>
+<p>Al termine di questo modulo (3 ore) sarai in grado di:</p>
+<p>✅ <strong>Comprendere</strong> cos&#39;è l&#39;IA e come funzionano gli LLM moderni<br />
+→ Saprai spiegare a un amico cosa fa ChatGPT &quot;sotto il cofano&quot;</p>
+<p>✅ <strong>Riconoscere</strong> limiti, bias e allucinazioni<br />
+→ Non ti farai ingannare quando l&#39;IA inventa fatti falsi</p>
+<p>✅ <strong>Formulare</strong> prompt tecnici efficaci<br />
+→ Otterrai codice utilizzabile al primo colpo invece di perdere ore</p>
+<p>✅ <strong>Applicare</strong> framework professionali (CLEAR, Chain-of-Thought)<br />
+→ Userai tecniche da professionista, non da principiante</p>
+<p>✅ <strong>Valutare criticamente</strong> output generati da IA<br />
+→ Saprai dire se un codice è buono o pericoloso</p>
+<p>✅ <strong>Integrare</strong> IA nel workflow di sviluppo<br />
+→ L&#39;IA diventerà parte naturale del tuo lavoro</p>
+<h3 id="13-strumenti-2025">1.3 Strumenti 2025</h3>
+<p><strong>Cosa vi serve per iniziare?</strong></p>
+<p>Niente di costoso! La maggior parte degli strumenti sono gratuiti o gratis per studenti.</p>
+<p><strong>LLM Raccomandati (almeno 1 obbligatorio):</strong></p>
+<pre><code>GRATUITI AL 100%:
+┌────────────────────────────────────────┐
+│ ChatGPT 3.5 (OpenAI)                   │
+│ ├─ Gratis forever                      │
+│ ├─ Molto buono per iniziare            │
+│ └─ Limite: qualità inferiore a GPT-4   │
+│                                        │
+│ Claude 3.5 Sonnet (Anthropic)          │
+│ ├─ Gratis con limiti                   │
+│ ├─ Eccellente per istruzioni precise   │
+│ └─ Limite: ~50 messaggi/giorno free    │
+│                                        │
+│ Gemini 1.5 (Google)                    │
+│ ├─ Gratis con account Google           │
+│ ├─ Context window ENORME               │
+│ └─ Limite: più lento dei concorrenti   │
+└────────────────────────────────────────┘
+
+STUDENTI (GRATIS CON VERIFICA):
+┌────────────────────────────────────────┐
+│ GitHub Copilot                         │
+│ ├─ Gratis con GitHub Student Pack      │
+│ ├─ Si integra nell&#39;IDE (VSCode, etc)   │
+│ ├─ Scrive codice mentre digiti         │
+│ └─ FORTEMENTE RACCOMANDATO              │
+│                                        │
+│ ChatGPT Plus                           │
+│ ├─ Normalmente $20/mese                │
+│ ├─ Gratis per studenti verificati      │
+│ └─ Accesso a GPT-4 (migliore qualità)  │
+└────────────────────────────────────────┘
+
+PRO (A PAGAMENTO - OPZIONALE):
+- ChatGPT Plus: $20/mese
+- Claude Pro: $20/mese
+- Cursor IDE: $20/mese (editor con IA integrata)</code></pre>
+<p><strong>Come ottenere GitHub Student Pack (IMPORTANTE!):</strong></p>
+<p>Il GitHub Student Pack è un regalo incredibile per studenti: oltre 100 tool professionali gratis, incluso GitHub Copilot che normalmente costa $10/mese!</p>
+<pre><code>PASSI:
+1. Vai su: https://education.github.com/pack
+2. Clicca &quot;Get Student Benefits&quot;
+3. Verifica identità studente con:
+   ├─ Email istituzionale ITS (@its...)
+   ├─ Foto documento studente
+   └─ Prova iscrizione
+4. Attendi approvazione (1-7 giorni)
+5. Attiva Copilot su VSCode
+
+COSA OTTIENI:
+✓ GitHub Copilot (valore $120/anno)
+✓ Domini .me gratis
+✓ Cloud credits AWS/Azure
+✓ + altri 100+ tool professionali</code></pre>
+<p><strong>Configurazione Ambiente Base:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. EDITOR RACCOMANDATO</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Visual</span> Studio Code <span class="er">(</span><span class="ex">gratuito</span><span class="kw">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">→</span> https://code.visualstudio.com/</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. ESTENSIONI VSCODE ESSENZIALI</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> GitHub Copilot <span class="er">(</span><span class="ex">se</span> hai Student Pack<span class="kw">)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> C/C++ <span class="er">(</span><span class="ex">Microsoft</span><span class="kw">)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> Arduino <span class="er">(</span><span class="ex">Microsoft</span><span class="kw">)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> ChatGPT <span class="er">(</span><span class="ex">extension</span> ufficiale<span class="kw">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. ACCOUNT DA CREARE</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">□</span> Account OpenAI <span class="er">(</span><span class="ex">ChatGPT</span><span class="kw">)</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">□</span> Account Anthropic <span class="er">(</span><span class="ex">Claude</span><span class="kw">)</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">□</span> Account Google <span class="er">(</span><span class="ex">Gemini</span><span class="kw">)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">□</span> GitHub account <span class="er">(</span><span class="ex">per</span> Student Pack<span class="kw">)</span></span></code></pre></div>
+<hr />
+<h2 id="2-fondamenti-di-intelligenza-artificiale">2. Fondamenti di Intelligenza Artificiale</h2>
+<h3 id="21-cosè-lia-nel-2025">2.1 Cos&#39;è l&#39;IA nel 2025</h3>
+<p><strong>Definizione Semplice:</strong></p>
+<blockquote>
+<p><strong>Intelligenza Artificiale</strong>: programmi che imparano a fare cose intelligenti guardando esempi, invece di seguire istruzioni scritte da programmatori.</p>
+</blockquote>
+<p><strong>Pensate alla differenza:</strong></p>
+<p><strong>Programmazione Tradizionale:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Il programmatore scrive OGNI regola</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> è_spam(email):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;viagra&quot;</span> <span class="kw">in</span> email:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">&quot;gratis&quot;</span> <span class="kw">in</span> email <span class="kw">and</span> <span class="st">&quot;vinci&quot;</span> <span class="kw">in</span> email:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...devi scrivere 1000 regole...</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span></code></pre></div>
+<p>→ Serve il programmatore per ogni nuova regola<br />
+→ Non si adatta a nuovi trucchi degli spammer</p>
+<p><strong>Intelligenza Artificiale:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L&#39;IA impara DA SOLA dai dati</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>modello <span class="op">=</span> train_spam_detector(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    esempi_spam<span class="op">=</span><span class="dv">10000</span>,     <span class="co"># email spam</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    esempi_normali<span class="op">=</span><span class="dv">10000</span>   <span class="co"># email normali</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ora riconosce spam MAI VISTO PRIMA</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(modello.è_spam(<span class="st">&quot;...nuova email...&quot;</span>))</span></code></pre></div>
+<p>→ Impara pattern complessi dai dati<br />
+→ Si adatta a nuovi tipi di spam</p>
+<p><strong>Evoluzione Storica (Timeline per capire dove siamo):</strong></p>
+<pre><code>1950s: NASCITA
+├─ Test di Turing (1950)
+├─ &quot;Può una macchina pensare?&quot;
+└─ Solo teoria, nessun risultato pratico
+
+1980s-1990s: INVERNO IA
+├─ Computer troppo lenti
+├─ Dati insufficienti
+└─ Poche applicazioni reali
+
+2010s: RINASCITA
+├─ 2012: Deep Learning funziona (ImageNet)
+├─ GPU potenti + Big Data
+├─ Google, Facebook investono miliardi
+└─ Assistenti vocali (Siri, Alexa)
+
+2020s: RIVOLUZIONE
+├─ 2022: ChatGPT (175 miliardi parametri!)
+│        → 100 milioni utenti in 2 mesi
+├─ 2023: GPT-4 (multimodale: testo+immagini)
+│        → Supera esami professionali
+├─ 2024: Claude 3.5, Gemini 1.5 Pro
+│        → Context window 2 milioni token
+└─ 2025: IA in OGNI strumento
+         → IDE, browser, sistemi operativi</code></pre>
+<p><strong>Perché PROPRIO ORA è il momento della rivoluzione?</strong></p>
+<p>Tre fattori si sono allineati:</p>
+<ol type="1">
+<li><strong>DATI</strong>: Internet ha creato oceani di testo/immagini/video</li>
+<li><strong>COMPUTING</strong>: GPU moderne 1000x più potenti di 10 anni fa</li>
+<li><strong>ALGORITMI</strong>: Transformer (2017) ha sbloccato tutto</li>
+</ol>
+<p>È come avere benzina (dati) + motore (GPU) + chiave per accenderlo (algoritmi).</p>
+<h3 id="22-categorie-ia-essenziali">2.2 Categorie IA Essenziali</h3>
+<p>L&#39;IA è un termine generico. Sotto questo ombrello ci sono TANTI tipi diversi di tecnologie. Ecco le principali che dovete conoscere:</p>
+<pre><code>┌─────────────────────────────────────────┐
+│    CATEGORIE IA (Focus 2025)            │
+├─────────────────────────────────────────┤
+│                                         │
+│ 1. MACHINE LEARNING (ML)                │
+│    Apprendimento da dati con algoritmi  │
+│    statistici                           │
+│    │                                    │
+│    ├─ Supervised Learning               │
+│    │  (impara da esempi etichettati)    │
+│    │  Es: Spam detector, diagnosi       │
+│    │                                    │
+│    ├─ Unsupervised Learning             │
+│    │  (trova pattern da solo)           │
+│    │  Es: Clustering clienti            │
+│    │                                    │
+│    └─ Reinforcement Learning            │
+│       (impara per tentativi/errori)     │
+│       Es: AlphaGo, robot                │
+│                                         │
+│ 2. DEEP LEARNING                        │
+│    Reti neurali &quot;profonde&quot; (tanti       │
+│    layer) che imparano automaticamente  │
+│    │                                    │
+│    ├─ Computer Vision                   │
+│    │  (riconoscimento immagini)         │
+│    │  Es: Face ID, auto autonome        │
+│    │                                    │
+│    ├─ NLP (Natural Language)            │
+│    │  (comprensione linguaggio)         │
+│    │  Es: ChatGPT, traduttori           │
+│    │                                    │
+│    └─ Speech Recognition                │
+│       (riconoscimento vocale)           │
+│       Es: Alexa, Siri                   │
+│                                         │
+│ 3. IA GENERATIVA ⭐ (FOCUS 2025)       │
+│    IA che CREA contenuti nuovi          │
+│    │                                    │
+│    ├─ LLM (Large Language Models)       │
+│    │  Generano TESTO e CODICE           │
+│    │  Es: ChatGPT, Claude, Gemini       │
+│    │  → QUESTO È IL NOSTRO FOCUS!       │
+│    │                                    │
+│    ├─ Image Generation                  │
+│    │  Generano IMMAGINI                 │
+│    │  Es: DALL-E 3, Midjourney, Stable  │
+│    │                                    │
+│    └─ Multi-Modal                       │
+│       Capiscono/generano testo+immagini │
+│       Es: GPT-4V, Gemini 1.5           │
+│                                         │
+│ 4. EDGE AI / TinyML ⭐                 │
+│    IA che gira su microcontrollori!     │
+│    Es: Keyword spotting su Arduino      │
+│                                         │
+└─────────────────────────────────────────┘</code></pre>
+<p><strong>Spiegazione Categorie con Esempi Pratici:</strong></p>
+<h4 id="1-machine-learning-ml"><strong>1. Machine Learning (ML)</strong></h4>
+<p>Il ML è la base di tutto. L&#39;idea: invece di programmare regole, dai esempi e l&#39;algoritmo impara le regole da solo.</p>
+<p><strong>Esempio Supervised Learning:</strong></p>
+<pre><code>PROBLEMA: Riconoscere se un&#39;email è spam
+
+DATI TRAINING:
+Email 1: &quot;Vinci iPhone gratis!&quot; → SPAM ✓
+Email 2: &quot;Riunione domani ore 10&quot; → OK ✓
+Email 3: &quot;Viagra sconto 90%&quot; → SPAM ✓
+...10.000 esempi...
+
+ALGORITMO IMPARA:
+- Parole spam: &quot;gratis&quot;, &quot;vinci&quot;, &quot;viagra&quot;
+- Pattern spam: molti CAPS, link strani
+- Mittenti spam: domini sospetti
+
+RISULTATO:
+Input: nuova email mai vista
+Output: SPAM (85% sicuro) o OK (98% sicuro)</code></pre>
+<p><strong>Esempio Unsupervised Learning:</strong></p>
+<pre><code>PROBLEMA: Raggruppa clienti simili
+
+DATI:
+Cliente A: Compra [pasta, pomodori, basilico]
+Cliente B: Compra [birra, patatine, pizza]
+Cliente C: Compra [pasta, olio, aglio]
+...
+
+ALGORITMO TROVA GRUPPI DA SOLO:
+Cluster 1: &quot;Cucinatori italiani&quot; (A, C)
+Cluster 2: &quot;Party people&quot; (B)
+
+USO: Marketing mirato per ogni cluster</code></pre>
+<h4 id="2-deep-learning"><strong>2. Deep Learning</strong></h4>
+<p>Deep Learning = Machine Learning con reti neurali molto &quot;profonde&quot; (tanti layer). Può imparare concetti sempre più astratti.</p>
+<p><strong>Analogia:</strong></p>
+<pre><code>Layer 1: Rileva linee/bordi in immagine
+   ↓
+Layer 2: Combina linee in forme (occhi, naso)
+   ↓
+Layer 3: Combina forme in oggetti (volto)
+   ↓
+Layer 4: Riconosce CHI è la persona</code></pre>
+<p><strong>Applicazione ITS:</strong></p>
+<pre><code>COMPUTER VISION su produzione:
+Camera → Deep Learning Model → Difetto rilevato!
+
+Es: Controllo qualità PCB (circuit board)
+- Input: Foto PCB
+- Model: CNN (Convolutional Neural Network)
+- Output: &quot;Saldatura difettosa sulla resistenza R7&quot;
+- Accuratezza: &gt;99.5%</code></pre>
+<h4 id="3-ia-generativa-focus-corso"><strong>3. IA Generativa (FOCUS CORSO)</strong></h4>
+<p>Questa è la rivoluzione 2022-2025. IA che non solo riconosce, ma <strong>CREA</strong> contenuti nuovi.</p>
+<p><strong>Large Language Models (LLM):</strong></p>
+<p>Immaginate un modello che ha &quot;letto&quot; quasi tutto internet:</p>
+<ul>
+<li>Wikipedia completa</li>
+<li>Milioni di libri</li>
+<li>Codice GitHub (miliardi di righe)</li>
+<li>Forum, blog, paper scientifici</li>
+</ul>
+<p>Ora può:</p>
+<ul>
+<li>Rispondere a domande</li>
+<li>Scrivere articoli</li>
+<li><strong>Generare codice</strong> ← QUESTO CI INTERESSA!</li>
+<li>Tradurre linguaggi</li>
+<li>Riassumere documenti</li>
+</ul>
+<p><strong>Come è possibile?</strong></p>
+<p>Il modello ha imparato <strong>pattern statistici</strong> del linguaggio. Non &quot;capisce&quot; veramente, ma è bravissimo a prevedere &quot;quale parola viene dopo&quot;.</p>
+<pre><code>Input: &quot;La capitale d&#39;Italia è&quot;
+Model pensa:
+  &quot;Roma&quot; → 92% probabilità ✓
+  &quot;Milano&quot; → 3%
+  &quot;Parigi&quot; → 0.001%
+Output: &quot;Roma&quot;</code></pre>
+<p>Ma con miliardi di parametri e addestramento sofisticato, questi pattern diventano sorprendentemente intelligenti!</p>
+<h4 id="4-edge-ai--tinyml"><strong>4. Edge AI / TinyML</strong></h4>
+<p>Questa è la frontiera per embedded! IA che gira su microcontrollori con pochi KB di RAM.</p>
+<p><strong>Caso d&#39;uso reale:</strong></p>
+<pre><code>KEYWORD SPOTTING su Arduino Nano 33 BLE:
+
+Hardware:
+- MCU: ARM Cortex-M4 (64 MHz)
+- RAM: 256 KB
+- Flash: 1 MB
+
+Model:
+- Tipo: CNN
+- Dimensione: 30 KB (!)
+- Accuratezza: 94%
+
+Funzionalità:
+Microfono → Model → Riconosce &quot;Arduino&quot;
+                  → Attiva azione
+
+Consumi:
+- Idle: 50 µA
+- Active: 8 mA
+- Batteria dura MESI</code></pre>
+<p><strong>Perché è importante?</strong></p>
+<ul>
+<li>Privacy: dati restano locali</li>
+<li>Latenza: risposta istantanea</li>
+<li>Affidabilità: no dipendenza cloud</li>
+<li>Costo: no connettività necessaria</li>
+</ul>
+<h3 id="23-ia-vs-algoritmi-tradizionali">2.3 IA vs Algoritmi Tradizionali</h3>
+<p><strong>Quando usare cosa?</strong></p>
+<p>Questa è una domanda FONDAMENTALE per ingegneri. Non tutto va risolto con IA!</p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Algoritmo Classico</th>
+<th>IA/ML</th>
+<th>Vincitore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calcolare IVA su vendita</strong></td>
+<td><code>prezzo * 0.22</code></td>
+<td>Rete neurale addestrata su esempi</td>
+<td>❌ Algoritmo! (IA è overkill)</td>
+</tr>
+<tr>
+<td><strong>Classificare email spam</strong></td>
+<td>Regole if/then manuali</td>
+<td>Modello ML addestrato</td>
+<td>✅ IA! (troppi pattern)</td>
+</tr>
+<tr>
+<td><strong>Riconoscimento vocale</strong></td>
+<td>Pattern matching acustico</td>
+<td>Deep Learning CNN/RNN</td>
+<td>✅ IA! (impossibile altrimenti)</td>
+</tr>
+<tr>
+<td><strong>PID controller</strong></td>
+<td>Formula PID classica</td>
+<td>Reinforcement Learning</td>
+<td>⚖️ Dipende! (PID ok per casi semplici)</td>
+</tr>
+<tr>
+<td><strong>Generare codice da descrizione</strong></td>
+<td>Template + regex</td>
+<td>LLM (GPT-4)</td>
+<td>✅ IA! (unica opzione)</td>
+</tr>
+<tr>
+<td><strong>Ordinare array</strong></td>
+<td>Quicksort</td>
+<td>Neural Sort</td>
+<td>❌ Algoritmo! (più veloce, deterministico)</td>
+</tr>
+<tr>
+<td><strong>Predire guasto motore</strong></td>
+<td>Soglie fisse</td>
+<td>ML + sensori</td>
+<td>✅ IA! (pattern complessi)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Regole Pratiche 2025:</strong></p>
+<pre><code>USA ALGORITMI CLASSICI quando:
+✓ Le regole sono chiare e stabili
+  Es: calcolo IVA non cambierà domani
+
+✓ Precisione matematica è CRITICA
+  Es: sistemi safety-critical (avionica)
+
+✓ Spiegabilità è obbligatoria
+  Es: &quot;perché il controllo ha fatto X?&quot;
+
+✓ Dati insufficienti
+  Es: 10 esempi non bastano per ML
+
+✓ Risorse limitate
+  Es: Arduino Uno (2KB RAM!)
+
+USA IA/ML quando:
+✓ Pattern troppo complessi per regole
+  Es: &quot;questa immagine contiene un gatto?&quot;
+
+✓ Hai TANTI dati
+  Es: 10.000+ esempi etichettati
+
+✓ Task creativi/generativi
+  Es: scrivere codice, testi, immagini
+
+✓ Ambiente cambia nel tempo
+  Es: nuovi tipi di spam ogni giorno
+
+✓ Approssimazione accettabile
+  Es: 95% accuratezza è ok</code></pre>
+<p><strong>Esempio Reale ITS: Sistema Rilevamento Difetti</strong></p>
+<pre><code>SCENARIO: Controllo qualità saldature PCB
+
+APPROCCIO CLASSICO:
+```c
+bool saldatura_ok(Image img, Point p) {
+    // Controlla dimensione
+    if (area(p) &lt; MIN_AREA) return false;
+    if (area(p) &gt; MAX_AREA) return false;
+
+    // Controlla colore
+    if (brightness(p) &lt; MIN_BRIGHT) return false;
+
+    // Controlla forma
+    if (circolarità(p) &lt; 0.8) return false;
+
+    return true;
+}</code></pre>
+<p><strong>Problemi:</strong></p>
+<ul>
+<li>Devi definire TUTTE le regole manualmente</li>
+<li>Non funziona su nuovi tipi di difetti</li>
+<li>Falsi positivi/negativi alti</li>
+</ul>
+<p><strong>APPROCCIO IA:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> train_cnn(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    immagini_ok <span class="op">=</span> <span class="dv">5000</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    immagini_difetto <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inference</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>difetto <span class="op">=</span> model.predict(nuova_immagine)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># → 98.2% accuratezza!</span></span></code></pre></div>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>Impara automaticamente i pattern</li>
+<li>Si adatta a nuovi difetti con re-training</li>
+<li>Accuratezza superiore</li>
+</ul>
+<p><strong>Conclusione per questo caso: IA vince!</strong></p>
+<hr />
+<h2 id="3-large-language-models-llm">3. Large Language Models (LLM)</h2>
+<h3 id="31-cosa-sono-gli-llm">3.1 Cosa Sono gli LLM</h3>
+<p>Gli <strong>LLM (Large Language Models)</strong> sono il cuore di ChatGPT, Claude, e Gemini. Sono quello che useremo per programmare con l&#39;IA.</p>
+<p><strong>Definizione Semplice:</strong></p>
+<blockquote>
+<p><strong>LLM</strong>: Un programma di intelligenza artificiale addestrato su MILIARDI di pagine di testo da internet, libri e codice. Può capire cosa scrivi e generare risposte sensate, incluso codice funzionante.</p>
+</blockquote>
+<p><strong>Ma come funziona veramente?</strong></p>
+<p>Pensate a un gioco dove dovete indovinare la parola successiva:</p>
+<pre><code>&quot;Il gatto dorme sul ___&quot;
+
+Voi probabilmente direste:
+- &quot;divano&quot; (molto probabile)
+- &quot;letto&quot; (probabile)
+- &quot;tetto&quot; (possibile)
+- &quot;aeroplano&quot; (wtf? no!)</code></pre>
+<p>Un LLM fa la STESSA cosa, ma:</p>
+<ol type="1">
+<li>Ha visto MILIARDI di frasi simili</li>
+<li>Ha imparato pattern statistici</li>
+<li>Può farlo per QUALSIASI contesto</li>
+</ol>
+<p><strong>LLM Principali 2025 (Comparison):</strong></p>
+<pre><code>┌────────────────────────────────────────────────────────┐
+│ GPT-4 Turbo (OpenAI)                                   │
+├────────────────────────────────────────────────────────┤
+│ Parametri: ~1.7 trilioni (1,700,000,000,000!)         │
+│ Context: 128,000 token (~100k parole, ~400 pagine)    │
+│ Costo: $0.01 per 1k token input                       │
+│                                                        │
+│ ✅ PUNTI DI FORZA:                                     │
+│   - Eccellente per codice                             │
+│   - Ragionamento matematico                           │
+│   - Multimodale (vede immagini!)                      │
+│   - Function calling preciso                          │
+│                                                        │
+│ ❌ PUNTI DEBOLI:                                       │
+│   - Più costoso dei concorrenti                       │
+│   - A volte troppo verboso                            │
+│   - Censura eccessiva su alcuni topic                 │
+└────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────┐
+│ Claude 3.5 Sonnet (Anthropic)                          │
+├────────────────────────────────────────────────────────┤
+│ Parametri: Non dichiarati (segreto!)                  │
+│ Context: 200,000 token (~150k parole)                 │
+│ Costo: $0.003 per 1k token (3x cheaper!)              │
+│                                                        │
+│ ✅ PUNTI DI FORZA:                                     │
+│   - MIGLIORE per seguire istruzioni                   │
+│   - Analisi codice accurata                           │
+│   - Meno allucinazioni di GPT                         │
+│   - Stile di scrittura naturale                       │
+│                                                        │
+│ ❌ PUNTI DEBOLI:                                       │
+│   - Meno bravo su matematica complessa                │
+│   - Meno conosciuto = meno esempi online              │
+│   - Rate limits più stretti (free tier)               │
+└────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────┐
+│ Gemini 1.5 Pro (Google)                                │
+├────────────────────────────────────────────────────────┤
+│ Parametri: Non dichiarati                             │
+│ Context: 2,000,000 token (!!!) = ~1 milione parole!   │
+│ Costo: $0.00125 per 1k token (cheapest!)              │
+│                                                        │
+│ ✅ PUNTI DI FORZA:                                     │
+│   - Context ENORME (può leggere interi libri)         │
+│   - Gratis con limiti generosi                        │
+│   - Multimodale avanzato                              │
+│   - Integrazione Google Workspace                     │
+│                                                        │
+│ ❌ PUNTI DEBOLI:                                       │
+│   - Più lento dei concorrenti                         │
+│   - Qualità codice inferiore a GPT-4                  │
+│   - Meno adatto a task specifici                      │
+└────────────────────────────────────────────────────────┘</code></pre>
+<p><strong>Quale usare?</strong></p>
+<pre><code>Per CODICE COMPLESSO:
+→ GPT-4 Turbo
+  Esempio: &quot;Implementa Red-Black Tree in C&quot;
+
+Per SEGUIRE ISTRUZIONI PRECISE:
+→ Claude 3.5 Sonnet
+  Esempio: &quot;Genera sketch Arduino con ESATTAMENTE
+            questi 15 requisiti...&quot;
+
+Per ANALIZZARE DOCUMENTI LUNGHI:
+→ Gemini 1.5 Pro
+  Esempio: &quot;Leggi questo datasheet 500 pagine e
+            trova i pin per I2C&quot;
+
+Per IMPARARE/SPERIMENTARE GRATIS:
+→ ChatGPT 3.5 o Claude Free
+  Funzionano benissimo per il 90% dei casi!</code></pre>
+<h3 id="32-come-funzionano-spiegazione-semplificata">3.2 Come Funzionano (Spiegazione Semplificata)</h3>
+<p><strong>Il Viaggio di un Prompt (Step-by-Step):</strong></p>
+<p>Quando scrivi &quot;Scrivi funzione C per sommare array&quot; e premi invio, cosa succede?</p>
+<pre><code>STEP 1: TOKENIZZAZIONE
+──────────────────────────────────────────
+Il tuo testo viene spezzato in &quot;token&quot;
+(pezzi di parole)
+
+Input: &quot;Scrivi funzione C&quot;
+↓
+Token: [&quot;Scr&quot;, &quot;ivi&quot;, &quot; funzione&quot;, &quot; C&quot;]
+
+Perché non parole intere?
+→ Gestisce meglio parole nuove/rare
+→ Funziona su TUTTE le lingue
+→ Più efficiente per il modello
+
+Un token ≈ 4 caratteri in italiano
+&quot;Ciao come stai?&quot; = ~4 token</code></pre>
+<pre><code>STEP 2: EMBEDDING
+──────────────────────────────────────────
+Ogni token → Vettore di numeri
+(rappresentazione matematica)
+
+&quot;Scrivi&quot; → [0.2, -0.5, 0.8, ..., 0.3]
+           (4096 numeri!)
+
+Cosa rappresentano questi numeri?
+→ SIGNIFICATO SEMANTICO
+
+Token simili hanno vettori simili:
+&quot;Scrivi&quot; ≈ &quot;Genera&quot; ≈ &quot;Crea&quot;
+&quot;C&quot; ≈ &quot;C++&quot; ≈ &quot;codice&quot;
+
+Questo permette al modello di &quot;capire&quot;
+relazioni tra concetti!</code></pre>
+<pre><code>STEP 3: ATTENTION MECHANISM
+──────────────────────────────────────────
+Il cuore del Transformer!
+
+Il modello &quot;presta attenzione&quot; a token
+rilevanti per predire il prossimo
+
+Esempio:
+Input: &quot;Scrivi funzione C per invertire stringa&quot;
+
+Quando genera codice, presta attenzione a:
+- &quot;funzione&quot; → genererà `tipo nome()`
+- &quot;C&quot; → userà sintassi C, non Python
+- &quot;invertire&quot; → algoritmo reverse
+- &quot;stringa&quot; → tipo `char*`
+
+È come sottolineare le parti importanti
+di un testo mentre studi!</code></pre>
+<pre><code>STEP 4: PREDIZIONE PROBABILISTICA
+──────────────────────────────────────────
+Il modello genera UN token alla volta
+scegliendo il più probabile
+
+Dopo &quot;Scrivi funzione C per sommare array&quot;,
+il modello calcola:
+
+Prossimo token:
+&quot;void&quot; → 45% prob
+&quot;int&quot; → 40% prob
+&quot;\n&quot; → 10% prob (inizia su nuova riga)
+&quot;float&quot; → 4% prob
+&quot;class&quot; → 0.001% (sbagliato, C non ha class!)
+
+Sceglie: &quot;int&quot; (in questo caso)
+
+Poi ripete:
+&quot;int&quot; → Prossimo token:
+&quot;sum&quot; → 30%
+&quot;add&quot; → 25%
+&quot;array&quot; → 20%
+...</code></pre>
+<pre><code>STEP 5: ITERAZIONE FINO A COMPLETAMENTO
+──────────────────────────────────────────
+Ripete step 4 finché:
+- Genera token di STOP
+- Raggiunge limite token
+- Tu fermi generazione
+
+Genera così 100, 1000, 10000 token...
+e costruisce risposta completa!</code></pre>
+<p><strong>Esempio Concreto Completo:</strong></p>
+<pre><code>PROMPT:
+&quot;Scrivi funzione C che calcola fattoriale&quot;
+
+GENERAZIONE (semplificato):
+Token 1: &quot;int&quot; (45% prob)
+Token 2: &quot; fattoriale&quot; (52% prob)
+Token 3: &quot;(&quot; (98% prob - deve aprire parentesi!)
+Token 4: &quot;int&quot; (78% prob)
+Token 5: &quot; n&quot; (65% prob - nome parametro comune)
+Token 6: &quot;)&quot; (99% prob)
+Token 7: &quot; {&quot; (99% prob)
+Token 8: &quot;\n&quot; (95% prob - new line)
+Token 9: &quot;    if&quot; (70% prob - case base ricorsione)
+...continua...
+
+RISULTATO:
+int fattoriale(int n) {
+    if (n &lt;= 1) return 1;
+    return n * fattoriale(n - 1);
+}</code></pre>
+<p><strong>Ma come fa a &quot;sapere&quot; la formula del fattoriale?</strong></p>
+<p><strong>Non &quot;sa&quot; nulla!</strong> Ha solo visto MILIONI di esempi di codice durante training:</p>
+<pre><code>Training data (semplificato):
+- Visto 10,000 implementazioni fattoriale su GitHub
+- Visto spiegazioni su Wikipedia/StackOverflow
+- Visto esami/esercizi di programmazione
+
+Ha imparato il PATTERN:
+&quot;fattoriale&quot; + &quot;ricorsione&quot; →
+   if (n &lt;= 1) return 1;
+   return n * fattoriale(n-1);</code></pre>
+<p>È come uno studente che ha fatto 10,000 esercizi: non &quot;capisce&quot; matematicamente, ma ha visto il pattern così tante volte che lo riproduce perfettamente!</p>
+<h3 id="33-capacità-e-limiti">3.3 Capacità e Limiti</h3>
+<p><strong>✅ Cosa Fanno BENISSIMO</strong></p>
+<h4 id="1-generazione-codice"><strong>1. Generazione Codice</strong></h4>
+<pre><code>ECCELLENTI PER:
+
+✓ Funzioni standard (sorting, searching, etc)
+✓ Boilerplate code (setup Arduino, init struct)
+✓ Implementazione algoritmi noti
+✓ Conversione tra linguaggi
+✓ Wrapper per API
+
+ESEMPIO REALE:
+Prompt: &quot;Implementa merge sort in C&quot;
+→ Genera implementazione corretta 95% volte
+→ Spesso più pulita di quella di studente medio!</code></pre>
+<h4 id="2-debugging"><strong>2. Debugging</strong></h4>
+<pre><code>✓ Spiega errori compilatore in linguaggio semplice
+✓ Trova bug evidenti (null pointer, off-by-one)
+✓ Suggerisce fix
+✓ Propone test case che fallirebbero
+
+ESEMPIO:
+Input: &quot;error: invalid conversion from &#39;const char*&#39; to &#39;char*&#39;&quot;
+→ LLM spiega: &quot;Stai passando stringa costante a
+   funzione che si aspetta puntatore modificabile.
+   Soluzione: cambia parametro in const char*&quot;</code></pre>
+<h4 id="3-documentazione"><strong>3. Documentazione</strong></h4>
+<pre><code>✓ Genera commenti Doxygen
+✓ Scrive README.md professionali
+✓ Crea docstring Python
+✓ Spiega codice complesso
+
+ESEMPIO:
+Input: [funzione complessa senza commenti]
+Prompt: &quot;Aggiungi commenti Doxygen&quot;
+→ Output: documentazione completa, parametri, return, esempi</code></pre>
+<h4 id="4-refactoring"><strong>4. Refactoring</strong></h4>
+<pre><code>✓ Migliora naming variabili
+✓ Estrae funzioni da codice duplicato
+✓ Semplifica logica complessa
+✓ Applica design pattern
+
+ESEMPIO:
+Input: codice con 500 righe in un&#39;unica funzione
+Prompt: &quot;Refactora in funzioni più piccole&quot;
+→ Output: 10 funzioni ben nominate, ognuna &lt;50 righe</code></pre>
+<h4 id="5-learning-assistant"><strong>5. Learning Assistant</strong></h4>
+<pre><code>✓ Spiega concetti in modo semplice
+✓ Genera esercizi personalizzati
+✓ Confronta approcci diversi
+✓ Risponde a &quot;perché?&quot; infinite volte senza irritarsi!
+
+ESEMPIO STUDENTE:
+&quot;Perché usare malloc invece di array fisso?&quot;
+→ Spiegazione con pro/cons, esempi, casi d&#39;uso
+&quot;Ok ma quando DEVO usare malloc?&quot;
+→ Scenari specifici con codice
+&quot;E se malloc fallisce?&quot;
+→ Error handling patterns
+[...puoi continuare all&#39;infinito...]</code></pre>
+<p><strong>❌ Limiti CRITICI (IMPORTANTE!)</strong></p>
+<h4 id="1-allucinazioni"><strong>1. Allucinazioni</strong></h4>
+<pre><code>PROBLEMA #1: Inventa fatti/funzioni inesistenti
+
+ESEMPIO REALE (successo davvero!):
+Prompt: &quot;Copia stringa in C&quot;
+Output IA:
+  char* copy = strdup(original);
+
+PROBLEMA: strdup() NON è standard C!
+→ Non compila su embedded
+→ Non compila con -std=c99
+→ Ma SEMBRA corretto!
+
+COME DIFENDERSI:
+✓ Compila sempre il codice
+✓ Leggi documentazione ufficiale
+✓ Se non conosci una funzione, cercala!
+✓ Usa -Wall -Wextra -Wpedantic</code></pre>
+<h4 id="2-knowledge-cutoff"><strong>2. Knowledge Cutoff</strong></h4>
+<pre><code>PROBLEMA #2: Dati limitati a data di training
+
+GPT-4: Training fino aprile 2023
+→ Non conosce librerie/tool usciti dopo
+→ Non conosce nuove versioni Arduino
+→ Non sa eventi recenti
+
+ESEMPIO:
+&quot;Usa nuova libreria XYZ del 2024&quot;
+→ &quot;Non conosco questa libreria&quot;
+→ Potrebbe inventare API inesistente!
+
+SOLUZIONE:
+✓ Fornisci documentazione nel prompt
+✓ Specifica versioni esatte
+✓ Verifica online esistenza librerie</code></pre>
+<h4 id="3-no-vera-comprensione"><strong>3. No Vera Comprensione</strong></h4>
+<pre><code>PROBLEMA #3: Pattern matching, non ragionamento
+
+L&#39;IA non &quot;capisce&quot; cosa fa il codice.
+Riproduce pattern visti, come pappagallo intelligente.
+
+ESEMPIO PROBLEMA:
+Prompt: &quot;Scrivi funzione che trova numero primo
+         più grande di N&quot;
+
+Potrebbe generare:
+bool isPrime(int n) { ... }  // ✓ corretto
+int nextPrime(int n) {
+    for (int i = n+1; ; i++) {
+        if (isPrime(i)) return i;
+    }
+}
+// ❌ LOOP INFINITO se n molto grande!
+// Non ha &quot;capito&quot; che serve limite
+
+LEZIONE:
+✓ Testa sempre edge cases
+✓ Non fidarti ciecamente
+✓ Verifica logica, non solo sintassi</code></pre>
+<h4 id="4-matematica-complessa-fallisce"><strong>4. Matematica Complessa Fallisce</strong></h4>
+<pre><code>PROBLEMA #4: Calcoli complessi inaffidabili
+
+ESEMPIO:
+&quot;Qual è 127 * 843?&quot;
+
+IA potrebbe dire: 107,061
+
+Risposta corretta: 107,061 ✓
+Ma se chiedi: &quot;E 127 * 844?&quot;
+Potrebbe dire: 107,188 ❌ (giusto: 107,188)
+
+Piccolo errore! Ma su calcoli complessi peggiora.
+
+SOLUZIONE:
+✓ Non usare LLM per matematica precisa
+✓ Usa calcolatrice/codice per calcoli
+✓ LLM va bene per LOGICA, non aritmetica</code></pre>
+<h4 id="5-sicurezza-non-garantita"><strong>5. Sicurezza Non Garantita</strong></h4>
+<pre><code>PROBLEMA #5: Può generare codice vulnerabile
+
+ESEMPIO:
+Prompt: &quot;Leggi password da input&quot;
+Output potenziale:
+  char password[20];
+  scanf(&quot;%s&quot;, password);  // ❌ BUFFER OVERFLOW!
+
+È sintatticamente corretto ma PERICOLOSO!
+
+COME DIFENDERSI:
+✓ Code review sempre
+✓ Static analysis (cppcheck)
+✓ Fuzzing/testing
+✓ Non usare in sistemi safety-critical
+   senza validazione esperta</code></pre>
+<p><strong>TABELLA RIASSUNTIVA - Quando Fidarsi</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Affidabilità</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Genera funzione semplice</strong></td>
+<td>90%</td>
+<td>Verifica sempre compilazione</td>
+</tr>
+<tr>
+<td><strong>Spiega errore compilatore</strong></td>
+<td>95%</td>
+<td>Ottime spiegazioni</td>
+</tr>
+<tr>
+<td><strong>Matematica semplice</strong></td>
+<td>70%</td>
+<td>Meglio usare calcolatrice</td>
+</tr>
+<tr>
+<td><strong>Matematica complessa</strong></td>
+<td>30%</td>
+<td>❌ Non affidabile</td>
+</tr>
+<tr>
+<td><strong>Trova bug evidenti</strong></td>
+<td>85%</td>
+<td>Buono ma non perfetto</td>
+</tr>
+<tr>
+<td><strong>Trova bug sottili</strong></td>
+<td>40%</td>
+<td>Serve umano esperto</td>
+</tr>
+<tr>
+<td><strong>Genera documentazione</strong></td>
+<td>95%</td>
+<td>Eccellente</td>
+</tr>
+<tr>
+<td><strong>Code sicuro security-critical</strong></td>
+<td>50%</td>
+<td>❌ Serve review esperto</td>
+</tr>
+<tr>
+<td><strong>Spiega concetti</strong></td>
+<td>90%</td>
+<td>Ottimo teacher</td>
+</tr>
+<tr>
+<td><strong>Genera test case</strong></td>
+<td>80%</td>
+<td>Buono, ma aggiungi edge cases tu</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="4-limiti-rischi-e-uso-responsabile">4. Limiti, Rischi e Uso Responsabile</h2>
+<h3 id="41-allucinazioni---il-problema-1">4.1 Allucinazioni - Il Problema #1</h3>
+<p><strong>Cos&#39;è un&#39;allucinazione?</strong></p>
+<blockquote>
+<p><strong>Allucinazione IA</strong>: Quando il modello genera informazioni che sembrano vere e plausibili, ma sono completamente inventate.</p>
+</blockquote>
+<p>È come uno studente che invece di dire &quot;non lo so&quot;, inventa una risposta che SEMBRA giusta ma è falsa.</p>
+<p><strong>Perché succede?</strong></p>
+<p>L&#39;LLM è addestrato a generare testo che &quot;suona bene&quot;, non necessariamente testo VERO. Se non sa qualcosa, potrebbe inventare per completare il pattern!</p>
+<p><strong>Esempi Reali di Allucinazioni:</strong></p>
+<h4 id="esempio-1-funzioni-inesistenti-molto-comune"><strong>Esempio 1: Funzioni Inesistenti (MOLTO COMUNE)</strong></h4>
+<div class="sourceCode" id="cb37"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ ALLUCINAZIONE TIPICA</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Prompt<span class="op">:</span> <span class="st">&quot;Duplica stringa in C&quot;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>Output IA<span class="op">:</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>duplicate <span class="op">=</span> strdup<span class="op">(</span>original<span class="op">);</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>PROBLEMA<span class="op">:</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>strdup<span class="op">()</span> NON esiste in C standard<span class="op">!</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> È una estensione POSIX</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Non compila con <span class="op">-</span>std<span class="op">=</span>c99</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Non funziona su molti embedded</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Ma SEMBRA perfetto<span class="op">!</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>✅ VERSIONE CORRETTA<span class="op">:</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>duplicate <span class="op">=</span> malloc<span class="op">(</span>strlen<span class="op">(</span>original<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>duplicate <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>duplicate<span class="op">,</span> original<span class="op">);</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="esempio-2-librerie-inventate"><strong>Esempio 2: Librerie Inventate</strong></h4>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ ALLUCINAZIONE</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>Prompt<span class="op">:</span> <span class="st">&quot;Usa sensore XYZ con Arduino&quot;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>Output IA<span class="op">:</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;XYZ_Sensor.h&gt;</span><span class="pp">  </span><span class="co">// ❌ NON ESISTE!</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>XYZ_Sensor sensor<span class="op">(</span>A0<span class="op">);</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>sensor<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> value <span class="op">=</span> sensor<span class="op">.</span>read<span class="op">();</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>PROBLEMA<span class="op">:</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Libreria inventata</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Metodi plausibili ma falsi</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> Compila solo se NON provi davvero</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>COME RILEVARE<span class="op">:</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>✓ Cerca libreria su Library Manager Arduino</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>✓ Controlla su GitHub</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>✓ Verifica documentazione ufficiale</span></code></pre></div>
+<h4 id="esempio-3-fatti-inventati"><strong>Esempio 3: &quot;Fatti&quot; Inventati</strong></h4>
+<pre><code>Prompt: &quot;Quanti studenti ITS in Italia 2024?&quot;
+
+Output possibile:
+&quot;Ci sono 47.532 studenti iscritti a ITS in Italia
+nel 2024, con un aumento del 12.3% rispetto al 2023.&quot;
+
+PROBLEMA:
+- Numeri TROPPO specifici (sospetto!)
+- Nessuna fonte citata
+- Potrebbe essere inventato
+
+COME VERIFICARE:
+✓ Chiedi: &quot;Qual è la fonte?&quot;
+✓ Cerca su siti ufficiali (MIUR, Indire)
+✓ Numeri troppo precisi = red flag</code></pre>
+<p><strong>Come Difendersi dalle Allucinazioni:</strong></p>
+<pre><code>REGOLA D&#39;ORO:
+&quot;Fidarsi è bene, NON fidarsi è meglio!&quot;
+
+✅ CHECKLIST ANTI-ALLUCINAZIONE:
+
+1. COMPILA SEMPRE IL CODICE
+   [ ] gcc compila senza errori?
+   [ ] Zero warning con -Wall -Wextra?
+
+2. VERIFICA FUNZIONI/LIBRERIE
+   [ ] Cerchi documentazione ufficiale
+   [ ] Esiste su cppreference.com (C/C++)?
+   [ ] Esiste su Arduino Library Manager?
+
+3. TESTA L&#39;OUTPUT
+   [ ] Unit test passano?
+   [ ] Edge cases gestiti?
+   [ ] Valgrind pulito (no leak)?
+
+4. CONTROLLA &quot;FATTI&quot;
+   [ ] Numeri troppo specifici?
+   [ ] Fonte citata verificabile?
+   [ ] Cerca su Google per conferma
+
+5. USA STRUMENTI
+   [ ] Static analysis (cppcheck)
+   [ ] Linter
+   [ ] Compiler warning TUTTI abilitati</code></pre>
+<p><strong>Segnali di Allarme (Red Flags):</strong></p>
+<pre><code>🚩 RED FLAGS - Probabile Allucinazione:
+
+⚠️ &quot;Secondo recenti studi...&quot;
+   → Senza citare fonte = inventato
+
+⚠️ Funzione che non hai mai visto
+   → Cerca SEMPRE se non conosci
+
+⚠️ Numeri troppo specifici
+   → &quot;45.732 studenti&quot; vs &quot;~46.000&quot;
+
+⚠️ &quot;La libreria XYZ fornisce...&quot;
+   → Verifica che esista!
+
+⚠️ Codice compila ma non funziona
+   → Logica inventata, sintassi ok
+
+⚠️ &quot;Questa funzione è stata introdotta in C99&quot;
+   → Verifica su standard ufficiale</code></pre>
+<h3 id="42-bias-nei-dati-di-training">4.2 Bias nei Dati di Training</h3>
+<p><strong>Cos&#39;è il Bias?</strong></p>
+<blockquote>
+<p><strong>Bias</strong>: Pregiudizi o distorsioni nei dati di training che si riflettono nelle risposte del modello.</p>
+</blockquote>
+<p><strong>Esempi di Bias in Programmazione:</strong></p>
+<h4 id="1-bias-linguistico"><strong>1. Bias Linguistico</strong></h4>
+<pre><code>PROBLEMA:
+L&#39;IA è molto più brava in INGLESE che italiano
+
+ESEMPIO:
+Prompt INGLESE:
+&quot;Implement binary search in C&quot;
+→ Output: Perfetto, ottimizzato, 95% corretto
+
+Prompt ITALIANO:
+&quot;Implementa ricerca binaria in C&quot;
+→ Output: Funziona ma meno ottimizzato, 80% corretto
+
+SOLUZIONE:
+✓ Usa prompts in inglese per codice
+✓ Commenti possono essere in italiano
+✓ Nomi funzioni in inglese (best practice comunque)</code></pre>
+<h4 id="2-bias-platformhardware"><strong>2. Bias Platform/Hardware</strong></h4>
+<pre><code>PROBLEMA:
+Più esempi per hardware popolari
+
+BIAS EVIDENTI:
+- Arduino Uno &gt;&gt; Arduino Mega &gt;&gt; STM32 &gt;&gt; PIC
+- Raspberry Pi &gt;&gt; ESP32 &gt;&gt; Arduino
+- x86/Linux &gt;&gt; ARM/Windows &gt;&gt; RISC-V
+
+ESEMPIO:
+&quot;Configura I2C su Arduino&quot;
+→ Esempi per Uno (Wire.h)
+
+&quot;Configura I2C su PIC18F&quot;
+→ Risposta generica, meno precisa
+
+SOLUZIONE:
+✓ Specifica ESATTAMENTE il modello hardware
+✓ Fornisci datasheet se possibile
+✓ Chiedi alternative se primo tentativo vago</code></pre>
+<h4 id="3-bias-temporale"><strong>3. Bias Temporale</strong></h4>
+<pre><code>PROBLEMA:
+Preferisce soluzioni vecchie/deprecate
+
+ESEMPIO:
+Prompt: &quot;Temporizza Arduino&quot;
+
+Output potenziale:
+delay(1000);  // ❌ Vecchio stile, bloccante
+
+Invece di:
+unsigned long previousMillis = 0;
+if (millis() - previousMillis &gt;= 1000) {
+    // ✅ Moderno, non-bloccante
+}
+
+SOLUZIONE:
+✓ Specifica anno/versione target
+✓ Chiedi esplicitamente &quot;metodo moderno 2025&quot;
+✓ Menziona &quot;non-blocking&quot; se rilevante</code></pre>
+<p><strong>Mitigare i Bias:</strong></p>
+<pre><code>PROMPT DESIGN ANTI-BIAS:
+
+❌ VAGO:
+&quot;Scrivi programma Arduino sensore&quot;
+
+✅ SPECIFICO:
+&quot;Scrivi sketch Arduino Uno R4 (2024) con sensore
+ DHT22, usando libreria DHT sensor library v1.4.6,
+ pattern millis() non-bloccante moderno&quot;
+
+ELEMENTI CHIAVE:
+✓ Hardware esatto con anno/revisione
+✓ Versione libreria
+✓ Anno/standard (&quot;moderno 2025&quot;, &quot;C99 standard&quot;)
+✓ Best practices esplicite</code></pre>
+<h3 id="43-sicurezza-e-privacy">4.3 Sicurezza e Privacy</h3>
+<p><strong>⚠️ REGOLA FONDAMENTALE:</strong></p>
+<blockquote>
+<p><strong>MAI inserire dati sensibili in LLM!</strong></p>
+</blockquote>
+<p><strong>Perché?</strong></p>
+<p>Quando scrivi qualcosa a ChatGPT/Claude:</p>
+<ol type="1">
+<li>Viene salvato nei loro server</li>
+<li>Potrebbe essere usato per training futuro</li>
+<li>Potrebbe essere visto da revisori umani (quality check)</li>
+<li>Se c&#39;è breach, potrebbe trapelare</li>
+</ol>
+<p><strong>❌ NON INSERIRE MAI:</strong></p>
+<pre><code>ASSOLUTAMENTE VIETATO:
+
+❌ Password (anche vecchie!)
+❌ API keys / Token autenticazione
+❌ Dati personali:
+   - Numeri telefono
+   - Indirizzi email/casa
+   - Codici fiscali
+   - Carte credito (ovvio!)
+
+❌ Codice proprietario aziendale
+   - Segreti commerciali
+   - Algoritmi protetti
+   - Configurazioni interne
+
+❌ Informazioni riservate ITS/scuola
+   - Voti altri studenti
+   - Dati sensibili progetti</code></pre>
+<p><strong>✅ SAFE PRACTICES:</strong></p>
+<pre><code>COME USARE IN SICUREZZA:
+
+✅ GENERALIZZA il problema
+Invece di:
+  &quot;Debug questo codice del server aziendale SuperSecretCorp...&quot;
+
+Usa:
+  &quot;Debug questo pattern di server web generico...&quot;
+
+✅ USA DATI MOCK/ESEMPIO
+Invece di:
+  users = [&quot;mario.rossi@email.com&quot;, &quot;giuseppe.verdi@email.com&quot;]
+
+Usa:
+  users = [&quot;user1@example.com&quot;, &quot;user2@example.com&quot;]
+
+✅ RIMUOVI INFO IDENTIFICATIVE
+Codice vero:
+  #define SERVER_IP &quot;192.168.1.100&quot;
+  #define API_KEY &quot;sk_live_51H3...&quot;
+
+Codice per IA:
+  #define SERVER_IP &quot;XXX.XXX.XXX.XXX&quot;
+  #define API_KEY &quot;YOUR_API_KEY_HERE&quot;
+
+✅ USA VARIABILI PLACEHOLDER
+Invece di nomi reali, usa:
+  COMPANY_NAME, PROJECT_X, SECRET_KEY, etc.</code></pre>
+<p><strong>Esempio Pratico - Richiesta Sicura:</strong></p>
+<pre><code>❌ NON SICURO:
+
+&quot;Debug questo codice del nostro sistema di allarme
+presso cliente ACME Corp, IP 10.50.23.15,
+password admin: Acme2024!
+[codice con logica proprietaria]&quot;
+
+✅ SICURO:
+
+&quot;Debug questo pattern per sistema embedded di
+allarme generico. Hardware: Arduino Mega.
+Problema: Timeout su connessione server.
+
+[codice con IP/password rimossi, logica sanitizzata]</code></pre>
+<p><strong>Tool/Setting Privacy:</strong></p>
+<pre><code>OPZIONI PRIVACY (varia per provider):
+
+ChatGPT:
+Settings → Data Controls
+□ Disable &quot;Improve model for everyone&quot;
+  → I tuoi chat NON usati per training
+
+Claude:
+Settings → Privacy
+□ Conversations private by default
+
+Copilot (GitHub):
+Settings → telemetry
+□ Disable se non vuoi condividere snippet</code></pre>
+<h3 id="44-linee-guida-uso-responsabile">4.4 Linee Guida Uso Responsabile</h3>
+<p><strong>Principi Fondamentali:</strong></p>
+<pre><code>┌────────────────────────────────────────┐
+│  REGOLE D&#39;ORO USO IA 2025              │
+├────────────────────────────────────────┤
+│                                        │
+│  1. IA = ASSISTENTE, non SOSTITUTO    │
+│     Tu sei il programmatore,           │
+│     IA è il tuo aiutante junior        │
+│                                        │
+│  2. VERIFICA SEMPRE output critici     │
+│     Test, compila, valida              │
+│                                        │
+│  3. COMPRENDI il codice generato       │
+│     Se non capisci, non usare!         │
+│     Chiedi spiegazione all&#39;IA stessa   │
+│                                        │
+│  4. MANTIENI competenze tecniche       │
+│     Non diventare dipendente           │
+│     Studia i fondamentali              │
+│                                        │
+│  5. USA ETICA in contesti accademici   │
+│     Chiedi al prof se è permesso       │
+│     Cita uso IA se richiesto           │
+│                                        │
+└────────────────────────────────────────┘</code></pre>
+<p><strong>✅ Usi Corretti:</strong></p>
+<pre><code>DO - Esempi Concreti:
+
+✓ LEARNING:
+  &quot;Spiega come funziona malloc() in C&quot;
+  → Ottimo per capire concetti!
+
+✓ DEBUGGING:
+  &quot;Perché questo codice ha memory leak?&quot;
+  [codice di un tuo progetto personale]
+  → Aiuto nel trovare bug
+
+✓ BOILERPLATE:
+  &quot;Genera setup base Arduino con serial + LED&quot;
+  → Accelera tasks ripetitivi
+
+✓ REFACTORING:
+  &quot;Come posso migliorare questo codice?&quot;
+  → Impari best practices
+
+✓ IDEAZIONE:
+  &quot;Suggerisci architettura per sistema IoT&quot;
+  → Brainstorming tecnico
+
+✓ DOCUMENTAZIONE:
+  &quot;Genera README per questo progetto&quot;
+  → Task tedioso automatizzato</code></pre>
+<p><strong>❌ Usi Scorretti:</strong></p>
+<pre><code>DON&#39;T - Esempi da EVITARE:
+
+❌ COPIA-INCOLLA CIECO:
+   Prompt: &quot;Fai esercizio 5 del compito&quot;
+   → Copi senza capire
+   → Non impari niente
+   → Problematico eticamente
+
+❌ ESAMI SENZA PERMESSO:
+   Usare IA durante test/esame
+   → Se non esplicitamente permesso = CHEATING
+
+❌ DIPENDENZA TOTALE:
+   Non sai più fare niente senza IA
+   → Perdi competenze base
+   → Problema in colloqui/emergenze
+
+❌ CODICE PRODUCTION SENZA REVIEW:
+   Deploy diretto codice IA
+   → Bug/vulnerabilità
+   → Irresponsabile
+
+❌ IGNORA WARNING:
+   IA genera codice, compili con -Wall
+   → 10 warning
+   → Li ignori &quot;tanto funziona&quot;
+   → ❌ PESSIMA PRATICA
+
+❌ SOSTITUISCI RAGIONAMENTO:
+   &quot;IA non posso pensare per te&quot;
+   → Diventi passivo
+   → Non sviluppi problem solving</code></pre>
+<p><strong>Uso Etico in Contesto Accademico:</strong></p>
+<pre><code>GUIDELINES ITS/UNIVERSITÀ:
+
+SEMPRE PERMESSO:
+✓ Studiare concetti con IA
+✓ Chiedere spiegazioni teoria
+✓ Praticare con esercizi extra generati da IA
+✓ Debug progetti personali
+
+PERMESSO SE ESPLICITAMENTE AUTORIZZATO:
+⚠️ Usare IA per compiti/progetti
+⚠️ Generare parti di codice per assignment
+⚠️ Refactoring progetti graded
+
+MAI PERMESSO (salvo eccezioni):
+❌ Esami/test scritti
+❌ Valutazioni individuali
+❌ Certificazioni
+
+REGOLA:
+&quot;Se in dubbio, CHIEDI al docente!&quot;
+
+CITAZIONE:
+Se usi IA per progetto e permesso:
+&quot;&quot;&quot;
+Parti di questo codice sono state generate con
+assistenza di [ChatGPT/Claude/Copilot], poi
+validate e testate dallo studente.
+Specificamente: [funzione X, algoritmo Y]
+&quot;&quot;&quot;</code></pre>
+<p><strong>Auto-Valutazione Uso Responsabile:</strong></p>
+<pre><code>DOMANDE DA FARTI:
+
+□ Capisco al 100% il codice generato?
+  NO → Studia finché capisci
+
+□ Ho testato tutti i casi edge?
+  NO → Scrivi più test
+
+□ So spiegare ogni riga a un collega?
+  NO → Non sei pronto a usarlo
+
+□ Sarei in grado di riscriverlo da zero?
+  NO → Stai imparando o solo copiando?
+
+□ È permesso usare IA per questo task?
+  DUBBIO → Chiedi al docente/responsabile
+
+□ Ho verificato non ci sono vulnerabilità?
+  NO → Code review + static analysis
+
+Se rispondi NO a qualcuna:
+→ Fermati e correggi prima di procedere!</code></pre>
+</main>
+</body>
+</html>

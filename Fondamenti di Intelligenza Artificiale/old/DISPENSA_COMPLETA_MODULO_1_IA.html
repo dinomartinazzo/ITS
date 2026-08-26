@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 DISPENSA COMPLETA - MODULO 1</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 DISPENSA COMPLETA - MODULO 1</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>DISPENSA_COMPLETA_MODULO_1_IA.md</dd></div>
+<div><dt>Cartella</dt><dd>CookBooks/ITS/Fondamenti di Intelligenza Artificiale/old</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h1 id="fondamenti-di-intelligenza-artificiale">Fondamenti di Intelligenza Artificiale</h1>
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h2>
+<h3 id="durata-2-ore--livello-introduttivo">Durata: 2 ore | Livello: Introduttivo</h3>
+<hr />
+<h2 id="bookmark_tabs-indice-del-modulo">📑 Indice del Modulo</h2>
+<ol type="1">
+<li><a href="#1-introduzione-e-obiettivi">Introduzione e Obiettivi</a></li>
+<li><a href="#2-cosè-lintelligenza-artificiale">Cos&#39;è l&#39;Intelligenza Artificiale</a></li>
+<li><a href="#3-storia-e-evoluzione-dellia">Storia e Evoluzione dell&#39;IA</a></li>
+<li><a href="#4-categorie-dellia">Categorie dell&#39;IA</a></li>
+<li><a href="#5-modelli-linguistici-llm">Modelli Linguistici (LLM)</a></li>
+<li><a href="#6-limiti-e-rischi-dellia">Limiti e Rischi dell&#39;IA</a></li>
+<li><a href="#7-applicazioni-in-ambito-its">Applicazioni in Ambito ITS</a></li>
+<li><a href="#8-casi-studio-pratici">Casi Studio Pratici</a></li>
+<li><a href="#9-esercizi-e-autovalutazione">Esercizi e Autovalutazione</a></li>
+<li><a href="#10-glossario-tecnico">Glossario Tecnico</a></li>
+</ol>
+<hr />
+<h2 id="1-introduzione-e-obiettivi">1. Introduzione e Obiettivi</h2>
+<h3 id="11-benvenuti-al-corso">1.1 Benvenuti al Corso</h3>
+<p>Benvenuti al <strong>Modulo 1</strong> del corso di Intelligenza Artificiale e Programmazione Assistita. Questo modulo rappresenta la base teorica su cui costruiremo tutte le competenze pratiche dei moduli successivi.</p>
+<h3 id="12-obiettivi-di-apprendimento">1.2 Obiettivi di Apprendimento</h3>
+<p>Al termine di questo modulo sarai in grado di:</p>
+<p>✅ <strong>Comprendere</strong> cos&#39;è l&#39;intelligenza artificiale e come funziona<br />
+✅ <strong>Distinguere</strong> tra diverse categorie di IA (simbolica, ML, DL, LLM)<br />
+✅ <strong>Identificare</strong> i limiti tecnici e i rischi dei sistemi IA<br />
+✅ <strong>Riconoscere</strong> applicazioni reali in contesti industriali e embedded<br />
+✅ <strong>Valutare criticamente</strong> output generati da sistemi IA</p>
+<h3 id="13-prerequisiti">1.3 Prerequisiti</h3>
+<ul>
+<li>Nessun prerequisito specifico</li>
+<li>Conoscenze informatiche di base</li>
+<li>Curiosità e spirito critico</li>
+</ul>
+<h3 id="14-materiali-necessari">1.4 Materiali Necessari</h3>
+<ul>
+<li>Questa dispensa</li>
+<li>Accesso a un sistema IA (ChatGPT, Claude, ecc.)</li>
+<li>Quaderno per appunti</li>
+<li>Computer per esercizi pratici</li>
+</ul>
+<hr />
+<h2 id="2-cosè-lintelligenza-artificiale">2. Cos&#39;è l&#39;Intelligenza Artificiale</h2>
+<h3 id="21-definizione">2.1 Definizione</h3>
+<blockquote>
+<p><strong>Intelligenza Artificiale (IA)</strong>: insieme di tecniche computazionali progettate per permettere a un sistema di svolgere compiti che normalmente richiederebbero intelligenza umana.</p>
+</blockquote>
+<p>L&#39;IA non è una tecnologia singola, ma una <strong>famiglia di approcci</strong> che include:</p>
+<ul>
+<li>Riconoscimento di pattern</li>
+<li>Decision making</li>
+<li>Predizione</li>
+<li>Classificazione</li>
+<li>Generazione di contenuti</li>
+</ul>
+<h3 id="22-ia-vs-algoritmi-tradizionali">2.2 IA vs Algoritmi Tradizionali</h3>
+<h4 id="approccio-algoritmico-classico"><strong>Approccio Algoritmico Classico</strong></h4>
+<pre><code>SE temperatura &gt; 30 ALLORA
+    accendi_ventilatore()
+ALTRIMENTI
+    spegni_ventilatore()
+FINE</code></pre>
+<p><strong>Caratteristiche:</strong></p>
+<ul>
+<li>✅ Regole deterministiche chiare</li>
+<li>✅ Comportamento prevedibile al 100%</li>
+<li>✅ Facile debugging</li>
+<li>❌ Rigido, non si adatta</li>
+<li>❌ Richiede regole esplicite per ogni caso</li>
+</ul>
+<h4 id="approccio-iamachine-learning"><strong>Approccio IA/Machine Learning</strong></h4>
+<pre><code>Modello addestrato su:
+- 10.000 esempi di temperature e azioni corrette
+- Pattern complessi di comfort termico
+- Preferenze utenti
+
+Risultato:
+- Predice azione ottimale anche per situazioni mai viste
+- Si adatta a nuovi pattern
+- Può gestire incertezza</code></pre>
+<p><strong>Caratteristiche:</strong></p>
+<ul>
+<li>✅ Generalizza da esempi</li>
+<li>✅ Gestisce complessità</li>
+<li>✅ Si adatta a nuovi scenari</li>
+<li>❌ Possibile errore intrinseco</li>
+<li>❌ Meno prevedibile</li>
+<li>❌ Richiede dati di addestramento</li>
+</ul>
+<h3 id="23-quando-usare-ia-vs-algoritmi-classici">2.3 Quando Usare IA vs Algoritmi Classici</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th><strong>Usa Algoritmo Classico</strong></th>
+<th><strong>Usa IA</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regole chiare e stabili</td>
+<td>Pattern complessi e nascosti</td>
+</tr>
+<tr>
+<td>Comportamento predicibile richiesto</td>
+<td>Adattamento necessario</td>
+</tr>
+<tr>
+<td>Pochi casi da gestire</td>
+<td>Migliaia di varianti possibili</td>
+</tr>
+<tr>
+<td>Esempio: Calcolo IVA</td>
+<td>Esempio: Riconoscimento vocale</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="24-esempio-pratico-comparativo">2.4 Esempio Pratico Comparativo</h3>
+<p><strong>Problema:</strong> Classificare email come spam o non-spam</p>
+<p><strong>Soluzione Algoritmica:</strong></p>
+<pre><code>IF contiene(&quot;viagra&quot;) OR contiene(&quot;vinto&quot;) THEN spam</code></pre>
+<ul>
+<li>Pro: veloce, chiaro</li>
+<li>Contro: facilmente aggirabile, incompleto</li>
+</ul>
+<p><strong>Soluzione IA:</strong></p>
+<pre><code>Addestramento su 100.000 email etichettate
+Modello impara:
+- Pattern linguistici dello spam
+- Strutture sintattiche sospette
+- Combinazioni di parole
+- Metadati (mittente, orario, ecc.)</code></pre>
+<ul>
+<li>Pro: molto più accurato, robusto</li>
+<li>Contro: richiede dati, meno trasparente</li>
+</ul>
+<hr />
+<h2 id="3-storia-e-evoluzione-dellia">3. Storia e Evoluzione dell&#39;IA</h2>
+<h3 id="31-timeline-essenziale">3.1 Timeline Essenziale</h3>
+<pre><code>1950  | Test di Turing - &quot;Can machines think?&quot;
+1956  | Conferenza di Dartmouth - nasce il termine &quot;AI&quot;
+1980s | Sistemi esperti e IA simbolica
+1990s | Machine Learning prende piede
+2012  | Deep Learning vince ImageNet
+2017  | Transformer architecture (base dei LLM)
+2022  | ChatGPT - IA mainstream
+2024  | IA integrata in sviluppo software</code></pre>
+<h3 id="32-le-tre-ondate-dellia">3.2 Le Tre Ondate dell&#39;IA</h3>
+<h4 id="prima-ondata-1950-1980-ia-simbolica"><strong>Prima Ondata (1950-1980): IA Simbolica</strong></h4>
+<ul>
+<li>Basata su logica e regole</li>
+<li>Sistemi esperti</li>
+<li>Limitata a domini ristretti</li>
+</ul>
+<h4 id="seconda-ondata-1980-2010-machine-learning"><strong>Seconda Ondata (1980-2010): Machine Learning</strong></h4>
+<ul>
+<li>Apprendimento da dati</li>
+<li>Algoritmi statistici</li>
+<li>Applicazioni specifiche</li>
+</ul>
+<h4 id="terza-ondata-2010-oggi-deep-learning-e-llm"><strong>Terza Ondata (2010-oggi): Deep Learning e LLM</strong></h4>
+<ul>
+<li>Reti neurali profonde</li>
+<li>Capacità generative</li>
+<li>Applicazioni generaliste</li>
+</ul>
+<h3 id="33-perché-ora">3.3 Perché Ora?</h3>
+<p>L&#39;IA moderna è possibile grazie a tre fattori:</p>
+<ol type="1">
+<li><strong>Big Data</strong>: miliardi di esempi disponibili</li>
+<li><strong>Computing Power</strong>: GPU e cloud computing</li>
+<li><strong>Algoritmi Migliorati</strong>: transformer, attention mechanism</li>
+</ol>
+<hr />
+<h2 id="4-categorie-dellia">4. Categorie dell&#39;IA</h2>
+<h3 id="41-panoramica">4.1 Panoramica</h3>
+<pre><code>Intelligenza Artificiale
+│
+├── IA Simbolica (rule-based)
+│   └── Sistemi esperti, logica
+│
+├── Machine Learning (statistico)
+│   ├── Supervisionato
+│   ├── Non supervisionato
+│   └── Reinforcement Learning
+│
+├── Deep Learning (reti neurali)
+│   ├── Computer Vision
+│   ├── NLP
+│   └── Audio/Speech
+│
+└── IA Generativa (LLM, diffusion models)
+    ├── Modelli linguistici
+    ├── Generazione immagini
+    └── Generazione codice</code></pre>
+<h3 id="42-ia-simbolica">4.2 IA Simbolica</h3>
+<h4 id="cosè"><strong>Cos&#39;è</strong></h4>
+<p>Sistema basato su regole logiche esplicite programmate dall&#39;uomo.</p>
+<h4 id="esempio-sistema-esperto-medico"><strong>Esempio: Sistema Esperto Medico</strong></h4>
+<pre><code>REGOLA 1: SE febbre &gt; 38 E mal_di_gola ALLORA possibile_influenza
+REGOLA 2: SE possibile_influenza E tosse ALLORA consiglia_riposo
+REGOLA 3: SE febbre &gt; 39 ALLORA allerta_medico</code></pre>
+<h4 id="vantaggi"><strong>Vantaggi</strong></h4>
+<ul>
+<li>✅ Trasparente (si capisce perché decide così)</li>
+<li>✅ Verificabile</li>
+<li>✅ Non richiede dati di addestramento</li>
+</ul>
+<h4 id="svantaggi"><strong>Svantaggi</strong></h4>
+<ul>
+<li>❌ Rigido</li>
+<li>❌ Non scala a problemi complessi</li>
+<li>❌ Richiede codifica manuale di tutte le regole</li>
+</ul>
+<h3 id="43-machine-learning">4.3 Machine Learning</h3>
+<h4 id="431-supervised-learning-apprendimento-supervisionato"><strong>4.3.1 Supervised Learning (Apprendimento Supervisionato)</strong></h4>
+<p><strong>Principio:</strong> Impara da esempi etichettati</p>
+<p><strong>Processo:</strong></p>
+<pre><code>INPUT (dati) + LABEL (etichetta corretta)
+        ↓
+   [ADDESTRAMENTO]
+        ↓
+    MODELLO ADDESTRATO
+        ↓
+   Predice label per nuovi dati</code></pre>
+<p><strong>Esempio Pratico: Classificazione Frutti</strong></p>
+<p>Dataset di addestramento:</p>
+<pre><code>Immagine_1: mela rossa, rotonda, 200g → MELA
+Immagine_2: banana gialla, lunga, 150g → BANANA
+Immagine_3: mela verde, rotonda, 180g → MELA
+... (1000 esempi)</code></pre>
+<p>Dopo addestramento:</p>
+<pre><code>Nuova_immagine: oggetto rosso, rotondo, 190g
+Modello predice: MELA (98% confidenza)</code></pre>
+<p><strong>Applicazioni:</strong></p>
+<ul>
+<li>Classificazione email spam</li>
+<li>Diagnosi mediche</li>
+<li>Previsione prezzi</li>
+<li>Riconoscimento immagini</li>
+</ul>
+<h4 id="432-unsupervised-learning-non-supervisionato"><strong>4.3.2 Unsupervised Learning (Non Supervisionato)</strong></h4>
+<p><strong>Principio:</strong> Trova pattern senza etichette</p>
+<p><strong>Esempio: Clustering Clienti</strong></p>
+<pre><code>Dataset: 10.000 clienti con abitudini d&#39;acquisto
+Algoritmo trova automaticamente gruppi:
+
+Gruppo A: Giovani, tech, acquisti online
+Gruppo B: Famiglie, spesa settimanale, negozi fisici
+Gruppo C: Senior, prodotti salute, acquisti sporadici</code></pre>
+<p><strong>Applicazioni:</strong></p>
+<ul>
+<li>Segmentazione mercato</li>
+<li>Rilevamento anomalie</li>
+<li>Compressione dati</li>
+</ul>
+<h4 id="433-reinforcement-learning"><strong>4.3.3 Reinforcement Learning</strong></h4>
+<p><strong>Principio:</strong> Impara per tentativi ed errori con rinforzi</p>
+<p><strong>Esempio: Robot che Impara a Camminare</strong></p>
+<pre><code>Tentativo 1: Cade subito → Ricompensa: -10
+Tentativo 2: 2 passi poi cade → Ricompensa: +5
+Tentativo 3: 10 passi → Ricompensa: +50
+...
+Dopo 1000 tentativi: Cammina stabilmente</code></pre>
+<p><strong>Applicazioni:</strong></p>
+<ul>
+<li>Giochi (AlphaGo, scacchi)</li>
+<li>Robotica</li>
+<li>Auto autonome</li>
+<li>Ottimizzazione processi</li>
+</ul>
+<h3 id="44-deep-learning">4.4 Deep Learning</h3>
+<h4 id="cosè-1"><strong>Cos&#39;è</strong></h4>
+<p>Sottocategoria del ML che usa reti neurali &quot;profonde&quot; (molti strati).</p>
+<h4 id="architettura-base"><strong>Architettura Base</strong></h4>
+<pre><code>INPUT (es. immagine)
+    ↓
+[Layer 1: rileva bordi]
+    ↓
+[Layer 2: rileva forme semplici]
+    ↓
+[Layer 3: rileva parti (occhi, naso)]
+    ↓
+[Layer 4: rileva oggetti completi]
+    ↓
+OUTPUT (es. &quot;gatto&quot; 95%)</code></pre>
+<h4 id="perché-deep"><strong>Perché &quot;Deep&quot;?</strong></h4>
+<ul>
+<li>Molti strati di elaborazione</li>
+<li>Ogni strato apprende rappresentazioni sempre più astratte</li>
+<li>Capacità di gestire problemi molto complessi</li>
+</ul>
+<h4 id="applicazioni-famose"><strong>Applicazioni Famose</strong></h4>
+<ul>
+<li><strong>Computer Vision</strong>: riconoscimento facciale, auto autonome</li>
+<li><strong>NLP</strong>: traduzione, assistenti vocali</li>
+<li><strong>Giochi</strong>: AlphaGo, OpenAI Five</li>
+</ul>
+<h3 id="45-ia-generativa-e-llm">4.5 IA Generativa e LLM</h3>
+<p><strong>Novità:</strong> Non solo classifica/predice, ma <strong>genera</strong> nuovi contenuti.</p>
+<h4 id="tipi"><strong>Tipi:</strong></h4>
+<ul>
+<li><strong>LLM</strong> (Large Language Models): generano testo</li>
+<li><strong>Diffusion Models</strong>: generano immagini (DALL-E, Midjourney)</li>
+<li><strong>Audio/Video</strong>: generano voce, musica, video</li>
+</ul>
+<p>Approfondiremo gli LLM nella prossima sezione.</p>
+<hr />
+<h2 id="5-modelli-linguistici-llm">5. Modelli Linguistici (LLM)</h2>
+<h3 id="51-cosè-un-llm">5.1 Cos&#39;è un LLM</h3>
+<blockquote>
+<p><strong>LLM (Large Language Model)</strong>: Modello di IA addestrato su enormi quantità di testo per comprendere e generare linguaggio naturale.</p>
+</blockquote>
+<p><strong>Esempi:</strong></p>
+<ul>
+<li>GPT-4 (OpenAI)</li>
+<li>Claude (Anthropic)</li>
+<li>Gemini (Google)</li>
+<li>LLaMA (Meta)</li>
+</ul>
+<h3 id="52-come-funziona-un-llm">5.2 Come Funziona un LLM</h3>
+<h4 id="processo-di-addestramento"><strong>Processo di Addestramento</strong></h4>
+<p><strong>Fase 1: Pre-training</strong></p>
+<pre><code>Dataset: Miliardi di pagine web, libri, codice
+Compito: Predire la prossima parola
+
+Esempio:
+Input: &quot;Il gatto è salito sul...&quot;
+Modello impara: probabilmente &quot;tetto&quot; o &quot;divano&quot; o &quot;albero&quot;
+
+Ripetuto trilioni di volte su vari testi</code></pre>
+<p><strong>Fase 2: Fine-tuning</strong></p>
+<pre><code>Addestramento specifico su:
+- Conversazioni di qualità
+- Istruzioni e risposte
+- Feedback umano
+
+Risultato: Modello che segue istruzioni</code></pre>
+<h4 id="generazione-di-testo"><strong>Generazione di Testo</strong></h4>
+<pre><code>Input utente: &quot;Spiega cos&#39;è un array&quot;
+
+Processo interno:
+Token 1: &quot;Un&quot; (probabilità 0.85)
+Token 2: &quot;array&quot; (probabilità 0.92)
+Token 3: &quot;è&quot; (probabilità 0.98)
+Token 4: &quot;una&quot; (probabilità 0.88)
+Token 5: &quot;struttura&quot; (probabilità 0.75)
+... continua token per token
+
+Output: &quot;Un array è una struttura dati che...&quot;</code></pre>
+<p><strong>Caratteristica chiave:</strong> Generazione <strong>probabilistica</strong>, non deterministica.</p>
+<h3 id="53-architettura-transformer">5.3 Architettura Transformer</h3>
+<p>Gli LLM moderni usano l&#39;architettura <strong>Transformer</strong> (2017).</p>
+<h4 id="componenti-chiave"><strong>Componenti Chiave:</strong></h4>
+<p><strong>1. Attention Mechanism</strong></p>
+<pre><code>Permette al modello di &quot;prestare attenzione&quot; a parole rilevanti:
+
+Frase: &quot;Il gatto, che era molto affamato, mangiò&quot;
+Predizione prossima parola:
+- Alta attenzione a: &quot;gatto&quot;, &quot;affamato&quot;
+- Bassa attenzione a: &quot;che&quot;, &quot;era&quot;
+→ Predice: &quot;tutto&quot; o &quot;velocemente&quot;</code></pre>
+<p><strong>2. Positional Encoding</strong></p>
+<ul>
+<li>Codifica la posizione delle parole</li>
+<li>Permette di capire l&#39;ordine</li>
+</ul>
+<p><strong>3. Multi-Head Attention</strong></p>
+<ul>
+<li>Analizza il testo da molteplici prospettive simultaneamente</li>
+</ul>
+<h3 id="54-capacità-e-limiti">5.4 Capacità e Limiti</h3>
+<h4 id="capacità-sorprendenti"><strong>Capacità Sorprendenti</strong></h4>
+<p>✅ <strong>Comprensione Contestuale</strong></p>
+<pre><code>&quot;Banco&quot; in:
+- &quot;Vado in banco&quot; → istituzione finanziaria
+- &quot;Banco di scuola&quot; → mobile
+- &quot;Banco di pesci&quot; → gruppo</code></pre>
+<p>✅ <strong>Ragionamento Base</strong></p>
+<pre><code>Q: &quot;Se ho 3 mele e ne mangio 2, quante ne rimangono?&quot;
+A: &quot;Rimane 1 mela&quot;</code></pre>
+<p>✅ <strong>Generazione Creativa</strong></p>
+<ul>
+<li>Scrittura articoli</li>
+<li>Poesie</li>
+<li>Codice</li>
+</ul>
+<p>✅ <strong>Traduzione</strong></p>
+<ul>
+<li>Multi-lingua</li>
+<li>Mantiene contesto e stile</li>
+</ul>
+<h4 id="limiti-critici"><strong>Limiti Critici</strong></h4>
+<p>❌ <strong>Conoscenza Limitata</strong></p>
+<ul>
+<li>Taglio temporale (knowledge cutoff)</li>
+<li>Non accede a dati in tempo reale</li>
+</ul>
+<p>❌ <strong>No Ragionamento Logico Perfetto</strong></p>
+<pre><code>Problema:
+&quot;Se tutti i gatti sono animali e tutti gli animali respirano,
+allora i gatti respirano?&quot;
+
+LLM: Spesso corretto (ha visto pattern simili)
+Ma: Non fa deduzione logica formale</code></pre>
+<p>❌ <strong>No Comprensione Vera</strong></p>
+<ul>
+<li>Manipola pattern statistici</li>
+<li>Non &quot;capisce&quot; davvero il significato</li>
+</ul>
+<p>❌ <strong>Allucinazioni</strong> (vedi sezione successiva)</p>
+<h3 id="55-tokenizzazione">5.5 Tokenizzazione</h3>
+<p>Prima di essere elaborato, il testo viene spezzato in <strong>token</strong>.</p>
+<h4 id="esempio-di-tokenizzazione"><strong>Esempio di Tokenizzazione</strong></h4>
+<pre><code>Input: &quot;Ciao, come stai?&quot;
+
+Tokenizzazione:
+[&quot;Ciao&quot;, &quot;,&quot;, &quot; come&quot;, &quot; stai&quot;, &quot;?&quot;]
+
+O più granulare:
+[&quot;Ci&quot;, &quot;ao&quot;, &quot;,&quot;, &quot; co&quot;, &quot;me&quot;, &quot; st&quot;, &quot;ai&quot;, &quot;?&quot;]</code></pre>
+<p><strong>Perché è importante:</strong></p>
+<ul>
+<li>LLM lavora sui token, non su parole</li>
+<li>Parole rare possono essere spezzate male</li>
+<li>Lingue diverse hanno tokenizzazione diversa</li>
+</ul>
+<h4 id="limiti-di-token"><strong>Limiti di Token</strong></h4>
+<pre><code>GPT-4: ~8.000 token di contesto
+Claude: ~100.000 token di contesto
+
+Token ≈ 0.75 parole in inglese
+Token ≈ 0.6 parole in italiano</code></pre>
+<h3 id="56-temperatura-e-parametri-di-generazione">5.6 Temperatura e Parametri di Generazione</h3>
+<h4 id="temperatura"><strong>Temperatura</strong></h4>
+<p>Controlla la &quot;creatività&quot; del modello:</p>
+<pre><code>Temperatura = 0:
+Input: &quot;Il cielo è&quot;
+Output: &quot;blu&quot; (sempre la risposta più probabile)
+
+Temperatura = 0.5:
+Output: &quot;blu&quot; o &quot;azzurro&quot; o &quot;sereno&quot; (variazione moderata)
+
+Temperatura = 1.5:
+Output: &quot;costellato&quot; o &quot;infinito&quot; o &quot;rosso al tramonto&quot;
+(alta creatività, ma può essere meno accurato)</code></pre>
+<p><strong>Quando usare:</strong></p>
+<ul>
+<li><strong>Bassa (0-0.3)</strong>: Codice, risposte fattuali, precisione</li>
+<li><strong>Media (0.5-0.8)</strong>: Scrittura creativa con controllo</li>
+<li><strong>Alta (1.0+)</strong>: Brainstorming, creatività massima</li>
+</ul>
+<hr />
+<h2 id="6-limiti-e-rischi-dellia">6. Limiti e Rischi dell&#39;IA</h2>
+<h3 id="61-le-allucinazioni">6.1 Le &quot;Allucinazioni&quot;</h3>
+<blockquote>
+<p><strong>Allucinazione</strong>: Quando l&#39;IA genera informazioni plausibili ma <strong>completamente inventate</strong>.</p>
+</blockquote>
+<h4 id="perché-accade"><strong>Perché Accade</strong></h4>
+<p>L&#39;IA predice la &quot;parola successiva più probabile&quot;, non verifica la verità:</p>
+<pre><code>Prompt: &quot;Chi ha vinto il premio Nobel per la fisica nel 2087?&quot;
+
+Output possibile (ERRATO):
+&quot;Nel 2087 il premio Nobel per la fisica è stato assegnato a 
+Maria Rossi per la sua ricerca sulla fusione fredda.&quot;
+
+Perché: Struttura plausibile, ma anno futuro → inventato</code></pre>
+<h4 id="esempi-reali-di-allucinazioni"><strong>Esempi Reali di Allucinazioni</strong></h4>
+<p><strong>Caso 1: Citazioni Inventate</strong></p>
+<pre><code>Prompt: &quot;Cita una frase famosa di Einstein sulla programmazione&quot;
+Output: &quot;Come disse Einstein: &#39;Il codice è la lingua dell&#39;universo&#39;&quot;
+
+Verità: Einstein non ha mai detto questo</code></pre>
+<p><strong>Caso 2: Funzioni Inesistenti</strong></p>
+<pre><code>Prompt: &quot;Scrivi codice C per invertire una stringa&quot;
+Output include: strreverse(str);
+
+Problema: strreverse() non esiste nella libreria standard C</code></pre>
+<p><strong>Caso 3: Dati Statistici Inventati</strong></p>
+<pre><code>Prompt: &quot;Quanti studenti ITS si sono diplomati in Italia nel 2023?&quot;
+Output: &quot;Nel 2023 si sono diplomati 45.732 studenti ITS&quot;
+
+Problema: Numero inventato, sembra specifico ma è falso</code></pre>
+<h4 id="come-difendersi-dalle-allucinazioni"><strong>Come Difendersi dalle Allucinazioni</strong></h4>
+<p>✅ <strong>Verifica sempre informazioni critiche</strong></p>
+<pre><code>Fonti verificabili:
+- Documentazione ufficiale
+- Paper scientifici
+- Statistiche governative</code></pre>
+<p>✅ <strong>Chiedi le fonti</strong></p>
+<pre><code>Prompt: &quot;Da dove hai questa informazione? Cita le fonti.&quot;</code></pre>
+<p>✅ <strong>Usa per brainstorming, non per fatti</strong></p>
+<p>✅ <strong>Testa il codice generato</strong></p>
+<pre><code>SEMPRE compilare e testare il codice,
+mai assumere che funzioni</code></pre>
+<h3 id="62-bias-nei-dati">6.2 Bias nei Dati</h3>
+<h4 id="cosè-il-bias"><strong>Cos&#39;è il Bias</strong></h4>
+<p>Pregiudizi presenti nei dati di addestramento che influenzano le predizioni.</p>
+<h4 id="esempi-di-bias"><strong>Esempi di Bias</strong></h4>
+<p><strong>Bias di Genere</strong></p>
+<pre><code>Input: &quot;Il dottore ha visitato il paziente. Poi ___ ha prescritto&quot;
+Output comune: &quot;lui ha prescritto&quot;
+
+Causa: Nei dati di addestramento &quot;dottore&quot; è più spesso 
+associato a pronomi maschili</code></pre>
+<p><strong>Bias Geografico/Culturale</strong></p>
+<pre><code>Input: &quot;Descrivi una tipica casa&quot;
+Output: Spesso descrive case occidentali/americane
+
+Causa: Sovrarappresentazione di contenuti USA/Europa</code></pre>
+<p><strong>Bias Linguistico</strong></p>
+<pre><code>Modelli funzionano meglio in inglese che in altre lingue
+
+Causa: Più dati di addestramento in inglese</code></pre>
+<h4 id="impatto-nel-vostro-contesto"><strong>Impatto nel Vostro Contesto</strong></h4>
+<pre><code>Sviluppo su microcontrollori:
+- IA può suggerire librerie più comuni su Arduino Uno
+- Ma il vostro progetto usa STM32
+→ Suggerimenti meno utili
+
+Contesto italiano:
+- Normative CEI vs NEC (americana)
+- IA può dare informazioni non applicabili</code></pre>
+<h3 id="63-controllabilità-e-sicurezza">6.3 Controllabilità e Sicurezza</h3>
+<h4 id="problema-della-controllabilità"><strong>Problema della Controllabilità</strong></h4>
+<p>❌ <strong>Non puoi garantire l&#39;output</strong></p>
+<pre><code>Stesso prompt, esecuzioni diverse:
+Run 1: Codice corretto
+Run 2: Codice con bug sottile
+Run 3: Codice inefficiente</code></pre>
+<p>❌ <strong>Difficile prevenire comportamenti indesiderati</strong></p>
+<pre><code>Jailbreak attempts:
+Utente trova modi creativi di far generare contenuti proibiti</code></pre>
+<h4 id="rischi-di-sicurezza"><strong>Rischi di Sicurezza</strong></h4>
+<p><strong>1. Code Injection</strong></p>
+<pre><code>Prompt malintenzionato:
+&quot;Genera codice che legge file utente e invia a server esterno&quot;
+
+IA potrebbe generare codice dannoso se non supervisionata</code></pre>
+<p><strong>2. Esposizione Dati Sensibili</strong></p>
+<pre><code>Rischio: Inserire nel prompt dati privati
+
+❌ &quot;Ecco il database dei nostri clienti [dati], analizzalo&quot;
+→ Dati potrebbero essere usati per ri-addestramento</code></pre>
+<p><strong>3. Dipendenza Eccessiva</strong></p>
+<pre><code>Sviluppatore si affida ciecamente all&#39;IA
+→ Non capisce il codice generato
+→ Non identifica vulnerabilità
+→ Sistema non sicuro</code></pre>
+<h3 id="64-problemi-etici">6.4 Problemi Etici</h3>
+<h4 id="proprietà-intellettuale"><strong>Proprietà Intellettuale</strong></h4>
+<pre><code>Domanda: Chi possiede il codice generato dall&#39;IA?
+- L&#39;utente che ha fatto il prompt?
+- La compagnia che ha creato l&#39;IA?
+- Nessuno (pubblico dominio)?
+
+Attualmente: Area grigia legale</code></pre>
+<h4 id="sostituzione-lavorativa"><strong>Sostituzione Lavorativa</strong></h4>
+<ul>
+<li>IA assiste ma non (ancora) sostituisce completamente</li>
+<li>Cambiano le competenze richieste</li>
+<li>Importante: Imparare a lavorare CON l&#39;IA</li>
+</ul>
+<h4 id="impatto-ambientale"><strong>Impatto Ambientale</strong></h4>
+<pre><code>Addestramento di un LLM grande:
+- Consuma energia equivalente a ~5 auto durante vita intera
+- Emissioni CO2 significative
+
+Uso continuo:
+- Server farm
+- Raffreddamento</code></pre>
+<h3 id="65-linee-guida-per-uso-responsabile">6.5 Linee Guida per Uso Responsabile</h3>
+<h4 id="white_check_mark-do---fai"><strong>✅ DO - Fai</strong></h4>
+<pre><code>✅ Verifica sempre gli output critici
+✅ Usa IA come assistente, non sostituto
+✅ Testa il codice generato
+✅ Mantieni competenze tecniche proprie
+✅ Sii critico e scettico
+✅ Proteggi dati sensibili
+✅ Cita quando usi contenuti generati da IA</code></pre>
+<h4 id="x-dont---non-fare"><strong>❌ DON&#39;T - Non Fare</strong></h4>
+<pre><code>❌ Fidarsi ciecamente dell&#39;output
+❌ Inserire dati confidenziali nei prompt
+❌ Usare codice senza capirlo
+❌ Assumere che sia sempre corretto
+❌ Dipendere completamente dall&#39;IA
+❌ Ignorare licenze e copyright</code></pre>
+<hr />
+<h2 id="7-applicazioni-in-ambito-its">7. Applicazioni in Ambito ITS</h2>
+<h3 id="71-industry-40">7.1 Industry 4.0</h3>
+<h4 id="manutenzione-predittiva"><strong>Manutenzione Predittiva</strong></h4>
+<p><strong>Scenario:</strong> Linea produzione con macchinari industriali</p>
+<p><strong>Senza IA:</strong></p>
+<pre><code>Manutenzione programmata ogni X ore
+→ Possibili fermi imprevisti
+→ Manutenzione prematura (spreco)</code></pre>
+<p><strong>Con IA:</strong></p>
+<pre><code>Sensori raccolgono:
+- Vibrazioni
+- Temperature
+- Consumi energetici
+- Audio (rumore macchinario)
+
+Modello ML addestrato su:
+- Dati storici di guasti
+- Segnali pre-guasto
+
+Output:
+&quot;Cuscinetto motore 3 degradato, previsto guasto in 48-72h&quot;
+→ Manutenzione pianificata
+→ Evitato fermo produzione</code></pre>
+<p><strong>Vantaggi Reali:</strong></p>
+<ul>
+<li>Riduzione downtime: 30-50%</li>
+<li>Costi manutenzione: -20-30%</li>
+<li>Vita utile macchinari: +20%</li>
+</ul>
+<h4 id="controllo-qualità-automatizzato"><strong>Controllo Qualità Automatizzato</strong></h4>
+<p><strong>Applicazione: Computer Vision per Difetti</strong></p>
+<pre><code>Sistema di ispezione visiva:
+
+Camera ad alta risoluzione → Immagine prodotto
+                ↓
+    [Modello Deep Learning]
+                ↓
+Classificazione: OK / DIFETTO
+
+Tipi di difetti rilevabili:
+- Graffi superficiali
+- Cricche
+- Dimensioni non conformi
+- Colori sbagliati
+- Assemblaggi mancanti</code></pre>
+<p><strong>Prestazioni:</strong></p>
+<ul>
+<li>Velocità: 1000+ pezzi/ora</li>
+<li>Accuratezza: &gt;99.5%</li>
+<li>Costo: Ridotto dopo ammortamento iniziale</li>
+</ul>
+<h3 id="72-automotive-e-adas">7.2 Automotive e ADAS</h3>
+<h4 id="adas-advanced-driver-assistance-systems"><strong>ADAS (Advanced Driver Assistance Systems)</strong></h4>
+<p><strong>Sistemi Attivi nei Veicoli Moderni:</strong></p>
+<pre><code>1. Lane Keeping Assist
+   Camera → CV → Detect lane lines → Steering correction
+
+2. Adaptive Cruise Control
+   Radar → Detect vehicle ahead → Adjust speed
+
+3. Automatic Emergency Braking
+   Camera + Radar → Detect obstacle → Brake
+
+4. Traffic Sign Recognition
+   Camera → CV + LLM → Read signs → Display info</code></pre>
+<h4 id="sensori-e-fusione-dati"><strong>Sensori e Fusione Dati</strong></h4>
+<pre><code>Auto moderna tipica:
+
+- 8-12 telecamere
+- 4-6 radar
+- 2-4 LiDAR
+- Sensori ultrasuoni (12+)
+- GPS/IMU
+
+IA fonde tutti i dati per:
+- Mappa 3D ambiente
+- Predizione traiettorie altri veicoli
+- Decisioni guida</code></pre>
+<h4 id="sfide-tecniche"><strong>Sfide Tecniche</strong></h4>
+<pre><code>Real-time processing:
+- Decisioni in &lt;100ms
+- Affidabilità &gt;99.9999%
+- Funzionamento in condizioni difficili (pioggia, notte)
+
+Safety-critical:
+- Certificazioni rigorose
+- Fallback systems
+- Testing estensivo</code></pre>
+<h3 id="73-sistemi-embedded">7.3 Sistemi Embedded</h3>
+<h4 id="inferenza-su-microcontrollori"><strong>Inferenza su Microcontrollori</strong></h4>
+<p><strong>Trend:</strong> Portare IA direttamente su MCU</p>
+<p><strong>Esempio: Keyword Spotting</strong></p>
+<pre><code>Microcontrollore: STM32H7 (ARM Cortex-M7)
+Task: Riconoscere parola &quot;Arduino&quot;
+
+1. Microfono cattura audio
+2. Pre-processing (FFT)
+3. Rete neurale tiny (50KB)
+4. Output: &quot;Arduino detected&quot; o &quot;No&quot;
+
+Tutto su chip, no cloud!</code></pre>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>Latenza: &lt;50ms</li>
+<li>Privacy: dati non escono dal device</li>
+<li>Costi: no connettività necessaria</li>
+<li>Energia: basso consumo</li>
+</ul>
+<h4 id="tinyml---machine-learning-su-embedded"><strong>TinyML - Machine Learning su Embedded</strong></h4>
+<p><strong>Frameworks Popolari:</strong></p>
+<pre><code>- TensorFlow Lite Micro
+- Edge Impulse
+- STM32Cube.AI
+- Arduino ML
+
+Permettono di:
+1. Addestrare modello su PC
+2. Ottimizzare per MCU
+3. Deployare su hardware embedded</code></pre>
+<p><strong>Casi D&#39;Uso Reali:</strong></p>
+<pre><code>1. Predictive Maintenance IoT
+   - Sensore vibrazioni
+   - Modello tiny su MCU
+   - Alert quando pattern anomalo
+
+2. Gesture Recognition
+   - Accelerometro
+   - Rileva gesti utente
+   - Controllo dispositivi
+
+3. Audio Event Detection
+   - Microfono
+   - Riconosce suoni (vetro rotto, allarmi)
+   - Sistema sicurezza</code></pre>
+<h4 id="vincoli-e-ottimizzazioni"><strong>Vincoli e Ottimizzazioni</strong></h4>
+<pre><code>Tipico MCU embedded:
+- RAM: 256KB - 2MB
+- Flash: 512KB - 2MB
+- Clock: 80-400 MHz
+- No FPU in alcuni casi
+
+Tecniche di ottimizzazione:
+- Quantizzazione (float32 → int8)
+- Pruning (rimozione neuroni poco utili)
+- Knowledge distillation
+- Architetture efficienti (MobileNet)
+
+Risultato:
+Modello da 50MB → 50KB (1000x più piccolo!)
+Con perdita accuratezza &lt; 2%</code></pre>
+<h3 id="74-programmazione-assistita-preview-moduli-2-4">7.4 Programmazione Assistita (Preview Moduli 2-4)</h3>
+<h4 id="code-generation"><strong>Code Generation</strong></h4>
+<pre><code>Prompt: &quot;Scrivi funzione C per media mobile su 10 campioni&quot;
+
+IA genera:
+- Struttura dati (array circolare)
+- Funzione di inserimento
+- Calcolo media
+- Gestione edge cases
+
+Programmatore:
+- Verifica correttezza
+- Adatta a specifiche di progetto
+- Testa</code></pre>
+<p><strong>Benefici:</strong></p>
+<ul>
+<li>Velocità: +30-50% produttività</li>
+<li>Qualità: meno errori sintattici</li>
+<li>Learning: vedi esempi di codice buono</li>
+</ul>
+<p><strong>Attenzione:</strong></p>
+<ul>
+<li>Sempre validare</li>
+<li>IA non conosce il tuo hardware specifico</li>
+<li>Possibili funzioni non standard</li>
+</ul>
+<h3 id="75-iot-e-smart-devices">7.5 IoT e Smart Devices</h3>
+<h4 id="natural-language-interface"><strong>Natural Language Interface</strong></h4>
+<pre><code>Dispositivo IoT smart:
+
+Utente: &quot;Accendi la luce in cucina&quot;
+    ↓
+[LLM cloud o edge] → Parse intent
+    ↓
+{
+  action: &quot;turn_on&quot;,
+  device: &quot;light&quot;,
+  location: &quot;kitchen&quot;
+}
+    ↓
+API call → Luce accesa</code></pre>
+<h4 id="analisi-dati-sensori"><strong>Analisi Dati Sensori</strong></h4>
+<pre><code>Smart Building:
+- 1000 sensori (temp, umidità, CO2, presenza)
+- Stream dati continuo
+
+IA:
+- Pattern detection: Anomalie
+- Optimization: HVAC efficiente
+- Prediction: Necessità manutenzione
+
+Risultato:
+- Energia: -30%
+- Comfort: +20%
+- Costi: -25%</code></pre>
+<hr />
+<h2 id="8-casi-studio-pratici">8. Casi Studio Pratici</h2>
+<h3 id="81-caso-studio-classificazione-anomalie-motori">8.1 Caso Studio: Classificazione Anomalie Motori</h3>
+<h4 id="contesto"><strong>Contesto</strong></h4>
+<p>Azienda manifatturiera con 50 motori elettrici in produzione. Obiettivo: prevenire guasti costosi.</p>
+<h4 id="soluzione-tradizionale"><strong>Soluzione Tradizionale</strong></h4>
+<pre><code>Manutenzione ogni 1000h di funzionamento
+Costo annuo: €50.000
+Downtime imprevisti: 3-5 all&#39;anno (€20k cad)</code></pre>
+<h4 id="soluzione-con-ia"><strong>Soluzione con IA</strong></h4>
+<p><strong>Step 1: Raccolta Dati</strong></p>
+<pre><code>Sensori installati:
+- Accelerometro 3-assi
+- Microfono
+- Temperatura cuscinetti
+- Corrente assorbita
+
+Frequenza campionamento: 10kHz (vibrazioni), 1Hz (altri)
+Durata raccolta: 6 mesi (fase normale + alcuni guasti)</code></pre>
+<p><strong>Step 2: Labeling</strong></p>
+<pre><code>Dati etichettati da esperti:
+- 85% funzionamento normale
+- 10% stato degradato
+- 5% pre-guasto
+
+Feature engineering:
+- FFT dello spettro vibrazioni
+- RMS vibrazioni
+- Picchi spettrali
+- Temperatura trend</code></pre>
+<p><strong>Step 3: Training</strong></p>
+<pre><code>Modello: Random Forest Classifier
+Split: 70% training, 15% validation, 15% test
+
+Accuracy: 94%
+False Negative Rate: 2% (accettabile)
+False Positive Rate: 5%</code></pre>
+<p><strong>Step 4: Deployment</strong></p>
+<pre><code>Edge device: Raspberry Pi per ogni motore
+Inferenza: Ogni 30 secondi
+Output: 
+- Verde: OK
+- Giallo: Monitorare
+- Rosso: Manutenzione urgente
+
+Dashboard centrale con alert</code></pre>
+<h4 id="risultati-dopo-1-anno"><strong>Risultati Dopo 1 Anno</strong></h4>
+<pre><code>✅ Downtime imprevisti: 0
+✅ Costo manutenzione: -40%
+✅ Vita utile motori: +15%
+✅ ROI: 8 mesi
+
+❌ False alarm: 1-2 al mese (gestibili)
+❌ Costo iniziale: €80k (sensori + software + training)</code></pre>
+<h4 id="lezioni-apprese"><strong>Lezioni Apprese</strong></h4>
+<pre><code>1. Dati di qualità fondamentali
+   - 6 mesi di raccolta necessari
+   - Importante avere esempi di guasti
+
+2. Domain expertise essenziale
+   - Ingegneri meccanici + data scientists
+   - Feature engineering guidata da fisica
+
+3. Edge computing preferibile
+   - Latenza bassa
+   - Privacy
+   - Funziona anche senza rete
+
+4. Manutenzione del modello
+   - Re-training trimestrale
+   - Drift detection (performance decade)</code></pre>
+<h3 id="82-caso-studio-ia-su-microcontrollore-per-wake-word">8.2 Caso Studio: IA su Microcontrollore per Wake Word</h3>
+<h4 id="contesto-1"><strong>Contesto</strong></h4>
+<p>Sviluppare dispositivo IoT che si attiva alla parola &quot;Ciao Arduino&quot;.</p>
+<h4 id="requisiti"><strong>Requisiti</strong></h4>
+<pre><code>- MCU: STM32F746 (ARM Cortex-M7, 216MHz)
+- RAM disponibile: 256KB
+- Flash disponibile: 512KB per modello
+- Latenza max: 200ms
+- Consumo: &lt;50mW in listening mode
+- Accuracy: &gt;95%</code></pre>
+<h4 id="approccio-tradizionale-impossibile"><strong>Approccio Tradizionale (Impossibile)</strong></h4>
+<pre><code>Modello speech recognition standard:
+- Size: 500MB+
+- Richiede GPU
+- Latenza: ~100ms su desktop
+
+→ Non applicabile su MCU</code></pre>
+<h4 id="soluzione-tinyml"><strong>Soluzione TinyML</strong></h4>
+<p><strong>Step 1: Dataset</strong></p>
+<pre><code>Raccolta:
+- 5000 clip &quot;Ciao Arduino&quot; (varie voci, accenti)
+- 10000 clip altre parole/rumori
+- Durata clip: 1 secondo cad
+
+Augmentation:
+- Variazione velocità
+- Background noise
+- Riverbero
+
+Dataset finale: 30k esempi</code></pre>
+<p><strong>Step 2: Feature Extraction</strong></p>
+<pre><code>Audio raw (16kHz) → MFCC (Mel-Frequency Cepstral Coefficients)
+
+Vantaggi MFCC:
+- Riduce dimensionalità (16kHz → 13 coefficienti)
+- Robusto a variazioni speaker
+- Compatibile con ML
+
+Window: 30ms, overlap 10ms
+Output: Matrice 13x40 per ogni secondo</code></pre>
+<p><strong>Step 3: Model Architecture</strong></p>
+<pre><code>Tiny CNN:
+
+Input: 13x40 MFCC
+  ↓
+Conv2D (8 filters, 3x3) + ReLU
+  ↓
+MaxPool (2x2)
+  ↓
+Conv2D (16 filters, 3x3) + ReLU
+  ↓
+MaxPool (2x2)
+  ↓
+Flatten
+  ↓
+Dense (32) + ReLU
+  ↓
+Dense (2) + Softmax
+  ↓
+Output: [P(target), P(non-target)]
+
+Totale parametri: ~8.500</code></pre>
+<p><strong>Step 4: Training</strong></p>
+<pre><code>Framework: TensorFlow/Keras
+Epochs: 50
+Batch size: 32
+Optimizer: Adam
+
+Validation accuracy: 96.5%</code></pre>
+<p><strong>Step 5: Quantization</strong></p>
+<pre><code>Post-training quantization:
+Float32 → Int8
+
+Dimensione modello:
+Prima: 34KB (float32)
+Dopo: 9KB (int8)
+
+Accuracy loss: 0.5% (accettabile)</code></pre>
+<p><strong>Step 6: Deployment su STM32</strong></p>
+<pre><code>Tool: STM32Cube.AI
+
+Conversione Keras → C code
+Integrazione in firmware
+
+Memory footprint:
+- Modello: 9KB Flash
+- Working buffers: 45KB RAM
+- Totale: ben dentro limiti
+
+Inference time: 85ms
+Power: 42mW (ottimo!)</code></pre>
+<h4 id="testing-sul-campo"><strong>Testing sul Campo</strong></h4>
+<pre><code>Test su 100 utenti diversi:
+- True Positive Rate: 94%
+- False Positive Rate: 2/hour
+- Funziona con accenti regionali
+- Resiliente a rumore moderato
+
+Criticità identificate:
+- Performance degrada in ambienti molto rumorosi
+- Alcuni accenti stranieri problematici
+→ Raccolti più dati per re-training</code></pre>
+<h4 id="conclusioni-tecniche"><strong>Conclusioni Tecniche</strong></h4>
+<pre><code>✅ IA su MCU è fattibile per task mirati
+✅ Ottimizzazione cruciale (quantization, pruning)
+✅ Trade-off accuracy vs. size gestibile
+✅ Consumo energetico molto basso
+
+❌ Limiti:
+  - Solo task semplici
+  - Richiede expertise ML + embedded
+  - Dataset quality fondamentale</code></pre>
+<h3 id="83-caso-studio-code-generation-assistita">8.3 Caso Studio: Code Generation Assistita</h3>
+<h4 id="scenario"><strong>Scenario</strong></h4>
+<p>Studente ITS deve implementare algoritmo PID per controllo motore.</p>
+<h4 id="approccio-manuale-tradizionale"><strong>Approccio Manuale (Tradizionale)</strong></h4>
+<pre><code>Tempo stimato: 4-6 ore
+
+Step:
+1. Ricerca teoria PID (1h)
+2. Comprensione equazioni (1h)
+3. Scrittura codice C (2h)
+4. Debug (1-2h)
+5. Tuning parametri (variabile)
+
+Problemi comuni:
+- Errori implementazione integrale (wind-up)
+- Discrete vs continuous
+- Overflow variabili</code></pre>
+<h4 id="approccio-con-ia-assistita"><strong>Approccio con IA Assistita</strong></h4>
+<p><strong>Iterazione 1: Prompt Base</strong></p>
+<pre><code>Prompt: &quot;Scrivi funzione PID in C&quot;
+
+Output IA:
+float pid_controller(float setpoint, float measurement) {
+    float error = setpoint - measurement;
+    integral += error;
+    float derivative = error - previous_error;
+    previous_error = error;
+    return Kp * error + Ki * integral + Kd * derivative;
+}</code></pre>
+<p><strong>Analisi Output:</strong></p>
+<pre><code>❌ Variabili globali non dichiarate
+❌ No anti-windup per integrale
+❌ No limite output
+❌ No gestione tempo di campionamento
+❌ Coefficienti hardcoded
+
+Voto: 4/10 - Non usabile in produzione</code></pre>
+<p><strong>Iterazione 2: Prompt Migliorato</strong></p>
+<pre><code>Prompt:
+&quot;Scrivi in standard C99 una funzione PID controller con:
+- Struttura dati per stato interno
+- Anti-windup per integrale
+- Saturazione output tra min e max
+- Gestione corretta del tempo di campionamento dt
+- Commenti esplicativi
+- Funzione di inizializzazione separata&quot;
+
+Output IA: [codice significativamente migliore]
+
+typedef struct {
+    float Kp, Ki, Kd;
+    float integral;
+    float prev_error;
+    float out_min, out_max;
+} PIDController;
+
+void pid_init(PIDController *pid, float kp, float ki, float kd, 
+              float out_min, float out_max) {
+    pid-&gt;Kp = kp;
+    pid-&gt;Ki = ki;
+    pid-&gt;Kd = kd;
+    pid-&gt;integral = 0.0f;
+    pid-&gt;prev_error = 0.0f;
+    pid-&gt;out_min = out_min;
+    pid-&gt;out_max = out_max;
+}
+
+float pid_compute(PIDController *pid, float setpoint, 
+                  float measurement, float dt) {
+    float error = setpoint - measurement;
+    
+    // Termine proporzionale
+    float P = pid-&gt;Kp * error;
+    
+    // Termine integrale con anti-windup
+    pid-&gt;integral += error * dt;
+    float I = pid-&gt;Ki * pid-&gt;integral;
+    
+    // Termine derivativo
+    float derivative = (error - pid-&gt;prev_error) / dt;
+    float D = pid-&gt;Kd * derivative;
+    
+    // Output totale
+    float output = P + I + D;
+    
+    // Saturazione
+    if (output &gt; pid-&gt;out_max) {
+        output = pid-&gt;out_max;
+        // Anti-windup: non accumulare se saturo
+        pid-&gt;integral -= error * dt;
+    } else if (output &lt; pid-&gt;out_min) {
+        output = pid-&gt;out_min;
+        pid-&gt;integral -= error * dt;
+    }
+    
+    pid-&gt;prev_error = error;
+    return output;
+}</code></pre>
+<p><strong>Analisi Output 2:</strong></p>
+<pre><code>✅ Struttura dati appropriata
+✅ Separazione inizializzazione/compute
+✅ Anti-windup implementato
+✅ Saturazione output
+✅ Gestione dt corretta
+✅ Codice commentato
+
+⚠️ Da verificare:
+- Comportamento su reset (prev_error)
+- Gestione dt = 0
+- Test su valori reali
+
+Voto: 8/10 - Buona base, richiede validazione</code></pre>
+<p><strong>Iterazione 3: Testing</strong></p>
+<pre><code>Prompt: &quot;Genera funzione di test per questo PID controller 
+con vari scenari: step response, rampa, disturbi&quot;
+
+Output IA: [genera test cases]
+
+Test identificano:
+- Bug: derivative kick su cambio setpoint
+  (risolto salvando measurement invece di error)
+- Performance buona su step
+- Overshoot da parametri da tunare
+
+Totale tempo con IA: 1.5 ore
+- 30min prompt + iterazioni
+- 45min comprensione codice generato
+- 15min testing e fix</code></pre>
+<h4 id="confronto-finale"><strong>Confronto Finale</strong></h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Metodo</th>
+<th>Tempo</th>
+<th>Qualità</th>
+<th>Apprendimento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manuale</td>
+<td>4-6h</td>
+<td>Alta (se esperti)</td>
+<td>Alto</td>
+</tr>
+<tr>
+<td>IA Assistita</td>
+<td>1.5h</td>
+<td>Alta (dopo validazione)</td>
+<td>Medio-Alto</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Conclusioni:</strong></p>
+<pre><code>✅ IA accelera significativamente
+✅ Permette focus su comprensione vs. sintassi
+✅ Output richiede sempre validazione critica
+❌ Non sostituisce competenza tecnica</code></pre>
+<hr />
+<h2 id="9-esercizi-e-autovalutazione">9. Esercizi e Autovalutazione</h2>
+<h3 id="91-quiz-teorico">9.1 Quiz Teorico</h3>
+<h4 id="domanda-1-definizioni-base"><strong>Domanda 1: Definizioni Base</strong></h4>
+<p>Quale delle seguenti affermazioni è corretta?</p>
+<p>A) L&#39;IA può risolvere solo problemi per cui esistono regole esplicite<br />
+B) L&#39;IA apprende pattern da dati e può generalizzare a nuove situazioni<br />
+C) L&#39;IA ha sempre ragione perché basata su matematica<br />
+D) L&#39;IA può funzionare senza dati di addestramento</p>
+<details>
+<summary>Risposta</summary>
+B) Corretta. L&#39;IA apprende da dati e generalizza.
+</details>
+
+<h4 id="domanda-2-categorie-ia"><strong>Domanda 2: Categorie IA</strong></h4>
+<p>Quale tecnica useresti per raggruppare clienti con comportamenti simili senza etichette predefinite?</p>
+<p>A) Supervised Learning<br />
+B) Reinforcement Learning<br />
+C) Unsupervised Learning (Clustering)<br />
+D) Rule-based system</p>
+<details>
+<summary>Risposta</summary>
+C) Unsupervised Learning - perfetto per clustering senza etichette.
+</details>
+
+<h4 id="domanda-3-llm"><strong>Domanda 3: LLM</strong></h4>
+<p>Come genera testo un Large Language Model?</p>
+<p>A) Cerca nel database e copia frasi esistenti<br />
+B) Ragiona logicamente come un umano<br />
+C) Predice token successivi basandosi su probabilità<br />
+D) Usa regole grammaticali programmate</p>
+<details>
+<summary>Risposta</summary>
+C) Corretta. LLM predice token per token probabilisticamente.
+</details>
+
+<h4 id="domanda-4-allucinazioni"><strong>Domanda 4: Allucinazioni</strong></h4>
+<p>Cos&#39;è un&#39;allucinazione in un LLM?</p>
+<p>A) Un errore di connessione<br />
+B) Informazione plausibile ma inventata<br />
+C) Risposta troppo lunga<br />
+D) Errore di sintassi</p>
+<details>
+<summary>Risposta</summary>
+B) L&#39;LLM genera contenuti che sembrano veri ma sono inventati.
+</details>
+
+<h4 id="domanda-5-applicazioni"><strong>Domanda 5: Applicazioni</strong></h4>
+<p>Quale NON è un&#39;applicazione tipica di Deep Learning?</p>
+<p>A) Riconoscimento immagini<br />
+B) Calcolo di radice quadrata<br />
+C) Traduzione automatica<br />
+D) Riconoscimento vocale</p>
+<details>
+<summary>Risposta</summary>
+B) La radice quadrata si calcola con algoritmi classici, non serve DL.
+</details>
+
+<h3 id="92-esercizio-pratico-1-classificazione-applicazioni">9.2 Esercizio Pratico 1: Classificazione Applicazioni</h3>
+<p><strong>Istruzioni:</strong> Per ogni scenario, indica quale tipo di IA è più appropriato.</p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>IA Simbolica</th>
+<th>ML Supervisionato</th>
+<th>ML Non Super.</th>
+<th>Reinforcement</th>
+<th>Deep Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Diagnosi medica da sintomi predefiniti</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2. Riconoscimento facciale da foto</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>3. Robot che impara a camminare</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>4. Segmentazione clienti senza categorie note</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+<tr>
+<td>5. Previsione prezzi case da caratteristiche</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Soluzioni</summary>
+
+<ol type="1">
+<li><strong>IA Simbolica</strong> o ML Supervisionato (dipende dalla complessità)</li>
+<li><strong>Deep Learning</strong> (Computer Vision)</li>
+<li><strong>Reinforcement Learning</strong></li>
+<li><strong>ML Non Supervisionato</strong> (Clustering)</li>
+<li><strong>ML Supervisionato</strong> (Regressione)</li>
+</ol>
+</details>
+
+<h3 id="93-esercizio-pratico-2-analisi-critica-output-ia">9.3 Esercizio Pratico 2: Analisi Critica Output IA</h3>
+<p><strong>Scenario:</strong> Hai chiesto a un LLM di spiegarti cos&#39;è un microcontrollore. Ecco la risposta:</p>
+<pre><code>&quot;Un microcontrollore è un chip che contiene CPU, RAM e periferiche.
+Il più famoso è l&#39;Arduino Mega2560 che ha una CPU a 32-bit e 512MB di RAM.
+Viene usato principalmente nei supercomputer per calcoli complessi.
+La sua invenzione nel 2015 da parte di Steve Jobs ha rivoluzionato l&#39;IoT.&quot;</code></pre>
+<p><strong>Compito:</strong></p>
+<ol type="1">
+<li>Identifica tutte le affermazioni errate</li>
+<li>Spiega perché sono errate</li>
+<li>Fornisci le informazioni corrette</li>
+</ol>
+<details>
+<summary>Soluzione</summary>
+
+<p><strong>Errori identificati:</strong></p>
+<ol type="1">
+<li><p><strong>&quot;Arduino Mega2560 ha CPU a 32-bit&quot;</strong></p>
+<ul>
+<li>FALSO: Ha CPU 8-bit (ATmega2560)</li>
+</ul></li>
+<li><p><strong>&quot;512MB di RAM&quot;</strong></p>
+<ul>
+<li>FALSO: Ha solo 8KB di SRAM</li>
+</ul></li>
+<li><p><strong>&quot;Usato nei supercomputer&quot;</strong></p>
+<ul>
+<li>FALSO: Usati in sistemi embedded, non supercomputer</li>
+</ul></li>
+<li><p><strong>&quot;Invenzione nel 2015 da Steve Jobs&quot;</strong></p>
+<ul>
+<li>FALSO: Microcontrollori esistono dagli anni &#39;70; Jobs non li ha inventati; Arduino nasce nel 2005</li>
+</ul></li>
+</ol>
+<p><strong>Tipo di errori:</strong> Allucinazioni tipiche (numeri plausibili ma sbagliati, associazioni errate)</p>
+</details>
+
+<h3 id="94-esercizio-pratico-3-progettazione-sistema-ia">9.4 Esercizio Pratico 3: Progettazione Sistema IA</h3>
+<p><strong>Scenario:</strong> Sei stato incaricato di progettare un sistema per rilevare difetti su pannelli solari in una fabbrica.</p>
+<p><strong>Dati disponibili:</strong></p>
+<ul>
+<li>10.000 immagini di pannelli OK</li>
+<li>500 immagini di pannelli con difetti (vari tipi)</li>
+<li>Camera industriale 12MP</li>
+<li>Server on-premise con GPU</li>
+</ul>
+<p><strong>Compiti:</strong></p>
+<ol type="1">
+<li>Scegli la categoria di IA più appropriata</li>
+<li>Giustifica la scelta</li>
+<li>Descrivi il pipeline di lavoro</li>
+<li>Identifica almeno 3 sfide potenziali</li>
+</ol>
+<details>
+<summary>Soluzione Esempio</summary>
+
+<p><strong>1. Categoria:</strong> Deep Learning (Computer Vision) - Supervised Learning</p>
+<p><strong>2. Giustificazione:</strong></p>
+<ul>
+<li>Problema di classificazione immagini</li>
+<li>Dataset etichettato disponibile</li>
+<li>Pattern visivi complessi</li>
+<li>Deep Learning eccelle in questo tipo di task</li>
+</ul>
+<p><strong>3. Pipeline:</strong></p>
+<pre><code>1. Pre-processing:
+   - Resize immagini a 512x512
+   - Normalizzazione pixel values
+   - Data augmentation (rotazioni, flip, variazioni luce)
+
+2. Model Architecture:
+   - CNN (es. ResNet-50 modificato)
+   - Output: OK / DIFETTO + confidence
+
+3. Training:
+   - Split: 70% train, 15% validation, 15% test
+   - Gestione imbalance dataset (più OK che difetti)
+   - Transfer learning da modello pre-trained
+
+4. Deployment:
+   - Edge inference su server locale
+   - Integrazione con linea produzione
+   - Alert automatici
+
+5. Monitoring:
+   - Tracking accuracy nel tempo
+   - Re-training periodico con nuovi esempi</code></pre>
+<p><strong>4. Sfide:</strong></p>
+<pre><code>1. Imbalance dataset (10k OK vs 500 difetti)
+   - Soluzione: Oversampling minoranza, class weights
+
+2. Variabilità illuminazione in fabbrica
+   - Soluzione: Augmentation, illuminazione controllata
+
+3. Nuovi tipi di difetti nel tempo
+   - Soluzione: Sistema di labeling continuo, re-training
+
+4. False negative critici (difetto non rilevato)
+   - Soluzione: Threshold ottimizzato per recall alto</code></pre>
+</details>
+
+<h3 id="95-esercizio-pratico-4-prompt-engineering">9.5 Esercizio Pratico 4: Prompt Engineering</h3>
+<p><strong>Scenario:</strong> Devi chiedere a un LLM di generare codice per un filtro passa-basso digitale.</p>
+<p><strong>Compito:</strong> Scrivi due versioni del prompt:</p>
+<ol type="1">
+<li><strong>Versione base</strong> (probabilmente insufficiente)</li>
+<li><strong>Versione professionale</strong> (specifica e completa)</li>
+</ol>
+<p>Poi spiega le differenze.</p>
+<details>
+<summary>Soluzione Esempio</summary>
+
+<p><strong>Versione Base (❌ Insufficiente):</strong></p>
+<pre><code>&quot;Scrivi codice per un filtro passa-basso&quot;</code></pre>
+<p><strong>Problemi:</strong></p>
+<ul>
+<li>Linguaggio non specificato</li>
+<li>Tipo di filtro non chiaro</li>
+<li>Parametri mancanti</li>
+<li>Contesto d&#39;uso assente</li>
+</ul>
+<hr />
+<p><strong>Versione Professionale (✅ Completa):</strong></p>
+<pre><code>&quot;Scrivi in standard C99 una funzione per implementare un filtro 
+passa-basso digitale del primo ordine (RC filter discretizzato).
+
+Requisiti:
+- Funzione: float lpf_update(LPF_State *state, float input)
+- Struttura per mantenere stato interno
+- Parametro alpha (costante di smoothing) configurabile
+- Alpha calcolato da frequenza di taglio e sample rate
+- Includi funzione di inizializzazione
+- Aggiungi commenti esplicativi
+- Fornisci esempio di uso con sample rate 1kHz e fc 50Hz
+
+Vincoli:
+- No librerie esterne
+- Efficiente per sistemi embedded
+- Float precision (32-bit)
+
+Output richiesto:
+- Header file (.h) con dichiarazioni
+- Implementation (.c)
+- Esempio di uso nel main()
+&quot;</code></pre>
+<p><strong>Differenze Chiave:</strong></p>
+<pre><code>✅ Linguaggio e standard specificati
+✅ Dettagli tecnici (tipo filtro, ordine)
+✅ Struttura dati richiesta
+✅ Parametri e vincoli chiari
+✅ Formato output definito
+✅ Esempio concreto richiesto
+✅ Contesto (embedded) specificato
+
+Risultato: Output molto più utilizzabile e professionale</code></pre>
+</details>
+
+<h3 id="96-progetto-finale-del-modulo">9.6 Progetto Finale del Modulo</h3>
+<p><strong>Titolo:</strong> Analisi Critica di Sistema IA Industriale</p>
+<p><strong>Obiettivo:</strong> Applicare tutte le conoscenze del modulo in un caso reale.</p>
+<p><strong>Consegna:</strong></p>
+<ol type="1">
+<li>Scegli un&#39;applicazione industriale di IA (es. manutenzione predittiva, quality control, robotica)</li>
+<li>Ricerca un caso reale (paper, articolo tecnico, case study aziendale)</li>
+<li>Produci un report (2-3 pagine) che include:</li>
+</ol>
+<p><strong>Struttura Report:</strong></p>
+<pre><code>1. INTRODUZIONE (1/2 pagina)
+   - Descrizione applicazione
+   - Contesto industriale
+   - Problema da risolvere
+
+2. SOLUZIONE IA (1 pagina)
+   - Tipo di IA utilizzata (categoria)
+   - Architettura (se disponibile)
+   - Dati utilizzati
+   - Processo di training
+
+3. ANALISI CRITICA (1/2 pagina)
+   - Punti di forza della soluzione
+   - Limiti identificati
+   - Possibili bias o rischi
+   - Validazione risultati
+
+4. VALUTAZIONE (1/2 pagina)
+   - Risultati quantitativi (accuracy, ROI, ecc.)
+   - Applicabilità al vostro contesto ITS
+   - Lezioni apprese
+
+5. CONCLUSIONI (1/4 pagina)
+   - Sintesi
+   - Raccomandazioni</code></pre>
+<p><strong>Criteri di Valutazione:</strong></p>
+<ul>
+<li>Completezza analisi: 30%</li>
+<li>Capacità critica: 30%</li>
+<li>Comprensione tecnica: 25%</li>
+<li>Chiarezza esposizione: 15%</li>
+</ul>
+<p><strong>Fonti Suggerite:</strong></p>
+<ul>
+<li>IEEE Xplore</li>
+<li>ArXiv (sezione CS)</li>
+<li>Blog tecnici aziendali (NVIDIA, Google AI, ecc.)</li>
+<li>Case study pubblici</li>
+</ul>
+<hr />
+<h2 id="10-glossario-tecnico">10. Glossario Tecnico</h2>
+<h3 id="a">A</h3>
+<p><strong>Accuracy (Accuratezza)</strong><br />
+Percentuale di predizioni corrette su totale predizioni.</p>
+<pre><code>Accuracy = (TP + TN) / (TP + TN + FP + FN)</code></pre>
+<p><strong>Activation Function</strong><br />
+Funzione non-lineare in una rete neurale (es. ReLU, Sigmoid, Tanh).</p>
+<p><strong>ADAS (Advanced Driver Assistance Systems)</strong><br />
+Sistemi di assistenza alla guida avanzati.</p>
+<p><strong>Algorithm</strong><br />
+Sequenza finita di istruzioni per risolvere un problema.</p>
+<p><strong>Allucinazione</strong><br />
+Output di un LLM che è plausibile ma inventato/errato.</p>
+<p><strong>API (Application Programming Interface)</strong><br />
+Interfaccia per interagire con un software/servizio.</p>
+<p><strong>Attention Mechanism</strong><br />
+Tecnica che permette al modello di &quot;focalizzarsi&quot; su parti rilevanti dell&#39;input.</p>
+<h3 id="b">B</h3>
+<p><strong>Backpropagation</strong><br />
+Algoritmo per calcolare gradienti in una rete neurale durante training.</p>
+<p><strong>Batch</strong><br />
+Sottoinsieme di dati usato in un&#39;iterazione di training.</p>
+<p><strong>Bias (Machine Learning)</strong></p>
+<ol type="1">
+<li>Parametro in neuroni (intercetta)</li>
+<li>Pregiudizio nei dati o modello</li>
+</ol>
+<p><strong>Big Data</strong><br />
+Dataset molto grandi (terabytes+) che richiedono elaborazione distribuita.</p>
+<h3 id="c">C</h3>
+<p><strong>Classification</strong><br />
+Task di assegnare categorie a input (es. spam/non-spam).</p>
+<p><strong>Clustering</strong><br />
+Raggruppamento automatico di dati simili senza etichette.</p>
+<p><strong>CNN (Convolutional Neural Network)</strong><br />
+Architettura di rete neurale efficace per immagini.</p>
+<p><strong>Computer Vision</strong><br />
+Branca dell&#39;IA che elabora e comprende immagini.</p>
+<p><strong>Corpus</strong><br />
+Grande raccolta di testi usata per training di modelli linguistici.</p>
+<h3 id="d">D</h3>
+<p><strong>Data Augmentation</strong><br />
+Tecniche per aumentare varietà dataset (rotazioni, flip, noise, ecc.).</p>
+<p><strong>Dataset</strong><br />
+Collezione di dati usata per training/validation/test.</p>
+<p><strong>Deep Learning</strong><br />
+Sottocategoria ML con reti neurali &quot;profonde&quot; (molti layer).</p>
+<p><strong>Deployment</strong><br />
+Processo di messa in produzione di un modello.</p>
+<h3 id="e">E</h3>
+<p><strong>Edge Computing</strong><br />
+Elaborazione dati direttamente su dispositivo (vs cloud).</p>
+<p><strong>Embedding</strong><br />
+Rappresentazione vettoriale densa di dati (es. word embeddings).</p>
+<p><strong>Epoch</strong><br />
+Passata completa attraverso tutto il training dataset.</p>
+<p><strong>Evaluation Metrics</strong><br />
+Metriche per valutare performance (accuracy, precision, recall, F1).</p>
+<h3 id="f">F</h3>
+<p><strong>Feature</strong><br />
+Attributo misurabile dell&#39;input (es. pixel, frequenza audio).</p>
+<p><strong>Feature Engineering</strong><br />
+Processo di creare feature rilevanti dai dati raw.</p>
+<p><strong>Fine-tuning</strong><br />
+Adattamento di modello pre-trained a task specifico.</p>
+<p><strong>FPU (Floating Point Unit)</strong><br />
+Unità hardware per calcoli in virgola mobile.</p>
+<h3 id="g">G</h3>
+<p><strong>Generative AI</strong><br />
+IA che genera nuovi contenuti (testo, immagini, audio).</p>
+<p><strong>GPU (Graphics Processing Unit)</strong><br />
+Hardware ottimizzato per calcoli paralleli, usato per training IA.</p>
+<p><strong>Gradient Descent</strong><br />
+Algoritmo di ottimizzazione per minimizzare loss function.</p>
+<h3 id="h">H</h3>
+<p><strong>Hyperparameter</strong><br />
+Parametro di configurazione del training (learning rate, batch size).</p>
+<p><strong>Hallucination</strong><br />
+Vedi &quot;Allucinazione&quot;.</p>
+<h3 id="i">I</h3>
+<p><strong>Inference</strong><br />
+Processo di usare modello addestrato per fare predizioni.</p>
+<p><strong>IoT (Internet of Things)</strong><br />
+Rete di dispositivi fisici connessi e intelligenti.</p>
+<h3 id="k">K</h3>
+<p><strong>Knowledge Cutoff</strong><br />
+Data oltre la quale un LLM non ha dati di addestramento.</p>
+<p><strong>K-Fold Cross Validation</strong><br />
+Tecnica per validare modello su più split del dataset.</p>
+<h3 id="l">L</h3>
+<p><strong>Label</strong><br />
+Etichetta target in supervised learning (output corretto).</p>
+<p><strong>Latency</strong><br />
+Tempo di risposta di un sistema.</p>
+<p><strong>Learning Rate</strong><br />
+Hyperparameter che controlla velocità di apprendimento.</p>
+<p><strong>LLM (Large Language Model)</strong><br />
+Modello di linguaggio molto grande (miliardi di parametri).</p>
+<p><strong>Loss Function</strong><br />
+Funzione che misura errore del modello (da minimizzare).</p>
+<h3 id="m">M</h3>
+<p><strong>Machine Learning</strong><br />
+Branca IA dove algoritmi apprendono da dati.</p>
+<p><strong>MCU (Microcontroller Unit)</strong><br />
+Chip embedded con CPU, RAM, periferiche integrate.</p>
+<p><strong>MFCC (Mel-Frequency Cepstral Coefficients)</strong><br />
+Feature per elaborazione audio/speech.</p>
+<p><strong>Model</strong><br />
+Rappresentazione matematica addestrata per fare predizioni.</p>
+<h3 id="n">N</h3>
+<p><strong>Neural Network</strong><br />
+Modello computazionale ispirato a neuroni biologici.</p>
+<p><strong>NLP (Natural Language Processing)</strong><br />
+Elaborazione linguaggio naturale.</p>
+<p><strong>Normalization</strong><br />
+Processo di scalare dati a range standard (es. 0-1).</p>
+<h3 id="o">O</h3>
+<p><strong>Overfitting</strong><br />
+Modello troppo adattato al training set, performa male su nuovi dati.</p>
+<p><strong>Optimizer</strong><br />
+Algoritmo che aggiorna pesi del modello (SGD, Adam, ecc.).</p>
+<h3 id="p">P</h3>
+<p><strong>Parameter</strong><br />
+Peso o bias appreso dal modello durante training.</p>
+<p><strong>Precision</strong><br />
+Percentuale di predizioni positive corrette.</p>
+<pre><code>Precision = TP / (TP + FP)</code></pre>
+<p><strong>Pre-training</strong><br />
+Fase iniziale di training su grandi dataset generali.</p>
+<p><strong>Prompt</strong><br />
+Istruzione/input fornito a un LLM.</p>
+<p><strong>Pruning</strong><br />
+Rimozione di parametri poco importanti per ridurre dimensione modello.</p>
+<h3 id="q">Q</h3>
+<p><strong>Quantization</strong><br />
+Conversione di pesi da alta a bassa precisione (es. float32 → int8).</p>
+<h3 id="r">R</h3>
+<p><strong>Recall</strong><br />
+Percentuale di casi positivi reali correttamente identificati.</p>
+<pre><code>Recall = TP / (TP + FN)</code></pre>
+<p><strong>Regression</strong><br />
+Predizione di valori continui (vs categorie discrete).</p>
+<p><strong>Reinforcement Learning</strong><br />
+Apprendimento tramite reward/penalty per azioni.</p>
+<p><strong>ReLU (Rectified Linear Unit)</strong><br />
+Activation function: f(x) = max(0, x)</p>
+<h3 id="s">S</h3>
+<p><strong>Supervised Learning</strong><br />
+ML con dati etichettati (input + output corretto).</p>
+<p><strong>Sample</strong><br />
+Singolo elemento di un dataset.</p>
+<h3 id="t">T</h3>
+<p><strong>Test Set</strong><br />
+Porzione di dati usata per valutazione finale del modello.</p>
+<p><strong>TinyML</strong><br />
+Machine Learning su dispositivi embedded con risorse limitate.</p>
+<p><strong>Token</strong><br />
+Unità base di testo per LLM (spesso sub-parola).</p>
+<p><strong>Training Set</strong><br />
+Porzione di dati usata per addestrare il modello.</p>
+<p><strong>Transfer Learning</strong><br />
+Riuso di modello addestrato su un task per altro task simile.</p>
+<p><strong>Transformer</strong><br />
+Architettura di rete neurale base dei moderni LLM.</p>
+<h3 id="u">U</h3>
+<p><strong>Underfitting</strong><br />
+Modello troppo semplice, performa male sia su training che test.</p>
+<p><strong>Unsupervised Learning</strong><br />
+ML senza etichette, trova pattern automaticamente.</p>
+<h3 id="v">V</h3>
+<p><strong>Validation Set</strong><br />
+Porzione di dati usata per tuning hyperparameters durante training.</p>
+<h3 id="w">W</h3>
+<p><strong>Weight</strong><br />
+Parametro di connessione in una rete neurale.</p>
+<h3 id="simboli">Simboli</h3>
+<p><strong>α (Alpha)</strong><br />
+Comunemente: learning rate o coefficiente di smoothing.</p>
+<p><strong>η (Eta)</strong><br />
+Comunemente: learning rate.</p>
+<hr />
+<h2 id="books-bibliografia-e-risorse">📚 Bibliografia e Risorse</h2>
+<h3 id="libri-consigliati">Libri Consigliati</h3>
+<ol type="1">
+<li><strong>&quot;Artificial Intelligence: A Modern Approach&quot;</strong> - Russell &amp; Norvig</li>
+<li><strong>&quot;Deep Learning&quot;</strong> - Goodfellow, Bengio, Courville</li>
+<li><strong>&quot;Pattern Recognition and Machine Learning&quot;</strong> - Bishop</li>
+</ol>
+<h3 id="corsi-online-gratuiti">Corsi Online Gratuiti</h3>
+<ul>
+<li><strong>Coursera</strong>: Machine Learning - Andrew Ng</li>
+<li><strong>Fast.ai</strong>: Practical Deep Learning</li>
+<li><strong>MIT OpenCourseWare</strong>: Introduction to Deep Learning</li>
+</ul>
+<h3 id="risorse-web">Risorse Web</h3>
+<ul>
+<li><strong>Papers with Code</strong>: State-of-the-art ML papers con codice</li>
+<li><strong>ArXiv</strong>: Repository paper scientifici</li>
+<li><strong>Kaggle</strong>: Competizioni e dataset ML</li>
+</ul>
+<h3 id="tool-e-framework">Tool e Framework</h3>
+<ul>
+<li><strong>TensorFlow / Keras</strong>: Framework deep learning</li>
+<li><strong>PyTorch</strong>: Framework deep learning (research-friendly)</li>
+<li><strong>Scikit-learn</strong>: Libreria ML Python</li>
+<li><strong>Edge Impulse</strong>: TinyML per embedded</li>
+</ul>
+<hr />
+<h2 id="pencil-note-per-il-docente">📝 Note per il Docente</h2>
+<h3 id="suggerimenti-didattici">Suggerimenti Didattici</h3>
+<p><strong>Timing Raccomandato (2 ore totali):</strong></p>
+<ul>
+<li>Introduzione e motivazione: 15min</li>
+<li>Sezioni 2-4 (IA, categorie, LLM): 45min</li>
+<li>Sezione 6 (limiti e rischi): 20min</li>
+<li>Sezione 7 (applicazioni ITS): 25min</li>
+<li>Q&amp;A e discussione: 15min</li>
+</ul>
+<p><strong>Punti Chiave da Enfatizzare:</strong></p>
+<ol type="1">
+<li>IA come strumento, non magia</li>
+<li>Importanza validazione critica</li>
+<li>Limiti e rischi reali</li>
+<li>Applicazioni pratiche nel loro futuro lavorativo</li>
+</ol>
+<p><strong>Materiali Supplementari Utili:</strong></p>
+<ul>
+<li>Video demo di sistemi IA reali</li>
+<li>Code snippet da mostrare live</li>
+<li>Accesso a LLM per esempi in tempo reale</li>
+</ul>
+<p><strong>Valutazione Apprendimento:</strong></p>
+<ul>
+<li>Quiz interattivo (Kahoot/Mentimeter)</li>
+<li>Discussione casi studio</li>
+<li>Esercizio pratico guidato con LLM</li>
+</ul>
+<hr />
+<h2 id="white_check_mark-checklist-completamento-modulo">✅ Checklist Completamento Modulo</h2>
+<p>Per lo studente - verifica di aver compreso:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>So definire cos&#39;è l&#39;IA e distinguerla da algoritmi classici</label></li>
+<li><label><input type="checkbox"></input>Conosco le 4 categorie principali di IA</label></li>
+<li><label><input type="checkbox"></input>Capisco come funzionano gli LLM a livello concettuale</label></li>
+<li><label><input type="checkbox"></input>So cos&#39;è un&#39;allucinazione e come identificarla</label></li>
+<li><label><input type="checkbox"></input>Riconosco bias e limiti dei sistemi IA</label></li>
+<li><label><input type="checkbox"></input>Posso citare 3 applicazioni IA in ambito ITS/embedded</label></li>
+<li><label><input type="checkbox"></input>So valutare criticamente output generato da IA</label></li>
+<li><label><input type="checkbox"></input>Ho completato almeno 3 esercizi della sezione 9</label></li>
+<li><label><input type="checkbox"></input>Mi sento pronto per il Modulo 2 (Prompt Engineering)</label></li>
+</ul>
+<hr />
+<p><strong>Fine Modulo 1</strong></p>
+<p><em>Prossimo passo: Modulo 2 - Tecniche di Programmazione Assistita</em></p>
+<hr />
+<p><strong>Versione documento:</strong> 1.0<br />
+<strong>Ultimo aggiornamento:</strong> Dicembre 2024<br />
+<strong>Autore:</strong> Corso ITS - IA e Programmazione Assistita<br />
+<strong>Licenza:</strong> Materiale didattico ad uso interno</p>
+</main>
+</body>
+</html>

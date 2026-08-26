@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NI USB-6008 — Lab LabVIEW | ITS Academy Meccatronico Veneto</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0d1117;
+  --surface:   #161b22;
+  --surface2:  #1c2330;
+  --border:    #30363d;
+  --accent:    #f0b429;
+  --accent2:   #58a6ff;
+  --accent3:   #3fb950;
+  --accent4:   #ff7b72;
+  --text:      #e6edf3;
+  --muted:     #8b949e;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'IBM Plex Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--surface);
+  border-bottom: 2px solid var(--accent);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header-badge {
+  background: var(--accent);
+  color: #000;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 11px;
+  padding: 4px 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.header-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .02em;
+}
+.header-sub {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+  margin-left: auto;
+}
+
+/* ── HERO ── */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 52px 32px 36px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+  border-bottom: 1px solid var(--border);
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--accent); }
+.hero-desc {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 540px;
+}
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.hero-meta-row {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.hero-meta-row strong {
+  color: var(--accent2);
+  display: block;
+  font-size: 13px;
+}
+
+/* ── NAV PILLS ── */
+.nav-pills {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--muted);
+  transition: all .18s;
+  cursor: pointer;
+  background: transparent;
+  font-family: var(--sans);
+}
+.pill:hover { border-color: var(--accent2); color: var(--accent2); background: rgba(88,166,255,.07); }
+.pill .num {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--surface2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--accent);
+}
+
+/* ── MAIN ── */
+main { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* ── EXPERIMENT CARD ── */
+.exp {
+  margin-top: 56px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.exp-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #000;
+  background: var(--accent);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.exp[data-color="blue"] .exp-num  { background: var(--accent2); }
+.exp[data-color="green"] .exp-num { background: var(--accent3); }
+.exp[data-color="red"] .exp-num   { background: var(--accent4); }
+
+.exp-title { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+.exp-subtitle { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 2px; }
+.exp-tag {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 10px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.exp-body { padding: 28px; background: var(--surface); }
+
+/* ── GRID 2 COL ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } .hero { grid-template-columns: 1fr; } }
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background: var(--border); }
+
+/* ── INFO BOX ── */
+.infobox {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.infobox p { color: var(--muted); font-size: 14px; }
+.infobox p + p { margin-top: 8px; }
+.infobox strong { color: var(--text); }
+
+/* ── TABLE ── */
+.tbl-wrap { overflow-x: auto; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,.025); }
+td code { font-family: var(--mono); font-size: 12px; color: var(--accent2); background: var(--bg); padding: 1px 5px; border-radius: 3px; }
+
+/* ── SCHEMA SVG ── */
+.schema-wrap {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.schema-wrap svg { max-width: 100%; height: auto; }
+
+/* ── STEPS ── */
+.steps { list-style: none; margin-bottom: 20px; }
+.steps li {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.steps li:last-child { border-bottom: none; }
+.step-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent2);
+  min-width: 24px;
+  padding-top: 2px;
+}
+.steps li code { font-family: var(--mono); font-size: 12px; color: var(--accent); background: var(--bg); padding: 1px 5px; border-radius: 3px; }
+
+/* ── LABVIEW BLOCK DIAGRAM ── */
+.lv-diagram {
+  background: #002b45;
+  border: 1px solid #1e5799;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.lv-title {
+  color: #7ec8e3;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #1e5799;
+  padding-bottom: 8px;
+}
+.lv-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.lv-node {
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.lv-yellow { background: #b8860b; color: #fff3cd; }
+.lv-blue   { background: #1e4d8c; color: #cce5ff; border: 1px solid #3a7bd5; }
+.lv-gray   { background: #2a2a40; color: #adb5bd; border: 1px solid #444; }
+.lv-green  { background: #155724; color: #c3e6cb; }
+.lv-orange { background: #7a3c00; color: #ffd8a8; }
+.lv-wire   { color: #7ec8e3; font-size: 14px; }
+.lv-loop   { border: 1px dashed #3a7bd5; border-radius: 4px; padding: 8px 12px; margin-top: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.lv-loop-label { font-size: 10px; color: #7ec8e3; letter-spacing: .08em; text-transform: uppercase; width: 100%; margin-bottom: 4px; }
+
+/* ── ALERT / NOTE ── */
+.note {
+  display: flex;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  border: 1px solid;
+}
+.note-warn { background: rgba(240,180,41,.08); border-color: rgba(240,180,41,.3); color: var(--text); }
+.note-info { background: rgba(88,166,255,.08); border-color: rgba(88,166,255,.3); color: var(--text); }
+.note-ok   { background: rgba(63,185,80,.08);  border-color: rgba(63,185,80,.3);  color: var(--text); }
+.note-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.note strong { display: block; margin-bottom: 2px; }
+
+/* ── DOMANDE ── */
+.questions {
+  background: var(--surface2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 22px;
+  margin-top: 24px;
+}
+.questions h4 {
+  font-size: 12px;
+  font-family: var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.questions ol { padding-left: 20px; color: var(--muted); font-size: 14px; }
+.questions ol li { margin-bottom: 6px; }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 24px 32px;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+/* scroll behavior */
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="header-badge">ITS Academy</div>
+    <div>
+      <div class="header-title">Laboratorio di Acquisizione Dati — NI USB-6008</div>
+    </div>
+    <div class="header-sub">LabVIEW / NI-DAQmx &nbsp;|&nbsp; UF Sistemi di Misura</div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Scheda laboratoriale · 4 esperimenti</div>
+    <h1>NI USB-6008<br><span>con LabVIEW</span></h1>
+    <p class="hero-desc">Acquisizione di tensione, corrente, temperatura (termocoppia) e conteggio impulsi da encoder — utilizzo pratico del DAQ Assistant e del Block Diagram LabVIEW.</p>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-row"><strong>NI USB-6008</strong>Hardware DAQ</div>
+    <div class="hero-meta-row"><strong>LabVIEW 2021+</strong>Software</div>
+    <div class="hero-meta-row"><strong>NI-DAQmx 21+</strong>Driver</div>
+    <div class="hero-meta-row"><strong>4 ore</strong>Durata stimata</div>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<div class="nav-pills">
+  <a class="pill" href="#exp1"><span class="num">01</span> Misura di Tensione</a>
+  <a class="pill" href="#exp2"><span class="num">02</span> Misura di Corrente</a>
+  <a class="pill" href="#exp3"><span class="num">03</span> Termocoppia</a>
+  <a class="pill" href="#exp4"><span class="num">04</span> Encoder / Contatore</a>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+
+<!-- ═══════════════════════════════════════════════
+     ESPERIMENTO 1 — MISURA DI TENSIONE
+═══════════════════════════════════════════════ -->
+<div class="exp" id="exp1" data-color="yellow">
+  <div class="exp-header">
+    <div class="exp-num">01</div>
+    <div>
+      <div class="exp-title">Misura di Tensione</div>
+      <div class="exp-subtitle">AI Voltage · Canale differenziale · Waveform Chart</div>
+    </div>
+    <div class="exp-tag">∼ 45 min</div>
+  </div>
+  <div class="exp-body">
+
+    <div class="sec-label">Obiettivi</div>
+    <div class="infobox">
+      <p>Acquisire una tensione variabile (partitore resistivo + potenziometro) tramite un canale analogico in modalità <strong>differenziale</strong>. Visualizzare il segnale in tempo reale con un <strong>Waveform Chart</strong> e misurare il valore medio con un indicatore numerico.</p>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="sec-label">Schema di collegamento</div>
+        <div class="schema-wrap">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="11">
+            <!-- +5V rail -->
+            <line x1="30" y1="20" x2="30" y2="200" stroke="#f0b429" stroke-width="2"/>
+            <text x="10" y="15" fill="#f0b429" font-size="10">+5V</text>
+            <!-- GND rail -->
+            <line x1="350" y1="20" x2="350" y2="200" stroke="#8b949e" stroke-width="2"/>
+            <text x="340" y="15" fill="#8b949e" font-size="10">GND</text>
+
+            <!-- R1 -->
+            <rect x="55" y="60" width="50" height="24" rx="4" fill="#1c2330" stroke="#30363d" stroke-width="1.5"/>
+            <text x="80" y="76" fill="#e6edf3" text-anchor="middle">R1</text>
+            <text x="80" y="90" fill="#8b949e" text-anchor="middle" font-size="9">10 kΩ</text>
+            <line x1="30" y1="72" x2="55" y2="72" stroke="#f0b429" stroke-width="1.5"/>
+
+            <!-- Pot -->
+            <rect x="55" y="110" width="50" height="24" rx="4" fill="#1c2330" stroke="#58a6ff" stroke-width="1.5"/>
+            <text x="80" y="126" fill="#e6edf3" text-anchor="middle">POT</text>
+            <text x="80" y="140" fill="#8b949e" text-anchor="middle" font-size="9">10 kΩ</text>
+            <line x1="30" y1="122" x2="55" y2="122" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="30" y1="72" x2="30" y2="122" stroke="#f0b429" stroke-width="1.5"/>
+
+            <!-- R1 bottom - junction -->
+            <line x1="105" y1="72" x2="150" y2="72" stroke="#e6edf3" stroke-width="1.5"/>
+            <line x1="105" y1="122" x2="150" y2="122" stroke="#e6edf3" stroke-width="1.5"/>
+            <circle cx="150" cy="72" r="3" fill="#3fb950"/>
+            <circle cx="150" cy="122" r="3" fill="#3fb950"/>
+
+            <!-- Wires to USB-6008 -->
+            <line x1="150" y1="72" x2="230" y2="72" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="150" y1="122" x2="230" y2="122" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+            <!-- USB-6008 box -->
+            <rect x="230" y="40" width="110" height="140" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+            <text x="285" y="58" fill="#f0b429" text-anchor="middle" font-size="10" font-weight="600">USB-6008</text>
+            <text x="285" y="72" fill="#8b949e" text-anchor="middle" font-size="9">AI0+ (pin 2)</text>
+            <text x="285" y="122" fill="#8b949e" text-anchor="middle" font-size="9">AI0− (pin 3)</text>
+
+            <!-- GND line from pot bottom -->
+            <line x1="105" y1="122" x2="105" y2="175" stroke="#8b949e" stroke-width="1.5"/>
+            <line x1="105" y1="175" x2="350" y2="175" stroke="#8b949e" stroke-width="1.5"/>
+            <line x1="350" y1="122" x2="350" y2="175" stroke="#8b949e" stroke-width="1.5"/>
+
+            <!-- Legend -->
+            <rect x="50" y="195" width="10" height="3" fill="#3fb950"/>
+            <text x="65" y="200" fill="#8b949e" font-size="9">Segnale differenziale AI0±</text>
+          </svg>
+        </div>
+
+        <div class="sec-label">Tabella connessioni</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Segnale</th><th>Pin USB-6008</th><th>Colore cavo</th></tr></thead>
+            <tbody>
+              <tr><td>AI0+ (HI)</td><td><code>Pin 2</code></td><td>Rosso</td></tr>
+              <tr><td>AI0− (LO)</td><td><code>Pin 3</code></td><td>Nero</td></tr>
+              <tr><td>+5 V ref.</td><td><code>Pin 25</code></td><td>Giallo</td></tr>
+              <tr><td>GND</td><td><code>Pin 1</code></td><td>Marrone</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label">Procedura LabVIEW — DAQ Assistant</div>
+        <ol class="steps">
+          <li><span class="step-n">1.</span><span>Apri un nuovo VI. Nel <strong>Block Diagram</strong> trascina <code>DAQ Assistant</code> da Functions → Measurement I/O → NI-DAQmx.</span></li>
+          <li><span class="step-n">2.</span><span>Nella procedura guidata seleziona <strong>Acquire Signals → Analog Input → Voltage</strong>.</span></li>
+          <li><span class="step-n">3.</span><span>Seleziona il canale <code>Dev1/ai0</code>. Imposta: range <strong>−10 V / +10 V</strong>, terminal config <strong>Differential</strong>.</span></li>
+          <li><span class="step-n">4.</span><span>Acquisition Mode: <strong>Continuous Samples</strong> — Rate: <code>1000 Hz</code> — Samples: <code>100</code>.</span></li>
+          <li><span class="step-n">5.</span><span>Clicca <strong>OK</strong>. Sul Front Panel aggiungi: <code>Waveform Chart</code> e un indicatore <code>Numeric</code> per il valor medio.</span></li>
+          <li><span class="step-n">6.</span><span>Inserisci un ciclo <strong>While Loop</strong> attorno al DAQ Assistant. Collega il terminale <em>data</em> al Chart e a una funzione <code>Mean</code> (Signal Processing → Signal Operations).</span></li>
+          <li><span class="step-n">7.</span><span>Aggiungi un <strong>Stop Button</strong> al terminale di arresto del While Loop.</span></li>
+          <li><span class="step-n">8.</span><span>Esegui il VI. Ruota il potenziometro e osserva la variazione sul Chart.</span></li>
+        </ol>
+
+        <div class="sec-label">Block Diagram — schema logico</div>
+        <div class="lv-diagram">
+          <div class="lv-title">LabVIEW Block Diagram — Exp. 1</div>
+          <div class="lv-loop">
+            <div class="lv-loop-label">While Loop</div>
+            <span class="lv-node lv-yellow">DAQ Assistant<br><small>ai0 · Diff · 1kHz</small></span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-blue">Mean VI</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-green">Numeric Indicator<br><small>V medio</small></span>
+            <br>
+            <span class="lv-node lv-yellow">DAQ Assistant</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-orange">Waveform Chart<br><small>V(t)</small></span>
+            <br>
+            <span class="lv-node lv-gray">Stop Button</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">⊠ Loop Stop</span>
+          </div>
+        </div>
+
+        <div class="note note-warn">
+          <div class="note-icon">⚠</div>
+          <div><strong>Limiti di ingresso</strong>Non superare ±20 V sui pin AI in modalità single-ended e ±10 V in modalità differenziale. La scheda non è protetta da sovratensioni elevate.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions">
+      <h4>Domande di verifica</h4>
+      <ol>
+        <li>Qual è la risoluzione in tensione di un ADC a 12 bit con fondo scala ±10 V?</li>
+        <li>Perché si preferisce il collegamento differenziale rispetto al single-ended in ambienti rumorosi?</li>
+        <li>Cosa succede al segnale se si supera il valore di fondo scala impostato?</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     ESPERIMENTO 2 — MISURA DI CORRENTE
+═══════════════════════════════════════════════ -->
+<div class="exp" id="exp2" data-color="blue">
+  <div class="exp-header">
+    <div class="exp-num">02</div>
+    <div>
+      <div class="exp-title">Misura di Corrente</div>
+      <div class="exp-subtitle">Metodo dello shunt · AI Voltage → conversione I = V/R</div>
+    </div>
+    <div class="exp-tag">∼ 45 min</div>
+  </div>
+  <div class="exp-body">
+
+    <div class="sec-label">Obiettivi</div>
+    <div class="infobox">
+      <p>Misurare una corrente continua fino a ~100 mA tramite una <strong>resistenza shunt</strong> da 10 Ω (bassa caduta di tensione). Il VI legge la tensione ai capi dello shunt e la converte numericamente in corrente con la legge di Ohm: <strong>I = V<sub>shunt</sub> / R<sub>shunt</sub></strong>.</p>
+      <p>Il carico è simulato con un resistore variabile (decade box o reostato) in serie con l'alimentazione.</p>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="sec-label">Schema di collegamento</div>
+        <div class="schema-wrap">
+          <svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="11">
+            <!-- supply -->
+            <rect x="10" y="80" width="40" height="50" rx="5" fill="#1c2330" stroke="#f0b429" stroke-width="1.5"/>
+            <text x="30" y="101" fill="#f0b429" text-anchor="middle" font-size="9">PSU</text>
+            <text x="30" y="116" fill="#8b949e" text-anchor="middle" font-size="9">5–12V</text>
+            <!-- top wire -->
+            <line x1="50" y1="90" x2="90" y2="90" stroke="#f0b429" stroke-width="2"/>
+            <!-- Rload -->
+            <rect x="90" y="76" width="60" height="28" rx="4" fill="#1c2330" stroke="#30363d" stroke-width="1.5"/>
+            <text x="120" y="94" fill="#e6edf3" text-anchor="middle">R<tspan font-size="9" dy="3">load</tspan></text>
+            <text x="120" y="110" fill="#8b949e" text-anchor="middle" font-size="9">100–1kΩ</text>
+            <!-- wire after Rload -->
+            <line x1="150" y1="90" x2="190" y2="90" stroke="#e6edf3" stroke-width="2"/>
+            <!-- Rshunt -->
+            <rect x="190" y="76" width="60" height="28" rx="4" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+            <text x="220" y="94" fill="#58a6ff" text-anchor="middle">R<tspan font-size="9" dy="3">shunt</tspan></text>
+            <text x="220" y="110" fill="#8b949e" text-anchor="middle" font-size="9">10 Ω</text>
+            <!-- junction points shunt -->
+            <circle cx="190" cy="90" r="3" fill="#3fb950"/>
+            <circle cx="250" cy="90" r="3" fill="#3fb950"/>
+            <!-- wires to USB-6008 -->
+            <line x1="190" y1="90" x2="190" y2="145" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <line x1="250" y1="90" x2="250" y2="145" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <!-- bottom GND wire -->
+            <line x1="250" y1="90" x2="330" y2="90" stroke="#e6edf3" stroke-width="2"/>
+            <line x1="330" y1="90" x2="330" y2="115" stroke="#8b949e" stroke-width="2"/>
+            <line x1="330" y1="115" x2="10" y2="115" stroke="#8b949e" stroke-width="2"/>
+            <line x1="10" y1="115" x2="10" y2="130" stroke="#8b949e" stroke-width="2"/>
+
+            <!-- USB-6008 mini box -->
+            <rect x="160" y="145" width="120" height="50" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+            <text x="220" y="160" fill="#f0b429" text-anchor="middle" font-size="9" font-weight="600">USB-6008</text>
+            <text x="185" y="175" fill="#8b949e" text-anchor="middle" font-size="8">AI1+ (pin4)</text>
+            <text x="255" y="175" fill="#8b949e" text-anchor="middle" font-size="8">AI1− (pin5)</text>
+
+            <text x="220" y="200" fill="#8b949e" text-anchor="middle" font-size="9">V<tspan font-size="8" dy="2">shunt</tspan> → I = V/R</text>
+          </svg>
+        </div>
+
+        <div class="sec-label">Tabella connessioni</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Punto</th><th>Pin USB-6008</th><th>Nota</th></tr></thead>
+            <tbody>
+              <tr><td>Anodo R<sub>shunt</sub></td><td><code>Pin 4 (AI1+)</code></td><td>HI differenziale</td></tr>
+              <tr><td>Catodo R<sub>shunt</sub></td><td><code>Pin 5 (AI1−)</code></td><td>LO differenziale</td></tr>
+              <tr><td>GND circuito</td><td><code>Pin 1 (GND)</code></td><td>Riferimento comune</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note-info">
+          <div class="note-icon">ℹ</div>
+          <div><strong>Scelta dello shunt</strong>Con R<sub>shunt</sub> = 10 Ω e I<sub>max</sub> = 100 mA, la caduta massima è 1 V — ben entro il range ±10 V dell'ADC. La potenza dissipata è P = 0.1² × 10 = <strong>100 mW</strong>: usa un resistore da almeno 0.25 W.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label">Procedura LabVIEW</div>
+        <ol class="steps">
+          <li><span class="step-n">1.</span><span>Crea un nuovo VI. Trascina <code>DAQ Assistant</code> nel Block Diagram.</span></li>
+          <li><span class="step-n">2.</span><span>Seleziona <strong>Acquire Signals → Analog Input → Voltage</strong>, canale <code>Dev1/ai1</code>. Differenziale, range ±1 V (o ±10 V), Continuous, 500 Hz, 50 campioni.</span></li>
+          <li><span class="step-n">3.</span><span>Collega il terminale <em>data</em> a una funzione <code>Mean</code> (valore medio di V<sub>shunt</sub>).</span></li>
+          <li><span class="step-n">4.</span><span>Dopo la <code>Mean</code>, trascina una costante numerica con il valore <code>10</code> (R<sub>shunt</sub> in Ω). Collega a una funzione <strong>Divide</strong>: risultato = I [A].</span></li>
+          <li><span class="step-n">5.</span><span>Moltiplica per 1000 con un'altra <strong>Multiply</strong> per ottenere I in <strong>mA</strong>.</span></li>
+          <li><span class="step-n">6.</span><span>Aggiungi due indicatori: <code>V shunt [V]</code> e <code>I misurata [mA]</code>. Aggiungi un <code>Waveform Chart</code> per V<sub>shunt</sub>(t).</span></li>
+          <li><span class="step-n">7.</span><span>Avvolgi il tutto in un <strong>While Loop</strong> con Stop Button. Esegui e varia R<sub>load</sub>.</span></li>
+          <li><span class="step-n">8.</span><span>Confronta il valore misurato con quello calcolato tramite multimetro esterno.</span></li>
+        </ol>
+
+        <div class="sec-label">Block Diagram — schema logico</div>
+        <div class="lv-diagram">
+          <div class="lv-title">LabVIEW Block Diagram — Exp. 2</div>
+          <div class="lv-loop">
+            <div class="lv-loop-label">While Loop</div>
+            <span class="lv-node lv-yellow">DAQ Assistant<br><small>ai1 · Diff · 500Hz</small></span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-blue">Mean VI</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">÷ 10 Ω</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">× 1000</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-green">I [mA]</span>
+            <br>
+            <span class="lv-node lv-blue">Mean VI</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-orange">V shunt [V]</span>
+            <br>
+            <span class="lv-node lv-gray">Stop Button ──▶ ⊠</span>
+          </div>
+        </div>
+
+        <div class="note note-ok">
+          <div class="note-icon">✓</div>
+          <div><strong>Verifica</strong>Misura la stessa corrente con un multimetro in serie al circuito. L'errore relativo atteso è &lt; 2% con R<sub>shunt</sub> di precisione (1%).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions">
+      <h4>Domande di verifica</h4>
+      <ol>
+        <li>Perché la resistenza di shunt deve essere piccola rispetto al carico?</li>
+        <li>Come cambieresti il circuito per misurare correnti fino a 1 A senza saturare l'ADC?</li>
+        <li>Quali errori sistematici introduce questa tecnica di misura?</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     ESPERIMENTO 3 — TERMOCOPPIA
+═══════════════════════════════════════════════ -->
+<div class="exp" id="exp3" data-color="green">
+  <div class="exp-header">
+    <div class="exp-num">03</div>
+    <div>
+      <div class="exp-title">Misura di Temperatura — Termocoppia</div>
+      <div class="exp-subtitle">Tipo K · Amplificatore AD8495 · AI Voltage → °C</div>
+    </div>
+    <div class="exp-tag">∼ 60 min</div>
+  </div>
+  <div class="exp-body">
+
+    <div class="sec-label">Obiettivi</div>
+    <div class="infobox">
+      <p>Acquisire la temperatura tramite una termocoppia di tipo K condizionata da un <strong>modulo AD8495</strong> (o equivalente Adafruit breakout). Il modulo AD8495 amplifica il segnale della termocoppia e include la compensazione della giunzione fredda (CJC), fornendo in uscita <strong>5 mV/°C</strong>. L'USB-6008 legge questa tensione e il VI la converte in temperatura.</p>
+      <p><strong>Legge di conversione:</strong> T [°C] = V<sub>out</sub> [V] / 0.005</p>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="sec-label">Schema di collegamento</div>
+        <div class="schema-wrap">
+          <svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="11">
+            <!-- Thermocouple -->
+            <ellipse cx="40" cy="115" rx="28" ry="40" fill="#1c2330" stroke="#f0b429" stroke-width="1.5"/>
+            <text x="40" y="108" fill="#f0b429" text-anchor="middle" font-size="9" font-weight="600">TC</text>
+            <text x="40" y="122" fill="#8b949e" text-anchor="middle" font-size="8">Tipo K</text>
+            <!-- TC wires -->
+            <line x1="68" y1="100" x2="110" y2="100" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="68" y1="130" x2="110" y2="130" stroke="#ff7b72" stroke-width="1.5"/>
+            <!-- TC labels -->
+            <text x="85" y="96" fill="#f0b429" font-size="8">+ (Nickel-Cr)</text>
+            <text x="85" y="145" fill="#ff7b72" font-size="8">− (Nickel-Al)</text>
+
+            <!-- AD8495 module -->
+            <rect x="110" y="72" width="90" height="86" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+            <text x="155" y="90" fill="#3fb950" text-anchor="middle" font-size="9" font-weight="600">AD8495</text>
+            <text x="155" y="103" fill="#8b949e" text-anchor="middle" font-size="8">5 mV/°C</text>
+            <text x="125" y="120" fill="#8b949e" font-size="8">TC+</text>
+            <text x="125" y="135" fill="#8b949e" font-size="8">TC−</text>
+            <text x="155" y="150" fill="#3fb950" text-anchor="middle" font-size="8">OUT →</text>
+
+            <!-- Power to AD8495 -->
+            <line x1="155" y1="72" x2="155" y2="50" stroke="#f0b429" stroke-width="1.5"/>
+            <text x="160" y="46" fill="#f0b429" font-size="8">+5V (USB-6008 pin25)</text>
+            <line x1="155" y1="158" x2="155" y2="178" stroke="#8b949e" stroke-width="1.5"/>
+            <text x="160" y="190" fill="#8b949e" font-size="8">GND (pin 1)</text>
+
+            <!-- Output wire -->
+            <line x1="200" y1="150" x2="260" y2="150" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <circle cx="200" cy="150" r="3" fill="#3fb950"/>
+
+            <!-- USB-6008 box -->
+            <rect x="260" y="120" width="100" height="60" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+            <text x="310" y="137" fill="#f0b429" text-anchor="middle" font-size="9" font-weight="600">USB-6008</text>
+            <text x="310" y="152" fill="#8b949e" text-anchor="middle" font-size="8">AI2 (pin 6) SE</text>
+            <text x="310" y="165" fill="#8b949e" text-anchor="middle" font-size="8">GND (pin 1)</text>
+
+            <!-- Formula -->
+            <text x="190" y="210" fill="#58a6ff" font-size="10" text-anchor="middle">T = V_out / 0.005</text>
+          </svg>
+        </div>
+
+        <div class="sec-label">Tabella connessioni</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Segnale</th><th>Pin USB-6008</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Vout AD8495</td><td><code>Pin 6 (AI2)</code></td><td>SE, range 0–5 V</td></tr>
+              <tr><td>+5 V alimentaz.</td><td><code>Pin 25 (+5V)</code></td><td>Max 200 mA tot.</td></tr>
+              <tr><td>GND</td><td><code>Pin 1 (GND)</code></td><td>Comune</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note-warn">
+          <div class="note-icon">⚠</div>
+          <div><strong>Modalità Single-Ended</strong>Per questo canale si usa SE (non differenziale) perché l'AD8495 ha già un'uscita riferita a GND. Imposta <em>Terminal Configuration → RSE</em> nel DAQ Assistant.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label">Procedura LabVIEW</div>
+        <ol class="steps">
+          <li><span class="step-n">1.</span><span>Nuovo VI. Trascina <code>DAQ Assistant</code>. Seleziona <strong>Analog Input → Voltage</strong>, canale <code>Dev1/ai2</code>.</span></li>
+          <li><span class="step-n">2.</span><span>Terminal Config: <strong>RSE</strong> (Referenced Single-Ended). Range: <code>0 – 5 V</code>. Continuous, 10 Hz, 10 campioni (la temperatura è lenta).</span></li>
+          <li><span class="step-n">3.</span><span>Prendi la <code>Mean</code> del segnale acquisito → V<sub>avg</sub> [V].</span></li>
+          <li><span class="step-n">4.</span><span>Dividi per la costante <code>0.005</code> (5 mV/°C) → T [°C].</span></li>
+          <li><span class="step-n">5.</span><span>Aggiungi indicatori: <code>T [°C]</code> (termometro o numerico) e <code>V out [V]</code>. Opzionale: <code>Waveform Chart</code> per T(t).</span></li>
+          <li><span class="step-n">6.</span><span>Inserisci un <strong>Wait (ms)</strong> = <code>500</code> nel loop per non saturare il bus USB.</span></li>
+          <li><span class="step-n">7.</span><span>Avvolgi in While Loop + Stop. Esegui: verifica la temperatura ambiente (~20–25 °C), poi avvicina le dita alla giunzione calda.</span></li>
+          <li><span class="step-n">8.</span><span>Confronta con un termometro di riferimento. Calcola l'errore assoluto.</span></li>
+        </ol>
+
+        <div class="sec-label">Block Diagram — schema logico</div>
+        <div class="lv-diagram">
+          <div class="lv-title">LabVIEW Block Diagram — Exp. 3</div>
+          <div class="lv-loop">
+            <div class="lv-loop-label">While Loop</div>
+            <span class="lv-node lv-yellow">DAQ Assistant<br><small>ai2 · RSE · 10Hz</small></span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-blue">Mean VI</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">÷ 0.005</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-green">T [°C]</span>
+            <br>
+            <span class="lv-node lv-blue">Mean VI</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-orange">V out [V]</span>
+            &nbsp;&nbsp;&nbsp;
+            <span class="lv-node lv-gray">Wait 500ms</span>
+            <br>
+            <span class="lv-node lv-gray">Stop Button ──▶ ⊠</span>
+          </div>
+        </div>
+
+        <div class="note note-info">
+          <div class="note-icon">ℹ</div>
+          <div><strong>Alternativa con NI-9211</strong>Se disponibile il modulo NI-9211 (cDAQ), LabVIEW offre il tipo di misura <em>Temperature → Thermocouple</em> nativamente, con selezione del tipo (K, J, T…) e CJC automatica via DAQmx.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions">
+      <h4>Domande di verifica</h4>
+      <ol>
+        <li>Cos'è la compensazione della giunzione fredda (CJC) e perché è necessaria?</li>
+        <li>Quale sensibilità in µV/°C ha una termocoppia di tipo K? Perché serve un amplificatore?</li>
+        <li>Come varieresti il circuito per misurare temperature fino a 500 °C (V<sub>out</sub> max del AD8495)?</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     ESPERIMENTO 4 — ENCODER / CONTATORE
+═══════════════════════════════════════════════ -->
+<div class="exp" id="exp4" data-color="red">
+  <div class="exp-header">
+    <div class="exp-num">04</div>
+    <div>
+      <div class="exp-title">Encoder — Contatore di Impulsi</div>
+      <div class="exp-subtitle">Counter Input · 32 bit · Velocità angolare in RPM</div>
+    </div>
+    <div class="exp-tag">∼ 60 min</div>
+  </div>
+  <div class="exp-body">
+
+    <div class="sec-label">Obiettivi</div>
+    <div class="infobox">
+      <p>Usare il <strong>contatore a 32 bit</strong> dell'USB-6008 per contare gli impulsi di un encoder incrementale (o di un sensore ottico / Hall). Calcolare la <strong>velocità angolare in RPM</strong> campionando il contatore a intervalli di tempo noti: <strong>n [RPM] = (ΔCount / PPR) × (60 / ΔT)</strong>.</p>
+      <p>L'ingresso contatore dell'USB-6008 accetta segnali TTL (0–5 V). Se l'encoder è a open-collector è necessaria una resistenza di pull-up da 10 kΩ a +5 V.</p>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="sec-label">Schema di collegamento</div>
+        <div class="schema-wrap">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="11">
+            <!-- Encoder disk illustration -->
+            <circle cx="55" cy="110" r="38" fill="#1c2330" stroke="#ff7b72" stroke-width="2"/>
+            <circle cx="55" cy="110" r="28" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+            <!-- teeth -->
+            <g stroke="#ff7b72" stroke-width="1.5">
+              <line x1="55" y1="72" x2="55" y2="82"/>
+              <line x1="77" y1="80" x2="72" y2="88"/>
+              <line x1="88" y1="102" x2="79" y2="105"/>
+              <line x1="84" y1="127" x2="76" y2="123"/>
+              <line x1="66" y1="144" x2="62" y2="136"/>
+              <line x1="44" y1="148" x2="46" y2="139"/>
+              <line x1="27" y1="137" x2="33" y2="130"/>
+              <line x1="18" y1="118" x2="27" y2="116"/>
+              <line x1="22" y1="95" x2="30" y2="99"/>
+              <line x1="37" y1="76" x2="40" y2="84"/>
+            </g>
+            <text x="55" y="113" fill="#ff7b72" text-anchor="middle" font-size="9" font-weight="600">ENCODER</text>
+            <text x="55" y="125" fill="#8b949e" text-anchor="middle" font-size="8">PPR: 100</text>
+
+            <!-- Sensor / output -->
+            <rect x="105" y="94" width="55" height="32" rx="4" fill="#1c2330" stroke="#8b949e" stroke-width="1.5"/>
+            <text x="132" y="112" fill="#e6edf3" text-anchor="middle" font-size="9">Uscita</text>
+            <text x="132" y="123" fill="#8b949e" text-anchor="middle" font-size="8">TTL / OC</text>
+
+            <!-- Pull-up if needed -->
+            <rect x="170" y="60" width="45" height="24" rx="4" fill="#1c2330" stroke="#f0b429" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="192" y="76" fill="#f0b429" text-anchor="middle" font-size="9">10 kΩ</text>
+            <text x="192" y="57" fill="#f0b429" text-anchor="middle" font-size="8">pull-up (se OC)</text>
+            <line x1="192" y1="60" x2="192" y2="48" stroke="#f0b429" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="200" y="44" fill="#f0b429" font-size="8">+5V</text>
+
+            <!-- Signal line -->
+            <line x1="160" y1="110" x2="230" y2="110" stroke="#ff7b72" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <circle cx="192" cy="110" r="3" fill="#ff7b72"/>
+            <line x1="192" y1="84" x2="192" y2="110" stroke="#f0b429" stroke-width="1" stroke-dasharray="3,2"/>
+
+            <!-- GND line -->
+            <line x1="160" y1="126" x2="360" y2="126" stroke="#8b949e" stroke-width="1.5"/>
+
+            <!-- USB-6008 -->
+            <rect x="230" y="80" width="120" height="70" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+            <text x="290" y="97" fill="#f0b429" text-anchor="middle" font-size="9" font-weight="600">USB-6008</text>
+            <text x="290" y="112" fill="#ff7b72" text-anchor="middle" font-size="8">PFI0 / CTR0 SRC</text>
+            <text x="290" y="124" fill="#8b949e" text-anchor="middle" font-size="8">(pin 16 — P2.0)</text>
+            <text x="290" y="140" fill="#8b949e" text-anchor="middle" font-size="8">GND → pin 1</text>
+
+            <!-- Edge count symbol -->
+            <text x="290" y="175" fill="#58a6ff" text-anchor="middle" font-size="9">↑ Edge Count 32-bit</text>
+          </svg>
+        </div>
+
+        <div class="sec-label">Tabella connessioni</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Segnale</th><th>Pin USB-6008</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Impulso encoder (A)</td><td><code>Pin 16 (P2.0 / PFI0)</code></td><td>CTR0 Source</td></tr>
+              <tr><td>+5 V pull-up (se OC)</td><td><code>Pin 25 (+5V)</code></td><td>+ R 10 kΩ a PFI0</td></tr>
+              <tr><td>GND encoder</td><td><code>Pin 1 (GND)</code></td><td>Comune</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note note-warn">
+          <div class="note-icon">⚠</div>
+          <div><strong>Livelli TTL</strong>Il pin PFI0 accetta solo 0–5 V. Segnali a 12 V o 24 V (comuni su encoder industriali) richiedono un divisore resistivo o un optoisolatore prima di entrare nell'USB-6008.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label">Procedura LabVIEW — Contatore</div>
+        <ol class="steps">
+          <li><span class="step-n">1.</span><span>Nuovo VI. Trascina <code>DAQ Assistant</code>. Seleziona <strong>Acquire Signals → Counter Input → Edge Count</strong>.</span></li>
+          <li><span class="step-n">2.</span><span>Selezione device: <code>Dev1/ctr0</code>. Edge: <strong>Rising</strong>. Count Direction: <strong>Count Up</strong>. Samples: 1 (lettura singola per polling).</span></li>
+          <li><span class="step-n">3.</span><span>Nel While Loop, leggi il contatore ogni <strong>100 ms</strong> con un blocco <code>Wait (ms)</code>. Memorizza il valore precedente in un <strong>Shift Register</strong>.</span></li>
+          <li><span class="step-n">4.</span><span>Calcola <code>ΔCount = Count_attuale − Count_precedente</code> con una funzione <strong>Subtract</strong>.</span></li>
+          <li><span class="step-n">5.</span><span>Converti in RPM: <code>RPM = (ΔCount / PPR) × (60 / ΔT)</code>. Con PPR=100 e ΔT=0.1 s → <code>RPM = ΔCount × 6</code>.</span></li>
+          <li><span class="step-n">6.</span><span>Aggiungi indicatori: <code>RPM</code> (gauge o numerico), <code>Count totale</code> (U32). Opzionale: Chart RPM vs tempo.</span></li>
+          <li><span class="step-n">7.</span><span>Aggiungi un controllo <strong>Reset Counter</strong> (Boolean) che, se TRUE, resetta lo shift register a 0 via <code>Select</code>.</span></li>
+          <li><span class="step-n">8.</span><span>Testa ruotando manualmente l'encoder o variando la velocità di un motorino DC.</span></li>
+        </ol>
+
+        <div class="sec-label">Block Diagram — schema logico</div>
+        <div class="lv-diagram">
+          <div class="lv-title">LabVIEW Block Diagram — Exp. 4</div>
+          <div class="lv-loop">
+            <div class="lv-loop-label">While Loop (100 ms)</div>
+            <span class="lv-node lv-yellow">DAQ Assistant<br><small>ctr0 · Edge Count</small></span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">Count_now</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-blue">Subtract<br><small>now − prev</small></span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-gray">× 6</span>
+            <span class="lv-wire">──▶</span>
+            <span class="lv-node lv-green">RPM</span>
+            <br>
+            <span class="lv-node lv-gray">Shift Register (prev)</span>
+            <span class="lv-wire">◀── Count_now</span>
+            &nbsp;&nbsp;
+            <span class="lv-node lv-gray">Wait 100ms</span>
+            <br>
+            <span class="lv-node lv-gray">Stop Button ──▶ ⊠</span>
+          </div>
+        </div>
+
+        <div class="note note-info">
+          <div class="note-icon">ℹ</div>
+          <div><strong>Shift Register in LabVIEW</strong>Clic destro sul bordo sinistro del While Loop → <em>Add Shift Register</em>. Il terminale sinistro contiene il valore del ciclo precedente (Count<sub>prev</sub>), quello destro riceve il valore corrente per il ciclo successivo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="questions">
+      <h4>Domande di verifica</h4>
+      <ol>
+        <li>Un encoder con PPR = 500 e velocità 1200 RPM: quanti impulsi al secondo genera?</li>
+        <li>Perché si usa un Shift Register invece di una variabile locale per memorizzare Count<sub>prev</sub>?</li>
+        <li>Come modificheresti il VI per misurare anche il senso di rotazione con un encoder in quadratura (canali A e B)?</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── RIEPILOGO CONNESSIONI ── -->
+<div style="margin-top:56px;">
+  <div class="sec-label">Riepilogo connessioni — USB-6008 (tutti gli esperimenti)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Esp.</th><th>Canale DAQmx</th><th>Pin fisico</th><th>Modo</th><th>Segnale</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>ai0</code></td><td>2 (+) / 3 (−)</td><td>Differenziale</td><td>Tensione 0–5 V (partitore)</td></tr>
+        <tr><td>2</td><td><code>ai1</code></td><td>4 (+) / 5 (−)</td><td>Differenziale</td><td>V<sub>shunt</sub> → corrente</td></tr>
+        <tr><td>3</td><td><code>ai2</code></td><td>6 / GND</td><td>RSE Single-Ended</td><td>AD8495 out (temp. tipo K)</td></tr>
+        <tr><td>4</td><td><code>ctr0</code></td><td>16 (PFI0/P2.0)</td><td>Edge Count</td><td>Impulsi encoder</td></tr>
+        <tr><td>—</td><td>+5 V</td><td>25</td><td>—</td><td>Alimentazione sensori (max 200 mA)</td></tr>
+        <tr><td>—</td><td>GND</td><td>1</td><td>—</td><td>Riferimento comune</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  ITS Academy Meccatronico Veneto &nbsp;·&nbsp; Laboratorio Sistemi di Misura &nbsp;·&nbsp; NI USB-6008 + LabVIEW &nbsp;·&nbsp; Rev. 1.0
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 MODULO 2</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 MODULO 2</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>MODULO_2_PROMPT_ENGINEERING.md</dd></div>
+<div><dt>Cartella</dt><dd>CookBooks/ITS/Fondamenti di Intelligenza Artificiale/old</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h1 id="prompt-engineering-e-programmazione-assistita">Prompt Engineering e Programmazione Assistita</h1>
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h2>
+<h3 id="durata-4-ore--livello-intermedio">Durata: 4 ore | Livello: Intermedio</h3>
+<hr />
+<h2 id="bookmark_tabs-indice-del-modulo">📑 Indice del Modulo</h2>
+<ol type="1">
+<li><a href="#1-introduzione-e-obiettivi">Introduzione e Obiettivi</a></li>
+<li><a href="#2-cosè-la-programmazione-assistita">Cos&#39;è la Programmazione Assistita</a></li>
+<li><a href="#3-teoria-del-prompt-engineering">Teoria del Prompt Engineering</a></li>
+<li><a href="#4-struttura-del-prompt-perfetto">Struttura del Prompt Perfetto</a></li>
+<li><a href="#5-applicazioni-pratiche">Applicazioni Pratiche</a></li>
+<li><a href="#6-metodologie-operative">Metodologie Operative</a></li>
+<li><a href="#7-analisi-critica-del-codice-generato">Analisi Critica del Codice Generato</a></li>
+<li><a href="#8-esempi-guidati-completi">Esempi Guidati Completi</a></li>
+<li><a href="#9-errori-comuni-e-come-evitarli">Errori Comuni e Come Evitarli</a></li>
+<li><a href="#10-esercizi-pratici">Esercizi Pratici</a></li>
+</ol>
+<hr />
+<h2 id="1-introduzione-e-obiettivi">1. Introduzione e Obiettivi</h2>
+<h3 id="11-benvenuti-al-modulo-2">1.1 Benvenuti al Modulo 2</h3>
+<p>Dopo aver compreso i fondamenti dell&#39;IA nel Modulo 1, è tempo di applicare queste conoscenze in modo pratico. Questo modulo vi insegnerà a <strong>trasformare l&#39;IA in uno strumento efficace</strong> per lo sviluppo software.</p>
+<h3 id="12-obiettivi-di-apprendimento">1.2 Obiettivi di Apprendimento</h3>
+<p>Al termine di questo modulo sarai in grado di:</p>
+<p>✅ <strong>Formulare</strong> prompt tecnici efficaci e completi<br />
+✅ <strong>Valutare criticamente</strong> la qualità del codice generato da IA<br />
+✅ <strong>Integrare</strong> l&#39;IA nel flusso di sviluppo professionale<br />
+✅ <strong>Riconoscere</strong> errori, omissioni e limiti degli output IA<br />
+✅ <strong>Applicare</strong> metodologie iterative per migliorare i risultati<br />
+✅ <strong>Documentare</strong> e testare codice assistito da IA</p>
+<h3 id="13-prerequisiti">1.3 Prerequisiti</h3>
+<ul>
+<li>Completamento Modulo 1 (Fondamenti IA)</li>
+<li>Conoscenze base di programmazione</li>
+<li>Familiarità con un linguaggio (C, Python, o simili)</li>
+<li>Accesso a un LLM (ChatGPT, Claude, GitHub Copilot, ecc.)</li>
+</ul>
+<hr />
+<h2 id="2-cosè-la-programmazione-assistita">2. Cos&#39;è la Programmazione Assistita</h2>
+<h3 id="21-definizione">2.1 Definizione</h3>
+<blockquote>
+<p><strong>Programmazione Assistita</strong>: metodologia di sviluppo in cui l&#39;intelligenza artificiale affianca (ma non sostituisce) il programmatore nelle fasi di ideazione, scrittura, documentazione, test e refactoring del codice.</p>
+</blockquote>
+<h3 id="22-il-ruolo-dellia">2.2 Il Ruolo dell&#39;IA</h3>
+<pre><code>┌─────────────────────────────────────────┐
+│     IL PROGRAMMATORE RESTA AL CENTRO    │
+├─────────────────────────────────────────┤
+│                                         │
+│  ┌───────────┐         ┌───────────┐   │
+│  │           │         │           │   │
+│  │   UMANO   │ ◄────► │    IA     │   │
+│  │           │         │           │   │
+│  │ Decisioni │         │ Supporto  │   │
+│  │ Strategia │         │ Operativo │   │
+│  │ Validazione│         │ Velocità  │   │
+│  │           │         │           │   │
+│  └───────────┘         └───────────┘   │
+│                                         │
+│  L&#39;IA suggerisce, l&#39;umano decide       │
+└─────────────────────────────────────────┘</code></pre>
+<h3 id="23-benefici-misurabili">2.3 Benefici Misurabili</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Metrica</th>
+<th>Miglioramento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Velocità scrittura codice</td>
+<td>+35-55%</td>
+</tr>
+<tr>
+<td>Riduzione errori sintattici</td>
+<td>+40%</td>
+</tr>
+<tr>
+<td>Tempo documentazione</td>
+<td>-60%</td>
+</tr>
+<tr>
+<td>Produttività complessiva</td>
+<td>+30%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Attenzione:</strong> Questi benefici si ottengono SOLO con uso corretto!</p>
+<h3 id="24-quando-usare-la-programmazione-assistita">2.4 Quando Usare la Programmazione Assistita</h3>
+<p>✅ <strong>Usa IA per:</strong></p>
+<ul>
+<li>Funzioni utility standard</li>
+<li>Algoritmi ben noti (sort, search)</li>
+<li>Boilerplate code</li>
+<li>Conversioni di formato</li>
+<li>Test cases generazione</li>
+<li>Documentazione</li>
+<li>Spiegazione codice esistente</li>
+</ul>
+<p>❌ <strong>NON usare IA per:</strong></p>
+<ul>
+<li>Logica business critica complessa</li>
+<li>Algoritmi proprietari innovativi</li>
+<li>Codice safety-critical (medicale, avionico)</li>
+<li>Quando non puoi validare l&#39;output</li>
+</ul>
+<hr />
+<h2 id="3-teoria-del-prompt-engineering">3. Teoria del Prompt Engineering</h2>
+<h3 id="31-cosè-un-prompt">3.1 Cos&#39;è un Prompt</h3>
+<blockquote>
+<p><strong>Prompt</strong>: L&#39;istruzione in linguaggio naturale che fornisci all&#39;IA per ottenere un output desiderato.</p>
+</blockquote>
+<p>La <strong>qualità del prompt</strong> determina direttamente la <strong>qualità dell&#39;output</strong>.</p>
+<h3 id="32-anatomia-di-un-prompt">3.2 Anatomia di un Prompt</h3>
+<pre><code>┌─────────────────────────────────────────┐
+│         PROMPT EFFICACE                 │
+├─────────────────────────────────────────┤
+│                                         │
+│  1. RUOLO (opzionale)                   │
+│     &quot;Sei un esperto programmatore C&quot;    │
+│                                         │
+│  2. CONTESTO                            │
+│     &quot;Per un sistema embedded STM32&quot;     │
+│                                         │
+│  3. COMPITO                             │
+│     &quot;Scrivi una funzione che...&quot;        │
+│                                         │
+│  4. VINCOLI                             │
+│     &quot;Usa solo standard C99&quot;             │
+│     &quot;Max 50 righe&quot;                      │
+│                                         │
+│  5. FORMATO OUTPUT                      │
+│     &quot;Codice + commenti + esempio uso&quot;   │
+│                                         │
+│  6. ESEMPI (opzionale)                  │
+│     &quot;Input: [1,2,3] → Output: 6&quot;        │
+│                                         │
+└─────────────────────────────────────────┘</code></pre>
+<h3 id="33-principi-fondamentali">3.3 Principi Fondamentali</h3>
+<h4 id="principio-1-specificità"><strong>Principio 1: Specificità</strong></h4>
+<p>❌ <strong>Vago:</strong></p>
+<pre><code>&quot;Scrivi una funzione di ordinamento&quot;</code></pre>
+<p>✅ <strong>Specifico:</strong></p>
+<pre><code>&quot;Scrivi in C99 una funzione `void bubble_sort(int arr[], int n)`
+che ordina in-place un array di interi in ordine crescente usando
+l&#39;algoritmo bubble sort&quot;</code></pre>
+<h4 id="principio-2-contesto"><strong>Principio 2: Contesto</strong></h4>
+<p>❌ <strong>Senza contesto:</strong></p>
+<pre><code>&quot;Ottimizza questa funzione&quot;</code></pre>
+<p>✅ <strong>Con contesto:</strong></p>
+<pre><code>&quot;Ottimizza questa funzione per microcontrollore ARM Cortex-M4
+a 168MHz con 192KB RAM, minimizzando uso memoria ma mantenendo
+complessità O(n log n)&quot;</code></pre>
+<h4 id="principio-3-iterazione"><strong>Principio 3: Iterazione</strong></h4>
+<pre><code>Prompt 1 (base) → Output 1 → Analisi
+    ↓
+Prompt 2 (migliorato) → Output 2 → Analisi
+    ↓
+Prompt 3 (raffinato) → Output 3 → Validazione</code></pre>
+<p>Non aspettarti perfezione al primo tentativo!</p>
+<h3 id="34-framework-clear">3.4 Framework CLEAR</h3>
+<p><strong>C</strong>ontext (Contesto)<br />
+<strong>L</strong>anguage/Library (Linguaggio/Librerie)<br />
+<strong>E</strong>xpectation (Aspettativa)<br />
+<strong>A</strong>ssumptions (Assunzioni)<br />
+<strong>R</strong>equirements (Requisiti)</p>
+<h4 id="esempio-applicato"><strong>Esempio Applicato:</strong></h4>
+<pre><code>[C] Sto sviluppando firmware per sensore IoT temperatura/umidità
+[L] Usa C99 con SDK ESP32 (FreeRTOS)
+[E] Voglio funzione che legge DHT22 e ritorna struct con valori
+[A] DHT22 già configurato su GPIO4, timing già gestito da libreria
+[R] Funzione deve:
+    - Ritornare struct {float temp; float hum; bool valid;}
+    - Gestire timeout lettura (max 2 secondi)
+    - Validare checksum DHT22
+    - Essere non-bloccante (non usare delay&gt;10ms)</code></pre>
+<h3 id="35-template-di-prompt-professionale">3.5 Template di Prompt Professionale</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># PROMPT TEMPLATE PER CODICE</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contesto</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Sistema: embedded/desktop/web</span><span class="co">]</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Hardware: MCU/PC specs se rilevante</span><span class="co">]</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Obiettivo progetto</span><span class="co">]</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Task Tecnico</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>Scrivi in <span class="co">[</span><span class="ot">LINGUAGGIO + STANDARD</span><span class="co">]</span> una funzione/modulo che:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Funzionalità principale</span><span class="co">]</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Funzionalità secondaria</span><span class="co">]</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Firma Funzione</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">tipo_ritorno</span><span class="co">]</span> nome_funzione(<span class="co">[</span><span class="ot">parametri</span><span class="co">]</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Vincoli</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Vincolo 1: es. no librerie esterne</span><span class="co">]</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Vincolo 2: es. complessità massima O(n)</span><span class="co">]</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Vincolo 3: es. memoria massima</span><span class="co">]</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input/Output</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>Input: <span class="co">[</span><span class="ot">Descrizione + esempio</span><span class="co">]</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>Output: <span class="co">[</span><span class="ot">Descrizione + esempio</span><span class="co">]</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>Errori: <span class="co">[</span><span class="ot">Come gestirli</span><span class="co">]</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Requisiti Output</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Codice ben commentato</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Gestione errori richiesta</span><span class="co">]</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Test case inclusi / separati</span><span class="co">]</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Documentazione funzione</span><span class="co">]</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Esempio Uso (opzionale)</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="in">```c</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">// Esempio di chiamata</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> result <span class="op">=</span> mia_funzione<span class="op">(</span>input<span class="op">);</span></span></code></pre></div>
+<pre><code>
+---
+
+## 4. Struttura del Prompt Perfetto
+
+### 4.1 Checklist del Prompt
+
+Prima di inviare un prompt, verifica:
+</code></pre>
+<p>[ ] Ho specificato il linguaggio? (C, C99, C++, Python, ecc.)<br />
+[ ] Ho specificato lo standard? (C99, C11, Python 3.10)<br />
+[ ] Ho descritto chiaramente il task?<br />
+[ ] Ho elencato i vincoli?<br />
+[ ] Ho specificato cosa NON usare?<br />
+[ ] Ho indicato come gestire errori?<br />
+[ ] Ho richiesto esempi/test?<br />
+[ ] Ho specificato il formato output?<br />
+[ ] Ho fornito esempi se necessario?<br />
+[ ] Il prompt è &lt;500 parole? (evita prolissità)</p>
+<pre><code>
+### 4.2 Livelli di Prompt
+
+#### **Livello 1: Principiante (Insufficiente)**</code></pre>
+<p>&quot;Scrivi codice per sommare array&quot;</p>
+<pre><code>**Voto: 3/10**
+
+#### **Livello 2: Intermedio (Accettabile)**</code></pre>
+<p>&quot;Scrivi in C una funzione che somma gli elementi di un array di interi.<br />
+La funzione deve chiamarsi <code>somma_array</code> e prendere array e dimensione.&quot;</p>
+<pre><code>**Voto: 6/10**
+
+#### **Livello 3: Avanzato (Buono)**</code></pre>
+<p>&quot;Scrivi in standard C99 una funzione:</p>
+<p>int somma_array(const int arr[], int n)</p>
+<p>che:</p>
+<ul>
+<li>Somma tutti gli elementi dell&#39;array</li>
+<li>Ritorna 0 se n &lt;= 0</li>
+<li>Gestisce correttamente array vuoto</li>
+<li>Usa int per somma (overflow ignorato per semplicità)</li>
+<li>Nessuna libreria esterna necessaria</li>
+</ul>
+<p>Includi 2 esempi di test.&quot;</p>
+<pre><code>**Voto: 9/10**
+
+### 4.3 Pattern di Prompt Utili
+
+#### **Pattern: &quot;Explain Then Code&quot;**</code></pre>
+<p>&quot;Prima spiega l&#39;algoritmo in pseudocodice o linguaggio naturale,<br />
+poi implementa in [linguaggio]&quot;</p>
+<pre><code>
+#### **Pattern: &quot;Test-Driven&quot;**</code></pre>
+<p>&quot;Genera prima 5 test cases (input/output attesi),<br />
+poi scrivi la funzione che li passa&quot;</p>
+<pre><code>
+#### **Pattern: &quot;Incremental&quot;**</code></pre>
+<p>&quot;Scrivi prima versione base senza gestione errori,<br />
+poi aggiungi gestione errori,<br />
+poi aggiungi validazione input,<br />
+poi ottimizza&quot;</p>
+<pre><code>
+---
+
+## 5. Applicazioni Pratiche
+
+### 5.1 Generazione Codice
+
+#### **Esempio: Funzione Utility**
+
+**Prompt:**</code></pre>
+<p>Scrivi in C99 una funzione per invertire un array di interi in-place.</p>
+<p>int arr[] = {1, 2, 3, 4, 5};<br />
+reverse_array(arr, 5);<br />
+// arr diventa {5, 4, 3, 2, 1}</p>
+<pre><code>
+**Output Atteso:**
+```c
+void reverse_array(int arr[], int n) {
+    for (int i = 0; i &lt; n / 2; i++) {
+        int temp = arr[i];
+        arr[i] = arr[n - 1 - i];
+        arr[n - 1 - i] = temp;
+    }
+}</code></pre>
+<h3 id="52-documentazione-automatica">5.2 Documentazione Automatica</h3>
+<p><strong>Prompt:</strong></p>
+<pre><code>&quot;Genera documentazione stile Doxygen per questa funzione C: [codice]&quot;</code></pre>
+<p><strong>Output:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Calcola il Massimo Comun Divisore (MCD) di due interi</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * Implementazione dell&#39;algoritmo di Euclide per calcolare il MCD.</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">a</span><span class="co"> Primo numero intero</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">b</span><span class="co"> Secondo numero intero</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> Il MCD di a e b</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="in">@note</span><span class="co"> Complessità O(log(min(a,b)))</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@example</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"> * int risultato = gcd(48, 18); // risultato = 6</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span></code></pre></div>
+<h3 id="53-debugging-assistito">5.3 Debugging Assistito</h3>
+<p><strong>Prompt:</strong></p>
+<pre><code>&quot;Spiega questo errore e correggilo: [errore] [codice]&quot;</code></pre>
+<p><strong>Output IA:</strong></p>
+<pre><code>PROBLEMA 1: arr dichiarato come int, non int[]
+Correzione: int arr[] o int *arr
+
+PROBLEMA 2: Loop condition i &lt;= n causa accesso fuori range
+Correzione: i &lt; n
+
+CODICE CORRETTO:
+void print_array(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+}</code></pre>
+<h3 id="54-generazione-test">5.4 Generazione Test</h3>
+<p><strong>Prompt:</strong></p>
+<pre><code>&quot;Genera 5 test cases per la funzione:
+
+int binary_search(int arr[], int n, int target)
+
+che cerca target in array ordinato arr di dimensione n.
+Ritorna indice se trovato, -1 altrimenti.&quot;</code></pre>
+<hr />
+<h2 id="6-metodologie-operative">6. Metodologie Operative</h2>
+<h3 id="61-ciclo-spec--code--test">6.1 Ciclo &quot;Spec → Code → Test&quot;</h3>
+<pre><code>┌──────────────────────────────────────┐
+│   METODOLOGIA RACCOMANDATA           │
+├──────────────────────────────────────┤
+│                                      │
+│  FASE 1: SPECIFICA                   │
+│  Scrivi prompt dettagliato           │
+│  Definisci test cases aspettati      │
+│         ↓                            │
+│  FASE 2: GENERAZIONE                 │
+│  IA genera codice                    │
+│         ↓                            │
+│  FASE 3: REVISIONE                   │
+│  Leggi e comprendi codice            │
+│  Identifica problemi potenziali      │
+│         ↓                            │
+│  FASE 4: TESTING                     │
+│  Compila                             │
+│  Esegui test                         │
+│  Verifica edge cases                 │
+│         ↓                            │
+│  FASE 5: VALIDAZIONE                 │
+│  ✅ OK → Integra nel progetto        │
+│  ❌ Problemi → Torna a FASE 1/2      │
+│                                      │
+└──────────────────────────────────────┘</code></pre>
+<h3 id="62-iterazione-guidata">6.2 Iterazione Guidata</h3>
+<p><strong>Iterazione 1: Base</strong></p>
+<pre><code>Prompt: &quot;Scrivi funzione per calcolare media array&quot;
+Output: Funzione base (ma forse senza gestione errori)</code></pre>
+<p><strong>Iterazione 2: Rafforzata</strong></p>
+<pre><code>Prompt: &quot;Migliora gestendo n&lt;=0 e possibile overflow&quot;
+Output: Funzione con controlli</code></pre>
+<p><strong>Iterazione 3: Ottimizzata</strong></p>
+<pre><code>Prompt: &quot;Aggiungi versione per array molto grandi usando streaming&quot;
+Output: Implementazione ottimizzata</code></pre>
+<h3 id="63-validazione-multi-livello">6.3 Validazione Multi-Livello</h3>
+<pre><code>LIVELLO 1: Sintassi
+[ ] Codice compila senza errori?
+[ ] Nessun warning?
+
+LIVELLO 2: Semantica
+[ ] Logica corretta?
+[ ] Edge cases gestiti?
+[ ] No buffer overflow?
+
+LIVELLO 3: Stile
+[ ] Nomi variabili chiari?
+[ ] Codice leggibile?
+[ ] Commenti utili?
+
+LIVELLO 4: Performance
+[ ] Complessità accettabile?
+[ ] Uso memoria ragionevole?</code></pre>
+<hr />
+<h2 id="7-analisi-critica-del-codice-generato">7. Analisi Critica del Codice Generato</h2>
+<h3 id="71-checklist-di-analisi">7.1 Checklist di Analisi</h3>
+<h4 id="controllo-immediato-2-minuti"><strong>Controllo Immediato (2 minuti)</strong></h4>
+<pre><code>[ ] Compila?
+[ ] Firma funzione corretta?
+[ ] Nomi variabili sensati?
+[ ] Gestione base errori presente?</code></pre>
+<h4 id="controllo-approfondito-10-minuti"><strong>Controllo Approfondito (10 minuti)</strong></h4>
+<pre><code>[ ] Testato su casi normali?
+[ ] Testato su edge cases?
+[ ] Gestione memoria corretta?
+[ ] No memory leak?
+[ ] Comportamento su input invalidi?</code></pre>
+<h3 id="72-errori-tipici-da-cercare">7.2 Errori Tipici da Cercare</h3>
+<h4 id="errore-1-funzioni-non-standard"><strong>Errore 1: Funzioni Non Standard</strong></h4>
+<div class="sourceCode" id="cb31"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA potrebbe generare:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>str <span class="op">=</span> strdup<span class="op">(</span>input<span class="op">);</span> <span class="co">// ❌ strdup non è C standard!</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Soluzione corretta:</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> <span class="op">*</span>str <span class="op">=</span> malloc<span class="op">(</span>strlen<span class="op">(</span>input<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>str <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>str<span class="op">,</span> input<span class="op">);</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="errore-2-buffer-overflow"><strong>Errore 2: Buffer Overflow</strong></h4>
+<div class="sourceCode" id="cb32"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA potrebbe generare:</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> copy_string<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>dest<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>src<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    strcpy<span class="op">(</span>dest<span class="op">,</span> src<span class="op">);</span> <span class="co">// ❌ Pericoloso! No size check</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Soluzione:</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> copy_string<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>dest<span class="op">,</span> <span class="dt">char</span> <span class="op">*</span>src<span class="op">,</span> <span class="dt">size_t</span> dest_size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>dest <span class="op">&amp;&amp;</span> src <span class="op">&amp;&amp;</span> dest_size <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        strncpy<span class="op">(</span>dest<span class="op">,</span> src<span class="op">,</span> dest_size <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        dest<span class="op">[</span>dest_size <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">&#39;</span><span class="sc">\0</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="errore-3-gestione-puntatori-null"><strong>Errore 3: Gestione Puntatori NULL</strong></h4>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA potrebbe generare:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sum<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        s <span class="op">+=</span> arr<span class="op">[</span>i<span class="op">];</span> <span class="co">// ❌ Crash se arr == NULL!</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s<span class="op">;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Soluzione:</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sum<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>arr <span class="op">==</span> NULL <span class="op">||</span> n <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// ✅ Gestione esplicita</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>        s <span class="op">+=</span> arr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s<span class="op">;</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="8-esempi-guidati-completi">8. Esempi Guidati Completi</h2>
+<h3 id="81-esempio-ricerca-binaria">8.1 Esempio: Ricerca Binaria</h3>
+<p><strong>Prompt Professionale:</strong></p>
+<pre><code>&quot;Scrivi in C99 una funzione di ricerca binaria:
+
+int binary_search(const int arr[], int n, int target)
+
+Requisiti:
+- Array arr ordinato in ordine crescente
+- Ritorna indice se trovato, -1 se non trovato
+- Gestisce arr=NULL (ritorna -1)
+- Gestisce n&lt;=0 (ritorna -1)
+- Implementazione iterativa (non ricorsiva)
+- Complessità O(log n)
+- Commenti che spiegano logica
+- Includi 5 test cases&quot;</code></pre>
+<p><strong>Output Validato:</strong></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Ricerca binaria in array ordinato</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">arr</span><span class="co"> Array ordinato crescente</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">n</span><span class="co"> Dimensione array</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">target</span><span class="co"> Valore da cercare</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> Indice se trovato, -1 altrimenti</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> binary_search<span class="op">(</span><span class="dt">const</span> <span class="dt">int</span> arr<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> target<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>arr <span class="op">==</span> NULL <span class="op">||</span> n <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> left <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> right <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>left <span class="op">&lt;=</span> right<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> mid <span class="op">=</span> left <span class="op">+</span> <span class="op">(</span>right <span class="op">-</span> left<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>arr<span class="op">[</span>mid<span class="op">]</span> <span class="op">==</span> target<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> mid<span class="op">;</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>arr<span class="op">[</span>mid<span class="op">]</span> <span class="op">&lt;</span> target<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>            left <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="9-errori-comuni-e-come-evitarli">9. Errori Comuni e Come Evitarli</h2>
+<h3 id="91-errore-prompt-troppo-vago">9.1 Errore: Prompt Troppo Vago</h3>
+<p>❌ <strong>Sbagliato:</strong></p>
+<pre><code>&quot;Scrivi codice per ordinare&quot;</code></pre>
+<p>✅ <strong>Corretto:</strong></p>
+<pre><code>&quot;Scrivi in C99 funzione `void selection_sort(int arr[], int n)`
+che ordina in-place array di interi in ordine crescente usando
+algoritmo selection sort. Gestisci n&lt;=0 ritornando immediatamente.&quot;</code></pre>
+<h3 id="92-errore-fidarsi-ciecamente">9.2 Errore: Fidarsi Ciecamente</h3>
+<p>❌ <strong>Comportamento Pericoloso:</strong></p>
+<pre><code>1. Chiedi codice a IA
+2. Copia-incolla nel progetto
+3. Compila
+4. Deploy in produzione</code></pre>
+<p>✅ <strong>Comportamento Corretto:</strong></p>
+<pre><code>1. Chiedi codice a IA
+2. LEGGI e COMPRENDI il codice
+3. TESTA su casi normali ed edge
+4. VALIDA con tool (cppcheck, valgrind)
+5. CODE REVIEW con collega
+6. Integra gradualmente</code></pre>
+<h3 id="93-errore-non-iterare">9.3 Errore: Non Iterare</h3>
+<p>❌ <strong>Singolo Tentativo:</strong></p>
+<pre><code>Prompt 1 → Output mediocre → &quot;Vabbè, lo uso così&quot;</code></pre>
+<p>✅ <strong>Approccio Iterativo:</strong></p>
+<pre><code>Prompt 1 → Output base
+   ↓
+Analisi problemi
+   ↓
+Prompt 2 migliorato → Output migliore
+   ↓
+✅ Codice pronto</code></pre>
+<hr />
+<h2 id="10-esercizi-pratici">10. Esercizi Pratici</h2>
+<h3 id="esercizio-1-miglioramento-prompt">Esercizio 1: Miglioramento Prompt</h3>
+<p><strong>Dato questo prompt mediocre:</strong></p>
+<pre><code>&quot;Fai una funzione che trova il massimo&quot;</code></pre>
+<p><strong>Compito:</strong> Riscrivilo in versione professionale che includa:</p>
+<ul>
+<li>Linguaggio e standard</li>
+<li>Firma funzione</li>
+<li>Gestione errori</li>
+<li>Formato output</li>
+<li>Test richiesti</li>
+</ul>
+<h3 id="esercizio-2-debugging-assistito">Esercizio 2: Debugging Assistito</h3>
+<p><strong>Dato questo codice con bug:</strong></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> arr<span class="op">[</span><span class="dv">5</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">+=</span> arr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Somma: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> sum<span class="op">);</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Compiti:</strong></p>
+<ol type="1">
+<li>Identifica il bug</li>
+<li>Scrivi un prompt per l&#39;IA che chieda di spiegare e correggere</li>
+<li>Valida la soluzione proposta</li>
+</ol>
+<h3 id="esercizio-3-test-generation">Esercizio 3: Test Generation</h3>
+<p><strong>Data questa funzione:</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Verifica se una stringa è palindroma</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> is_palindrome<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>str<span class="op">);</span></span></code></pre></div>
+<p><strong>Compito:</strong> Scrivi un prompt che generi 8 test cases completi</p>
+<hr />
+<h2 id="white_check_mark-checklist-completamento-modulo">✅ Checklist Completamento Modulo</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>So formulare prompt tecnici completi</label></li>
+<li><label><input type="checkbox"></input>Comprendo struttura CLEAR</label></li>
+<li><label><input type="checkbox"></input>Conosco pattern di prompt utili</label></li>
+<li><label><input type="checkbox"></input>So iterare su prompt per migliorare output</label></li>
+<li><label><input type="checkbox"></input>So analizzare criticamente codice generato da IA</label></li>
+<li><label><input type="checkbox"></input>Riconosco errori tipici (buffer overflow, NULL ptr, ecc.)</label></li>
+<li><label><input type="checkbox"></input>Applico metodologia Spec → Code → Test</label></li>
+<li><label><input type="checkbox"></input>Ho completato almeno 3 esercizi pratici</label></li>
+<li><label><input type="checkbox"></input>Mi sento pronto per Modulo 3</label></li>
+</ul>
+<hr />
+<p><strong>Fine Modulo 2</strong></p>
+<p><em>Prossimo: Modulo 3 - Programmazione C con IA</em></p>
+<hr />
+<p><strong>Versione:</strong> 2.0 | <strong>Aggiornamento:</strong> Dicembre 2024 | <strong>Corso ITS</strong></p>
+</main>
+</body>
+</html>

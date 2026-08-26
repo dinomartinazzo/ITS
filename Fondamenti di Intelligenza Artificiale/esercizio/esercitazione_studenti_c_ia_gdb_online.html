@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Esercitazione Studenti – C + IA con Debug su gdb online</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Esercitazione Studenti – C + IA con Debug su gdb online</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>esercitazione_studenti_c_ia_gdb_online.md</dd></div>
+<div><dt>Cartella</dt><dd>CookBooks/ITS/Fondamenti di Intelligenza Artificiale/esercizio</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="focus-spec--code--test-manuale--debug-solo-gdb-online">Focus: Spec → Code → Test (manuale) → Debug (solo gdb online)</h2>
+<hr />
+<h2 id="0-obiettivo">0) Obiettivo</h2>
+<p>Usare l’IA come <strong>supporto controllato</strong> per sviluppare una mini-libreria in C e verificare il comportamento tramite:</p>
+<ul>
+<li>compilazione con warning;</li>
+<li>test manuali;</li>
+<li>debug <strong>solo con gdb online</strong>.</li>
+</ul>
+<p>Consegna finale: sorgenti + report con prompt e risultati.</p>
+<hr />
+<h1 id="1-esempio-introduttivo-mini-libreria-in-c">1) Esempio introduttivo: “mini-libreria” in C</h1>
+<p>In C una “libreria” (in questo contesto) è un insieme di funzioni riutilizzabili organizzate in:</p>
+<ul>
+<li>un file <strong>header</strong> <code>.h</code> (prototipi e tipi),</li>
+<li>un file <strong>sorgente</strong> <code>.c</code> (implementazioni),</li>
+<li>un file <code>main.c</code> che usa la libreria.</li>
+</ul>
+<h2 id="11-esempio-minimo-libreria-add">1.1 Esempio minimo: libreria <code>add</code></h2>
+<p>Copia questi 3 file nel tuo gdb online e verifica che compili.</p>
+<h3 id="file-addh">File: add.h</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef ADD_H</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ADD_H</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<h3 id="file-addc">File: add.c</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;add.h&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="file-mainc">File: main.c</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;add.h&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> r <span class="op">=</span> add<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;r=</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> r<span class="op">);</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="12-compilazione-importante">1.2 Compilazione (importante)</h2>
+<p>Compila sempre con:</p>
+<ul>
+<li>standard C99</li>
+<li>warning attivi</li>
+<li>simboli di debug per gdb</li>
+</ul>
+<p>Comando:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c99 <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-Wpedantic</span> <span class="at">-O0</span> <span class="at">-g</span> main.c add.c <span class="at">-o</span> app</span></code></pre></div>
+<p>Esecuzione:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./app</span></span></code></pre></div>
+<h2 id="13-debug-rapido-con-gdb">1.3 Debug rapido con gdb</h2>
+<p>Avvio:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gdb</span> ./app</span></code></pre></div>
+<p>Comandi minimi:</p>
+<ul>
+<li><code>break main</code></li>
+<li><code>run</code></li>
+<li><code>next</code> (passo senza entrare)</li>
+<li><code>step</code> (entra nella funzione)</li>
+<li><code>print r</code></li>
+<li><code>quit</code></li>
+</ul>
+<hr />
+<h1 id="2-esercitazione-principale-mini-libreria-stats">2) Esercitazione principale: Mini-libreria <code>stats</code></h1>
+<h2 id="21-specifica-traccia-funzionale">2.1 Specifica (traccia funzionale)</h2>
+<p>Realizzare una mini-libreria <code>stats</code> per array di interi <code>int</code> con funzioni:</p>
+<ol type="1">
+<li><code>int stats_min(const int *v, int n, int *out);</code></li>
+<li><code>int stats_max(const int *v, int n, int *out);</code></li>
+<li><code>int stats_sum_ll(const int *v, int n, long long *out);</code></li>
+<li><code>int stats_mean(const int *v, int n, double *out);</code></li>
+<li><code>int stats_variance_population(const int *v, int n, double *out);</code></li>
+</ol>
+<h3 id="regole-obbligatorie">Regole obbligatorie</h3>
+<ul>
+<li>Standard: <strong>C99</strong></li>
+<li>Ritorno: <code>0</code> se OK, <code>!=0</code> se errore</li>
+<li>Errori da gestire:
+<ul>
+<li><code>v == NULL</code></li>
+<li><code>out == NULL</code></li>
+<li><code>n &lt;= 0</code></li>
+</ul></li>
+<li><code>sum_ll</code>: accumulo in <code>long long</code></li>
+<li><code>variance_population</code>: varianza di popolazione = media dei quadrati degli scarti (divisore <code>n</code>)</li>
+<li>Le funzioni non devono stampare nulla</li>
+<li>Niente input da tastiera (<code>scanf</code> vietato)</li>
+</ul>
+<hr />
+<h2 id="22-flusso-obbligatorio-con-ia-da-documentare-nel-report">2.2 Flusso obbligatorio con IA (da documentare nel report)</h2>
+<h3 id="fase-a--generazione-specifica-tecnica">Fase A – Generazione specifica tecnica</h3>
+<p>Produrre una specifica testuale con:</p>
+<ul>
+<li>firme delle funzioni</li>
+<li>pre/post-condizioni</li>
+<li>codici di errore</li>
+<li>complessità</li>
+<li>note overflow/precisione</li>
+</ul>
+<h3 id="fase-b--generazione-codice">Fase B – Generazione codice</h3>
+<p>Generare 3 file:</p>
+<ul>
+<li><code>stats.h</code></li>
+<li><code>stats.c</code></li>
+<li><code>main.c</code> (che chiama le funzioni e stampa risultati per test manuali)</li>
+</ul>
+<h3 id="fase-c--generazione-piano-di-test">Fase C – Generazione piano di test</h3>
+<p>Un elenco di casi con:</p>
+<ul>
+<li>input</li>
+<li>output atteso</li>
+<li>motivazione</li>
+</ul>
+<h3 id="fase-d--test-manuale">Fase D – Test manuale</h3>
+<p>Eseguire in <code>main.c</code> almeno 6 casi e confrontare a mano “atteso vs ottenuto”.</p>
+<h3 id="fase-e--debug-gdb-online">Fase E – Debug (gdb online)</h3>
+<p>Se un caso fallisce: debug con breakpoint e stampa variabili.</p>
+<hr />
+<h1 id="3-prompt-modello-da-copiare-e-incollare-nel-report">3) Prompt modello (da copiare e incollare nel report)</h1>
+<h2 id="prompt-a--specifica-tecnica">Prompt A – Specifica tecnica</h2>
+<pre class="text"><code>Genera una specifica tecnica in italiano per una mini-libreria C99 chiamata stats.
+Deve includere: prototipi, pre/post-condizioni, codici errore, complessità e note su overflow/precisione.
+Funzioni: min, max, somma long long, media double, varianza popolazione double su array di int.
+Vincoli: portabile, nessuna dipendenza esterna, ogni funzione valida v/out/n.
+Formato: sezioni numerate.</code></pre>
+<h2 id="prompt-b--codice">Prompt B – Codice</h2>
+<pre class="text"><code>Genera codice completo C99 per stats.h, stats.c, main.c.
+Compilazione con gcc: -std=c99 -Wall -Wextra -Wpedantic -O0 -g.
+Regole: codici errore coerenti, out scritto solo se OK.
+Varianza popolazione: (1/n) * somma( (xi - mean)^2 ).
+In main.c: esegui casi di prova e stampa risultati in modo leggibile (senza scanf).</code></pre>
+<h2 id="prompt-c--piano-test">Prompt C – Piano test</h2>
+<pre class="text"><code>Genera un piano di test per stats (min, max, sum_ll, mean, variance_population).
+Includi: casi normali, negativi, n==1, input invalidi (NULL, n&lt;=0), valori grandi per sum_ll.
+Per ogni test: input, output atteso, motivazione.</code></pre>
+<h2 id="prompt-d--debug-assistito-solo-analisi-non-copia-incolla">Prompt D – Debug assistito (solo analisi, non copia-incolla)</h2>
+<pre class="text"><code>Ti fornisco un problema: un test manuale fallisce. Analizza possibili cause e dimmi dove mettere breakpoint in gdb.
+Non riscrivere tutto il codice: suggerisci controlli e variabili da osservare.</code></pre>
+<hr />
+<h1 id="4-compilazione-ed-esecuzione-nel-gdb-online">4) Compilazione ed esecuzione nel gdb online</h1>
+<h2 id="41-compilazione">4.1 Compilazione</h2>
+<p>Eseguire:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-std</span><span class="op">=</span>c99 <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-Wpedantic</span> <span class="at">-O0</span> <span class="at">-g</span> main.c stats.c <span class="at">-o</span> app <span class="at">-lm</span></span></code></pre></div>
+<p>Note:</p>
+<ul>
+<li><code>-O0</code> evita ottimizzazioni che rendono più difficile il debug</li>
+<li><code>-g</code> abilita simboli per gdb</li>
+<li><code>-lm</code> serve se usate funzioni matematiche come <code>sqrt</code> (opzionale)</li>
+</ul>
+<h2 id="42-esecuzione">4.2 Esecuzione</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./app</span></span></code></pre></div>
+<hr />
+<h1 id="5-debug-operativo-solo-gdb-online">5) Debug operativo (solo gdb online)</h1>
+<p>Avvio:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gdb</span> ./app</span></code></pre></div>
+<p>Comandi essenziali (sequenza tipica):</p>
+<ol type="1">
+<li><code>break main</code></li>
+<li><code>run</code></li>
+<li><code>next</code> finché arrivi alla chiamata che fallisce</li>
+<li><code>step</code> per entrare nella funzione <code>stats_*</code></li>
+<li><code>print n</code></li>
+<li><code>print v[0]</code></li>
+<li><code>print i</code> (se sei nel ciclo)</li>
+<li><code>print mean</code> / <code>print acc</code> (se stai calcolando media/varianza)</li>
+<li><code>backtrace</code> se c’è crash</li>
+<li><code>quit</code></li>
+</ol>
+<h3 id="breakpoint-mirati">Breakpoint mirati</h3>
+<p>Se sai dove è il problema:</p>
+<ul>
+<li><code>break stats_variance_population</code></li>
+<li><code>break stats_mean</code></li>
+<li><code>break stats_sum_ll</code></li>
+</ul>
+<h3 id="watchpoint-se-disponibile">Watchpoint (se disponibile)</h3>
+<p>Utile per vedere quando una variabile cambia:</p>
+<ul>
+<li><code>watch i</code></li>
+<li><code>watch acc</code></li>
+</ul>
+<hr />
+<h1 id="6-test-manuali-minimi-obbligatori">6) Test manuali minimi (obbligatori)</h1>
+<p>Scegli almeno questi casi nel tuo <code>main.c</code> e stampa i risultati:</p>
+<ol type="1">
+<li><code>v={1,2,3,4}</code></li>
+</ol>
+<ul>
+<li>min=1, max=4, sum=10, mean=2.5, var_pop=1.25</li>
+</ul>
+<ol start="2" type="1">
+<li><code>v={-5,-1,-3}</code></li>
+</ol>
+<ul>
+<li>min=-5, max=-1, sum=-9, mean=-3.0</li>
+</ul>
+<ol start="3" type="1">
+<li><code>v={7}</code></li>
+</ol>
+<ul>
+<li>mean=7.0, var_pop=0.0</li>
+</ul>
+<ol start="4" type="1">
+<li>caso errore: <code>v=NULL</code></li>
+</ol>
+<ul>
+<li>rc != 0</li>
+</ul>
+<ol start="5" type="1">
+<li>caso errore: <code>out=NULL</code></li>
+</ol>
+<ul>
+<li>rc != 0</li>
+</ul>
+<ol start="6" type="1">
+<li>caso errore: <code>n&lt;=0</code></li>
+</ol>
+<ul>
+<li>rc != 0</li>
+</ul>
+<ol start="7" type="1">
+<li>somma grande: <code>v={1000000000,1000000000,1000000000}</code></li>
+</ol>
+<ul>
+<li>sum=3000000000 (necessario long long)</li>
+</ul>
+<hr />
+<h1 id="7-consegna">7) Consegna</h1>
+<p>Consegnare:</p>
+<ul>
+<li><code>stats.h</code>, <code>stats.c</code>, <code>main.c</code></li>
+<li><code>report.txt</code> con:
+<ul>
+<li>prompt A/B/C (incollati)</li>
+<li>piano di test (tabella atteso/ottenuto)</li>
+<li>eventuali bug trovati e come li hai risolti</li>
+<li>comandi gdb usati (breakpoint, variabili osservate)</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="8-estensione-facoltativa">8) Estensione facoltativa</h1>
+<ol type="1">
+<li>Aggiungere <code>stats_stddev_population</code> usando <code>sqrt</code>.</li>
+<li>Aggiungere varianza campionaria (divisore <code>n-1</code>) e commentare la differenza.</li>
+<li>Migliorare robustezza: evitare scrittura su <code>out</code> in caso di errore.</li>
+</ol>
+<hr />
+<h2 id="fine-documento">Fine documento</h2>
+</main>
+</body>
+</html>
