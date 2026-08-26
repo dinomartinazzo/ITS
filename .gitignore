@@ -3,3 +3,6 @@
 
 # File temporanei creati dal filesystem FUSE del mount di rete/USB
 .fuse_hidden*
+
+# Log di esecuzione dello script di sync, non contenuto da pubblicare
+*.log
