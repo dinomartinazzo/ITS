@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 MODULO EXTRA</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 MODULO EXTRA</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>MODULO_EXTRA_GUIDA_PRATICA_STUDENTI_ITS.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale/old</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h1 id="guida-pratica-alluso-dellia-per-studenti-its">Guida Pratica all&#39;Uso dell&#39;IA per Studenti ITS</h1>
+<h2 id="come-sfruttare-lia-per-studio-progetti-e-lavoro">Come Sfruttare l&#39;IA per Studio, Progetti e Lavoro</h2>
+<h3 id="manuale-operativo-completo">Manuale Operativo Completo</h3>
+<hr />
+<h2 id="bookmark_tabs-indice-del-modulo">📑 Indice del Modulo</h2>
+<ol type="1">
+<li><a href="#1-introduzione-per-studenti-its">Introduzione per Studenti ITS</a></li>
+<li><a href="#2-strumenti-ia-disponibili">Strumenti IA Disponibili</a></li>
+<li><a href="#3-organizzazione-dei-prompt">Organizzazione dei Prompt</a></li>
+<li><a href="#4-prompt-per-apprendimento-e-studio">Prompt per Apprendimento e Studio</a></li>
+<li><a href="#5-prompt-per-generazione-codice">Prompt per Generazione Codice</a></li>
+<li><a href="#6-prompt-per-testi-e-documentazione">Prompt per Testi e Documentazione</a></li>
+<li><a href="#7-prompt-per-presentazioni">Prompt per Presentazioni</a></li>
+<li><a href="#8-workflow-completi-per-progetti-its">Workflow Completi per Progetti ITS</a></li>
+<li><a href="#9-biblioteca-prompt-pronti-alluso">Biblioteca Prompt Pronti all&#39;Uso</a></li>
+<li><a href="#10-errori-da-evitare">Errori da Evitare</a></li>
+<li><a href="#11-casi-duso-reali-its">Casi d&#39;Uso Reali ITS</a></li>
+<li><a href="#12-sistema-di-organizzazione-personale">Sistema di Organizzazione Personale</a></li>
+</ol>
+<hr />
+<h2 id="1-introduzione-per-studenti-its">1. Introduzione per Studenti ITS</h2>
+<h3 id="11-perché-questa-guida">1.1 Perché Questa Guida</h3>
+<p>Come studente ITS in ambito informatico, embedded o sistemi, l&#39;IA può essere il tuo <strong>assistente personale 24/7</strong> per:</p>
+<ul>
+<li>✅ <strong>Studiare</strong> concetti difficili con spiegazioni personalizzate</li>
+<li>✅ <strong>Programmare</strong> più velocemente con supporto su codice</li>
+<li>✅ <strong>Documentare</strong> progetti in modo professionale</li>
+<li>✅ <strong>Creare</strong> presentazioni efficaci per esami/stage</li>
+<li>✅ <strong>Risolvere</strong> problemi tecnici complessi</li>
+<li>✅ <strong>Prepararsi</strong> per colloqui di lavoro</li>
+</ul>
+<p><strong>Ma attenzione</strong>: L&#39;IA è uno <strong>strumento</strong>, non una <strong>scorciatoia</strong>. Usala per imparare meglio, non per evitare di imparare!</p>
+<h3 id="12-mentalità-corretta">1.2 Mentalità Corretta</h3>
+<pre><code>❌ MENTALITÀ SBAGLIATA:
+&quot;Chiedo all&#39;IA di fare tutto, io copio&quot;
+→ Risultato: Non impari nulla, non sai validare
+
+✅ MENTALITÀ CORRETTA:
+&quot;Uso l&#39;IA per capire meglio, accelerare, migliorare&quot;
+→ Risultato: Impari di più, più velocemente</code></pre>
+<h3 id="13-la-regola-doro">1.3 La Regola d&#39;Oro</h3>
+<blockquote>
+<p><strong>Usa l&#39;IA come un TUTOR esperto, non come un GHOSTWRITER.</strong></p>
+<p>Fai domande, chiedi spiegazioni, richiedi esempi.<br />
+Poi STUDIA l&#39;output, COMPRENDI, VALIDA, INTEGRA.</p>
+</blockquote>
+<h3 id="14-competenze-che-svilupperai">1.4 Competenze che Svilupperai</h3>
+<p>Usando questa guida imparerai a:</p>
+<ol type="1">
+<li><strong>Formulare domande precise</strong> → Ottieni risposte utili</li>
+<li><strong>Organizzare conoscenza</strong> → Sistema di prompt riutilizzabili</li>
+<li><strong>Validare criticamente</strong> → Riconosci errori IA</li>
+<li><strong>Produrre contenuti professionali</strong> → Codice, docs, slide</li>
+<li><strong>Lavorare efficacemente</strong> → Velocità + Qualità</li>
+</ol>
+<hr />
+<h2 id="2-strumenti-ia-disponibili">2. Strumenti IA Disponibili</h2>
+<h3 id="21-llm-generici-conversazionali">2.1 LLM Generici (Conversazionali)</h3>
+<h4 id="chatgpt-openai"><strong>ChatGPT (OpenAI)</strong></h4>
+<pre><code>URL: https://chat.openai.com
+Costo: Gratuito (limitato) / Plus $20/mese
+Punti di forza:
+- Interfaccia semplice
+- Ottimo per codice Python, JavaScript
+- Buone spiegazioni didattiche
+- Plugin (con Plus)
+
+Punti deboli:
+- A volte genera codice obsoleto
+- Limiti giornalieri versione free</code></pre>
+<h4 id="claude-anthropic"><strong>Claude (Anthropic)</strong></h4>
+<pre><code>URL: https://claude.ai
+Costo: Gratuito (limitato) / Pro $20/mese
+Punti di forza:
+- Contesto molto lungo (200k token)
+- Eccellente con C, embedded
+- Analisi documenti complessi
+- Risposte strutturate
+
+Punti deboli:
+- Meno plugin di ChatGPT</code></pre>
+<h4 id="gemini-google"><strong>Gemini (Google)</strong></h4>
+<pre><code>URL: https://gemini.google.com
+Costo: Gratuito
+Punti di forza:
+- Integrato con Google Suite
+- Cerca web in tempo reale
+- Analizza immagini
+
+Punti deboli:
+- A volte meno tecnico degli altri</code></pre>
+<h3 id="22-tool-specializzati-per-codice">2.2 Tool Specializzati per Codice</h3>
+<h4 id="github-copilot"><strong>GitHub Copilot</strong></h4>
+<pre><code>Tipo: Plugin IDE (VSCode, JetBrains)
+Costo: $10/mese (GRATIS per studenti!)
+Come: https://education.github.com/pack
+
+Uso:
+- Autocomplete intelligente
+- Genera funzioni da commenti
+- Suggerisce fix
+
+Ideale per: Coding quotidiano</code></pre>
+<h4 id="cursor"><strong>Cursor</strong></h4>
+<pre><code>Tipo: IDE con IA integrata
+Costo: Gratuito / Pro $20/mese
+URL: https://cursor.sh
+
+Uso:
+- Editor stile VSCode + IA nativa
+- Ctrl+K per prompt nel codice
+- Refactoring assistito
+
+Ideale per: Progetti complessi</code></pre>
+<h3 id="23-tool-per-presentazioni">2.3 Tool per Presentazioni</h3>
+<h4 id="gammaapp"><strong>Gamma.app</strong></h4>
+<pre><code>URL: https://gamma.app
+Costo: Gratuito (limitato) / Pro $10/mese
+
+Genera slide da:
+- Prompt testo
+- Documenti
+- Outline
+
+Output: Presentazioni professionali pronte</code></pre>
+<h4 id="beautifulai"><strong>Beautiful.ai</strong></h4>
+<pre><code>URL: https://www.beautiful.ai
+Costo: Trial gratuito / $12/mese
+
+Design automatico slide
+Template professionali</code></pre>
+<h3 id="24-tool-per-documentazione">2.4 Tool per Documentazione</h3>
+<h4 id="notion-ai"><strong>Notion AI</strong></h4>
+<pre><code>Integrato in Notion
+Costo: $10/mese (add-on)
+
+Genera/migliora:
+- Note di studio
+- Documentazione progetti
+- Wiki personali</code></pre>
+<h3 id="25-raccomandazione-per-studente-its">2.5 Raccomandazione per Studente ITS</h3>
+<p><strong>Setup Consigliato (Gratuito):</strong></p>
+<pre><code>1. ChatGPT free → Domande generali, spiegazioni
+2. Claude free → Codice C, embedded, analisi tecnica
+3. GitHub Copilot (studente) → Coding quotidiano
+4. Gamma.app free → Presentazioni esami
+
+Costo totale: €0 (con email studente!)</code></pre>
+<p><strong>Setup Avanzato (con budget):</strong></p>
+<pre><code>1. ChatGPT Plus ($20) O Claude Pro ($20)
+2. GitHub Copilot ($10 → gratis studenti)
+3. Gamma Pro ($10)
+
+Costo: ~$20-30/mese
+Risparmio tempo: 10-15 ore/mese
+ROI: Eccellente!</code></pre>
+<hr />
+<h2 id="3-organizzazione-dei-prompt">3. Organizzazione dei Prompt</h2>
+<h3 id="31-perché-organizzare-i-prompt">3.1 Perché Organizzare i Prompt</h3>
+<p>Come organizzeresti i tuoi <strong>appunti di studio</strong>? Probabilmente per materia, argomento, progetto.</p>
+<p>Lo stesso vale per i prompt IA:</p>
+<p><strong>Senza organizzazione:</strong></p>
+<ul>
+<li>&quot;Cosa avevo chiesto settimana scorsa?&quot;</li>
+<li>&quot;Com&#39;era quel prompt per generare test?&quot;</li>
+<li>&quot;Devo riscrivere tutto da capo...&quot;</li>
+</ul>
+<p><strong>Con organizzazione:</strong></p>
+<ul>
+<li>Biblioteca prompt riutilizzabili</li>
+<li>Modelli per task ricorrenti</li>
+<li>Evoluzione progressiva</li>
+<li>Risparmio tempo enorme</li>
+</ul>
+<h3 id="32-sistema-di-organizzazione-prompt">3.2 Sistema di Organizzazione Prompt</h3>
+<h4 id="metodo-1-file-di-testo-base"><strong>Metodo 1: File di Testo (Base)</strong></h4>
+<pre><code>📁 Prompt_ITS/
+├── 📁 Studio/
+│   ├── 📄 spiega_concetto.txt
+│   ├── 📄 riassunto_argomento.txt
+│   └── 📄 esercizi_pratica.txt
+├── 📁 Codice/
+│   ├── 📄 funzione_C_template.txt
+│   ├── 📄 sketch_arduino_template.txt
+│   ├── 📄 debug_codice.txt
+│   └── 📄 refactoring.txt
+├── 📁 Documentazione/
+│   ├── 📄 README_progetto.txt
+│   ├── 📄 relazione_tecnica.txt
+│   └── 📄 commenti_codice.txt
+└── 📁 Presentazioni/
+    ├── 📄 slide_progetto.txt
+    └── 📄 pitch_idea.txt</code></pre>
+<p><strong>Esempio file <code>funzione_C_template.txt</code>:</strong></p>
+<pre><code>TEMPLATE PROMPT: Funzione C Professionale
+
+---
+Scrivi in standard C99 una funzione:
+
+[FIRMA FUNZIONE]
+
+SPECIFICHE:
+- [Cosa deve fare]
+- [Gestione errori]
+- [Valori ritorno]
+
+VINCOLI:
+- Solo C99 standard
+- No VLA
+- Gestione NULL esplicita
+
+OUTPUT RICHIESTO:
+- Header (.h) con Doxygen
+- Implementation (.c)
+- 3+ test cases
+
+ESEMPIO USO:
+[Codice esempio]
+---
+
+USO:
+Copia questo template, compila [CAMPI], invia all&#39;IA.</code></pre>
+<h4 id="metodo-2-notion-intermedio"><strong>Metodo 2: Notion (Intermedio)</strong></h4>
+<p>Crea database Notion:</p>
+<pre><code>Database: &quot;Prompt Library&quot;
+├── Proprietà:
+│   ├── Nome (Titolo)
+│   ├── Categoria (Select: Studio/Codice/Docs/Slides)
+│   ├── Tool (Select: ChatGPT/Claude/Copilot)
+│   ├── Qualità (Rating 1-5)
+│   ├── Ultima modifica (Data)
+│   └── Tag (Multi-select)
+└── Views:
+    ├── Per Categoria
+    ├── Per Tool
+    └── Preferiti (5 stelle)</code></pre>
+<p><strong>Vantaggio:</strong> Ricerca veloce, template riutilizzabili, collaborazione.</p>
+<h4 id="metodo-3-github-repo-avanzato"><strong>Metodo 3: GitHub Repo (Avanzato)</strong></h4>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea repo privato</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> repo create my-prompts <span class="at">--private</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Struttura</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">my-prompts/</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md <span class="er">(</span><span class="ex">indice</span><span class="kw">)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> templates/</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── coding/</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── docs/</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── study/</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> examples/</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── real_usage/</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> CHANGELOG.md</span></code></pre></div>
+<p><strong>Vantaggio:</strong> Versioning, backup automatico, condivisibile.</p>
+<h3 id="33-sistema-di-nomenclatura">3.3 Sistema di Nomenclatura</h3>
+<p><strong>Convenzione consigliata:</strong></p>
+<pre><code>[CATEGORIA]_[TASK]_[DETTAGLIO].txt
+
+Esempi:
+CODE_function_C_mathematical.txt
+CODE_arduino_sensor_analog.txt
+STUDY_explain_concept_simple.txt
+STUDY_quiz_generation.txt
+DOC_readme_project.txt
+DOC_comments_inline.txt
+SLIDE_project_presentation.txt</code></pre>
+<h3 id="34-template-base-universale">3.4 Template Base Universale</h3>
+<p>Ogni prompt ben fatto contiene questi elementi:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># [NOME PROMPT]</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contesto</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Chi sei, cosa stai facendo, perché serve</span><span class="co">]</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Obiettivo</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Cosa vuoi ottenere - chiaro e misurabile</span><span class="co">]</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Input</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Cosa fornisci all&#39;IA</span><span class="co">]</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Vincoli</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Limitazioni, standard, formati</span><span class="co">]</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Output Desiderato</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Come deve essere la risposta</span><span class="co">]</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Esempi (opzionale)</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Input/output di esempio</span><span class="co">]</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>CHANGELOG:</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>v1.0 - 2024-12-05 - Versione iniziale</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>v1.1 - 2024-12-10 - Aggiunto esempio</span></code></pre></div>
+<h3 id="35-sistema-di-evoluzione-prompt">3.5 Sistema di Evoluzione Prompt</h3>
+<p>I tuoi prompt MIGLIORERANNO nel tempo:</p>
+<pre><code>ITERAZIONE 1: Prompt base
+→ Output OK ma generico
+
+ITERAZIONE 2: Aggiungi vincoli specifici
+→ Output migliore, più mirato
+
+ITERAZIONE 3: Aggiungi esempi
+→ Output quasi perfetto
+
+ITERAZIONE 4: Fine-tune dettagli
+→ Output professionale
+
+SALVA VERSIONE FINALE!</code></pre>
+<p><strong>Best Practice:</strong> Quando trovi un prompt che funziona bene, <strong>salvalo immediatamente</strong> con note su cosa lo rende efficace.</p>
+<hr />
+<h2 id="4-prompt-per-apprendimento-e-studio">4. Prompt per Apprendimento e Studio</h2>
+<h3 id="41-spiegazione-concetti">4.1 Spiegazione Concetti</h3>
+<h4 id="template-spiega-concetto-semplice"><strong>Template: Spiega Concetto Semplice</strong></h4>
+<pre><code>Sono uno studente ITS al [ANNO] anno di [INDIRIZZO].
+
+Devo capire il concetto di [CONCETTO] nel contesto di [MATERIA].
+
+Spiegamelo in modo:
+1. Semplice ma preciso (livello universitario tecnico)
+2. Con un&#39;analogia pratica
+3. Con un esempio di codice/applicazione se pertinente
+4. Evidenziando errori comuni da evitare
+
+Poi dammi 3 domande di autoverifica per testare se ho capito.</code></pre>
+<p><strong>Esempio Reale:</strong></p>
+<pre><code>Sono uno studente ITS al primo anno di Informatica.
+
+Devo capire il concetto di PUNTATORI in C nel contesto di 
+Programmazione di Sistema.
+
+Spiegamelo in modo:
+1. Semplice ma preciso (livello universitario tecnico)
+2. Con un&#39;analogia pratica
+3. Con un esempio di codice
+4. Evidenziando errori comuni da evitare
+
+Poi dammi 3 domande di autoverifica per testare se ho capito.</code></pre>
+<h4 id="template-confronto-concetti"><strong>Template: Confronto Concetti</strong></h4>
+<pre><code>Sono uno studente ITS che studia [MATERIA].
+
+Qual è la differenza tra [CONCETTO A] e [CONCETTO B]?
+
+Fornisci:
+1. Definizioni tecniche di entrambi
+2. Tabella comparativa con 5 criteri
+3. Quando usare uno vs l&#39;altro
+4. Esempio pratico di ciascuno
+5. Errori comuni nel confonderli</code></pre>
+<p><strong>Esempio:</strong></p>
+<pre><code>Qual è la differenza tra malloc() e calloc() in C?
+[Usa template sopra]</code></pre>
+<h4 id="template-approfondimento-tecnico"><strong>Template: Approfondimento Tecnico</strong></h4>
+<pre><code>Sto studiando [ARGOMENTO] per [MATERIA/PROGETTO].
+
+Ho capito le basi, ma voglio approfondire [ASPETTO SPECIFICO].
+
+Fornisci:
+1. Spiegazione tecnica dettagliata
+2. Come funziona internamente (se rilevante)
+3. Casi d&#39;uso avanzati
+4. Pitfalls e best practices
+5. Risorse per approfondire ulteriormente
+
+Il mio livello attuale: [principiante/intermedio/avanzato]</code></pre>
+<h3 id="42-generazione-quiz-e-test">4.2 Generazione Quiz e Test</h3>
+<h4 id="template-quiz-autovalutazione"><strong>Template: Quiz Autovalutazione</strong></h4>
+<pre><code>Genera un quiz di autovalutazione su [ARGOMENTO].
+
+Formato:
+- 10 domande a scelta multipla
+- 5 domande vero/falso
+- 3 domande aperte brevi
+
+Livello: [base/intermedio/avanzato]
+Focus su: [aspetti specifici]
+
+Fornisci le domande senza risposte. Poi, separatamente, 
+fornisci tutte le risposte con spiegazioni.</code></pre>
+<h4 id="template-esercizi-pratici"><strong>Template: Esercizi Pratici</strong></h4>
+<pre><code>Crea 5 esercizi pratici su [ARGOMENTO] per studente ITS.
+
+Per ogni esercizio fornisci:
+1. Testo esercizio (cosa fare)
+2. Input/output attesi
+3. Suggerimenti (hints) se bloccato
+4. Soluzione completa commentata
+5. Varianti più difficili (opzionali)
+
+Difficoltà: crescente (da facile a difficile)
+Tempo stimato: ~15 minuti ciascuno</code></pre>
+<p><strong>Esempio:</strong></p>
+<pre><code>Crea 5 esercizi pratici su ARRAY E PUNTATORI IN C per studente ITS.
+[Usa template]</code></pre>
+<h3 id="43-riassunti-e-sintesi">4.3 Riassunti e Sintesi</h3>
+<h4 id="template-riassunto-capitoloargomento"><strong>Template: Riassunto Capitolo/Argomento</strong></h4>
+<pre><code>Ho studiato [ARGOMENTO/CAPITOLO] da [FONTE].
+
+Ecco i concetti chiave che ho identificato:
+[Lista punti principali]
+
+Crea un riassunto strutturato che:
+1. Organizzi i concetti in modo logico
+2. Evidenzi collegamenti tra concetti
+3. Aggiunga esempi pratici per ogni punto
+4. Includa una &quot;mappa mentale&quot; testuale
+5. Concluda con 3 takeaway principali
+
+Formato: Markdown con titoli chiari
+Lunghezza: 1-2 pagine A4</code></pre>
+<h4 id="template-preparazione-esame"><strong>Template: Preparazione Esame</strong></h4>
+<pre><code>Devo preparare l&#39;esame di [MATERIA] che copre:
+[Lista argomenti]
+
+Crea un piano di studio strutturato che:
+1. Organizzi gli argomenti per priorità
+2. Suggerisca ordine di studio ottimale
+3. Indichi tempo stimato per argomento
+4. Includa metodi di memorizzazione/comprensione
+5. Proponga sessioni di ripasso
+
+Ho [N] giorni disponibili e studio [X] ore/giorno.</code></pre>
+<h3 id="44-chiarimento-dubbi">4.4 Chiarimento Dubbi</h3>
+<h4 id="template-non-ho-capito"><strong>Template: &quot;Non Ho Capito...&quot;</strong></h4>
+<pre><code>Sto studiando [ARGOMENTO] e non ho capito [PUNTO SPECIFICO].
+
+Ho capito fino a qui:
+[Cosa hai capito]
+
+Ma non capisco:
+[Cosa non ti è chiaro]
+
+Ho provato:
+[Cosa hai tentato per capire]
+
+Spiegami [PUNTO SPECIFICO] in modo diverso, magari con:
+- Un&#39;analogia pratica
+- Un esempio passo-passo
+- Un disegno/schema descritto a parole</code></pre>
+<hr />
+<h2 id="5-prompt-per-generazione-codice">5. Prompt per Generazione Codice</h2>
+<h3 id="51-template-funzione-singola">5.1 Template Funzione Singola</h3>
+<h4 id="template-base-funzione-c"><strong>Template Base Funzione C</strong></h4>
+<pre><code>Scrivi in standard C99 una funzione:
+
+FIRMA:
+[tipo_ritorno] nome_funzione([parametri]);
+
+COMPORTAMENTO:
+- [Cosa fa]
+- [Come gestisce input invalidi]
+- [Cosa ritorna]
+
+VINCOLI:
+- Solo C99 standard (no POSIX, no GNU)
+- No VLA
+- Gestione esplicita NULL/errori
+- Complessità massima: O([...])
+
+OUTPUT RICHIESTO:
+1. Header file (.h) con:
+   - Dichiarazione
+   - Documentazione Doxygen completa
+2. Implementation (.c) con:
+   - Codice commentato
+   - Gestione edge cases
+3. Test file con 5 test cases:
+   - Caso normale
+   - Edge cases (minimo 3)
+   - Caso errore
+
+ESEMPIO USO:
+[Mostra chiamata tipica]</code></pre>
+<p><strong>Esempio Compilato:</strong></p>
+<pre><code>Scrivi in standard C99 una funzione:
+
+FIRMA:
+int find_max(const int arr[], int n, int *max_value);
+
+COMPORTAMENTO:
+- Trova valore massimo in array
+- Salva massimo in *max_value
+- Ritorna 0 se successo, -1 se errore
+
+VINCOLI:
+- Solo C99 standard
+- Gestione esplicita NULL
+- Complessità: O(n)
+
+OUTPUT RICHIESTO:
+[come template]
+
+ESEMPIO USO:
+int arr[] = {3, 7, 2, 9, 1};
+int max;
+if (find_max(arr, 5, &amp;max) == 0) {
+    printf(&quot;Max: %d\n&quot;, max);
+}</code></pre>
+<h4 id="template-sketch-arduino"><strong>Template Sketch Arduino</strong></h4>
+<pre><code>Scrivi sketch Arduino per board [BOARD_TYPE]:
+
+HARDWARE:
+- [Componente 1] su pin [X]
+- [Componente 2] su pin [Y]
+- [...]
+
+FUNZIONALITÀ:
+1. [Funzione principale]
+2. [Funzione secondaria]
+3. [Gestione eventi/sensori]
+
+VINCOLI TECNICI:
+- Usa millis() (NO delay() lunghi)
+- Logica completamente non-bloccante
+- Comunicazione seriale [BAUD] per debug
+- Gestisci debouncing se pulsanti
+- Definisci pin con const int
+
+OUTPUT RICHIESTO:
+1. Sketch completo (.ino)
+2. Commenti esplicativi
+3. Schema collegamenti testuale/ASCII art
+4. Istruzioni setup iniziale
+
+COMPORTAMENTO ATTESO:
+[Descrivi scenario d&#39;uso]</code></pre>
+<h3 id="52-debugging-e-fixing">5.2 Debugging e Fixing</h3>
+<h4 id="template-debug-codice"><strong>Template Debug Codice</strong></h4>
+<pre><code>Ho questo codice [LINGUAGGIO] che non funziona come previsto:
+
+```[linguaggio]
+[IL TUO CODICE]</code></pre>
+<p>PROBLEMA OSSERVATO:<br />
+[Descrizione comportamento errato o errore]</p>
+<p>COMPORTAMENTO ATTESO:<br />
+[Cosa dovrebbe fare]</p>
+<p>COSA HO PROVATO:<br />
+[Tentativi di fix]</p>
+<p>COMPITI:</p>
+<ol type="1">
+<li>Identifica TUTTI i bug (sintattici, logici, sicurezza)</li>
+<li>Spiega PERCHÉ ogni bug causa il problema</li>
+<li>Fornisci versione corretta e funzionante</li>
+<li>Aggiungi commenti che evidenziano le correzioni</li>
+<li>Suggerisci test per validare il fix</li>
+</ol>
+<pre><code>
+#### **Template Ottimizzazione**
+</code></pre>
+<p>Ho questo codice funzionante ma voglio ottimizzarlo:</p>
+<pre class="[linguaggio]"><code>[CODICE]</code></pre>
+<p>OBIETTIVI OTTIMIZZAZIONE:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Velocità (performance)</label></li>
+<li><label><input type="checkbox"></input>Memoria (footprint)</label></li>
+<li><label><input type="checkbox"></input>Leggibilità</label></li>
+<li><label><input type="checkbox"></input>Sicurezza</label></li>
+</ul>
+<p>VINCOLI:</p>
+<ul>
+<li>[Vincoli specifici]</li>
+</ul>
+<p>COMPITI:</p>
+<ol type="1">
+<li>Analizza complessità attuale</li>
+<li>Identifica bottleneck</li>
+<li>Proponi ottimizzazioni specifiche</li>
+<li>Fornisci versione ottimizzata</li>
+<li>Benchmarking: confronta prima/dopo</li>
+</ol>
+<pre><code>
+### 5.3 Refactoring
+
+#### **Template Refactoring Completo**
+</code></pre>
+<p>Questo codice funziona ma è poco manutenibile:</p>
+<pre class="[linguaggio]"><code>[CODICE]</code></pre>
+<p>OBIETTIVI REFACTORING:</p>
+<ol type="1">
+<li>Migliorare leggibilità</li>
+<li>Ridurre duplicazione</li>
+<li>Separare responsabilità (SRP)</li>
+<li>Migliorare nomi variabili/funzioni</li>
+<li>Aggiungere documentazione</li>
+</ol>
+<p>VINCOLI:</p>
+<ul>
+<li>Mantieni comportamento identico</li>
+<li>No cambi di algoritmo</li>
+<li>[Linguaggio] standard [versione]</li>
+</ul>
+<p>OUTPUT:</p>
+<ol type="1">
+<li>Codice refactorato completo</li>
+<li>Lista modifiche applicate</li>
+<li>Confronto prima/dopo (evidenzia differenze)</li>
+<li>Test che dimostrano equivalenza comportamentale</li>
+</ol>
+<pre><code>
+### 5.4 Generazione Test
+
+#### **Template Test Suite**
+</code></pre>
+<p>Ho questa funzione [LINGUAGGIO]:</p>
+<pre class="[linguaggio]"><code>[FUNZIONE]</code></pre>
+<p>Genera test suite completa che copra:</p>
+<ol type="1">
+<li>Casi normali (happy path)</li>
+<li>Edge cases (limiti, valori estremi)</li>
+<li>Casi errore (input invalidi)</li>
+<li>Corner cases (combinazioni rare)</li>
+</ol>
+<p>Per ogni test fornisci:</p>
+<ul>
+<li>Nome test descrittivo</li>
+<li>Input</li>
+<li>Output atteso</li>
+<li>Asserzione</li>
+<li>Commento su cosa testa</li>
+</ul>
+<p>Framework: [es. assert.h per C, unittest per Python]<br />
+Copertura target: &gt;90%</p>
+<pre><code>
+### 5.5 Documentazione Codice
+
+#### **Template Commenti Inline**
+</code></pre>
+<p>Aggiungi commenti inline al seguente codice:</p>
+<pre class="[linguaggio]"><code>[CODICE]</code></pre>
+<p>STILE COMMENTI:</p>
+<ul>
+<li>Spiega PERCHÉ, non COSA (il cosa si vede dal codice)</li>
+<li>Evidenzia algoritmi non ovvi</li>
+<li>Documenta assunzioni</li>
+<li>Nota edge cases gestiti</li>
+</ul>
+<p>FORMATO:</p>
+<ul>
+<li>[Formato commenti del linguaggio]</li>
+<li>Concisi ma informativi</li>
+</ul>
+<pre><code>
+#### **Template README Progetto**
+</code></pre>
+<p>Ho sviluppato questo progetto [NOME]:</p>
+<p>DESCRIZIONE BREVE:<br />
+[1 frase cosa fa]</p>
+<p>COMPONENTI:</p>
+<ul>
+<li></li>
+<li></li>
+<li>[...]</li>
+</ul>
+<p>DIPENDENZE:</p>
+<ul>
+<li>[Libreria 1]</li>
+<li>[Libreria 2]</li>
+</ul>
+<p>Genera README.md professionale che includa:</p>
+<ol type="1">
+<li>Titolo e descrizione</li>
+<li>Features principali</li>
+<li>Requisiti di sistema</li>
+<li>Istruzioni installazione (passo-passo)</li>
+<li>Esempi d&#39;uso</li>
+<li>Struttura progetto</li>
+<li>Licenza</li>
+<li>Contatti/Contributi</li>
+</ol>
+<p>Tono: Professionale ma accessibile<br />
+Formato: Markdown con emoji appropriati</p>
+<pre><code>
+---
+
+## 6. Prompt per Testi e Documentazione
+
+### 6.1 Relazioni Tecniche
+
+#### **Template Relazione Progetto ITS**
+</code></pre>
+<p>Devo scrivere relazione tecnica per progetto ITS su [ARGOMENTO].</p>
+<p>INFORMAZIONI PROGETTO:</p>
+<ul>
+<li>Titolo: [...]</li>
+<li>Durata: [...]</li>
+<li>Obiettivi: [...]</li>
+<li>Tecnologie: [...]</li>
+<li>Risultati: [...]</li>
+</ul>
+<p>STRUTTURA RICHIESTA:</p>
+<ol type="1">
+<li>Introduzione (problema affrontato)</li>
+<li>Analisi requisiti</li>
+<li>Progettazione (architettura, scelte tecniche)</li>
+<li>Implementazione (dettagli tecnici)</li>
+<li>Testing e validazione</li>
+<li>Risultati e discussione</li>
+<li>Conclusioni e sviluppi futuri</li>
+</ol>
+<p>VINCOLI:</p>
+<ul>
+<li>Lunghezza: [N] pagine</li>
+<li>Tono: Tecnico-professionale</li>
+<li>Pubblico: Docenti ITS + potenziali datori lavoro</li>
+<li>Formato: [Word/LaTeX/Markdown]</li>
+</ul>
+<p>Genera outline dettagliato con punti chiave per ogni sezione.<br />
+Poi, su richiesta, espandi sezione per sezione.</p>
+<pre><code>
+#### **Template Documentazione API**
+</code></pre>
+<p>Ho sviluppato [LIBRERIA/MODULO] con queste funzioni:</p>
+<p>[LISTA FUNZIONI CON FIRME]</p>
+<p>Genera documentazione API stile professionale che includa:</p>
+<p>PER OGNI FUNZIONE:</p>
+<ol type="1">
+<li>Descrizione scopo</li>
+<li>Parametri (tipo, descrizione, vincoli)</li>
+<li>Valore ritorno</li>
+<li>Esempi d&#39;uso (minimo 2)</li>
+<li>Note su edge cases</li>
+<li>Possibili errori</li>
+<li>Vedere anche (funzioni correlate)</li>
+</ol>
+<p>STILE:</p>
+<ul>
+<li>Formato: [Doxygen/JSDoc/Sphinx]</li>
+<li>Esempi funzionanti</li>
+<li>Chiaro per utente esterno</li>
+</ul>
+<pre><code>
+### 6.2 Report e Analisi
+
+#### **Template Report Tecnico**
+</code></pre>
+<p>Ho raccolto questi dati da [ESPERIMENTO/PROGETTO]:</p>
+<p>[DATI O DESCRIZIONE]</p>
+<p>Genera report tecnico che:</p>
+<ol type="1">
+<li>Introduca brevemente contesto</li>
+<li>Descriva metodologia</li>
+<li>Presenti dati (tabelle/grafici descritti)</li>
+<li>Analizzi risultati</li>
+<li>Tragga conclusioni</li>
+<li>Suggerisca miglioramenti</li>
+</ol>
+<p>Formato: [Word/PDF]<br />
+Lunghezza: [N] pagine<br />
+Grafici: Descrivi che tipo serve, genererò io</p>
+<pre><code>
+### 6.3 Email e Comunicazioni
+
+#### **Template Email Professionale**
+</code></pre>
+<p>Devo scrivere email a [DESTINATARIO: docente/azienda/collega] per [SCOPO].</p>
+<p>CONTESTO:<br />
+[Breve descrizione situazione]</p>
+<p>OBIETTIVO EMAIL:<br />
+[Cosa vuoi ottenere]</p>
+<p>INFORMAZIONI DA INCLUDERE:</p>
+<ul>
+<li>[Info 1]</li>
+<li>[Info 2]</li>
+</ul>
+<p>TONO: [Formale/Semi-formale/Cordiale]</p>
+<p>Genera email completa con:</p>
+<ul>
+<li>Oggetto efficace</li>
+<li>Saluto appropriato</li>
+<li>Corpo chiaro e conciso</li>
+<li>Chiusura e firma</li>
+</ul>
+<pre><code>
+**Esempio:**</code></pre>
+<p>Destinatario: Professor Rossi (docente Sistemi Embedded)<br />
+Scopo: Chiarimento su specifiche progetto finale</p>
+<p>CONTESTO:<br />
+Sto sviluppando progetto su sistema IoT con Arduino<br />
+e non sono sicuro se posso usare librerie esterne.</p>
+<p>OBIETTIVO:<br />
+Ottenere chiarimento e eventuale approvazione.</p>
+<p>TONO: Formale ma cordiale</p>
+<pre><code>
+### 6.4 CV e Lettere Motivazionali
+
+#### **Template Miglioramento CV**
+</code></pre>
+<p>Ecco il mio CV attuale:</p>
+<p>[PASTE CV O DESCRIZIONE SEZIONI]</p>
+<p>CONTESTO:</p>
+<ul>
+<li>Studente ITS [anno/indirizzo]</li>
+<li>Candidatura per: [Stage/Lavoro/Progetto]</li>
+<li>Azienda target: [Tipo/settore]</li>
+</ul>
+<p>COMPITI:</p>
+<ol type="1">
+<li>Analizza punti forti e deboli</li>
+<li>Suggerisci miglioramenti struttura</li>
+<li>Riscrivi sezioni chiave enfatizzando:
+<ul>
+<li>Competenze tecniche</li>
+<li>Progetti rilevanti</li>
+<li>Soft skills</li>
+</ul></li>
+<li>Suggerisci cosa aggiungere/rimuovere</li>
+<li>Ottimizza per ATS (Applicant Tracking System)</li>
+</ol>
+<p>Output: CV migliorato in formato [richiesto]</p>
+<pre><code>
+#### **Template Lettera Motivazionale**
+</code></pre>
+<p>Sto candidando per [POSIZIONE] presso [AZIENDA].</p>
+<p>MIO BACKGROUND:</p>
+<ul>
+<li>[Percorso studi]</li>
+<li>[Competenze chiave]</li>
+<li>[Progetti rilevanti]</li>
+</ul>
+<p>PERCHÉ QUESTA POSIZIONE:</p>
+<ul>
+<li>[Motivazione 1]</li>
+<li>[Motivazione 2]</li>
+</ul>
+<p>COSA PORTO:</p>
+<ul>
+<li>[Valore che aggiungi]</li>
+</ul>
+<p>Genera lettera motivazionale che:</p>
+<ol type="1">
+<li>Catturi attenzione nelle prime righe</li>
+<li>Dimostri conoscenza azienda/ruolo</li>
+<li>Colleghi mie competenze a loro bisogni</li>
+<li>Mostri entusiasmo genuino</li>
+<li>Call to action chiara</li>
+</ol>
+<p>Lunghezza: ~300-400 parole<br />
+Tono: Professionale, entusiasta, non retorico</p>
+<pre><code>
+---
+
+## 7. Prompt per Presentazioni
+
+### 7.1 Struttura Presentazione
+
+#### **Template Outline Presentazione**
+</code></pre>
+<p>Devo creare presentazione su [ARGOMENTO] per [CONTESTO].</p>
+<p>INFORMAZIONI:</p>
+<ul>
+<li>Pubblico: [Chi ascolta]</li>
+<li>Durata: [Minuti]</li>
+<li>Scopo: [Informare/Persuadere/Insegnare]</li>
+<li>Formato: [Esame/Pitch/Conferenza]</li>
+</ul>
+<p>CONTENUTI DA COPRIRE:</p>
+<ul>
+<li>[Punto 1]</li>
+<li>[Punto 2]</li>
+<li>[...]</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Outline completo con numero slide stimato</li>
+<li>Contenuto chiave per ogni slide</li>
+<li>Suggerimenti visual per ogni sezione</li>
+<li>Script note relatore per slide complesse</li>
+<li>Timing suggerito per sezione</li>
+</ol>
+<p>STRUTTURA:</p>
+<ul>
+<li>Introduzione (impatto)</li>
+<li>Corpo (3-5 punti principali)</li>
+<li>Conclusione (call to action/takeaway)</li>
+</ul>
+<pre><code>
+### 7.2 Contenuto Slide Specifiche
+
+#### **Template Slide Tecnica**
+</code></pre>
+<p>Slide su [ARGOMENTO TECNICO].</p>
+<p>OBIETTIVO SLIDE:<br />
+[Cosa deve capire lo spettatore]</p>
+<p>CONTENUTO DA INCLUDERE:</p>
+<ul>
+<li>[Info 1]</li>
+<li>[Info 2]</li>
+</ul>
+<p>VINCOLI:</p>
+<ul>
+<li>Massimo [N] bullet points</li>
+<li>1 visual (descrivi che tipo)</li>
+<li>Leggibile da 5 metri</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Titolo slide efficace</li>
+<li>Bullet points (max 6 parole cad)</li>
+<li>Descrizione visual suggerito</li>
+<li>Note relatore (cosa dire, non cosa scrivere)</li>
+</ol>
+<pre><code>
+**Esempio:**</code></pre>
+<p>Slide su &quot;Architettura Sistema Arduino&quot;</p>
+<p>OBIETTIVO:<br />
+Far capire componenti principali e loro relazione</p>
+<p>CONTENUTO:</p>
+<ul>
+<li>Microcontrollore ATmega328P</li>
+<li>Pin I/O (digitali/analogici)</li>
+<li>Alimentazione</li>
+<li>Comunicazione seriale</li>
+</ul>
+<p>VINCOLI:</p>
+<ul>
+<li>Max 5 bullet points</li>
+<li>Schema a blocchi</li>
+<li>Leggibile</li>
+</ul>
+<p>[IA genera contenuto ottimizzato]</p>
+<pre><code>
+### 7.3 Pitch e Demo
+
+#### **Template Elevator Pitch**
+</code></pre>
+<p>Ho sviluppato [PROGETTO/IDEA].</p>
+<p>DESCRIZIONE TECNICA:<br />
+[Cosa fa, come funziona]</p>
+<p>PROBLEMA RISOLTO:<br />
+[Pain point]</p>
+<p>PUBBLICO:<br />
+[A chi mi rivolgo]</p>
+<p>Genera elevator pitch di 60 secondi (~150 parole) che:</p>
+<ol type="1">
+<li>Catturi attenzione con problema/hook</li>
+<li>Presenti soluzione in modo chiaro</li>
+<li>Evidenzi valore unico</li>
+<li>Chiuda con call to action</li>
+</ol>
+<p>Stile: Chiaro, entusiasta, non tecnico (se pubblico misto)</p>
+<pre><code>
+#### **Template Demo Script**
+</code></pre>
+<p>Devo fare demo live di [PROGETTO].</p>
+<p>SETUP:<br />
+[Hardware/software necessari]</p>
+<p>FUNZIONALITÀ DA MOSTRARE:</p>
+<ol type="1">
+<li>[Feature 1]</li>
+<li>[Feature 2]</li>
+<li>[...]</li>
+</ol>
+<p>DURATA: [Minuti]</p>
+<p>Genera script demo che:</p>
+<ol type="1">
+<li>Introduca contesto (30 sec)</li>
+<li>Mostri features in sequenza logica</li>
+<li>Gestisca transizioni fluide</li>
+<li>Anticipi possibili domande</li>
+<li>Includa piano B se qualcosa non funziona</li>
+</ol>
+<p>FORMATO:</p>
+<ul>
+<li>Timing preciso per ogni parte</li>
+<li>Cosa dire E cosa fare</li>
+<li>Note su cosa evidenziare</li>
+</ul>
+<pre><code>
+### 7.4 Slide di Codice
+
+#### **Template Slide con Codice**
+</code></pre>
+<p>Devo mostrare questo codice in slide:</p>
+<pre class="[linguaggio]"><code>[CODICE]</code></pre>
+<p>OBIETTIVO:<br />
+[Cosa deve capire l&#39;audience]</p>
+<p>VINCOLI:</p>
+<ul>
+<li>Slide PowerPoint/Google Slides</li>
+<li>Leggibile da lontano</li>
+<li>Massimo [N] righe visibili</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Versione codice semplificata (solo essenziale)</li>
+<li>Annotazioni/evidenziazioni chiave</li>
+<li>Titolo slide</li>
+<li>Spiegazione concisa (sotto il codice)</li>
+<li>Note relatore per spiegare dettagli</li>
+</ol>
+<p>Formato syntax highlighting: [linguaggio]</p>
+<pre><code>
+---
+
+## 8. Workflow Completi per Progetti ITS
+
+### 8.1 Workflow: Progetto da Zero
+
+#### **Fase 1: Ideazione e Planning**
+</code></pre>
+<p>PROMPT 1 - Brainstorming:<br />
+&quot;Sono studente ITS [indirizzo]. Devo sviluppare progetto<br />
+finale su tema [AREA: es. IoT/Embedded/Automazione].</p>
+<p>Suggeriscimi 10 idee di progetto che:</p>
+<ul>
+<li>Siano fattibili in [N] settimane</li>
+<li>Dimostrino competenze tecniche</li>
+<li>Abbiano applicazione pratica</li>
+<li>Usino tecnologie [elenca]</li>
+</ul>
+<p>Per ogni idea:</p>
+<ul>
+<li>Descrizione breve</li>
+<li>Difficoltà (1-5)</li>
+<li>Tecnologie necessarie</li>
+<li>Originalità (1-5)&quot;</li>
+</ul>
+<p>↓</p>
+<p>PROMPT 2 - Analisi Fattibilità:<br />
+&quot;Ho scelto idea: [DESCRIZIONE]</p>
+<p>Analizza fattibilità considerando:</p>
+<ul>
+<li>Componenti hardware necessari (con costi stimati)</li>
+<li>Software/librerie richieste</li>
+<li>Competenze da acquisire</li>
+<li>Tempo stimato per milestone</li>
+<li>Rischi e mitigation</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Bill of Materials (BOM)</li>
+<li>Timeline progetto</li>
+<li>Analisi SWOT</li>
+<li>Piano di apprendimento per skill mancanti&quot;</li>
+</ol>
+<pre><code>
+#### **Fase 2: Design e Architettura**
+</code></pre>
+<p>PROMPT 3 - Architettura Sistema:<br />
+&quot;Progetto: [NOME E DESCRIZIONE]</p>
+<p>Requisiti funzionali:</p>
+<ul>
+<li>[Req 1]</li>
+<li>[Req 2]</li>
+</ul>
+<p>Requisiti non funzionali:</p>
+<ul>
+<li>[Performance]</li>
+<li>[Affidabilità]</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Architettura sistema (descrivi diagramma a blocchi)</li>
+<li>Scelte tecnologiche giustificate</li>
+<li>Interfacce tra componenti</li>
+<li>Struttura software (moduli)</li>
+<li>Schema elettrico/collegamenti (se hardware)</li>
+</ol>
+<p>Formato: Descrittivo + pseudocodice dove utile&quot;</p>
+<p>↓</p>
+<p>PROMPT 4 - Specifica Dettagliata:<br />
+&quot;Basandoti sull&#39;architettura, genera specifica tecnica<br />
+dettagliata per modulo [NOME_MODULO]:</p>
+<ul>
+<li>Input/Output</li>
+<li>Algoritmi utilizzati</li>
+<li>Gestione errori</li>
+<li>API esposte</li>
+<li>Dipendenze</li>
+<li>Test cases previsti&quot;</li>
+</ul>
+<pre><code>
+#### **Fase 3: Implementazione**
+</code></pre>
+<p>PROMPT 5 - Generazione Codice Base:<br />
+[Usa template sezione 5 per ogni modulo]</p>
+<p>↓</p>
+<p>PROMPT 6 - Integrazione:<br />
+&quot;Ho questi moduli sviluppati:<br />
+[Lista moduli con breve descrizione]</p>
+<p>Genera:</p>
+<ol type="1">
+<li>Main/entry point che integra tutto</li>
+<li>Gestione dipendenze</li>
+<li>Inizializzazione sistema</li>
+<li>Shutdown pulito</li>
+<li>Logging/debugging&quot;</li>
+</ol>
+<p>↓</p>
+<p>PROMPT 7 - Testing:<br />
+[Usa template generazione test sezione 5.4]</p>
+<pre><code>
+#### **Fase 4: Documentazione**
+</code></pre>
+<p>PROMPT 8 - Documentazione Tecnica:<br />
+[Usa template sezione 6.1]</p>
+<p>↓</p>
+<p>PROMPT 9 - README e Guide:<br />
+[Usa template sezione 5.5]</p>
+<p>↓</p>
+<p>PROMPT 10 - Presentazione:<br />
+[Usa template sezione 7]</p>
+<pre><code>
+### 8.2 Workflow: Debugging Complesso
+</code></pre>
+<p>STEP 1 - Isolamento Problema:<br />
+&quot;Ho questo bug nel progetto [NOME]:</p>
+<p>SINTOMO:<br />
+[Cosa non funziona]</p>
+<p>QUANDO SUCCEDE:<br />
+[Condizioni]</p>
+<p>COSA HO PROVATO:<br />
+[Tentativi]</p>
+<p>Aiutami a isolare il problema:</p>
+<ol type="1">
+<li>Genera checklist debug</li>
+<li>Suggerisci test per riprodurre</li>
+<li>Identifica aree probabili del bug</li>
+<li>Proponi strategia di isolamento&quot;</li>
+</ol>
+<p>↓</p>
+<p>STEP 2 - Analisi Specifica:<br />
+[Paste codice sospetto]<br />
+[Usa template debug sezione 5.2]</p>
+<p>↓</p>
+<p>STEP 3 - Fix e Validazione:<br />
+&quot;Applicato questo fix:<br />
+[Mostra modifiche]</p>
+<p>Genera:</p>
+<ol type="1">
+<li>Test di regressione</li>
+<li>Test che valida il fix</li>
+<li>Checklist per verificare no effetti collaterali&quot;</li>
+</ol>
+<pre><code>
+### 8.3 Workflow: Preparazione Esame/Colloquio
+</code></pre>
+<p>FASE 1 - Studio:<br />
+[Usa template sezione 4.1-4.3]</p>
+<p>↓</p>
+<p>FASE 2 - Ripasso Attivo:<br />
+&quot;Argomenti esame: [LISTA]</p>
+<p>Per ogni argomento genera:</p>
+<ol type="1">
+<li>Domanda probabile esame</li>
+<li>Risposta modello (concisa)</li>
+<li>Domanda di approfondimento</li>
+<li>Concetti da collegare</li>
+</ol>
+<p>Poi simula 10 domande random da tutto il materiale&quot;</p>
+<p>↓</p>
+<p>FASE 3 - Presentazione Progetti:<br />
+[Usa template sezione 7.3 per pitch progetti]</p>
+<p>↓</p>
+<p>FASE 4 - Simulazione:<br />
+&quot;Simula colloquio tecnico per posizione [RUOLO].</p>
+<p>Fai 5 domande tecniche progressive:</p>
+<ol type="1">
+<li>Base (valuta conoscenze fondamentali)<br />
+2-3. Intermedie (problem solving)<br />
+4-5. Avanzate (pensiero critico)</li>
+</ol>
+<p>Per ogni mia risposta:</p>
+<ul>
+<li>Valuta (1-10)</li>
+<li>Indica miglioramenti</li>
+<li>Fai follow-up se necessario&quot;</li>
+</ul>
+<pre><code>
+---
+
+## 9. Biblioteca Prompt Pronti all&#39;Uso
+
+### 9.1 Prompt Copy-Paste per Studenti ITS
+
+#### **Studio: Spiegazione ELI5 (Explain Like I&#39;m 5)**
+</code></pre>
+<p>Spiega [CONCETTO COMPLESSO] come se avessi 5 anni,<br />
+poi spiega lo stesso concetto al mio livello (studente ITS).</p>
+<p>Cosa voglio capire: PERCHÉ funziona così, non solo COME.</p>
+<pre><code>
+#### **Codice: Quick Function**
+</code></pre>
+<p>Funzione [LINGUAGGIO] che fa: [1 RIGA DESCRIZIONE]<br />
+Parametri: [LISTA]<br />
+Ritorna: [TIPO]<br />
+Standard: [C99/Python3/etc]<br />
+Test: includi 2 esempi</p>
+<pre><code>
+#### **Debug: Fix Veloce**
+</code></pre>
+<p>Questo codice:</p>
+<pre class="[linguaggio]"><code>[PASTE CODICE]</code></pre>
+<p>Errore: [COPIA ERRORE COMPILATORE/RUNTIME]</p>
+<p>Fix + spiega il problema in 2 righe.</p>
+<pre><code>
+#### **Docs: README Express**
+</code></pre>
+<p>Progetto: [NOME]<br />
+Fa: [1 RIGA]<br />
+Tech: [LISTA]<br />
+Come run: [COMANDO]</p>
+<p>Genera README.md minimale ma completo.</p>
+<pre><code>
+#### **Presentazione: Slide in 5 Minuti**
+</code></pre>
+<p>Presentazione [DURATA]min su [TOPIC]<br />
+Pubblico: [CHI]<br />
+3 punti chiave: [P1, P2, P3]</p>
+<p>Outline + contenuto slide chiave.</p>
+<pre><code>
+### 9.2 Prompt Avanzati
+
+#### **Code Review Automatico**
+</code></pre>
+<p>Fai code review di questo codice come se fossi senior developer:</p>
+<pre class="[linguaggio]"><code>[CODICE]</code></pre>
+<p>Valuta (1-10) e commenta:</p>
+<ol type="1">
+<li>Correttezza</li>
+<li>Leggibilità</li>
+<li>Performance</li>
+<li>Sicurezza</li>
+<li>Manutenibilità</li>
+</ol>
+<p>Per ogni problema trovato:</p>
+<ul>
+<li>Severity (Critical/Major/Minor)</li>
+<li>Suggerimento fix</li>
+<li>Best practice violata</li>
+</ul>
+<pre><code>
+#### **Progettazione Sistema**
+</code></pre>
+<p>Devo progettare sistema [TIPO] con requisiti:</p>
+<p>FUNZIONALI:</p>
+<ul>
+<li>[Req 1]</li>
+<li>[Req 2]</li>
+</ul>
+<p>NON-FUNZIONALI:</p>
+<ul>
+<li>Performance: [spec]</li>
+<li>Affidabilità: [spec]</li>
+<li>Scalabilità: [spec]</li>
+</ul>
+<p>Proponi 3 architetture alternative con:</p>
+<ul>
+<li>Diagramma (descritto)</li>
+<li>Pro/Contro</li>
+<li>Costo stimato</li>
+<li>Complessità implementazione</li>
+</ul>
+<p>Poi raccomanda la migliore per caso d&#39;uso [CONTESTO].</p>
+<pre><code>
+#### **Analisi Comparativa**
+</code></pre>
+<p>Devo scegliere tra [OPZIONE A] e [OPZIONE B] per [CONTESTO].</p>
+<p>Criteri decisione:</p>
+<ul>
+<li>[Criterio 1]</li>
+<li>[Criterio 2]</li>
+<li>[...]</li>
+</ul>
+<p>Genera:</p>
+<ol type="1">
+<li>Tabella comparativa dettagliata</li>
+<li>Analisi punti critici</li>
+<li>Raccomandazione giustificata</li>
+<li>Scenario dove l&#39;altra opzione sarebbe migliore</li>
+</ol>
+<pre><code>
+### 9.3 Prompt Creativi
+
+#### **Analogia su Misura**
+</code></pre>
+<p>Spiega [CONCETTO TECNICO COMPLESSO] usando un&#39;analogia<br />
+tratta dal mondo [DOMINIO FAMILIARE: sport/cucina/musica/etc].</p>
+<p>Mantieni analogia coerente su tutti gli aspetti del concetto.</p>
+<pre><code>
+**Esempio:**</code></pre>
+<p>Spiega STACK (struttura dati) usando analogia con una pila di piatti.</p>
+<pre><code>
+#### **Storytelling Tecnico**
+</code></pre>
+<p>Racconta come [TECNOLOGIA/CONCETTO] è nata e si è evoluta,<br />
+come se fosse una storia avvincente.</p>
+<p>Include:</p>
+<ul>
+<li>Problema originale</li>
+<li>Soluzioni tentate</li>
+<li>Breakthrough</li>
+<li>Evoluzione</li>
+<li>Stato attuale</li>
+<li>Futuro possibile</li>
+</ul>
+<p>Stile: Divulgativo ma accurato tecnicamente.</p>
+<pre><code>
+#### **Debugging Narrativo**
+</code></pre>
+<p>Ho questo bug frustrante: [DESCRIZIONE]</p>
+<p>Raccontami una &quot;detective story&quot; del debug:</p>
+<ol type="1">
+<li>Indizi (sintomi osservati)</li>
+<li>Sospetti (possibili cause)</li>
+<li>Investigazione (come procedere)</li>
+<li>Rivelazione (causa vera)</li>
+<li>Risoluzione (fix)</li>
+</ol>
+<p>Rendila didattica e memorabile!</p>
+<pre><code>
+---
+
+## 10. Errori da Evitare
+
+### 10.1 Errori Comuni con IA
+
+#### ❌ **Errore 1: Prompt Troppo Vago**
+</code></pre>
+<p>SBAGLIATO:<br />
+&quot;Scrivi codice Arduino&quot;</p>
+<p>PROBLEMA: Troppo generico, output inutile</p>
+<p>CORRETTO:<br />
+&quot;Scrivi sketch Arduino Uno che legge temperatura<br />
+da TMP36 su A0 e accende LED su pin 13 se &gt;25°C.<br />
+Usa millis(), no delay. Seriale 9600 per debug.&quot;</p>
+<pre><code>
+#### ❌ **Errore 2: Copiare Senza Capire**
+</code></pre>
+<p>COMPORTAMENTO SBAGLIATO:</p>
+<ol type="1">
+<li>Chiedi codice all&#39;IA</li>
+<li>Copia-incolla direttamente</li>
+<li>Compili</li>
+<li>&quot;Funziona!&quot; → Consegni</li>
+</ol>
+<p>PROBLEMA:</p>
+<ul>
+<li>Non hai imparato nulla</li>
+<li>Non sai se è corretto</li>
+<li>Non sai fixare se rompe</li>
+<li>Non puoi spiegarlo</li>
+</ul>
+<p>COMPORTAMENTO CORRETTO:</p>
+<ol type="1">
+<li>Chiedi codice</li>
+<li>LEGGI e COMPRENDI ogni riga</li>
+<li>Identifica possibili problemi</li>
+<li>TESTA con vari input</li>
+<li>VALIDA con tool (compiler, valgrind)</li>
+<li>MODIFICA se necessario</li>
+<li>ORA puoi usarlo</li>
+</ol>
+<pre><code>
+#### ❌ **Errore 3: Non Validare Output**
+</code></pre>
+<p>CASO REALE:<br />
+Student: &quot;IA, scrivi funzione C per duplicare stringa&quot;<br />
+IA: [Genera codice con strdup()]<br />
+Student: [Copia, compila su embedded]<br />
+Compilatore: &quot;error: strdup undefined&quot;</p>
+<p>PROBLEMA: strdup() non è C standard!</p>
+<p>LEZIONE: SEMPRE validare suggerimenti IA</p>
+<ul>
+<li>Controlla standard/librerie</li>
+<li>Testa su target reale</li>
+<li>Usa documentation ufficiale</li>
+</ul>
+<pre><code>
+#### ❌ **Errore 4: Prompt Monolitico**
+</code></pre>
+<p>SBAGLIATO:<br />
+&quot;Scrivi intero sistema di gestione libreria con database,<br />
+interfaccia utente, gestione utenti, prestiti, ricerche,<br />
+statistiche, backup automatico, in C++ con Qt.&quot;</p>
+<p>PROBLEMA: Troppo grande, output superficiale</p>
+<p>CORRETTO: Approccio iterativo</p>
+<ol type="1">
+<li>&quot;Progetta architettura sistema libreria&quot;</li>
+<li>&quot;Specifica modulo database&quot;</li>
+<li>&quot;Implementa classe Book&quot;</li>
+<li>&quot;Genera test per Book&quot;<br />
+[... passo dopo passo]</li>
+</ol>
+<pre><code>
+#### ❌ **Errore 5: Ignorare Contesto**
+</code></pre>
+<p>SBAGLIATO:<br />
+&quot;Scrivi codice per gestire 1000 connessioni simultanee&quot;<br />
+[Su Arduino con 2KB RAM!]</p>
+<p>PROBLEMA: IA non conosce il TUO contesto specifico</p>
+<p>CORRETTO:<br />
+&quot;Sistema: Arduino Uno (2KB RAM, 32KB Flash)<br />
+Task: Gestire max 5 sensori con polling ogni 100ms<br />
+Vincoli: Memoria minimale, no allocazione dinamica</p>
+<p>Scrivi codice adatto a QUESTI vincoli.&quot;</p>
+<pre><code>
+### 10.2 Red Flags nell&#39;Output IA
+
+Impara a riconoscere segnali di allarme:
+
+#### 🚩 **Red Flag 1: Funzioni &quot;Strane&quot;**
+
+```c
+// IA genera:
+char *str = strdup(input);  // 🚩 strdup in C99?
+result = itoa(number);      // 🚩 itoa standard?
+
+AZIONE: Verifica SEMPRE su cppreference.com</code></pre>
+<h4 id="triangular_flag_on_post-red-flag-2-sembra-troppo-facile">🚩 <strong>Red Flag 2: &quot;Sembra Troppo Facile&quot;</strong></h4>
+<pre><code>Prompt: &quot;Sistema operativo real-time da zero&quot;
+IA: &quot;Ecco il codice completo in 50 righe!&quot;
+
+🚩 Se sembra troppo semplice per problema complesso,
+   probabilmente è TROPPO semplificato o incompleto.</code></pre>
+<h4 id="triangular_flag_on_post-red-flag-3-commenti-generici">🚩 <strong>Red Flag 3: Commenti Generici</strong></h4>
+<div class="sourceCode" id="cb84"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA genera:</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">// Initialize x to 5</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// Initialize y to 10</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>🚩 Commenti che ripetono il codice <span class="op">=</span> output low<span class="op">-</span>quality</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>   Buoni commenti spiegano PERCHÉ<span class="op">,</span> non COSA<span class="op">.</span></span></code></pre></div>
+<h4 id="triangular_flag_on_post-red-flag-4-nessuna-gestione-errori">🚩 <strong>Red Flag 4: Nessuna Gestione Errori</strong></h4>
+<div class="sourceCode" id="cb85"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA genera:</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> process<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>data<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>        data<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// 🚩 No check data!=NULL!</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>🚩 Codice senza error handling <span class="op">=</span> codice fragile</span></code></pre></div>
+<h4 id="triangular_flag_on_post-red-flag-5-hardcoded-magic-numbers">🚩 <strong>Red Flag 5: Hardcoded Magic Numbers</strong></h4>
+<div class="sourceCode" id="cb86"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co">// IA genera:</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>sensor <span class="op">&gt;</span> <span class="dv">1023</span><span class="op">)</span> <span class="op">{</span>  <span class="co">// 🚩 Perché 1023?</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">5000</span><span class="op">);</span>      <span class="co">// 🚩 Perché 5000?</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>🚩 Numeri senza spiegazione<span class="op">/</span>costanti <span class="op">=</span> codice oscuro</span></code></pre></div>
+<h3 id="103-quando-non-usare-ia">10.3 Quando NON Usare IA</h3>
+<p>Situazioni dove IA <strong>non è appropriata</strong>:</p>
+<h4 id="x-durante-esami-senza-permesso">❌ <strong>Durante Esami Senza Permesso</strong></h4>
+<p>Ovvio, ma va detto: se l&#39;esame vieta strumenti esterni, rispetta le regole.</p>
+<h4 id="x-per-copiare-progetti-altrui">❌ <strong>Per Copiare Progetti Altrui</strong></h4>
+<pre><code>SBAGLIATO:
+&quot;IA, ricrea il progetto X che ho visto online&quot;
+→ Plagio, anche se tramite IA
+
+CORRETTO:
+&quot;IA, spiega come funziona progetto X&quot;
+&quot;IA, aiutami a implementare concetto simile MA originale&quot;</code></pre>
+<h4 id="x-per-evitare-di-imparare-basi">❌ <strong>Per Evitare di Imparare Basi</strong></h4>
+<pre><code>Se non sai cos&#39;è un ciclo for, NON chiedere:
+&quot;IA, scrivi for loop&quot;
+
+Prima STUDIA le basi, poi usa IA per:
+- Approfondimenti
+- Applicazioni complesse
+- Ottimizzazioni</code></pre>
+<h4 id="x-per-decisioni-critiche-senza-verifica">❌ <strong>Per Decisioni Critiche Senza Verifica</strong></h4>
+<pre><code>SCENARIO: Sistema medicale embedded
+
+❌ &quot;IA, scrivi algoritmo controllo dosaggio insulina&quot;
+   → Copia diretto in produzione
+
+Dati sensibili, vite umane → Serve:
+- Revisione esperto
+- Testing rigoroso
+- Certificazioni
+- Validazione multipla</code></pre>
+<hr />
+<h2 id="11-casi-duso-reali-its">11. Casi d&#39;Uso Reali ITS</h2>
+<h3 id="111-scenario-progetto-stage-azienda">11.1 Scenario: Progetto Stage Azienda</h3>
+<p><strong>Contesto:</strong> Stage in azienda automazione, ti chiedono di sviluppare prototipo sistema monitoraggio macchine.</p>
+<p><strong>Workflow con IA:</strong></p>
+<pre><code>GIORNO 1 - Comprensione Requisiti:
+&quot;Analizza questi requisiti aziendali e aiutami a:
+1. Identificare ambiguità
+2. Generare domande chiarificatrici
+3. Creare checklist validazione requisiti&quot;
+
+↓
+
+GIORNO 2-3 - Ricerca e Studio:
+&quot;Non conosco protocollo Modbus RTU richiesto.
+Spiegami:
+- Come funziona
+- Come implementarlo su Arduino/ESP32
+- Librerie disponibili
+- Esempi pratici&quot;
+
+&quot;Genera piano studio 2 giorni per padroneggiare Modbus&quot;
+
+↓
+
+GIORNO 4-7 - Prototipazione:
+[Usa workflow progetto sezione 8.1]
+&quot;Genera architettura sistema&quot;
+&quot;Implementa modulo comunicazione Modbus&quot;
+&quot;Crea interface HMI basilare&quot;
+
+↓
+
+GIORNO 8-9 - Testing:
+&quot;Genera piano testing per sistema Modbus:
+- Unit test moduli
+- Integration test
+- Stress test comunicazione
+- Edge cases (disconnessioni, errori)&quot;
+
+↓
+
+GIORNO 10 - Documentazione:
+&quot;Genera documentazione tecnica per consegna:
+- Architettura sistema
+- Manuale installazione
+- Troubleshooting comune
+- API documentation&quot;
+
+↓
+
+GIORNO 11-12 - Presentazione:
+&quot;Prepara presentazione 15min per team aziendale:
+- Problema e soluzione
+- Demo funzionalità
+- Architettura tecnica
+- Prossimi step sviluppo&quot;</code></pre>
+<p><strong>Risultato:</strong> Progetto completato con qualità professionale, hai imparato Modbus, impressionato azienda.</p>
+<h3 id="112-scenario-recupero-esame">11.2 Scenario: Recupero Esame</h3>
+<p><strong>Contesto:</strong> Hai fallito esame Sistemi Embedded, devi recuperare in 2 settimane.</p>
+<p><strong>Piano con IA:</strong></p>
+<pre><code>SETTIMANA 1 - Fondamenti:
+
+GIORNO 1-2: Architetture Embedded
+&quot;Crea piano studio architetture embedded (ARM, AVR).
+Include:
+- Concetti chiave per giorno
+- Esercizi pratici
+- Quiz autovalutazione&quot;
+
+&quot;Per ogni argomento studiato, genera:
+1. Riassunto 1 pagina
+2. Mappa concettuale (descritta)
+3. 5 domande esame probabili&quot;
+
+GIORNO 3-4: Gestione Interrupts
+[Stesso approccio]
+
+GIORNO 5-6: Comunicazione (UART, SPI, I2C)
+[Stesso approccio]
+
+GIORNO 7: Ripasso e Simulazione
+&quot;Simula esame completo con 20 domande miste.
+Valuta risposte, indica lacune, genera materiale ripasso.&quot;
+
+↓
+
+SETTIMANA 2 - Pratica e Consolidamento:
+
+GIORNO 8-10: Progetti Pratici
+&quot;3 mini-progetti embedded che coprano tutti gli argomenti:
+1. [Progetto 1]
+2. [Progetto 2]  
+3. [Progetto 3]
+Con test e documentazione.&quot;
+
+GIORNO 11-12: Esercizi Esame Precedenti
+&quot;Analizza questi testi esami passati.
+Genera soluzioni commentate + spiegazioni concettuali.&quot;
+
+GIORNO 13: Mock Exam
+&quot;Simula esame reale condizioni.
+Timer 2 ore, ambiente silenzioso.&quot;
+
+GIORNO 14: Revisione Finale
+&quot;Basandoti sui miei errori mock exam, genera:
+- Checklist ultimi ripasso
+- Formule/concetti chiave da memorizzare
+- Tips strategici per esame&quot;</code></pre>
+<p><strong>Risultato:</strong> Esame passato con buon voto, basi solide acquisite.</p>
+<h3 id="113-scenario-tesi-its">11.3 Scenario: Tesi ITS</h3>
+<p><strong>Contesto:</strong> Tesi finale su &quot;Sistema IoT per Smart Agriculture&quot;</p>
+<p><strong>Mesi 1-2: Ricerca e Progettazione</strong></p>
+<pre><code>&quot;Analisi stato dell&#39;arte Smart Agriculture IoT.
+Genera:
+1. Survey tecnologie attuali
+2. Gap nel mercato
+3. Opportunità innovazione
+4. Bibliografia paper rilevanti&quot;
+
+↓
+
+&quot;Proponi 5 architetture per sistema IoT agricolo con:
+- Sensori (suolo, meteo, ecc)
+- Edge processing
+- Cloud platform
+- User interface
+Confronta e raccomanda.&quot;
+
+↓
+
+&quot;Genera documento progettazione dettagliato:
+- Requisiti funzionali/non-funzionali
+- Architettura HW/SW
+- Diagrammi UML
+- Piano implementazione
+Stile: Tesi accademica formale&quot;</code></pre>
+<p><strong>Mesi 3-4: Implementazione</strong></p>
+<pre><code>[Workflow progetto sezione 8.1, applicato a ogni componente]
+
+&quot;Implementa modulo acquisizione sensori&quot;
+&quot;Implementa algoritmo irrigazione intelligente&quot;  
+&quot;Sviluppa dashboard visualizzazione dati&quot;
+&quot;Integra comunicazione MQTT&quot;</code></pre>
+<p><strong>Mese 5: Testing e Validazione</strong></p>
+<pre><code>&quot;Piano testing completo sistema IoT:
+- Unit test componenti
+- Integration test
+- Field test (agricoltura reale)
+- Performance benchmarks
+- Reliability testing&quot;
+
+&quot;Analizza dati raccolti durante field test.
+Genera grafici prestazioni, statistiche affidabilità.&quot;</code></pre>
+<p><strong>Mese 6: Scrittura Tesi</strong></p>
+<pre><code>&quot;Genera struttura tesi su sistema Smart Agriculture:
+- Capitoli principali
+- Sezioni per capitolo
+- Figura/tabella per sezione
+- Bibliografia organizzata&quot;
+
+[Per ogni capitolo:]
+&quot;Scrivi bozza capitolo [N]: [Titolo]
+Basandoti su materiale raccolto: [paste note/dati]
+Stile: Accademico formale, terza persona&quot;
+
+&quot;Revise e migliora capitolo considerando:
+- Chiarezza espositiva
+- Coerenza tecnica
+- Formalismo accademico&quot;</code></pre>
+<p><strong>Risultato:</strong> Tesi completa, progetto funzionante, ottima valutazione.</p>
+<h3 id="114-scenario-primo-colloquio-tecnico">11.4 Scenario: Primo Colloquio Tecnico</h3>
+<p><strong>Contesto:</strong> Colloquio per posizione Junior Embedded Developer.</p>
+<p><strong>Preparazione:</strong></p>
+<pre><code>FASE 1 - Analisi Posizione:
+&quot;Analizza job description:
+[paste descrizione lavoro]
+
+Identifica:
+- Competenze tecniche richieste
+- Soft skills ricercate
+- Tecnologie/tool citati
+- Tipo progetti probabili
+
+Genera piano preparazione mirato.&quot;
+
+↓
+
+FASE 2 - Studio Mirato:
+&quot;Per ogni tecnologia richiesta [es. FreeRTOS], genera:
+- Concetti essenziali da sapere
+- Domande colloquio probabili
+- Progetti dimostrativi semplici
+- Terminologia chiave&quot;
+
+↓
+
+FASE 3 - Mock Interview:
+&quot;Simula colloquio tecnico per [posizione].
+Fai domande progressive:
+- Warm-up (basi)
+- Tecniche (problem solving)
+- Behavioral (soft skills)
+- Case study (progetto reale)
+
+Valuta risposte, da feedback.&quot;
+
+↓
+
+FASE 4 - Preparazione Presentazione Portfolio:
+&quot;Ho questi 3 progetti da presentare:
+[Lista progetti]
+
+Per ciascuno, prepara:
+- Elevator pitch (30 sec)
+- Demo script (2 min)
+- Risposte a domande tecniche probabili
+- Slide supporto (1-2 slide)&quot;
+
+↓
+
+FASE 5 - Q&amp;A Preparation:
+&quot;Genera 20 domande intelligenti da fare al recruiter/tech lead,
+organizzate per categoria:
+- Tecnica (tech stack, metodologie)
+- Team (struttura, collaboration)
+- Crescita (learning, mentorship)
+- Progetto (roadmap, challenges)&quot;</code></pre>
+<p><strong>Durante Colloquio:</strong></p>
+<ul>
+<li>Sicurezza acquisita da preparazione</li>
+<li>Risposte strutturate e competenti</li>
+<li>Domande intelligenti dimostrano interesse</li>
+</ul>
+<p><strong>Risultato:</strong> Offerta ricevuta!</p>
+<hr />
+<h2 id="12-sistema-di-organizzazione-personale">12. Sistema di Organizzazione Personale</h2>
+<h3 id="121-setup-workspace-digitale">12.1 Setup Workspace Digitale</h3>
+<h4 id="struttura-cartelle-raccomandata"><strong>Struttura Cartelle Raccomandata</strong></h4>
+<pre><code>📁 ITS_AI_Workspace/
+├── 📁 01_Prompts_Library/
+│   ├── 📁 Study/
+│   ├── 📁 Code/
+│   ├── 📁 Docs/
+│   └── 📁 Presentations/
+├── 📁 02_Projects/
+│   ├── 📁 [Nome_Progetto_1]/
+│   │   ├── 📄 README.md
+│   │   ├── 📁 code/
+│   │   ├── 📁 docs/
+│   │   ├── 📁 prompts_used/
+│   │   └── 📄 CHANGELOG.md
+│   └── 📁 [Nome_Progetto_2]/
+├── 📁 03_Study_Notes/
+│   ├── 📁 [Materia_1]/
+│   └── 📁 [Materia_2]/
+├── 📁 04_Code_Snippets/
+│   ├── 📁 C/
+│   ├── 📁 Arduino/
+│   └── 📁 Python/
+└── 📁 05_Career/
+    ├── 📄 CV.md
+    ├── 📄 Cover_Letter_Template.md
+    └── 📁 Interview_Prep/</code></pre>
+<h3 id="122-template-tracker-progresso">12.2 Template Tracker Progresso</h3>
+<p><strong>File: <code>PROGRESS_TRACKER.md</code></strong></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Progress Tracker - [Anno Accademico]</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Obiettivi Generali</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Completare corso <span class="co">[</span><span class="ot">Nome</span><span class="co">]</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Sviluppare <span class="co">[</span><span class="ot">N</span><span class="co">]</span> progetti personali</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Imparare <span class="co">[</span><span class="ot">Tecnologia X</span><span class="co">]</span></span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Ottenere stage presso <span class="co">[</span><span class="ot">Tipo Azienda</span><span class="co">]</span></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Progetti in Corso</span></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Nome Progetto 1]</span></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>**Status:** 🟡 In Progress (60%)</span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>**Deadline:** 2024-XX-XX</span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>**Ultima sessione:** 2024-XX-XX</span>
+<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>**Tasks:**</span>
+<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Setup ambiente</span>
+<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Architettura sistema</span>
+<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Implementazione modulo A</span>
+<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Testing</span>
+<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Documentazione</span>
+<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-23"><a href="#cb98-23" aria-hidden="true" tabindex="-1"></a>**Prompts Utili:**</span>
+<span id="cb98-24"><a href="#cb98-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`prompts/project1_architecture.txt`</span></span>
+<span id="cb98-25"><a href="#cb98-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`prompts/project1_testing.txt`</span></span>
+<span id="cb98-26"><a href="#cb98-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-27"><a href="#cb98-27" aria-hidden="true" tabindex="-1"></a>**Note:** <span class="co">[</span><span class="ot">Problemi incontrati, decisioni prese</span><span class="co">]</span></span>
+<span id="cb98-28"><a href="#cb98-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-29"><a href="#cb98-29" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb98-30"><a href="#cb98-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-31"><a href="#cb98-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Nome Progetto 2]</span></span>
+<span id="cb98-32"><a href="#cb98-32" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb98-33"><a href="#cb98-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-34"><a href="#cb98-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Materie/Esami</span></span>
+<span id="cb98-35"><a href="#cb98-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-36"><a href="#cb98-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sistemi Embedded</span></span>
+<span id="cb98-37"><a href="#cb98-37" aria-hidden="true" tabindex="-1"></a>**Esame:** 2024-XX-XX</span>
+<span id="cb98-38"><a href="#cb98-38" aria-hidden="true" tabindex="-1"></a>**Status:** 🟢 Preparato</span>
+<span id="cb98-39"><a href="#cb98-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-40"><a href="#cb98-40" aria-hidden="true" tabindex="-1"></a>**Argomenti:**</span>
+<span id="cb98-41"><a href="#cb98-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Architetture</span>
+<span id="cb98-42"><a href="#cb98-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Interrupts</span>
+<span id="cb98-43"><a href="#cb98-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> DMA</span>
+<span id="cb98-44"><a href="#cb98-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Power Management</span>
+<span id="cb98-45"><a href="#cb98-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-46"><a href="#cb98-46" aria-hidden="true" tabindex="-1"></a>**Risorse IA:**</span>
+<span id="cb98-47"><a href="#cb98-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`prompts/embedded_study_plan.txt`</span></span>
+<span id="cb98-48"><a href="#cb98-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`prompts/embedded_quiz.txt`</span></span>
+<span id="cb98-49"><a href="#cb98-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-50"><a href="#cb98-50" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb98-51"><a href="#cb98-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-52"><a href="#cb98-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skills Development</span></span>
+<span id="cb98-53"><a href="#cb98-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-54"><a href="#cb98-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### Nuove Competenze 2024</span></span>
+<span id="cb98-55"><a href="#cb98-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> FreeRTOS basics</span>
+<span id="cb98-56"><a href="#cb98-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Machine Learning embedded</span>
+<span id="cb98-57"><a href="#cb98-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> PCB Design</span>
+<span id="cb98-58"><a href="#cb98-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-59"><a href="#cb98-59" aria-hidden="true" tabindex="-1"></a>**Per ognuna:**</span>
+<span id="cb98-60"><a href="#cb98-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Risorse usate</span>
+<span id="cb98-61"><a href="#cb98-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Progetti pratici</span>
+<span id="cb98-62"><a href="#cb98-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Certificazioni (se applicable)</span>
+<span id="cb98-63"><a href="#cb98-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-64"><a href="#cb98-64" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb98-65"><a href="#cb98-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-66"><a href="#cb98-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Retrospettive Mensili</span></span>
+<span id="cb98-67"><a href="#cb98-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-68"><a href="#cb98-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Dicembre 2024</span></span>
+<span id="cb98-69"><a href="#cb98-69" aria-hidden="true" tabindex="-1"></a>**Cosa ha funzionato:**</span>
+<span id="cb98-70"><a href="#cb98-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb98-71"><a href="#cb98-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-72"><a href="#cb98-72" aria-hidden="true" tabindex="-1"></a>**Cosa migliorare:**</span>
+<span id="cb98-73"><a href="#cb98-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb98-74"><a href="#cb98-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-75"><a href="#cb98-75" aria-hidden="true" tabindex="-1"></a>**Lezioni apprese:**</span>
+<span id="cb98-76"><a href="#cb98-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb98-77"><a href="#cb98-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-78"><a href="#cb98-78" aria-hidden="true" tabindex="-1"></a>**Next month focus:**</span>
+<span id="cb98-79"><a href="#cb98-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span></code></pre></div>
+<h3 id="123-journal-giornaliero">12.3 Journal Giornaliero</h3>
+<p><strong>File: <code>DAILY_LOG_YYYY-MM.md</code></strong></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Daily Log - December 2024</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2024-12-05</span></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>**Time spent:** 4 hours</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>**Main focus:** Progetto Arduino IoT</span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### What I did:</span></span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implementato modulo sensori</span>
+<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Debuggato problema I2C</span>
+<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Generato documentazione</span>
+<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-12"><a href="#cb99-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### IA Usage:</span></span>
+<span id="cb99-13"><a href="#cb99-13" aria-hidden="true" tabindex="-1"></a>**Prompts efficaci oggi:**</span>
+<span id="cb99-14"><a href="#cb99-14" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>&quot;Debug I2C communication Arduino...&quot;</span>
+<span id="cb99-15"><a href="#cb99-15" aria-hidden="true" tabindex="-1"></a>   → Risolto in 10min invece di ore</span>
+<span id="cb99-16"><a href="#cb99-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-17"><a href="#cb99-17" aria-hidden="true" tabindex="-1"></a>**Prompts da migliorare:**</span>
+<span id="cb99-18"><a href="#cb99-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>&quot;Genera test...&quot; troppo vago</span>
+<span id="cb99-19"><a href="#cb99-19" aria-hidden="true" tabindex="-1"></a>   → Next time: specificare criteri</span>
+<span id="cb99-20"><a href="#cb99-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-21"><a href="#cb99-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Learning:</span></span>
+<span id="cb99-22"><a href="#cb99-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scoperto <span class="co">[</span><span class="ot">nuovo concetto</span><span class="co">]</span></span>
+<span id="cb99-23"><a href="#cb99-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capito perché <span class="co">[</span><span class="ot">problema</span><span class="co">]</span> accadeva</span>
+<span id="cb99-24"><a href="#cb99-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-25"><a href="#cb99-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tomorrow:</span></span>
+<span id="cb99-26"><a href="#cb99-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Continuare testing</span>
+<span id="cb99-27"><a href="#cb99-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Scrivere README</span>
+<span id="cb99-28"><a href="#cb99-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-29"><a href="#cb99-29" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb99-30"><a href="#cb99-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-31"><a href="#cb99-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2024-12-06</span></span>
+<span id="cb99-32"><a href="#cb99-32" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span></code></pre></div>
+<h3 id="124-checklist-workflow-quotidiano">12.4 Checklist Workflow Quotidiano</h3>
+<p><strong>All&#39;inizio della sessione studio/lavoro:</strong></p>
+<pre><code>□ Apri workspace organizzato
+□ Review obiettivi giornata
+□ Check deadline imminenti
+□ Prepara prompt library (apri file utili)
+□ Setup ambiente (IDE, seriale, hardware)</code></pre>
+<p><strong>Durante il lavoro:</strong></p>
+<pre><code>□ Usa IA per blocchi &gt;15min
+□ Salva prompt efficaci subito
+□ Documenta decisioni importanti
+□ Testa output IA sempre
+□ Commit codice frequentemente</code></pre>
+<p><strong>A fine sessione:</strong></p>
+<pre><code>□ Aggiorna progress tracker
+□ Scrivi daily log (5min)
+□ Salva prompts nuovi/migliorati
+□ Backup lavoro
+□ Prepara TODO domani</code></pre>
+<h3 id="125-template-revisione-settimanale">12.5 Template Revisione Settimanale</h3>
+<p><strong>File: <code>WEEKLY_REVIEW_YYYY-WXX.md</code></strong></p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Weekly Review - Week XX, Month YYYY</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accomplishments</span></span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>**Projects:**</span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Progetto A</span><span class="co">]</span>: <span class="co">[</span><span class="ot">milestone raggiunto</span><span class="co">]</span></span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Progetto B</span><span class="co">]</span>: <span class="co">[</span><span class="ot">progresso</span><span class="co">]</span></span>
+<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a>**Study:**</span>
+<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Materia X</span><span class="co">]</span>: <span class="co">[</span><span class="ot">argomenti coperti</span><span class="co">]</span></span>
+<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Skill Y</span><span class="co">]</span>: <span class="co">[</span><span class="ot">pratica fatta</span><span class="co">]</span></span>
+<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a>**Code written:** XXX lines</span>
+<span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a>**Prompts created/refined:** XX</span>
+<span id="cb103-14"><a href="#cb103-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-15"><a href="#cb103-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Challenges</span></span>
+<span id="cb103-16"><a href="#cb103-16" aria-hidden="true" tabindex="-1"></a>**Technical:**</span>
+<span id="cb103-17"><a href="#cb103-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Problema 1</span><span class="co">]</span>: <span class="co">[</span><span class="ot">Come risolto o in progress</span><span class="co">]</span></span>
+<span id="cb103-18"><a href="#cb103-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-19"><a href="#cb103-19" aria-hidden="true" tabindex="-1"></a>**Learning:**</span>
+<span id="cb103-20"><a href="#cb103-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Difficoltà concept</span><span class="co">]</span>: <span class="co">[</span><span class="ot">Strategia adottata</span><span class="co">]</span></span>
+<span id="cb103-21"><a href="#cb103-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-22"><a href="#cb103-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## IA Effectiveness</span></span>
+<span id="cb103-23"><a href="#cb103-23" aria-hidden="true" tabindex="-1"></a>**Best prompts this week:**</span>
+<span id="cb103-24"><a href="#cb103-24" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="co">[</span><span class="ot">Prompt name</span><span class="co">]</span>: <span class="co">[</span><span class="ot">Perché efficace</span><span class="co">]</span></span>
+<span id="cb103-25"><a href="#cb103-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-26"><a href="#cb103-26" aria-hidden="true" tabindex="-1"></a>**Improvements needed:**</span>
+<span id="cb103-27"><a href="#cb103-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Area da migliorare</span><span class="co">]</span></span>
+<span id="cb103-28"><a href="#cb103-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-29"><a href="#cb103-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Metrics</span></span>
+<span id="cb103-30"><a href="#cb103-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hours studied: XX</span>
+<span id="cb103-31"><a href="#cb103-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Projects progress: <span class="co">[</span><span class="ot">percentuali</span><span class="co">]</span></span>
+<span id="cb103-32"><a href="#cb103-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>IA time saved: ~XX hours</span>
+<span id="cb103-33"><a href="#cb103-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-34"><a href="#cb103-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Next Week Goals</span></span>
+<span id="cb103-35"><a href="#cb103-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="co">[</span><span class="ot">Goal 1</span><span class="co">]</span></span>
+<span id="cb103-36"><a href="#cb103-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="co">[</span><span class="ot">Goal 2</span><span class="co">]</span></span>
+<span id="cb103-37"><a href="#cb103-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="co">[</span><span class="ot">Goal 3</span><span class="co">]</span></span>
+<span id="cb103-38"><a href="#cb103-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-39"><a href="#cb103-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
+<span id="cb103-40"><a href="#cb103-40" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Riflessioni libere, idee, spunti futuri</span><span class="co">]</span></span></code></pre></div>
+<h3 id="126-dashboard-notion-opzionale">12.6 Dashboard Notion (Opzionale)</h3>
+<p>Se usi Notion, crea dashboard con:</p>
+<pre><code>┌─────────────────────────────────────┐
+│        ITS AI WORKSPACE             │
+├─────────────────────────────────────┤
+│                                     │
+│  📊 PROGRESS OVERVIEW               │
+│  ├ Projects: [X/Y completed]       │
+│  ├ Exams: [next: Nome - date]      │
+│  └ Skills: [learning X, Y, Z]      │
+│                                     │
+│  🎯 WEEKLY GOALS                    │
+│  □ [Goal 1]                         │
+│  □ [Goal 2]                         │
+│                                     │
+│  ⚡ QUICK ACTIONS                   │
+│  → New Prompt                       │
+│  → New Project                      │
+│  → Daily Log                        │
+│                                     │
+│  📚 DATABASES                       │
+│  → Prompts Library                  │
+│  → Projects                         │
+│  → Study Notes                      │
+│  → Code Snippets                    │
+│                                     │
+└─────────────────────────────────────┘</code></pre>
+<p><strong>Vantaggio:</strong> Vista unificata, quick access, mobile-friendly.</p>
+<hr />
+<h2 id="books-risorse-supplementari">📚 Risorse Supplementari</h2>
+<h3 id="link-utili">Link Utili</h3>
+<p><strong>Tool IA:</strong></p>
+<ul>
+<li>ChatGPT: <a href="https://chat.openai.com">https://chat.openai.com</a></li>
+<li>Claude: <a href="https://claude.ai">https://claude.ai</a></li>
+<li>GitHub Copilot: <a href="https://copilot.github.com">https://copilot.github.com</a></li>
+<li>GitHub Student Pack: <a href="https://education.github.com/pack">https://education.github.com/pack</a></li>
+</ul>
+<p><strong>Prompt Engineering:</strong></p>
+<ul>
+<li>Learn Prompting: <a href="https://learnprompting.org">https://learnprompting.org</a></li>
+<li>Prompt Engineering Guide: <a href="https://www.promptingguide.ai">https://www.promptingguide.ai</a></li>
+</ul>
+<p><strong>Community:</strong></p>
+<ul>
+<li>r/learnprogramming</li>
+<li>r/embedded</li>
+<li>Stack Overflow</li>
+</ul>
+<h3 id="libri-consigliati">Libri Consigliati</h3>
+<ol type="1">
+<li><strong>&quot;The Pragmatic Programmer&quot;</strong> - Thomas &amp; Hunt</li>
+<li><strong>&quot;Code Complete&quot;</strong> - McConnell</li>
+<li><strong>&quot;Making Embedded Systems&quot;</strong> - White</li>
+</ol>
+<h3 id="canali-youtube">Canali YouTube</h3>
+<ul>
+<li><strong>Ben Eater</strong> - Computer architecture</li>
+<li><strong>Andreas Spiess</strong> - Arduino/ESP32 projects</li>
+<li><strong>Low Level Learning</strong> - C e sistemi embedded</li>
+</ul>
+<hr />
+<h2 id="white_check_mark-checklist-finale">✅ Checklist Finale</h2>
+<p><strong>Prima di iniziare il tuo percorso:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Ho scelto i tool IA da usare</label></li>
+<li><label><input type="checkbox"></input>Ho creato account necessari</label></li>
+<li><label><input type="checkbox"></input>Ho ottenuto GitHub Student Pack (Copilot gratis!)</label></li>
+<li><label><input type="checkbox"></input>Ho setup workspace organizzato</label></li>
+<li><label><input type="checkbox"></input>Ho scaricato template prompt dalla dispensa</label></li>
+<li><label><input type="checkbox"></input>Ho creato sistema di tracking progresso</label></li>
+<li><label><input type="checkbox"></input>Ho letto sezione &quot;Errori da Evitare&quot;</label></li>
+<li><label><input type="checkbox"></input>Ho capito mentalità corretta (IA = strumento, non scorciatoia)</label></li>
+</ul>
+<p><strong>Durante il percorso, ricorda di:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Salvare prompt efficaci appena li trovi</label></li>
+<li><label><input type="checkbox"></input>Validare SEMPRE output IA</label></li>
+<li><label><input type="checkbox"></input>Documentare progetti mentre lavori</label></li>
+<li><label><input type="checkbox"></input>Fare retrospettive regolari</label></li>
+<li><label><input type="checkbox"></input>Condividere conoscenze con colleghi</label></li>
+<li><label><input type="checkbox"></input>Chiedere aiuto quando bloccato (anche all&#39;IA!)</label></li>
+</ul>
+<hr />
+<h2 id="mortar_board-conclusione">🎓 Conclusione</h2>
+<p>Questa guida ti ha fornito:</p>
+<p>✅ <strong>Strumenti</strong> per usare IA efficacemente<br />
+✅ <strong>Template</strong> prompt per ogni situazione<br />
+✅ <strong>Workflow</strong> completi per progetti reali<br />
+✅ <strong>Sistema</strong> di organizzazione personale<br />
+✅ <strong>Best practices</strong> validate</p>
+<p><strong>Ora dipende da te!</strong></p>
+<p>L&#39;IA è potente, ma sei <strong>TU</strong> che:</p>
+<ul>
+<li>Formuli le domande giuste</li>
+<li>Validi le risposte</li>
+<li>Integri le conoscenze</li>
+<li>Costruisci competenze reali</li>
+</ul>
+<blockquote>
+<p><strong>Usa l&#39;IA per diventare uno sviluppatore MIGLIORE,</strong><br />
+<strong>non per evitare di diventare uno sviluppatore.</strong></p>
+</blockquote>
+<p><strong>Buon lavoro e... buon prompt! 🚀</strong></p>
+<hr />
+<p><strong>Versione documento:</strong> 1.0<br />
+<strong>Ultimo aggiornamento:</strong> Dicembre 2024<br />
+<strong>Corso ITS:</strong> IA e Programmazione Assistita<br />
+<strong>Modulo:</strong> Extra - Guida Pratica Studenti</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Guida ai Filtri - Generatore Sinusoidale</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Guida ai Filtri - Generatore Sinusoidale</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>guida_filtri.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/UF 10 Sensori e Trasduttori/Microcontrollori e segnali/4 sketch_with_noise_and_filters</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="panoramica">Panoramica</h2>
+<p>Il sistema ora include <strong>8 tipi di filtri</strong> digitali che possono essere applicati singolarmente o in cascata al segnale (pulito o con disturbi). I filtri sono visualizzati in tempo reale sul Serial Plotter insieme al segnale originale.</p>
+<h2 id="visualizzazione">Visualizzazione</h2>
+<p>Quando <strong>almeno un filtro è attivo</strong>, il Serial Plotter mostra <strong>due tracce</strong>:</p>
+<ul>
+<li><strong>Prima traccia (blu)</strong>: Segnale RAW (con eventuali disturbi)</li>
+<li><strong>Seconda traccia (rossa)</strong>: Segnale FILTRATO</li>
+</ul>
+<p>Questo permette di confrontare visivamente l&#39;efficacia del filtro in tempo reale!</p>
+<hr />
+<h2 id="filtri-disponibili">Filtri Disponibili</h2>
+<h3 id="1-simple-average-media-aritmetica-semplice">1. <strong>Simple Average</strong> (Media Aritmetica Semplice)</h3>
+<p><strong>Comando</strong>: <code>filter simple</code> / <code>nofilter simple</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Media degli ultimi N campioni</li>
+<li>Parametro: <code>simpleAvgSamples = 10</code> (modificabile nel codice)</li>
+<li>Filtro non ricorsivo (FIR)</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>y[n] = (x[n] + x[n-1] + ... + x[n-N+1]) / N</code></pre>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Riduce rumore bianco efficacemente</li>
+<li>Ritardo di N/2 campioni</li>
+<li>Transizione graduale</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Smoothing generale</li>
+<li>Riduzione rumore ad alta frequenza</li>
+<li>Applicazioni in tempo non critico</li>
+</ul>
+<p><strong>Parametri ottimali</strong>:</p>
+<ul>
+<li>Rumore basso: N = 5-10</li>
+<li>Rumore medio: N = 10-20</li>
+<li>Rumore alto: N = 20-30</li>
+</ul>
+<hr />
+<h3 id="2-moving-average-media-mobile">2. <strong>Moving Average</strong> (Media Mobile)</h3>
+<p><strong>Comando</strong>: <code>filter moving</code> / <code>nofilter moving</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Media scorrevole su finestra fissa</li>
+<li>Parametro: <code>movingAvgWindow = 20</code> (modificabile nel codice)</li>
+<li>Equivalente a Simple Average ma con finestra più ampia</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>y[n] = (1/W) * Σ(x[n-i]) per i=0 to W-1</code></pre>
+<p>Dove W = dimensione finestra</p>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Smoothing molto efficace</li>
+<li>Elimina picchi e rumore</li>
+<li>Ritardo proporzionale a W</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Trend analysis</li>
+<li>Rimozione oscillazioni rapide</li>
+<li>Smoothing robusto</li>
+</ul>
+<p><strong>Confronto con Simple Average</strong>:</p>
+<ul>
+<li>Moving Average: finestra più ampia (default 20)</li>
+<li>Simple Average: finestra più stretta (default 10)</li>
+<li>Usa entrambi per smoothing progressivo!</li>
+</ul>
+<hr />
+<h3 id="3-exponential-moving-average-ema-media-mobile-esponenziale">3. <strong>Exponential Moving Average (EMA)</strong> (Media Mobile Esponenziale)</h3>
+<p><strong>Comando</strong>: <code>filter ema</code> / <code>nofilter ema</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Peso esponenziale decrescente ai campioni vecchi</li>
+<li>Parametro: <code>emaAlpha = 0.1</code> (0-1, più basso = più liscio)</li>
+<li>Filtro ricorsivo (IIR) molto efficiente</li>
+<li>Memoria infinita ma decadimento esponenziale</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>y[n] = α * x[n] + (1-α) * y[n-1]</code></pre>
+<p>Dove α = emaAlpha</p>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Smoothing reattivo</li>
+<li>Risposta più veloce di moving average</li>
+<li>Ritardo minimo</li>
+<li>Peso maggiore ai campioni recenti</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Trading e finanza</li>
+<li>Inseguimento di segnali variabili</li>
+<li>Applicazioni real-time</li>
+</ul>
+<p><strong>Parametri α</strong>:</p>
+<ul>
+<li>α = 0.01: molto liscio, lento</li>
+<li>α = 0.1: bilanciato (default)</li>
+<li>α = 0.3: reattivo, veloce</li>
+<li>α = 0.5: molto reattivo</li>
+</ul>
+<p><strong>Relazione con time constant</strong>:</p>
+<pre><code>α = 2 / (N + 1)
+Dove N = numero campioni equivalente</code></pre>
+<hr />
+<h3 id="4-complementary-filter-filtro-complementare">4. <strong>Complementary Filter</strong> (Filtro Complementare)</h3>
+<p><strong>Comando</strong>: <code>filter compl</code> / <code>nofilter compl</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Combina alta e bassa frequenza con pesi complementari</li>
+<li>Parametro: <code>complementaryAlpha = 0.98</code> (tipicamente 0.95-0.99)</li>
+<li>Usato in sensor fusion (IMU, gyro+accel)</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>y_low[n] = α * y_low[n-1] + (1-α) * x[n]
+y_high[n] = x[n] - y_low[n]
+y[n] = y_low[n]  (output passa-basso)</code></pre>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Separa componenti lente e veloci</li>
+<li>Configurazione attuale: output passa-basso</li>
+<li>Ottimo per deriva + rumore</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Fusione sensori (gyro drift + accel noise)</li>
+<li>Rimozione deriva mantenendo dinamica</li>
+<li>Sistemi di navigazione inerziale</li>
+</ul>
+<p><strong>Nota</strong>: α alto (0.98) = più passa-basso, α basso (0.90) = più passa-alto</p>
+<hr />
+<h3 id="5-median-filter-filtro-mediano">5. <strong>Median Filter</strong> (Filtro Mediano)</h3>
+<p><strong>Comando</strong>: <code>filter median</code> / <code>nofilter median</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Ordina campioni e prende valore centrale</li>
+<li>Parametro: <code>medianWindow = 5</code> (dispari, tipicamente 3-7)</li>
+<li>Filtro non lineare</li>
+</ul>
+<p><strong>Algoritmo</strong>:</p>
+<ol type="1">
+<li>Preleva ultimi N campioni</li>
+<li>Ordina in ordine crescente</li>
+<li>Restituisce valore centrale</li>
+</ol>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li><strong>ECCELLENTE per impulsi</strong>: elimina spike completamente</li>
+<li>Preserva bordi e transizioni</li>
+<li>Non introduce blur come media</li>
+<li>Immune a outlier</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Rimozione impulsi e spike</li>
+<li>Elaborazione immagini (salt &amp; pepper noise)</li>
+<li>Dati con outlier occasionali</li>
+<li>Segnali con transizioni nette</li>
+</ul>
+<p><strong>Dimensione finestra</strong>:</p>
+<ul>
+<li>3: veloce, rimozione spike singoli</li>
+<li>5: bilanciato (default)</li>
+<li>7: robusto contro burst di impulsi</li>
+</ul>
+<p><strong>Confronto con Moving Average</strong>:</p>
+<ul>
+<li>Median: elimina impulsi senza smoothing eccessivo</li>
+<li>Moving: smussa tutto ma diffonde gli impulsi</li>
+</ul>
+<hr />
+<h3 id="6-kalman-filter-filtro-di-kalman">6. <strong>Kalman Filter</strong> (Filtro di Kalman)</h3>
+<p><strong>Comando</strong>: <code>filter kalman</code> / <code>nofilter kalman</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Filtro ottimo per sistemi lineari con rumore gaussiano</li>
+<li>Stima lo stato &quot;vero&quot; da misure rumorose</li>
+<li>Parametri:
+<ul>
+<li><code>kalmanQ = 0.01</code> (rumore processo)</li>
+<li><code>kalmanR = 1.0</code> (rumore misura)</li>
+</ul></li>
+<li>Versione semplificata 1D</li>
+</ul>
+<p><strong>Algoritmo</strong>:</p>
+<pre><code>PREDICTION:
+x_prior = x_prev
+P_prior = P_prev + Q
+
+UPDATE:
+K = P_prior / (P_prior + R)  (Kalman Gain)
+x = x_prior + K * (measurement - x_prior)
+P = (1 - K) * P_prior</code></pre>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Smoothing ottimale statisticamente</li>
+<li>Bilancia predizione e misura</li>
+<li>Adattivo al rumore</li>
+<li>Convergenza rapida</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Tracking di oggetti</li>
+<li>GPS e navigazione</li>
+<li>Fusione dati multi-sensore</li>
+<li>Sistemi di controllo</li>
+</ul>
+<p><strong>Tuning parametri</strong>:</p>
+<ul>
+<li><p><strong>Q basso</strong> (0.001): sistema molto stabile, cambia lentamente</p></li>
+<li><p><strong>Q medio</strong> (0.01): bilanciato (default)</p></li>
+<li><p><strong>Q alto</strong> (0.1): sistema dinamico, segue misure rapidamente</p></li>
+<li><p><strong>R basso</strong> (0.1): misure affidabili, segue il segnale</p></li>
+<li><p><strong>R medio</strong> (1.0): bilanciato (default)</p></li>
+<li><p><strong>R alto</strong> (10.0): misure rumorose, più smoothing</p></li>
+</ul>
+<p><strong>Rapporto Q/R</strong>:</p>
+<ul>
+<li>Q/R &lt;&lt; 1: filtro conservativo (smoothing pesante)</li>
+<li>Q/R ≈ 1: bilanciato</li>
+<li>Q/R &gt;&gt; 1: filtro reattivo (segue misure)</li>
+</ul>
+<hr />
+<h3 id="7-low-pass-filter-filtro-passa-basso-rc">7. <strong>Low-Pass Filter</strong> (Filtro Passa-Basso RC)</h3>
+<p><strong>Comando</strong>: <code>filter lowpass</code> / <code>nofilter lowpass</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Filtro IIR primo ordine (RC analogico digitalizzato)</li>
+<li>Parametro: <code>lowPassCutoff = 0.5</code> Hz (frequenza di taglio)</li>
+<li>Attenua frequenze sopra il cutoff</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>α = Δt / (RC + Δt)
+dove RC = 1 / (2π * f_cutoff)
+
+y[n] = α * x[n] + (1-α) * y[n-1]</code></pre>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Rimuove alte frequenze (rumore rapido)</li>
+<li>Preserva basse frequenze (trend, segnale lento)</li>
+<li>Roll-off graduale: -20 dB/decade</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Anti-aliasing</li>
+<li>Rimozione rumore ad alta frequenza</li>
+<li>Smoothing audio</li>
+<li>Condizionamento sensori</li>
+</ul>
+<p><strong>Frequenza di taglio</strong>:</p>
+<ul>
+<li>0.1 Hz: molto selettivo, solo trend lentissimi</li>
+<li><strong>0.5 Hz</strong>: bilanciato per sinusoide 0.1 Hz (default)</li>
+<li>2.0 Hz: permette più dinamica</li>
+<li>5.0 Hz: taglio alto, rimuove solo rumore veloce</li>
+</ul>
+<p><strong>Relazione con segnale</strong>:</p>
+<ul>
+<li>Se f_signal = 0.1 Hz e f_cutoff = 0.5 Hz → passa segnale, attenua rumore</li>
+<li>Se f_cutoff &lt; f_signal → attenua anche il segnale!</li>
+</ul>
+<hr />
+<h3 id="8-high-pass-filter-filtro-passa-alto">8. <strong>High-Pass Filter</strong> (Filtro Passa-Alto)</h3>
+<p><strong>Comando</strong>: <code>filter highpass</code> / <code>nofilter highpass</code></p>
+<p><strong>Caratteristiche</strong>:</p>
+<ul>
+<li>Filtro IIR primo ordine (differenziatore + passa-basso)</li>
+<li>Parametro: <code>highPassCutoff = 0.05</code> Hz (frequenza di taglio)</li>
+<li>Attenua frequenze sotto il cutoff</li>
+</ul>
+<p><strong>Formula</strong>:</p>
+<pre><code>α = RC / (RC + Δt)
+dove RC = 1 / (2π * f_cutoff)
+
+y[n] = α * (y[n-1] + x[n] - x[n-1])</code></pre>
+<p><strong>Effetto</strong>:</p>
+<ul>
+<li>Rimuove basse frequenze (deriva DC, offset)</li>
+<li>Preserva alte frequenze (variazioni rapide)</li>
+<li>Blocca componente continua</li>
+</ul>
+<p><strong>Uso tipico</strong>:</p>
+<ul>
+<li>Rimozione deriva DC</li>
+<li>Eliminazione offset</li>
+<li>Accoppiamento AC</li>
+<li>Rilevamento transizioni</li>
+</ul>
+<p><strong>Frequenza di taglio</strong>:</p>
+<ul>
+<li><strong>0.05 Hz</strong>: blocca deriva lenta (default, buono per drift)</li>
+<li>0.01 Hz: blocca anche variazioni molto lente</li>
+<li>0.1 Hz: più aggressivo</li>
+</ul>
+<p><strong>Attenzione</strong>:</p>
+<ul>
+<li>Se f_cutoff troppo alto → attenua anche il segnale utile!</li>
+<li>Per sinusoide 0.1 Hz, usa f_cutoff &lt;&lt; 0.1 Hz</li>
+</ul>
+<hr />
+<h2 id="comandi-seriali">Comandi Seriali</h2>
+<h3 id="attivare-filtri">Attivare Filtri</h3>
+<pre><code>filter simple      → Attiva media semplice
+filter moving      → Attiva media mobile
+filter ema         → Attiva EMA
+filter compl       → Attiva complementare
+filter median      → Attiva mediano
+filter kalman      → Attiva Kalman
+filter lowpass     → Attiva passa-basso
+filter highpass    → Attiva passa-alto</code></pre>
+<h3 id="disattivare-filtri">Disattivare Filtri</h3>
+<pre><code>nofilter simple    → Disattiva media semplice
+nofilter moving    → Disattiva media mobile
+nofilter ema       → Disattiva EMA
+nofilter compl     → Disattiva complementare
+nofilter median    → Disattiva mediano
+nofilter kalman    → Disattiva Kalman
+nofilter lowpass   → Disattiva passa-basso
+nofilter highpass  → Disattiva passa-alto</code></pre>
+<h3 id="status">Status</h3>
+<pre><code>filters            → Mostra filtri attivi</code></pre>
+<hr />
+<h2 id="esempi-di-utilizzo">Esempi di Utilizzo</h2>
+<h3 id="esempio-1-rimozione-rumore-bianco">Esempio 1: Rimozione Rumore Bianco</h3>
+<pre><code>&gt; on
+&gt; add white
+[osserva rumore]
+&gt; filter moving
+Filtro media mobile: ON</code></pre>
+<p><strong>Risultato</strong>: Traccia blu rumorosa, traccia rossa liscia</p>
+<hr />
+<h3 id="esempio-2-eliminazione-impulsi">Esempio 2: Eliminazione Impulsi</h3>
+<pre><code>&gt; on
+&gt; add impulse
+[vedi spike casuali]
+&gt; filter median
+Filtro mediano: ON</code></pre>
+<p><strong>Risultato</strong>: Gli impulsi spariscono completamente dalla traccia rossa!</p>
+<hr />
+<h3 id="esempio-3-rimozione-deriva-dc">Esempio 3: Rimozione Deriva DC</h3>
+<pre><code>&gt; on
+&gt; add drift
+[vedi segnale che sale]
+&gt; filter highpass
+Filtro passa-alto: ON</code></pre>
+<p><strong>Risultato</strong>: Traccia rossa centrata, deriva eliminata</p>
+<hr />
+<h3 id="esempio-4-filtri-in-cascata">Esempio 4: Filtri in Cascata</h3>
+<pre><code>&gt; on
+&gt; add white
+&gt; add impulse
+&gt; filter median      # Prima elimina impulsi
+&gt; filter moving      # Poi smussa rumore bianco
+&gt; filters
+=== FILTRI ATTIVI ===
+  median:  ON
+  moving:  ON
+=====================</code></pre>
+<p><strong>Risultato</strong>: Segnale super pulito! Median rimuove spike, Moving smussa rumore.</p>
+<hr />
+<h3 id="esempio-5-confronto-ema-vs-moving-average">Esempio 5: Confronto EMA vs Moving Average</h3>
+<pre><code>&gt; on
+&gt; add white
+&gt; filter ema
+[osserva per 10 secondi]
+&gt; nofilter ema
+&gt; filter moving
+[confronta]</code></pre>
+<p><strong>Differenza</strong>: EMA più reattivo, Moving più liscio</p>
+<hr />
+<h3 id="esempio-6-kalman-su-scatter-noise">Esempio 6: Kalman su Scatter Noise</h3>
+<pre><code>&gt; on
+&gt; add scatter
+[nuvola di punti]
+&gt; filter kalman
+Filtro Kalman: ON</code></pre>
+<p><strong>Risultato</strong>: Il Kalman &quot;trova&quot; la sinusoide nella nuvola di punti!</p>
+<hr />
+<h3 id="esempio-7-passa-basso-per-rumore-veloce">Esempio 7: Passa-Basso per Rumore Veloce</h3>
+<pre><code>&gt; on
+&gt; add white
+&gt; add sine          # Interferenza 2 Hz
+&gt; filter lowpass
+# Con lowPassCutoff = 0.5 Hz:
+# - Segnale 0.1 Hz: PASSA
+# - Rumore bianco: ATTENUATO
+# - Interferenza 2 Hz: ATTENUATA</code></pre>
+<hr />
+<h2 id="filtri-in-cascata">Filtri in Cascata</h2>
+<p>I filtri vengono applicati <strong>nell&#39;ordine seguente</strong>:</p>
+<ol type="1">
+<li>Simple Average</li>
+<li>Moving Average</li>
+<li>EMA</li>
+<li>Complementary</li>
+<li>Median</li>
+<li>Kalman</li>
+<li>Low-Pass</li>
+<li>High-Pass</li>
+</ol>
+<h3 id="strategie-efficaci">Strategie Efficaci</h3>
+<h4 id="anti-impulse--smoothing">Anti-Impulse + Smoothing</h4>
+<pre><code>filter median      # Primo: elimina spike
+filter moving      # Secondo: smussa residuo</code></pre>
+<h4 id="anti-drift--anti-noise">Anti-Drift + Anti-Noise</h4>
+<pre><code>filter highpass    # Primo: elimina deriva
+filter lowpass     # Secondo: elimina rumore veloce</code></pre>
+<h4 id="optimal-filtering">Optimal Filtering</h4>
+<pre><code>filter median      # Elimina outlier
+filter kalman      # Stima ottima</code></pre>
+<h3 id="warning-attenzione-allordine">⚠️ Attenzione all&#39;Ordine!</h3>
+<p>L&#39;ordine è importante:</p>
+<ul>
+<li>✅ <code>median</code> → <code>moving</code> = spike rimossi poi smoothing</li>
+<li>❌ <code>moving</code> → <code>median</code> = spike diffusi poi mediano meno efficace</li>
+</ul>
+<hr />
+<h2 id="parametri-modificabili-nel-codice">Parametri Modificabili nel Codice</h2>
+<h3 id="simple-average">Simple Average</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> simpleAvgSamples <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>  <span class="co">// 5-30 campioni</span></span></code></pre></div>
+<h3 id="moving-average">Moving Average</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> movingAvgWindow <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>   <span class="co">// 10-50 campioni</span></span></code></pre></div>
+<h3 id="ema">EMA</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> emaAlpha <span class="op">=</span> <span class="fl">0.1</span><span class="bu">f</span><span class="op">;</span>          <span class="co">// 0.01-0.5</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">// α = 0.01 → molto liscio</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">// α = 0.1  → bilanciato</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">// α = 0.3  → reattivo</span></span></code></pre></div>
+<h3 id="complementary">Complementary</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> complementaryAlpha <span class="op">=</span> <span class="fl">0.98</span><span class="bu">f</span><span class="op">;</span>  <span class="co">// 0.90-0.99</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.98 → favorisce passa-basso</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.95 → più bilanciato</span></span></code></pre></div>
+<h3 id="median">Median</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> medianWindow <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>       <span class="co">// 3, 5, 7 (dispari)</span></span></code></pre></div>
+<h3 id="kalman">Kalman</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> kalmanQ <span class="op">=</span> <span class="fl">0.01</span><span class="bu">f</span><span class="op">;</span>          <span class="co">// Rumore processo (0.001-0.1)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> kalmanR <span class="op">=</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">;</span>           <span class="co">// Rumore misura (0.1-10.0)</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Q/R basso → più smoothing</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Q/R alto → più reattivo</span></span></code></pre></div>
+<h3 id="low-pass">Low-Pass</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> lowPassCutoff <span class="op">=</span> <span class="fl">0.5</span><span class="bu">f</span><span class="op">;</span>     <span class="co">// Frequenza taglio (Hz)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.1 Hz  → molto selettivo</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.5 Hz  → bilanciato</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">// 2.0 Hz  → permette dinamica</span></span></code></pre></div>
+<h3 id="high-pass">High-Pass</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> highPassCutoff <span class="op">=</span> <span class="fl">0.05</span><span class="bu">f</span><span class="op">;</span>   <span class="co">// Frequenza taglio (Hz)</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.01 Hz → blocca deriva molto lenta</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.05 Hz → bilanciato</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">// 0.1 Hz  → più aggressivo</span></span></code></pre></div>
+<hr />
+<h2 id="progetti-didattici">Progetti Didattici</h2>
+<h3 id="1-confronto-filtri-anti-rumore">1. Confronto Filtri Anti-Rumore</h3>
+<pre><code>add white
+filter simple    # Test 1
+nofilter simple
+filter moving    # Test 2
+nofilter moving
+filter ema       # Test 3</code></pre>
+<p>Quale smussa meglio? Quale ha meno ritardo?</p>
+<h3 id="2-median-filter-challenge">2. Median Filter Challenge</h3>
+<pre><code>add impulse
+filter simple    # Gli impulsi si &quot;spalmano&quot;
+nofilter simple
+filter median    # Gli impulsi spariscono!</code></pre>
+<h3 id="3-kalman-vs-ema">3. Kalman vs EMA</h3>
+<pre><code>add scatter
+filter ema       # Prova EMA
+nofilter ema
+filter kalman    # Prova Kalman</code></pre>
+<p>Il Kalman converge meglio su rumore estremo!</p>
+<h3 id="4-complementary-filter-demo">4. Complementary Filter Demo</h3>
+<pre><code>add drift        # Deriva lenta
+add white        # Rumore veloce
+filter compl     # Rimuove deriva, mantiene dinamica</code></pre>
+<h3 id="5-cascata-ottimale">5. Cascata Ottimale</h3>
+<pre><code>add white
+add impulse
+add drift
+filter highpass  # Elimina drift
+filter median    # Elimina impulsi
+filter lowpass   # Smussa rumore</code></pre>
+<h3 id="6-cutoff-frequency-test">6. Cutoff Frequency Test</h3>
+<p>Modifica nel codice:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> lowPassCutoff <span class="op">=</span> <span class="fl">0.1</span><span class="bu">f</span><span class="op">;</span>   <span class="co">// Test 1</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> lowPassCutoff <span class="op">=</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">;</span>   <span class="co">// Test 2</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> lowPassCutoff <span class="op">=</span> <span class="fl">5.0</span><span class="bu">f</span><span class="op">;</span>   <span class="co">// Test 3</span></span></code></pre></div>
+<p>Osserva come cambia l&#39;effetto del filtro!</p>
+<hr />
+<h2 id="tabella-comparativa-filtri">Tabella Comparativa Filtri</h2>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Filtro</th>
+<th>Tipo</th>
+<th>Ritardo</th>
+<th>Anti-Rumore</th>
+<th>Anti-Impulse</th>
+<th>Anti-Drift</th>
+<th>Complessità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple</td>
+<td>FIR</td>
+<td>Medio</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>❌</td>
+<td>Bassa</td>
+</tr>
+<tr>
+<td>Moving</td>
+<td>FIR</td>
+<td>Alto</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>❌</td>
+<td>Bassa</td>
+</tr>
+<tr>
+<td>EMA</td>
+<td>IIR</td>
+<td>Basso</td>
+<td>⭐⭐⭐</td>
+<td>⭐</td>
+<td>❌</td>
+<td>Molto Bassa</td>
+</tr>
+<tr>
+<td>Complementary</td>
+<td>IIR</td>
+<td>Basso</td>
+<td>⭐⭐</td>
+<td>⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>Median</td>
+<td>Non-lin</td>
+<td>Medio</td>
+<td>⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>❌</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>Kalman</td>
+<td>Adattivo</td>
+<td>Basso</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>Low-Pass</td>
+<td>IIR</td>
+<td>Basso</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td>❌</td>
+<td>Bassa</td>
+</tr>
+<tr>
+<td>High-Pass</td>
+<td>IIR</td>
+<td>Basso</td>
+<td>⭐</td>
+<td>⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>Bassa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="legenda">Legenda</h3>
+<ul>
+<li>Ritardo: quanto il filtro rallenta la risposta</li>
+<li>Anti-Rumore: efficacia su rumore bianco/gaussiano</li>
+<li>Anti-Impulse: efficacia su spike/impulsi</li>
+<li>Anti-Drift: efficacia su deriva DC</li>
+<li>Complessità: costo computazionale</li>
+</ul>
+<hr />
+<h2 id="consigli-pratici">Consigli Pratici</h2>
+<h3 id="per-rumore-bianco">Per Rumore Bianco</h3>
+<p><strong>Best</strong>: Low-Pass, Moving Average, Kalman</p>
+<pre><code>filter lowpass</code></pre>
+<h3 id="per-impulsispike">Per Impulsi/Spike</h3>
+<p><strong>Best</strong>: Median</p>
+<pre><code>filter median</code></pre>
+<h3 id="per-deriva-dc">Per Deriva DC</h3>
+<p><strong>Best</strong>: High-Pass, Complementary</p>
+<pre><code>filter highpass</code></pre>
+<h3 id="per-scatter-rumore-estremo">Per Scatter (rumore estremo)</h3>
+<p><strong>Best</strong>: Kalman</p>
+<pre><code>filter kalman</code></pre>
+<h3 id="per-applicazioni-real-time">Per Applicazioni Real-Time</h3>
+<p><strong>Best</strong>: EMA, Low-Pass (ritardo minimo)</p>
+<pre><code>filter ema</code></pre>
+<h3 id="per-massima-pulizia-no-vincoli-tempo">Per Massima Pulizia (no vincoli tempo)</h3>
+<p><strong>Best</strong>: Cascata multi-filtro</p>
+<pre><code>filter median
+filter kalman
+filter lowpass</code></pre>
+<hr />
+<h2 id="suggerimenti-per-altri-filtri">Suggerimenti per Altri Filtri</h2>
+<h3 id="filtri-da-aggiungere">Filtri da Aggiungere</h3>
+<h4 id="1-savitzky-golay-filter">1. <strong>Savitzky-Golay Filter</strong></h4>
+<ul>
+<li>Fit polinomiale su finestra mobile</li>
+<li>Preserva forma del segnale meglio di moving average</li>
+<li>Ottimo per smoothing mantenendo picchi</li>
+</ul>
+<h4 id="2-butterworth-filter">2. <strong>Butterworth Filter</strong></h4>
+<ul>
+<li>Filtro IIR di ordine superiore</li>
+<li>Risposta in frequenza molto piatta in banda passante</li>
+<li>Configurabile: passa-basso, passa-alto, passa-banda</li>
+</ul>
+<h4 id="3-notch-filter-band-stop">3. <strong>Notch Filter</strong> (Band-Stop)</h4>
+<ul>
+<li>Elimina una specifica frequenza</li>
+<li>Perfetto per rimuovere interferenza 50/60 Hz</li>
+<li>Parametri: frequenza centrale e Q-factor</li>
+</ul>
+<h4 id="4-adaptive-filter-lms---least-mean-squares">4. <strong>Adaptive Filter</strong> (LMS - Least Mean Squares)</h4>
+<ul>
+<li>Si adatta automaticamente al rumore</li>
+<li>Insegue caratteristiche variabili nel tempo</li>
+<li>Usato in cancellazione eco</li>
+</ul>
+<h4 id="5-wavelet-denoising">5. <strong>Wavelet Denoising</strong></h4>
+<ul>
+<li>Decomposizione multi-risoluzione</li>
+<li>Threshold su coefficienti wavelet</li>
+<li>Ottimo per segnali non stazionari</li>
+</ul>
+<h4 id="6-particle-filter">6. <strong>Particle Filter</strong></h4>
+<ul>
+<li>Filtro Monte Carlo per sistemi non lineari</li>
+<li>Più robusto di Kalman per non-linearità</li>
+<li>Computazionalmente intensivo</li>
+</ul>
+<h4 id="7-alpha-beta-filter">7. <strong>Alpha-Beta Filter</strong></h4>
+<ul>
+<li>Semplificazione di Kalman</li>
+<li>Due soli parametri (α, β)</li>
+<li>Tracking di posizione e velocità</li>
+</ul>
+<h4 id="8-wiener-filter">8. <strong>Wiener Filter</strong></h4>
+<ul>
+<li>Filtro ottimo nel senso dei minimi quadrati</li>
+<li>Richiede stima della PSD del rumore</li>
+<li>Ottimo per deconvoluzione</li>
+</ul>
+<hr />
+<h2 id="conclusioni">Conclusioni</h2>
+<p>Il sistema di filtri implementato offre:</p>
+<p>✅ <strong>8 filtri diversi</strong> per ogni tipo di disturbo<br />
+✅ <strong>Visualizzazione comparativa</strong> real-time (raw vs filtered)<br />
+✅ <strong>Cascata configurabile</strong> per filtraggio multi-stage<br />
+✅ <strong>Parametrizzazione</strong> via codice per tuning fine<br />
+✅ <strong>Didattica completa</strong> su DSP e filtraggio digitale</p>
+<p>La possibilità di combinare disturbi e filtri rende questo sistema ideale per:</p>
+<ul>
+<li>Insegnamento DSP</li>
+<li>Test algoritmi</li>
+<li>Prototipazione rapida</li>
+<li>Confronto filtri</li>
+</ul>
+<p>Sperimenta con diverse combinazioni per capire pregi e limiti di ogni approccio!</p>
+</main>
+</body>
+</html>

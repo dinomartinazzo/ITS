@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Modulo 2: Variabili e Tipi di Dato</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Modulo 2: Variabili e Tipi di Dato</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>modulo2_variabili.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Corso Completo di Programmazione C - ITS Informatica</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="its-informatica---livello-base">ITS Informatica - Livello Base</h2>
+<hr />
+<h2 id="obiettivi-del-modulo">Obiettivi del Modulo</h2>
+<p>Al termine di questo modulo sarai in grado di:</p>
+<ul>
+<li>Capire cosa sono le variabili</li>
+<li>Usare i tipi di dato fondamentali (int, float, char)</li>
+<li>Dichiarare e inizializzare variabili</li>
+<li>Fare operazioni matematiche semplici</li>
+<li>Leggere input dall&#39;utente</li>
+</ul>
+<hr />
+<h2 id="21-che-cosa-sono-le-variabili">2.1 Che cosa sono le Variabili?</h2>
+<p>Una <strong>variabile</strong> è come una <strong>scatola con un&#39;etichetta</strong> dove puoi mettere un valore.</p>
+<h3 id="analogia-della-vita-reale">Analogia della vita reale:</h3>
+<pre><code>┌─────────────────┐
+│     SCATOLA     │  ← Questa è la variabile &quot;eta&quot;
+│       19        │  ← Questo è il valore dentro
+└─────────────────┘</code></pre>
+<h3 id="nel-programma">Nel programma:</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> eta <span class="op">=</span> <span class="dv">19</span><span class="op">;</span>    <span class="co">// Creo una scatola chiamata &quot;eta&quot; e ci metto 19</span></span></code></pre></div>
+<p><strong>Perché sono utili?</strong></p>
+<ul>
+<li>Puoi cambiare il valore quando vuoi</li>
+<li>Puoi usare lo stesso valore più volte</li>
+<li>Rendi il programma più flessibile</li>
+</ul>
+<hr />
+<h2 id="22-i-tipi-di-dato-principali">2.2 I Tipi di Dato Principali</h2>
+<p>Come le scatole hanno dimensioni diverse, le variabili hanno <strong>tipi</strong> diversi:</p>
+<h3 id="1234-int---numeri-interi">🔢 <code>int</code> - Numeri Interi</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> eta <span class="op">=</span> <span class="dv">19</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> studenti <span class="op">=</span> <span class="dv">25</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> temperatura <span class="op">=</span> <span class="op">-</span><span class="dv">5</span><span class="op">;</span></span></code></pre></div>
+<ul>
+<li>Contiene: numeri senza virgola (-100, 0, 42, 1000)</li>
+<li>Range: circa da -2 miliardi a +2 miliardi</li>
+</ul>
+<h3 id="moneybag-float---numeri-decimali">💰 <code>float</code> - Numeri Decimali</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> prezzo <span class="op">=</span> <span class="fl">29.99</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> altezza <span class="op">=</span> <span class="fl">1.75</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> media <span class="op">=</span> <span class="fl">7.5</span><span class="op">;</span></span></code></pre></div>
+<ul>
+<li>Contiene: numeri con la virgola (3.14, -2.5, 0.1)</li>
+<li>Precisione: circa 6-7 cifre decimali</li>
+</ul>
+<h3 id="pencil-char---caratteri">📝 <code>char</code> - Caratteri</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> lettera <span class="op">=</span> <span class="ch">&#39;A&#39;</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> voto <span class="op">=</span> <span class="ch">&#39;B&#39;</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> risposta <span class="op">=</span> <span class="ch">&#39;S&#39;</span><span class="op">;</span></span></code></pre></div>
+<ul>
+<li>Contiene: un singolo carattere</li>
+<li>Si scrive sempre tra apici singoli <code>&#39; &#39;</code></li>
+</ul>
+<hr />
+<h2 id="23-dichiarazione-e-inizializzazione">2.3 Dichiarazione e Inizializzazione</h2>
+<h3 id="metodo-1-prima-dichiari-poi-assegni">Metodo 1: Prima dichiari, poi assegni</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero<span class="op">;</span>        <span class="co">// Dichiaro la variabile</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    numero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>       <span class="co">// Assegno il valore</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Il numero è: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="metodo-2-dichiari-e-assegni-insieme">Metodo 2: Dichiari e assegni insieme</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>   <span class="co">// Tutto in una riga</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Il numero è: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="più-variabili-insieme">Più variabili insieme:</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> c <span class="op">=</span> <span class="dv">30</span><span class="op">;</span>    <span class="co">// Tre variabili insieme</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a=</span><span class="sc">%d</span><span class="st">, b=</span><span class="sc">%d</span><span class="st">, c=</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a<span class="op">,</span> b<span class="op">,</span> c<span class="op">);</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="24-come-stampare-le-variabili">2.4 Come Stampare le Variabili</h2>
+<p>Ogni tipo ha il suo <strong>codice speciale</strong> per la stampa:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> eta <span class="op">=</span> <span class="dv">19</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> altezza <span class="op">=</span> <span class="fl">1.75</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> iniziale <span class="op">=</span> <span class="ch">&#39;M&#39;</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Eta: </span><span class="sc">%d</span><span class="st"> anni</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> eta<span class="op">);</span>           <span class="co">// %d per int</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Altezza: </span><span class="sc">%.2f</span><span class="st"> metri</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> altezza<span class="op">);</span> <span class="co">// %f per float</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Iniziale: </span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> iniziale<span class="op">);</span>      <span class="co">// %c per char</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Risultato:</strong></p>
+<pre><code>Eta: 19 anni
+Altezza: 1.75 metri
+Iniziale: M</code></pre>
+<h3 id="art-trucchi-di-formattazione">🎨 Trucchi di Formattazione:</h3>
+<ul>
+<li><code>%.1f</code> = 1 cifra dopo la virgola (3.1)</li>
+<li><code>%.2f</code> = 2 cifre dopo la virgola (3.14)</li>
+<li><code>%5d</code> = almeno 5 spazi per il numero ( 42)</li>
+</ul>
+<hr />
+<h2 id="25-operatori-matematici">2.5 Operatori Matematici</h2>
+<h3 id="operatori-base">Operatori Base:</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a + b = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a <span class="op">+</span> b<span class="op">);</span>    <span class="co">// Addizione: 13</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a - b = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a <span class="op">-</span> b<span class="op">);</span>    <span class="co">// Sottrazione: 7</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a * b = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a <span class="op">*</span> b<span class="op">);</span>    <span class="co">// Moltiplicazione: 30</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a / b = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a <span class="op">/</span> b<span class="op">);</span>    <span class="co">// Divisione: 3 (parte intera)</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;a </span><span class="sc">%%</span><span class="st"> b = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> a <span class="op">%</span> b<span class="op">);</span>    <span class="co">// Resto: 1</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="rotating_light-attenzione-alla-divisione">🚨 Attenzione alla Divisione!</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> risultato1 <span class="op">=</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span>      <span class="co">// Risultato: 3 (perde la parte decimale)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> risultato2 <span class="op">=</span> <span class="fl">7.0</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// Risultato: 3.5 (mantiene i decimali)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;7 / 2 (int) = </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> risultato1<span class="op">);</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;7.0 / 2 (float) = </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> risultato2<span class="op">);</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="26-leggere-input-dallutente">2.6 Leggere Input dall&#39;Utente</h2>
+<p>Usa <code>scanf()</code> per far inserire dati all&#39;utente:</p>
+<h3 id="esempio-semplice">Esempio Semplice:</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> eta<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Quanti anni hai? &quot;</span><span class="op">);</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>eta<span class="op">);</span>              <span class="co">// Legge un numero intero</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Hai </span><span class="sc">%d</span><span class="st"> anni!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> eta<span class="op">);</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="mag-nota-importante">🔍 Nota Importante:</h3>
+<ul>
+<li><code>scanf</code> usa <code>&amp;</code> prima del nome della variabile</li>
+<li><code>&amp;eta</code> significa &quot;metti il valore nella scatola chiamata eta&quot;</li>
+</ul>
+<h3 id="input-multipli">Input Multipli:</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> giorno<span class="op">,</span> mese<span class="op">,</span> anno<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci la tua data di nascita (gg mm aaaa): &quot;</span><span class="op">);</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st"> </span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>giorno<span class="op">,</span> <span class="op">&amp;</span>mese<span class="op">,</span> <span class="op">&amp;</span>anno<span class="op">);</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Sei nato il </span><span class="sc">%d</span><span class="st">/</span><span class="sc">%d</span><span class="st">/</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> giorno<span class="op">,</span> mese<span class="op">,</span> anno<span class="op">);</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="27-esercizi-pratici">2.7 Esercizi Pratici</h2>
+<h3 id="dart-esercizio-21-calcolatore-delletà">🎯 Esercizio 2.1: Calcolatore dell&#39;Età</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anno_nascita<span class="op">,</span> anno_corrente<span class="op">,</span> eta<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;In che anno sei nato? &quot;</span><span class="op">);</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>anno_nascita<span class="op">);</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;In che anno siamo? &quot;</span><span class="op">);</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>anno_corrente<span class="op">);</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    eta <span class="op">=</span> anno_corrente <span class="op">-</span> anno_nascita<span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Hai circa </span><span class="sc">%d</span><span class="st"> anni!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> eta<span class="op">);</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="dart-esercizio-22-calcolatrice-semplice">🎯 Esercizio 2.2: Calcolatrice Semplice</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> numero1<span class="op">,</span> numero2<span class="op">,</span> somma<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci primo numero: &quot;</span><span class="op">);</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>numero1<span class="op">);</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci secondo numero: &quot;</span><span class="op">);</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>numero2<span class="op">);</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    somma <span class="op">=</span> numero1 <span class="op">+</span> numero2<span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%.1f</span><span class="st"> + </span><span class="sc">%.1f</span><span class="st"> = </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> numero1<span class="op">,</span> numero2<span class="op">,</span> somma<span class="op">);</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="dart-esercizio-23-convertitore-euro-dollari">🎯 Esercizio 2.3: Convertitore Euro-Dollari</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> euro<span class="op">,</span> dollari<span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> cambio <span class="op">=</span> <span class="fl">1.1</span><span class="op">;</span>  <span class="co">// 1 euro = 1.1 dollari (esempio)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci l&#39;importo in euro: &quot;</span><span class="op">);</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>euro<span class="op">);</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    dollari <span class="op">=</span> euro <span class="op">*</span> cambio<span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%.2f</span><span class="st"> euro = </span><span class="sc">%.2f</span><span class="st"> dollari</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> euro<span class="op">,</span> dollari<span class="op">);</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="28-errori-comuni-e-soluzioni">2.8 Errori Comuni e Soluzioni</h2>
+<h3 id="x-errore-variabile-non-dichiarata">❌ Errore: Variabile non dichiarata</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SBAGLIATO:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span>  <span class="co">// numero non esiste!</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">// GIUSTO:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span></span></code></pre></div>
+<h3 id="x-errore-tipo-sbagliato-in-printf">❌ Errore: Tipo sbagliato in printf</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SBAGLIATO:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span>  <span class="co">// Usa %f per int!</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">// GIUSTO:</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numero <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span>  <span class="co">// Usa %d per int</span></span></code></pre></div>
+<h3 id="x-errore-dimenticare--in-scanf">❌ Errore: Dimenticare &amp; in scanf</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// SBAGLIATO:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">);</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">// GIUSTO:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>numero<span class="op">);</span></span></code></pre></div>
+<hr />
+<h2 id="29-nomi-delle-variabili">2.9 Nomi delle Variabili</h2>
+<h3 id="white_check_mark-nomi-validi">✅ Nomi Validi:</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> eta<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numeroStudenti<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numero_telefono<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">,</span> y<span class="op">,</span> z<span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> counter1<span class="op">,</span> counter2<span class="op">;</span></span></code></pre></div>
+<h3 id="x-nomi-non-validi">❌ Nomi Non Validi:</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="dv">2</span><span class="er">nome</span><span class="op">;</span>        <span class="co">// Non può iniziare con numero</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> numero<span class="op">-</span>casa<span class="op">;</span>  <span class="co">// Non può contenere -</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="dt">int</span><span class="op">;</span>          <span class="co">// Non può essere una parola riservata</span></span></code></pre></div>
+<h3 id="bulb-consigli-per-nomi">💡 Consigli per Nomi:</h3>
+<ul>
+<li>Usa nomi <strong>significativi</strong>: <code>eta</code> invece di <code>x</code></li>
+<li>Usa <strong>camelCase</strong>: <code>numeroStudenti</code></li>
+<li>O usa <strong>underscore</strong>: <code>numero_studenti</code></li>
+<li>Sii <strong>coerente</strong> nel tuo stile</li>
+</ul>
+<hr />
+<h2 id="210-costanti">2.10 Costanti</h2>
+<p>Per valori che <strong>non cambiano mai</strong>, usa le costanti:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define PI </span><span class="fl">3.14159</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_STUDENTI </span><span class="dv">30</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> raggio <span class="op">=</span> <span class="fl">5.0</span><span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> area <span class="op">=</span> PI <span class="op">*</span> raggio <span class="op">*</span> raggio<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;L&#39;area del cerchio è: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> area<span class="op">);</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;La classe può avere massimo </span><span class="sc">%d</span><span class="st"> studenti</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> MAX_STUDENTI<span class="op">);</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="dart-progetto-del-modulo-calcolatore-bmi">🎯 Progetto del Modulo: &quot;Calcolatore BMI&quot;</h2>
+<p>Crea un programma che calcoli il BMI (Body Mass Index):</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> peso<span class="op">,</span> altezza<span class="op">,</span> bmi<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;=== CALCOLATORE BMI ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci il tuo peso (kg): &quot;</span><span class="op">);</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>peso<span class="op">);</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci la tua altezza (metri): &quot;</span><span class="op">);</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>altezza<span class="op">);</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    bmi <span class="op">=</span> peso <span class="op">/</span> <span class="op">(</span>altezza <span class="op">*</span> altezza<span class="op">);</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- RISULTATO ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Peso: </span><span class="sc">%.1f</span><span class="st"> kg</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> peso<span class="op">);</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Altezza: </span><span class="sc">%.2f</span><span class="st"> m</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> altezza<span class="op">);</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;BMI: </span><span class="sc">%.1f\n</span><span class="st">&quot;</span><span class="op">,</span> bmi<span class="op">);</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- INTERPRETAZIONE ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>bmi <span class="op">&lt;</span> <span class="fl">18.5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Sottopeso</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>bmi <span class="op">&lt;</span> <span class="dv">25</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Peso normale</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Sovrappeso</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="211-riepilogo">2.11 Riepilogo</h2>
+<p>✅ <strong>Cosa hai imparato:</strong></p>
+<ul>
+<li>Le variabili sono &quot;scatole&quot; per contenere dati</li>
+<li>Tipi base: <code>int</code>, <code>float</code>, <code>char</code></li>
+<li>Come dichiarare e inizializzare variabili</li>
+<li>Operatori matematici di base</li>
+<li>Come leggere input con <code>scanf()</code></li>
+<li>Come formattare l&#39;output con <code>printf()</code></li>
+</ul>
+<p>✅ <strong>Cosa sai fare ora:</strong></p>
+<ul>
+<li>Creare programmi interattivi</li>
+<li>Fare calcoli matematici</li>
+<li>Memorizzare e utilizzare dati</li>
+<li>Gestire diversi tipi di informazioni</li>
+</ul>
+<hr />
+<p><strong>Prossimo modulo:</strong> Imparerai a prendere <strong>decisioni</strong> nei tuoi programmi con <code>if</code> ed <code>else</code>!</p>
+</main>
+</body>
+</html>

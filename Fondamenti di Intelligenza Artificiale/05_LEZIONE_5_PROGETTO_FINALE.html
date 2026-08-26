@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 LEZIONE 5: PROGETTO FINALE INTEGRATO</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 LEZIONE 5: PROGETTO FINALE INTEGRATO</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>05_LEZIONE_5_PROGETTO_FINALE.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h2>
+<p><strong>Durata:</strong> 2 ore<br />
+<strong>Struttura:</strong> 100% pratica hands-on<br />
+<strong>Livello:</strong> Avanzato (integrazione)<br />
+<strong>Prerequisiti:</strong> Lezioni 1-4 completate</p>
+<hr />
+<h2 id="dart-obiettivi-della-lezione">🎯 Obiettivi della Lezione</h2>
+<p>Al termine di questa lezione sarai in grado di:</p>
+<p>✅ <strong>Implementare</strong> un progetto completo end-to-end con IA<br />
+✅ <strong>Integrare</strong> tutte le competenze apprese (prompt engineering, C sicuro, Git, documentazione)<br />
+✅ <strong>Applicare</strong> workflow professionale completo<br />
+✅ <strong>Creare</strong> un progetto portfolio-ready<br />
+✅ <strong>Presentare</strong> il lavoro in modo professionale<br />
+✅ <strong>Debuggare</strong> e validare sistematicamente</p>
+<hr />
+<h2 id="clipboard-struttura-della-lezione">📋 Struttura della Lezione</h2>
+<p><strong>100% PRATICA INTEGRATA (120 minuti)</strong></p>
+<ol type="1">
+<li><p><strong>Scelta e Setup Progetto</strong> (15 min)</p>
+<ul>
+<li>Scegli tra 4 progetti proposti</li>
+<li>Setup repository e struttura</li>
+<li>Definisci MVP (Minimum Viable Product)</li>
+</ul></li>
+<li><p><strong>Implementazione Core</strong> (60 min)</p>
+<ul>
+<li>Design architettura con IA</li>
+<li>Implementazione moduli principali</li>
+<li>Testing continuo</li>
+</ul></li>
+<li><p><strong>Testing e Validazione</strong> (20 min)</p>
+<ul>
+<li>Test sistematico</li>
+<li>Valgrind verification</li>
+<li>Edge cases</li>
+</ul></li>
+<li><p><strong>Documentazione Finale</strong> (15 min)</p>
+<ul>
+<li>README completo</li>
+<li>Commenti Doxygen</li>
+<li>User guide</li>
+</ul></li>
+<li><p><strong>Presentazione</strong> (10 min)</p>
+<ul>
+<li>Demo progetto</li>
+<li>Discussione scelte tecniche</li>
+<li>Lessons learned</li>
+</ul></li>
+</ol>
+<hr />
+<hr />
+<h1 id="progetti-disponibili">PROGETTI DISPONIBILI</h1>
+<hr />
+<h2 id="progetto-1-student-management-system-mortar_board">PROGETTO 1: STUDENT MANAGEMENT SYSTEM 🎓</h2>
+<h3 id="descrizione">Descrizione</h3>
+<p>Sistema di gestione studenti per scuola/università. Gestisce studenti, corsi, iscrizioni, voti e genera statistiche.</p>
+<h3 id="features-core-mvp">Features Core (MVP)</h3>
+<p><strong>Must Have:</strong></p>
+<ul>
+<li>Aggiungere/rimuovere studenti (nome, matricola, email)</li>
+<li>Aggiungere corsi (nome, codice, crediti)</li>
+<li>Iscrivere studente a corso</li>
+<li>Registrare voti (0-30)</li>
+<li>Visualizzare elenco studenti/corsi</li>
+<li>Calcolare media voti per studente</li>
+<li>Persistenza su file</li>
+</ul>
+<p><strong>Should Have (se c&#39;è tempo):</strong></p>
+<ul>
+<li>Generare pagella studente</li>
+<li>Statistiche corso (media classe, distribuzione voti)</li>
+<li>Ricerca studenti/corsi</li>
+<li>Export CSV</li>
+</ul>
+<h3 id="strutture-dati-suggerite">Strutture Dati Suggerite</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> email<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> enrollment_year<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Student<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> code<span class="op">[</span><span class="dv">10</span><span class="op">];</span>        <span class="co">// es: &quot;PROG101&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> credits<span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Course<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> student_id<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> course_code<span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> grade<span class="op">;</span>            <span class="co">// 0-30</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> date<span class="op">[</span><span class="dv">11</span><span class="op">];</span>        <span class="co">// YYYY-MM-DD</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Enrollment<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    Student <span class="op">*</span>students<span class="op">;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> student_count<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> student_capacity<span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> StudentDB<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">// ... simile per Course e Enrollment</span></span></code></pre></div>
+<h3 id="difficoltà">Difficoltà</h3>
+<p>⭐⭐⭐ (Media)</p>
+<h3 id="skills-dimostrate">Skills Dimostrate</h3>
+<ul>
+<li>Gestione multiple strutture dati complesse</li>
+<li>Relazioni tra entità (student-course N:M)</li>
+<li>Calcoli statistici</li>
+<li>Report generation</li>
+</ul>
+<hr />
+<h2 id="progetto-2-data-logger--analyzer-bar_chart">PROGETTO 2: DATA LOGGER &amp; ANALYZER 📊</h2>
+<h3 id="descrizione-1">Descrizione</h3>
+<p>Sistema che legge dati da sensori simulati (file CSV o generati random), li analizza e genera report.</p>
+<h3 id="features-core-mvp-1">Features Core (MVP)</h3>
+<p><strong>Must Have:</strong></p>
+<ul>
+<li>Leggere dati da CSV (timestamp, sensor_id, value)</li>
+<li>Memorizzare in struttura dati efficiente</li>
+<li>Calcolare statistiche: min, max, media, deviazione standard</li>
+<li>Rilevare anomalie (valori fuori soglia)</li>
+<li>Generare report testuale</li>
+<li>Visualizzazione dati (ASCII chart)</li>
+</ul>
+<p><strong>Should Have:</strong></p>
+<ul>
+<li>Export dati filtrati</li>
+<li>Multiple sensors support</li>
+<li>Aggregazione temporale (oraria, giornaliera)</li>
+</ul>
+<h3 id="strutture-dati-suggerite-1">Strutture Dati Suggerite</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> timestamp<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sensor_id<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> value<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> DataPoint<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    DataPoint <span class="op">*</span>points<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> count<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> capacity<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> TimeSeries<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> min<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> max<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> mean<span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> std_dev<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> anomaly_count<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Statistics<span class="op">;</span></span></code></pre></div>
+<h3 id="esempio-csv-input">Esempio CSV Input</h3>
+<pre class="csv"><code>timestamp,sensor_id,value
+2025-01-15 10:00:00,1,23.5
+2025-01-15 10:01:00,1,23.8
+2025-01-15 10:02:00,1,24.1
+2025-01-15 10:03:00,1,55.0
+2025-01-15 10:04:00,1,23.9</code></pre>
+<h3 id="esempio-output">Esempio Output</h3>
+<pre><code>===== SENSOR DATA ANALYSIS =====
+
+Sensor ID: 1
+Period: 2025-01-15 10:00 - 10:04
+Samples: 5
+
+Statistics:
+  Min: 23.5°C
+  Max: 55.0°C
+  Mean: 30.06°C
+  Std Dev: 12.8
+
+Anomalies Detected: 1
+  - 2025-01-15 10:03:00: 55.0°C (spike +131% from mean)
+
+Visualization (last 24h):
+60°C │           ●
+50°C │
+40°C │
+30°C │    ●  ●     ●
+20°C │  ●
+     └─────────────────────
+      10h 11h 12h 13h 14h</code></pre>
+<h3 id="difficoltà-1">Difficoltà</h3>
+<p>⭐⭐⭐⭐ (Media-Alta)</p>
+<h3 id="skills-dimostrate-1">Skills Dimostrate</h3>
+<ul>
+<li>File parsing (CSV)</li>
+<li>Time series data management</li>
+<li>Statistical algorithms</li>
+<li>ASCII visualization</li>
+<li>Anomaly detection</li>
+</ul>
+<hr />
+<h2 id="progetto-3-command-line-todo-manager-white_check_mark">PROGETTO 3: COMMAND-LINE TODO MANAGER ✅</h2>
+<h3 id="descrizione-2">Descrizione</h3>
+<p>Todo list avanzata con priorità, categorie, ricerca e statistiche produttività.</p>
+<h3 id="features-core-mvp-2">Features Core (MVP)</h3>
+<p><strong>Must Have:</strong></p>
+<ul>
+<li>Add task (title, description, priority, category)</li>
+<li>List tasks (all, pending, completed)</li>
+<li>Complete task</li>
+<li>Delete task</li>
+<li>Persistenza file</li>
+<li>Interfaccia interattiva (menu)</li>
+</ul>
+<p><strong>Should Have:</strong></p>
+<ul>
+<li>Filtrare per priorità/categoria</li>
+<li>Ricerca per keyword</li>
+<li>Deadline support</li>
+<li>Statistiche produttività (completed per day/week)</li>
+</ul>
+<h3 id="strutture-dati-suggerite-2">Strutture Dati Suggerite</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">enum</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    PRIORITY_LOW<span class="op">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    PRIORITY_MEDIUM<span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    PRIORITY_HIGH</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Priority<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">enum</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    STATUS_PENDING<span class="op">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    STATUS_COMPLETED<span class="op">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    STATUS_CANCELLED</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Status<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> title<span class="op">[</span><span class="dv">200</span><span class="op">];</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> description<span class="op">[</span><span class="dv">500</span><span class="op">];</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    Priority priority<span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    Status status<span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> category<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> created_at<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> completed_at<span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> deadline<span class="op">;</span>      <span class="co">// 0 se nessuna deadline</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Task<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    Task <span class="op">*</span>tasks<span class="op">;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> count<span class="op">;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> capacity<span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> TaskList<span class="op">;</span></span></code></pre></div>
+<h3 id="esempio-ui">Esempio UI</h3>
+<pre><code>===== TODO MANAGER =====
+
+1. Add Task
+2. List Tasks
+3. Complete Task
+4. Delete Task
+5. Filter by Priority
+6. Search
+7. Statistics
+8. Exit
+
+Choice: 2
+
+===== TASK LIST =====
+┌────┬──────────────────────────────────┬──────────┬────────────┐
+│ ID │ Title                            │ Priority │ Status     │
+├────┼──────────────────────────────────┼──────────┼────────────┤
+│ 1  │ Studiare per esame C             │ HIGH     │ Pending    │
+│ 2  │ Comprare latte                   │ LOW      │ Completed  │
+│ 3  │ Finire progetto ITS              │ HIGH     │ Pending    │
+└────┴──────────────────────────────────┴──────────┴────────────┘
+
+Total: 3 tasks (2 pending, 1 completed)</code></pre>
+<h3 id="difficoltà-2">Difficoltà</h3>
+<p>⭐⭐ (Bassa-Media)</p>
+<h3 id="skills-dimostrate-2">Skills Dimostrate</h3>
+<ul>
+<li>CLI interface design</li>
+<li>Enum usage</li>
+<li>Time handling</li>
+<li>Filtering algorithms</li>
+<li>User experience</li>
+</ul>
+<hr />
+<h2 id="progetto-4-config-file-parser-wrench">PROGETTO 4: CONFIG FILE PARSER 🔧</h2>
+<h3 id="descrizione-3">Descrizione</h3>
+<p>Parser e validator per file di configurazione custom format (stile INI o YAML semplificato).</p>
+<h3 id="features-core-mvp-3">Features Core (MVP)</h3>
+<p><strong>Must Have:</strong></p>
+<ul>
+<li>Parsing file config custom format</li>
+<li>Supporto sezioni [Section]</li>
+<li>Supporto key=value</li>
+<li>Supporto commenti (#)</li>
+<li>Validazione sintassi</li>
+<li>API per query config (get_value, get_section)</li>
+<li>Error reporting dettagliato (linea errore)</li>
+</ul>
+<p><strong>Should Have:</strong></p>
+<ul>
+<li>Type validation (int, string, bool)</li>
+<li>Default values</li>
+<li>Config merging (override)</li>
+<li>Export to JSON/XML</li>
+</ul>
+<h3 id="esempio-config-format">Esempio Config Format</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ini"><code class="sourceCode ini"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Database Configuration</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[database]</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">host </span><span class="ot">=</span><span class="st"> </span><span class="kw">localhost</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">5432</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">username </span><span class="ot">=</span><span class="st"> admin</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># password = secret123  # commented out</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">max_connections </span><span class="ot">=</span><span class="st"> </span><span class="dv">100</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">enable_logging </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">[server]</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dt">bind_address </span><span class="ot">=</span><span class="st"> 0.0.0.0</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="dt">port </span><span class="ot">=</span><span class="st"> </span><span class="dv">8080</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dt">workers </span><span class="ot">=</span><span class="st"> </span><span class="dv">4</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="kw">[features]</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="dt">enable_cache </span><span class="ot">=</span><span class="st"> </span><span class="kw">true</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="dt">cache_ttl </span><span class="ot">=</span><span class="st"> </span><span class="dv">3600</span></span></code></pre></div>
+<h3 id="strutture-dati-suggerite-3">Strutture Dati Suggerite</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> key<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> value<span class="op">[</span><span class="dv">200</span><span class="op">];</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> ConfigEntry<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ConfigEntry <span class="op">*</span>entries<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> entry_count<span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> ConfigSection<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    ConfigSection <span class="op">*</span>sections<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> section_count<span class="op">;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Config<span class="op">;</span></span></code></pre></div>
+<h3 id="esempio-api-usage">Esempio API Usage</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Config <span class="op">*</span>cfg <span class="op">=</span> config_load<span class="op">(</span><span class="st">&quot;app.conf&quot;</span><span class="op">);</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Query values</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>host <span class="op">=</span> config_get<span class="op">(</span>cfg<span class="op">,</span> <span class="st">&quot;database&quot;</span><span class="op">,</span> <span class="st">&quot;host&quot;</span><span class="op">);</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> port <span class="op">=</span> config_get_int<span class="op">(</span>cfg<span class="op">,</span> <span class="st">&quot;database&quot;</span><span class="op">,</span> <span class="st">&quot;port&quot;</span><span class="op">);</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> logging <span class="op">=</span> config_get_bool<span class="op">(</span>cfg<span class="op">,</span> <span class="st">&quot;database&quot;</span><span class="op">,</span> <span class="st">&quot;enable_logging&quot;</span><span class="op">);</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Validate</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>config_validate<span class="op">(</span>cfg<span class="op">,</span> schema<span class="op">)</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    config_print_errors<span class="op">(</span>cfg<span class="op">);</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>config_free<span class="op">(</span>cfg<span class="op">);</span></span></code></pre></div>
+<h3 id="difficoltà-3">Difficoltà</h3>
+<p>⭐⭐⭐⭐⭐ (Alta)</p>
+<h3 id="skills-dimostrate-3">Skills Dimostrate</h3>
+<ul>
+<li>Text parsing</li>
+<li>Lexical analysis</li>
+<li>Error handling robusto</li>
+<li>API design</li>
+<li>String manipulation avanzata</li>
+</ul>
+<hr />
+<hr />
+<h1 id="workflow-implementazione">WORKFLOW IMPLEMENTAZIONE</h1>
+<hr />
+<h2 id="fase-1-setup-e-design-15-minuti">FASE 1: SETUP E DESIGN (15 minuti)</h2>
+<h3 id="step-11-scelta-progetto">Step 1.1: Scelta Progetto</h3>
+<p><strong>Scegli UN progetto tra i 4 proposti.</strong></p>
+<p><strong>Criteri decisione:</strong></p>
+<ul>
+<li>⏱️ Tempo disponibile (2 ore)</li>
+<li>🎯 Interesse personale</li>
+<li>📊 Skills che vuoi dimostrare</li>
+<li>🏆 Portfolio value</li>
+</ul>
+<p><strong>Consiglio:</strong> Se sei incerto, scegli <strong>PROGETTO 3 (TODO Manager)</strong> - è bilanciato tra complessità e tempo.</p>
+<h3 id="step-12-setup-repository">Step 1.2: Setup Repository</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea directory progetto</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> my-project</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my-project</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inizializza Git</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea .gitignore</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> .gitignore <span class="op">&lt;&lt; EOF</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">*.o</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="st">*.exe</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="st">*.out</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="st">build/</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="st">.vscode/</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="st">*.swp</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea struttura base</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> src</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> include</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> tests</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Primo commit</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Initial commit: Project structure&quot;</span></span></code></pre></div>
+<h3 id="step-13-definisci-mvp-con-ia">Step 1.3: Definisci MVP con IA</h3>
+<p><strong>Prompt per IA:</strong></p>
+<pre><code>Progetto scelto: [NOME PROGETTO]
+
+Aiutami a definire un MVP realistico implementabile in 90 minuti.
+
+Contesto:
+- Sono studente ITS, livello intermedio in C
+- Ho già struttura progetto pronta
+- Userò IA per generare boilerplate
+- Priorità: funzionalità core working, non polish
+
+Fornisci:
+1. Lista features MVP (must-have only, max 5)
+2. Strutture dati essenziali
+3. Moduli da implementare (ordine priorità)
+4. Stima tempo per modulo
+5. Punti rischio (cosa potrebbe rallentare)
+
+Output in formato checklist.</code></pre>
+<p><strong>Salva output in <code>MVP.md</code></strong></p>
+<h3 id="step-14-design-architettura">Step 1.4: Design Architettura</h3>
+<p><strong>Prompt per IA:</strong></p>
+<pre><code>Per il mio progetto [NOME] con MVP:
+[incolla features MVP]
+
+Genera:
+1. Architettura modulare (quali file .c/.h)
+2. Strutture dati complete in C
+3. Firma funzioni pubbliche principali (solo prototipi)
+4. Diagramma dipendenze moduli
+
+Vincoli:
+- C99
+- Massima semplicità (no over-engineering)
+- Memory-safe by design
+- Testabile
+
+Format output:
+- Codice C per struct
+- Lista file con responsabilità
+- Include guards negli header</code></pre>
+<p><strong>Salva struct e prototipi in file header appropriati.</strong></p>
+<h3 id="step-15-commit-design">Step 1.5: Commit Design</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add MVP.md src/ include/</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;docs: Add MVP definition and architecture design&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="fase-2-implementazione-core-60-minuti">FASE 2: IMPLEMENTAZIONE CORE (60 minuti)</h2>
+<h3 id="strategia-implementazione">Strategia Implementazione</h3>
+<p><strong>Ordine consigliato:</strong></p>
+<pre><code>1. Strutture dati + allocazione/free (15 min)
+   ↓
+2. Persistenza (load/save) (15 min)
+   ↓
+3. Operazioni core (20 min)
+   ↓
+4. UI/Menu (10 min)</code></pre>
+<p><strong>Regole d&#39;oro:</strong></p>
+<ul>
+<li>✅ <strong>Compila dopo ogni modulo</strong> (catch errori subito)</li>
+<li>✅ <strong>Testa incrementalmente</strong> (non tutto alla fine)</li>
+<li>✅ <strong>Commit frequenti</strong> (ogni 15-20 min)</li>
+<li>✅ <strong>Chiedi all&#39;IA</strong> quando bloccato (non perdere tempo)</li>
+</ul>
+<h3 id="21-implementare-strutture-dati-15-min">2.1 Implementare Strutture Dati (15 min)</h3>
+<p><strong>Prompt template:</strong></p>
+<pre><code>Implementa queste strutture dati complete:
+
+[incolla struct dal design]
+
+Includi funzioni:
+- create: alloca e inizializza
+- free: libera memoria (no leak)
+- add: aggiungi elemento (con resize automatico)
+- remove: rimuovi elemento
+- find: cerca elemento
+
+Requisiti:
+- Controllo NULL su tutti i parametri
+- Controllo malloc failures
+- Dynamic array che si espande
+- Codice memory-safe (Valgrind clean)
+- Commenti Doxygen
+
+File: [nome].h e [nome].c</code></pre>
+<p><strong>Implementa, compila, testa:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compila</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-g</span> <span class="at">-c</span> src/data.c <span class="at">-I</span> include/</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Se compila OK, commit</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add src/data.c include/data.h</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Implement core data structures&quot;</span></span></code></pre></div>
+<h3 id="22-implementare-persistenza-15-min">2.2 Implementare Persistenza (15 min)</h3>
+<p><strong>Prompt template:</strong></p>
+<pre><code>Implementa modulo storage per salvare/caricare dati su file.
+
+Strutture: [lista struct da salvare]
+Formato file: CSV (semplice parsing)
+
+Funzioni:
+- int save_to_file(const char *filename, DataStruct *data)
+- int load_from_file(const char *filename, DataStruct *data)
+
+Requisiti:
+- Gestione errori (file not found, permission denied)
+- CSV format: header + data rows
+- Proper escaping (se string con virgole)
+- Validazione durante load (skip linee malformate)
+
+Error handling:
+- Return 0 success, -1 error
+- Log errori su stderr
+
+File: storage.c, storage.h</code></pre>
+<p><strong>Test manuale:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea file test dati</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Testa load</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Testa save</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifica file generato è valido</span></span></code></pre></div>
+<p><strong>Commit:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add src/storage.c include/storage.h</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Add file persistence (CSV format)&quot;</span></span></code></pre></div>
+<h3 id="23-implementare-operazioni-core-20-min">2.3 Implementare Operazioni Core (20 min)</h3>
+<p><strong>Per ogni operazione core (es: add, remove, list, complete):</strong></p>
+<p><strong>Prompt template:</strong></p>
+<pre><code>Implementa la funzione [NOME_OPERAZIONE]:
+
+Signature: [firma funzione]
+
+Comportamento:
+- [descrizione dettagliata]
+
+Input validation:
+- [vincoli parametri]
+
+Output:
+- [cosa ritorna, side effects]
+
+Edge cases:
+- [casi limite da gestire]
+
+Esempio uso:
+- [snippet di esempio]
+
+Include error handling e commenti Doxygen.</code></pre>
+<p><strong>Workflow:</strong></p>
+<pre><code>Implementa operazione 1
+  ↓
+Compila
+  ↓
+Test veloce manuale
+  ↓
+Fix eventuali bug
+  ↓
+Commit
+  ↓
+Ripeti per operazione 2, 3, ...</code></pre>
+<p><strong>Commit example:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Add task creation with validation&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Implement task listing with filters&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Add task completion functionality&quot;</span></span></code></pre></div>
+<h3 id="24-implementare-uimenu-10-min">2.4 Implementare UI/Menu (10 min)</h3>
+<p><strong>Prompt per interfaccia:</strong></p>
+<pre><code>Genera interfaccia menu interattiva per CLI app.
+
+Operazioni disponibili:
+1. [operazione 1]
+2. [operazione 2]
+3. [operazione 3]
+...
+N. Exit
+
+Requirements:
+- Loop infinito fino a exit
+- Input validation (scelta non valida → richiedi)
+- Clear screen tra operazioni (opzionale)
+- User-friendly prompts
+- Error messages chiari
+
+Stile:
+┌─────────────────────┐
+│   APP NAME          │
+├─────────────────────┤
+│ 1. Option 1         │
+│ 2. Option 2         │
+│ ...                 │
+└─────────────────────┘
+
+File: ui.c, ui.h, main.c</code></pre>
+<p><strong>Test UI:</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compila tutto</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-g</span> src/<span class="pp">*</span>.c <span class="at">-I</span> include/ <span class="at">-o</span> myapp</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Testa UI</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./myapp</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifica tutti i menu funzionano</span></span></code></pre></div>
+<p><strong>Commit:</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add src/ui.c include/ui.h src/main.c</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;feat: Add interactive CLI menu&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="fase-3-testing-e-validazione-20-minuti">FASE 3: TESTING E VALIDAZIONE (20 minuti)</h2>
+<h3 id="31-test-sistematico-funzionalità">3.1 Test Sistematico Funzionalità</h3>
+<p><strong>Checklist test funzionali:</strong></p>
+<p><strong>Per ogni operazione core:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input><strong>Happy path:</strong> Input normale → output corretto</label></li>
+<li><label><input type="checkbox"></input><strong>Edge case:</strong> Input limite (vuoto, NULL, max size)</label></li>
+<li><label><input type="checkbox"></input><strong>Error handling:</strong> Input invalido → errore gestito</label></li>
+<li><label><input type="checkbox"></input><strong>Persistenza:</strong> Dati salvati → reload → dati identici</label></li>
+</ul>
+<p><strong>Esempio test TODO app:</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Add</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./myapp</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 1 <span class="kw">(</span><span class="ex">Add</span> Task<span class="kw">)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="st">&quot;Test task&quot;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> High <span class="ex">priority</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="ex">→</span> Verifica: task aggiunto in lista</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Persistenza</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 8 <span class="kw">(</span><span class="ex">Exit</span><span class="kw">)</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="ex">./myapp</span> <span class="er">(</span><span class="ex">riapri</span><span class="kw">)</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 2 <span class="kw">(</span><span class="ex">List</span><span class="kw">)</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="ex">→</span> Verifica: task precedente ancora presente</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Complete</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 3 <span class="kw">(</span><span class="ex">Complete</span> task<span class="kw">)</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 1</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 2 <span class="kw">(</span><span class="ex">List</span><span class="kw">)</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="ex">→</span> Verifica: task marcato completed</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Test Edge Case</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 1 <span class="kw">(</span><span class="ex">Add</span><span class="kw">)</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="st">&quot;&quot;</span> <span class="kw">(</span><span class="ex">empty</span> title<span class="kw">)</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="ex">→</span> Verifica: errore <span class="st">&quot;Title cannot be empty&quot;</span></span></code></pre></div>
+<h3 id="32-valgrind-check">3.2 Valgrind Check</h3>
+<p><strong>Memory leak verification:</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compila con debug symbols</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-g</span> <span class="at">-Wall</span> <span class="at">-Wextra</span> src/<span class="pp">*</span>.c <span class="at">-I</span> include/ <span class="at">-o</span> myapp</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Valgrind full check</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">valgrind</span> <span class="at">--leak-check</span><span class="op">=</span>full <span class="at">--show-leak-kinds</span><span class="op">=</span>all <span class="at">--track-origins</span><span class="op">=</span>yes ./myapp</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Interagisci con app (test vari workflow)</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Exit</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifica output Valgrind:</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># HEAP SUMMARY:</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   in use at exit: 0 bytes in 0 blocks  ← DEVE essere 0!</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   total heap usage: N allocs, N frees   ← allocs == frees</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co"># All heap blocks were freed -- no leaks are possible  ← PERFETTO!</span></span></code></pre></div>
+<p><strong>Se Valgrind trova leak:</strong></p>
+<ol type="1">
+<li>Identifica quale malloc non ha free corrispondente</li>
+<li>Usa prompt IA:</li>
+</ol>
+<pre><code>Valgrind ha trovato memory leak:
+
+[incolla output Valgrind]
+
+Codice sospetto:
+[incolla funzione indicata]
+
+Analizza e suggerisci fix.</code></pre>
+<ol start="3" type="1">
+<li>Applica fix, ricompila, ritesta</li>
+</ol>
+<h3 id="33-edge-cases">3.3 Edge Cases</h3>
+<p><strong>Test casi limite:</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Test con struct vuota</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>TaskList <span class="op">*</span>empty_list <span class="op">=</span> task_list_create<span class="op">();</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>task_list_print<span class="op">(</span>empty_list<span class="op">);</span>  <span class="co">// Non deve crashare</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Test con input NULL</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>task_add<span class="op">(</span>NULL<span class="op">,</span> <span class="st">&quot;Title&quot;</span><span class="op">);</span>  <span class="co">// Deve ritornare errore, non crashare</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>task_add<span class="op">(</span>list<span class="op">,</span> NULL<span class="op">);</span>     <span class="co">// Deve ritornare errore</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Test con input molto grande</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> long_title<span class="op">[</span><span class="dv">10000</span><span class="op">];</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>memset<span class="op">(</span>long_title<span class="op">,</span> <span class="ch">&#39;A&#39;</span><span class="op">,</span> <span class="dv">9999</span><span class="op">);</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>long_title<span class="op">[</span><span class="dv">9999</span><span class="op">]</span> <span class="op">=</span> <span class="ch">&#39;</span><span class="sc">\0</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>task_add<span class="op">(</span>list<span class="op">,</span> long_title<span class="op">);</span>  <span class="co">// Deve troncare o gestire</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Test con file non esistente</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>load_from_file<span class="op">(</span><span class="st">&quot;nonexistent.csv&quot;</span><span class="op">,</span> list<span class="op">);</span>  <span class="co">// Deve gestire errore</span></span></code></pre></div>
+<h3 id="34-fix-e-commit">3.4 Fix e Commit</h3>
+<p><strong>Ogni bug trovato:</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix bug</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifica fix funziona</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add [files modificati]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: [descrizione bug fixato]&quot;</span></span></code></pre></div>
+<p><strong>Esempio:</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: Prevent segfault on empty task list print&quot;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: Add NULL check in task_add()&quot;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: Free title string in task_free() (memory leak)&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="fase-4-documentazione-15-minuti">FASE 4: DOCUMENTAZIONE (15 minuti)</h2>
+<h3 id="41-readmemd-completo">4.1 README.md Completo</h3>
+<p><strong>Genera con IA:</strong></p>
+<pre><code>Genera README.md professionale per questo progetto:
+
+Nome: [nome progetto]
+Descrizione: [breve descrizione]
+Features implementate:
+- [feature 1]
+- [feature 2]
+...
+
+Tecnologie: C99, Make, CSV
+
+Include sezioni:
+- Overview (con emoji)
+- Features
+- Installation (compilazione)
+- Usage (esempi comandi)
+- Project Structure (tree files)
+- Testing (come testare)
+- Known Issues (se ci sono)
+- Future Improvements
+- Author
+
+Stile: Professionale ma friendly, con emoji appropriati.</code></pre>
+<p><strong>Customizza output IA con dettagli specifici.</strong></p>
+<h3 id="42-commenti-finali">4.2 Commenti Finali</h3>
+<p><strong>Assicurati che ogni funzione pubblica abbia Doxygen comment:</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> [breve descrizione]</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> [</span><span class="cv">nome</span><span class="co">] [descrizione]</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> [descrizione]</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span></code></pre></div>
+<p><strong>Usa IA per generare velocemente:</strong></p>
+<pre><code>Genera commento Doxygen per queste funzioni:
+
+[incolla funzioni senza commenti]</code></pre>
+<h3 id="43-commit-documentazione">4.3 Commit Documentazione</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md src/ include/</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;docs: Add comprehensive README and code comments&quot;</span></span></code></pre></div>
+<h3 id="44-tag-release">4.4 Tag Release</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea tag versione 1.0</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">&quot;First release - MVP complete</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="st">Features:</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="st">- [lista features]</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="st">Tested:</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="st">- Functional tests passed</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="st">- Valgrind clean (no leaks)</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="st">- Edge cases handled</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Push tag (se hai remote)</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span></code></pre></div>
+<hr />
+<h2 id="fase-5-presentazione-10-minuti">FASE 5: PRESENTAZIONE (10 minuti)</h2>
+<h3 id="51-preparare-demo">5.1 Preparare Demo</h3>
+<p><strong>Script di demo (cosa mostrare):</strong></p>
+<ol type="1">
+<li><p><strong>Overview (30 sec)</strong></p>
+<ul>
+<li>&quot;Ho sviluppato [nome progetto], un [descrizione]&quot;</li>
+<li>&quot;Risolve il problema di [problema]&quot;</li>
+</ul></li>
+<li><p><strong>Live Demo (2 min)</strong></p>
+<ul>
+<li>Avvia applicazione</li>
+<li>Mostra 2-3 operazioni core</li>
+<li>Evidenzia feature interessante</li>
+</ul></li>
+<li><p><strong>Code Walkthrough (1 min)</strong></p>
+<ul>
+<li>Mostra architettura (tree files)</li>
+<li>Evidenzia modulo più interessante</li>
+<li>Spiega scelta design chiave</li>
+</ul></li>
+<li><p><strong>Quality Assurance (1 min)</strong></p>
+<ul>
+<li>Mostra Valgrind output (0 leaks)</li>
+<li>Mostra README.md</li>
+<li>Mostra git log (commit significativi)</li>
+</ul></li>
+<li><p><strong>Q&amp;A e Lessons Learned (5 min)</strong></p>
+<ul>
+<li>Cosa è andato bene</li>
+<li>Cosa rifaresti diversamente</li>
+<li>Come l&#39;IA ha aiutato</li>
+</ul></li>
+</ol>
+<h3 id="52-domande-tipiche-preparati">5.2 Domande Tipiche (Preparati)</h3>
+<p><strong>Domanda:</strong> &quot;Perché hai scelto questo progetto?&quot;<br />
+<strong>Risposta:</strong> [motivazione personale + skills dimostrate]</p>
+<p><strong>Domanda:</strong> &quot;Qual è stata la parte più difficile?&quot;<br />
+<strong>Risposta:</strong> [challenge tecnico + come l&#39;hai risolto]</p>
+<p><strong>Domanda:</strong> &quot;Come hai usato l&#39;IA?&quot;<br />
+<strong>Risposta:</strong> [esempi concreti: boilerplate, debugging, doc]</p>
+<p><strong>Domanda:</strong> &quot;Qual è il prossimo miglioramento che faresti?&quot;<br />
+<strong>Risposta:</strong> [feature should-have non implementata + perché importante]</p>
+<h3 id="53-self-evaluation-checklist">5.3 Self-Evaluation Checklist</h3>
+<p><strong>Valuta il tuo progetto:</strong></p>
+<p><strong>Funzionalità:</strong> ⭐⭐⭐⭐⭐</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Tutte features MVP implementate</label></li>
+<li><label><input type="checkbox"></input>App funziona end-to-end</label></li>
+<li><label><input type="checkbox"></input>Edge cases gestiti</label></li>
+<li><label><input type="checkbox"></input>Error handling robusto</label></li>
+</ul>
+<p><strong>Qualità Codice:</strong> ⭐⭐⭐⭐⭐</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Compila senza warning</label></li>
+<li><label><input type="checkbox"></input>Valgrind clean (0 leak)</label></li>
+<li><label><input type="checkbox"></input>Codice ben organizzato</label></li>
+<li><label><input type="checkbox"></input>Naming consistente</label></li>
+</ul>
+<p><strong>Documentazione:</strong> ⭐⭐⭐⭐⭐</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>README completo e chiaro</label></li>
+<li><label><input type="checkbox"></input>Commenti appropriati</label></li>
+<li><label><input type="checkbox"></input>API documentata</label></li>
+</ul>
+<p><strong>Git Workflow:</strong> ⭐⭐⭐⭐⭐</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Commit frequenti e significativi</label></li>
+<li><label><input type="checkbox"></input>Commit messages descrittivi</label></li>
+<li><label><input type="checkbox"></input>History pulita</label></li>
+</ul>
+<p><strong>Voto globale:</strong> ___ / 20</p>
+<hr />
+<hr />
+<h1 id="troubleshooting-comune">TROUBLESHOOTING COMUNE</h1>
+<hr />
+<h2 id="problema-1-non-riesco-a-compilare">Problema 1: &quot;Non riesco a compilare&quot;</h2>
+<p><strong>Sintomi:</strong></p>
+<pre><code>gcc: error: ...
+undefined reference to ...</code></pre>
+<p><strong>Soluzioni:</strong></p>
+<p><strong>Step 1:</strong> Verifica command line</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Corretto:</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-g</span> src/<span class="pp">*</span>.c <span class="at">-I</span> include/ <span class="at">-o</span> myapp</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Elementi chiave:</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -I include/  ← dice dove trovare header</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># src/*.c      ← compila tutti .c in src/</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -o myapp     ← nome output</span></span></code></pre></div>
+<p><strong>Step 2:</strong> Verifica include guards</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In ogni header</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef NOME_H</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NOME_H</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ... contenuto ...</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<p><strong>Step 3:</strong> Chiedi all&#39;IA</p>
+<pre><code>Ho questo errore di compilazione:
+
+[incolla errore completo]
+
+File coinvolti:
+[lista file]
+
+Come posso fixare?</code></pre>
+<h2 id="problema-2-segmentation-fault">Problema 2: &quot;Segmentation Fault&quot;</h2>
+<p><strong>Debugging:</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compila con debug</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-g</span> ...</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run con GDB</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gdb</span> ./myapp</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># In GDB:</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">run</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[...</span> crash ...]</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">backtrace</span>  <span class="co"># Mostra dove è crashato</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">print</span> variable  <span class="co"># Ispeziona variabile</span></span></code></pre></div>
+<p><strong>Oppure chiedi IA:</strong></p>
+<pre><code>La mia app crasha con segfault quando [azione che causa crash].
+
+Backtrace GDB:
+[incolla backtrace]
+
+Codice funzione sospetta:
+[incolla funzione]
+
+Dove potrebbe essere il bug?</code></pre>
+<h2 id="problema-3-valgrind-trova-leak">Problema 3: &quot;Valgrind Trova Leak&quot;</h2>
+<p><strong>Interpretare output:</strong></p>
+<pre><code>==12345== 400 bytes in 1 blocks are definitely lost
+==12345==    at malloc (...)
+==12345==    by create_task (task.c:15)
+==12345==    by main (main.c:42)</code></pre>
+<p><strong>Significa:</strong></p>
+<ul>
+<li>400 byte non liberati</li>
+<li>Allocati in <code>create_task()</code> linea 15</li>
+<li>Chiamato da <code>main()</code> linea 42</li>
+</ul>
+<p><strong>Fix:</strong></p>
+<ol type="1">
+<li>Trova il <code>malloc</code> a task.c:15</li>
+<li>Verifica che esista <code>free</code> corrispondente</li>
+<li>Aggiungi <code>free</code> mancante</li>
+</ol>
+<h2 id="problema-4-non-ho-tempo">Problema 4: &quot;Non Ho Tempo&quot;</h2>
+<p><strong>Priorità:</strong></p>
+<p>Se ti rimangono solo 30 minuti:</p>
+<ol type="1">
+<li>✅ <strong>Funzionalità base working</strong> (70% tempo)</li>
+<li>✅ <strong>Fix crash e leak critici</strong> (20% tempo)</li>
+<li>✅ <strong>README minimo</strong> (10% tempo)</li>
+</ol>
+<p><strong>Non fare:</strong></p>
+<ul>
+<li>❌ Feature &quot;nice to have&quot;</li>
+<li>❌ Refactoring estetico</li>
+<li>❌ UI polish</li>
+</ul>
+<p><strong>Fai:</strong></p>
+<ul>
+<li>✅ MVP che funziona</li>
+<li>✅ Codice che non crasha</li>
+<li>✅ README che spiega cosa fa</li>
+</ul>
+<hr />
+<hr />
+<h1 id="checklist-finale">CHECKLIST FINALE</h1>
+<hr />
+<h2 id="prima-di-considerare-finito">Prima di Considerare &quot;Finito&quot;</h2>
+<h3 id="white_check_mark-funzionalità">✅ Funzionalità</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Tutte features MVP implementate</label></li>
+<li><label><input type="checkbox"></input>App avvia senza errori</label></li>
+<li><label><input type="checkbox"></input>Workflow completo funziona end-to-end</label></li>
+<li><label><input type="checkbox"></input>Dati persistono correttamente (save/load)</label></li>
+<li><label><input type="checkbox"></input>Edge cases gestiti (non crash con input strani)</label></li>
+</ul>
+<h3 id="white_check_mark-qualità-codice">✅ Qualità Codice</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Compila con <code>gcc -Wall -Wextra -Werror</code></label></li>
+<li><label><input type="checkbox"></input>Valgrind reports: &quot;All heap blocks were freed&quot;</label></li>
+<li><label><input type="checkbox"></input>Nessun warning ignorato</label></li>
+<li><label><input type="checkbox"></input>Codice organizzato in moduli logici</label></li>
+<li><label><input type="checkbox"></input>Naming consistente</label></li>
+</ul>
+<h3 id="white_check_mark-testing">✅ Testing</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Testato happy path (uso normale)</label></li>
+<li><label><input type="checkbox"></input>Testato edge cases (empty, NULL, max size)</label></li>
+<li><label><input type="checkbox"></input>Testato error handling (input invalido)</label></li>
+<li><label><input type="checkbox"></input>Testato persistenza (save → exit → load → data OK)</label></li>
+</ul>
+<h3 id="white_check_mark-documentazione">✅ Documentazione</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>README.md presente e completo:</label>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Overview chiaro</label></li>
+<li><label><input type="checkbox"></input>Installation instructions</label></li>
+<li><label><input type="checkbox"></input>Usage examples</label></li>
+<li><label><input type="checkbox"></input>Project structure</label></li>
+</ul></li>
+<li><label><input type="checkbox"></input>Commenti Doxygen su funzioni pubbliche</label></li>
+<li><label><input type="checkbox"></input>Commenti inline dove necessario (WHY not WHAT)</label></li>
+</ul>
+<h3 id="white_check_mark-git">✅ Git</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Repository inizializzato</label></li>
+<li><label><input type="checkbox"></input>Almeno 5 commit significativi</label></li>
+<li><label><input type="checkbox"></input>Commit messages descrittivi</label></li>
+<li><label><input type="checkbox"></input>.gitignore appropriato</label></li>
+<li><label><input type="checkbox"></input>Tagged release (v1.0.0)</label></li>
+</ul>
+<h3 id="white_check_mark-presentation-ready">✅ Presentation Ready</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Demo script preparato</label></li>
+<li><label><input type="checkbox"></input>Può spiegare scelte architetturali</label></li>
+<li><label><input type="checkbox"></input>Può discutere challenges e solutions</label></li>
+<li><label><input type="checkbox"></input>Può mostrare Valgrind clean</label></li>
+</ul>
+<hr />
+<hr />
+<h1 id="esempi-di-progetti-completati">ESEMPI DI PROGETTI COMPLETATI</h1>
+<hr />
+<h2 id="esempio-1-todo-manager-by-student-a">Esempio 1: TODO Manager (by Student A)</h2>
+<p><strong>Repository:</strong> <a href="https://github.com/studentA/todo-cli">https://github.com/studentA/todo-cli</a></p>
+<p><strong>Features Implementate:</strong></p>
+<ul>
+<li>✅ CRUD tasks (Create, Read, Update, Delete)</li>
+<li>✅ Priority system (Low, Medium, High)</li>
+<li>✅ Filter by status/priority</li>
+<li>✅ CSV persistence</li>
+<li>✅ Interactive menu</li>
+</ul>
+<p><strong>Highlights:</strong></p>
+<ul>
+<li>Valgrind clean (0 leaks)</li>
+<li>87% code coverage (unit tests)</li>
+<li>Comprehensive README with GIFs</li>
+<li>23 meaningful commits</li>
+</ul>
+<p><strong>Demo Video:</strong> (link)</p>
+<p><strong>Grade:</strong> 19/20</p>
+<hr />
+<h2 id="esempio-2-data-logger-by-student-b">Esempio 2: Data Logger (by Student B)</h2>
+<p><strong>Repository:</strong> <a href="https://github.com/studentB/data-logger">https://github.com/studentB/data-logger</a></p>
+<p><strong>Features Implementate:</strong></p>
+<ul>
+<li>✅ CSV parsing (1000+ rows)</li>
+<li>✅ Statistical analysis (min/max/mean/stddev)</li>
+<li>✅ Anomaly detection (threshold-based)</li>
+<li>✅ ASCII chart visualization</li>
+<li>✅ Export filtered data</li>
+</ul>
+<p><strong>Highlights:</strong></p>
+<ul>
+<li>Handles large files efficiently</li>
+<li>Clean separation of concerns (parser, analyzer, visualizer)</li>
+<li>Excellent error reporting</li>
+<li>Doxygen documentation generated</li>
+</ul>
+<p><strong>Performance:</strong></p>
+<ul>
+<li>Processes 10,000 data points in &lt;100ms</li>
+</ul>
+<p><strong>Grade:</strong> 20/20</p>
+<hr />
+<hr />
+<h1 id="risorse-e-supporto">RISORSE E SUPPORTO</h1>
+<hr />
+<h2 id="durante-implementazione">Durante Implementazione</h2>
+<p><strong>Se bloccato:</strong></p>
+<ol type="1">
+<li><p><strong>Consulta lezioni precedenti</strong></p>
+<ul>
+<li>Lezione 2: Prompt engineering</li>
+<li>Lezione 3: Memory management</li>
+<li>Lezione 4: Git workflow</li>
+</ul></li>
+<li><p><strong>Chiedi all&#39;IA</strong> (formula prompt specifico)</p></li>
+<li><p><strong>Chiedi al docente</strong> (se IA non risolve)</p></li>
+<li><p><strong>Cerca su Stack Overflow</strong> (se problema comune)</p></li>
+</ol>
+<h2 id="prompt-utili-generici">Prompt Utili Generici</h2>
+<p><strong>Debugging generico:</strong></p>
+<pre><code>Ho questo problema: [descrizione]
+
+Sintomi: [cosa succede]
+Aspettative: [cosa dovrebbe succedere]
+
+Codice rilevante:
+[incolla codice]
+
+Error output:
+[incolla errore se presente]
+
+Cosa potrebbe essere? Suggerisci debug steps.</code></pre>
+<p><strong>Refactoring:</strong></p>
+<pre><code>Questo codice funziona ma è disorganizzato:
+
+[incolla codice]
+
+Come posso refactorarlo per essere:
+- Più leggibile
+- Più testabile
+- Senza duplicazione
+
+Mantieni funzionalità identica.</code></pre>
+<p><strong>Ottimizzazione:</strong></p>
+<pre><code>Questa funzione è troppo lenta con grandi input:
+
+[incolla funzione]
+
+Input tipico: [descrizione input]
+
+Come posso ottimizzare? Considera:
+- Algoritmo più efficiente
+- Data structure migliore
+- Trade-off memory vs speed</code></pre>
+<h2 id="risorse-online">Risorse Online</h2>
+<p><strong>Documentazione C:</strong></p>
+<ul>
+<li><a href="https://en.cppreference.com/w/c">https://en.cppreference.com/w/c</a></li>
+</ul>
+<p><strong>Git:</strong></p>
+<ul>
+<li><a href="https://git-scm.com/docs">https://git-scm.com/docs</a></li>
+</ul>
+<p><strong>Valgrind:</strong></p>
+<ul>
+<li><a href="https://valgrind.org/docs/manual/quick-start.html">https://valgrind.org/docs/manual/quick-start.html</a></li>
+</ul>
+<p><strong>Markdown:</strong></p>
+<ul>
+<li><a href="https://www.markdownguide.org/basic-syntax/">https://www.markdownguide.org/basic-syntax/</a></li>
+</ul>
+<hr />
+<hr />
+<h1 id="dart-congratulations">🎯 CONGRATULATIONS!</h1>
+<hr />
+<h2 id="hai-completato-il-corso">Hai Completato il Corso!</h2>
+<h3 id="mortar_board-skills-acquisite">🎓 Skills Acquisite</h3>
+<p>Durante questo corso hai imparato:</p>
+<p><strong>Tecniche:</strong></p>
+<ul>
+<li>✅ Prompt engineering efficace (framework CLEAR)</li>
+<li>✅ Programmazione C sicura (memory management, buffer overflow prevention)</li>
+<li>✅ Testing sistematico (Valgrind, edge cases)</li>
+<li>✅ Git workflow professionale</li>
+<li>✅ Documentazione tecnica (README, Doxygen)</li>
+</ul>
+<p><strong>Mindset:</strong></p>
+<ul>
+<li>✅ Design-first thinking</li>
+<li>✅ Critical validation di output IA</li>
+<li>✅ Iterazione e continuous improvement</li>
+<li>✅ Quality assurance mindset</li>
+</ul>
+<p><strong>Portfolio:</strong></p>
+<ul>
+<li>✅ Progetto completo su GitHub</li>
+<li>✅ README professionale</li>
+<li>✅ Git history pulita</li>
+<li>✅ Codice production-quality</li>
+</ul>
+<h3 id="rocket-prossimi-passi">🚀 Prossimi Passi</h3>
+<p><strong>Immediate (questa settimana):</strong></p>
+<ol type="1">
+<li><p><strong>Completa progetto se non finito</strong></p>
+<ul>
+<li>Implementa feature mancanti</li>
+<li>Fix bug noti</li>
+<li>Migliora documentazione</li>
+</ul></li>
+<li><p><strong>Push su GitHub</strong></p>
+<ul>
+<li>Repository pubblico</li>
+<li>README professionale</li>
+<li>Tag release</li>
+</ul></li>
+<li><p><strong>Update portfolio</strong></p>
+<ul>
+<li>Pin progetto su profilo</li>
+<li>Update bio</li>
+<li>Link da LinkedIn/CV</li>
+</ul></li>
+</ol>
+<p><strong>Short-term (questo mese):</strong></p>
+<ol start="4" type="1">
+<li><p><strong>Implement 2-3 progetti aggiuntivi</strong></p>
+<ul>
+<li>Diversifica portfolio</li>
+<li>Applica skills in contesti diversi</li>
+<li>Sperimenta con librerie/tool nuovi</li>
+</ul></li>
+<li><p><strong>Contribuisci a open source</strong></p>
+<ul>
+<li>Cerca &quot;good first issue&quot; su GitHub</li>
+<li>Fork, implement, PR</li>
+<li>Build reputation</li>
+</ul></li>
+<li><p><strong>Approfondisci una area</strong></p>
+<ul>
+<li>Embedded systems (Arduino, ESP32)</li>
+<li>Web development (learn backend)</li>
+<li>Systems programming (OS concepts)</li>
+</ul></li>
+</ol>
+<p><strong>Long-term (quest&#39;anno):</strong></p>
+<ol start="7" type="1">
+<li><p><strong>Build significant project</strong></p>
+<ul>
+<li>1000+ lines of code</li>
+<li>Multiple contributors</li>
+<li>Used by others</li>
+</ul></li>
+<li><p><strong>Partecipa a hackathon</strong></p>
+<ul>
+<li>Network con altri developer</li>
+<li>Fast-paced development experience</li>
+<li>Portfolio piece</li>
+</ul></li>
+<li><p><strong>Technical blog/YouTube</strong></p>
+<ul>
+<li>Documenta quello che impari</li>
+<li>&quot;Best way to learn is teach&quot;</li>
+<li>Build online presence</li>
+</ul></li>
+</ol>
+<h3 id="briefcase-preparazione-colloqui">💼 Preparazione Colloqui</h3>
+<p><strong>Il tuo progetto finale è interview-ready se:</strong></p>
+<ul>
+<li>✅ GitHub repository pubblico ben documentato</li>
+<li>✅ Può spiegare ogni scelta tecnica</li>
+<li>✅ Può discutere trade-offs</li>
+<li>✅ Può spiegare come hai usato IA (senza nasconderlo!)</li>
+<li>✅ Può fare live demo senza crash</li>
+</ul>
+<p><strong>Domande tipiche colloquio:</strong></p>
+<p><strong>Q:</strong> &quot;Raccontami di un progetto di cui sei orgoglioso&quot;<br />
+<strong>A:</strong> [Descrivi progetto finale, focus su challenges risolti]</p>
+<p><strong>Q:</strong> &quot;Come usi l&#39;IA nella programmazione?&quot;<br />
+<strong>A:</strong> &quot;Uso IA come assistente per boilerplate e debugging, ma valido sempre criticamente. Per esempio, nel mio progetto [X], l&#39;IA ha generato struttura base ma io ho...&quot;</p>
+<p><strong>Q:</strong> &quot;Come gestisci i bug?&quot;<br />
+<strong>A:</strong> &quot;Approccio sistematico: riproduco, uso debugger/Valgrind, formulo ipotesi, testo fix, valido con test. Nel progetto [X] ho affrontato [bug specifico] e...&quot;</p>
+<h3 id="star2-final-advice">🌟 Final Advice</h3>
+<p><strong>Sull&#39;uso dell&#39;IA:</strong></p>
+<blockquote>
+<p><strong>&quot;L&#39;IA è come un junior developer molto veloce. Ti può aiutare enormemente, ma tu devi essere il senior che supervisiona, valida e decide.&quot;</strong></p>
+</blockquote>
+<p><strong>Non dire mai:</strong></p>
+<ul>
+<li>❌ &quot;L&#39;IA lo ha scritto per me&quot;</li>
+<li>❌ &quot;Non so come funziona, l&#39;ha fatto ChatGPT&quot;</li>
+</ul>
+<p><strong>Dì invece:</strong></p>
+<ul>
+<li>✅ &quot;Ho usato IA per generare boilerplate, poi ho customizzato&quot;</li>
+<li>✅ &quot;L&#39;IA ha suggerito 3 approcci, ho scelto X perché...&quot;</li>
+<li>✅ &quot;Uso IA per accelerare, ma valido tutto con test e Valgrind&quot;</li>
+</ul>
+<p><strong>Sulla carriera:</strong></p>
+<blockquote>
+<p><strong>&quot;Il futuro della programmazione è collaborazione umano-IA. I programmatori che sapranno usare IA efficacemente saranno i più richiesti.&quot;</strong></p>
+</blockquote>
+<p><strong>Skills che nessuna IA sostituirà:</strong></p>
+<ul>
+<li>🧠 <strong>Problem decomposition</strong> (dividere problema complesso)</li>
+<li>🎯 <strong>Requirements gathering</strong> (capire cosa serve davvero)</li>
+<li>🏗️ <strong>Architecture design</strong> (decidere struttura sistema)</li>
+<li>🔍 <strong>Critical thinking</strong> (validare correttezza)</li>
+<li>🤝 <strong>Communication</strong> (spiegare soluzioni)</li>
+</ul>
+<p><strong>Investi su queste.</strong></p>
+<hr />
+<h2 id="telephone_receiver-resta-in-contatto">📞 Resta in Contatto</h2>
+<p><strong>Docente:</strong></p>
+<ul>
+<li>Email: [email docente]</li>
+<li>LinkedIn: [link]</li>
+</ul>
+<p><strong>Community:</strong></p>
+<ul>
+<li>Discord: [link se disponibile]</li>
+<li>Forum: [link se disponibile]</li>
+</ul>
+<p><strong>Risorse:</strong></p>
+<ul>
+<li>Repository materiale corso: [link]</li>
+<li>Registrazioni lezioni: [link se disponibile]</li>
+</ul>
+<hr />
+<h2 id="pray-feedback">🙏 Feedback</h2>
+<p><strong>Aiutaci a migliorare il corso!</strong></p>
+<p>Se hai 5 minuti, lascia feedback:</p>
+<ol type="1">
+<li><strong>Cosa ha funzionato bene?</strong></li>
+<li><strong>Cosa miglioreresti?</strong></li>
+<li><strong>Quale lezione ti è piaciuta di più?</strong></li>
+<li><strong>Il corso ha soddisfatto le aspettative?</strong></li>
+<li><strong>Consiglieresti questo corso?</strong></li>
+</ol>
+<p>[Link form feedback]</p>
+<hr />
+<h2 id="confetti_ball-congratulazioni-di-nuovo">🎊 CONGRATULAZIONI DI NUOVO!</h2>
+<p>Hai completato il corso <strong>&quot;Intelligenza Artificiale e Programmazione Assistita&quot;</strong>.</p>
+<p>Ora hai le skills per:</p>
+<ul>
+<li>🚀 Sviluppare software in modo 2x più veloce</li>
+<li>🛡️ Scrivere codice sicuro e robusto</li>
+<li>📚 Documentare professionalmente</li>
+<li>🤝 Collaborare con Git</li>
+<li>🧠 Usare IA in modo intelligente e critico</li>
+</ul>
+<p><strong>Il tuo viaggio come developer moderno è appena iniziato.</strong></p>
+<p><strong>Buon coding e buona fortuna! 💻✨</strong></p>
+<hr />
+<p><strong>Made with ❤️ and Claude</strong></p>
+<p><strong>Corso ITS - Intelligenza Artificiale e Programmazione Assistita 2025</strong></p>
+<hr />
+</main>
+</body>
+</html>

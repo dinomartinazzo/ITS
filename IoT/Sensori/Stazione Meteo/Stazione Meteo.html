@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Stazione Meteo con OpenWeatherMap</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Stazione Meteo con OpenWeatherMap</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>Stazione Meteo.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/IoT/Sensori/Stazione Meteo</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<p>Questo progetto utilizza un microcontrollore (ad esempio ESP32) per connettersi al servizio OpenWeatherMap e ottenere dati meteo in tempo reale. I dati vengono visualizzati su una pagina web ospitata dal microcontrollore stesso.</p>
+<h2 id="come-funziona">Come funziona</h2>
+<ol type="1">
+<li><strong>Connessione WiFi</strong>: Il microcontrollore si connette a una rete WiFi utilizzando le credenziali fornite nel codice (<code>ssid</code> e <code>password</code>).</li>
+<li><strong>Richiesta API</strong>: Viene effettuata una richiesta HTTP al servizio OpenWeatherMap utilizzando un&#39;API key personale (<code>apiKey</code>) e il nome della città (<code>location</code>).</li>
+<li><strong>Risposta JSON</strong>: OpenWeatherMap restituisce i dati meteo in formato JSON.</li>
+<li><strong>Parsing JSON</strong>: Il microcontrollore analizza il JSON per estrarre informazioni come temperatura, umidità, velocità del vento, ecc.</li>
+<li><strong>Visualizzazione Web</strong>: I dati vengono formattati in HTML e resi disponibili su una pagina web accessibile tramite il browser.</li>
+</ol>
+<h2 id="dettagli-del-json-di-ritorno">Dettagli del JSON di ritorno</h2>
+<p>Il JSON restituito da OpenWeatherMap contiene diverse informazioni. Ecco una spiegazione dei campi principali:</p>
+<ul>
+<li><strong><code>coord</code></strong>: Coordinate geografiche della città (latitudine e longitudine).</li>
+<li><strong><code>weather</code></strong>: Array contenente informazioni sulle condizioni meteo:
+<ul>
+<li><code>id</code>: ID della condizione meteo.</li>
+<li><code>main</code>: Descrizione breve (es. &quot;Clouds&quot;).</li>
+<li><code>description</code>: Descrizione dettagliata (es. &quot;few clouds&quot;).</li>
+<li><code>icon</code>: Codice per l&#39;icona meteo.</li>
+</ul></li>
+<li><strong><code>main</code></strong>: Informazioni principali:
+<ul>
+<li><code>temp</code>: Temperatura attuale (in gradi Celsius se specificato).</li>
+<li><code>feels_like</code>: Temperatura percepita.</li>
+<li><code>temp_min</code> e <code>temp_max</code>: Temperature minima e massima.</li>
+<li><code>pressure</code>: Pressione atmosferica (in hPa).</li>
+<li><code>humidity</code>: Umidità relativa (in percentuale).</li>
+</ul></li>
+<li><strong><code>wind</code></strong>: Informazioni sul vento:
+<ul>
+<li><code>speed</code>: Velocità del vento (in m/s).</li>
+<li><code>deg</code>: Direzione del vento (in gradi).</li>
+</ul></li>
+<li><strong><code>sys</code></strong>: Informazioni aggiuntive:
+<ul>
+<li><code>country</code>: Codice del paese.</li>
+<li><code>sunrise</code> e <code>sunset</code>: Orari di alba e tramonto (in formato UNIX).</li>
+</ul></li>
+<li><strong><code>dt</code></strong>: Timestamp dell&#39;ultimo aggiornamento (in formato UNIX).</li>
+<li><strong><code>name</code></strong>: Nome della città.</li>
+</ul>
+<h2 id="api-key">API Key</h2>
+<p>L&#39;API key (<code>apiKey</code>) è una chiave univoca fornita da OpenWeatherMap al momento della registrazione. Serve per autenticare le richieste al servizio. È importante mantenerla privata per evitare utilizzi non autorizzati.</p>
+<h2 id="codice-html-generato">Codice HTML generato</h2>
+<p>Il codice HTML generato dal microcontrollore include:</p>
+<ul>
+<li>Un titolo con il nome della città e del paese.</li>
+<li>Un&#39;icona meteo basata sul codice <code>icon</code> fornito dal JSON.</li>
+<li>Informazioni dettagliate come temperatura, umidità, pressione, velocità del vento, orari di alba e tramonto.</li>
+<li>Un modulo per aggiornare la città visualizzata.</li>
+</ul>
+<h2 id="esempio-di-utilizzo">Esempio di utilizzo</h2>
+<ol type="1">
+<li>Modifica le credenziali WiFi e l&#39;API key nel codice.</li>
+<li>Carica il codice sul microcontrollore.</li>
+<li>Accedi alla pagina web tramite l&#39;indirizzo IP del dispositivo.</li>
+<li>Visualizza i dati meteo e aggiorna la città tramite il modulo.</li>
+</ol>
+<p>Per ulteriori dettagli, visita il sito ufficiale di OpenWeatherMap: <a href="https://openweathermap.org/"><span>https://openweathermap.org/</span></a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;coord&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;lon&quot;</span><span class="fu">:</span> <span class="fl">-0.1257</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;lat&quot;</span><span class="fu">:</span> <span class="fl">51.5085</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;weather&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">801</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="st">&quot;Clouds&quot;</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;few clouds&quot;</span><span class="fu">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;icon&quot;</span><span class="fu">:</span> <span class="st">&quot;02d&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;main&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;temp&quot;</span><span class="fu">:</span> <span class="fl">289.79</span><span class="fu">,</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;feels_like&quot;</span><span class="fu">:</span> <span class="fl">288.89</span><span class="fu">,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;temp_min&quot;</span><span class="fu">:</span> <span class="fl">288.1</span><span class="fu">,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;temp_max&quot;</span><span class="fu">:</span> <span class="fl">290.67</span><span class="fu">,</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;pressure&quot;</span><span class="fu">:</span> <span class="dv">1004</span><span class="fu">,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;humidity&quot;</span><span class="fu">:</span> <span class="dv">53</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;wind&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="fl">5.66</span><span class="fu">,</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;deg&quot;</span><span class="fu">:</span> <span class="dv">230</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sys&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;country&quot;</span><span class="fu">:</span> <span class="st">&quot;GB&quot;</span><span class="fu">,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sunrise&quot;</span><span class="fu">:</span> <span class="dv">1744520922</span><span class="fu">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sunset&quot;</span><span class="fu">:</span> <span class="dv">1744570372</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;London&quot;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;WiFi.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;WebServer.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;HTTPClient.h&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;ArduinoJson.h&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">//const char* ssid = &quot;Mate10&quot;;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> ssid <span class="op">=</span> <span class="st">&quot;FRITZ!Box 7530 NH&quot;</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> password <span class="op">=</span> <span class="st">&quot;3661461500&quot;</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>String apiKey <span class="op">=</span> <span class="st">&quot;e2263c853668df51ff7b3ed521ec5f9d&quot;</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>String location <span class="op">=</span> <span class="st">&quot;Milano,it&quot;</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>WebServer server<span class="op">(</span><span class="dv">80</span><span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> lastPrintTime <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">// HTML semplificato e dinamico</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>String buildPage<span class="op">(</span>String city<span class="op">,</span> String country<span class="op">,</span> String desc<span class="op">,</span> String icon<span class="op">,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                 <span class="dt">float</span> temp<span class="op">,</span> <span class="dt">float</span> temp_min<span class="op">,</span> <span class="dt">float</span> temp_max<span class="op">,</span> <span class="dt">int</span> humidity<span class="op">,</span> <span class="dt">int</span> pressure<span class="op">,</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                 <span class="dt">float</span> wind<span class="op">,</span> <span class="dt">int</span> wind_deg<span class="op">,</span> String sunrise<span class="op">,</span> String sunset<span class="op">,</span> String last_update<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">&quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#39;utf-8&#39;&gt;&lt;title&gt;Meteo&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&quot;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;h2&gt;Meteo per &quot;</span> <span class="op">+</span> city <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> country <span class="op">+</span> <span class="st">&quot;&lt;/h2&gt;&quot;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;img src=&#39;https://openweathermap.org/img/wn/&quot;</span> <span class="op">+</span> icon <span class="op">+</span> <span class="st">&quot;@2x.png&#39;&gt;&lt;/p&gt;&quot;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Condizione:&lt;/strong&gt; &quot;</span> <span class="op">+</span> desc <span class="op">+</span> <span class="st">&quot;&lt;/p&gt;&quot;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Temperatura:&lt;/strong&gt; &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C (min: &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp_min<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C, max: &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp_max<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C)&lt;/p&gt;&quot;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Umidità:&lt;/strong&gt; &quot;</span> <span class="op">+</span> String<span class="op">(</span>humidity<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;%&lt;/p&gt;&quot;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Pressione:&lt;/strong&gt; &quot;</span> <span class="op">+</span> String<span class="op">(</span>pressure<span class="op">)</span> <span class="op">+</span> <span class="st">&quot; hPa&lt;/p&gt;&quot;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Vento:&lt;/strong&gt; &quot;</span> <span class="op">+</span> String<span class="op">(</span>wind<span class="op">)</span> <span class="op">+</span> <span class="st">&quot; m/s (&quot;</span> <span class="op">+</span> String<span class="op">(</span>wind_deg<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°)&lt;/p&gt;&quot;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Alba:&lt;/strong&gt; &quot;</span> <span class="op">+</span> sunrise <span class="op">+</span> <span class="st">&quot; - &lt;strong&gt;Tramonto:&lt;/strong&gt; &quot;</span> <span class="op">+</span> sunset <span class="op">+</span> <span class="st">&quot;&lt;/p&gt;&quot;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;p&gt;&lt;strong&gt;Ultimo aggiornamento:&lt;/strong&gt; &quot;</span> <span class="op">+</span> last_update <span class="op">+</span> <span class="st">&quot;&lt;/p&gt;&lt;br&gt;&quot;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;form action=&#39;/setcity&#39;&gt;&lt;input name=&#39;q&#39; placeholder=&#39;Es: Torino,it&#39;&gt;&lt;button&gt;Aggiorna Città&lt;/button&gt;&lt;/form&gt;&quot;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;script&gt;setTimeout(()=&gt;location.reload(), 60000);&lt;/script&gt;&quot;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">// Conversione UNIX -&gt; ora leggibile</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>String formatTime<span class="op">(</span><span class="dt">time_t</span> t<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> buf<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  strftime<span class="op">(</span>buf<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>buf<span class="op">),</span> <span class="st">&quot;%H:%M:%S&quot;</span><span class="op">,</span> localtime<span class="op">(&amp;</span>t<span class="op">));</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> String<span class="op">(</span>buf<span class="op">);</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printWeatherDataToSerial<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>WiFi<span class="op">.</span>status<span class="op">()</span> <span class="op">!=</span> WL_CONNECTED<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;WiFi non connesso&quot;</span><span class="op">);</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  String url <span class="op">=</span> <span class="st">&quot;http://api.openweathermap.org/data/2.5/weather?q=&quot;</span> <span class="op">+</span> location <span class="op">+</span> <span class="st">&quot;&amp;appid=&quot;</span> <span class="op">+</span> apiKey <span class="op">+</span> <span class="st">&quot;&amp;units=metric&quot;</span><span class="op">;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  HTTPClient http<span class="op">;</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  http<span class="op">.</span>begin<span class="op">(</span>url<span class="op">);</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> httpCode <span class="op">=</span> http<span class="op">.</span>GET<span class="op">();</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>httpCode <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Errore HTTP&quot;</span><span class="op">);</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  String payload <span class="op">=</span> http<span class="op">.</span>getString<span class="op">();</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  JsonDocument doc<span class="op">;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  DeserializationError error <span class="op">=</span> deserializeJson<span class="op">(</span>doc<span class="op">,</span> payload<span class="op">);</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>error<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Errore parsing JSON&quot;</span><span class="op">);</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Estrazione dati principali</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  String city <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;name&quot;</span><span class="op">];</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  String country <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;country&quot;</span><span class="op">];</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  String desc <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;weather&quot;</span><span class="op">][</span><span class="dv">0</span><span class="op">][</span><span class="st">&quot;description&quot;</span><span class="op">];</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  String icon <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;weather&quot;</span><span class="op">][</span><span class="dv">0</span><span class="op">][</span><span class="st">&quot;icon&quot;</span><span class="op">];</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp&quot;</span><span class="op">];</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp_min <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp_min&quot;</span><span class="op">];</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp_max <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp_max&quot;</span><span class="op">];</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> humidity <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;humidity&quot;</span><span class="op">];</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> pressure <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;pressure&quot;</span><span class="op">];</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> wind <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;wind&quot;</span><span class="op">][</span><span class="st">&quot;speed&quot;</span><span class="op">];</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> wind_deg <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;wind&quot;</span><span class="op">][</span><span class="st">&quot;deg&quot;</span><span class="op">];</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> sunrise <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;sunrise&quot;</span><span class="op">];</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> sunset <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;sunset&quot;</span><span class="op">];</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> dt <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;dt&quot;</span><span class="op">];</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampa dati in seriale</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;=== Meteo ===&quot;</span><span class="op">);</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;IP: &quot;</span> <span class="op">+</span> WiFi<span class="op">.</span>localIP<span class="op">().</span>toString<span class="op">());</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Città: &quot;</span> <span class="op">+</span> city <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> country<span class="op">);</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Descrizione: &quot;</span> <span class="op">+</span> desc<span class="op">);</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Icona: &quot;</span> <span class="op">+</span> icon<span class="op">);</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Temperatura: &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C (min: &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp_min<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C, max: &quot;</span> <span class="op">+</span> String<span class="op">(</span>temp_max<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°C)&quot;</span><span class="op">);</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Umidità: &quot;</span> <span class="op">+</span> String<span class="op">(</span>humidity<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;%&quot;</span><span class="op">);</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Pressione: &quot;</span> <span class="op">+</span> String<span class="op">(</span>pressure<span class="op">)</span> <span class="op">+</span> <span class="st">&quot; hPa&quot;</span><span class="op">);</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Vento: &quot;</span> <span class="op">+</span> String<span class="op">(</span>wind<span class="op">)</span> <span class="op">+</span> <span class="st">&quot; m/s (&quot;</span> <span class="op">+</span> String<span class="op">(</span>wind_deg<span class="op">)</span> <span class="op">+</span> <span class="st">&quot;°)&quot;</span><span class="op">);</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Alba: &quot;</span> <span class="op">+</span> formatTime<span class="op">(</span>sunrise<span class="op">));</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Tramonto: &quot;</span> <span class="op">+</span> formatTime<span class="op">(</span>sunset<span class="op">));</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Ultimo aggiornamento: &quot;</span> <span class="op">+</span> formatTime<span class="op">(</span>dt<span class="op">));</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;================&quot;</span><span class="op">);</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> handleRoot<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>WiFi<span class="op">.</span>status<span class="op">()</span> <span class="op">!=</span> WL_CONNECTED<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span>send<span class="op">(</span><span class="dv">503</span><span class="op">,</span> <span class="st">&quot;text/plain&quot;</span><span class="op">,</span> <span class="st">&quot;WiFi non connesso&quot;</span><span class="op">);</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  String url <span class="op">=</span> <span class="st">&quot;http://api.openweathermap.org/data/2.5/weather?q=&quot;</span> <span class="op">+</span> location <span class="op">+</span> <span class="st">&quot;&amp;appid=&quot;</span> <span class="op">+</span> apiKey <span class="op">+</span> <span class="st">&quot;&amp;units=metric&quot;</span><span class="op">;</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  HTTPClient http<span class="op">;</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  http<span class="op">.</span>begin<span class="op">(</span>url<span class="op">);</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> httpCode <span class="op">=</span> http<span class="op">.</span>GET<span class="op">();</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>httpCode <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span>send<span class="op">(</span><span class="dv">500</span><span class="op">,</span> <span class="st">&quot;text/plain&quot;</span><span class="op">,</span> <span class="st">&quot;Errore HTTP&quot;</span><span class="op">);</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>  String payload <span class="op">=</span> http<span class="op">.</span>getString<span class="op">();</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  JsonDocument doc<span class="op">;</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  DeserializationError error <span class="op">=</span> deserializeJson<span class="op">(</span>doc<span class="op">,</span> payload<span class="op">);</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>error<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span>send<span class="op">(</span><span class="dv">500</span><span class="op">,</span> <span class="st">&quot;text/plain&quot;</span><span class="op">,</span> <span class="st">&quot;Errore parsing JSON&quot;</span><span class="op">);</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Estrazione dati principali</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  String city <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;name&quot;</span><span class="op">];</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  String country <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;country&quot;</span><span class="op">];</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>  String desc <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;weather&quot;</span><span class="op">][</span><span class="dv">0</span><span class="op">][</span><span class="st">&quot;description&quot;</span><span class="op">];</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  String icon <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;weather&quot;</span><span class="op">][</span><span class="dv">0</span><span class="op">][</span><span class="st">&quot;icon&quot;</span><span class="op">];</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp&quot;</span><span class="op">];</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp_min <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp_min&quot;</span><span class="op">];</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp_max <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;temp_max&quot;</span><span class="op">];</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> humidity <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;humidity&quot;</span><span class="op">];</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> pressure <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;main&quot;</span><span class="op">][</span><span class="st">&quot;pressure&quot;</span><span class="op">];</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> wind <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;wind&quot;</span><span class="op">][</span><span class="st">&quot;speed&quot;</span><span class="op">];</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> wind_deg <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;wind&quot;</span><span class="op">][</span><span class="st">&quot;deg&quot;</span><span class="op">];</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> sunrise <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;sunrise&quot;</span><span class="op">];</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> sunset <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;sys&quot;</span><span class="op">][</span><span class="st">&quot;sunset&quot;</span><span class="op">];</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>  <span class="dt">time_t</span> dt <span class="op">=</span> doc<span class="op">[</span><span class="st">&quot;dt&quot;</span><span class="op">];</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>  String page <span class="op">=</span> buildPage<span class="op">(</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>    city<span class="op">,</span> country<span class="op">,</span> desc<span class="op">,</span> icon<span class="op">,</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>    temp<span class="op">,</span> temp_min<span class="op">,</span> temp_max<span class="op">,</span> humidity<span class="op">,</span> pressure<span class="op">,</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>    wind<span class="op">,</span> wind_deg<span class="op">,</span> formatTime<span class="op">(</span>sunrise<span class="op">),</span> formatTime<span class="op">(</span>sunset<span class="op">),</span> formatTime<span class="op">(</span>dt<span class="op">)</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>  <span class="op">);</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>  server<span class="op">.</span>send<span class="op">(</span><span class="dv">200</span><span class="op">,</span> <span class="st">&quot;text/html&quot;</span><span class="op">,</span> page<span class="op">);</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> handleSetCity<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>server<span class="op">.</span>hasArg<span class="op">(</span><span class="st">&quot;q&quot;</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>    String newLocation <span class="op">=</span> server<span class="op">.</span>arg<span class="op">(</span><span class="st">&quot;q&quot;</span><span class="op">);</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>newLocation<span class="op">.</span>length<span class="op">()</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> newLocation<span class="op">.</span>indexOf<span class="op">(</span><span class="ch">&#39;,&#39;</span><span class="op">)</span> <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>      location <span class="op">=</span> newLocation<span class="op">;</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>      server<span class="op">.</span>sendHeader<span class="op">(</span><span class="st">&quot;Location&quot;</span><span class="op">,</span> <span class="st">&quot;/&quot;</span><span class="op">,</span> <span class="kw">true</span><span class="op">);</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>      server<span class="op">.</span>send<span class="op">(</span><span class="dv">302</span><span class="op">,</span> <span class="st">&quot;text/plain&quot;</span><span class="op">,</span> <span class="st">&quot;Redirecting...&quot;</span><span class="op">);</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>      server<span class="op">.</span>send<span class="op">(</span><span class="dv">400</span><span class="op">,</span> <span class="st">&quot;text/html&quot;</span><span class="op">,</span> </span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#39;utf-8&#39;&gt;&lt;title&gt;Errore&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&quot;</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&lt;h2&gt;Errore: Formato città non valido&lt;/h2&gt;&quot;</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&lt;p&gt;Il formato corretto è: &lt;strong&gt;NomeCittà,Paese&lt;/strong&gt; (es: Torino,it)&lt;/p&gt;&quot;</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&lt;a href=&#39;/&#39;&gt;Torna alla pagina principale&lt;/a&gt;&quot;</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="op">);</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span>send<span class="op">(</span><span class="dv">400</span><span class="op">,</span> <span class="st">&quot;text/html&quot;</span><span class="op">,</span> </span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#39;utf-8&#39;&gt;&lt;title&gt;Errore&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&quot;</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;&lt;h2&gt;Errore: Parametro &#39;q&#39; mancante&lt;/h2&gt;&quot;</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;&lt;a href=&#39;/&#39;&gt;Torna alla pagina principale&lt;/a&gt;&quot;</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="op">);</span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>  WiFi<span class="op">.</span>begin<span class="op">(</span>ssid<span class="op">,</span> password<span class="op">);</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Connessione a WiFi&quot;</span><span class="op">);</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>WiFi<span class="op">.</span>status<span class="op">()</span> <span class="op">!=</span> WL_CONNECTED<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;.&quot;</span><span class="op">);</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">WiFi connesso. IP: &quot;</span> <span class="op">+</span> WiFi<span class="op">.</span>localIP<span class="op">().</span>toString<span class="op">());</span></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>  configTime<span class="op">(</span><span class="dv">7200</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="st">&quot;pool.ntp.org&quot;</span><span class="op">);</span>  <span class="co">// fuso orario Italia</span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>  server<span class="op">.</span>on<span class="op">(</span><span class="st">&quot;/&quot;</span><span class="op">,</span> handleRoot<span class="op">);</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>  server<span class="op">.</span>on<span class="op">(</span><span class="st">&quot;/setcity&quot;</span><span class="op">,</span> handleSetCity<span class="op">);</span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>  server<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Web server avviato.&quot;</span><span class="op">);</span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>  server<span class="op">.</span>handleClient<span class="op">();</span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stampa dati ogni 10 secondi</span></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>millis<span class="op">()</span> <span class="op">-</span> lastPrintTime <span class="op">&gt;=</span> <span class="dv">10000</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>    lastPrintTime <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    printWeatherDataToSerial<span class="op">();</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</main>
+</body>
+</html>

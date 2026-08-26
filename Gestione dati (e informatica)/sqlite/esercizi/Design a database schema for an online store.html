@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Design a database schema for an online store</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Design a database schema for an online store</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>Design a database schema for an online store.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Gestione dati (e informatica)/sqlite/esercizi</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<p>Design a database schema for an online store.</p>
+<p>Designing a database schema for an online merchandise store involves organizing the data that will be stored in the database, ensuring that it can efficiently handle the store&#39;s operations. Below is a simplified example of a database schema for an online merchandise store. Please note that this is a basic representation, and a real-world application may require additional tables and fields to meet specific requirements.</p>
+<p>Entities and Relationships:</p>
+<ol type="1">
+<li>Customers:</li>
+</ol>
+<ul>
+<li>customer_id (Primary Key)</li>
+<li>first_name</li>
+<li>last_name</li>
+<li>email</li>
+<li>password</li>
+<li>address</li>
+<li>phone_number</li>
+</ul>
+<ol start="2" type="1">
+<li>Products:</li>
+</ol>
+<ul>
+<li>product_id (Primary Key)</li>
+<li>name</li>
+<li>description</li>
+<li>price</li>
+<li>category_id (Foreign Key)</li>
+<li>manufacturer_id (Foreign Key)</li>
+</ul>
+<ol start="3" type="1">
+<li>Categories:</li>
+</ol>
+<ul>
+<li>category_id (Primary Key)</li>
+<li>name</li>
+</ul>
+<ol start="4" type="1">
+<li>Manufacturers:</li>
+</ol>
+<ul>
+<li>manufacturer_id (Primary Key)</li>
+<li>name</li>
+<li>country</li>
+<li>website</li>
+</ul>
+<ol start="5" type="1">
+<li>Orders:</li>
+</ol>
+<ul>
+<li>order_id (Primary Key)</li>
+<li>customer_id (Foreign Key)</li>
+<li>order_date</li>
+<li>status (e.g., &quot;Processing,&quot; &quot;Shipped,&quot; &quot;Delivered&quot;)</li>
+</ul>
+<ol start="6" type="1">
+<li>Order_Items:</li>
+</ol>
+<ul>
+<li>order_item_id (Primary Key)</li>
+<li>order_id (Foreign Key)</li>
+<li>product_id (Foreign Key)</li>
+<li>quantity</li>
+<li>item_price (price at the time of purchase)</li>
+</ul>
+<ol start="7" type="1">
+<li>Reviews:</li>
+</ol>
+<ul>
+<li>review_id (Primary Key)</li>
+<li>product_id (Foreign Key)</li>
+<li>customer_id (Foreign Key)</li>
+<li>rating</li>
+<li>review_text</li>
+<li>review_date</li>
+</ul>
+<ol start="8" type="1">
+<li>Cart:</li>
+</ol>
+<ul>
+<li>cart_id (Primary Key)</li>
+<li>customer_id (Foreign Key)</li>
+</ul>
+<ol start="9" type="1">
+<li>Cart_Items:</li>
+</ol>
+<ul>
+<li>cart_item_id (Primary Key)</li>
+<li>cart_id (Foreign Key)</li>
+<li>product_id (Foreign Key)</li>
+<li>quantity</li>
+</ul>
+<p>Database Schema Diagram:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Customers ----1-----* Orders ----*-----1 Order_Items -----*----1 Products</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span>              <span class="pp">|</span>              <span class="pp">|</span>                      <span class="pp">|</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span>              <span class="pp">|</span>              <span class="pp">|</span>                      <span class="pp">|</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="pp">|</span>              <span class="pp">|</span>              <span class="pp">|</span>                      <span class="pp">|</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Categories  * Manufacturers  * Reviews             * Cart</span></code></pre></div>
+<p>In this schema:</p>
+<ul>
+<li>Customers can place orders, and each order can contain multiple products.</li>
+<li>Each product belongs to a category and a manufacturer.</li>
+<li>Reviews are associated with products and customers.</li>
+<li>Customers can have items in their shopping cart, and each cart item corresponds to a product.</li>
+<li>The &quot;cart&quot; table stores cart-specific information for each customer, allowing them to add and remove items before making a purchase.</li>
+<li>The &quot;status&quot; field in the &quot;Orders&quot; table can be used to track the order&#39;s processing status.</li>
+</ul>
+<p>This is a basic schema, and depending on the specific requirements of your online merchandise store, you may need to add more tables or fields to handle things like shipping information, promotions, and payment processing. Additionally, consider implementing data validation, indexing, and appropriate constraints to maintain data integrity and optimize database performance.</p>
+<hr />
+<p>To create the tables in SQLite, you can use SQL statements as follows. SQLite uses a simplified data type system compared to some other database systems. Below is the SQL code for creating the tables using SQLite:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Customers table</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Customers (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    customer_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    first_name TEXT,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    last_name TEXT,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    email TEXT <span class="kw">UNIQUE</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">password</span> TEXT,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    address TEXT,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    phone_number TEXT</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Categories table</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Categories (</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    category_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    name TEXT</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- Manufacturers table</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Manufacturers (</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    manufacturer_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    name TEXT,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    country TEXT,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    website TEXT</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">-- Products table</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Products (</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    product_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    name TEXT,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    description TEXT,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    price <span class="dt">REAL</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    category_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    manufacturer_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (category_id) <span class="kw">REFERENCES</span> Categories(category_id),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (manufacturer_id) <span class="kw">REFERENCES</span> Manufacturers(manufacturer_id)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co">-- Orders table</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Orders (</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    order_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    customer_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    order_date <span class="dt">DATE</span>,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    status TEXT,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (customer_id) <span class="kw">REFERENCES</span> Customers(customer_id)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co">-- Order_Items table</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Order_Items (</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    order_item_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    order_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    product_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    quantity <span class="dt">INTEGER</span>,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    item_price <span class="dt">REAL</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (order_id) <span class="kw">REFERENCES</span> Orders(order_id),</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (product_id) <span class="kw">REFERENCES</span> Products(product_id)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">-- Reviews table</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Reviews (</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    review_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    product_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    customer_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    rating <span class="dt">INTEGER</span>,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    review_text TEXT,</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    review_date <span class="dt">DATE</span>,</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (product_id) <span class="kw">REFERENCES</span> Products(product_id),</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (customer_id) <span class="kw">REFERENCES</span> Customers(customer_id)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">-- Cart table</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Cart (</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    cart_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    customer_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (customer_id) <span class="kw">REFERENCES</span> Customers(customer_id)</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">-- Cart_Items table</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> Cart_Items (</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    cart_item_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    cart_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    product_id <span class="dt">INTEGER</span>,</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    quantity <span class="dt">INTEGER</span>,</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (cart_id) <span class="kw">REFERENCES</span> Cart(cart_id),</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (product_id) <span class="kw">REFERENCES</span> Products(product_id)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>These SQL statements create the tables in an SQLite database using the appropriate data types and constraints. Note that in SQLite, you generally use <code>INTEGER</code> for auto-increment primary keys, <code>TEXT</code> for string data, and <code>REAL</code> for floating-point numbers. You may adjust the data types as needed based on your specific requirements.</p>
+<p>I&#39;ll provide you with example SQL statements to insert 10 sample values into each of the tables you created in SQLite. Please note that these are just sample values, and you can modify them to match your specific data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert values into the Customers table</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Customers (first_name, last_name, email, <span class="kw">password</span>, address, phone_number)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;John&#39;</span>, <span class="st">&#39;Doe&#39;</span>, <span class="st">&#39;john.doe@email.com&#39;</span>, <span class="st">&#39;password1&#39;</span>, <span class="st">&#39;123 Main St&#39;</span>, <span class="st">&#39;555-123-4567&#39;</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Jane&#39;</span>, <span class="st">&#39;Smith&#39;</span>, <span class="st">&#39;jane.smith@email.com&#39;</span>, <span class="st">&#39;password2&#39;</span>, <span class="st">&#39;456 Elm St&#39;</span>, <span class="st">&#39;555-234-5678&#39;</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Bob&#39;</span>, <span class="st">&#39;Johnson&#39;</span>, <span class="st">&#39;bob.johnson@email.com&#39;</span>, <span class="st">&#39;password3&#39;</span>, <span class="st">&#39;789 Oak St&#39;</span>, <span class="st">&#39;555-345-6789&#39;</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;Williams&#39;</span>, <span class="st">&#39;alice.williams@email.com&#39;</span>, <span class="st">&#39;password4&#39;</span>, <span class="st">&#39;101 Pine St&#39;</span>, <span class="st">&#39;555-456-7890&#39;</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;David&#39;</span>, <span class="st">&#39;Lee&#39;</span>, <span class="st">&#39;david.lee@email.com&#39;</span>, <span class="st">&#39;password5&#39;</span>, <span class="st">&#39;202 Cedar St&#39;</span>, <span class="st">&#39;555-567-8901&#39;</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Sarah&#39;</span>, <span class="st">&#39;Anderson&#39;</span>, <span class="st">&#39;sarah.anderson@email.com&#39;</span>, <span class="st">&#39;password6&#39;</span>, <span class="st">&#39;303 Birch St&#39;</span>, <span class="st">&#39;555-678-9012&#39;</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Michael&#39;</span>, <span class="st">&#39;Brown&#39;</span>, <span class="st">&#39;michael.brown@email.com&#39;</span>, <span class="st">&#39;password7&#39;</span>, <span class="st">&#39;404 Maple St&#39;</span>, <span class="st">&#39;555-789-0123&#39;</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Laura&#39;</span>, <span class="st">&#39;Miller&#39;</span>, <span class="st">&#39;laura.miller@email.com&#39;</span>, <span class="st">&#39;password8&#39;</span>, <span class="st">&#39;505 Walnut St&#39;</span>, <span class="st">&#39;555-890-1234&#39;</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Steven&#39;</span>, <span class="st">&#39;Wilson&#39;</span>, <span class="st">&#39;steven.wilson@email.com&#39;</span>, <span class="st">&#39;password9&#39;</span>, <span class="st">&#39;606 Cherry St&#39;</span>, <span class="st">&#39;555-901-2345&#39;</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Emily&#39;</span>, <span class="st">&#39;Davis&#39;</span>, <span class="st">&#39;emily.davis@email.com&#39;</span>, <span class="st">&#39;password10&#39;</span>, <span class="st">&#39;707 Ash St&#39;</span>, <span class="st">&#39;555-012-3456&#39;</span>);</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert values into the Categories table</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Categories (name)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Clothing&#39;</span>),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Electronics&#39;</span>),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Home &amp; Kitchen&#39;</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Toys &amp; Games&#39;</span>),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Books&#39;</span>),</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Sports &amp; Outdoors&#39;</span>),</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Health &amp; Beauty&#39;</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Jewelry&#39;</span>),</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Automotive&#39;</span>),</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Music&#39;</span>);</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert values into the Manufacturers table</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Manufacturers (name, country, website)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Nike&#39;</span>, <span class="st">&#39;USA&#39;</span>, <span class="st">&#39;www.nike.com&#39;</span>),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Sony&#39;</span>, <span class="st">&#39;Japan&#39;</span>, <span class="st">&#39;www.sony.com&#39;</span>),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;KitchenAid&#39;</span>, <span class="st">&#39;USA&#39;</span>, <span class="st">&#39;www.kitchenaid.com&#39;</span>),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;LEGO&#39;</span>, <span class="st">&#39;Denmark&#39;</span>, <span class="st">&#39;www.lego.com&#39;</span>),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Penguin Random House&#39;</span>, <span class="st">&#39;USA&#39;</span>, <span class="st">&#39;www.penguinrandomhouse.com&#39;</span>),</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Adidas&#39;</span>, <span class="st">&#39;Germany&#39;</span>, <span class="st">&#39;www.adidas.com&#39;</span>),</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;L&#39;</span>Oréal<span class="st">&#39;, &#39;</span>France<span class="st">&#39;, &#39;</span>www.loreal.com<span class="st">&#39;),</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Tiffany &amp; Co.<span class="st">&#39;, &#39;</span>USA<span class="st">&#39;, &#39;</span>www.tiffany.com<span class="st">&#39;),</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Ford<span class="st">&#39;, &#39;</span>USA<span class="st">&#39;, &#39;</span>www.ford.com<span class="st">&#39;),</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Sony Music<span class="st">&#39;, &#39;</span>USA<span class="st">&#39;, &#39;</span>www.sonymusic.com<span class="st">&#39;);</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="st">-- Insert values into the Products table</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="st">INSERT INTO Products (name, description, price, category_id, manufacturer_id)</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="st">VALUES</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>T<span class="op">-</span>Shirt<span class="st">&#39;, &#39;</span>Cotton T<span class="op">-</span>Shirt<span class="st">&#39;, 19.99, 1, 1),</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>PlayStation <span class="dv">5</span><span class="st">&#39;, &#39;</span>Gaming Console<span class="st">&#39;, 499.99, 2, 2),</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Stand Mixer<span class="st">&#39;, &#39;</span>Kitchen Appliance<span class="st">&#39;, 299.99, 3, 3),</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>LEGO Classic<span class="st">&#39;, &#39;</span>Building Blocks<span class="st">&#39;, 29.99, 4, 4),</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>The Great Gatsby<span class="st">&#39;, &#39;</span>Novel<span class="st">&#39;, 12.99, 5, 5),</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Running Shoes<span class="st">&#39;, &#39;</span>Athletic Shoes<span class="st">&#39;, 89.99, 6, 6),</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Shampoo<span class="st">&#39;, &#39;</span>Hair Care Product<span class="st">&#39;, 6.99, 7, 7),</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Diamond Necklace<span class="st">&#39;, &#39;</span>Jewelry<span class="st">&#39;, 999.99, 8, 8),</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Ford F<span class="op">-</span><span class="dv">150</span><span class="st">&#39;, &#39;</span>Truck<span class="st">&#39;, 39999.99, 9, 9),</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="st">    (&#39;</span>Vinyl Record<span class="st">&#39;, &#39;</span>Music<span class="st">&#39;, 24.99, 10, 10);</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="st">-- Insert values into the Orders table</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="st">-- (You&#39;</span>ll need <span class="kw">to</span> <span class="kw">replace</span> customer_id <span class="kw">and</span> <span class="kw">use</span> a valid <span class="fu">value</span>)</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Orders (customer_id, order_date, status)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-11-04&#39;</span>, <span class="st">&#39;Processing&#39;</span>),</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-11-03&#39;</span>, <span class="st">&#39;Shipped&#39;</span>),</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-11-02&#39;</span>, <span class="st">&#39;Delivered&#39;</span>),</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-11-01&#39;</span>, <span class="st">&#39;Processing&#39;</span>),</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-10-31&#39;</span>, <span class="st">&#39;Shipped&#39;</span>),</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-10-30&#39;</span>, <span class="st">&#39;Delivered&#39;</span>),</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-10-29&#39;</span>, <span class="st">&#39;Processing&#39;</span>),</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-10-28&#39;</span>, <span class="st">&#39;Shipped&#39;</span>),</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-10-27&#39;</span>, <span class="st">&#39;Delivered&#39;</span>),</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-10-26&#39;</span>, <span class="st">&#39;Processing&#39;</span>);</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert values into the Order_Items table</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co">-- (You&#39;ll need to replace order_id and product_id with valid values)</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Order_Items (order_id, product_id, quantity, item_price)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">39.98</span>),</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">499.99</span>),</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">299.99</span>),</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="fl">89.97</span>),</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="fl">51.96</span>),</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="fl">179.98</span>),</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="fl">34.95</span>),</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="fl">999.99</span>),</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="fl">39999.99</span>),</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="fl">74.97</span>);</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert values into the Reviews table</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="co">-- (You&#39;ll need to replace product_id and customer_id with valid values)</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Reviews (product_id, customer_id, rating, review_text, review_date)</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="st">&#39;Great T-Shirt!&#39;</span>, <span class="st">&#39;2023-11-04&#39;</span>),</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="st">&#39;Awesome console&#39;</span>, <span class="st">&#39;2023-11-03&#39;</span>),</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="st">&#39;Love my mixer&#39;</span>, <span class="st">&#39;2023-11-02&#39;</span>),</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">&#39;Best LEGO set&#39;</span>, <span class="st">&#39;2023-11-01&#39;</span>),</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="st">&#39;Classic novel&#39;</span>, <span class="st">&#39;2023-10-31&#39;</span>),</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="st">&#39;Perfect running shoes&#39;</span>, <span class="st">&#39;2023-10-30&#39;</span>),</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="st">&#39;Good shampoo&#39;</span>, <span class="st">&#39;2023-10-29&#39;</span>),</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="st">&#39;Beautiful necklace&#39;</span>, <span class="st">&#39;2023-10-28&#39;</span>),</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="st">&#39;Solid truck&#39;</span>, <span class="st">&#39;2023-10-27&#39;</span>),</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="st">&#39;Awesome record&#39;</span>, <span class="st">&#39;2023-10-26&#39;</span>);</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert items into the cart (replace cart_id and product_id with actual values)</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add 2 units of the product with ID 2 to the cart</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add 3 units of the product with ID 5 to the cart</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Cart_Items (cart_id, product_id, quantity)</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), </span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>);</span></code></pre></div>
+<hr />
+<p>SQLite supports a wide range of SQL queries for retrieving, updating, and managing data. Here are some examples of significant queries in SQLite:</p>
+<ol type="1">
+<li><strong>SELECT Statement</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve all columns from a table:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> Customers;</span></code></pre></div>
+<ul>
+<li>Retrieve specific columns from a table:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> first_name, last_name <span class="kw">FROM</span> Customers;</span></code></pre></div>
+<ul>
+<li>Filter rows using a WHERE clause:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> Products <span class="kw">WHERE</span> price <span class="op">&lt;</span> <span class="fl">50.00</span>;</span></code></pre></div>
+<ul>
+<li>Join multiple tables:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Orders.order_date</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Orders <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Orders.customer_id;</span></code></pre></div>
+<ol start="2" type="1">
+<li><strong>INSERT Statement</strong> :</li>
+</ol>
+<ul>
+<li>Insert a new customer record into the Customers table:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> Customers (first_name, last_name, email, <span class="kw">password</span>, address, phone_number)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">&#39;New&#39;</span>, <span class="st">&#39;Customer&#39;</span>, <span class="st">&#39;new.customer@email.com&#39;</span>, <span class="st">&#39;newpassword&#39;</span>, <span class="st">&#39;123 New St&#39;</span>, <span class="st">&#39;555-987-6543&#39;</span>);</span></code></pre></div>
+<ol start="3" type="1">
+<li><strong>UPDATE Statement</strong> :</li>
+</ol>
+<ul>
+<li>Update a customer&#39;s phone number:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> Customers</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> phone_number <span class="op">=</span> <span class="st">&#39;555-555-5555&#39;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> customer_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ol start="4" type="1">
+<li><strong>DELETE Statement</strong> :</li>
+</ol>
+<ul>
+<li>Delete a specific product from the Products table:</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> Products</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> product_id <span class="op">=</span> <span class="dv">3</span>;</span></code></pre></div>
+<ol start="5" type="1">
+<li><strong>Aggregation Queries</strong> :</li>
+</ol>
+<ul>
+<li>Calculate the total price of all items in an order:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(item_price) <span class="kw">AS</span> total_price</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Order_Items</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> order_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ul>
+<li>Find the average rating for a product:</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">AVG</span>(rating) <span class="kw">AS</span> average_rating</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Reviews</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> product_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ol start="6" type="1">
+<li><strong>Grouping and Aggregating Data</strong> :</li>
+</ol>
+<ul>
+<li>Count the number of orders for each customer:</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> customer_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> order_count</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Orders</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> customer_id;</span></code></pre></div>
+<ol start="7" type="1">
+<li><strong>Subqueries</strong> :</li>
+</ol>
+<ul>
+<li>Find the customers who placed orders in the last week:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> customer_id, first_name, last_name</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> customer_id <span class="kw">IN</span> (</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> customer_id</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> Orders</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> order_date <span class="op">&gt;=</span> <span class="dt">DATE</span>(<span class="st">&#39;now&#39;</span>, <span class="st">&#39;-7 days&#39;</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<ol start="8" type="1">
+<li><strong>Sorting Results</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve products in a specific category, ordered by price:</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> name, price</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> category_id <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> price;</span></code></pre></div>
+<ol start="9" type="1">
+<li><strong>Limiting Results</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve the top 5 highest-rated products:</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> name, rating</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> rating <span class="kw">DESC</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div>
+<p>These are just a few examples of the types of queries you can perform in SQLite. Depending on your specific application and data, you may need to write more complex queries and use various SQL features provided by SQLite to manipulate and retrieve data as needed.</p>
+<p>Here are some significant SQL queries in SQLite that involve multiple tables and utilize relationships between them:</p>
+<ol type="1">
+<li><strong>Retrieve Customer&#39;s Orders</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve a customer&#39;s orders along with order details:</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name, Orders.order_id, Order_Items.product_id, Products.name, Order_Items.quantity</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Orders <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Orders.customer_id</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Order_Items <span class="kw">ON</span> Orders.order_id <span class="op">=</span> Order_Items.order_id</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Order_Items.product_id <span class="op">=</span> Products.product_id</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Customers.customer_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ol start="2" type="1">
+<li><strong>Retrieve Product Reviews</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve product reviews with customer names:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Products.name, Reviews.rating, Reviews.review_text, Customers.first_name, Customers.last_name</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Reviews <span class="kw">ON</span> Products.product_id <span class="op">=</span> Reviews.product_id</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Customers <span class="kw">ON</span> Reviews.customer_id <span class="op">=</span> Customers.customer_id;</span></code></pre></div>
+<ol start="3" type="1">
+<li><strong>Calculate Total Order Value</strong> :</li>
+</ol>
+<ul>
+<li>Calculate the total value of each order:</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Orders.order_id, <span class="fu">SUM</span>(Order_Items.item_price) <span class="kw">AS</span> total_order_value</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Orders</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Order_Items <span class="kw">ON</span> Orders.order_id <span class="op">=</span> Order_Items.order_id</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Orders.order_id;</span></code></pre></div>
+<ol start="4" type="1">
+<li><strong>Find Customers with Most Orders</strong> :</li>
+</ol>
+<ul>
+<li>Find the customers with the most orders:</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name, <span class="fu">COUNT</span>(Orders.order_id) <span class="kw">AS</span> order_count</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Orders <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Orders.customer_id</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Customers.customer_id</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> order_count <span class="kw">DESC</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div>
+<ol start="5" type="1">
+<li><strong>Retrieve Cart Items for a Customer</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve items in a customer&#39;s shopping cart:</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name, Products.name, Cart_Items.quantity</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Cart <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Cart.customer_id</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Cart_Items <span class="kw">ON</span> Cart.cart_id <span class="op">=</span> Cart_Items.cart_id</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Cart_Items.product_id <span class="op">=</span> Products.product_id</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Customers.customer_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ol start="6" type="1">
+<li><strong>Find Products with No Reviews</strong> :</li>
+</ol>
+<ul>
+<li>Find products with no reviews:</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Products.name</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Reviews <span class="kw">ON</span> Products.product_id <span class="op">=</span> Reviews.product_id</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Reviews.review_id <span class="kw">IS</span> <span class="kw">NULL</span>;</span></code></pre></div>
+<ol start="7" type="1">
+<li><strong>Calculate Average Product Price by Category</strong> :</li>
+</ol>
+<ul>
+<li>Calculate the average price of products in each category:</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Categories.name, <span class="fu">AVG</span>(Products.price) <span class="kw">AS</span> avg_price</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Categories</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Categories.category_id <span class="op">=</span> Products.category_id</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Categories.category_id;</span></code></pre></div>
+<p>These queries illustrate how you can leverage relationships between tables to retrieve meaningful information from your SQLite database. They involve various SQL operations, such as JOINs, aggregations, and filtering, to perform complex data analysis and retrieval. You can adapt and modify these queries to suit your specific requirements and database schema.</p>
+<p>SQL queries in SQLite that involve table relationships:</p>
+<ol type="1">
+<li><strong>Find Customers with Most Expensive Orders</strong> :</li>
+</ol>
+<ul>
+<li>Find the customers with the highest total order values:</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name, <span class="fu">SUM</span>(Order_Items.item_price) <span class="kw">AS</span> total_spent</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Orders <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Orders.customer_id</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Order_Items <span class="kw">ON</span> Orders.order_id <span class="op">=</span> Order_Items.order_id</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Customers.customer_id</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_spent <span class="kw">DESC</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div>
+<ol start="2" type="1">
+<li><strong>Retrieve Latest Review for Each Product</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve the most recent review for each product:</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Products.name, Reviews.rating, Reviews.review_text, Reviews.review_date</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Reviews <span class="kw">ON</span> Products.product_id <span class="op">=</span> Reviews.product_id</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Reviews.review_date <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(review_date) <span class="kw">FROM</span> Reviews <span class="kw">WHERE</span> product_id <span class="op">=</span> Products.product_id);</span></code></pre></div>
+<ol start="3" type="1">
+<li><strong>Calculate Total Sales by Manufacturer</strong> :</li>
+</ol>
+<ul>
+<li>Calculate the total sales for products from each manufacturer:</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Manufacturers.name, <span class="fu">SUM</span>(Order_Items.item_price) <span class="kw">AS</span> total_sales</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Manufacturers</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Manufacturers.manufacturer_id <span class="op">=</span> Products.manufacturer_id</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Order_Items <span class="kw">ON</span> Products.product_id <span class="op">=</span> Order_Items.product_id</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Manufacturers.manufacturer_id;</span></code></pre></div>
+<ol start="4" type="1">
+<li><strong>Find Out of Stock Products</strong> :</li>
+</ol>
+<ul>
+<li>Find products that are out of stock (quantity in cart equals zero):</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Products.name</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Products</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Cart_Items <span class="kw">ON</span> Products.product_id <span class="op">=</span> Cart_Items.product_id</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Cart_Items.quantity <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> Cart_Items.quantity <span class="op">=</span> <span class="dv">0</span>;</span></code></pre></div>
+<ol start="5" type="1">
+<li><strong>Retrieve Average Ratings by Category</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve the average ratings of products in each category:</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Categories.name, <span class="fu">AVG</span>(Reviews.rating) <span class="kw">AS</span> avg_rating</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Categories</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Categories.category_id <span class="op">=</span> Products.category_id</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> Reviews <span class="kw">ON</span> Products.product_id <span class="op">=</span> Reviews.product_id</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Categories.category_id;</span></code></pre></div>
+<ol start="6" type="1">
+<li><strong>Find Customers with Specific Product in Cart</strong> :</li>
+</ol>
+<ul>
+<li>Find customers who have a specific product in their cart:</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Cart <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Cart.customer_id</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Cart_Items <span class="kw">ON</span> Cart.cart_id <span class="op">=</span> Cart_Items.cart_id</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Products <span class="kw">ON</span> Cart_Items.product_id <span class="op">=</span> Products.product_id</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Products.name <span class="op">=</span> <span class="st">&#39;T-Shirt&#39;</span>;</span></code></pre></div>
+<ol start="7" type="1">
+<li><strong>Retrieve Customers with Multiple Orders on the Same Day</strong> :</li>
+</ol>
+<ul>
+<li>Retrieve customers who placed multiple orders on the same day:</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Customers.first_name, Customers.last_name, Orders.order_date</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Customers</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> Orders <span class="kw">ON</span> Customers.customer_id <span class="op">=</span> Orders.customer_id</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> Orders.order_date <span class="kw">IN</span> (</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> order_date</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> Orders</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> order_date</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">HAVING</span> <span class="fu">COUNT</span>(order_id) <span class="op">&gt;</span> <span class="dv">1</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>These additional queries demonstrate how to extract valuable insights from your database by working with table relationships, performing aggregations, and utilizing various SQL clauses. You can adapt these queries to suit your specific use case and database schema.</p>
+</main>
+</body>
+</html>

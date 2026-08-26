@@ -1,0 +1,2343 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 LEZIONE 1: INTRODUZIONE ALL&#39;IA E PRIMI PROMPT</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 LEZIONE 1: INTRODUZIONE ALL&#39;IA E PRIMI PROMPT</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>01_LEZIONE_1.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h2>
+<p><strong>Durata:</strong> 2 ore<br />
+<strong>Struttura:</strong> 1 ora teoria + 1 ora pratica<br />
+<strong>Livello:</strong> Base<br />
+<strong>Prerequisiti:</strong> Nessuno (conoscenze informatiche di base)</p>
+<hr />
+<h2 id="dart-obiettivi-della-lezione">🎯 Obiettivi della Lezione</h2>
+<p>Al termine di questa lezione sarai in grado di:</p>
+<p>✅ <strong>Comprendere</strong> il contesto storico che ha portato all&#39;IA moderna<br />
+✅ <strong>Spiegare</strong> cosa sono i Large Language Models e come funzionano<br />
+✅ <strong>Identificare</strong> i principali strumenti IA disponibili nel 2025<br />
+✅ <strong>Riconoscere</strong> i limiti critici dell&#39;IA (allucinazioni, bias, knowledge cutoff)<br />
+✅ <strong>Utilizzare</strong> ChatGPT e altri LLM per i primi esperimenti pratici<br />
+✅ <strong>Applicare</strong> principi etici nell&#39;uso dell&#39;IA<br />
+✅ <strong>Formulare</strong> domande e prompt efficaci<br />
+✅ <strong>Confrontare</strong> l&#39;output di diversi modelli IA</p>
+<hr />
+<h2 id="clipboard-struttura-della-lezione">📋 Struttura della Lezione</h2>
+<h3 id="parte-1-teoria-60-minuti"><strong>PARTE 1: TEORIA (60 minuti)</strong></h3>
+<ol type="1">
+<li><p><strong>Introduzione e Contesto</strong> (10 min)</p>
+<ul>
+<li>Benvenuto e presentazione del corso</li>
+<li>Perché l&#39;IA è importante nel 2025</li>
+<li>Il ruolo dell&#39;IA nella programmazione moderna</li>
+</ul></li>
+<li><p><strong>Storia dell&#39;Intelligenza Artificiale</strong> (15 min)</p>
+<ul>
+<li>Da Alan Turing (1950) ai LLM moderni</li>
+<li>I momenti chiave: dagli &quot;inverni IA&quot; alla rivoluzione ChatGPT</li>
+<li>Timeline essenziale: 1950-2025</li>
+</ul></li>
+<li><p><strong>Cos&#39;è un Large Language Model</strong> (15 min)</p>
+<ul>
+<li>Architettura e funzionamento</li>
+<li>Come i LLM &quot;apprendono&quot;</li>
+<li>Cosa sanno fare (e cosa NON sanno fare)</li>
+</ul></li>
+<li><p><strong>Panoramica Strumenti 2025</strong> (10 min)</p>
+<ul>
+<li>ChatGPT (OpenAI)</li>
+<li>Claude (Anthropic)</li>
+<li>Gemini (Google)</li>
+<li>GitHub Copilot e altri strumenti</li>
+</ul></li>
+<li><p><strong>Limiti Critici e Uso Etico</strong> (10 min)</p>
+<ul>
+<li>Allucinazioni: quando l&#39;IA &quot;inventa&quot;</li>
+<li>Bias e knowledge cutoff</li>
+<li>Responsabilità e etica professionale</li>
+</ul></li>
+</ol>
+<h3 id="parte-2-pratica-60-minuti"><strong>PARTE 2: PRATICA (60 minuti)</strong></h3>
+<ol start="6" type="1">
+<li><p><strong>Setup e Configurazione</strong> (15 min)</p>
+<ul>
+<li>Creazione account ChatGPT/Claude/Gemini</li>
+<li>Interfaccia e prime esplorazioni</li>
+<li>Configurazioni base</li>
+</ul></li>
+<li><p><strong>Primi Esperimenti Guidati</strong> (20 min)</p>
+<ul>
+<li>Dalla domanda semplice al prompt strutturato</li>
+<li>Esempi pratici step-by-step</li>
+<li>Analisi degli output</li>
+</ul></li>
+<li><p><strong>Riconoscere e Gestire Allucinazioni</strong> (15 min)</p>
+<ul>
+<li>Esercizi di identificazione</li>
+<li>Tecniche di verifica</li>
+<li>Cosa fare quando l&#39;IA sbaglia</li>
+</ul></li>
+<li><p><strong>Confronto tra LLM Diversi</strong> (10 min)</p>
+<ul>
+<li>Stessa domanda a ChatGPT, Claude e Gemini</li>
+<li>Analisi delle differenze</li>
+<li>Quando usare quale strumento</li>
+</ul></li>
+</ol>
+<hr />
+<hr />
+<h1 id="parte-1-teoria-60-minuti-1">PARTE 1: TEORIA (60 MINUTI)</h1>
+<hr />
+<h2 id="1-introduzione-e-contesto-10-minuti">1. INTRODUZIONE E CONTESTO (10 minuti)</h2>
+<h3 id="11-benvenuto-al-corso">1.1 Benvenuto al Corso</h3>
+<p>Benvenuto al corso <strong>&quot;Intelligenza Artificiale e Programmazione Assistita&quot;</strong> per studenti ITS!</p>
+<p>Questo non è un corso tradizionale di programmazione, né un corso teorico sull&#39;intelligenza artificiale. È qualcosa di completamente nuovo: un corso che ti insegna a <strong>collaborare efficacemente con l&#39;IA</strong> per diventare un programmatore più produttivo, creativo e professionale.</p>
+<h3 id="12-perché-lia-è-importante-nel-2025">1.2 Perché l&#39;IA è Importante nel 2025?</h3>
+<p>Nel 2025, l&#39;intelligenza artificiale non è più fantascienza o tecnologia futuristica. È una <strong>realtà quotidiana</strong> che sta trasformando radicalmente il modo in cui lavoriamo, programmiamo e risolviamo problemi.</p>
+<p><strong>Alcuni dati che dimostrano questa rivoluzione:</strong></p>
+<p>📊 <strong>GitHub Copilot:</strong> Oltre 1.5 milioni di sviluppatori paganti lo usano quotidianamente (2024)<br />
+📊 <strong>ChatGPT:</strong> Ha raggiunto 100 milioni di utenti in soli 2 mesi dal lancio (record assoluto)<br />
+📊 <strong>Stack Overflow:</strong> Il traffico è calato del 35% dopo ChatGPT (gli sviluppatori chiedono all&#39;IA)<br />
+📊 <strong>Studi di produttività:</strong> Gli sviluppatori che usano IA completano task il 55% più velocemente</p>
+<p><strong>Cosa significa per te come studente ITS?</strong></p>
+<ol type="1">
+<li><p><strong>Nuove competenze richieste:</strong> Le aziende non cercano più solo programmatori che sanno scrivere codice, ma professionisti che sanno <strong>collaborare con l&#39;IA</strong> per produrre software di qualità.</p></li>
+<li><p><strong>Democratizzazione della programmazione:</strong> L&#39;IA abbassa la barriera d&#39;ingresso. Puoi realizzare progetti complessi anche se sei alle prime armi, <strong>purché tu sappia guidare l&#39;IA correttamente</strong>.</p></li>
+<li><p><strong>Focus sulle competenze di alto livello:</strong> Meno tempo su sintassi e boilerplate, più tempo su architettura, design, problem solving e validazione critica.</p></li>
+</ol>
+<h3 id="13-il-ruolo-dellia-nella-programmazione-moderna">1.3 Il Ruolo dell&#39;IA nella Programmazione Moderna</h3>
+<p><strong>L&#39;IA NON sostituisce il programmatore.</strong> Questa è una credenza errata che va subito chiarita.</p>
+<p><strong>Analogia del pilota e del copilota:</strong></p>
+<p>Immagina un aereo moderno. Il pilota automatico può gestire gran parte del volo, ma:</p>
+<ul>
+<li>❌ <strong>NON</strong> può decollare in sicurezza senza supervisione</li>
+<li>❌ <strong>NON</strong> può gestire situazioni impreviste</li>
+<li>❌ <strong>NON</strong> può prendere decisioni strategiche</li>
+<li>❌ <strong>NON</strong> può validare che tutto funzioni correttamente</li>
+</ul>
+<p>Il pilota umano:</p>
+<ul>
+<li>✅ <strong>Decide</strong> la rotta e la strategia</li>
+<li>✅ <strong>Supervisiona</strong> il pilota automatico</li>
+<li>✅ <strong>Interviene</strong> quando necessario</li>
+<li>✅ <strong>Valida</strong> che tutto sia corretto</li>
+</ul>
+<p><strong>Lo stesso vale per l&#39;IA nella programmazione:</strong></p>
+<pre><code>TU (Programmatore)                  IA (Assistente)
+├─ Definisci il problema           ├─ Suggerisce soluzioni
+├─ Scegli l&#39;architettura           ├─ Genera codice boilerplate
+├─ Validi la correttezza           ├─ Propone alternative
+├─ Testi e debuggi                 ├─ Aiuta a trovare bug
+├─ Prendi decisioni finali         ├─ Fornisce informazioni
+└─ SEI RESPONSABILE                └─ È UNO STRUMENTO</code></pre>
+<p><strong>Il mindset corretto:</strong></p>
+<blockquote>
+<p><strong>&quot;L&#39;IA è un collega junior super veloce ma che commette errori. Tu sei il senior che supervisiona.&quot;</strong></p>
+</blockquote>
+<p>Questa metafora è fondamentale: un collega junior può essere estremamente utile se lo guidi bene, ma devi sempre verificare il suo lavoro.</p>
+<h3 id="14-cosa-imparerai-in-questo-corso">1.4 Cosa Imparerai in Questo Corso</h3>
+<p>Questo corso è strutturato per darti competenze <strong>immediatamente spendibili</strong> nel mondo del lavoro:</p>
+<p><strong>Settimana 1-2: Fondamenti</strong></p>
+<ul>
+<li>Come funzionano i LLM</li>
+<li>Come scrivere prompt efficaci</li>
+<li>Come riconoscere e correggere allucinazioni</li>
+</ul>
+<p><strong>Settimana 3-4: Programmazione Assistita</strong></p>
+<ul>
+<li>Generare codice C sicuro con l&#39;IA</li>
+<li>Debug e testing con supporto IA</li>
+<li>Best practices e pattern comuni</li>
+</ul>
+<p><strong>Settimana 5: Progetto Completo</strong></p>
+<ul>
+<li>Implementare un sistema reale end-to-end</li>
+<li>Documentazione professionale</li>
+<li>Portfolio per colloqui di lavoro</li>
+</ul>
+<hr />
+<h2 id="2-storia-dellintelligenza-artificiale-15-minuti">2. STORIA DELL&#39;INTELLIGENZA ARTIFICIALE (15 minuti)</h2>
+<h3 id="21-perché-studiare-la-storia">2.1 Perché Studiare la Storia?</h3>
+<p>Prima di immergerci nell&#39;uso pratico dell&#39;IA, è importante comprendere <strong>da dove veniamo</strong>. La storia dell&#39;IA è una storia di:</p>
+<ul>
+<li>🎢 <strong>Cicli di hype e delusione</strong> (&quot;inverni IA&quot;)</li>
+<li>💡 <strong>Scoperte rivoluzionarie</strong> che hanno cambiato tutto</li>
+<li>🤔 <strong>Limiti fondamentali</strong> che ancora oggi influenzano i sistemi</li>
+<li>🚀 <strong>Progressi esponenziali</strong> negli ultimi anni</li>
+</ul>
+<p>Capire questa storia ti aiuterà a:</p>
+<ul>
+<li><strong>Contestualizzare</strong> le capacità attuali dell&#39;IA</li>
+<li><strong>Riconoscere</strong> i pattern storici (cosa funziona, cosa fallisce)</li>
+<li><strong>Anticipare</strong> dove stiamo andando</li>
+<li><strong>Evitare</strong> errori del passato</li>
+</ul>
+<h3 id="22-timeline-essenziale-1950-2025">2.2 Timeline Essenziale: 1950-2025</h3>
+<h4 id="date-1950-il-test-di-turing---nasce-la-domanda"><strong>📅 1950: Il Test di Turing - Nasce la Domanda</strong></h4>
+<p><strong>Alan Turing</strong>, matematico britannico, pubblica il paper <strong>&quot;Computing Machinery and Intelligence&quot;</strong> dove propone una domanda rivoluzionaria:</p>
+<blockquote>
+<p><strong>&quot;Possono le macchine pensare?&quot;</strong></p>
+</blockquote>
+<p>Invece di definire filosoficamente &quot;pensiero&quot;, Turing propone un test pragmatico:</p>
+<p><strong>Il Test di Turing (Imitation Game):</strong></p>
+<ul>
+<li>Un umano conversa in chat con due interlocutori anonimi</li>
+<li>Uno è umano, l&#39;altro è una macchina</li>
+<li>Se l&#39;umano non riesce a distinguere chi è la macchina, allora la macchina &quot;pensa&quot;</li>
+</ul>
+<p><strong>Perché è importante oggi:</strong> ChatGPT e Claude hanno essenzialmente <strong>superato</strong> il Test di Turing in molte conversazioni. Ma questo non significa che &quot;pensino&quot; davvero!</p>
+<h4 id="date-1956-la-conferenza-di-dartmouth---nasce-lia-come-disciplina"><strong>📅 1956: La Conferenza di Dartmouth - Nasce l&#39;IA come Disciplina</strong></h4>
+<p><strong>Estate 1956, Dartmouth College (USA)</strong></p>
+<p>Un gruppo di ricercatori (John McCarthy, Marvin Minsky, Claude Shannon, Nathaniel Rochester) organizza un workshop di 2 mesi dove coniarono per la prima volta il termine <strong>&quot;Artificial Intelligence&quot;</strong>.</p>
+<p><strong>La proposta originale diceva:</strong></p>
+<blockquote>
+<p>&quot;Lo studio sarà condotto sulla base della congettura che ogni aspetto dell&#39;apprendimento o qualsiasi altra caratteristica dell&#39;intelligenza possa in linea di principio essere descritto con tale precisione da poter costruire una macchina per simularlo.&quot;</p>
+</blockquote>
+<p><strong>Ottimismo iniziale (eccessivo):</strong> Pensavano di risolvere l&#39;IA in pochi anni. Ci sono voluti 70 anni per ChatGPT.</p>
+<h4 id="date-1957-1969-i-primi-successi"><strong>📅 1957-1969: I Primi Successi</strong></h4>
+<p><strong>Perceptron (1957):</strong></p>
+<ul>
+<li>Frank Rosenblatt crea il primo &quot;neurone artificiale&quot;</li>
+<li>Può imparare a classificare pattern semplici</li>
+<li>Venne dimostrato su hardware fisico, non solo teoria</li>
+</ul>
+<p><strong>ELIZA (1961-1963):</strong></p>
+<ul>
+<li>Primo &quot;chatbot&quot; della storia (MIT, Joseph Weizenbaum)</li>
+<li>Simulava uno psicoterapeuta rogersiano</li>
+<li><strong>Trucco:</strong> Usava pattern matching semplice, NON comprensione vera</li>
+<li><strong>Rivelazione scioccante:</strong> Anche sapendo che era un trucco, le persone si affezionavano e confidavano segreti</li>
+</ul>
+<pre><code>Utente: &quot;Ho problemi con mio padre&quot;
+ELIZA: &quot;Raccontami di più sulla tua famiglia&quot;
+Utente: &quot;Mio padre non mi capisce&quot;
+ELIZA: &quot;Perché pensi che tuo padre non ti capisca?&quot;</code></pre>
+<p><strong>Lezione per oggi:</strong> L&#39;effetto ELIZA persiste. Gli utenti tendono a <strong>antropomorfizzare</strong> l&#39;IA, attribuendole comprensione che non ha.</p>
+<h4 id="date-1974-1980-il-primo-inverno-dellia"><strong>📅 1974-1980: Il Primo &quot;Inverno dell&#39;IA&quot;</strong></h4>
+<p><strong>Cosa successe:</strong></p>
+<ul>
+<li>I finanziamenti pubblici vengono drasticamente tagliati</li>
+<li>I risultati pratici non corrispondono alle promesse</li>
+<li><strong>Lighthill Report (UK, 1973):</strong> Report governativo devastante che conclude che l&#39;IA è sopravvalutata</li>
+</ul>
+<p><strong>Problemi principali:</strong></p>
+<ol type="1">
+<li><strong>Computational Limits:</strong> I computer erano troppo lenti e con poca memoria</li>
+<li><strong>Limiti teorici:</strong> Alcune cose che sembravano semplici (riconoscere una sedia) erano impossibili</li>
+<li><strong>Overhype:</strong> Erano state fatte promesse irrealistiche</li>
+</ol>
+<p><strong>Perceptrons Book (Minsky &amp; Papert, 1969):</strong></p>
+<ul>
+<li>Dimostrazione matematica che i perceptron non possono risolvere problemi non-linearmente separabili (es: XOR)</li>
+<li>Questo <strong>uccise la ricerca sulle reti neurali per 20 anni</strong></li>
+</ul>
+<p><strong>Lezione per oggi:</strong> L&#39;hype eccessivo seguito da delusione è un pattern ricorrente. Oggi siamo in un momento di hype (ChatGPT), ma dobbiamo rimanere critici.</p>
+<h4 id="date-1980-1987-il-boom-dei-sistemi-esperti"><strong>📅 1980-1987: Il Boom dei Sistemi Esperti</strong></h4>
+<p><strong>Cosa sono i sistemi esperti:</strong><br />
+Programmi che codificano la conoscenza di esperti umani in <strong>regole IF-THEN</strong>.</p>
+<p><strong>Esempio di sistema esperto:</strong></p>
+<pre><code>IF paziente ha febbre &gt; 38°C
+   AND paziente ha tosse
+   AND paziente ha mal di gola
+THEN probabile diagnosi: influenza
+     raccomandazione: riposo e paracetamolo</code></pre>
+<p><strong>Sistemi famosi:</strong></p>
+<ul>
+<li><strong>MYCIN (1972-1980):</strong> Diagnosi di infezioni batteriche del sangue</li>
+<li><strong>XCON (1980):</strong> Configurazione di sistemi computer VAX (risparmiò milioni a Digital Equipment Corporation)</li>
+<li><strong>DENDRAL:</strong> Analisi struttura molecolare</li>
+</ul>
+<p><strong>Successo commerciale:</strong> Aziende investirono miliardi. Boom di &quot;LISP Machines&quot; (computer specializzati per IA).</p>
+<h4 id="date-1987-1993-il-secondo-inverno-dellia"><strong>📅 1987-1993: Il Secondo &quot;Inverno dell&#39;IA&quot;</strong></h4>
+<p><strong>Il crollo:</strong></p>
+<ul>
+<li>Le aziende si rendono conto che i sistemi esperti sono <strong>fragili</strong></li>
+<li>Ogni regola deve essere codificata manualmente</li>
+<li>Impossibile gestire incertezza e casi non previsti</li>
+<li>Il mercato delle LISP Machines crolla: troppo costose, tecnologia obsoleta</li>
+</ul>
+<p><strong>Lezione per oggi:</strong> L&#39;IA basata su regole manuali non scala. I LLM moderni &quot;apprendono&quot; da dati, non da regole scritte a mano.</p>
+<h4 id="date-1997-deep-blue-batte-kasparov"><strong>📅 1997: Deep Blue Batte Kasparov</strong></h4>
+<p><strong>11 maggio 1997:</strong> Il computer Deep Blue (IBM) batte Garry Kasparov, campione mondiale di scacchi.</p>
+<p><strong>Significato storico:</strong></p>
+<ul>
+<li>Prima volta che una macchina batte un umano al top level in un dominio considerato di &quot;alta intelligenza&quot;</li>
+<li><strong>Ma:</strong> Deep Blue usava forza bruta (calcolo di milioni di posizioni), NON comprensione strategica</li>
+</ul>
+<p><strong>Quote di Kasparov dopo la sconfitta:</strong></p>
+<blockquote>
+<p>&quot;Potevo sentire... una nuova forma di intelligenza dall&#39;altra parte del tavolo&quot;</p>
+</blockquote>
+<p><strong>Reality check:</strong> Deep Blue era specializzato SOLO negli scacchi. Non sapeva giocare a dama.</p>
+<h4 id="date-2006-2011-il-risveglio---deep-learning"><strong>📅 2006-2011: Il Risveglio - Deep Learning</strong></h4>
+<p><strong>Cosa cambia:</strong></p>
+<ol type="1">
+<li><strong>Hardware più potente:</strong> GPU (schede grafiche) si rivelano perfette per addestrare reti neurali</li>
+<li><strong>Big Data:</strong> Internet fornisce quantità immense di dati</li>
+<li><strong>Algoritmi migliorati:</strong> Backpropagation, ReLU, Dropout</li>
+</ol>
+<p><strong>Geoffrey Hinton</strong> e il suo team dimostrano che reti neurali PROFONDE (molti layer) possono apprendere rappresentazioni complesse.</p>
+<p><strong>ImageNet (2009):</strong><br />
+Dataset di 14 milioni di immagini etichettate. Diventerà il benchmark per la computer vision.</p>
+<h4 id="date-2012-alexnet---la-rivoluzione-deep-learning"><strong>📅 2012: AlexNet - La Rivoluzione Deep Learning</strong></h4>
+<p><strong>ImageNet Competition 2012:</strong></p>
+<p>AlexNet (rete neurale profonda) <strong>DISTRUGGE</strong> la competizione:</p>
+<ul>
+<li><strong>Errore di AlexNet:</strong> 15.3%</li>
+<li><strong>Secondo classificato (metodi tradizionali):</strong> 26.2%</li>
+<li><strong>Miglioramento:</strong> ~11% in UN ANNO (prima ci volevano decenni)</li>
+</ul>
+<p><strong>Impatto:</strong></p>
+<ul>
+<li>Tutte le aziende tech si gettano sul deep learning</li>
+<li>Google, Facebook, Microsoft assumono ricercatori in massa</li>
+<li>Boom di investimenti</li>
+</ul>
+<h4 id="date-2014-2016-applicazioni-pratiche"><strong>📅 2014-2016: Applicazioni Pratiche</strong></h4>
+<p><strong>GANs - Generative Adversarial Networks (2014):</strong></p>
+<ul>
+<li>Ian Goodfellow inventa le reti generative avversarie</li>
+<li>Fondamentali per generare immagini realistiche (DALL-E, Midjourney, Stable Diffusion verranno dopo)</li>
+</ul>
+<p><strong>AlphaGo (2016):</strong></p>
+<ul>
+<li>DeepMind (Google) crea AlphaGo</li>
+<li><strong>Marzo 2016:</strong> Batte Lee Sedol (campione mondiale di Go) 4-1</li>
+<li><strong>Significato:</strong> Go ha 10^170 posizioni possibili (più atomi nell&#39;universo)</li>
+<li>Forza bruta è impossibile: AlphaGo usa <strong>intuizione</strong> appresa con reti neurali</li>
+</ul>
+<p><strong>Quote di Lee Sedol:</strong></p>
+<blockquote>
+<p>&quot;Ho pensato che AlphaGo fosse basato su probabilità e statistica. Ma quando ho visto questa mossa, ho cambiato idea. Sicuramente AlphaGo è creativo.&quot;</p>
+</blockquote>
+<h4 id="date-2017-larchitettura-transformer---punto-di-svolta"><strong>📅 2017: L&#39;Architettura Transformer - Punto di Svolta</strong></h4>
+<p><strong>Giugno 2017:</strong> Ricercatori Google pubblicano paper <strong>&quot;Attention is All You Need&quot;</strong></p>
+<p><strong>Introduzione del Transformer:</strong><br />
+Un nuovo tipo di architettura neurale basata su <strong>&quot;attention mechanism&quot;</strong> (meccanismo di attenzione).</p>
+<p><strong>Perché è rivoluzionario:</strong></p>
+<ul>
+<li>Prima: le reti neurali processavano testo parola per parola sequenzialmente (lento)</li>
+<li>Transformer: processa tutto il testo in parallelo guardando relazioni tra TUTTE le parole (veloce)</li>
+</ul>
+<p><strong>Meccanismo di attenzione - Esempio:</strong></p>
+<p>Frase: &quot;Il gatto ha bevuto il latte perché aveva sete&quot;</p>
+<p>Domanda: A cosa si riferisce &quot;aveva&quot;?</p>
+<p><strong>Transformer calcola &quot;attenzione&quot;:</strong></p>
+<ul>
+<li>&quot;aveva&quot; → &quot;gatto&quot; (alta attenzione)</li>
+<li>&quot;aveva&quot; → &quot;latte&quot; (bassa attenzione)</li>
+</ul>
+<p>Quindi comprende che è il <strong>gatto</strong> che aveva sete, non il latte.</p>
+<p><strong>Conseguenza:</strong> TUTTI i LLM moderni (GPT, BERT, Claude, Gemini) usano architettura Transformer o sue varianti.</p>
+<h4 id="date-2018-2020-lera-dei-llm-pre-chatgpt"><strong>📅 2018-2020: L&#39;Era dei LLM Pre-ChatGPT</strong></h4>
+<p><strong>BERT (2018 - Google):</strong></p>
+<ul>
+<li>Bidirectional Encoder Representations from Transformers</li>
+<li>Addestrato su 3.3 miliardi di parole (Wikipedia + libri)</li>
+<li>Rivoluziona la comprensione del linguaggio naturale</li>
+</ul>
+<p><strong>GPT-2 (2019 - OpenAI):</strong></p>
+<ul>
+<li>1.5 miliardi di parametri</li>
+<li>OpenAI inizialmente NON lo rilascia pubblicamente per paura di abusi</li>
+<li>Può generare testo coerente paragrafo dopo paragrafo</li>
+</ul>
+<p><strong>GPT-3 (2020 - OpenAI):</strong></p>
+<ul>
+<li><strong>175 miliardi di parametri</strong> (100x più grande di GPT-2)</li>
+<li>Addestrato su ~500 miliardi di token</li>
+<li>Costo addestramento: stimato 4-12 milioni di dollari</li>
+<li><strong>Capacità emergenti:</strong> Può fare task mai visti prima senza training specifico (few-shot learning)</li>
+</ul>
+<p><strong>Accesso API:</strong> OpenAI rilascia GPT-3 via API (a pagamento). Migliaia di startup costruiscono prodotti sopra.</p>
+<h4 id="date-30-novembre-2022-chatgpt---il-momento-spartiacque"><strong>📅 30 Novembre 2022: ChatGPT - Il Momento Spartiacque</strong></h4>
+<p><strong>OpenAI rilascia ChatGPT gratuitamente al pubblico.</strong></p>
+<p><strong>Cosa lo rende speciale:</strong></p>
+<ul>
+<li>Interfaccia chat conversazionale (non API tecnica)</li>
+<li>Gratuito per tutti</li>
+<li>Incredibilmente capace: scrive codice, saggi, poesie, risponde domande complesse</li>
+</ul>
+<p><strong>Crescita esplosiva:</strong></p>
+<ul>
+<li><strong>5 giorni:</strong> 1 milione di utenti</li>
+<li><strong>2 mesi:</strong> 100 milioni di utenti (record assoluto di qualsiasi app)</li>
+<li>Per confronto: TikTok ci mise 9 mesi, Instagram 2.5 anni</li>
+</ul>
+<p><strong>Impatto culturale:</strong></p>
+<ul>
+<li>Copertine di tutti i giornali mondiali</li>
+<li>Governi iniziano a discutere regolamentazione</li>
+<li>Scuole e università vietano (poi cambiano idea)</li>
+<li>Milioni di persone usano IA per la prima volta</li>
+</ul>
+<p><strong>Conseguenza:</strong> Microsoft investe $10 miliardi in OpenAI. Google lancia Bard (ora Gemini) in tutta fretta. La corsa all&#39;IA si intensifica.</p>
+<h4 id="date-2023-2025-la-rivoluzione-dei-llm"><strong>📅 2023-2025: La Rivoluzione dei LLM</strong></h4>
+<p><strong>Marzo 2023: GPT-4</strong></p>
+<ul>
+<li>Multimodale (capisce immagini e testo)</li>
+<li>Superato test SAT, esame avvocati, esami medici</li>
+<li>Ragionamento molto più avanzato</li>
+</ul>
+<p><strong>Aprile 2023: Claude (Anthropic)</strong></p>
+<ul>
+<li>Competitor di ChatGPT focalizzato su sicurezza</li>
+<li>Finestra di contesto enorme (100k+ token)</li>
+<li>Particolarmente bravo in ragionamento e programmazione</li>
+</ul>
+<p><strong>Maggio 2023: Google Bard (ora Gemini)</strong></p>
+<ul>
+<li>Risposta di Google a ChatGPT</li>
+<li>Integrato con Google Search</li>
+<li>Accesso a informazioni real-time</li>
+</ul>
+<p><strong>Luglio 2023: Llama 2 (Meta)</strong></p>
+<ul>
+<li><strong>Open source</strong> e gratuito</li>
+<li>Chiunque può scaricarlo ed eseguirlo localmente</li>
+<li>Democratizzazione dell&#39;accesso all&#39;IA</li>
+</ul>
+<p><strong>Fine 2023-2025: Esplosione di Applicazioni</strong></p>
+<ul>
+<li>GitHub Copilot X: programmazione assistita avanzata</li>
+<li>GPT-4o: multimodale ultra-veloce</li>
+<li>Gemini Pro 1.5: finestra di contesto da 2 milioni di token</li>
+<li>Claude Sonnet 3.5: eccellenza in coding</li>
+<li>DALL-E 3, Midjourney v6, Stable Diffusion 3: generazione immagini fotorealistica</li>
+<li>Sora (OpenAI): generazione video da testo</li>
+</ul>
+<p><strong>Stato attuale (2025):</strong></p>
+<ul>
+<li>L&#39;IA è mainstream: centinaia di milioni di utenti</li>
+<li>Quasi ogni professione sta sperimentando integrazione IA</li>
+<li>Dibattito intenso su regolamentazione, etica, futuro del lavoro</li>
+</ul>
+<h3 id="23-lezioni-dalla-storia">2.3 Lezioni dalla Storia</h3>
+<p><strong>Cosa ci insegna questa storia:</strong></p>
+<ol type="1">
+<li><p><strong>I cicli di hype sono normali:</strong> Siamo probabilmente al picco di un ciclo di hype. Aspettiamoci una correzione (ma i LLM sono qui per restare).</p></li>
+<li><p><strong>L&#39;IA non è &quot;intelligente&quot; come sembra:</strong> Ogni era ha avuto il suo &quot;trucco&quot; (ELIZA: pattern matching, Deep Blue: forza bruta, LLM: completamento statistico di pattern). Non è vera comprensione.</p></li>
+<li><p><strong>Le breakthrough arrivano da combinazioni:</strong> Hardware + dati + algoritmi. Transformer ha funzionato perché c&#39;erano GPU potenti e Internet forniva dati.</p></li>
+<li><p><strong>L&#39;applicazione pratica richiede tempo:</strong> Dal Transformer (2017) a ChatGPT (2022) sono passati 5 anni di ingegnerizzazione.</p></li>
+<li><p><strong>L&#39;open source accelera il progresso:</strong> Transformer paper era pubblico. Llama 2 open source ha generato migliaia di progetti.</p></li>
+</ol>
+<p><strong>Implicazioni per te:</strong></p>
+<ul>
+<li>Usa l&#39;IA ora, ma preparati ad adattarti quando cambierà</li>
+<li>Focalizzati su competenze trasferibili (problem solving, critical thinking)</li>
+<li>Non affezionarti troppo a uno strumento specifico</li>
+</ul>
+<hr />
+<h2 id="3-cosè-un-large-language-model-15-minuti">3. COS&#39;È UN LARGE LANGUAGE MODEL (15 minuti)</h2>
+<h3 id="31-definizione-e-concetti-base">3.1 Definizione e Concetti Base</h3>
+<p><strong>Large Language Model (LLM):</strong></p>
+<p>Un modello di intelligenza artificiale addestrato su quantità enormi di testo per <strong>predire la prossima parola</strong> in una sequenza.</p>
+<p><strong>Esempio banale:</strong></p>
+<p>Input: &quot;Il gatto è salito sul...&quot;<br />
+LLM predice: &quot;tetto&quot; (alta probabilità), &quot;tavolo&quot; (media probabilità), &quot;elefante&quot; (bassa probabilità)</p>
+<p><strong>Ma se fosse solo questo, non sarebbe impressionante.</strong> La magia sta in cosa emerge da questa semplice capacità quando applicata a <strong>scala massiva</strong>.</p>
+<h3 id="32-come-funziona-un-llm-spiegazione-semplificata">3.2 Come Funziona un LLM (Spiegazione Semplificata)</h3>
+<p><strong>Step 1: Training (Addestramento)</strong></p>
+<p>Immagina di leggere l&#39;intera Internet (semplificando):</p>
+<pre><code>Testi di input:
+- Wikipedia intera (tutte le lingue)
+- Milioni di libri
+- Codice sorgente da GitHub
+- Siti web, forum, discussioni
+- Paper scientifici</code></pre>
+<p><strong>Dimensioni tipiche (GPT-4):</strong></p>
+<ul>
+<li>~13 trilioni di token (parole/pezzi di parole)</li>
+<li>~45 TB di testo compresso</li>
+<li>Costo: ~$100 milioni di compute</li>
+</ul>
+<p><strong>Cosa fa il modello:</strong></p>
+<p>Per ogni frase vista, il modello prova a predire la prossima parola. Se sbaglia, aggiusta i suoi parametri interni (pesi) per migliorare la predizione.</p>
+<p><strong>Esempio di training:</strong></p>
+<pre><code>Testo: &quot;La capitale della Francia è Parigi&quot;
+
+Il modello vede:
+&quot;La capitale della Francia è ___&quot;
+
+Predice: &quot;Berlino&quot; (SBAGLIATO)
+Sistema: &quot;No, era Parigi. Aggiusto i pesi.&quot;
+
+Dopo milioni di esempi simili:
+&quot;La capitale della Francia è ___&quot;
+Predice: &quot;Parigi&quot; ✅</code></pre>
+<p><strong>Step 2: Cosa Emerge</strong></p>
+<p>Dopo aver visto miliardi di esempi di:</p>
+<ul>
+<li>Codice Python funzionante</li>
+<li>Spiegazioni matematiche</li>
+<li>Conversazioni domanda-risposta</li>
+<li>Traduzioni</li>
+<li>Ragionamento logico</li>
+</ul>
+<p>Il modello sviluppa <strong>capacità emergenti</strong>:</p>
+<ul>
+<li>✅ Può scrivere codice in linguaggi che segue schemi simili</li>
+<li>✅ Può ragionare su problemi nuovi</li>
+<li>✅ Può tradurre lingue mai viste esplicitamente associate</li>
+<li>✅ Può spiegare concetti complessi</li>
+</ul>
+<p><strong>Nota cruciale:</strong> Nessuna di queste capacità è stata &quot;programmata&quot;. Sono emerse dal training su testi.</p>
+<h3 id="33-architettura-interna-concetti-semplificati">3.3 Architettura Interna (Concetti Semplificati)</h3>
+<p><strong>Transformer Architecture:</strong></p>
+<p>Un LLM moderno (come GPT-4) è composto da:</p>
+<pre><code>┌─────────────────────────────────┐
+│  INPUT: &quot;Scrivi una funzione&quot;   │
+└────────────┬────────────────────┘
+             │
+             ▼
+      ┌─────────────┐
+      │ Tokenization│ (divide in pezzi)
+      └──────┬──────┘
+             │
+             ▼
+      ┌────────────────┐
+      │ Embeddings     │ (trasforma in numeri)
+      └───────┬────────┘
+             │
+             ▼
+   ┌────────────────────┐
+   │ Transformer Layers │ (centinaia di layer)
+   │ Layer 1            │
+   │ Layer 2            │
+   │   ...              │
+   │ Layer 96           │
+   └────────┬───────────┘
+             │
+             ▼
+      ┌─────────────┐
+      │ Prediction  │ (prossima parola)
+      └──────┬──────┘
+             │
+             ▼
+┌────────────────────────────────────┐
+│ OUTPUT: &quot;def my_function():&quot;      │
+└────────────────────────────────────┘</code></pre>
+<p><strong>Attention Mechanism (la parte magica):</strong></p>
+<p>Ogni layer &quot;presta attenzione&quot; a tutte le altre parole per capire il contesto.</p>
+<p><strong>Esempio:</strong></p>
+<pre><code>Input: &quot;La torre Eiffel è a Parigi. È molto alta.&quot;
+
+Quando processa &quot;È molto alta&quot;, il modello:
+1. Presta attenzione a &quot;torre Eiffel&quot; (alto score)
+2. Ignora &quot;Parigi&quot; (basso score per &quot;alta&quot;)
+3. Capisce che &quot;alta&quot; si riferisce alla torre
+
+Senza attention, non capirebbe a cosa si riferisce &quot;È&quot;.</code></pre>
+<p><strong>Parametri:</strong></p>
+<p>Un &quot;parametro&quot; è un numero che il modello aggiusta durante il training.</p>
+<p><strong>Dimensioni:</strong></p>
+<ul>
+<li>GPT-3: 175 miliardi di parametri</li>
+<li>GPT-4: stimato ~1.7 trilioni di parametri (OpenAI non ha confermato)</li>
+<li>Claude 3 Opus: ~100-500 miliardi (stimato)</li>
+</ul>
+<p><strong>Analogia:</strong> Se il cervello umano avesse ~100 trilioni di sinapsi, i parametri sono come le &quot;forze&quot; delle connessioni sinaptiche.</p>
+<h3 id="34-cosa-sanno-fare-i-llm">3.4 Cosa Sanno Fare i LLM</h3>
+<p><strong>Capacità Principali:</strong></p>
+<ol type="1">
+<li><p><strong>Completamento di testo</strong></p>
+<pre><code>Input: &quot;C&#39;era una volta un re che...&quot;
+Output: &quot;...regnava su un regno lontano e misterioso...&quot;</code></pre></li>
+<li><p><strong>Risposta a domande</strong></p>
+<pre><code>Input: &quot;Cos&#39;è il polimorfismo in C++?&quot;
+Output: [Spiegazione dettagliata]</code></pre></li>
+<li><p><strong>Generazione di codice</strong></p>
+<pre><code>Input: &quot;Scrivi una funzione C che inverta una stringa&quot;
+Output: [Codice C funzionante]</code></pre></li>
+<li><p><strong>Traduzione</strong></p>
+<pre><code>Input: &quot;Translate to English: &#39;Ciao, come stai?&#39;&quot;
+Output: &quot;Hello, how are you?&quot;</code></pre></li>
+<li><p><strong>Riassunto</strong></p>
+<pre><code>Input: [Testo di 10 pagine] + &quot;Riassumi in 3 punti&quot;
+Output: [3 bullet points]</code></pre></li>
+<li><p><strong>Ragionamento (limitato)</strong></p>
+<pre><code>Input: &quot;Se tutti i gatti hanno la coda, e Felix è un gatto, Felix ha la coda?&quot;
+Output: &quot;Sì, Felix ha la coda perché [ragionamento]&quot;</code></pre></li>
+<li><p><strong>Creatività</strong></p>
+<pre><code>Input: &quot;Scrivi una poesia sul debugging&quot;
+Output: [Poesia originale e divertente]</code></pre></li>
+<li><p><strong>Analisi e debugging di codice</strong></p>
+<pre><code>Input: [Codice con bug] + &quot;Trova l&#39;errore&quot;
+Output: &quot;Il bug è alla linea 12: [spiegazione]&quot;</code></pre></li>
+</ol>
+<h3 id="35-cosa-non-sanno-fare-limiti-fondamentali">3.5 Cosa NON Sanno Fare (Limiti Fondamentali)</h3>
+<p><strong>❌ NON hanno vera comprensione</strong></p>
+<p>L&#39;LLM manipola simboli statisticamente, non &quot;capisce&quot; nel senso umano.</p>
+<p><strong>Esempio rivelatore:</strong></p>
+<pre><code>Prompt: &quot;Quante lettere &#39;r&#39; ci sono nella parola &#39;strawberry&#39;?&quot;
+
+ChatGPT (GPT-3.5): &quot;Ci sono 2 lettere &#39;r&#39; in &#39;strawberry&#39;&quot;
+
+SBAGLIATO! Ce ne sono 3: st-r-awber-r-y</code></pre>
+<p>Perché sbaglia? Perché il modello lavora su <strong>token</strong>, non lettere individuali. Non &quot;vede&quot; la parola come la vediamo noi.</p>
+<p><strong>❌ NON hanno accesso al mondo reale</strong></p>
+<p>Un LLM puro (senza estensioni) non può:</p>
+<ul>
+<li>Accedere a Internet in tempo reale</li>
+<li>Eseguire codice</li>
+<li>Vedere immagini (a meno che non sia multimodale)</li>
+<li>Interagire con API</li>
+</ul>
+<p><strong>❌ NON hanno memoria persistente tra sessioni</strong></p>
+<p>Ogni conversazione ricomincia da zero (a meno che non usi servizi con &quot;memory&quot; artificiale).</p>
+<p><strong>❌ NON possono ragionare su matematica complessa in modo affidabile</strong></p>
+<pre><code>Prompt: &quot;Calcola 12847 × 8293&quot;
+
+LLM può dare: &quot;106,547,871&quot; (SBAGLIATO)
+Risposta corretta: 106,508,071</code></pre>
+<p>Perché? Perché ha imparato pattern di calcoli, ma non ha una calcolatrice interna affidabile.</p>
+<p><strong>Soluzione:</strong> Usa tool esterni (Python, calculator API).</p>
+<p><strong>❌ NON possono garantire correttezza</strong></p>
+<p>Anche quando il codice &quot;sembra&quot; giusto, potrebbe avere bug sottili.</p>
+<h3 id="36-il-modello-statistico-perché-allucinano">3.6 Il Modello Statistico: Perché &quot;Allucinano&quot;</h3>
+<p><strong>Cosa succede internamente:</strong></p>
+<p>Quando un LLM genera una risposta, sta campionando da una <strong>distribuzione di probabilità</strong> su tutte le possibili prossime parole.</p>
+<p><strong>Esempio:</strong></p>
+<pre><code>Input: &quot;La capitale dell&#39;Italia è&quot;
+
+Distribuzione di probabilità (semplificata):
+- &quot;Roma&quot; → 95%
+- &quot;Milano&quot; → 2%
+- &quot;Firenze&quot; → 1%
+- &quot;Napoli&quot; → 1%
+- [altre parole] → 1%</code></pre>
+<p><strong>Sampling con temperature:</strong></p>
+<p>Il parametro &quot;temperature&quot; controlla la casualità:</p>
+<ul>
+<li><strong>Temperature bassa (0.1):</strong> Sempre la risposta più probabile → &quot;Roma&quot; (deterministico)</li>
+<li><strong>Temperature alta (1.5):</strong> Più variabilità → Potrebbe scegliere &quot;Milano&quot; qualche volta</li>
+</ul>
+<p><strong>Problema delle allucinazioni:</strong></p>
+<p>Se il modello non &quot;sa&quot; la risposta con certezza, distribuisce probabilità su più opzioni. A volte sceglie quella sbagliata, ma la presenta con <strong>tono sicuro e assertivo</strong>.</p>
+<p><strong>Esempio di allucinazione:</strong></p>
+<pre><code>Prompt: &quot;Chi ha vinto il premio Nobel per la fisica nel 2087?&quot;
+
+LLM: &quot;Il premio Nobel per la fisica nel 2087 è stato vinto
+      dal Dr. Marco Santini per i suoi studi sulla fusione fredda.&quot;</code></pre>
+<p><strong>Tutto inventato!</strong> Il 2087 è nel futuro, ma l&#39;LLM genera comunque una risposta plausibile seguendo il pattern di altre risposte su Nobel.</p>
+<hr />
+<h2 id="4-panoramica-strumenti-2025-10-minuti">4. PANORAMICA STRUMENTI 2025 (10 minuti)</h2>
+<h3 id="41-il-panorama-dei-llm-nel-2025">4.1 Il Panorama dei LLM nel 2025</h3>
+<p>Nel 2025, abbiamo un ecosistema ricco e competitivo di LLM. Ogni strumento ha punti di forza specifici.</p>
+<h3 id="42-chatgpt-openai">4.2 ChatGPT (OpenAI)</h3>
+<p><strong>Modelli principali:</strong></p>
+<ul>
+<li><strong>GPT-4o</strong> (Omni): Multimodale, velocissimo</li>
+<li><strong>GPT-4 Turbo</strong>: Versione migliorata di GPT-4</li>
+<li><strong>GPT-3.5 Turbo</strong>: Gratuito, veloce ma meno capace</li>
+</ul>
+<p><strong>Punti di forza:</strong></p>
+<ul>
+<li>✅ Interfaccia più user-friendly</li>
+<li>✅ Enorme conoscenza generale</li>
+<li>✅ Ottimo per brainstorming e ideazione</li>
+<li>✅ Integrazione con DALL-E (generazione immagini)</li>
+<li>✅ Browsing web (nelle versioni Plus/Team)</li>
+<li>✅ Code Interpreter (esegue codice Python)</li>
+</ul>
+<p><strong>Limiti:</strong></p>
+<ul>
+<li>❌ Knowledge cutoff (dati fino a una certa data)</li>
+<li>❌ Versione gratuita più limitata</li>
+<li>❌ A volte &quot;inventa&quot; dettagli tecnici</li>
+</ul>
+<p><strong>Quando usarlo:</strong></p>
+<ul>
+<li>Spiegazioni generali</li>
+<li>Brainstorming di idee</li>
+<li>Scrittura creativa</li>
+<li>Prototipazione rapida di codice</li>
+</ul>
+<p><strong>Costi:</strong></p>
+<ul>
+<li><strong>Gratuito:</strong> GPT-3.5 Turbo con limiti</li>
+<li><strong>Plus ($20/mese):</strong> GPT-4, GPT-4o, più messaggi, browsing, DALL-E</li>
+<li><strong>API:</strong> Pay-per-use (economico per uso occasionale)</li>
+</ul>
+<h3 id="43-claude-anthropic">4.3 Claude (Anthropic)</h3>
+<p><strong>Modelli principali:</strong></p>
+<ul>
+<li><strong>Claude 3 Opus</strong>: Top di gamma (ragionamento complesso)</li>
+<li><strong>Claude 3 Sonnet</strong>: Bilanciato (ottimo per codice)</li>
+<li><strong>Claude 3 Haiku</strong>: Veloce ed economico</li>
+</ul>
+<p><strong>Punti di forza:</strong></p>
+<ul>
+<li>✅ <strong>Eccellente per programmazione</strong> (specialmente Sonnet)</li>
+<li>✅ Finestra di contesto enorme (100k-200k token = ~150-300 pagine)</li>
+<li>✅ Molto attento a sicurezza ed etica</li>
+<li>✅ Ragionamento lungo e strutturato</li>
+<li>✅ Ottimo per analisi di codice complesso</li>
+</ul>
+<p><strong>Limiti:</strong></p>
+<ul>
+<li>❌ Più &quot;cauto&quot; (a volte rifiuta richieste legittime)</li>
+<li>❌ Interfaccia meno rifinita di ChatGPT</li>
+<li>❌ Limiti di messaggio più stringenti nel piano gratuito</li>
+</ul>
+<p><strong>Quando usarlo:</strong></p>
+<ul>
+<li><strong>Programmazione complessa</strong> (è spesso migliore di GPT-4)</li>
+<li>Analisi di codebase grandi</li>
+<li>Ragionamento su testi lunghi</li>
+<li>Review di codice</li>
+</ul>
+<p><strong>Costi:</strong></p>
+<ul>
+<li><strong>Gratuito:</strong> Accesso limitato a Claude 3 Sonnet</li>
+<li><strong>Pro ($20/mese):</strong> 5x più messaggi, accesso a Opus</li>
+<li><strong>API:</strong> Pay-per-use</li>
+</ul>
+<h3 id="44-gemini-google">4.4 Gemini (Google)</h3>
+<p><strong>Modelli principali:</strong></p>
+<ul>
+<li><strong>Gemini Ultra 1.5</strong>: Top di gamma</li>
+<li><strong>Gemini Pro 1.5</strong>: Bilanciato</li>
+<li><strong>Gemini Flash</strong>: Veloce</li>
+</ul>
+<p><strong>Punti di forza:</strong></p>
+<ul>
+<li>✅ Integrazione con Google Search (informazioni real-time)</li>
+<li>✅ Finestra di contesto record (fino a 2 milioni di token)</li>
+<li>✅ Multimodale avanzato</li>
+<li>✅ Gratuito per la maggior parte degli usi</li>
+<li>✅ Ottimo per ricerca e fact-checking</li>
+</ul>
+<p><strong>Limiti:</strong></p>
+<ul>
+<li>❌ Meno consistente di GPT-4/Claude</li>
+<li>❌ A volte eccessivamente verboso</li>
+<li>❌ Disponibilità regionale variabile</li>
+</ul>
+<p><strong>Quando usarlo:</strong></p>
+<ul>
+<li>Ricerca con informazioni aggiornate</li>
+<li>Analisi di documenti enormi (grazie alla finestra massiva)</li>
+<li>Quando serve accesso a Google Search</li>
+</ul>
+<p><strong>Costi:</strong></p>
+<ul>
+<li><strong>Gratuito:</strong> Ampio accesso</li>
+<li><strong>Gemini Advanced ($20/mese):</strong> Accesso a Ultra, più quota</li>
+<li><strong>API:</strong> Pay-per-use</li>
+</ul>
+<h3 id="45-github-copilot-microsoftopenai">4.5 GitHub Copilot (Microsoft/OpenAI)</h3>
+<p><strong>Cos&#39;è:</strong> Assistente IA integrato nell&#39;editor di codice (VSCode, JetBrains, ecc.)</p>
+<p><strong>Come funziona:</strong><br />
+Mentre scrivi codice, Copilot suggerisce completamenti in tempo reale.</p>
+<p><strong>Esempio:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Tu scrivi:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Funzione che calcola il fattoriale</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Copilot suggerisce automaticamente:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> factorial<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> factorial<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Punti di forza:</strong></p>
+<ul>
+<li>✅ <strong>Massima produttività</strong> per coding</li>
+<li>✅ Integrato direttamente nell&#39;editor</li>
+<li>✅ Completamento inline istantaneo</li>
+<li>✅ Suggerisce funzioni intere da commenti</li>
+<li>✅ Chat integrata per domande contestuali</li>
+</ul>
+<p><strong>Limiti:</strong></p>
+<ul>
+<li>❌ Richiede subscription</li>
+<li>❌ Funziona meglio su linguaggi popolari (Python, JS, Java)</li>
+<li>❌ Può suggestionare verso codice non ottimale</li>
+</ul>
+<p><strong>Quando usarlo:</strong></p>
+<ul>
+<li><strong>Sempre</strong> quando scrivi codice!</li>
+<li>Boilerplate e codice ripetitivo</li>
+<li>Implementazione veloce di algoritmi standard</li>
+</ul>
+<p><strong>Costi:</strong></p>
+<ul>
+<li><strong>$10/mese</strong> per individui</li>
+<li><strong>GRATUITO per studenti</strong> con GitHub Student Pack (<a href="https://education.github.com/pack">https://education.github.com/pack</a>)</li>
+</ul>
+<h3 id="46-confronto-rapido">4.6 Confronto Rapido</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Strumento</th>
+<th>Migliore per</th>
+<th>Costo</th>
+<th>Livello Studente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ChatGPT</strong></td>
+<td>Uso generale, brainstorming</td>
+<td>Gratis/€20</td>
+<td>Ottimo inizio</td>
+</tr>
+<tr>
+<td><strong>Claude</strong></td>
+<td>Programmazione, analisi codice</td>
+<td>Gratis/€20</td>
+<td>Eccellente per codice</td>
+</tr>
+<tr>
+<td><strong>Gemini</strong></td>
+<td>Ricerca, info aggiornate</td>
+<td>Gratis</td>
+<td>Buono per ricerca</td>
+</tr>
+<tr>
+<td><strong>Copilot</strong></td>
+<td>Produttività coding</td>
+<td>Gratis studenti</td>
+<td>ESSENZIALE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Consiglio per studenti ITS:</strong></p>
+<ol type="1">
+<li><strong>Inizia con:</strong> ChatGPT o Claude gratuito per imparare prompting</li>
+<li><strong>Procurati:</strong> GitHub Student Pack per Copilot gratuito</li>
+<li><strong>Sperimenta:</strong> Usa tutti e 3 (ChatGPT, Claude, Gemini) per confrontare</li>
+<li><strong>Specializzati:</strong> Dopo 2-3 settimane, scegli quello che preferisci come principale</li>
+</ol>
+<h3 id="47-altri-strumenti-utili">4.7 Altri Strumenti Utili</h3>
+<p><strong>Cursor</strong> (<a href="https://cursor.sh/">https://cursor.sh/</a>)</p>
+<ul>
+<li>Editor di codice con IA integrata</li>
+<li>Alternative a VSCode + Copilot</li>
+<li>Gratuito per uso base</li>
+</ul>
+<p><strong>Perplexity AI</strong> (<a href="https://perplexity.ai/">https://perplexity.ai/</a>)</p>
+<ul>
+<li>Motore di ricerca con IA</li>
+<li>Fornisce fonti per ogni affermazione</li>
+<li>Ottimo per ricerca tecnica</li>
+</ul>
+<p><strong>Phind</strong> (<a href="https://phind.com/">https://phind.com/</a>)</p>
+<ul>
+<li>Motore di ricerca specializzato per sviluppatori</li>
+<li>Risponde con codice e spiegazioni</li>
+<li>Gratuito</li>
+</ul>
+<p><strong>Stack Overflow + OverflowAI</strong></p>
+<ul>
+<li>Stack Overflow tradizionale ora ha integrazione IA</li>
+<li>Combina domande umane + risposte IA</li>
+</ul>
+<hr />
+<h2 id="5-limiti-critici-e-uso-etico-10-minuti">5. LIMITI CRITICI E USO ETICO (10 minuti)</h2>
+<h3 id="51-allucinazioni-quando-lia-inventa">5.1 Allucinazioni: Quando l&#39;IA &quot;Inventa&quot;</h3>
+<p><strong>Definizione:</strong><br />
+Un&#39;<strong>allucinazione</strong> è quando l&#39;IA genera informazioni false o inventate presentandole con sicurezza come se fossero vere.</p>
+<p><strong>Perché accade:</strong><br />
+Come spiegato prima, l&#39;LLM è un modello statistico. Quando non &quot;sa&quot; la risposta, completa comunque il pattern in modo plausibile.</p>
+<p><strong>Esempi reali di allucinazioni:</strong></p>
+<p><strong>Esempio 1: Funzioni inesistenti</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Chiedi a ChatGPT: &quot;Come leggere un file binario in C?&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Potrebbe suggerire:</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>fp <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;file.bin&quot;</span><span class="op">,</span> <span class="st">&quot;rb&quot;</span><span class="op">);</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    read_binary<span class="op">(</span>fp<span class="op">);</span>  <span class="co">// ← QUESTA FUNZIONE NON ESISTE!</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>fp<span class="op">);</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Esempio 2: Librerie inventate</strong></p>
+<pre><code>Prompt: &quot;Come fare HTTP requests in C?&quot;
+
+Risposta: &quot;Usa la libreria libhttpeasy:
+           #include &lt;httpeasy.h&gt;
+           http_get(&#39;https://example.com&#39;);&quot;
+
+PROBLEMA: libhttpeasy NON ESISTE!</code></pre>
+<p><strong>Esempio 3: Riferimenti accademici falsi</strong></p>
+<pre><code>Prompt: &quot;Quali studi supportano che X causa Y?&quot;
+
+Risposta: &quot;Lo studio di Smith et al. (2019) pubblicato
+           su Nature dimostra che X causa Y.&quot;
+
+PROBLEMA: Lo studio non esiste! Nome autore, anno e
+          rivista sembrano realistici ma sono inventati.</code></pre>
+<p><strong>Come riconoscere allucinazioni:</strong></p>
+<ol type="1">
+<li><p><strong>Diffida di nomi specifici che non conosci</strong></p>
+<ul>
+<li>Funzioni di libreria mai sentite</li>
+<li>Autori di studi</li>
+<li>Tool o comandi OS strani</li>
+</ul></li>
+<li><p><strong>Controlla documentazione ufficiale</strong></p>
+<ul>
+<li>Se l&#39;IA suggerisce una funzione, cerca la documentazione online</li>
+</ul></li>
+<li><p><strong>Compila e testa SEMPRE il codice</strong></p>
+<ul>
+<li>Un errore di compilazione rivela subito allucinazioni</li>
+</ul></li>
+<li><p><strong>Chiedi fonti</strong></p>
+<ul>
+<li>&quot;Puoi darmi il link alla documentazione ufficiale?&quot;</li>
+<li>Se l&#39;IA non può, probabilmente ha inventato</li>
+</ul></li>
+<li><p><strong>Fai cross-check con più LLM</strong></p>
+<ul>
+<li>Chiedi la stessa cosa a ChatGPT, Claude e Gemini</li>
+<li>Se danno risposte diverse, approfondir</li>
+</ul></li>
+</ol>
+<h3 id="52-bias-pregiudizi">5.2 Bias (Pregiudizi)</h3>
+<p><strong>Definizione:</strong><br />
+I LLM riflettono i bias presenti nei dati di training (Internet, libri, ecc.).</p>
+<p><strong>Esempi di bias:</strong></p>
+<p><strong>Bias di genere:</strong></p>
+<pre><code>Prompt: &quot;Il dottore è entrato nella stanza. ___ ha detto...&quot;
+
+LLM potrebbe preferire: &quot;Lui ha detto&quot; (assumendo dottore = uomo)
+Anche se: &quot;Lei ha detto&quot; è ugualmente valido</code></pre>
+<p><strong>Bias culturale:</strong></p>
+<pre><code>Prompt: &quot;Genera un nome casuale per un CEO&quot;
+
+LLM potrebbe generare: &quot;John Smith&quot;, &quot;Michael Johnson&quot;
+Meno frequente: &quot;Jamal Washington&quot;, &quot;Wei Zhang&quot;</code></pre>
+<p><strong>Bias nel codice:</strong><br />
+L&#39;IA potrebbe suggerire pratiche di coding che riflettono pattern popolari ma non ottimali.</p>
+<p><strong>Come mitigare bias:</strong></p>
+<ol type="1">
+<li><p><strong>Sii esplicito:</strong> Specifica requisiti inclusivi</p>
+<ul>
+<li>&quot;Genera una lista di 10 nomi casuali di varie etnie e generi&quot;</li>
+</ul></li>
+<li><p><strong>Revisiona criticamente:</strong> Non accettare ciecamente output stereotipati</p></li>
+<li><p><strong>Diversifica input:</strong> Prova prompt da prospettive diverse</p></li>
+</ol>
+<h3 id="53-knowledge-cutoff">5.3 Knowledge Cutoff</h3>
+<p><strong>Definizione:</strong><br />
+I LLM sono addestrati su dati fino a una certa data. Non conoscono eventi successivi.</p>
+<p><strong>Knowledge cutoff comuni (2025):</strong></p>
+<ul>
+<li>GPT-4: Ottobre 2023</li>
+<li>Claude 3: Inizio 2024</li>
+<li>Gemini: Dati più recenti grazie a Google Search</li>
+</ul>
+<p><strong>Problema pratico:</strong></p>
+<pre><code>Prompt (nel 2025): &quot;Qual è l&#39;ultima versione di Python?&quot;
+
+GPT-4 potrebbe dire: &quot;Python 3.11&quot; (se il cutoff è 2023)
+Realtà nel 2025: Python 3.13 è uscito</code></pre>
+<p><strong>Soluzioni:</strong></p>
+<ol type="1">
+<li><strong>Usa LLM con browsing:</strong> ChatGPT Plus, Gemini</li>
+<li><strong>Specifica data:</strong> &quot;Secondo dati fino a gennaio 2025, qual è...?&quot;</li>
+<li><strong>Verifica informazioni time-sensitive:</strong> Sempre cross-check online</li>
+</ol>
+<h3 id="54-limiti-di-ragionamento">5.4 Limiti di Ragionamento</h3>
+<p><strong>I LLM NON sono perfetti in:</strong></p>
+<p><strong>1. Matematica complessa</strong></p>
+<pre><code>Prompt: &quot;Risolvi: ∫(x² + 3x + 2)dx da 0 a 5&quot;
+
+LLM potrebbe sbagliare calcoli numerici specifici
+Soluzione: Usa tool matematici (WolframAlpha, SymPy)</code></pre>
+<p><strong>2. Logica multi-step complessa</strong></p>
+<pre><code>Prompt: &quot;Ho 3 scatole. Scatola A contiene B e C.
+         B contiene D. D contiene una chiave.
+         In quale scatola devo guardare per la chiave?&quot;
+
+LLM può confondersi su ragionamenti annidati</code></pre>
+<p><strong>3. Programmazione con state complesso</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">// L&#39;IA può generare codice con race conditions,</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">// memory leak sottili, o logic error non ovvi</span></span></code></pre></div>
+<p><strong>Soluzione: TESTA SEMPRE</strong></p>
+<h3 id="55-uso-etico-e-responsabile">5.5 Uso Etico e Responsabile</h3>
+<p><strong>Principi fondamentali:</strong></p>
+<p><strong>1. Trasparenza</strong></p>
+<ul>
+<li>✅ <strong>Dichiara</strong> quando usi IA per generare codice/contenuti (nei contesti appropriati)</li>
+<li>❌ NON spacciare lavoro generato da IA come completamente tuo senza verifica</li>
+</ul>
+<p><strong>2. Verifica e responsabilità</strong></p>
+<ul>
+<li>✅ <strong>Tu sei responsabile</strong> del codice che consegni, anche se generato da IA</li>
+<li>✅ <strong>Testa, comprendi, valida</strong> tutto prima di usarlo</li>
+</ul>
+<p><strong>3. Privacy e dati sensibili</strong></p>
+<ul>
+<li>❌ <strong>NON inviare:</strong> Dati personali, password, segreti aziendali, codice proprietario</li>
+<li>⚠️ <strong>OpenAI, Anthropic, Google</strong> potrebbero usare i tuoi input per training (controlla privacy policy)</li>
+</ul>
+<p><strong>Esempio di cosa NON fare:</strong></p>
+<pre><code>Prompt SBAGLIATO: &quot;Ecco il database password della mia azienda [dati],
+                   aiutami a scrivere script di migrazione&quot;
+
+PROBLEMA: Hai appena esposto dati sensibili!</code></pre>
+<p><strong>Cosa fare invece:</strong></p>
+<pre><code>Prompt CORRETTO: &quot;Aiutami a scrivere script di migrazione per un
+                  database. Schema: users(id, username, hashed_password).
+                  Usa dati di esempio fittizi.&quot;</code></pre>
+<p><strong>4. Plagio e originalità</strong></p>
+<ul>
+<li>✅ Usa IA come <strong>strumento di supporto</strong>, non sostituto del pensiero</li>
+<li>✅ L&#39;IA suggerisce, TU decidi e adatti</li>
+<li>❌ NON copiare e incollare senza comprendere</li>
+</ul>
+<p><strong>5. Fair use in ambito educativo</strong></p>
+<ul>
+<li>✅ <strong>Accettabile:</strong> Usare IA per imparare, comprendere concetti, generare esempi</li>
+<li>❌ <strong>NON accettabile:</strong> Usare IA per fare compiti/esami senza comprensione</li>
+<li>⚠️ <strong>Chiedi al docente:</strong> Ogni corso ha regole diverse</li>
+</ul>
+<p><strong>6. Impatto ambientale e sociale</strong></p>
+<ul>
+<li>⚠️ <strong>Consapevolezza:</strong> Addestrare GPT-4 ha emissioni di CO₂ significative</li>
+<li>⚠️ <strong>Labor concerns:</strong> I dati di training includono contenuti umani (spesso non compensati)</li>
+</ul>
+<h3 id="56-regolamentazioni-e-futuro">5.6 Regolamentazioni e Futuro</h3>
+<p><strong>Situazione normativa (2025):</strong></p>
+<p><strong>Unione Europea: AI Act</strong></p>
+<ul>
+<li>Regolamentazione basata su livelli di rischio</li>
+<li>LLM considerati &quot;high-risk&quot; in certi contesti</li>
+<li>Requisiti di trasparenza</li>
+</ul>
+<p><strong>USA:</strong></p>
+<ul>
+<li>Regolamentazione a livello statale (California, New York)</li>
+<li>Nessuna legge federale comprensiva ancora</li>
+</ul>
+<p><strong>Italia:</strong></p>
+<ul>
+<li>Garante Privacy attivo (ha bloccato ChatGPT temporaneamente nel 2023)</li>
+<li>Linee guida per uso in ambito pubblico e educativo</li>
+</ul>
+<p><strong>Implicazioni per te:</strong></p>
+<ul>
+<li>Rimani aggiornato su normative</li>
+<li>Usa IA in modo responsabile anticipando future regole</li>
+<li>Documenta l&#39;uso di IA nei tuoi progetti</li>
+</ul>
+<hr />
+<hr />
+<h1 id="parte-2-pratica-60-minuti-1">PARTE 2: PRATICA (60 MINUTI)</h1>
+<hr />
+<h2 id="6-setup-e-configurazione-15-minuti">6. SETUP E CONFIGURAZIONE (15 minuti)</h2>
+<h3 id="61-obiettivi-di-questa-sezione">6.1 Obiettivi di questa Sezione</h3>
+<ul>
+<li>✅ Creare account su almeno 2 LLM (ChatGPT, Claude, o Gemini)</li>
+<li>✅ Familiarizzare con l&#39;interfaccia</li>
+<li>✅ Configurare impostazioni base</li>
+<li>✅ Fare i primi esperimenti</li>
+</ul>
+<h3 id="62-creazione-account-chatgpt">6.2 Creazione Account ChatGPT</h3>
+<p><strong>Step 1: Registrazione</strong></p>
+<ol type="1">
+<li>Vai su <a href="https://chat.openai.com">https://chat.openai.com</a></li>
+<li>Clicca &quot;Sign up&quot;</li>
+<li>Opzioni di registrazione:
+<ul>
+<li>Email + password</li>
+<li>Google account</li>
+<li>Microsoft account</li>
+<li>Apple ID</li>
+</ul></li>
+</ol>
+<p><strong>Consiglio:</strong> Usa email universitaria se disponibile (potrebbe dare accesso a benefit educativi).</p>
+<ol start="4" type="1">
+<li>Verifica email</li>
+<li>Completa profilo base</li>
+</ol>
+<p><strong>Step 2: Interfaccia</strong></p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  [☰ Menu]  New Chat                [⚙️ Settings]│
+├─────────────────────────────────────────────┤
+│  Chat History:                              │
+│  □ My first conversation                    │
+│  □ Help with Python code                    │
+│  □ ...                                      │
+├─────────────────────────────────────────────┤
+│                                             │
+│         [Area conversazione]                │
+│                                             │
+│  ChatGPT:                                   │
+│  Ciao! Come posso aiutarti oggi?            │
+│                                             │
+├─────────────────────────────────────────────┤
+│  [Message ChatGPT...]              [Send ↑] │
+└─────────────────────────────────────────────┘</code></pre>
+<p><strong>Step 3: Primo messaggio di test</strong></p>
+<p>Scrivi:</p>
+<pre><code>Ciao! Sono uno studente ITS e sto imparando a usare l&#39;IA
+per la programmazione. Puoi darmi un esempio di codice
+C che stampa &quot;Hello World&quot;?</code></pre>
+<p><strong>Analizza la risposta:</strong></p>
+<ul>
+<li>✅ Ha generato codice C corretto?</li>
+<li>✅ Ha incluso spiegazioni?</li>
+<li>✅ Ha compilato (<code>#include &lt;stdio.h&gt;</code>, <code>int main()</code>, ecc.)?</li>
+</ul>
+<p><strong>Step 4: Configurazioni utili</strong></p>
+<p>Clicca ⚙️ Settings:</p>
+<ul>
+<li><strong>Theme:</strong> Light/Dark (scegli preferenza)</li>
+<li><strong>Chat history:</strong> Abilita per salvare conversazioni</li>
+<li><strong>Data controls:</strong> Decide se OpenAI può usare i tuoi dati per training
+<ul>
+<li>⚠️ Se disabiliti, più privacy ma nessun miglioramento del modello</li>
+</ul></li>
+<li><strong>Custom instructions:</strong> (disponibile in Plus) Istruzioni permanenti per tutte le chat</li>
+</ul>
+<h3 id="63-creazione-account-claude">6.3 Creazione Account Claude</h3>
+<p><strong>Step 1: Registrazione</strong></p>
+<ol type="1">
+<li><p>Vai su <a href="https://claude.ai">https://claude.ai</a></p></li>
+<li><p>Clicca &quot;Try Claude&quot;</p></li>
+<li><p>Registra con:</p>
+<ul>
+<li>Email + verifica</li>
+<li>Google account</li>
+</ul></li>
+<li><p>Completa onboarding</p></li>
+</ol>
+<p><strong>Step 2: Interfaccia</strong></p>
+<p>Simile a ChatGPT ma con alcune differenze:</p>
+<ul>
+<li><strong>Chats:</strong> Lista conversazioni sulla sinistra</li>
+<li><strong>Artifacts:</strong> Claude può generare &quot;artifacts&quot; (documenti standalone che puoi esportare)</li>
+<li><strong>Upload files:</strong> Puoi caricare file per analisi (PDF, immagini, codice)</li>
+</ul>
+<p><strong>Step 3: Primo messaggio di test</strong></p>
+<pre><code>Analizza questo codice C e dimmi se ci sono problemi:
+
+#include &lt;stdio.h&gt;
+
+int main() {
+    char buffer[10];
+    gets(buffer);  // legge input
+    printf(&quot;Hai scritto: %s\n&quot;, buffer);
+    return 0;
+}</code></pre>
+<p><strong>Claude dovrebbe identificare il problema:</strong> <code>gets()</code> è pericoloso (buffer overflow)! Dovrebbe suggerirti <code>fgets()</code>.</p>
+<p><strong>Osservazione:</strong> Claude è spesso più attento a problemi di sicurezza nel codice.</p>
+<h3 id="64-creazione-account-gemini">6.4 Creazione Account Gemini</h3>
+<p><strong>Step 1: Accesso</strong></p>
+<ol type="1">
+<li>Vai su <a href="https://gemini.google.com">https://gemini.google.com</a></li>
+<li>Accedi con account Google (non serve registrazione separata)</li>
+</ol>
+<p><strong>Step 2: Interfaccia</strong></p>
+<ul>
+<li>Simile a ChatGPT</li>
+<li>Pulsante &quot;Google it&quot; per cercare info aggiornate</li>
+<li>Può generare immagini (nelle versioni avanzate)</li>
+</ul>
+<p><strong>Step 3: Test con informazione aggiornata</strong></p>
+<pre><code>Qual è l&#39;ultima versione stabile di GCC (compilatore C)
+rilasciata nel 2025?</code></pre>
+<p>Gemini dovrebbe poter trovare info aggiornate tramite Google Search.</p>
+<h3 id="65-confronto-iniziale-delle-interfacce">6.5 Confronto Iniziale delle Interfacce</h3>
+<p><strong>Prova questo esperimento:</strong></p>
+<p>Chiedi LA STESSA domanda a tutti e 3:</p>
+<pre><code>Scrivi una funzione C che conta quante volte compare
+una lettera in una stringa. Include gestione errori.</code></pre>
+<p><strong>Confronta:</strong></p>
+<ol type="1">
+<li><strong>Qualità codice:</strong> Quale genera codice più pulito?</li>
+<li><strong>Gestione errori:</strong> Chi aggiunge controlli?</li>
+<li><strong>Commenti:</strong> Chi commenta meglio?</li>
+<li><strong>Spiegazioni:</strong> Chi spiega più chiaramente?</li>
+</ol>
+<p><strong>Non c&#39;è risposta &quot;giusta&quot;:</strong> Dipende dalle tue preferenze!</p>
+<h3 id="66-configurazioni-avanzate-opzionale">6.6 Configurazioni Avanzate (Opzionale)</h3>
+<p><strong>ChatGPT Plus (se hai abbonamento):</strong></p>
+<ul>
+<li><strong>Browse with Bing:</strong> Abilita ricerca web</li>
+<li><strong>DALL-E:</strong> Genera immagini</li>
+<li><strong>Code Interpreter:</strong> Esegue Python (utile per calcoli)</li>
+</ul>
+<p><strong>Claude Pro:</strong></p>
+<ul>
+<li>Più messaggi al giorno (5x)</li>
+<li>Accesso a Claude 3 Opus (più potente)</li>
+</ul>
+<hr />
+<h2 id="7-primi-esperimenti-guidati-20-minuti">7. PRIMI ESPERIMENTI GUIDATI (20 minuti)</h2>
+<h3 id="71-esperimento-1-dalla-domanda-semplice-al-prompt-complesso">7.1 Esperimento 1: Dalla Domanda Semplice al Prompt Complesso</h3>
+<p><strong>Obiettivo:</strong> Capire come prompt progressivamente più dettagliati producono output migliori.</p>
+<p><strong>Step 1: Domanda semplice (vaga)</strong></p>
+<pre><code>Scrivi codice per ordinare array</code></pre>
+<p><strong>Analisi dell&#39;output:</strong></p>
+<ul>
+<li>❓ In che linguaggio? (Probabilmente Python o C, ma non specificato)</li>
+<li>❓ Che tipo di array? (int, float, stringhe?)</li>
+<li>❓ Che algoritmo? (bubble sort, quicksort, merge sort?)</li>
+<li>❓ Ordine crescente o decrescente?</li>
+</ul>
+<p><strong>L&#39;IA farà assunzioni.</strong> Probabilmente genererà qualcosa di generico.</p>
+<p><strong>Step 2: Domanda più specifica</strong></p>
+<pre><code>Scrivi una funzione C che ordina un array di interi in ordine crescente</code></pre>
+<p><strong>Meglio!</strong> Ora l&#39;IA sa:</p>
+<ul>
+<li>Linguaggio: C</li>
+<li>Tipo: int</li>
+<li>Ordine: crescente</li>
+</ul>
+<p>Ma ancora:</p>
+<ul>
+<li>❓ Che algoritmo?</li>
+<li>❓ Ordinamento in-place o nuovo array?</li>
+<li>❓ Dimensione array?</li>
+</ul>
+<p><strong>Step 3: Prompt dettagliato (ottimo)</strong></p>
+<pre><code>Scrivi una funzione C con le seguenti specifiche:
+
+- Nome: sort_array
+- Input: array di int, dimensione array
+- Output: void (ordina in-place)
+- Algoritmo: quicksort
+- Gestione errori: controlla se array è NULL
+- Includi: commenti esplicativi e esempio d&#39;uso</code></pre>
+<p><strong>Ora l&#39;IA ha tutte le informazioni!</strong> Output sarà molto più preciso.</p>
+<p><strong>Esercizio per te:</strong></p>
+<p>Prova entrambe le versioni (vaga vs dettagliata) e confronta gli output.</p>
+<h3 id="72-esperimento-2-iterazione-e-raffinamento">7.2 Esperimento 2: Iterazione e Raffinamento</h3>
+<p><strong>Obiettivo:</strong> Capire che puoi &quot;dialogare&quot; con l&#39;IA per migliorare il codice.</p>
+<p><strong>Step 1: Richiesta iniziale</strong></p>
+<pre><code>Scrivi una funzione C che legge un file di testo riga per riga</code></pre>
+<p><strong>Step 2: Analizza l&#39;output</strong></p>
+<p>L&#39;IA probabilmente genererà qualcosa come:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> read_file<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>filename<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>fp <span class="op">=</span> fopen<span class="op">(</span>filename<span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> line<span class="op">[</span><span class="dv">256</span><span class="op">];</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>line<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>line<span class="op">),</span> fp<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> line<span class="op">);</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>fp<span class="op">);</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Problemi potenziali:</strong></p>
+<ul>
+<li>❌ Non controlla se <code>fopen</code> ha fallito</li>
+<li>❌ Buffer fisso (256 caratteri)</li>
+<li>❌ Non gestisce linee più lunghe</li>
+</ul>
+<p><strong>Step 3: Richieste di miglioramento</strong></p>
+<pre><code>Ottimo! Ora modifica la funzione per:
+1. Controllare se fopen ha successo
+2. Gestire linee di lunghezza arbitraria
+3. Ritornare un codice di errore</code></pre>
+<p><strong>L&#39;IA migliorerà il codice</strong> aggiungendo:</p>
+<ul>
+<li><code>if (fp == NULL) return -1;</code></li>
+<li>Allocazione dinamica per linee lunghe</li>
+<li><code>return 0;</code> per successo</li>
+</ul>
+<p><strong>Step 4: Ulteriori raffinamenti</strong></p>
+<pre><code>Perfetto! Ultima cosa: aggiungi documentazione in stile Doxygen</code></pre>
+<p>L&#39;IA aggiungerà commenti:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Legge un file di testo riga per riga</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> </span><span class="cv">filename</span><span class="co"> Percorso del file da leggere</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> 0 se successo, -1 se errore</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span></code></pre></div>
+<p><strong>Lezione chiave:</strong></p>
+<blockquote>
+<p><strong>&quot;Non devi ottenere tutto perfetto al primo prompt. Itera e raffina!&quot;</strong></p>
+</blockquote>
+<h3 id="73-esperimento-3-spiegazione-di-codice-esistente">7.3 Esperimento 3: Spiegazione di Codice Esistente</h3>
+<p><strong>Obiettivo:</strong> Usare l&#39;IA per capire codice complesso.</p>
+<p><strong>Scenario:</strong> Hai trovato questo codice su Stack Overflow ma non capisci come funziona.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> countSetBits<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        n <span class="op">&amp;=</span> <span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>        count<span class="op">++;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count<span class="op">;</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Prompt:</strong></p>
+<pre><code>Spiega riga per riga cosa fa questa funzione C.
+Usa esempi concreti con numeri.
+
+[incolla codice]</code></pre>
+<p><strong>L&#39;IA dovrebbe spiegare:</strong></p>
+<ul>
+<li><code>n &amp; (n - 1)</code> rimuove il bit meno significativo impostato</li>
+<li>Loop conta quanti bit sono impostati (bit counting)</li>
+<li>Esempio con n=13 (binario: 1101) → 3 bit impostati</li>
+</ul>
+<p><strong>Prova anche:</strong></p>
+<pre><code>Ci sono modi più efficienti? Mostra alternative</code></pre>
+<p>L&#39;IA potrebbe suggerire lookup table o <code>__builtin_popcount()</code> (GCC).</p>
+<h3 id="74-esperimento-4-generazione-di-test">7.4 Esperimento 4: Generazione di Test</h3>
+<p><strong>Obiettivo:</strong> Far generare test cases all&#39;IA.</p>
+<p><strong>Hai scritto questa funzione:</strong></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> is_palindrome<span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>str<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>str <span class="op">==</span> NULL<span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len <span class="op">=</span> strlen<span class="op">(</span>str<span class="op">);</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> len <span class="op">/</span> <span class="dv">2</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>str<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> str<span class="op">[</span>len <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> i<span class="op">])</span> <span class="op">{</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Prompt:</strong></p>
+<pre><code>Genera 10 test cases per questa funzione che controlla
+se una stringa è palindroma. Include:
+- Casi normali (palindromi e non)
+- Edge cases (stringa vuota, singolo carattere, NULL)
+- Casi con spazi e punteggiatura
+
+[incolla codice funzione]</code></pre>
+<p><strong>L&#39;IA dovrebbe generare:</strong></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Test cases</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span><span class="st">&quot;radar&quot;</span><span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">);</span>      <span class="co">// palindromo semplice</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span><span class="st">&quot;hello&quot;</span><span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">);</span>      <span class="co">// non palindromo</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">);</span>           <span class="co">// stringa vuota</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span><span class="st">&quot;a&quot;</span><span class="op">)</span> <span class="op">==</span> <span class="dv">1</span><span class="op">);</span>          <span class="co">// singolo char</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span>NULL<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">);</span>         <span class="co">// NULL</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>assert<span class="op">(</span>is_palindrome<span class="op">(</span><span class="st">&quot;A man a plan a canal Panama&quot;</span><span class="op">)</span> <span class="op">==</span> <span class="op">?);</span> <span class="co">// con spazi</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co">// ... ecc</span></span></code></pre></div>
+<p><strong>Problema rivelato:</strong> La funzione non gestisce bene spazi e case sensitivity! L&#39;IA potrebbe suggerti di migliorarla.</p>
+<h3 id="75-esperimento-5-conversione-tra-paradigmi">7.5 Esperimento 5: Conversione tra Paradigmi</h3>
+<p><strong>Obiettivo:</strong> Far tradurre codice all&#39;IA.</p>
+<p><strong>Hai codice Python:</strong></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fibonacci(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fibonacci(n<span class="op">-</span><span class="dv">2</span>)</span></code></pre></div>
+<p><strong>Prompt:</strong></p>
+<pre><code>Converti questa funzione Python in C. Ottimizza per
+performance (usa memoization o iterazione invece di
+ricorsione pura).
+
+[incolla codice Python]</code></pre>
+<p><strong>L&#39;IA dovrebbe generare versione C ottimizzata:</strong></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versione iterativa (efficiente)</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="dt">long</span> <span class="dt">long</span> fibonacci<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> n<span class="op">;</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">long</span> <span class="dt">long</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> temp<span class="op">;</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> i <span class="op">&lt;=</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> temp<span class="op">;</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b<span class="op">;</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Complessità:</strong> O(n) invece di O(2^n) della versione ricorsiva!</p>
+<hr />
+<h2 id="8-riconoscere-e-gestire-allucinazioni-15-minuti">8. RICONOSCERE E GESTIRE ALLUCINAZIONI (15 minuti)</h2>
+<h3 id="81-esercizio-di-identificazione">8.1 Esercizio di Identificazione</h3>
+<p><strong>Obiettivo:</strong> Allenare il tuo &quot;fiuto&quot; per riconoscere quando l&#39;IA inventa.</p>
+<p><strong>Esercizio 1: Funzioni standard C</strong></p>
+<p><strong>Prompt:</strong></p>
+<pre><code>Dammi 3 funzioni standard C per manipolare stringhe</code></pre>
+<p><strong>Output tipico (corretto):</strong></p>
+<pre><code>1. strlen() - calcola lunghezza stringa
+2. strcpy() - copia stringa
+3. strcmp() - confronta stringhe</code></pre>
+<p><strong>Ora prova:</strong></p>
+<pre><code>Dammi 3 funzioni C per manipolare stringhe che iniziano con &quot;strx&quot;</code></pre>
+<p><strong>L&#39;IA potrebbe inventare:</strong></p>
+<pre><code>1. strxcopy() - copia efficiente
+2. strxreverse() - inverte stringa
+3. strxcompare() - confronto avanzato</code></pre>
+<p><strong>❌ QUESTE NON ESISTONO!</strong> L&#39;IA ha seguito il pattern &quot;strx...&quot; ma ha inventato.</p>
+<p><strong>Come verificare:</strong></p>
+<ol type="1">
+<li>Cerca su cppreference.com</li>
+<li>Compila codice di test:</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span><span class="pp">  </span><span class="co">// se la funzione esiste, sarà qui</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;test&quot;</span><span class="op">;</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>    strxreverse<span class="op">(</span>str<span class="op">);</span>  <span class="co">// errore di compilazione!</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="82-esercizio-allucinazioni-in-librerie">8.2 Esercizio: Allucinazioni in Librerie</h3>
+<p><strong>Prompt volutamente &quot;trabocchetto&quot;:</strong></p>
+<pre><code>Come uso la libreria &quot;libfastmath&quot; in C per calcoli veloci?</code></pre>
+<p><strong>L&#39;IA potrebbe generare:</strong></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fastmath.h&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> result <span class="op">=</span> fast_sqrt<span class="op">(</span><span class="fl">16.0</span><span class="op">);</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Result: </span><span class="sc">%f\n</span><span class="st">&quot;</span><span class="op">,</span> result<span class="op">);</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Compila con: gcc -o prog prog.c -lfastmath</span></span></code></pre></div>
+<p><strong>❌ PROBLEMA:</strong> <code>libfastmath</code> NON è una libreria standard!</p>
+<p><strong>Red flags che indicano allucinazione:</strong></p>
+<ul>
+<li>Nome libreria che non hai mai sentito</li>
+<li>Documentazione non trovabile su Google</li>
+<li>Errori di linker quando compili</li>
+</ul>
+<p><strong>Cosa fare:</strong></p>
+<ol type="1">
+<li>Cerca &quot;libfastmath C library&quot; su Google</li>
+<li>Se non trovi risultati ufficiali → probabilmente inventata</li>
+<li>Chiedi all&#39;IA: &quot;Puoi darmi il link alla documentazione ufficiale?&quot;</li>
+</ol>
+<h3 id="83-esercizio-correggere-allucinazioni">8.3 Esercizio: Correggere Allucinazioni</h3>
+<p><strong>Scenario:</strong> Hai chiesto codice e contiene una funzione inventata.</p>
+<p><strong>Codice generato dall&#39;IA:</strong></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">*</span>arr <span class="op">=</span> malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Inizializza array a zero</span></span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>    zero_array<span class="op">(</span>arr<span class="op">,</span> <span class="dv">10</span><span class="op">);</span>  <span class="co">// ← FUNZIONE INESISTENTE!</span></span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>arr<span class="op">);</span></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Step di correzione:</strong></p>
+<p><strong>1. Identificazione:</strong></p>
+<ul>
+<li><code>zero_array()</code> non è standard C</li>
+<li>Non è dichiarata da nessuna parte</li>
+</ul>
+<p><strong>2. Verifica con l&#39;IA:</strong></p>
+<pre><code>La funzione zero_array() esiste in C standard?
+Se no, come dovrei implementarla o quale alternativa standard esiste?</code></pre>
+<p><strong>L&#39;IA dovrebbe correggersi:</strong></p>
+<pre><code>Mi scuso, zero_array() non è standard. Usa invece:
+
+memset(arr, 0, 10 * sizeof(int));
+
+Include: #include &lt;string.h&gt;</code></pre>
+<p><strong>3. Alternativa: implementa tu</strong></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> zero_array<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>arr<span class="op">,</span> <span class="dt">size_t</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>        arr<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="84-esercizio-fact-checking-tecnico">8.4 Esercizio: Fact-checking Tecnico</h3>
+<p><strong>L&#39;IA ha generato questo commento:</strong></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Usa la funzione secure_malloc() che è stata aggiunta</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">// allo standard C11 per prevenire vulnerabilità</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> <span class="op">*</span>arr <span class="op">=</span> secure_malloc<span class="op">(</span><span class="dv">10</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">int</span><span class="op">));</span></span></code></pre></div>
+<p><strong>Domande da porsi:</strong></p>
+<ol type="1">
+<li>❓ <code>secure_malloc()</code> esiste in C11?</li>
+<li>❓ Come verifico?</li>
+</ol>
+<p><strong>Verifica:</strong></p>
+<p><strong>Step 1:</strong> Cerca su cppreference.com → NON TROVATA</p>
+<p><strong>Step 2:</strong> Leggi standard C11 (<a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf">https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf</a>)</p>
+<p><strong>Step 3:</strong> Chiedi conferma all&#39;IA:</p>
+<pre><code>Puoi citarmi il paragrafo dello standard C11 che introduce secure_malloc()?</code></pre>
+<p>Se l&#39;IA non può dare riferimenti precisi → probabilmente inventato.</p>
+<p><strong>Realtà:</strong> Non esiste <code>secure_malloc()</code> in C standard. L&#39;IA ha confuso con:</p>
+<ul>
+<li><code>malloc()</code> normale</li>
+<li>Estensioni Microsoft (<code>_malloc_dbg()</code>)</li>
+<li>Proposte mai accettate (Annex K &quot;secure&quot; functions)</li>
+</ul>
+<h3 id="85-strategie-di-difesa-contro-allucinazioni">8.5 Strategie di Difesa contro Allucinazioni</h3>
+<p><strong>Checklist anti-allucinazioni:</strong></p>
+<p><strong>✅ Prima di usare codice generato:</strong></p>
+<ol type="1">
+<li><p><strong>Compila sempre</strong></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> <span class="at">-Wall</span> <span class="at">-Wextra</span> <span class="at">-Werror</span> file.c</span></code></pre></div>
+<p>(flag -Werror trasforma warning in errori)</p></li>
+<li><p><strong>Cerca nomi sospetti</strong></p>
+<ul>
+<li>Funzioni mai sentite → cerca su cppreference.com</li>
+<li>Librerie esotiche → cerca documentazione ufficiale</li>
+<li>Comandi OS strani → testa in ambiente sicuro</li>
+</ul></li>
+<li><p><strong>Cross-check con altra IA</strong></p>
+<ul>
+<li>Chiedi a ChatGPT</li>
+<li>Poi chiedi a Claude</li>
+<li>Se risposte contradditorie → approfondisci</li>
+</ul></li>
+<li><p><strong>Chiedi fonti</strong></p>
+<pre><code>Puoi darmi il link alla documentazione ufficiale
+di questa funzione?</code></pre></li>
+<li><p><strong>Testa con input edge case</strong></p>
+<ul>
+<li>NULL pointer</li>
+<li>Array vuoto</li>
+<li>Numeri molto grandi</li>
+<li>Stringhe vuote</li>
+</ul></li>
+</ol>
+<p><strong>✅ Mindset corretto:</strong></p>
+<blockquote>
+<p><strong>&quot;L&#39;IA è un collega junior che tende a sembrare sicuro anche quando non lo è. Verifica SEMPRE.&quot;</strong></p>
+</blockquote>
+<hr />
+<h2 id="9-confronto-tra-llm-diversi-10-minuti">9. CONFRONTO TRA LLM DIVERSI (10 minuti)</h2>
+<h3 id="91-esperimento-comparativo">9.1 Esperimento Comparativo</h3>
+<p><strong>Obiettivo:</strong> Capire punti di forza e debolezza di ogni LLM.</p>
+<p><strong>Test 1: Domanda di conoscenza generale</strong></p>
+<p>Chiedi a <strong>tutti e 3</strong> (ChatGPT, Claude, Gemini):</p>
+<pre><code>Spiega la differenza tra malloc() e calloc() in C.
+Quando dovrei usare uno invece dell&#39;altro?</code></pre>
+<p><strong>Confronta:</strong></p>
+<ul>
+<li>✅ Chi dà la risposta più chiara?</li>
+<li>✅ Chi include esempi di codice?</li>
+<li>✅ Chi spiega le performance implications?</li>
+</ul>
+<p><strong>Test 2: Generazione di codice complesso</strong></p>
+<p>Chiedi a tutti e 3:</p>
+<pre><code>Scrivi una funzione C che implementa una linked list
+generica (che può contenere qualsiasi tipo di dato).
+Include funzioni per:
+- Creare lista
+- Aggiungere elemento
+- Rimuovere elemento
+- Liberare memoria</code></pre>
+<p><strong>Confronta:</strong></p>
+<ul>
+<li>✅ Chi genera codice più sicuro (gestione memoria)?</li>
+<li>✅ Chi aggiunge controlli errori?</li>
+<li>✅ Chi commenta meglio?</li>
+<li>✅ Chi gestisce edge cases?</li>
+</ul>
+<p><strong>Risultati tipici (osservazioni generali):</strong></p>
+<p><strong>ChatGPT:</strong></p>
+<ul>
+<li>🟢 Spiegazioni molto chiare e pedagogiche</li>
+<li>🟢 Ottimo per imparare concetti</li>
+<li>🟡 Codice solido ma a volte mancano controlli avanzati</li>
+</ul>
+<p><strong>Claude:</strong></p>
+<ul>
+<li>🟢 Eccellente qualità codice</li>
+<li>🟢 Attenzione a sicurezza e edge cases</li>
+<li>🟢 Commenti dettagliati</li>
+<li>🟡 A volte più verboso</li>
+</ul>
+<p><strong>Gemini:</strong></p>
+<ul>
+<li>🟢 Accesso a info aggiornate</li>
+<li>🟢 Buono per ricerca</li>
+<li>🟡 Codice a volte meno consistente</li>
+<li>🟡 Può essere generico</li>
+</ul>
+<h3 id="92-test-3-debugging">9.2 Test 3: Debugging</h3>
+<p><strong>Codice con bug:</strong></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reverse_string<span class="op">(</span><span class="dt">char</span> <span class="op">*</span>str<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len <span class="op">=</span> strlen<span class="op">(</span>str<span class="op">);</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">char</span> temp <span class="op">=</span> str<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>        str<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> str<span class="op">[</span>len <span class="op">-</span> i<span class="op">];</span></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>        str<span class="op">[</span>len <span class="op">-</span> i<span class="op">]</span> <span class="op">=</span> temp<span class="op">;</span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> str<span class="op">[]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>    reverse_string<span class="op">(</span>str<span class="op">);</span></span>
+<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> str<span class="op">);</span></span>
+<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Chiedi a tutti e 3:</strong></p>
+<pre><code>Questo codice dovrebbe invertire una stringa ma non funziona.
+Trova e correggi i bug.
+
+[incolla codice]</code></pre>
+<p><strong>Chi trova il bug?</strong></p>
+<p><strong>Bug:</strong></p>
+<ol type="1">
+<li><code>str[len - i]</code> dovrebbe essere <code>str[len - i - 1]</code> (off-by-one)</li>
+<li>Loop itera troppo (<code>&lt; len</code> invece di <code>&lt; len/2</code>)</li>
+</ol>
+<p><strong>Confronta:</strong> Chi spiega meglio il bug? Chi suggerisce test?</p>
+<h3 id="93-test-4-domanda-con-trabocchetto">9.3 Test 4: Domanda con Trabocchetto</h3>
+<p><strong>Chiedi a tutti e 3:</strong></p>
+<pre><code>In C, posso liberare la stessa memoria due volte con free()?
+È sicuro?</code></pre>
+<p><strong>Risposta corretta:</strong></p>
+<ul>
+<li>❌ <strong>NO!</strong> È undefined behavior (spesso causa crash)</li>
+<li>Chiamato &quot;double free&quot; vulnerability</li>
+<li>Porta a corruzioni di memoria e vulnerabilità di sicurezza</li>
+</ul>
+<p><strong>Chi risponde più accuratamente?</strong></p>
+<p>Confronta:</p>
+<ul>
+<li>Chi menziona &quot;undefined behavior&quot;?</li>
+<li>Chi spiega le conseguenze (crash, security vulnerability)?</li>
+<li>Chi suggerisce pattern per prevenire (settare pointer a NULL dopo free)?</li>
+</ul>
+<h3 id="94-quando-usare-quale-llm">9.4 Quando Usare Quale LLM</h3>
+<p><strong>Basandoti sui test, crea una strategia personale:</strong></p>
+<p><strong>Esempio di strategia:</strong></p>
+<pre><code>Situazione                          | LLM Consigliato
+------------------------------------|------------------
+Imparare nuovo concetto             | ChatGPT
+Generare codice production-ready    | Claude
+Ricerca info aggiornate             | Gemini
+Debugging codice complesso          | Claude
+Brainstorming idee progetto         | ChatGPT
+Analisi sicurezza codice            | Claude
+Trovare documentazione recente      | Gemini
+Spiegazione semplice per principianti| ChatGPT</code></pre>
+<p><strong>La tua strategia sarà personale!</strong> Dipende dalle tue preferenze.</p>
+<h3 id="95-esercizio-finale-il-tuo-test">9.5 Esercizio Finale: Il Tuo Test</h3>
+<p><strong>Crea il TUO test comparativo:</strong></p>
+<ol type="1">
+<li><p><strong>Scegli una domanda specifica</strong> per il tuo dominio (es: embedded systems, web, database)</p></li>
+<li><p><strong>Ponila a tutti e 3 gli LLM</strong></p></li>
+<li><p><strong>Documenta le differenze</strong> in una tabella:</p></li>
+</ol>
+<pre><code>| Criterio           | ChatGPT | Claude | Gemini |
+|--------------------|---------|--------|--------|
+| Correttezza        |  9/10   |  10/10 |  8/10  |
+| Chiarezza          |  10/10  |  8/10  |  7/10  |
+| Completezza        |  8/10   |  10/10 |  8/10  |
+| Esempi codice      |  9/10   |  9/10  |  7/10  |
+| Gestione errori    |  7/10   |  10/10 |  6/10  |
+|--------------------|---------|--------|--------|
+| TOTALE             |  43/50  |  47/50 |  36/50 |</code></pre>
+<ol start="4" type="1">
+<li><strong>Condividi</strong> con la classe i risultati</li>
+</ol>
+<hr />
+<h2 id="dart-riepilogo-lezione-1">🎯 RIEPILOGO LEZIONE 1</h2>
+<h3 id="cosa-abbiamo-imparato">Cosa Abbiamo Imparato</h3>
+<p><strong>Teoria:</strong></p>
+<ul>
+<li>✅ Storia dell&#39;IA: da Turing (1950) a ChatGPT (2022)</li>
+<li>✅ Come funzionano i LLM: predizione statistica + transformer</li>
+<li>✅ Panoramica strumenti 2025: ChatGPT, Claude, Gemini, Copilot</li>
+<li>✅ Limiti critici: allucinazioni, bias, knowledge cutoff</li>
+<li>✅ Uso etico: trasparenza, privacy, responsabilità</li>
+</ul>
+<p><strong>Pratica:</strong></p>
+<ul>
+<li>✅ Setup account su almeno 2 LLM</li>
+<li>✅ Primi esperimenti: prompt semplici → complessi</li>
+<li>✅ Iterazione e raffinamento del codice</li>
+<li>✅ Identificazione e correzione di allucinazioni</li>
+<li>✅ Confronto tra LLM diversi</li>
+</ul>
+<h3 id="key-takeaways">Key Takeaways</h3>
+<p><strong>💡 Insight fondamentali:</strong></p>
+<ol type="1">
+<li><p><strong>L&#39;IA è uno strumento potente ma imperfetto</strong></p>
+<ul>
+<li>Può accelerare il tuo lavoro 10x</li>
+<li>Ma devi sempre verificare l&#39;output</li>
+</ul></li>
+<li><p><strong>Prompt dettagliati = Output migliori</strong></p>
+<ul>
+<li>Specifica linguaggio, requisiti, vincoli</li>
+<li>Non aver paura di essere prolisso</li>
+</ul></li>
+<li><p><strong>Iterazione è normale</strong></p>
+<ul>
+<li>Raramente ottieni codice perfetto al primo tentativo</li>
+<li>Dialoga con l&#39;IA per raffinare</li>
+</ul></li>
+<li><p><strong>Ogni LLM ha personalità diversa</strong></p>
+<ul>
+<li>ChatGPT: ottimo insegnante</li>
+<li>Claude: ottimo programmatore attento</li>
+<li>Gemini: ottimo ricercatore</li>
+</ul></li>
+<li><p><strong>Sei TU il responsabile finale</strong></p>
+<ul>
+<li>Compila, testa, valida sempre</li>
+<li>Non fidarti ciecamente</li>
+</ul></li>
+</ol>
+<h3 id="checklist-competenze-acquisite">Checklist Competenze Acquisite</h3>
+<p><strong>Verifica di aver capito:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Sai spiegare cos&#39;è un LLM a un amico non tecnico</label></li>
+<li><label><input type="checkbox"></input>Hai creato account su almeno 2 LLM</label></li>
+<li><label><input type="checkbox"></input>Sai formulare prompt progressivamente più dettagliati</label></li>
+<li><label><input type="checkbox"></input>Sai riconoscere una allucinazione (funzione inventata)</label></li>
+<li><label><input type="checkbox"></input>Sai come verificare informazioni tecniche sospette</label></li>
+<li><label><input type="checkbox"></input>Hai confrontato output di almeno 2 LLM diversi</label></li>
+<li><label><input type="checkbox"></input>Capisci i limiti etici e di privacy</label></li>
+</ul>
+<hr />
+<h2 id="books-compiti-per-casa-opzionale-ma-raccomandato">📚 COMPITI PER CASA (Opzionale ma Raccomandato)</h2>
+<h3 id="esercizio-1-pratica-quotidiana">Esercizio 1: Pratica Quotidiana</h3>
+<p><strong>Per i prossimi 7 giorni:</strong></p>
+<p>Usa un LLM <strong>ogni giorno</strong> per:</p>
+<ul>
+<li>Spiegare 1 concetto che non capisci (da altre materie o da questo corso)</li>
+<li>Generare 1 piccolo programma C (10-20 righe)</li>
+<li>Fare 1 domanda tecnica</li>
+</ul>
+<p><strong>Obiettivo:</strong> Sviluppare familiarità e routine.</p>
+<h3 id="esercizio-2-diario-delle-allucinazioni">Esercizio 2: Diario delle Allucinazioni</h3>
+<p><strong>Crea un file <code>allucinazioni.md</code> e documenta:</strong></p>
+<p>Ogni volta che trovi un&#39;allucinazione, annota:</p>
+<ul>
+<li>Data</li>
+<li>LLM usato</li>
+<li>Prompt che hai dato</li>
+<li>Allucinazione trovata</li>
+<li>Come l&#39;hai scoperta</li>
+</ul>
+<p><strong>Esempio:</strong></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2025-01-15 - ChatGPT</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>**Prompt:** Come connettermi a database MySQL in C?</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>**Allucinazione:** Ha suggerito libreria &quot;libmysql-simple&quot;</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>**Come l&#39;ho scoperta:** Cercato su Google, non esiste.</span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>**Correzione:** La libreria corretta è &quot;libmysqlclient&quot; o &quot;MySQL C API&quot;</span></code></pre></div>
+<p><strong>Obiettivo:</strong> Allenare il tuo occhio critico.</p>
+<h3 id="esercizio-3-progetto-mini">Esercizio 3: Progetto Mini</h3>
+<p><strong>Realizza un piccolo programma C con supporto IA:</strong></p>
+<p><strong>Specifiche:</strong></p>
+<ul>
+<li>Programma che gestisce una lista TODO in console</li>
+<li>Comandi: add, list, remove, quit</li>
+<li>Salva su file</li>
+</ul>
+<p><strong>Regole:</strong></p>
+<ol type="1">
+<li>Usa l&#39;IA per generare il codice iniziale</li>
+<li>Testa e trova almeno 1 bug</li>
+<li>Chiedi all&#39;IA di aiutarti a fixare</li>
+<li>Documenta il processo</li>
+</ol>
+<p><strong>Obiettivo:</strong> Workflow completo assistito da IA.</p>
+<hr />
+<h2 id="link-risorse-extra">🔗 RISORSE EXTRA</h2>
+<h3 id="link-utili">Link Utili</h3>
+<p><strong>Documentazione C:</strong></p>
+<ul>
+<li><a href="https://en.cppreference.com/w/c">https://en.cppreference.com/w/c</a></li>
+<li><a href="https://www.gnu.org/software/libc/manual/">https://www.gnu.org/software/libc/manual/</a></li>
+</ul>
+<p><strong>Tool Online:</strong></p>
+<ul>
+<li><a href="https://www.onlinegdb.com/online_c_compiler">https://www.onlinegdb.com/online_c_compiler</a> - Compila C nel browser</li>
+<li><a href="https://godbolt.org/">https://godbolt.org/</a> - Compiler Explorer (vedi assembly)</li>
+</ul>
+<p><strong>Community:</strong></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/tagged/c">https://stackoverflow.com/questions/tagged/c</a></li>
+<li><a href="https://reddit.com/r/C_Programming">https://reddit.com/r/C_Programming</a></li>
+</ul>
+<p><strong>Articoli Approfondimento:</strong></p>
+<ul>
+<li>&quot;Attention is All You Need&quot; paper (Transformer): <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></li>
+<li>Blog Anthropic (Claude): <a href="https://www.anthropic.com/index/">https://www.anthropic.com/index/</a></li>
+<li>OpenAI Research: <a href="https://openai.com/research/">https://openai.com/research/</a></li>
+</ul>
+<h3 id="video-consigliati-youtube">Video Consigliati (YouTube)</h3>
+<ul>
+<li>&quot;How ChatGPT Works&quot; - Computerphile</li>
+<li>&quot;Transformers Explained&quot; - 3Blue1Brown</li>
+<li>&quot;AI Safety Concerns&quot; - Rob Miles</li>
+</ul>
+<hr />
+<h2 id="question-faq---domande-frequenti">❓ FAQ - Domande Frequenti</h2>
+<p><strong>Q: Posso usare l&#39;IA durante gli esami?</strong><br />
+A: Dipende dalle regole del corso. Chiedi al docente. In generale:</p>
+<ul>
+<li>✅ OK per imparare e fare pratica</li>
+<li>⚠️ Verifica policy per esami/compiti valutati</li>
+</ul>
+<p><strong>Q: L&#39;IA sostituirà i programmatori?</strong><br />
+A: No. L&#39;IA sostituirà i programmatori che NON usano l&#39;IA. Diventa un programmatore che sa collaborare con l&#39;IA.</p>
+<p><strong>Q: Quale LLM è &quot;il migliore&quot;?</strong><br />
+A: Non esiste &quot;il migliore&quot;. Dipende dal task. Per coding, Claude è spesso preferito. Per spiegazioni, ChatGPT. Per ricerca, Gemini.</p>
+<p><strong>Q: Devo pagare per usare l&#39;IA?</strong><br />
+A: No per iniziare. Le versioni gratuite sono sufficienti per imparare. Considera upgrade ($20/mese) dopo qualche settimana se ti trovi bene.</p>
+<p><strong>Q: L&#39;IA sta rubando posti di lavoro?</strong><br />
+A: L&#39;IA sta trasformando i lavori. I programmatori del futuro saranno &quot;AI-augmented&quot; (potenziati da IA). Le competenze umane (creatività, problem solving, validazione critica) diventano più importanti, non meno.</p>
+<p><strong>Q: Posso fidarmi del codice generato dall&#39;IA?</strong><br />
+A: MAI fidarsi ciecamente. SEMPRE compilare, testare, validare. L&#39;IA è uno strumento, tu sei il responsabile finale.</p>
+<p><strong>Q: Cosa faccio se l&#39;IA genera codice con bug?</strong><br />
+A: Normale! Segnala il bug all&#39;IA (&quot;Il tuo codice ha questo problema: [descrizione]&quot;), chiedi di correggerlo, e impara dal processo di debugging.</p>
+<hr />
+<h2 id="man_teacher-note-per-il-docente">👨‍🏫 NOTE PER IL DOCENTE</h2>
+<h3 id="timing-suggerito">Timing Suggerito</h3>
+<p><strong>Teoria (60 min):</strong></p>
+<ul>
+<li>Introduzione + Storia: 25 min</li>
+<li>LLM funzionamento: 15 min</li>
+<li>Strumenti 2025: 10 min</li>
+<li>Limiti ed etica: 10 min</li>
+</ul>
+<p><strong>Pratica (60 min):</strong></p>
+<ul>
+<li>Setup account: 15 min (supporta studenti con problemi tecnici)</li>
+<li>Esperimenti guidati: 20 min</li>
+<li>Allucinazioni: 15 min</li>
+<li>Confronto LLM: 10 min</li>
+</ul>
+<h3 id="adattamenti-possibili">Adattamenti Possibili</h3>
+<p><strong>Se hai meno tempo (90 min totali):</strong></p>
+<ul>
+<li>Riduci storia a 10 min (solo timeline essenziale)</li>
+<li>Setup come compito per casa</li>
+<li>Focus su esperimenti pratici</li>
+</ul>
+<p><strong>Se hai più tempo (150 min):</strong></p>
+<ul>
+<li>Aggiungi workshop: ogni studente presenta il suo test comparativo</li>
+<li>Sessione Q&amp;A estesa</li>
+<li>Live demo con casi reali portati dagli studenti</li>
+</ul>
+<h3 id="punti-critici-da-enfatizzare">Punti Critici da Enfatizzare</h3>
+<ol type="1">
+<li><strong>Mindset anti-hype:</strong> L&#39;IA è potente ma non magica</li>
+<li><strong>Sempre testare:</strong> Non fidarsi ciecamente</li>
+<li><strong>Responsabilità:</strong> Tu sei il proprietario del codice</li>
+<li><strong>Etica:</strong> Privacy e uso responsabile</li>
+</ol>
+<h3 id="troubleshooting-comuni">Troubleshooting Comuni</h3>
+<p><strong>Problema: Studente non riesce a creare account</strong></p>
+<ul>
+<li>Soluzione: Aiuta con email alternativa, usa Google sign-in</li>
+</ul>
+<p><strong>Problema: &quot;L&#39;IA non mi capisce&quot;</strong></p>
+<ul>
+<li>Soluzione: Insegna a formulare prompt più dettagliati (vedi esempi)</li>
+</ul>
+<p><strong>Problema: &quot;L&#39;IA ha dato risposta sbagliata, non funziona!&quot;</strong></p>
+<ul>
+<li>Soluzione: Ottimo! Momento educativo. Spiega che è normale, insegna debugging</li>
+</ul>
+<hr />
+<h2 id="mortar_board-prossima-lezione">🎓 PROSSIMA LEZIONE</h2>
+<p><strong>LEZIONE 2: Prompt Engineering e Programmazione Base</strong></p>
+<p><strong>Anteprima:</strong></p>
+<ul>
+<li>Framework CLEAR per prompt efficaci</li>
+<li>Tecniche avanzate: Few-shot, Chain-of-Thought</li>
+<li>Generare codice C completo e robusto</li>
+<li>Creare la tua libreria personale di prompt</li>
+<li>Casi studio: prompt falliti vs prompt di successo</li>
+</ul>
+<p><strong>Preparazione consigliata:</strong></p>
+<ul>
+<li>Completa gli esercizi per casa (se assegnati)</li>
+<li>Familiarizzati con almeno 2 LLM</li>
+<li>Porta domande/dubbi dalla pratica</li>
+</ul>
+<hr />
+<p><strong>Fine Lezione 1</strong></p>
+<hr />
+<p><strong>🚀 Sei pronto per iniziare il tuo viaggio nell&#39;Intelligenza Artificiale applicata alla programmazione!</strong></p>
+<p><strong>Ricorda:</strong></p>
+<blockquote>
+<p>&quot;L&#39;IA non sostituisce il pensiero critico, lo amplifica.&quot;</p>
+</blockquote>
+<p><strong>Buon lavoro! 💻✨</strong></p>
+</main>
+</body>
+</html>

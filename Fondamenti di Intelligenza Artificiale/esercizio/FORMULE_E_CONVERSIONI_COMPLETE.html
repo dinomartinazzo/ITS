@@ -1,0 +1,3838 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>FORMULE GEOMETRICHE E CONVERSIONI FISICHE - RIFERIMENTO COMPLETO</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">FORMULE GEOMETRICHE E CONVERSIONI FISICHE - RIFERIMENTO COMPLETO</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>FORMULE_E_CONVERSIONI_COMPLETE.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale/esercizio</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<blockquote>
+<p><strong>Guida completa per programmatori, studenti e ingegneri</strong><br />
+Versione 2.0 - Formato Markdown</p>
+</blockquote>
+<hr />
+<h2 id="bookmark_tabs-indice">📑 INDICE</h2>
+<h3 id="parte-1-figure-piane-2d"><a href="#parte-1-figure-piane-2d">PARTE 1: FIGURE PIANE (2D)</a></h3>
+<ul>
+<li><a href="#11-cerchio">1.1 Cerchio</a></li>
+<li><a href="#12-quadrato">1.2 Quadrato</a></li>
+<li><a href="#13-rettangolo">1.3 Rettangolo</a></li>
+<li><a href="#14-triangolo">1.4 Triangolo</a></li>
+<li><a href="#15-trapezio">1.5 Trapezio</a></li>
+<li><a href="#16-rombo">1.6 Rombo</a></li>
+<li><a href="#17-parallelogramma">1.7 Parallelogramma</a></li>
+<li><a href="#18-poligoni-regolari">1.8 Poligoni Regolari</a></li>
+<li><a href="#19-ellisse">1.9 Ellisse</a></li>
+<li><a href="#110-settore-circolare">1.10 Settore Circolare</a></li>
+<li><a href="#111-corona-circolare">1.11 Corona Circolare</a></li>
+</ul>
+<h3 id="parte-2-solidi-3d"><a href="#parte-2-solidi-3d">PARTE 2: SOLIDI (3D)</a></h3>
+<ul>
+<li><a href="#21-cubo">2.1 Cubo</a></li>
+<li><a href="#22-parallelepipedo-rettangolare">2.2 Parallelepipedo Rettangolare</a></li>
+<li><a href="#23-cilindro">2.3 Cilindro</a></li>
+<li><a href="#24-cono">2.4 Cono</a></li>
+<li><a href="#25-sfera">2.5 Sfera</a></li>
+<li><a href="#26-piramide">2.6 Piramide</a></li>
+<li><a href="#27-prisma">2.7 Prisma</a></li>
+<li><a href="#28-tronco-di-cono">2.8 Tronco di Cono</a></li>
+<li><a href="#29-tronco-di-piramide">2.9 Tronco di Piramide</a></li>
+<li><a href="#210-toro-ciambella">2.10 Toro (Ciambella)</a></li>
+<li><a href="#211-calotta-sferica">2.11 Calotta Sferica</a></li>
+</ul>
+<h3 id="parte-3-conversioni-fisiche"><a href="#parte-3-conversioni-fisiche">PARTE 3: CONVERSIONI FISICHE</a></h3>
+<ul>
+<li><a href="#31-lunghezza">3.1 Lunghezza</a></li>
+<li><a href="#32-area-superficie">3.2 Area (Superficie)</a></li>
+<li><a href="#33-volume">3.3 Volume</a></li>
+<li><a href="#34-massapeso">3.4 Massa/Peso</a></li>
+<li><a href="#35-temperatura">3.5 Temperatura</a></li>
+<li><a href="#36-tempo">3.6 Tempo</a></li>
+<li><a href="#37-velocità">3.7 Velocità</a></li>
+<li><a href="#38-accelerazione">3.8 Accelerazione</a></li>
+<li><a href="#39-forza">3.9 Forza</a></li>
+<li><a href="#310-pressione">3.10 Pressione</a></li>
+<li><a href="#311-energialavoro">3.11 Energia/Lavoro</a></li>
+<li><a href="#312-potenza">3.12 Potenza</a></li>
+<li><a href="#313-angoli">3.13 Angoli</a></li>
+<li><a href="#314-frequenza">3.14 Frequenza</a></li>
+<li><a href="#315-densità">3.15 Densità</a></li>
+</ul>
+<h3 id="parte-4-sensori-di-temperatura---termocoppie"><a href="#parte-4-sensori-di-temperatura---termocoppie">PARTE 4: SENSORI DI TEMPERATURA - TERMOCOPPIE</a></h3>
+<ul>
+<li><a href="#41-introduzione-alle-termocoppie">4.1 Introduzione alle Termocoppie</a></li>
+<li><a href="#42-tipi-di-termocoppie-standard">4.2 Tipi di Termocoppie Standard</a></li>
+<li><a href="#43-termocoppia-tipo-j">4.3 Termocoppia Tipo J</a></li>
+<li><a href="#44-termocoppia-tipo-k">4.4 Termocoppia Tipo K</a></li>
+<li><a href="#45-termocoppia-tipo-s">4.5 Termocoppia Tipo S</a></li>
+<li><a href="#46-altri-tipi-di-termocoppie">4.6 Altri Tipi di Termocoppie</a></li>
+<li><a href="#47-tabella-comparativa">4.7 Tabella Comparativa</a></li>
+<li><a href="#48-conversione-tensione-temperatura">4.8 Conversione Tensione-Temperatura</a></li>
+<li><a href="#49-compensazione-giunto-freddo">4.9 Compensazione Giunto Freddo</a></li>
+</ul>
+<h3 id="parte-5-costanti-fisiche-e-matematiche"><a href="#parte-5-costanti-fisiche-e-matematiche">PARTE 5: COSTANTI FISICHE E MATEMATICHE</a></h3>
+<hr />
+<h2 id="parte-1-figure-piane-2d-1">PARTE 1: FIGURE PIANE (2D)</h2>
+<h3 id="11-cerchio">1.1 Cerchio</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio: <code>r</code></li>
+<li>Diametro: <code>d = 2r</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro (Circonferenza)</strong></td>
+<td><code>P = 2πr = πd</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = πr² = πd²/4</code></td>
+</tr>
+<tr>
+<td><strong>Lunghezza arco</strong> (angolo θ in radianti)</td>
+<td><code>L = rθ</code></td>
+</tr>
+<tr>
+<td><strong>Area settore circolare</strong> (angolo θ in radianti)</td>
+<td><code>A_settore = (r²θ)/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Esempio in C:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> perimetro_cerchio<span class="op">(</span><span class="dt">double</span> raggio<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">2.0</span> <span class="op">*</span> M_PI <span class="op">*</span> raggio<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> area_cerchio<span class="op">(</span><span class="dt">double</span> raggio<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> M_PI <span class="op">*</span> raggio <span class="op">*</span> raggio<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="12-quadrato">1.2 Quadrato</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Lato: <code>l</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = 4l</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = l²</code></td>
+</tr>
+<tr>
+<td><strong>Diagonale</strong></td>
+<td><code>d = l√2</code></td>
+</tr>
+<tr>
+<td><strong>Raggio cerchio inscritto</strong></td>
+<td><code>r = l/2</code></td>
+</tr>
+<tr>
+<td><strong>Raggio cerchio circoscritto</strong></td>
+<td><code>R = (l√2)/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="13-rettangolo">1.3 Rettangolo</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Base: <code>b</code></li>
+<li>Altezza: <code>h</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = 2(b + h)</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = b × h</code></td>
+</tr>
+<tr>
+<td><strong>Diagonale</strong></td>
+<td><code>d = √(b² + h²)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="14-triangolo">1.4 Triangolo</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Lati: <code>a</code>, <code>b</code>, <code>c</code></li>
+<li>Base: <code>b</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Semiperimetro: <code>s = (a+b+c)/2</code></li>
+</ul>
+<h4 id="triangolo-generico">Triangolo Generico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = a + b + c</code></td>
+</tr>
+<tr>
+<td><strong>Area (base e altezza)</strong></td>
+<td><code>A = (b × h)/2</code></td>
+</tr>
+<tr>
+<td><strong>Area (Formula di Erone)</strong></td>
+<td><code>A = √[s(s-a)(s-b)(s-c)]</code> dove <code>s = (a+b+c)/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="triangolo-equilatero-lato-l">Triangolo Equilatero (lato <code>l</code>)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = 3l</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = (l²√3)/4</code></td>
+</tr>
+<tr>
+<td><strong>Altezza</strong></td>
+<td><code>h = (l√3)/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="triangolo-rettangolo-cateti-a-b-ipotenusa-c">Triangolo Rettangolo (cateti <code>a</code>, <code>b</code>; ipotenusa <code>c</code>)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Teorema di Pitagora</strong></td>
+<td><code>c² = a² + b²</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = (a × b)/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="15-trapezio">1.5 Trapezio</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Base maggiore: <code>B</code></li>
+<li>Base minore: <code>b</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Lati obliqui: <code>l₁</code>, <code>l₂</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = B + b + l₁ + l₂</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = [(B + b) × h]/2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Trapezio Isoscele:</strong></p>
+<ul>
+<li>Diagonale: <code>d = √[h² + ((B+b)/2)²]</code></li>
+</ul>
+<hr />
+<h3 id="16-rombo">1.6 Rombo</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Lato: <code>l</code></li>
+<li>Diagonale maggiore: <code>D</code></li>
+<li>Diagonale minore: <code>d</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = 4l</code></td>
+</tr>
+<tr>
+<td><strong>Area (con diagonali)</strong></td>
+<td><code>A = (D × d)/2</code></td>
+</tr>
+<tr>
+<td><strong>Area (con lato e altezza h)</strong></td>
+<td><code>A = l × h</code></td>
+</tr>
+<tr>
+<td><strong>Relazione lato-diagonali</strong></td>
+<td><code>l = √[(D/2)² + (d/2)²]</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="17-parallelogramma">1.7 Parallelogramma</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Base: <code>b</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Lato: <code>l</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = 2(b + l)</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = b × h</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="18-poligoni-regolari">1.8 Poligoni Regolari</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Numero lati: <code>n</code></li>
+<li>Lato: <code>l</code></li>
+<li>Apotema: <code>a</code> (distanza dal centro al centro di un lato)</li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Perimetro</strong></td>
+<td><code>P = n × l</code></td>
+</tr>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = (P × a)/2 = (n × l × a)/2</code></td>
+</tr>
+<tr>
+<td><strong>Angolo interno</strong></td>
+<td><code>α = [(n-2) × 180°]/n</code></td>
+</tr>
+<tr>
+<td><strong>Angolo esterno</strong></td>
+<td><code>β = 360°/n</code></td>
+</tr>
+<tr>
+<td><strong>Apotema (dal lato)</strong></td>
+<td><code>a = l/[2 tan(180°/n)]</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="casi-specifici">Casi Specifici:</h4>
+<p><strong>Pentagono Regolare (lato <code>l</code>):</strong></p>
+<ul>
+<li><code>A = (l²√25+10√5)/4 ≈ 1.72048 l²</code></li>
+</ul>
+<p><strong>Esagono Regolare (lato <code>l</code>):</strong></p>
+<ul>
+<li><code>A = (3l²√3)/2 ≈ 2.598 l²</code></li>
+<li><code>P = 6l</code></li>
+</ul>
+<hr />
+<h3 id="19-ellisse">1.9 Ellisse</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Semiasse maggiore: <code>a</code></li>
+<li>Semiasse minore: <code>b</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = πab</code></td>
+</tr>
+<tr>
+<td><strong>Perimetro (approssimazione Ramanujan)</strong></td>
+<td><code>P ≈ π[3(a+b) - √((3a+b)(a+3b))]</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="110-settore-circolare">1.10 Settore Circolare</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio: <code>r</code></li>
+<li>Angolo al centro: <code>θ</code> (in radianti)</li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = (r²θ)/2</code></td>
+</tr>
+<tr>
+<td><strong>Lunghezza arco</strong></td>
+<td><code>L = rθ</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Conversione angoli:</strong></p>
+<ul>
+<li>Gradi → Radianti: <code>θ_rad = (θ_gradi × π)/180</code></li>
+</ul>
+<hr />
+<h3 id="111-corona-circolare">1.11 Corona Circolare</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio esterno: <code>R</code></li>
+<li>Raggio interno: <code>r</code></li>
+</ul>
+<p><strong>Formula:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area</strong></td>
+<td><code>A = π(R² - r²) = π(R+r)(R-r)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="parte-2-solidi-3d-1">PARTE 2: SOLIDI (3D)</h2>
+<h3 id="21-cubo">2.1 Cubo</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Spigolo: <code>l</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = 6l²</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = l³</code></td>
+</tr>
+<tr>
+<td><strong>Diagonale cubo</strong></td>
+<td><code>d = l√3</code></td>
+</tr>
+<tr>
+<td><strong>Diagonale faccia</strong></td>
+<td><code>d_f = l√2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="22-parallelepipedo-rettangolare">2.2 Parallelepipedo Rettangolare</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Lunghezza: <code>l</code></li>
+<li>Larghezza: <code>w</code></li>
+<li>Altezza: <code>h</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = 2(lw + lh + wh)</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = l × w × h</code></td>
+</tr>
+<tr>
+<td><strong>Diagonale</strong></td>
+<td><code>d = √(l² + w² + h²)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="23-cilindro">2.3 Cilindro</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio base: <code>r</code></li>
+<li>Altezza: <code>h</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area base</strong></td>
+<td><code>A_base = πr²</code></td>
+</tr>
+<tr>
+<td><strong>Area laterale</strong></td>
+<td><code>A_lat = 2πrh</code></td>
+</tr>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = 2πr² + 2πrh = 2πr(r + h)</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = πr²h</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="24-cono">2.4 Cono</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio base: <code>r</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Apotema (generatrice): <code>a = √(r² + h²)</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area base</strong></td>
+<td><code>A_base = πr²</code></td>
+</tr>
+<tr>
+<td><strong>Area laterale</strong></td>
+<td><code>A_lat = πra = πr√(r² + h²)</code></td>
+</tr>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = πr² + πra = πr(r + a)</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (πr²h)/3</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="25-sfera">2.5 Sfera</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio: <code>r</code></li>
+<li>Diametro: <code>d = 2r</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie</strong></td>
+<td><code>A = 4πr² = πd²</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (4πr³)/3 = (πd³)/6</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="26-piramide">2.6 Piramide</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Area base: <code>A_b</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Perimetro base: <code>P</code></li>
+<li>Apotema: <code>a</code> (altezza faccia laterale)</li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie laterale</strong></td>
+<td><code>A_lat = (P × a)/2</code></td>
+</tr>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = A_b + A_lat</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (A_b × h)/3</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Piramide a base quadrata (lato base <code>l</code>):</strong></p>
+<ul>
+<li><code>V = (l²h)/3</code></li>
+<li><code>A_lat = 2l√(h² + (l/2)²)</code></li>
+</ul>
+<hr />
+<h3 id="27-prisma">2.7 Prisma</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Area base: <code>A_b</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Perimetro base: <code>P</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie laterale</strong></td>
+<td><code>A_lat = P × h</code></td>
+</tr>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = 2A_b + A_lat</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = A_b × h</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="28-tronco-di-cono">2.8 Tronco di Cono</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio base maggiore: <code>R</code></li>
+<li>Raggio base minore: <code>r</code></li>
+<li>Altezza: <code>h</code></li>
+<li>Apotema: <code>a = √[h² + (R-r)²]</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area laterale</strong></td>
+<td><code>A_lat = π(R + r)a</code></td>
+</tr>
+<tr>
+<td><strong>Area superficie totale</strong></td>
+<td><code>A_tot = π(R² + r² + (R+r)a)</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (πh/3)(R² + Rr + r²)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="29-tronco-di-piramide">2.9 Tronco di Piramide</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Area base maggiore: <code>A₁</code></li>
+<li>Area base minore: <code>A₂</code></li>
+<li>Altezza: <code>h</code></li>
+</ul>
+<p><strong>Formula:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (h/3)(A₁ + A₂ + √(A₁A₂))</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="210-toro-ciambella">2.10 Toro (Ciambella)</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio maggiore (dal centro al tubo): <code>R</code></li>
+<li>Raggio minore (raggio del tubo): <code>r</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie</strong></td>
+<td><code>A = 4π²Rr</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = 2π²Rr²</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="211-calotta-sferica">2.11 Calotta Sferica</h3>
+<p><strong>Parametri:</strong></p>
+<ul>
+<li>Raggio sfera: <code>R</code></li>
+<li>Altezza calotta: <code>h</code></li>
+</ul>
+<p><strong>Formule:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Grandezza</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Area superficie</strong></td>
+<td><code>A = 2πRh</code></td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td><code>V = (πh²/3)(3R - h)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="parte-3-conversioni-fisiche-1">PARTE 3: CONVERSIONI FISICHE</h2>
+<h3 id="31-lunghezza">3.1 Lunghezza</h3>
+<h4 id="sistema-metrico">Sistema Metrico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 km</td>
+<td>= 1000 m</td>
+</tr>
+<tr>
+<td>1 m</td>
+<td>= 100 cm = 1000 mm</td>
+</tr>
+<tr>
+<td>1 cm</td>
+<td>= 10 mm</td>
+</tr>
+<tr>
+<td>1 mm</td>
+<td>= 1000 μm (micrometri)</td>
+</tr>
+<tr>
+<td>1 μm</td>
+<td>= 1000 nm (nanometri)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 miglio (mile)</td>
+<td>= 1.60934 km = 1609.34 m</td>
+</tr>
+<tr>
+<td>1 iarda (yard)</td>
+<td>= 0.9144 m = 91.44 cm</td>
+</tr>
+<tr>
+<td>1 piede (foot, ft)</td>
+<td>= 0.3048 m = 30.48 cm</td>
+</tr>
+<tr>
+<td>1 pollice (inch, in)</td>
+<td>= 2.54 cm = 25.4 mm</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="marino-e-astronomico">Marino e Astronomico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 miglio nautico</td>
+<td>= 1.852 km = 1852 m</td>
+</tr>
+<tr>
+<td>1 unità astronomica (AU)</td>
+<td>= 149,597,870.7 km</td>
+</tr>
+<tr>
+<td>1 anno luce</td>
+<td>= 9.461 × 10¹² km</td>
+</tr>
+<tr>
+<td>1 parsec</td>
+<td>= 3.0857 × 10¹³ km ≈ 3.26 anni luce</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="conversioni-rapide">Conversioni Rapide</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Esempi in C</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> metri_to_feet<span class="op">(</span><span class="dt">double</span> m<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> m <span class="op">*</span> <span class="fl">3.28084</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> km_to_miles<span class="op">(</span><span class="dt">double</span> km<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> km <span class="op">*</span> <span class="fl">0.621371</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> inches_to_cm<span class="op">(</span><span class="dt">double</span> in<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> in <span class="op">*</span> <span class="fl">2.54</span><span class="op">;</span> <span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="32-area-superficie">3.2 Area (Superficie)</h3>
+<h4 id="sistema-metrico-1">Sistema Metrico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 km²</td>
+<td>= 1,000,000 m² = 100 ha</td>
+</tr>
+<tr>
+<td>1 ha (ettaro)</td>
+<td>= 10,000 m²</td>
+</tr>
+<tr>
+<td>1 m²</td>
+<td>= 10,000 cm²</td>
+</tr>
+<tr>
+<td>1 cm²</td>
+<td>= 100 mm²</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-1">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 miglio² (square mile)</td>
+<td>= 2.58999 km²</td>
+</tr>
+<tr>
+<td>1 acro (acre)</td>
+<td>= 4046.86 m² ≈ 0.404686 ha</td>
+</tr>
+<tr>
+<td>1 yard²</td>
+<td>= 0.836127 m²</td>
+</tr>
+<tr>
+<td>1 ft²</td>
+<td>= 0.092903 m² = 929.03 cm²</td>
+</tr>
+<tr>
+<td>1 inch²</td>
+<td>= 6.4516 cm²</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="33-volume">3.3 Volume</h3>
+<h4 id="sistema-metrico-2">Sistema Metrico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 m³</td>
+<td>= 1000 L = 1,000,000 cm³</td>
+</tr>
+<tr>
+<td>1 L (litro)</td>
+<td>= 1000 mL = 1000 cm³ = 1 dm³</td>
+</tr>
+<tr>
+<td>1 mL</td>
+<td>= 1 cm³</td>
+</tr>
+<tr>
+<td>1 hL (ettolitro)</td>
+<td>= 100 L</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-usa">Sistema Imperiale (USA)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 gallone (gallon, gal)</td>
+<td>= 3.78541 L</td>
+</tr>
+<tr>
+<td>1 quarto (quart, qt)</td>
+<td>= 0.946353 L</td>
+</tr>
+<tr>
+<td>1 pinta (pint, pt)</td>
+<td>= 0.473176 L</td>
+</tr>
+<tr>
+<td>1 tazza (cup)</td>
+<td>= 236.588 mL</td>
+</tr>
+<tr>
+<td>1 oncia fluida (fl oz)</td>
+<td>= 29.5735 mL</td>
+</tr>
+<tr>
+<td>1 cucchiaio (tablespoon)</td>
+<td>= 14.7868 mL</td>
+</tr>
+<tr>
+<td>1 cucchiaino (teaspoon)</td>
+<td>= 4.92892 mL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-uk">Sistema Imperiale (UK)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 gallone UK</td>
+<td>= 4.54609 L</td>
+</tr>
+<tr>
+<td>1 pinta UK</td>
+<td>= 0.568261 L</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="altro">Altro</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 ft³ (piede cubo)</td>
+<td>= 28.3168 L = 0.0283168 m³</td>
+</tr>
+<tr>
+<td>1 in³ (pollice cubo)</td>
+<td>= 16.3871 cm³</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="34-massapeso">3.4 Massa/Peso</h3>
+<h4 id="sistema-metrico-3">Sistema Metrico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 tonnellata (t)</td>
+<td>= 1000 kg</td>
+</tr>
+<tr>
+<td>1 kg</td>
+<td>= 1000 g</td>
+</tr>
+<tr>
+<td>1 g</td>
+<td>= 1000 mg</td>
+</tr>
+<tr>
+<td>1 mg</td>
+<td>= 1000 μg (microgrammi)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-2">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 libbra (pound, lb)</td>
+<td>= 0.453592 kg = 453.592 g</td>
+</tr>
+<tr>
+<td>1 oncia (ounce, oz)</td>
+<td>= 28.3495 g</td>
+</tr>
+<tr>
+<td>1 stone</td>
+<td>= 6.35029 kg = 14 lb</td>
+</tr>
+<tr>
+<td>1 ton (USA, short ton)</td>
+<td>= 907.185 kg</td>
+</tr>
+<tr>
+<td>1 ton (UK, long ton)</td>
+<td>= 1016.05 kg</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="note">Note</h4>
+<blockquote>
+<p><strong>Massa ≠ Peso</strong><br />
+Peso = Massa × Accelerazione di gravità<br />
+<code>P = m × g</code> (g ≈ 9.81 m/s² sulla Terra)</p>
+</blockquote>
+<hr />
+<h3 id="35-temperatura">3.5 Temperatura</h3>
+<h4 id="scale-di-temperatura">Scale di Temperatura</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Scala</th>
+<th>Simbolo</th>
+<th>Zero Assoluto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Celsius</td>
+<td>°C</td>
+<td>-273.15°C</td>
+</tr>
+<tr>
+<td>Fahrenheit</td>
+<td>°F</td>
+<td>-459.67°F</td>
+</tr>
+<tr>
+<td>Kelvin</td>
+<td>K</td>
+<td>0 K</td>
+</tr>
+<tr>
+<td>Rankine</td>
+<td>°R</td>
+<td>0°R</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="formule-di-conversione">Formule di Conversione</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Da</th>
+<th>A</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Celsius</strong></td>
+<td>Fahrenheit</td>
+<td><code>°F = (°C × 9/5) + 32</code></td>
+</tr>
+<tr>
+<td><strong>Fahrenheit</strong></td>
+<td>Celsius</td>
+<td><code>°C = (°F - 32) × 5/9</code></td>
+</tr>
+<tr>
+<td><strong>Celsius</strong></td>
+<td>Kelvin</td>
+<td><code>K = °C + 273.15</code></td>
+</tr>
+<tr>
+<td><strong>Kelvin</strong></td>
+<td>Celsius</td>
+<td><code>°C = K - 273.15</code></td>
+</tr>
+<tr>
+<td><strong>Fahrenheit</strong></td>
+<td>Kelvin</td>
+<td><code>K = (°F - 32) × 5/9 + 273.15</code></td>
+</tr>
+<tr>
+<td><strong>Kelvin</strong></td>
+<td>Fahrenheit</td>
+<td><code>°F = (K - 273.15) × 9/5 + 32</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="punti-di-riferimento">Punti di Riferimento</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Evento</th>
+<th>Celsius</th>
+<th>Fahrenheit</th>
+<th>Kelvin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero assoluto</td>
+<td>-273.15°C</td>
+<td>-459.67°F</td>
+<td>0 K</td>
+</tr>
+<tr>
+<td>Acqua congela</td>
+<td>0°C</td>
+<td>32°F</td>
+<td>273.15 K</td>
+</tr>
+<tr>
+<td>Temperatura corpo</td>
+<td>37°C</td>
+<td>98.6°F</td>
+<td>310.15 K</td>
+</tr>
+<tr>
+<td>Acqua bolle</td>
+<td>100°C</td>
+<td>212°F</td>
+<td>373.15 K</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Esempio in C:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> celsius_to_fahrenheit<span class="op">(</span><span class="dt">double</span> c<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>c <span class="op">*</span> <span class="fl">9.0</span><span class="op">/</span><span class="fl">5.0</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32.0</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> fahrenheit_to_celsius<span class="op">(</span><span class="dt">double</span> f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>f <span class="op">-</span> <span class="fl">32.0</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5.0</span><span class="op">/</span><span class="fl">9.0</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="36-tempo">3.6 Tempo</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 millennio</td>
+<td>= 1000 anni</td>
+</tr>
+<tr>
+<td>1 secolo</td>
+<td>= 100 anni</td>
+</tr>
+<tr>
+<td>1 decennio</td>
+<td>= 10 anni</td>
+</tr>
+<tr>
+<td>1 anno</td>
+<td>≈ 365.25 giorni (anno medio)</td>
+</tr>
+<tr>
+<td>1 anno</td>
+<td>= 12 mesi = 52 settimane</td>
+</tr>
+<tr>
+<td>1 mese</td>
+<td>≈ 30.44 giorni (medio)</td>
+</tr>
+<tr>
+<td>1 settimana</td>
+<td>= 7 giorni</td>
+</tr>
+<tr>
+<td>1 giorno</td>
+<td>= 24 ore</td>
+</tr>
+<tr>
+<td>1 ora (h)</td>
+<td>= 60 minuti = 3600 secondi</td>
+</tr>
+<tr>
+<td>1 minuto (min)</td>
+<td>= 60 secondi (s)</td>
+</tr>
+<tr>
+<td>1 secondo (s)</td>
+<td>= 1000 millisecondi (ms)</td>
+</tr>
+<tr>
+<td>1 ms</td>
+<td>= 1000 microsecondi (μs)</td>
+</tr>
+<tr>
+<td>1 μs</td>
+<td>= 1000 nanosecondi (ns)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="37-velocità">3.7 Velocità</h3>
+<h4 id="sistema-metrico-4">Sistema Metrico</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 m/s = 3.6 km/h</td>
+</tr>
+<tr>
+<td>1 km/h = 0.277778 m/s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="conversioni-internazionali">Conversioni Internazionali</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Da</th>
+<th>A</th>
+<th>Fattore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>km/h</td>
+<td>mph</td>
+<td>× 0.621371</td>
+</tr>
+<tr>
+<td>mph</td>
+<td>km/h</td>
+<td>× 1.60934</td>
+</tr>
+<tr>
+<td>m/s</td>
+<td>mph</td>
+<td>× 2.23694</td>
+</tr>
+<tr>
+<td>m/s</td>
+<td>ft/s</td>
+<td>× 3.28084</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="velocità-speciali">Velocità Speciali</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Descrizione</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Velocità del suono (a 20°C)</td>
+<td>≈ 343 m/s ≈ 1235 km/h</td>
+</tr>
+<tr>
+<td>Mach 1</td>
+<td>= velocità del suono</td>
+</tr>
+<tr>
+<td>Velocità della luce</td>
+<td>c = 299,792,458 m/s ≈ 300,000 km/s</td>
+</tr>
+<tr>
+<td>1 nodo (nautico)</td>
+<td>= 1 miglio nautico/ora = 1.852 km/h</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="38-accelerazione">3.8 Accelerazione</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accelerazione di gravità (Terra)</td>
+<td>g = 9.80665 m/s² ≈ 9.81 m/s²</td>
+</tr>
+<tr>
+<td>1 m/s²</td>
+<td>= 3.28084 ft/s²</td>
+</tr>
+<tr>
+<td>1 g</td>
+<td>= 9.80665 m/s² = 32.174 ft/s²</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="39-forza">3.9 Forza</h3>
+<h4 id="unità-si-newton-n">Unità SI: Newton (N)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 N</td>
+<td>= 1 kg·m/s²</td>
+</tr>
+<tr>
+<td>1 kN (kilonewton)</td>
+<td>= 1000 N</td>
+</tr>
+<tr>
+<td>1 dyne</td>
+<td>= 10⁻⁵ N</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-3">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 libbra-forza (lbf)</td>
+<td>= 4.44822 N</td>
+</tr>
+<tr>
+<td>1 kgf (kilogrammo-forza)</td>
+<td>= 9.80665 N</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="310-pressione">3.10 Pressione</h3>
+<h4 id="unità-si-pascal-pa">Unità SI: Pascal (Pa)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Pa</td>
+<td>= 1 N/m²</td>
+</tr>
+<tr>
+<td>1 kPa (kilopascal)</td>
+<td>= 1000 Pa</td>
+</tr>
+<tr>
+<td>1 MPa (megapascal)</td>
+<td>= 1,000,000 Pa</td>
+</tr>
+<tr>
+<td>1 bar</td>
+<td>= 100,000 Pa = 100 kPa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="atmosfera">Atmosfera</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 atmosfera standard (atm)</td>
+<td>= 101,325 Pa = 101.325 kPa = 1.01325 bar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="altre-unità">Altre Unità</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 mmHg (millimetro di mercurio)</td>
+<td>= 133.322 Pa</td>
+</tr>
+<tr>
+<td>1 torr</td>
+<td>≈ 1 mmHg = 133.322 Pa</td>
+</tr>
+<tr>
+<td>1 psi (pound per square inch)</td>
+<td>= 6894.76 Pa ≈ 6.895 kPa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="conversioni-rapide-1">Conversioni Rapide</h4>
+<pre><code>1 atm = 760 mmHg = 760 torr = 14.696 psi = 1.01325 bar
+1 bar = 14.5038 psi
+1 MPa = 145.038 psi</code></pre>
+<hr />
+<h3 id="311-energialavoro">3.11 Energia/Lavoro</h3>
+<h4 id="unità-si-joule-j">Unità SI: Joule (J)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 J</td>
+<td>= 1 N·m = 1 kg·m²/s²</td>
+</tr>
+<tr>
+<td>1 kJ (kilojoule)</td>
+<td>= 1000 J</td>
+</tr>
+<tr>
+<td>1 MJ (megajoule)</td>
+<td>= 1,000,000 J</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="calorie">Calorie</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 caloria (cal)</td>
+<td>= 4.184 J</td>
+</tr>
+<tr>
+<td>1 kilocaloria (kcal o Cal)</td>
+<td>= 4184 J = 4.184 kJ</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Nota:</strong> 1 Cal alimentare = 1 kcal</p>
+</blockquote>
+<h4 id="elettricità">Elettricità</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 kilowattora (kWh)</td>
+<td>= 3.6 MJ = 3,600,000 J</td>
+</tr>
+<tr>
+<td>1 elettronvolt (eV)</td>
+<td>= 1.60218 × 10⁻¹⁹ J</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-4">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 BTU (British Thermal Unit)</td>
+<td>= 1055.06 J ≈ 1.055 kJ</td>
+</tr>
+<tr>
+<td>1 foot-pound (ft·lb)</td>
+<td>= 1.35582 J</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="312-potenza">3.12 Potenza</h3>
+<h4 id="unità-si-watt-w">Unità SI: Watt (W)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 W</td>
+<td>= 1 J/s = 1 kg·m²/s³</td>
+</tr>
+<tr>
+<td>1 kW (kilowatt)</td>
+<td>= 1000 W</td>
+</tr>
+<tr>
+<td>1 MW (megawatt)</td>
+<td>= 1,000,000 W</td>
+</tr>
+<tr>
+<td>1 GW (gigawatt)</td>
+<td>= 1,000,000,000 W</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-5">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 cavallo vapore (HP, horsepower)</td>
+<td>= 745.7 W ≈ 0.746 kW</td>
+</tr>
+<tr>
+<td>1 cavallo vapore metrico (CV)</td>
+<td>= 735.5 W</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="conversioni">Conversioni</h4>
+<pre><code>1 kW = 1.341 HP
+1 HP = 550 ft·lb/s
+1 kW = 3412.14 BTU/h</code></pre>
+<hr />
+<h3 id="313-angoli">3.13 Angoli</h3>
+<h4 id="unità">Unità</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Cerchio completo</th>
+<th>Angolo retto</th>
+<th>Angolo piatto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gradi</strong></td>
+<td>360°</td>
+<td>90°</td>
+<td>180°</td>
+</tr>
+<tr>
+<td><strong>Radianti</strong></td>
+<td>2π rad</td>
+<td>π/2 rad</td>
+<td>π rad</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="gradi-sessagesimali">Gradi Sessagesimali</h4>
+<pre><code>1° = 60&#39; (minuti d&#39;arco)
+1&#39; = 60&quot; (secondi d&#39;arco)</code></pre>
+<h4 id="formule-di-conversione-1">Formule di Conversione</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Da</th>
+<th>A</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gradi</td>
+<td>Radianti</td>
+<td><code>rad = (deg × π)/180</code></td>
+</tr>
+<tr>
+<td>Radianti</td>
+<td>Gradi</td>
+<td><code>deg = (rad × 180)/π</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="conversioni-comuni">Conversioni Comuni</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Gradi</th>
+<th>Radianti</th>
+<th>Valore numerico radianti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>360°</td>
+<td>2π</td>
+<td>≈ 6.28319</td>
+</tr>
+<tr>
+<td>180°</td>
+<td>π</td>
+<td>≈ 3.14159</td>
+</tr>
+<tr>
+<td>90°</td>
+<td>π/2</td>
+<td>≈ 1.5708</td>
+</tr>
+<tr>
+<td>60°</td>
+<td>π/3</td>
+<td>≈ 1.0472</td>
+</tr>
+<tr>
+<td>45°</td>
+<td>π/4</td>
+<td>≈ 0.7854</td>
+</tr>
+<tr>
+<td>30°</td>
+<td>π/6</td>
+<td>≈ 0.5236</td>
+</tr>
+<tr>
+<td>1°</td>
+<td>-</td>
+<td>≈ 0.0174533 rad</td>
+</tr>
+<tr>
+<td>1 rad</td>
+<td>-</td>
+<td>≈ 57.2958°</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="314-frequenza">3.14 Frequenza</h3>
+<h4 id="unità-si-hertz-hz">Unità SI: Hertz (Hz)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Hz</td>
+<td>= 1 ciclo/secondo = 1 s⁻¹</td>
+</tr>
+<tr>
+<td>1 kHz (kilohertz)</td>
+<td>= 1000 Hz</td>
+</tr>
+<tr>
+<td>1 MHz (megahertz)</td>
+<td>= 1,000,000 Hz</td>
+</tr>
+<tr>
+<td>1 GHz (gigahertz)</td>
+<td>= 1,000,000,000 Hz</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="relazione-con-periodo">Relazione con Periodo</h4>
+<pre><code>f = 1/T
+T = 1/f</code></pre>
+<p>dove <code>f</code> = frequenza, <code>T</code> = periodo</p>
+<h4 id="esempi-pratici">Esempi Pratici</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Applicazione</th>
+<th>Frequenza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rete elettrica (Europa)</td>
+<td>50 Hz</td>
+</tr>
+<tr>
+<td>Rete elettrica (USA)</td>
+<td>60 Hz</td>
+</tr>
+<tr>
+<td>Radio FM</td>
+<td>88-108 MHz</td>
+</tr>
+<tr>
+<td>WiFi</td>
+<td>2.4 GHz o 5 GHz</td>
+</tr>
+<tr>
+<td>Processori CPU</td>
+<td>1-5 GHz</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="315-densità">3.15 Densità</h3>
+<h4 id="unità-si">Unità SI</h4>
+<ul>
+<li><code>kg/m³</code> (kilogrammo per metro cubo)</li>
+<li><code>g/cm³</code> (grammo per centimetro cubo)</li>
+</ul>
+<h4 id="conversioni-1">Conversioni</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 g/cm³</td>
+<td>= 1000 kg/m³</td>
+</tr>
+<tr>
+<td>1 kg/L</td>
+<td>= 1000 kg/m³ = 1 g/cm³</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="sistema-imperiale-6">Sistema Imperiale</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Unità</th>
+<th>Conversione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 lb/ft³</td>
+<td>= 16.0185 kg/m³</td>
+</tr>
+<tr>
+<td>1 lb/in³</td>
+<td>= 27,679.9 kg/m³</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="densità-di-materiali-comuni">Densità di Materiali Comuni</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Materiale</th>
+<th>Densità (kg/m³)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acqua (4°C)</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>Aria (20°C, 1 atm)</td>
+<td>1.204</td>
+</tr>
+<tr>
+<td>Ghiaccio</td>
+<td>917</td>
+</tr>
+<tr>
+<td>Alluminio</td>
+<td>2700</td>
+</tr>
+<tr>
+<td>Ferro</td>
+<td>7874</td>
+</tr>
+<tr>
+<td>Rame</td>
+<td>8960</td>
+</tr>
+<tr>
+<td>Piombo</td>
+<td>11,340</td>
+</tr>
+<tr>
+<td>Oro</td>
+<td>19,300</td>
+</tr>
+<tr>
+<td>Platino</td>
+<td>21,450</td>
+</tr>
+<tr>
+<td>Legno (quercia)</td>
+<td>600-900</td>
+</tr>
+<tr>
+<td>Calcestruzzo</td>
+<td>2400</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="parte-4-sensori-di-temperatura---termocoppie-1">PARTE 4: SENSORI DI TEMPERATURA - TERMOCOPPIE</h2>
+<h3 id="41-introduzione-alle-termocoppie">4.1 Introduzione alle Termocoppie</h3>
+<h4 id="cosè-una-termocoppia">Cos&#39;è una Termocoppia?</h4>
+<p>Una <strong>termocoppia</strong> è un sensore di temperatura che sfrutta l&#39;<strong>effetto Seebeck</strong>: quando due metalli diversi sono uniti e i loro giunti sono a temperature diverse, si genera una <strong>tensione elettrica</strong> (dell&#39;ordine dei millivolt) proporzionale alla differenza di temperatura.</p>
+<h4 id="principio-di-funzionamento">Principio di Funzionamento</h4>
+<pre><code>Metallo A ──┬─────────────┬── Metallo A
+            │             │
+        Giunto     Giunto freddo
+         caldo   (riferimento)
+           │             │
+         (T_hot)      (T_cold)
+           │             │
+           └─── ΔV ──────┘</code></pre>
+<p><strong>Formula base:</strong></p>
+<pre><code>V = α × (T_hot - T_cold)</code></pre>
+<p>dove:</p>
+<ul>
+<li><code>V</code> = tensione generata (mV)</li>
+<li><code>α</code> = coefficiente Seebeck (dipende dai metalli)</li>
+<li><code>T_hot</code> = temperatura del giunto caldo (punto di misura)</li>
+<li><code>T_cold</code> = temperatura del giunto freddo (riferimento)</li>
+</ul>
+<h4 id="vantaggi">Vantaggi</h4>
+<p>✅ Ampio range di temperatura (-200°C a +2300°C)<br />
+✅ Robuste e durature<br />
+✅ Economiche<br />
+✅ Auto-alimentate (non servono batterie)<br />
+✅ Risposta rapida<br />
+✅ Piccole dimensioni possibili</p>
+<h4 id="svantaggi">Svantaggi</h4>
+<p>❌ Bassa accuratezza (±1-3°C tipico)<br />
+❌ Tensione molto bassa (μV/mV)<br />
+❌ Non lineari<br />
+❌ Necessitano compensazione giunto freddo<br />
+❌ Sensibili a interferenze elettromagnetiche</p>
+<hr />
+<h3 id="42-tipi-di-termocoppie-standard">4.2 Tipi di Termocoppie Standard</h3>
+<p>Le termocoppie sono classificate secondo standard internazionali (ANSI, IEC) con lettere che identificano la combinazione di metalli.</p>
+<h4 id="classificazione-per-utilizzo">Classificazione per Utilizzo</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Tipi</th>
+<th>Applicazioni</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base Metal</strong></td>
+<td>J, K, T, E, N</td>
+<td>Uso generale, industriale</td>
+</tr>
+<tr>
+<td><strong>Noble Metal</strong></td>
+<td>R, S, B</td>
+<td>Alta temperatura, laboratorio</td>
+</tr>
+<tr>
+<td><strong>Specializzate</strong></td>
+<td>C, D, G</td>
+<td>Applicazioni specifiche</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="43-termocoppia-tipo-j">4.3 Termocoppia Tipo J</h3>
+<h4 id="caratteristiche">Caratteristiche</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Materiali</strong></td>
+<td><strong>Ferro (+)</strong> vs <strong>Costantana (-)</strong></td>
+</tr>
+<tr>
+<td><strong>Colore fili</strong></td>
+<td>Positivo: Bianco / Negativo: Rosso (USA)</td>
+</tr>
+<tr>
+<td><strong>Range temperatura</strong></td>
+<td>-40°C a +750°C</td>
+</tr>
+<tr>
+<td><strong>Range consigliato</strong></td>
+<td>0°C a +500°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità (Seebeck)</strong></td>
+<td>≈ 50-60 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Accuratezza</strong></td>
+<td>±2.2°C o ±0.75% (standard)</td>
+</tr>
+<tr>
+<td><strong>Atmosfera</strong></td>
+<td>Riducente, inerte (non ossidante)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="applicazioni-tipiche">Applicazioni Tipiche</h4>
+<ul>
+<li>Industria plastica (estrusori)</li>
+<li>Forni industriali</li>
+<li>Motori diesel</li>
+<li>Industria alimentare (limitata a &lt;500°C)</li>
+<li>Apparecchiature di processo generale</li>
+</ul>
+<h4 id="vantaggi-e-svantaggi">Vantaggi e Svantaggi</h4>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>✅ Economica</li>
+<li>✅ Ampio range</li>
+<li>✅ Buona sensibilità</li>
+<li>✅ Robusta</li>
+</ul>
+<p><strong>Svantaggi:</strong></p>
+<ul>
+<li>❌ Ferro si ossida sopra 540°C</li>
+<li>❌ Corrosione in ambiente umido</li>
+<li>❌ Vita limitata ad alta temperatura</li>
+<li>❌ Non per ambienti ossidanti</li>
+</ul>
+<h4 id="tensione-output-giunto-freddo-a-0c">Tensione Output (Giunto freddo a 0°C)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Temperatura</th>
+<th>Tensione (mV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0°C</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>100°C</td>
+<td>5.268</td>
+</tr>
+<tr>
+<td>200°C</td>
+<td>10.777</td>
+</tr>
+<tr>
+<td>300°C</td>
+<td>16.325</td>
+</tr>
+<tr>
+<td>400°C</td>
+<td>21.846</td>
+</tr>
+<tr>
+<td>500°C</td>
+<td>27.388</td>
+</tr>
+<tr>
+<td>600°C</td>
+<td>33.102</td>
+</tr>
+<tr>
+<td>700°C</td>
+<td>39.130</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="44-termocoppia-tipo-k">4.4 Termocoppia Tipo K</h3>
+<h4 id="caratteristiche-1">Caratteristiche</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Materiali</strong></td>
+<td><strong>Chromel (+)</strong> (Ni-Cr) vs <strong>Alumel (-)</strong> (Ni-Al)</td>
+</tr>
+<tr>
+<td><strong>Colore fili</strong></td>
+<td>Positivo: Giallo / Negativo: Rosso (USA)</td>
+</tr>
+<tr>
+<td><strong>Range temperatura</strong></td>
+<td>-200°C a +1350°C</td>
+</tr>
+<tr>
+<td><strong>Range consigliato</strong></td>
+<td>-40°C a +1000°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità (Seebeck)</strong></td>
+<td>≈ 41 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Accuratezza</strong></td>
+<td>±2.2°C o ±0.75% (standard)</td>
+</tr>
+<tr>
+<td><strong>Atmosfera</strong></td>
+<td>Ossidante o inerte (non riducente)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="applicazioni-tipiche-1">Applicazioni Tipiche</h4>
+<ul>
+<li><strong>Più comune in assoluto</strong> (70% mercato)</li>
+<li>Forni industriali ad alta temperatura</li>
+<li>Trattamenti termici metalli</li>
+<li>Fonderie</li>
+<li>Turbine a gas</li>
+<li>Industria alimentare</li>
+<li>HVAC (riscaldamento/raffreddamento)</li>
+<li>Automotive</li>
+<li>Laboratori generici</li>
+</ul>
+<h4 id="vantaggi-e-svantaggi-1">Vantaggi e Svantaggi</h4>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>✅ <strong>Standard de facto</strong> (più usata)</li>
+<li>✅ Ampio range temperatura</li>
+<li>✅ Buona accuratezza</li>
+<li>✅ Economica</li>
+<li>✅ Resistente ossidazione</li>
+<li>✅ Ottima linearità</li>
+</ul>
+<p><strong>Svantaggi:</strong></p>
+<ul>
+<li>❌ Non adatta ad atmosfere riducenti</li>
+<li>❌ Sensibile a contaminazione (deriva nel tempo)</li>
+<li>❌ Non per atmosfere solfuree</li>
+<li>❌ &quot;Green rot&quot; (corrosione) in certe condizioni</li>
+</ul>
+<h4 id="tensione-output-giunto-freddo-a-0c-1">Tensione Output (Giunto freddo a 0°C)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Temperatura</th>
+<th>Tensione (mV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-200°C</td>
+<td>-5.891</td>
+</tr>
+<tr>
+<td>-100°C</td>
+<td>-3.554</td>
+</tr>
+<tr>
+<td>0°C</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>100°C</td>
+<td>4.095</td>
+</tr>
+<tr>
+<td>200°C</td>
+<td>8.137</td>
+</tr>
+<tr>
+<td>300°C</td>
+<td>12.207</td>
+</tr>
+<tr>
+<td>400°C</td>
+<td>16.395</td>
+</tr>
+<tr>
+<td>500°C</td>
+<td>20.640</td>
+</tr>
+<tr>
+<td>600°C</td>
+<td>24.902</td>
+</tr>
+<tr>
+<td>700°C</td>
+<td>29.128</td>
+</tr>
+<tr>
+<td>800°C</td>
+<td>33.275</td>
+</tr>
+<tr>
+<td>900°C</td>
+<td>37.325</td>
+</tr>
+<tr>
+<td>1000°C</td>
+<td>41.269</td>
+</tr>
+<tr>
+<td>1100°C</td>
+<td>45.108</td>
+</tr>
+<tr>
+<td>1200°C</td>
+<td>48.838</td>
+</tr>
+<tr>
+<td>1300°C</td>
+<td>52.398</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="polinomio-di-approssimazione-tipo-k-0-1372c">Polinomio di Approssimazione (Tipo K, 0-1372°C)</h4>
+<p>Per convertire temperatura → tensione:</p>
+<pre><code>V = c₀ + c₁T + c₂T² + c₃T³ + ... + c₉T⁹</code></pre>
+<p>Coefficienti (0-1372°C):</p>
+<ul>
+<li>c₀ = 0.000000000000E+00</li>
+<li>c₁ = 3.945012802514E-02</li>
+<li>c₂ = 2.362237359873E-05</li>
+<li>c₃ = -3.285890678698E-07</li>
+<li>c₄ = 9.916080034248E-10</li>
+<li>(e altri...)</li>
+</ul>
+<blockquote>
+<p>Per implementazione in C, usare tabelle NIST ufficiali con interpolazione.</p>
+</blockquote>
+<hr />
+<h3 id="45-termocoppia-tipo-s">4.5 Termocoppia Tipo S</h3>
+<h4 id="caratteristiche-2">Caratteristiche</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Materiali</strong></td>
+<td><strong>Platino-10% Rodio (+)</strong> vs <strong>Platino (-)</strong></td>
+</tr>
+<tr>
+<td><strong>Colore fili</strong></td>
+<td>Positivo: Nero / Negativo: Rosso (USA)</td>
+</tr>
+<tr>
+<td><strong>Range temperatura</strong></td>
+<td>-50°C a +1768°C</td>
+</tr>
+<tr>
+<td><strong>Range consigliato</strong></td>
+<td>600°C a +1600°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità (Seebeck)</strong></td>
+<td>≈ 10 μV/°C (molto bassa!)</td>
+</tr>
+<tr>
+<td><strong>Accuratezza</strong></td>
+<td>±1.5°C o ±0.25% (alta precisione)</td>
+</tr>
+<tr>
+<td><strong>Atmosfera</strong></td>
+<td>Ossidante o inerte</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="applicazioni-tipiche-2">Applicazioni Tipiche</h4>
+<ul>
+<li><strong>Standard di laboratorio</strong> (alta precisione)</li>
+<li>Calibrazione strumenti</li>
+<li>Forni ad altissima temperatura</li>
+<li>Industria ceramica</li>
+<li>Trattamenti termici metalli nobili</li>
+<li>Industria del vetro</li>
+<li>Ricerca scientifica</li>
+<li>Fonderie (metalli preziosi)</li>
+</ul>
+<h4 id="vantaggi-e-svantaggi-2">Vantaggi e Svantaggi</h4>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>✅ <strong>Altissima temperatura</strong> (fino 1768°C)</li>
+<li>✅ <strong>Alta accuratezza e stabilità</strong></li>
+<li>✅ Eccellente ripetibilità</li>
+<li>✅ Standard internazionale (ITS-90)</li>
+<li>✅ Resistente ossidazione</li>
+<li>✅ Inerzia chimica (platino)</li>
+</ul>
+<p><strong>Svantaggi:</strong></p>
+<ul>
+<li>❌ <strong>Molto costosa</strong> (platino!)</li>
+<li>❌ Sensibilità molto bassa (10 μV/°C)</li>
+<li>❌ Richiede amplificazione maggiore</li>
+<li>❌ Fragile meccanicamente</li>
+<li>❌ Contaminazione da metalli comuni</li>
+<li>❌ Non per atmosfere riducenti o con metalli vapori</li>
+</ul>
+<h4 id="tensione-output-giunto-freddo-a-0c-2">Tensione Output (Giunto freddo a 0°C)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Temperatura</th>
+<th>Tensione (mV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0°C</td>
+<td>0.000</td>
+</tr>
+<tr>
+<td>100°C</td>
+<td>0.645</td>
+</tr>
+<tr>
+<td>200°C</td>
+<td>1.440</td>
+</tr>
+<tr>
+<td>300°C</td>
+<td>2.323</td>
+</tr>
+<tr>
+<td>400°C</td>
+<td>3.259</td>
+</tr>
+<tr>
+<td>500°C</td>
+<td>4.233</td>
+</tr>
+<tr>
+<td>600°C</td>
+<td>5.237</td>
+</tr>
+<tr>
+<td>700°C</td>
+<td>6.274</td>
+</tr>
+<tr>
+<td>800°C</td>
+<td>7.345</td>
+</tr>
+<tr>
+<td>900°C</td>
+<td>8.448</td>
+</tr>
+<tr>
+<td>1000°C</td>
+<td>9.585</td>
+</tr>
+<tr>
+<td>1100°C</td>
+<td>10.754</td>
+</tr>
+<tr>
+<td>1200°C</td>
+<td>11.951</td>
+</tr>
+<tr>
+<td>1300°C</td>
+<td>13.173</td>
+</tr>
+<tr>
+<td>1400°C</td>
+<td>14.416</td>
+</tr>
+<tr>
+<td>1500°C</td>
+<td>15.576</td>
+</tr>
+<tr>
+<td>1600°C</td>
+<td>17.445</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="note-importanti">Note Importanti</h4>
+<p>⚠️ La termocoppia tipo S è <strong>sensibilissima alla contaminazione</strong> da metalli base (ferro, nichel, rame). Anche piccole tracce possono alterare le misure.</p>
+<p>⚠️ Richiede <strong>protezione ceramica</strong> ad alta purezza (allumina 99.7%+).</p>
+<hr />
+<h3 id="46-altri-tipi-di-termocoppie">4.6 Altri Tipi di Termocoppie</h3>
+<h4 id="tipo-t-rame-costantana">Tipo T (Rame-Costantana)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>-200°C a +400°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità</strong></td>
+<td>≈ 43 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Criogenia, laboratori, alimentare</td>
+</tr>
+<tr>
+<td><strong>Vantaggi</strong></td>
+<td>Ottima per basse temperature, resistente umidità</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="tipo-e-chromel-costantana">Tipo E (Chromel-Costantana)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>-200°C a +900°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità</strong></td>
+<td>≈ 68 μV/°C (massima!)</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Forni, laboratori</td>
+</tr>
+<tr>
+<td><strong>Vantaggi</strong></td>
+<td>Output altissimo, buona per basse temperature</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="tipo-n-nicrosil-nisil">Tipo N (Nicrosil-Nisil)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>-270°C a +1300°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità</strong></td>
+<td>≈ 39 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Alternativa migliorata al tipo K</td>
+</tr>
+<tr>
+<td><strong>Vantaggi</strong></td>
+<td>Più stabile del K, resistente ossidazione</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="tipo-r-platino-13-rodio-vs-platino">Tipo R (Platino-13% Rodio vs Platino)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>-50°C a +1768°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità</strong></td>
+<td>≈ 10 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Simile a tipo S, laboratori</td>
+</tr>
+<tr>
+<td><strong>Note</strong></td>
+<td>Più stabile di S ad alta temperatura</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="tipo-b-platino-30-rodio-vs-platino-6-rodio">Tipo B (Platino-30% Rodio vs Platino-6% Rodio)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>200°C a +1820°C</td>
+</tr>
+<tr>
+<td><strong>Sensibilità</strong></td>
+<td>≈ 10 μV/°C</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Altissime temperature</td>
+</tr>
+<tr>
+<td><strong>Vantaggi</strong></td>
+<td>Output quasi nullo sotto 50°C (auto-compensazione parziale)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="tipo-c-tungsteno-5-renio-vs-tungsteno-26-renio">Tipo C (Tungsteno-5% Renio vs Tungsteno-26% Renio)</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Parametro</th>
+<th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Range</strong></td>
+<td>0°C a +2315°C</td>
+</tr>
+<tr>
+<td><strong>Applicazioni</strong></td>
+<td>Forni sottovuoto, aerospaziale</td>
+</tr>
+<tr>
+<td><strong>Vantaggi</strong></td>
+<td>Temperature estreme</td>
+</tr>
+<tr>
+<td><strong>Svantaggi</strong></td>
+<td>Fragile, costosa, solo vuoto o inerte</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="47-tabella-comparativa">4.7 Tabella Comparativa</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Materiali</th>
+<th>Range (°C)</th>
+<th>Sensibilità (μV/°C)</th>
+<th>Costo</th>
+<th>Applicazione Principale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>J</strong></td>
+<td>Fe vs Const</td>
+<td>-40 a 750</td>
+<td>50-60</td>
+<td>€</td>
+<td>Uso generale, industriale</td>
+</tr>
+<tr>
+<td><strong>K</strong></td>
+<td>Chromel vs Alumel</td>
+<td>-200 a 1350</td>
+<td>41</td>
+<td>€</td>
+<td><strong>PIÙ COMUNE</strong> - generale</td>
+</tr>
+<tr>
+<td><strong>T</strong></td>
+<td>Cu vs Const</td>
+<td>-200 a 400</td>
+<td>43</td>
+<td>€</td>
+<td>Basse temperature, criogenia</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>Chromel vs Const</td>
+<td>-200 a 900</td>
+<td>68</td>
+<td>€</td>
+<td>Alta sensibilità</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>Nicrosil vs Nisil</td>
+<td>-270 a 1300</td>
+<td>39</td>
+<td>€€</td>
+<td>Alternativa K migliorata</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Pt-13%Rh vs Pt</td>
+<td>-50 a 1768</td>
+<td>10</td>
+<td>€€€€</td>
+<td>Laboratorio, precisione</td>
+</tr>
+<tr>
+<td><strong>S</strong></td>
+<td>Pt-10%Rh vs Pt</td>
+<td>-50 a 1768</td>
+<td>10</td>
+<td>€€€€</td>
+<td><strong>STANDARD</strong> laboratorio</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>Pt-30%Rh vs Pt-6%Rh</td>
+<td>200 a 1820</td>
+<td>10</td>
+<td>€€€€€</td>
+<td>Altissime temperature</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>W-5%Re vs W-26%Re</td>
+<td>0 a 2315</td>
+<td>varia</td>
+<td>€€€€€</td>
+<td>Temperature estreme</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Legenda costo:</strong></p>
+<ul>
+<li>€ = Economica (&lt;10€)</li>
+<li>€€ = Media (10-50€)</li>
+<li>€€€€ = Costosa (100-500€)</li>
+<li>€€€€€ = Molto costosa (&gt;500€)</li>
+</ul>
+<hr />
+<h3 id="48-conversione-tensione-temperatura">4.8 Conversione Tensione-Temperatura</h3>
+<h4 id="metodi-di-conversione">Metodi di Conversione</h4>
+<p>Esistono 3 metodi principali per convertire tensione ↔︎ temperatura:</p>
+<h5 id="1-tabelle-di-lookup-lut">1. <strong>Tabelle di Lookup (LUT)</strong></h5>
+<p>Usare tabelle NIST ufficiali con interpolazione lineare.</p>
+<p><strong>Vantaggi:</strong> Semplice, accurato<br />
+<strong>Svantaggi:</strong> Richiede memoria</p>
+<p><strong>Esempio in C:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Tabella semplificata tipo K (ogni 100°C)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">const</span> <span class="dt">float</span> tipo_k_lut<span class="op">[][</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">0.000</span><span class="op">,</span> <span class="fl">0.0</span><span class="op">},</span>     <span class="co">// 0°C</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">4.095</span><span class="op">,</span> <span class="fl">100.0</span><span class="op">},</span>   <span class="co">// 100°C</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">8.137</span><span class="op">,</span> <span class="fl">200.0</span><span class="op">},</span>   <span class="co">// 200°C</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span><span class="fl">12.207</span><span class="op">,</span> <span class="fl">300.0</span><span class="op">},</span>  <span class="co">// 300°C</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... continua</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> tipo_k_mv_to_celsius<span class="op">(</span><span class="dt">float</span> mv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Interpolazione lineare tra punti tabella</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (codice semplificato)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TABLE_SIZE<span class="op">-</span><span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>mv <span class="op">&gt;=</span> tipo_k_lut<span class="op">[</span>i<span class="op">][</span><span class="dv">0</span><span class="op">]</span> <span class="op">&amp;&amp;</span> mv <span class="op">&lt;=</span> tipo_k_lut<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">][</span><span class="dv">0</span><span class="op">])</span> <span class="op">{</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            <span class="dt">float</span> t0 <span class="op">=</span> tipo_k_lut<span class="op">[</span>i<span class="op">][</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            <span class="dt">float</span> t1 <span class="op">=</span> tipo_k_lut<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">][</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="dt">float</span> v0 <span class="op">=</span> tipo_k_lut<span class="op">[</span>i<span class="op">][</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="dt">float</span> v1 <span class="op">=</span> tipo_k_lut<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">][</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> t0 <span class="op">+</span> <span class="op">(</span>mv <span class="op">-</span> v0<span class="op">)</span> <span class="op">*</span> <span class="op">(</span>t1 <span class="op">-</span> t0<span class="op">)</span> <span class="op">/</span> <span class="op">(</span>v1 <span class="op">-</span> v0<span class="op">);</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="fl">999.0</span><span class="op">;</span> <span class="co">// Errore</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h5 id="2-polinomi-di-approssimazione">2. <strong>Polinomi di Approssimazione</strong></h5>
+<p>NIST fornisce polinomi di grado 5-10 per ogni tipo.</p>
+<p><strong>Formula generale:</strong></p>
+<pre><code>T = c₀ + c₁V + c₂V² + c₃V³ + ... + cₙVⁿ</code></pre>
+<p><strong>Vantaggi:</strong> Accurato, poco codice<br />
+<strong>Svantaggi:</strong> Calcolo pesante (pow), range limitati</p>
+<h5 id="3-approssimazioni-lineari-semplificate">3. <strong>Approssimazioni Lineari (Semplificate)</strong></h5>
+<p>Per range ridotti, approssimazione lineare:</p>
+<pre><code>T ≈ T₀ + (V / S)</code></pre>
+<p>dove S = sensibilità (μV/°C)</p>
+<p><strong>Vantaggi:</strong> Velocissimo<br />
+<strong>Svantaggi:</strong> Accuratezza ridotta (±5-10°C)</p>
+<p><strong>Esempio tipo K (semplificato, 0-1000°C):</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> tipo_k_mv_to_celsius_approx<span class="op">(</span><span class="dt">float</span> mv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Approssimazione lineare: ~41 μV/°C</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mv <span class="op">/</span> <span class="fl">0.041</span><span class="op">;</span>  <span class="co">// mV to °C</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="49-compensazione-giunto-freddo">4.9 Compensazione Giunto Freddo</h3>
+<h4 id="problema">Problema</h4>
+<p>Le termocoppie misurano la <strong>differenza</strong> di temperatura tra giunto caldo e giunto freddo. Se il giunto freddo non è a 0°C, la lettura è errata!</p>
+<pre><code>V_misurata = α × (T_hot - T_cold)</code></pre>
+<p>Se <code>T_cold ≠ 0°C</code>, dobbiamo compensare.</p>
+<h4 id="soluzione-cold-junction-compensation-cjc">Soluzione: Cold Junction Compensation (CJC)</h4>
+<p><strong>Metodo 1: Bagno di ghiaccio</strong></p>
+<ul>
+<li>Giunto freddo in acqua+ghiaccio → 0°C garantito</li>
+<li>Usato in laboratorio (scomodo)</li>
+</ul>
+<p><strong>Metodo 2: Termometro di riferimento</strong></p>
+<ul>
+<li>Misura T_cold con sensore accurato (RTD, termistor, IC)</li>
+<li>Calcola correzione software</li>
+</ul>
+<p><strong>Formula:</strong></p>
+<pre><code>T_hot = T_misurata + T_cold</code></pre>
+<p>dove:</p>
+<ul>
+<li><code>T_misurata</code> = temperatura calcolata da V_misurata (assumendo T_cold = 0)</li>
+<li><code>T_cold</code> = temperatura effettiva giunto freddo (misurata)</li>
+</ul>
+<h4 id="implementazione-pratica">Implementazione Pratica</h4>
+<p><strong>Hardware:</strong> Usare IC specializzati (es: MAX31855, AD8495, LTC2983)</p>
+<ul>
+<li>Hanno CJC integrato</li>
+<li>Linearizzazione automatica</li>
+<li>Output digitale (SPI/I2C) o analogico</li>
+</ul>
+<p><strong>Software:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> leggi_temperatura_tipo_k<span class="op">(</span><span class="dt">float</span> mv_termocoppia<span class="op">,</span> <span class="dt">float</span> temp_giunto_freddo<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Converti mV a temperatura (assumendo giunto freddo a 0°C)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temp_misurata <span class="op">=</span> tipo_k_mv_to_celsius<span class="op">(</span>mv_termocoppia<span class="op">);</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Aggiungi compensazione giunto freddo</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temp_reale <span class="op">=</span> temp_misurata <span class="op">+</span> temp_giunto_freddo<span class="op">;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> temp_reale<span class="op">;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="esempio-numerico">Esempio Numerico</h4>
+<pre><code>Situazione:
+- Termocoppia misura: 10 mV
+- Tabella tipo K: 10 mV → 243.6°C (se giunto freddo a 0°C)
+- Ma giunto freddo è a 25°C!
+
+Compensazione:
+- Temperatura effettiva = 243.6°C + 25°C = 268.6°C
+
+Senza compensazione: ERRORE di 25°C!</code></pre>
+<hr />
+<h3 id="410-circuiti-di-condizionamento">4.10 Circuiti di Condizionamento</h3>
+<h4 id="componenti-necessari">Componenti Necessari</h4>
+<ol type="1">
+<li><strong>Amplificatore differenziale</strong> (segnale piccolo, 10-50 μV/°C)</li>
+<li><strong>Filtro anti-aliasing</strong> (riduce rumore 50/60 Hz)</li>
+<li><strong>ADC ad alta risoluzione</strong> (16-24 bit)</li>
+<li><strong>Sensore temperatura CJC</strong> (termistor, IC)</li>
+<li><strong>Protezione ESD</strong></li>
+</ol>
+<h4 id="schema-semplificato">Schema Semplificato</h4>
+<pre><code>Termocoppia (+) ──┬───[Protezione ESD]───┐
+                  │                       │
+                  │                   [Amplif.]──[Filtro]──[ADC]──[μC]
+                  │                       │
+Termocoppia (-) ──┴───[Protezione ESD]───┘
+                  │
+           [Sensore CJC]──────────────────────────[ADC]──[μC]</code></pre>
+<h4 id="ic-specializzati-consigliati">IC Specializzati Consigliati</h4>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>IC</th>
+<th>Tipo</th>
+<th>Risoluzione</th>
+<th>Caratteristiche</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MAX31855</strong></td>
+<td>SPI</td>
+<td>14-bit</td>
+<td>Tipo K, economico, CJC integrato</td>
+</tr>
+<tr>
+<td><strong>MAX6675</strong></td>
+<td>SPI</td>
+<td>12-bit</td>
+<td>Solo tipo K, base</td>
+</tr>
+<tr>
+<td><strong>AD8495</strong></td>
+<td>Analogico</td>
+<td>-</td>
+<td>Tipo K, output 5mV/°C, semplice</td>
+</tr>
+<tr>
+<td><strong>AD595</strong></td>
+<td>Analogico</td>
+<td>-</td>
+<td>Tipo K, output 10mV/°C</td>
+</tr>
+<tr>
+<td><strong>LTC2983</strong></td>
+<td>SPI</td>
+<td>24-bit</td>
+<td>Multi-tipo (J,K,S,T,E,N,R,B), precisione</td>
+</tr>
+<tr>
+<td><strong>MCP9600</strong></td>
+<td>I2C</td>
+<td>16-bit</td>
+<td>Tipo K,J,T,N,S,E,B,R, economico</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Esempio con MAX31855 (popolare):</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pseudo-codice Arduino</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;MAX31855.h&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>MAX31855 termocoppia<span class="op">(</span>CLK_PIN<span class="op">,</span> CS_PIN<span class="op">,</span> DO_PIN<span class="op">);</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temp_celsius <span class="op">=</span> termocoppia<span class="op">.</span>readCelsius<span class="op">();</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temp_giunto_freddo <span class="op">=</span> termocoppia<span class="op">.</span>readInternal<span class="op">();</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>isnan<span class="op">(</span>temp_celsius<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Errore lettura termocoppia&quot;</span><span class="op">);</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temperatura: &quot;</span><span class="op">);</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        Serial<span class="op">.</span>print<span class="op">(</span>temp_celsius<span class="op">);</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; °C&quot;</span><span class="op">);</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="411-considerazioni-pratiche">4.11 Considerazioni Pratiche</h3>
+<h4 id="cavi-e-connettori">Cavi e Connettori</h4>
+<p>⚠️ <strong>IMPORTANTE:</strong> Usare <strong>cavi di estensione specifici</strong> per ogni tipo!</p>
+<ul>
+<li>Cavi standard: fino al giunto freddo (connettore/terminali)</li>
+<li>Cavi di compensazione: hanno caratteristiche simili alla termocoppia</li>
+<li>Cavi sbagliati → errori enormi!</li>
+</ul>
+<p><strong>Connettori standard:</strong></p>
+<ul>
+<li><strong>USA:</strong> ANSI MC96.1 (forme specifiche per tipo)</li>
+<li><strong>Europa:</strong> IEC 60584-3 (colori standard)</li>
+</ul>
+<p><strong>Colori USA (ANSI):</strong></p>
+<ul>
+<li>Tipo J: Bianco(+) / Rosso(-)</li>
+<li>Tipo K: Giallo(+) / Rosso(-)</li>
+<li>Tipo T: Blu(+) / Rosso(-)</li>
+<li>Tipo E: Viola(+) / Rosso(-)</li>
+</ul>
+<h4 id="errori-comuni">Errori Comuni</h4>
+<p>❌ <strong>Giunto freddo non compensato</strong> → errore = T_ambiente<br />
+❌ <strong>Cavi di estensione sbagliati</strong> → errori imprevedibili<br />
+❌ <strong>Messa a terra errata</strong> → loop di massa, rumore 50/60 Hz<br />
+❌ <strong>Ossidazione contatti</strong> → drift, letture instabili<br />
+❌ <strong>Gradiente termico su connettori</strong> → giunto freddo &quot;falso&quot;<br />
+❌ <strong>Amplificazione insufficiente</strong> → risoluzione bassa<br />
+❌ <strong>Ambiente chimico incompatibile</strong> → corrosione, deriva</p>
+<h4 id="best-practices">Best Practices</h4>
+<p>✅ Usare IC specializzati (MAX31855, LTC2983...)<br />
+✅ Protezione ESD su ingressi<br />
+✅ Filtraggio 50/60 Hz (notch filter)<br />
+✅ Cavi schermati e twisted<br />
+✅ Giunto freddo isotermico (blocco terminale)<br />
+✅ Calibrazione periodica (vs standard)<br />
+✅ Guaine protettive adeguate all&#39;ambiente<br />
+✅ Evitare loop di massa</p>
+<hr />
+<h3 id="412-risorse-e-riferimenti">4.12 Risorse e Riferimenti</h3>
+<h4 id="tabelle-ufficiali">Tabelle Ufficiali</h4>
+<ul>
+<li><p><strong>NIST ITS-90 Thermocouple Database</strong><br />
+<a href="https://srdata.nist.gov/its90/main/">https://srdata.nist.gov/its90/main/</a></p></li>
+<li><p><strong>NIST Monograph 175</strong> (Tabelle complete)<br />
+<a href="https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nistmonograph175.pdf">https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nistmonograph175.pdf</a></p></li>
+</ul>
+<h4 id="standard">Standard</h4>
+<ul>
+<li><strong>ANSI MC96.1</strong> (USA) - Termocoppie e colori cavi</li>
+<li><strong>IEC 60584</strong> (Europa) - Specifiche termocoppie</li>
+<li><strong>ASTM E230</strong> - Tabelle e tolleranze</li>
+</ul>
+<h4 id="libri-consigliati">Libri Consigliati</h4>
+<ul>
+<li>&quot;Manual on the Use of Thermocouples in Temperature Measurement&quot; (ASTM)</li>
+<li>&quot;Temperature Measurement&quot; - L. Michalski et al.</li>
+</ul>
+<h4 id="datasheets-ic-utili">Datasheets IC Utili</h4>
+<ul>
+<li>Maxim MAX31855 (tipo K, SPI, economico)</li>
+<li>Analog Devices AD8495 (tipo K, analogico)</li>
+<li>Linear Technology LTC2983 (multi-tipo, precisione)</li>
+<li>Microchip MCP9600 (multi-tipo, I2C)</li>
+</ul>
+<hr />
+<h2 id="parte-5-costanti-fisiche-e-matematiche-1">PARTE 5: COSTANTI FISICHE E MATEMATICHE</h2>
+<h3 id="51-costanti-matematiche">5.1 Costanti Matematiche</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Costante</th>
+<th>Simbolo</th>
+<th>Valore (10 cifre)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pi greco</strong></td>
+<td>π</td>
+<td>3.1415926536</td>
+</tr>
+<tr>
+<td><strong>Numero di Eulero</strong></td>
+<td>e</td>
+<td>2.7182818285</td>
+</tr>
+<tr>
+<td><strong>Sezione aurea</strong></td>
+<td>φ</td>
+<td>1.6180339887</td>
+</tr>
+<tr>
+<td><strong>Radice di 2</strong></td>
+<td>√2</td>
+<td>1.4142135624</td>
+</tr>
+<tr>
+<td><strong>Radice di 3</strong></td>
+<td>√3</td>
+<td>1.7320508076</td>
+</tr>
+<tr>
+<td><strong>Radice di 5</strong></td>
+<td>√5</td>
+<td>2.2360679775</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="definizioni">Definizioni</h4>
+<p><strong>π (Pi greco):</strong></p>
+<ul>
+<li>Rapporto tra circonferenza e diametro di un cerchio</li>
+<li><code>π = C/d</code></li>
+</ul>
+<p><strong>e (Numero di Eulero):</strong></p>
+<ul>
+<li>Base del logaritmo naturale</li>
+<li><code>e = lim(n→∞) (1 + 1/n)ⁿ</code></li>
+</ul>
+<p><strong>φ (Sezione aurea):</strong></p>
+<ul>
+<li><code>φ = (1 + √5)/2</code></li>
+<li>Rapporto aureo in arte e natura</li>
+</ul>
+<hr />
+<h3 id="52-costanti-fisiche-fondamentali">5.2 Costanti Fisiche Fondamentali</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Costante</th>
+<th>Simbolo</th>
+<th>Valore</th>
+<th>Unità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Velocità della luce</strong> (vuoto)</td>
+<td>c</td>
+<td>299,792,458</td>
+<td>m/s</td>
+</tr>
+<tr>
+<td><strong>Costante di Planck</strong></td>
+<td>h</td>
+<td>6.62607015 × 10⁻³⁴</td>
+<td>J·s</td>
+</tr>
+<tr>
+<td><strong>Costante gravitazionale</strong></td>
+<td>G</td>
+<td>6.67430 × 10⁻¹¹</td>
+<td>m³/(kg·s²)</td>
+</tr>
+<tr>
+<td><strong>Carica elementare</strong></td>
+<td>e</td>
+<td>1.602176634 × 10⁻¹⁹</td>
+<td>C (coulomb)</td>
+</tr>
+<tr>
+<td><strong>Costante di Boltzmann</strong></td>
+<td>k_B</td>
+<td>1.380649 × 10⁻²³</td>
+<td>J/K</td>
+</tr>
+<tr>
+<td><strong>Numero di Avogadro</strong></td>
+<td>N_A</td>
+<td>6.02214076 × 10²³</td>
+<td>mol⁻¹</td>
+</tr>
+<tr>
+<td><strong>Costante dei gas ideali</strong></td>
+<td>R</td>
+<td>8.314462618</td>
+<td>J/(mol·K)</td>
+</tr>
+<tr>
+<td><strong>Massa elettrone</strong></td>
+<td>m_e</td>
+<td>9.1093837015 × 10⁻³¹</td>
+<td>kg</td>
+</tr>
+<tr>
+<td><strong>Massa protone</strong></td>
+<td>m_p</td>
+<td>1.67262192369 × 10⁻²⁷</td>
+<td>kg</td>
+</tr>
+<tr>
+<td><strong>Accelerazione gravità std</strong></td>
+<td>g</td>
+<td>9.80665</td>
+<td>m/s²</td>
+</tr>
+<tr>
+<td><strong>Permittività vuoto</strong></td>
+<td>ε₀</td>
+<td>8.8541878128 × 10⁻¹²</td>
+<td>F/m</td>
+</tr>
+<tr>
+<td><strong>Permeabilità vuoto</strong></td>
+<td>μ₀</td>
+<td>1.25663706212 × 10⁻⁶</td>
+<td>H/m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="53-costanti-in-cc">5.3 Costanti in C/C++</h3>
+<p><strong>Standard &lt;math.h&gt; / <cmath>:</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Costanti disponibili (con -D_USE_MATH_DEFINES in alcuni compilatori)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>M_E        <span class="co">// e = 2.71828...</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>M_LOG2E    <span class="co">// log₂(e)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>M_LOG10E   <span class="co">// log₁₀(e)</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>M_LN2      <span class="co">// ln(2)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>M_LN10     <span class="co">// ln(10)</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>M_PI       <span class="co">// π = 3.14159...</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>M_PI_2     <span class="co">// π/2</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>M_PI_4     <span class="co">// π/4</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>M_1_PI     <span class="co">// 1/π</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>M_2_PI     <span class="co">// 2/π</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>M_2_SQRTPI <span class="co">// 2/√π</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>M_SQRT2    <span class="co">// √2</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>M_SQRT1_2  <span class="co">// 1/√2</span></span></code></pre></div>
+<p><strong>Definizione manuale (se necessario):</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef M_PI</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">#define M_PI </span><span class="fl">3.14159265358979323846</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef M_E</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="pp">#define M_E </span><span class="fl">2.71828182845904523536</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Costanti fisiche</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SPEED_OF_LIGHT_M_S </span><span class="fl">299792458.0</span><span class="pp">  </span><span class="co">// m/s</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#define GRAVITY_M_S2 </span><span class="fl">9.80665</span><span class="pp">             </span><span class="co">// m/s²</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="pp">#define AVOGADRO_MOL </span><span class="fl">6.02214076e23</span><span class="pp">       </span><span class="co">// mol⁻¹</span></span></code></pre></div>
+<hr />
+<h2 id="pencil-note-finali">📝 NOTE FINALI</h2>
+<h3 id="precisione-dei-calcoli">Precisione dei Calcoli</h3>
+<ul>
+<li><strong>Approssimativi:</strong> π ≈ 3.14</li>
+<li><strong>Normali:</strong> π ≈ 3.14159</li>
+<li><strong>Alta precisione:</strong> Usare costanti <code>M_PI</code> del linguaggio</li>
+</ul>
+<h3 id="arrotondamenti">Arrotondamenti</h3>
+<p>I valori di conversione sono arrotondati a 5-6 cifre significative per praticità. Per calcoli scientifici critici, usare più cifre.</p>
+<h3 id="sistemi-di-unità">Sistemi di Unità</h3>
+<ul>
+<li><strong>SI</strong> (Sistema Internazionale): standard scientifico mondiale</li>
+<li><strong>Imperiale</strong>: USA, UK parziale</li>
+<li><strong>CGS</strong>: alcuni campi scientifici specifici</li>
+</ul>
+<h3 id="validità-delle-formule">Validità delle Formule</h3>
+<p>Tutte le formule geometriche assumono figure perfette in geometria euclidea. Nel mondo reale, misure possono variare per:</p>
+<ul>
+<li>Imperfezioni materiali</li>
+<li>Temperatura</li>
+<li>Pressione</li>
+<li>Tolleranze di fabbricazione</li>
+</ul>
+<hr />
+<h2 id="books-risorse-aggiuntive">📚 RISORSE AGGIUNTIVE</h2>
+<h3 id="per-programmatori">Per Programmatori</h3>
+<ul>
+<li><strong>NIST Reference on Constants</strong> - valori ufficiali costanti fisiche</li>
+<li><strong>Wolfram MathWorld</strong> - formule matematiche</li>
+<li><strong>ISO 80000</strong> - standard unità di misura</li>
+</ul>
+<h3 id="librerie-cc">Librerie C/C++</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span><span class="pp">      </span><span class="co">// Funzioni matematiche, costanti</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;tgmath.h&gt;</span><span class="pp">    </span><span class="co">// Type-generic math (C99)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;complex.h&gt;</span><span class="pp">   </span><span class="co">// Numeri complessi (C99)</span></span></code></pre></div>
+<hr />
+<h2 id="balance_scale-licenza-e-uso">⚖️ LICENZA E USO</h2>
+<p>📖 <strong>Questo documento è materiale didattico.</strong></p>
+<p><strong>Puoi:</strong></p>
+<ul>
+<li>✅ Studiare e consultare liberamente</li>
+<li>✅ Usare in progetti personali e commerciali</li>
+<li>✅ Condividere con studenti e colleghi</li>
+<li>✅ Implementare in codice (librerie, programmi)</li>
+</ul>
+<p><strong>Nota:</strong></p>
+<ul>
+<li>⚠️ Per applicazioni critiche (mediche, aerospaziali, industriali), verificare sempre i valori con fonti ufficiali (NIST, BIPM, ISO)</li>
+<li>⚠️ Le formule termocoppie sono semplificate; per implementazioni reali usare tabelle NIST complete</li>
+</ul>
+<hr />
+<h2 id="postbox-feedback">📮 FEEDBACK</h2>
+<p>Hai trovato errori o imprecisioni? Hai suggerimenti per migliorare questo riferimento?</p>
+<p>Questo documento è in continua evoluzione per servire meglio studenti, programmatori e ingegneri.</p>
+<hr />
+<p><strong>Versione:</strong> 2.0<br />
+<strong>Formato:</strong> Markdown<br />
+<strong>Ultimo aggiornamento:</strong> 2025<br />
+<strong>Autore:</strong> Materiale didattico per programmazione scientifica</p>
+<hr />
+<h2 id="link-link-rapidi">🔗 LINK RAPIDI</h2>
+<ul>
+<li><a href="#-indice">Torna all&#39;indice ↑</a></li>
+<li><a href="#parte-1-figure-piane-2d">Figure Piane</a></li>
+<li><a href="#parte-2-solidi-3d">Solidi 3D</a></li>
+<li><a href="#parte-3-conversioni-fisiche">Conversioni Fisiche</a></li>
+<li><a href="#parte-4-sensori-di-temperatura---termocoppie">Termocoppie</a></li>
+<li><a href="#parte-5-costanti-fisiche-e-matematiche">Costanti</a></li>
+</ul>
+<hr />
+<p><strong>📐 Buon calcolo e buona programmazione! 🚀</strong></p>
+</main>
+</body>
+</html>

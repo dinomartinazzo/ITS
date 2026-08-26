@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📚 BIBLIOTECA PROMPT 2025</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📚 BIBLIOTECA PROMPT 2025</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>BIBLIOTECA_PROMPT.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale/old</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="collezione-prompt-professionali-per-programmazione-con-ia">Collezione Prompt Professionali per Programmazione con IA</h2>
+<h3 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h3>
+<hr />
+<h2 id="bookmark_tabs-indice">📑 Indice</h2>
+<ol type="1">
+<li><a href="#introduzione">Introduzione</a></li>
+<li><a href="#prompt-generazione-codice-c">Prompt Generazione Codice C</a></li>
+<li><a href="#prompt-arduinoembedded">Prompt Arduino/Embedded</a></li>
+<li><a href="#prompt-debugging">Prompt Debugging</a></li>
+<li><a href="#prompt-testing">Prompt Testing</a></li>
+<li><a href="#prompt-documentazione">Prompt Documentazione</a></li>
+<li><a href="#prompt-ottimizzazione">Prompt Ottimizzazione</a></li>
+<li><a href="#prompt-analisi-e-review">Prompt Analisi e Review</a></li>
+<li><a href="#prompt-apprendimento">Prompt Apprendimento</a></li>
+<li><a href="#best-practices-prompting">Best Practices Prompting</a></li>
+</ol>
+<hr />
+<h2 id="introduzione">Introduzione</h2>
+<p>Questa biblioteca contiene <strong>prompt testati e ottimizzati</strong> per uso con LLM moderni (GPT-4, Claude 3.5, Gemini 1.5) nel contesto di programmazione C e Arduino.</p>
+<p><strong>Come usare:</strong></p>
+<ol type="1">
+<li>Copia il template prompt</li>
+<li>Sostituisci <code>[PARAMETRI]</code> con valori specifici</li>
+<li>Aggiungi contesto se necessario</li>
+<li>Invia all&#39;LLM</li>
+<li>Valida output con checklist</li>
+</ol>
+<p><strong>Convenzioni:</strong></p>
+<ul>
+<li><code>[MAIUSCOLO]</code> = parametro da sostituire</li>
+<li><code>VINCOLI:</code> = requisiti tecnici obbligatori</li>
+<li><code>OUTPUT:</code> = formato risposta atteso</li>
+</ul>
+<hr />
+<h2 id="prompt-generazione-codice-c">Prompt Generazione Codice C</h2>
+<h3 id="template-1-funzione-c-standard">Template 1: Funzione C Standard</h3>
+<pre><code># GENERAZIONE FUNZIONE C 2025
+
+Scrivi in **C99 standard** una funzione:
+
+## Firma
+```c
+[TIPO_RITORNO] [NOME_FUNZIONE]([PARAMETRI]);</code></pre>
+<h2 id="comportamento">Comportamento</h2>
+<p>[Descrizione dettagliata cosa deve fare la funzione]</p>
+<h2 id="vincoli-tecnici">Vincoli Tecnici</h2>
+<ul>
+<li>Standard: C99</li>
+<li>NO estensioni POSIX/GNU (NO strdup, strndup, asprintf)</li>
+<li>Usa SOLO librerie standard: stdio.h, stdlib.h, string.h, stdbool.h</li>
+<li>Compilazione: gcc -std=c99 -Wall -Wextra -Wpedantic -Werror</li>
+</ul>
+<h2 id="gestione-errori">Gestione Errori</h2>
+<ul>
+<li>Controlla puntatori NULL prima dell&#39;uso</li>
+<li>Controlla bounds array</li>
+<li>Ritorna [CODICE_ERRORE] in caso di errore</li>
+<li>Usa defensive programming</li>
+</ul>
+<h2 id="gestione-memoria">Gestione Memoria</h2>
+<ul>
+<li>Se alloca memoria: documenta chi deve chiamare free()</li>
+<li>NO memory leak</li>
+<li>NO double free</li>
+<li>Inizializza puntatori a NULL dopo free()</li>
+</ul>
+<h2 id="inputoutput">Input/Output</h2>
+<ul>
+<li>Input: [specifica parametri e pre-condizioni]</li>
+<li>Output: [specifica return value e post-condizioni]</li>
+<li>Side effects: [modifica parametri? I/O? globali?]</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>Genera anche suite test con assert.h:</p>
+<ul>
+<li>Caso normale</li>
+<li>Edge cases (NULL, 0, vuoti, negativi)</li>
+<li>Boundary conditions</li>
+</ul>
+<h2 id="output-richiesto">Output Richiesto</h2>
+<ol type="1">
+<li>Header comment Doxygen</li>
+<li>Implementazione funzione commentata</li>
+<li>Suite test completa</li>
+<li>Note su limitazioni/miglioramenti possibili</li>
+</ol>
+<pre><code>
+### Template 2: Struttura Dati C
+</code></pre>
+<h1 id="generazione-struttura-dati-c">GENERAZIONE STRUTTURA DATI C</h1>
+<p>Implementa in <strong>C99 standard</strong>:</p>
+<h2 id="tipo-dati">Tipo Dati</h2>
+<p>[es: Lista linkata / Stack / Coda / Hash table]</p>
+<h2 id="strutture">Strutture</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">[</span>NOME<span class="op">]</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span>CAMPI<span class="op">]</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="op">[</span>NOME<span class="op">];</span></span></code></pre></div>
+<h2 id="operazioni-richieste">Operazioni Richieste</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Creazione/Inizializzazione</label></li>
+<li><label><input type="checkbox"></input>Inserimento</label></li>
+<li><label><input type="checkbox"></input>Ricerca</label></li>
+<li><label><input type="checkbox"></input>Eliminazione</label></li>
+<li><label><input type="checkbox"></input>Attraversamento</label></li>
+<li><label><input type="checkbox"></input>Distruzione completa</label></li>
+</ul>
+<h2 id="vincoli">Vincoli</h2>
+<ul>
+<li>C99 standard puro</li>
+<li>Gestione memoria esplicita (malloc/free)</li>
+<li>Controlli NULL su tutti puntatori</li>
+<li>Documentazione Doxygen ogni funzione</li>
+</ul>
+<h2 id="performance">Performance</h2>
+<ul>
+<li>Complessità temporale target: [O(n), O(1), etc]</li>
+<li>Ottimizza per: [memoria / velocità / entrambe]</li>
+</ul>
+<h2 id="testing-1">Testing</h2>
+<p>Test per ogni operazione:</p>
+<ul>
+<li>Caso normale</li>
+<li>Sequenze operazioni</li>
+<li>Edge cases (vuoto, singolo elemento)</li>
+<li>Memory leak (valgrind clean)</li>
+</ul>
+<h2 id="output">Output</h2>
+<ol type="1">
+<li>Header file (.h) con dichiarazioni</li>
+<li>Implementation file (.c)</li>
+<li>Test suite completa</li>
+<li>Esempio uso</li>
+</ol>
+<pre><code>
+### Template 3: Algoritmo Specifico
+</code></pre>
+<h1 id="implementazione-algoritmo-c">IMPLEMENTAZIONE ALGORITMO C</h1>
+<p>Implementa algoritmo <strong>[NOME_ALGORITMO]</strong> in C99:</p>
+<h2 id="specifica">Specifica</h2>
+<p>[Descrizione algoritmo e cosa deve fare]</p>
+<h2 id="firma-funzione">Firma Funzione</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>TIPO<span class="op">]</span> <span class="op">[</span>nome<span class="op">]([</span>parametri<span class="op">]);</span></span></code></pre></div>
+<h2 id="vincoli-1">Vincoli</h2>
+<ul>
+<li>Standard: C99</li>
+<li>Complessità: [O(n log n) / O(n) / etc]</li>
+<li>Spazio: [O(1) / O(n) / etc]</li>
+<li>NO ricorsione se stack limitato</li>
+</ul>
+<h2 id="input">Input</h2>
+<ul>
+<li>Formato: [array / lista / etc]</li>
+<li>Range valori: [0-100 / negativi ammessi / etc]</li>
+<li>Dimensione: [fissa / variabile]</li>
+</ul>
+<h2 id="output-1">Output</h2>
+<ul>
+<li>Formato: [modificato in-place / nuovo array / etc]</li>
+<li>Return value: [successo/errore / risultato]</li>
+</ul>
+<h2 id="casi-speciali">Casi Speciali</h2>
+<ul>
+<li>Array vuoto: [comportamento]</li>
+<li>Singolo elemento: [comportamento]</li>
+<li>Duplicati: [come gestiti]</li>
+</ul>
+<h2 id="testing-2">Testing</h2>
+<ul>
+<li>Dataset piccolo (verifica manuale)</li>
+<li>Dataset grande (performance)</li>
+<li>Edge cases completi</li>
+</ul>
+<h2 id="output-2">Output</h2>
+<ol type="1">
+<li>Implementazione ottimizzata</li>
+<li>Analisi complessità</li>
+<li>Test con benchmark</li>
+</ol>
+<pre><code>
+---
+
+## Prompt Arduino/Embedded
+
+### Template 4: Sketch Arduino Base
+</code></pre>
+<h1 id="sketch-arduino-2025">SKETCH ARDUINO 2025</h1>
+<p>Crea sketch Arduino [BOARD] per:</p>
+<h2 id="hardware">Hardware</h2>
+<p>Board: [Arduino Uno / Nano ESP32 / Mega]<br />
+Componenti:</p>
+<ul>
+<li></li>
+<li></li>
+<li>[...]</li>
+</ul>
+<h2 id="connessioni-pin">Connessioni Pin</h2>
+<pre><code>[COMPONENTE] → Arduino
+  [PIN1] → [ARDUINO_PIN1]
+  [PIN2] → [ARDUINO_PIN2]
+  ...</code></pre>
+<h2 id="funzionalità">Funzionalità</h2>
+<p>[Descrizione dettagliata comportamento sistema]</p>
+<p>Requisiti specifici:</p>
+<ol type="1">
+<li>[REQUISITO_1]</li>
+<li>[REQUISITO_2]</li>
+<li>[...]</li>
+</ol>
+<h2 id="vincoli-tecnici-1">Vincoli Tecnici</h2>
+<ul>
+<li>Logica NON-BLOCCANTE: usa millis(), NO delay() lunghi</li>
+<li>Comunicazione seriale: [BAUD_RATE] baud per debug</li>
+<li>Gestione errori: [sensori / hardware]</li>
+<li>Commenti esplicativi per ogni sezione</li>
+</ul>
+<h2 id="librerie">Librerie</h2>
+<p>[Lista librerie Arduino da usare]</p>
+<ul>
+<li>[LIBRERIA_1] versione [X.Y]</li>
+<li>[LIBRERIA_2]</li>
+</ul>
+<h2 id="timing">Timing</h2>
+<ul>
+<li>[TASK_1]: ogni [X] millisecondi</li>
+<li>[TASK_2]: ogni [Y] secondi</li>
+<li></li>
+</ul>
+<h2 id="gestione-errori-1">Gestione Errori</h2>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<h2 id="output-richiesto-1">Output Richiesto</h2>
+<ol type="1">
+<li>Sketch completo con setup() e loop()</li>
+<li>Tabella pin connections</li>
+<li>Lista librerie da installare (con versioni)</li>
+<li>Istruzioni test rapido</li>
+<li>Note configurazione/calibrazione</li>
+</ol>
+<pre><code>
+### Template 5: Integrazione Sensore
+</code></pre>
+<h1 id="integrazione-sensore-arduino">INTEGRAZIONE SENSORE ARDUINO</h1>
+<p>Integra sensore <strong>[NOME_SENSORE]</strong> in sketch Arduino:</p>
+<h2 id="sensore">Sensore</h2>
+<p>Modello: [es: DHT22 / BMP280 / HC-SR04]<br />
+Protocollo: [I2C / SPI / Analogico / Digitale]<br />
+Datasheet: [link o note chiave]</p>
+<h2 id="connessioni">Connessioni</h2>
+<pre><code>[SENSORE] → Arduino
+  [PIN_1] → [ARDUINO_PIN]
+  [PIN_2] → [ARDUINO_PIN]
+  ...</code></pre>
+<h2 id="libreria">Libreria</h2>
+<p>Nome: [nome libreria ufficiale]<br />
+Installazione: [Arduino IDE / PlatformIO]<br />
+Versione: [X.Y.Z]</p>
+<h2 id="funzioni-richieste">Funzioni Richieste</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Inizializzazione</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setupSensor<span class="op">();</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Lettura dati</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>STRUCT_TYPE<span class="op">]</span> readSensor<span class="op">();</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Validazione lettura</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> isValidReading<span class="op">([</span>STRUCT_TYPE<span class="op">]</span> data<span class="op">);</span></span></code></pre></div>
+<h2 id="struct-dati">Struct Dati</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span>CAMPI_DATI<span class="op">]</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> valid<span class="op">;</span>  <span class="co">// flag validazione</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> SensorData<span class="op">;</span></span></code></pre></div>
+<h2 id="gestione-errori-2">Gestione Errori</h2>
+<ul>
+<li>Timeout lettura: [TIMEOUT_MS] ms</li>
+<li>Valori fuori range: [MIN]-[MAX]</li>
+<li>Sensore disconnesso: [COMPORTAMENTO]</li>
+</ul>
+<h2 id="timing-1">Timing</h2>
+<ul>
+<li>Frequenza lettura: [X] secondi</li>
+<li>Tempo warm-up: [Y] secondi</li>
+<li>Delay minimo tra letture: [Z] ms</li>
+</ul>
+<h2 id="calibrazione">Calibrazione</h2>
+<p>[Procedure calibrazione se necessaria]</p>
+<h2 id="testing-3">Testing</h2>
+<ul>
+<li>Test connessione setup</li>
+<li>Test lettura valori noti</li>
+<li>Test gestione errori</li>
+<li>Stress test (1000+ letture)</li>
+</ul>
+<h2 id="output-3">Output</h2>
+<ol type="1">
+<li>Codice integrazione completo</li>
+<li>Esempio uso nel loop()</li>
+<li>Debug output seriale</li>
+<li>Note troubleshooting comuni</li>
+</ol>
+<pre><code>
+### Template 6: Sistema Multi-Task Arduino
+</code></pre>
+<h1 id="sistema-multi-task-arduino">SISTEMA MULTI-TASK ARDUINO</h1>
+<p>Implementa sistema Arduino con task multipli non-bloccanti:</p>
+<h2 id="tasks">Tasks</h2>
+<p>[Lista task con priorità e timing]</p>
+<p>Task 1: [NOME]</p>
+<ul>
+<li>Frequenza: [ogni X ms]</li>
+<li>Priorità: [alta/media/bassa]</li>
+<li>Funzione: [cosa fa]</li>
+</ul>
+<p>Task 2: [NOME]</p>
+<ul>
+<li>Frequenza: [ogni Y ms]</li>
+<li>Priorità: [alta/media/bassa]</li>
+<li>Funzione: [cosa fa]</li>
+</ul>
+<p>[... altri task]</p>
+<h2 id="architettura">Architettura</h2>
+<p>Pattern: [Simple millis / State Machine / RTOS]</p>
+<p>Se State Machine:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> SystemState <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    STATE_<span class="op">[</span>NOME1<span class="op">],</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    STATE_<span class="op">[</span>NOME2<span class="op">],</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<p>Stati e transizioni:</p>
+<ul>
+<li>[STATO1] → [STATO2]: quando [CONDIZIONE]</li>
+<li>[...]</li>
+</ul>
+<h2 id="timer-non-bloccanti">Timer Non-Bloccanti</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="op">[</span>task1<span class="op">]</span>PrevMillis <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> <span class="op">[</span>task2<span class="op">]</span>PrevMillis <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">long</span> <span class="op">[</span>TASK1<span class="op">]</span>_INTERVAL <span class="op">=</span> <span class="op">[</span>X<span class="op">];</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">long</span> <span class="op">[</span>TASK2<span class="op">]</span>_INTERVAL <span class="op">=</span> <span class="op">[</span>Y<span class="op">];</span></span></code></pre></div>
+<h2 id="priorità">Priorità</h2>
+<p>Se conflitto:</p>
+<ol type="1">
+<li>[TASK_PRIORITA_1]</li>
+<li>[TASK_PRIORITA_2]</li>
+<li>[...]</li>
+</ol>
+<h2 id="gestione-overflow-millis">Gestione Overflow millis()</h2>
+<p>Gestisci correttamente rollover 49 giorni</p>
+<h2 id="sincronizzazione">Sincronizzazione</h2>
+<p>[Come task comunicano tra loro]</p>
+<ul>
+<li>Variabili globali: [quali]</li>
+<li>Flag: [quali]</li>
+</ul>
+<h2 id="output-4">Output</h2>
+<ol type="1">
+<li>Sketch con architettura multi-task</li>
+<li>Diagramma stati (se State Machine)</li>
+<li>Timing analysis (worst-case)</li>
+<li>Note ottimizzazione</li>
+</ol>
+<pre><code>
+---
+
+## Prompt Debugging
+
+### Template 7: Debug Errore Compilatore
+</code></pre>
+<h1 id="debug-errore-compilatore-c">DEBUG ERRORE COMPILATORE C</h1>
+<p>Ho questo codice C che genera errore di compilazione:</p>
+<h2 id="codice">Codice</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE COMPLETO<span class="op">]</span></span></code></pre></div>
+<h2 id="errore-compilatore">Errore Compilatore</h2>
+<pre><code>[INCOLLA OUTPUT ERRORE COMPLETO]</code></pre>
+<h2 id="contesto">Contesto</h2>
+<ul>
+<li>Compilatore: [gcc / clang] versione [X.Y]</li>
+<li>Flag compilazione: [es: -std=c99 -Wall -Wextra]</li>
+<li>OS: [Windows / Linux / Mac]</li>
+<li>Cosa dovrebbe fare: [descrizione funzionalità]</li>
+</ul>
+<h2 id="analizza-e-fornisci">Analizza e Fornisci</h2>
+<ol type="1">
+<li><p><strong>Root Cause</strong></p>
+<ul>
+<li>Causa esatta dell&#39;errore</li>
+<li>Riga/e problematiche</li>
+<li>Perché il compilatore si lamenta</li>
+</ul></li>
+<li><p><strong>Spiegazione Tecnica</strong></p>
+<ul>
+<li>Cosa viola lo standard C</li>
+<li>Regole linguaggio coinvolte</li>
+<li>Esempi simili</li>
+</ul></li>
+<li><p><strong>Fix Completo</strong></p>
+<ul>
+<li>Codice corretto commentato</li>
+<li>Evidenzia modifiche</li>
+<li>Spiega ogni cambio</li>
+</ul></li>
+<li><p><strong>Prevenzione Futura</strong></p>
+<ul>
+<li>Come evitare in futuro</li>
+<li>Best practice correlate</li>
+<li>Tool/warning da usare</li>
+</ul></li>
+<li><p><strong>Test di Validazione</strong></p>
+<ul>
+<li>Come verificare fix</li>
+<li>Test case da provare</li>
+</ul></li>
+</ol>
+<pre><code>
+### Template 8: Debug Runtime Arduino
+</code></pre>
+<h1 id="debug-comportamento-runtime-arduino">DEBUG COMPORTAMENTO RUNTIME ARDUINO</h1>
+<p>Sketch Arduino con comportamento anomalo:</p>
+<h2 id="codice-1">Codice</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA SKETCH<span class="op">]</span></span></code></pre></div>
+<h2 id="problema">Problema</h2>
+<p>Comportamento atteso:<br />
+[DESCRIZIONE]</p>
+<p>Comportamento attuale:<br />
+[DESCRIZIONE]</p>
+<h2 id="sintomi">Sintomi</h2>
+<ul>
+<li>[SINTOMO_1]</li>
+<li>[SINTOMO_2]</li>
+<li>[...]</li>
+</ul>
+<h2 id="setup-hardware">Setup Hardware</h2>
+<ul>
+<li>Board: [Arduino Uno / etc]</li>
+<li>Componenti: [lista]</li>
+<li>Alimentazione: [USB / esterna XVolt]</li>
+</ul>
+<h2 id="osservazioni">Osservazioni</h2>
+<ul>
+<li>Serial monitor output: [se disponibile]</li>
+<li>LED/indicatori: [comportamento]</li>
+<li>Quando si manifesta: [sempre / random / dopo X min]</li>
+</ul>
+<h2 id="tentativi-fatti">Tentativi Fatti</h2>
+<ul>
+<li></li>
+<li></li>
+</ul>
+<h2 id="debug-richiesto">Debug Richiesto</h2>
+<ol type="1">
+<li><p><strong>Analisi Codice</strong></p>
+<ul>
+<li>Identifica possibili cause</li>
+<li>Bug logica / timing / hardware</li>
+</ul></li>
+<li><p><strong>Ipotesi Problemi</strong></p>
+<ul>
+<li>Problema più probabile</li>
+<li>Problemi secondari possibili</li>
+</ul></li>
+<li><p><strong>Debug Steps</strong></p>
+<ul>
+<li>Aggiungi debug print strategici</li>
+<li>Test da fare per isolare</li>
+<li>Measurements con multimetro</li>
+</ul></li>
+<li><p><strong>Fix Proposto</strong></p>
+<ul>
+<li>Codice corretto</li>
+<li>Spiegazione modifiche</li>
+<li>Perché dovrebbe funzionare</li>
+</ul></li>
+<li><p><strong>Verifica</strong></p>
+<ul>
+<li>Come testare il fix</li>
+<li>Cosa monitorare</li>
+</ul></li>
+</ol>
+<pre><code>
+### Template 9: Debug Memory Leak C
+</code></pre>
+<h1 id="debug-memory-leak-c">DEBUG MEMORY LEAK C</h1>
+<p>Programma C con sospetto memory leak:</p>
+<h2 id="codice-2">Codice</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="evidenza-leak">Evidenza Leak</h2>
+<ul>
+<li>Valgrind output: [se disponibile]</li>
+<li>Comportamento: [memoria cresce / crash dopo X minuti]</li>
+<li>Contesto: [quando si manifesta]</li>
+</ul>
+<h2 id="analizza">Analizza</h2>
+<ol type="1">
+<li><p><strong>Leak Detection</strong></p>
+<ul>
+<li>Identifica malloc senza free corrispondente</li>
+<li>Puntatori persi</li>
+<li>Realloc problematici</li>
+</ul></li>
+<li><p><strong>Leak Paths</strong></p>
+<ul>
+<li>Percorsi esecuzione che causano leak</li>
+<li>Condizioni specifiche</li>
+</ul></li>
+<li><p><strong>Fix Completo</strong></p>
+<ul>
+<li>Codice corretto</li>
+<li>Aggiungi free() mancanti</li>
+<li>Pattern ownership chiaro</li>
+</ul></li>
+<li><p><strong>Validazione</strong></p>
+<ul>
+<li>Comando valgrind da usare</li>
+<li>Output atteso (0 bytes leaked)</li>
+</ul></li>
+<li><p><strong>Best Practices</strong></p>
+<ul>
+<li>Pattern safe da usare sempre</li>
+<li>Tool automatici (sanitizers)</li>
+</ul></li>
+</ol>
+<pre><code>
+---
+
+## Prompt Testing
+
+### Template 10: Generazione Suite Test
+</code></pre>
+<h1 id="generazione-test-suite-c">GENERAZIONE TEST SUITE C</h1>
+<p>Genera test completi per questa funzione C:</p>
+<h2 id="funzione-da-testare">Funzione da Testare</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA FIRMA E IMPLEMENTAZIONE<span class="op">]</span></span></code></pre></div>
+<h2 id="test-richiesti">Test Richiesti</h2>
+<ol type="1">
+<li><p><strong>Unit Tests</strong></p>
+<ul>
+<li>Casi normali (happy path)</li>
+<li>Edge cases: NULL, 0, vuoti, negativi</li>
+<li>Boundary conditions (min, max, overflow)</li>
+<li>Invalid input</li>
+</ul></li>
+<li><p><strong>Framework</strong><br />
+Usa assert.h (C standard):</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;assert.h&gt;</span></span></code></pre></div></li>
+<li><p><strong>Struttura</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> test_<span class="op">[</span>funzione<span class="op">]</span>_<span class="op">[</span>scenario<span class="op">]()</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Setup</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Execute</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assert</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Cleanup</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p><strong>Coverage</strong></p>
+<ul>
+<li>Tutti branch if/else</li>
+<li>Tutti casi switch</li>
+<li>Loop: 0, 1, many iterations</li>
+<li>Errori gestiti</li>
+</ul></li>
+<li><p><strong>Main Test</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    test_caso1<span class="op">();</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    test_caso2<span class="op">();</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;✅ All tests passed!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ol>
+<h2 id="output-5">Output</h2>
+<ol type="1">
+<li>File test completo compilabile</li>
+<li>Commenti su cosa testa ogni assert</li>
+<li>Note su coverage raggiunta</li>
+<li>Comando compilazione ed esecuzione</li>
+</ol>
+<pre><code>
+### Template 11: Test Hardware Arduino
+</code></pre>
+<h1 id="test-plan-hardware-arduino">TEST PLAN HARDWARE ARDUINO</h1>
+<p>Genera piano test per progetto Arduino:</p>
+<h2 id="sistema">Sistema</h2>
+<p>[Descrizione setup hardware e funzionalità]</p>
+<h2 id="test-checklist">Test Checklist</h2>
+<h3 id="unit-tests-componenti-singoli">Unit Tests (Componenti Singoli)</h3>
+<ul class="task-list">
+<li><p><label><input type="checkbox"></input>Test sensore 1: [NOME]</label></p>
+<ul>
+<li>Lettura valori corretti</li>
+<li>Gestione disconnessione</li>
+<li>Timing rispettato</li>
+</ul></li>
+<li><p><label><input type="checkbox"></input>Test attuatore 1: [NOME]</label></p>
+<ul>
+<li>Risponde a comandi</li>
+<li>Range operativo corretto</li>
+</ul></li>
+<li><p><label><input type="checkbox"></input>Test display: [NOME]</label></p>
+<ul>
+<li>Testo leggibile</li>
+<li>Update senza flicker</li>
+</ul></li>
+</ul>
+<p>[... altri componenti]</p>
+<h3 id="integration-tests">Integration Tests</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Test comunicazione moduli</label></li>
+<li><label><input type="checkbox"></input>Test timing multi-task</label></li>
+<li><label><input type="checkbox"></input>Test gestione errori</label></li>
+</ul>
+<h3 id="system-tests">System Tests</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Test scenario normale</label></li>
+<li><label><input type="checkbox"></input>Test condizioni estreme</label></li>
+<li><label><input type="checkbox"></input>Test lungo periodo (8+ ore)</label></li>
+</ul>
+<h3 id="stress-tests">Stress Tests</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Test sotto carico</label></li>
+<li><label><input type="checkbox"></input>Test memory usage</label></li>
+<li><label><input type="checkbox"></input>Test overflow/rollover</label></li>
+</ul>
+<h2 id="procedure-test">Procedure Test</h2>
+<p>Per ogni test:</p>
+<ol type="1">
+<li><strong>Setup</strong>: [cosa preparare]</li>
+<li><strong>Esecuzione</strong>: [steps]</li>
+<li><strong>Verifica</strong>: [cosa controllare]</li>
+<li><strong>Criteri pass/fail</strong>: [valori attesi]</li>
+</ol>
+<h2 id="test-automation">Test Automation</h2>
+<p>Funzioni test automatiche dove possibile:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> testSensor<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// return true se pass</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="output-6">Output</h2>
+<ol type="1">
+<li>Checklist stampabile</li>
+<li>Codice test automatici</li>
+<li>Test log template</li>
+<li>Criteri accettazione</li>
+</ol>
+<pre><code>
+---
+
+## Prompt Documentazione
+
+### Template 12: README.md Progetto
+</code></pre>
+<h1 id="generazione-readmemd-professionale">GENERAZIONE README.MD PROFESSIONALE</h1>
+<p>Genera README.md completo per:</p>
+<h2 id="progetto">Progetto</h2>
+<p>Nome: [NOME_PROGETTO]<br />
+Tipo: [Arduino / C library / Tool]<br />
+Scopo: [descrizione breve]</p>
+<h2 id="informazioni">Informazioni</h2>
+<ul>
+<li>Linguaggio: [C / C++ / Arduino]</li>
+<li>Board: [se applicabile]</li>
+<li>Licenza: [MIT / GPL / Apache]</li>
+</ul>
+<h2 id="sezioni-readme">Sezioni README</h2>
+<h3 id="1-header">1. Header</h3>
+<ul>
+<li>Titolo con emoji appropriata</li>
+<li>Badge: ![Arduino](shields.io badge)</li>
+<li>Badge: ![License](license badge)</li>
+<li>Tagline breve (1 frase)</li>
+</ul>
+<h3 id="2-features">2. Features</h3>
+<p>Lista bullet delle funzionalità principali con emoji:</p>
+<ul>
+<li>🎯 [feature 1]</li>
+<li>⚡ [feature 2]<br />
+[...]</li>
+</ul>
+<h3 id="3-hardware-se-arduino">3. Hardware (se Arduino)</h3>
+<p>Tabella BOM (Bill of Materials):<br />
+| Componente | Qty | Note |<br />
+|---|---|---|</p>
+<h3 id="4-wiringcollegamenti">4. Wiring/Collegamenti</h3>
+<p>Schema connessioni in formato code block:</p>
+<pre><code>[Component] → Arduino
+  Pin1 → PinX
+  ...</code></pre>
+<h3 id="5-installazione">5. Installazione</h3>
+<p>Steps numerati:</p>
+<ol type="1">
+<li>Installa [tool]</li>
+<li>Clona repository</li>
+<li>[...]</li>
+</ol>
+<h3 id="6-configurazione">6. Configurazione</h3>
+<p>Parametri configurabili</p>
+<h3 id="7-uso">7. Uso</h3>
+<p>Esempi pratici</p>
+<h3 id="8-documentazione-api">8. Documentazione API</h3>
+<p>(se libreria)</p>
+<h3 id="9-testing">9. Testing</h3>
+<p>Come testare</p>
+<h3 id="10-troubleshooting">10. Troubleshooting</h3>
+<p>FAQ problemi comuni</p>
+<h3 id="11-sviluppi-futuri">11. Sviluppi Futuri</h3>
+<p>Roadmap</p>
+<h3 id="12-contributi">12. Contributi</h3>
+<p>Come contribuire</p>
+<h3 id="13-licenza">13. Licenza</h3>
+<p>Dettagli licenza</p>
+<h3 id="14-autore">14. Autore</h3>
+<p>Info contatti</p>
+<h2 id="stile">Stile</h2>
+<ul>
+<li>Markdown professionale</li>
+<li>Emoji moderate</li>
+<li>Code blocks evidenziati</li>
+<li>Immagini/diagrammi (descrizione)</li>
+<li>Beginner-friendly</li>
+</ul>
+<h2 id="output-7">Output</h2>
+<p>README.md completo pronto per GitHub</p>
+<pre><code>
+### Template 13: Commenti Codice Doxygen
+</code></pre>
+<h1 id="documentazione-codice-doxygen">DOCUMENTAZIONE CODICE DOXYGEN</h1>
+<p>Genera commenti Doxygen professionali per:</p>
+<h2 id="codice-3">Codice</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA FUNZIONE<span class="op">/</span>STRUCT<span class="op">/</span><span class="dt">FILE</span><span class="op">]</span></span></code></pre></div>
+<h2 id="formato-doxygen">Formato Doxygen</h2>
+<h3 id="per-funzioni">Per Funzioni</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> [Descrizione breve 1 riga]</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * [Descrizione dettagliata multi-riga se necessario]</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> [</span><span class="cv">nome_param</span><span class="co">] [descrizione]</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@param</span><span class="co"> [</span><span class="cv">nome_param2</span><span class="co">] [descrizione]</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@return</span><span class="co"> [descrizione return value]</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@retval</span><span class="co"> [</span><span class="cv">valore_speciale</span><span class="co">] [quando ritorna questo]</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="in">@note</span><span class="co"> [Note importanti]</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="wa">@warning</span><span class="co"> [Warning critici]</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@pre</span><span class="co"> [Pre-condizioni]</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@post</span><span class="co"> [Post-condizioni]</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@see</span><span class="co"> [riferimenti altre funzioni]</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@example</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co"> * [esempio uso]</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span></code></pre></div>
+<h3 id="per-struct">Per Struct</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> [Descrizione struct]</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@struct</span><span class="co"> [</span><span class="cv">nome</span><span class="co">]</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * [Dettagli uso]</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> campo1<span class="op">;</span>  <span class="co">/**&lt; descrizione campo */</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> campo2<span class="op">;</span>  <span class="co">/**&lt; descrizione campo */</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Nome<span class="op">;</span></span></code></pre></div>
+<h3 id="per-file">Per File</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> [</span><span class="cv">nome_file.c</span><span class="co">]</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> [Scopo file]</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> [Nome Autore]</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> [Data]</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@version</span><span class="co"> [</span><span class="cv">X.Y.Z</span><span class="co">]</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"> * [Descrizione contenuto]</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span></code></pre></div>
+<h2 id="output-8">Output</h2>
+<p>Codice con commenti Doxygen completi</p>
+<pre><code>
+---
+
+## Prompt Ottimizzazione
+
+### Template 14: Ottimizzazione Performance
+</code></pre>
+<h1 id="ottimizzazione-performance-carduino">OTTIMIZZAZIONE PERFORMANCE C/ARDUINO</h1>
+<p>Ottimizza questo codice per performance:</p>
+<h2 id="codice-attuale">Codice Attuale</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="profiling-info">Profiling Info</h2>
+<p>[Se disponibile]</p>
+<ul>
+<li>Funzione più lenta: [nome] ([X]ms)</li>
+<li>Memoria usata: [Y] bytes</li>
+<li>Bottleneck identificato: [descrizione]</li>
+</ul>
+<h2 id="obiettivi-ottimizzazione">Obiettivi Ottimizzazione</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Ridurre tempo esecuzione: target [X]ms</label></li>
+<li><label><input type="checkbox"></input>Ridurre uso RAM: target [Y] bytes</label></li>
+<li><label><input type="checkbox"></input>Ridurre consumo energia (se embedded)</label></li>
+<li><label><input type="checkbox"></input>Altro: [specifica]</label></li>
+</ul>
+<h2 id="vincoli-2">Vincoli</h2>
+<ul>
+<li>Mantenere leggibilità: [alta/media]</li>
+<li>Compatibilità: [C99 / Arduino]</li>
+<li>NO assembly inline</li>
+<li>NO inline assembly</li>
+</ul>
+<h2 id="tecniche-da-applicare">Tecniche da Applicare</h2>
+<ul>
+<li>Loop unrolling</li>
+<li>Strength reduction</li>
+<li>Eliminazione calcoli ridondanti</li>
+<li>Cache-friendly data structures</li>
+<li>Uso PROGMEM (Arduino)</li>
+<li>Integer al posto float dove possibile</li>
+</ul>
+<h2 id="output-richiesto-2">Output Richiesto</h2>
+<ol type="1">
+<li><p><strong>Codice Ottimizzato</strong></p>
+<ul>
+<li>Con commenti su ottimizzazioni</li>
+<li>Before/After per ogni cambio</li>
+</ul></li>
+<li><p><strong>Analisi Performance</strong></p>
+<ul>
+<li>Speedup atteso</li>
+<li>Trade-off (memoria vs velocità)</li>
+</ul></li>
+<li><p><strong>Benchmark</strong></p>
+<ul>
+<li>Come misurare miglioramento</li>
+<li>Test da fare</li>
+</ul></li>
+<li><p><strong>Note</strong></p>
+<ul>
+<li>Optimizations applicate</li>
+<li>Limitazioni</li>
+<li>Ulteriori miglioramenti possibili</li>
+</ul></li>
+</ol>
+<pre><code>
+### Template 15: Ottimizzazione Memoria Arduino
+</code></pre>
+<h1 id="ottimizzazione-memoria-arduino">OTTIMIZZAZIONE MEMORIA ARDUINO</h1>
+<p>Riduci uso RAM di questo sketch Arduino:</p>
+<h2 id="sketch-attuale">Sketch Attuale</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="situazione-memoria">Situazione Memoria</h2>
+<ul>
+<li>Board: [Arduino Uno / Mega / etc]</li>
+<li>RAM totale: [X] bytes</li>
+<li>RAM usata: [Y] bytes ([Z]%)</li>
+<li>Target: &lt; [W]%</li>
+</ul>
+<h2 id="ram-usage-report">RAM Usage Report</h2>
+<p>[Da Arduino IDE: Sketch → Verify/Compile]</p>
+<pre><code>Global variables use X bytes (Y%) of dynamic memory</code></pre>
+<h2 id="tecniche-ottimizzazione">Tecniche Ottimizzazione</h2>
+<ol type="1">
+<li><p><strong>Stringhe in PROGMEM</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span> str<span class="op">[]</span> PROGMEM <span class="op">=</span> <span class="st">&quot;...&quot;</span><span class="op">;</span></span></code></pre></div></li>
+<li><p><strong>F() Macro per Seriale</strong></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Serial<span class="op">.</span>println<span class="op">(</span>F<span class="op">(</span><span class="st">&quot;testo&quot;</span><span class="op">));</span></span></code></pre></div></li>
+<li><p><strong>Eliminare String class</strong><br />
+Usare char[] statici</p></li>
+<li><p><strong>Ottimizzare struct</strong></p>
+<ul>
+<li>Padding aware</li>
+<li>Bitfields dove appropriato</li>
+</ul></li>
+<li><p><strong>Buffer statici riusabili</strong></p></li>
+<li><p><strong>Const/static dove possibile</strong></p></li>
+</ol>
+<h2 id="output-9">Output</h2>
+<ol type="1">
+<li>Sketch ottimizzato</li>
+<li>Prima/dopo ogni cambio</li>
+<li>Nuovo RAM usage</li>
+<li>Checklist applicata</li>
+</ol>
+<pre><code>
+---
+
+## Prompt Analisi e Review
+
+### Template 16: Code Review
+</code></pre>
+<h1 id="code-review-carduino">CODE REVIEW C/ARDUINO</h1>
+<p>Fai review professionale di questo codice:</p>
+<h2 id="codice-4">Codice</h2>
+<div class="sourceCode" id="cb44"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="contesto-1">Contesto</h2>
+<ul>
+<li>Linguaggio: [C99 / Arduino]</li>
+<li>Scopo: [descrizione funzionalità]</li>
+<li>Target: [embedded / desktop / etc]</li>
+</ul>
+<h2 id="aspetti-da-revieware">Aspetti da Revieware</h2>
+<h3 id="1-correttezza">1. Correttezza</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Implementazione corretta</label></li>
+<li><label><input type="checkbox"></input>Edge cases gestiti</label></li>
+<li><label><input type="checkbox"></input>Nessun bug ovvio</label></li>
+</ul>
+<h3 id="2-sicurezza">2. Sicurezza</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Buffer overflow check</label></li>
+<li><label><input type="checkbox"></input>Null pointer check</label></li>
+<li><label><input type="checkbox"></input>Integer overflow</label></li>
+<li><label><input type="checkbox"></input>Memory leak</label></li>
+</ul>
+<h3 id="3-performance">3. Performance</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Algoritmi efficienti</label></li>
+<li><label><input type="checkbox"></input>Uso memoria ottimale</label></li>
+<li><label><input type="checkbox"></input>NO operazioni ridondanti</label></li>
+</ul>
+<h3 id="4-maintainability">4. Maintainability</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Codice leggibile</label></li>
+<li><label><input type="checkbox"></input>Naming chiaro</label></li>
+<li><label><input type="checkbox"></input>Commenti utili</label></li>
+<li><label><input type="checkbox"></input>Struttura modulare</label></li>
+</ul>
+<h3 id="5-best-practices">5. Best Practices</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Coding standard rispettato</label></li>
+<li><label><input type="checkbox"></input>Gestione errori completa</label></li>
+<li><label><input type="checkbox"></input>Resource cleanup (RAII pattern)</label></li>
+</ul>
+<h3 id="6-portabilità">6. Portabilità</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>C99 standard compliance</label></li>
+<li><label><input type="checkbox"></input>NO dipendenze platform-specific</label></li>
+</ul>
+<h2 id="output-review">Output Review</h2>
+<h3 id="issues-trovati">Issues Trovati</h3>
+<p>Per ogni issue:<br />
+<strong>[SEVERITY: CRITICAL/HIGH/MEDIUM/LOW]</strong></p>
+<ul>
+<li>Riga: [X]</li>
+<li>Problema: [descrizione]</li>
+<li>Fix suggerito: [codice]</li>
+</ul>
+<h3 id="suggestions">Suggestions</h3>
+<ul>
+<li>[miglioramenti non critici]</li>
+</ul>
+<h3 id="positives">Positives</h3>
+<ul>
+<li>[cosa è fatto bene]</li>
+</ul>
+<h3 id="overall-rating">Overall Rating</h3>
+<p>[1-10] con motivazione</p>
+<pre><code>
+### Template 17: Analisi Sicurezza
+</code></pre>
+<h1 id="security-analysis-c-code">SECURITY ANALYSIS C CODE</h1>
+<p>Analizza sicurezza di questo codice C:</p>
+<h2 id="codice-5">Codice</h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="scope">Scope</h2>
+<ul>
+<li>Tipo applicazione: [embedded / server / etc]</li>
+<li>Input source: [user / network / sensor]</li>
+<li>Privilegi: [user / system]</li>
+</ul>
+<h2 id="vulnerabilità-da-cercare">Vulnerabilità da Cercare</h2>
+<h3 id="memory-safety">Memory Safety</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Buffer overflow (strcpy, strcat, gets)</label></li>
+<li><label><input type="checkbox"></input>Heap overflow</label></li>
+<li><label><input type="checkbox"></input>Stack overflow</label></li>
+<li><label><input type="checkbox"></input>Use after free</label></li>
+<li><label><input type="checkbox"></input>Double free</label></li>
+<li><label><input type="checkbox"></input>Memory leak (DoS)</label></li>
+</ul>
+<h3 id="integer-issues">Integer Issues</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Integer overflow/underflow</label></li>
+<li><label><input type="checkbox"></input>Signedness issues</label></li>
+<li><label><input type="checkbox"></input>Type confusion</label></li>
+</ul>
+<h3 id="input-validation">Input Validation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Unvalidated input</label></li>
+<li><label><input type="checkbox"></input>Format string bugs</label></li>
+<li><label><input type="checkbox"></input>Injection flaws</label></li>
+</ul>
+<h3 id="race-conditions">Race Conditions</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>TOCTOU (Time of Check Time of Use)</label></li>
+<li><label><input type="checkbox"></input>Unsafe globals</label></li>
+</ul>
+<h3 id="crypto">Crypto</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Weak RNG</label></li>
+<li><label><input type="checkbox"></input>Hardcoded secrets</label></li>
+</ul>
+<h2 id="report">Report</h2>
+<h3 id="vulnerabilities-found">Vulnerabilities Found</h3>
+<p>Per ogni vulnerabilità:<br />
+<strong>CVE Reference (se applicabile)</strong></p>
+<ul>
+<li>Severity: [CRITICAL/HIGH/MEDIUM/LOW]</li>
+<li>Type: [buffer overflow/etc]</li>
+<li>Location: Line [X]</li>
+<li>Exploit scenario: [descrizione]</li>
+<li>Fix: [codice sicuro]</li>
+</ul>
+<h3 id="mitigations">Mitigations</h3>
+<ul>
+<li>Compiler flags: [-fstack-protector, -D_FORTIFY_SOURCE=2]</li>
+<li>Static analysis: [tool da usare]</li>
+</ul>
+<h3 id="security-score">Security Score</h3>
+<p>[0-10] con giustificazione</p>
+<pre><code>
+---
+
+## Prompt Apprendimento
+
+### Template 18: Spiegazione Codice
+</code></pre>
+<h1 id="spiegazione-codice">SPIEGAZIONE CODICE</h1>
+<p>Spiega questo codice C/Arduino in dettaglio:</p>
+<h2 id="codice-6">Codice</h2>
+<div class="sourceCode" id="cb48"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>INCOLLA CODICE<span class="op">]</span></span></code></pre></div>
+<h2 id="livello-target">Livello Target</h2>
+<p>[Beginner / Intermediate / Advanced]</p>
+<h2 id="spiegazione-richiesta">Spiegazione Richiesta</h2>
+<h3 id="1-overview">1. Overview</h3>
+<ul>
+<li>Cosa fa il codice (high-level)</li>
+<li>Perché è strutturato così</li>
+</ul>
+<h3 id="2-step-by-step">2. Step-by-Step</h3>
+<p>Spiega riga per riga o blocco per blocco:</p>
+<ul>
+<li>Cosa fa</li>
+<li>Perché è necessario</li>
+<li>Come funziona</li>
+</ul>
+<h3 id="3-concetti-chiave">3. Concetti Chiave</h3>
+<p>Approfondisci:</p>
+<ul>
+<li></li>
+<li></li>
+<li>Pattern usati</li>
+</ul>
+<h3 id="4-variazioni">4. Variazioni</h3>
+<ul>
+<li>Come modificare per [caso_uso_diverso]</li>
+<li>Approcci alternativi</li>
+</ul>
+<h3 id="5-pitfalls">5. Pitfalls</h3>
+<ul>
+<li>Errori comuni da evitare</li>
+<li>Cosa NON fare</li>
+</ul>
+<h2 id="formato-output">Formato Output</h2>
+<ul>
+<li>Spiegazione chiara per livello target</li>
+<li>Esempi concreti</li>
+<li>Analogie se utili</li>
+<li>Codice annotato inline</li>
+</ul>
+<pre><code>
+### Template 19: Tutorial Step-by-Step
+</code></pre>
+<h1 id="tutorial-programmazione">TUTORIAL PROGRAMMAZIONE</h1>
+<p>Crea tutorial step-by-step per:</p>
+<h2 id="obiettivo">Obiettivo</h2>
+<p>[es: &quot;Imparare a usare I2C su Arduino&quot;]</p>
+<h2 id="target-audience">Target Audience</h2>
+<p>Livello: [Beginner / Intermediate]<br />
+Prerequisiti: [cosa devono già sapere]</p>
+<h2 id="struttura-tutorial">Struttura Tutorial</h2>
+<h3 id="introduzione-10">Introduzione (10%)</h3>
+<ul>
+<li>Cosa impareranno</li>
+<li>Perché è utile</li>
+<li>Cosa serve (HW/SW)</li>
+</ul>
+<h3 id="teoria-20">Teoria (20%)</h3>
+<ul>
+<li>Concetti fondamentali</li>
+<li>Come funziona sotto il cofano</li>
+<li>Terminologia chiave</li>
+</ul>
+<h3 id="pratica-60">Pratica (60%)</h3>
+<p>Esercizi progressivi:</p>
+<h4 id="esercizio-1-nome">Esercizio 1: [Nome]</h4>
+<p>Difficoltà: ⭐</p>
+<ul>
+<li>Obiettivo: [cosa si impara]</li>
+<li>Codice starter</li>
+<li>Steps guidati</li>
+<li>Soluzione completa</li>
+<li>Cosa abbiamo imparato</li>
+</ul>
+<h4 id="esercizio-2-nome">Esercizio 2: [Nome]</h4>
+<p>Difficoltà: ⭐⭐<br />
+[...]</p>
+<h4 id="progetto-finale">Progetto Finale</h4>
+<p>Difficoltà: ⭐⭐⭐</p>
+<ul>
+<li>Combina tutti concetti</li>
+<li>Specifiche</li>
+<li>Hints (no soluzione completa)</li>
+</ul>
+<h3 id="troubleshooting-10">Troubleshooting (10%)</h3>
+<ul>
+<li>Problemi comuni</li>
+<li>Soluzioni</li>
+</ul>
+<h3 id="next-steps">Next Steps</h3>
+<ul>
+<li>Cosa studiare dopo</li>
+<li>Risorse aggiuntive</li>
+</ul>
+<h2 id="stile-1">Stile</h2>
+<ul>
+<li>Linguaggio chiaro e friendly</li>
+<li>Tanti esempi</li>
+<li>Diagrammi (descrizione verbale)</li>
+<li>Checkpoint verifica comprensione</li>
+</ul>
+<h2 id="output-10">Output</h2>
+<p>Tutorial markdown completo pronto per pubblicazione</p>
+<pre><code>
+---
+
+## Best Practices Prompting
+
+### Regole d&#39;Oro
+
+1. **Sii Specifico**
+   ❌ &quot;Scrivi codice Arduino&quot;
+   ✅ &quot;Scrivi sketch Arduino Uno per LED RGB su pin 9,10,11 con fade effect&quot;
+
+2. **Specifica Standard**
+   ❌ &quot;Usa C&quot;
+   ✅ &quot;Usa C99 standard, NO estensioni POSIX&quot;
+
+3. **Chiedi Validazione**
+   ✅ &quot;Includi anche test con assert.h&quot;
+
+4. **Contesto Completo**
+   ✅ Include: hardware, vincoli, obiettivi
+
+5. **Output Strutturato**
+   ✅ &quot;Output: 1. Codice 2. Test 3. Note&quot;
+
+6. **Esempi Input/Output**
+   ✅ Mostra esempi concreti quando possibile
+
+### Checklist Prompt Efficace
+</code></pre>
+<p>[ ] Obiettivo chiaro?<br />
+[ ] Standard/versione specificata?<br />
+[ ] Vincoli tecnici elencati?<br />
+[ ] Formato output definito?<br />
+[ ] Contesto sufficiente?<br />
+[ ] Esempi inclusi (se utili)?<br />
+[ ] Criteri validazione chiari?</p>
+<pre><code>
+### Prompt Engineering Patterns
+
+#### Pattern 1: Chain of Thought
+Chiedi ragionamento esplicito:</code></pre>
+<p>&quot;Prima analizza il problema, poi proponi architettura,<br />
+poi implementa con spiegazioni per ogni scelta.&quot;</p>
+<pre><code>
+#### Pattern 2: Few-Shot
+Fornisci esempi:</code></pre>
+<p>&quot;Esempio 1: [input] → [output]<br />
+Esempio 2: [input] → [output]<br />
+Ora fai per: [nuovo input]&quot;</p>
+<pre><code>
+#### Pattern 3: Role Playing
+Assegna ruolo:</code></pre>
+<p>&quot;Sei un senior embedded engineer.<br />
+Rivedi questo codice come faresti in code review professionale.&quot;</p>
+<pre><code>
+#### Pattern 4: Iterative Refinement
+Migliora in passi:</code></pre>
+<p>&quot;Step 1: Implementa versione base funzionante<br />
+Step 2: Aggiungi gestione errori<br />
+Step 3: Ottimizza performance&quot;</p>
+<pre><code>
+---
+
+## 🎯 Quick Reference
+
+### Prompt Veloce Generazione Codice</code></pre>
+<p>&quot;Scrivi in C99 funzione <a href="[PARAMETRI]">NOME</a> che [COSA_FA].<br />
+Vincoli: NO POSIX, gestione errori completa, test inclusi.&quot;</p>
+<pre><code>
+### Prompt Veloce Debug</code></pre>
+<p>&quot;Debug questo codice C:<br />
+[CODICE]<br />
+Errore: [MESSAGGIO]<br />
+Spiega causa e fornisci fix.&quot;</p>
+<pre><code>
+### Prompt Veloce Arduino</code></pre>
+<p>&quot;Sketch Arduino [BOARD] con [SENSORE] su pin [X].<br />
+Funzionalità: [COSA_FA].<br />
+Usa millis(), NO delay lunghi.&quot;</p>
+<pre><code>
+### Prompt Veloce Documentazione</code></pre>
+<p>&quot;Genera README.md per [PROGETTO]:</p>
+<ul>
+<li>Features</li>
+<li>BOM</li>
+<li>Wiring</li>
+<li>Setup</li>
+<li>Uso<br />
+Stile: professionale, markdown.&quot;</li>
+</ul>
+<pre><code>
+---
+
+## 📊 Metriche Qualità Prompt
+
+**Prompt di Qualità Alta:**
+- Specificità: 9/10
+- Vincoli chiari: Sì
+- Output definito: Sì
+- Validazione: Test inclusi
+- Risultato: Codice production-ready al primo colpo
+
+**Prompt di Qualità Bassa:**
+- Specificità: 3/10
+- Vincoli: Vaghi
+- Output: Generico
+- Validazione: Assente
+- Risultato: Richiede 5+ iterazioni
+
+---
+
+## 🚀 Workflow Ottimale
+</code></pre>
+<ol type="1">
+<li>DEFINISCI obiettivo preciso<br />
+↓</li>
+<li>SCEGLI template appropriato<br />
+↓</li>
+<li>PERSONALIZZA con specifiche<br />
+↓</li>
+<li>INVIA a LLM (GPT-4/Claude 3.5/Gemini)<br />
+↓</li>
+<li>VALIDA output con checklist<br />
+↓</li>
+<li>TESTA codice generato<br />
+↓</li>
+<li>ITERA se necessario (max 2-3 volte)<br />
+↓</li>
+<li>DOCUMENTA prompt efficaci per riuso</li>
+</ol>
+<pre><code>
+---
+
+## 📝 Note Finali
+
+Questa biblioteca è **viva** e va **aggiornata**:
+- Aggiungi prompt che funzionano bene per te
+- Annota LLM e versione usata
+- Condividi con team/classe
+- Fai versioning (Git)
+
+**Last Updated:** Gennaio 2025
+**Tested with:** GPT-4 Turbo, Claude 3.5 Sonnet, Gemini 1.5 Pro
+
+---
+
+**Fine Biblioteca Prompt** 📚✨
+
+*Usa saggiamente, valida sempre, codifica sicuro!*
+</code></pre>
+</main>
+</body>
+</html>

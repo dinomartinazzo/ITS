@@ -1,0 +1,2374 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📘 LEZIONE 4: GESTIONE PROGETTI E DOCUMENTAZIONE</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📘 LEZIONE 4: GESTIONE PROGETTI E DOCUMENTAZIONE</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>04_LEZIONE_4.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="corso-its---intelligenza-artificiale-e-programmazione-assistita">Corso ITS - Intelligenza Artificiale e Programmazione Assistita</h2>
+<p><strong>Durata:</strong> 2 ore<br />
+<strong>Struttura:</strong> 1 ora teoria + 1 ora pratica<br />
+<strong>Livello:</strong> Intermedio-Avanzato<br />
+<strong>Prerequisiti:</strong> Lezioni 1-3 completate, familiarità con programmazione base</p>
+<hr />
+<h2 id="dart-obiettivi-della-lezione">🎯 Obiettivi della Lezione</h2>
+<p>Al termine di questa lezione sarai in grado di:</p>
+<p>✅ <strong>Pianificare</strong> progetti software con metodologia strutturata<br />
+✅ <strong>Progettare</strong> architetture con supporto IA<br />
+✅ <strong>Documentare</strong> codice professionalmente (README, commenti, Doxygen)<br />
+✅ <strong>Usare</strong> Git per version control<br />
+✅ <strong>Collaborare</strong> efficacemente in team con IA<br />
+✅ <strong>Creare</strong> portfolio di progetti per colloqui<br />
+✅ <strong>Applicare</strong> workflow professionali end-to-end</p>
+<hr />
+<h2 id="clipboard-struttura-della-lezione">📋 Struttura della Lezione</h2>
+<h3 id="parte-1-teoria-60-minuti"><strong>PARTE 1: TEORIA (60 minuti)</strong></h3>
+<ol type="1">
+<li><p><strong>Metodologia di Progetto con IA</strong> (15 min)</p>
+<ul>
+<li>Dalla idea al codice funzionante</li>
+<li>Design-first vs code-first</li>
+<li>Ruolo dell&#39;IA in ogni fase</li>
+</ul></li>
+<li><p><strong>Workflow Professionale</strong> (15 min)</p>
+<ul>
+<li>Requirements → Design → Implementation → Testing → Documentation</li>
+<li>Iterazione e feedback loop</li>
+<li>Quality assurance</li>
+</ul></li>
+<li><p><strong>Documentazione Tecnica</strong> (15 min)</p>
+<ul>
+<li>README.md efficaci</li>
+<li>Commenti in-code (Doxygen)</li>
+<li>Schemi e diagrammi</li>
+<li>Documentation-driven development</li>
+</ul></li>
+<li><p><strong>Git e Version Control</strong> (15 min)</p>
+<ul>
+<li>Concetti base: repository, commit, branch</li>
+<li>Workflow Git standard</li>
+<li>Best practices per commit message</li>
+<li>Collaborazione e code review</li>
+</ul></li>
+</ol>
+<h3 id="parte-2-pratica-60-minuti"><strong>PARTE 2: PRATICA (60 minuti)</strong></h3>
+<ol start="5" type="1">
+<li><p><strong>Workshop: Progettare con IA</strong> (15 min)</p>
+<ul>
+<li>Definire requirements</li>
+<li>Creare design document</li>
+<li>Generare scheletro progetto</li>
+</ul></li>
+<li><p><strong>Generare Documentazione</strong> (15 min)</p>
+<ul>
+<li>README.md completo</li>
+<li>Commenti Doxygen</li>
+<li>User guide</li>
+</ul></li>
+<li><p><strong>Git Hands-On</strong> (20 min)</p>
+<ul>
+<li>Inizializzare repository</li>
+<li>Commit workflow</li>
+<li>Branching e merging</li>
+<li>Push su GitHub</li>
+</ul></li>
+<li><p><strong>Progetto Completo</strong> (10 min)</p>
+<ul>
+<li>Integrazione di tutti i concetti</li>
+<li>Checklist finale</li>
+</ul></li>
+</ol>
+<hr />
+<hr />
+<h1 id="parte-1-teoria-60-minuti-1">PARTE 1: TEORIA (60 MINUTI)</h1>
+<hr />
+<h2 id="1-metodologia-di-progetto-con-ia-15-minuti">1. METODOLOGIA DI PROGETTO CON IA (15 minuti)</h2>
+<h3 id="11-dalla-idea-al-codice-funzionante">1.1 Dalla Idea al Codice Funzionante</h3>
+<p><strong>Il processo tradizionale (senza IA):</strong></p>
+<pre><code>Idea → Ricerca → Design → Implementazione (lenta) → Debug → Test → Deploy
+        ↑                                                              ↓
+        └──────────────── Feedback (settimane) ─────────────────────────┘</code></pre>
+<p><strong>Il processo moderno (con IA):</strong></p>
+<pre><code>Idea → Design con IA → Implementazione rapida → Validazione → Iterazione
+       ↓                      ↓                      ↓
+    Minuti               Ore (non giorni)      Feedback immediato</code></pre>
+<p><strong>Differenze chiave:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Senza IA</th>
+<th>Con IA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ricerca</strong></td>
+<td>Ore su Stack Overflow</td>
+<td>Chiedi all&#39;IA (minuti)</td>
+</tr>
+<tr>
+<td><strong>Design</strong></td>
+<td>Carta e penna</td>
+<td>IA genera opzioni con pro/contro</td>
+</tr>
+<tr>
+<td><strong>Implementazione</strong></td>
+<td>Scrivi tutto a mano</td>
+<td>IA genera boilerplate, tu customizzi</td>
+</tr>
+<tr>
+<td><strong>Debug</strong></td>
+<td>Printf debugging</td>
+<td>IA analizza errori e suggerisce fix</td>
+</tr>
+<tr>
+<td><strong>Documentazione</strong></td>
+<td>Compito noioso</td>
+<td>IA genera bozza, tu raffini</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Importante:</strong> L&#39;IA accelera OGNI fase, ma <strong>tu rimani il decision maker</strong>.</p>
+<h3 id="12-design-first-vs-code-first">1.2 Design-First vs Code-First</h3>
+<p><strong>❌ Code-First (Approccio istintivo ma rischioso):</strong></p>
+<pre><code>Studente: &quot;Voglio fare un gestionale studenti&quot;
+          ↓
+     Apre editor, inizia a scrivere codice
+          ↓
+     Dopo 100 righe: &quot;Aspetta, come gestisco errori?&quot;
+          ↓
+     Dopo 200 righe: &quot;Come faccio a testare questo?&quot;
+          ↓
+     Dopo 500 righe: &quot;Devo rifare tutto da capo!&quot;</code></pre>
+<p><strong>Risultato:</strong> Codice disorganizzato, difficile da mantenere, tempo sprecato.</p>
+<hr />
+<p><strong>✅ Design-First (Approccio professionale):</strong></p>
+<pre><code>Idea: &quot;Gestionale studenti&quot;
+  ↓
+Definisci requirements (con IA):
+  - Cosa deve fare esattamente?
+  - Quali dati gestisce?
+  - Quali operazioni serve?
+  ↓
+Design architettura (con IA):
+  - Quali strutture dati?
+  - Quali moduli/file?
+  - Interfaccia utente?
+  ↓
+Implementa modulo per modulo
+  ↓
+Testa sistematicamente
+  ↓
+Documenta</code></pre>
+<p><strong>Risultato:</strong> Codice pulito, manutenibile, meno bug, tempo risparmiato.</p>
+<p><strong>Analogia:</strong></p>
+<blockquote>
+<p>Costruire software senza design è come costruire una casa senza progetto. Forse riesci a fare 4 muri, ma probabilmente dovrai demolire e rifare.</p>
+</blockquote>
+<h3 id="13-le-5-fasi-del-progetto-con-ia">1.3 Le 5 Fasi del Progetto con IA</h3>
+<p><strong>FASE 1: REQUIREMENTS (Cosa serve?)</strong></p>
+<p><strong>Cosa fare:</strong></p>
+<ul>
+<li>Definisci obiettivi chiari</li>
+<li>Elenca funzionalità richieste</li>
+<li>Identifica vincoli (tempo, risorse, skills)</li>
+</ul>
+<p><strong>Come l&#39;IA aiuta:</strong></p>
+<pre><code>Prompt:
+Ho un&#39;idea per un progetto: [descrivi idea].
+Aiutami a definire requirements chiari e strutturati.
+Dividi in:
+- Must have (essenziale)
+- Should have (importante)
+- Nice to have (opzionale)</code></pre>
+<p><strong>Output IA:</strong> Lista organizzata di features.</p>
+<hr />
+<p><strong>FASE 2: DESIGN (Come farlo?)</strong></p>
+<p><strong>Cosa fare:</strong></p>
+<ul>
+<li>Scegli architettura</li>
+<li>Definisci strutture dati</li>
+<li>Pianifica moduli e interfacce</li>
+<li>Considera alternatives (trade-offs)</li>
+</ul>
+<p><strong>Come l&#39;IA aiuta:</strong></p>
+<pre><code>Prompt:
+Per il progetto [X] con requirements [Y],
+proponi 3 alternative di architettura.
+Per ognuna, analizza:
+- Pro e contro
+- Complessità implementazione
+- Estendibilità futura
+- Performance</code></pre>
+<p><strong>Output IA:</strong> Opzioni confrontabili. <strong>TU decidi</strong> quale usare.</p>
+<hr />
+<p><strong>FASE 3: IMPLEMENTATION (Codice)</strong></p>
+<p><strong>Cosa fare:</strong></p>
+<ul>
+<li>Implementa modulo per modulo</li>
+<li>Usa IA per generare boilerplate</li>
+<li>Customizza per il tuo caso</li>
+<li>Valida continuamente</li>
+</ul>
+<p><strong>Come l&#39;IA aiuta:</strong></p>
+<pre><code>Prompt:
+Genera scheletro del modulo [X] che implementa [Y].
+Include:
+- Strutture dati
+- Funzioni pubbliche (solo firma)
+- Gestione errori
+- Commenti TODO per logica</code></pre>
+<p><strong>Tu completi la logica specifica.</strong></p>
+<hr />
+<p><strong>FASE 4: TESTING (Funziona?)</strong></p>
+<p><strong>Cosa fare:</strong></p>
+<ul>
+<li>Test ogni funzione</li>
+<li>Test integrazione</li>
+<li>Edge cases</li>
+<li>Valgrind/sanitizer</li>
+</ul>
+<p><strong>Come l&#39;IA aiuta:</strong></p>
+<pre><code>Prompt:
+Genera suite di test per questa funzione:
+[codice]
+
+Include test per:
+- Happy path
+- Edge cases (NULL, empty, boundary)
+- Error handling</code></pre>
+<hr />
+<p><strong>FASE 5: DOCUMENTATION (Spiegare agli altri)</strong></p>
+<p><strong>Cosa fare:</strong></p>
+<ul>
+<li>README per overview</li>
+<li>Commenti in-code per dettagli</li>
+<li>User guide se applicabile</li>
+<li>Architecture document (per progetti grandi)</li>
+</ul>
+<p><strong>Come l&#39;IA aiuta:</strong></p>
+<pre><code>Prompt:
+Genera README.md professionale per questo progetto:
+[descrizione]
+
+Include:
+- Overview
+- Installation
+- Usage examples
+- API documentation
+- Contributing guidelines</code></pre>
+<h3 id="14-esempio-progetto-task-manager-cli">1.4 Esempio: Progetto &quot;Task Manager&quot; CLI</h3>
+<p><strong>Applichiamo le 5 fasi:</strong></p>
+<p><strong>FASE 1: Requirements</strong></p>
+<pre><code>Progetto: Task Manager da linea di comando
+
+Must have:
+- Aggiungere task (titolo, descrizione, priorità)
+- Elencare task
+- Marcare task come completato
+- Salvare su file (persistenza)
+
+Should have:
+- Filtrare per priorità
+- Ricerca per parola chiave
+
+Nice to have:
+- Deadline con reminder
+- Categorie/tag</code></pre>
+<p><strong>FASE 2: Design</strong></p>
+<pre><code>Architettura scelta:
+- task.h/task.c: Struttura Task e operazioni base
+- storage.h/storage.c: Salvataggio/caricamento da file
+- ui.h/ui.c: Interfaccia utente (menu)
+- main.c: Entry point
+
+Strutture dati:
+- typedef struct Task { int id; char *title; ... }
+- Dynamic array di Task per gestire lista
+
+File storage:
+- Format: JSON o CSV (scegliamo CSV per semplicità)</code></pre>
+<p><strong>FASE 3-5:</strong> Implementazione, testing, documentazione (vedremo in pratica).</p>
+<hr />
+<h2 id="2-workflow-professionale-15-minuti">2. WORKFLOW PROFESSIONALE (15 minuti)</h2>
+<h3 id="21-il-ciclo-di-sviluppo">2.1 Il Ciclo di Sviluppo</h3>
+<p><strong>Workflow standard professionale:</strong></p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                    SVILUPPO SOFTWARE                    │
+└─────────────────────────────────────────────────────────┘
+         ↓
+┌─────────────────┐
+│ 1. REQUIREMENTS │  ← Cosa serve?
+│   - User stories│
+│   - Specs       │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 2. DESIGN       │  ← Come farlo?
+│   - Architecture│
+│   - Data models │
+│   - API design  │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 3. IMPLEMENT    │  ← Scrivi codice
+│   - Modulo 1    │
+│   - Modulo 2... │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 4. TEST         │  ← Funziona?
+│   - Unit tests  │
+│   - Integration │
+│   - Valgrind    │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 5. CODE REVIEW  │  ← Qualità OK?
+│   - Peer review │
+│   - Refactoring │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 6. DOCUMENTATION│  ← Comprensibile?
+│   - README      │
+│   - Comments    │
+│   - User guide  │
+└────────┬────────┘
+         ↓
+┌─────────────────┐
+│ 7. DEPLOY       │  ← Rilascia!
+│   - Git tag     │
+│   - Release     │
+└─────────────────┘
+         │
+         └──────► Manutenzione e iterazione</code></pre>
+<h3 id="22-iterazione-e-feedback-loop">2.2 Iterazione e Feedback Loop</h3>
+<p><strong>Sviluppo NON è lineare!</strong></p>
+<pre><code>        ┌─────────────────┐
+        │   Requirements  │
+        └────────┬────────┘
+                 ↓
+        ┌─────────────────┐
+    ┌──→│     Design      │←──┐
+    │   └────────┬────────┘   │
+    │            ↓             │
+    │   ┌─────────────────┐   │
+    │   │  Implementation │   │
+    │   └────────┬────────┘   │
+    │            ↓             │
+    │   ┌─────────────────┐   │
+    └───│     Testing     │   │
+        └────────┬────────┘   │
+                 ↓             │
+        ┌─────────────────┐   │
+        │  Trovato bug?   │───┘ (torna a design/implementation)
+        └────────┬────────┘
+                 ↓ (no bug)
+        ┌─────────────────┐
+        │   Documentation │
+        └────────┬────────┘
+                 ↓
+        ┌─────────────────┐
+        │     Deploy      │
+        └─────────────────┘</code></pre>
+<p><strong>È normale tornare indietro!</strong> Trovare bug durante testing che richiedono modifica design è <strong>parte del processo</strong>.</p>
+<h3 id="23-quality-assurance-checklist">2.3 Quality Assurance Checklist</h3>
+<p><strong>Prima di considerare un progetto &quot;completo&quot;:</strong></p>
+<p><strong>✅ Funzionalità:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Tutte le features richieste implementate</label></li>
+<li><label><input type="checkbox"></input>Edge cases gestiti</label></li>
+<li><label><input type="checkbox"></input>Error handling completo</label></li>
+</ul>
+<p><strong>✅ Codice:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Compila senza warning (<code>-Wall -Wextra</code>)</label></li>
+<li><label><input type="checkbox"></input>Nessun memory leak (Valgrind clean)</label></li>
+<li><label><input type="checkbox"></input>Naming consistente e significativo</label></li>
+<li><label><input type="checkbox"></input>Funzioni &lt; 50 righe (se possibile)</label></li>
+<li><label><input type="checkbox"></input>Nessuna duplicazione evidente</label></li>
+</ul>
+<p><strong>✅ Testing:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Unit test per ogni funzione critica</label></li>
+<li><label><input type="checkbox"></input>Integration test per workflow completi</label></li>
+<li><label><input type="checkbox"></input>Testato su input edge case</label></li>
+<li><label><input type="checkbox"></input>Performance accettabile</label></li>
+</ul>
+<p><strong>✅ Documentazione:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>README.md completo</label></li>
+<li><label><input type="checkbox"></input>Commenti in-code dove necessario</label></li>
+<li><label><input type="checkbox"></input>API documentation (se libreria)</label></li>
+<li><label><input type="checkbox"></input>User guide (se applicazione)</label></li>
+</ul>
+<p><strong>✅ Version Control:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Tutto committato su Git</label></li>
+<li><label><input type="checkbox"></input>Commit message significativi</label></li>
+<li><label><input type="checkbox"></input>Tagged release version</label></li>
+<li><label><input type="checkbox"></input>Pushed su GitHub/GitLab</label></li>
+</ul>
+<h3 id="24-time-management-con-ia">2.4 Time Management con IA</h3>
+<p><strong>Stima tradizionale vs con IA:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Tempo senza IA</th>
+<th>Tempo con IA</th>
+<th>Saving</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirements gathering</td>
+<td>2h</td>
+<td>1h</td>
+<td>-50%</td>
+</tr>
+<tr>
+<td>Design architettura</td>
+<td>4h</td>
+<td>2h</td>
+<td>-50%</td>
+</tr>
+<tr>
+<td>Implementazione base</td>
+<td>8h</td>
+<td>3h</td>
+<td>-62%</td>
+</tr>
+<tr>
+<td>Debugging</td>
+<td>4h</td>
+<td>2h</td>
+<td>-50%</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>3h</td>
+<td>2h</td>
+<td>-33%</td>
+</tr>
+<tr>
+<td>Documentazione</td>
+<td>3h</td>
+<td>1h</td>
+<td>-67%</td>
+</tr>
+<tr>
+<td><strong>TOTALE</strong></td>
+<td><strong>24h</strong></td>
+<td><strong>11h</strong></td>
+<td><strong>-54%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Nota:</strong> I numeri variano, ma trend è chiaro: <strong>IA dimezza tempi</strong>.</p>
+<p><strong>Dove l&#39;IA risparmia più tempo:</strong></p>
+<ol type="1">
+<li><strong>Boilerplate code</strong> (struct, header guards, ecc.)</li>
+<li><strong>Debugging</strong> (analisi errori compilatore)</li>
+<li><strong>Documentazione</strong> (genera bozze)</li>
+<li><strong>Ricerca</strong> (Stack Overflow integrato)</li>
+</ol>
+<p><strong>Dove l&#39;IA NON risparmia tempo:</strong></p>
+<ul>
+<li>Pensiero critico (design decisions)</li>
+<li>Comprensione del dominio</li>
+<li>Testing approfondito</li>
+<li>Code review finale</li>
+</ul>
+<hr />
+<h2 id="3-documentazione-tecnica-15-minuti">3. DOCUMENTAZIONE TECNICA (15 minuti)</h2>
+<h3 id="31-readmemd-efficaci">3.1 README.md Efficaci</h3>
+<p><strong>README.md è la PRIMA cosa che la gente vede del tuo progetto.</strong></p>
+<p>Un buon README risponde a queste domande:</p>
+<ol type="1">
+<li><strong>Cosa fa</strong> questo progetto?</li>
+<li><strong>Perché</strong> dovrei usarlo?</li>
+<li><strong>Come</strong> lo installo?</li>
+<li><strong>Come</strong> lo uso?</li>
+<li><strong>Come</strong> contribuisco? (se open source)</li>
+</ol>
+<p><strong>Struttura standard README.md:</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nome Progetto</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Breve descrizione (1-2 frasi) di cosa fa.</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Features</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Feature 1</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Feature 2</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Feature 3</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Comandi per installare dipendenze e compilare</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/user/project.git</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> project</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div>
+<h2 id="usage">Usage</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Esempi di uso base</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./program</span> <span class="at">--help</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./program</span> input.txt output.txt</span></code></pre></div>
+<h2 id="examples">Examples</h2>
+<p>[Screenshot o esempi di output]</p>
+<h2 id="documentation">Documentation</h2>
+<p>Link a documentazione dettagliata se disponibile.</p>
+<h2 id="testing">Testing</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Come eseguire i test</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test</span></code></pre></div>
+<h2 id="contributing">Contributing</h2>
+<p>Linee guida per contribuire (se open source).</p>
+<h2 id="license">License</h2>
+<p>MIT / GPL / etc.</p>
+<h2 id="authors">Authors</h2>
+<ul>
+<li>Nome Cognome - <a href="https://github.com/username">@github</a></li>
+</ul>
+<pre><code>
+**Esempio concreto: Task Manager**
+
+````markdown
+# Task Manager CLI
+
+Un semplice ma potente task manager da linea di comando scritto in C.
+Perfetto per gestire le tue TODO list direttamente dal terminale.
+
+## Features
+
+- ✅ Aggiungere, elencare, completare task
+- 💾 Persistenza automatica su file
+- 🔍 Ricerca e filtraggio per priorità
+- 🎯 Interfaccia semplice e intuitiva
+
+## Installation
+
+### Requisiti
+
+- GCC o Clang
+- Make
+- Linux/macOS/Windows (MinGW)
+
+### Compilazione
+
+```bash
+git clone https://github.com/yourusername/taskmanager.git
+cd taskmanager
+make</code></pre>
+<h2 id="usage-1">Usage</h2>
+<h3 id="comandi-base">Comandi Base</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggiungere un task</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./taskmanager</span> add <span class="st">&quot;Studiare per esame&quot;</span> <span class="at">--priority</span> high</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Elencare tutti i task</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./taskmanager</span> list</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Marcare come completato</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ex">./taskmanager</span> complete 1</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrare per priorità</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="ex">./taskmanager</span> list <span class="at">--priority</span> high</span></code></pre></div>
+<h3 id="esempi">Esempi</h3>
+<pre><code>$ ./taskmanager list
+┌────┬───────────────────────────────────┬──────────┬───────────┐
+│ ID │ Title                             │ Priority │ Status    │
+├────┼───────────────────────────────────┼──────────┼───────────┤
+│ 1  │ Studiare per esame                │ HIGH     │ Pending   │
+│ 2  │ Comprare latte                    │ LOW      │ Completed │
+└────┴───────────────────────────────────┴──────────┴───────────┘</code></pre>
+<h2 id="documentation-1">Documentation</h2>
+<p>Vedi <a href="DOCUMENTATION.md">DOCUMENTATION.md</a> per API dettagliate.</p>
+<h2 id="testing-1">Testing</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># O con Valgrind:</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> valgrind-test</span></code></pre></div>
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>taskmanager/
+├── src/
+│   ├── main.c
+│   ├── task.c/.h       # Struttura Task e operazioni
+│   ├── storage.c/.h    # Persistenza file
+│   └── ui.c/.h         # Interfaccia utente
+├── tests/
+│   └── test_task.c
+├── Makefile
+└── README.md</code></pre>
+<h2 id="contributing-1">Contributing</h2>
+<p>Contributi sono benvenuti! Apri una issue o pull request.</p>
+<h2 id="license-1">License</h2>
+<p>MIT License - vedi <a href="LICENSE">LICENSE</a></p>
+<h2 id="author">Author</h2>
+<ul>
+<li>Mario Rossi - <a href="https://github.com/mariorossi">@mariorossi</a></li>
+</ul>
+<hr />
+<p><strong>Made with ❤️ and Claude Code</strong></p>
+<pre><code>
+**🎯 Prompt per generare README:**
+
+```
+Genera un README.md professionale per questo progetto:
+
+Progetto: [nome e descrizione]
+Features: [lista features]
+Tecnologie: [C, Make, ecc.]
+Target utente: [chi userà questo?]
+
+Includi:
+- Badge (se applicabile)
+- Sezioni standard (Installation, Usage, etc.)
+- Esempi di comandi
+- Project structure
+- Emoji appropriati per leggibilità
+```
+
+### 3.2 Commenti In-Code (Doxygen)
+
+**Quando commentare:**
+
+**❌ NON commentare ovvietà:**
+
+```c
+// Incrementa i
+i++;
+
+// Somma a e b
+int sum = a + b;
+```
+
+**✅ Commenta il &quot;PERCHÉ&quot;, non il &quot;COSA&quot;:**
+
+```c
+// Skip header row (data starts at line 2)
+for (int i = 1; i &lt; size; i++) { ... }
+
+// Use binary search since array is pre-sorted
+int index = binary_search(arr, value);
+```
+
+**Commenti Doxygen per API:**
+
+```c
+/**
+ * @brief Aggiunge un task alla lista
+ *
+ * Crea un nuovo task con i parametri specificati e lo aggiunge
+ * alla lista dinamica, espandendo se necessario.
+ *
+ * @param list Puntatore alla lista di task
+ * @param title Titolo del task (max 100 caratteri)
+ * @param priority Priorità: 0=low, 1=medium, 2=high
+ * @return 0 se successo, -1 se errore (malloc failure o parametri invalidi)
+ *
+ * @note list deve essere inizializzata con task_list_create()
+ * @warning title viene copiato, quindi può essere liberato dal caller
+ *
+ * @code
+ * TaskList *list = task_list_create();
+ * task_add(list, &quot;Buy milk&quot;, 0);
+ * task_add(list, &quot;Study for exam&quot;, 2);
+ * @endcode
+ */
+int task_add(TaskList *list, const char *title, int priority);
+```
+
+**Tag Doxygen comuni:**
+
+| Tag | Uso |
+|-----|-----|
+| `@brief` | Descrizione breve (1 riga) |
+| `@param` | Descrizione parametro |
+| `@return` | Descrizione valore di ritorno |
+| `@note` | Nota importante |
+| `@warning` | Avvertimento |
+| `@code ... @endcode` | Esempio di codice |
+| `@see` | Riferimento ad altra funzione |
+
+**Generare HTML da Doxygen:**
+
+```bash
+# Installa Doxygen
+sudo apt install doxygen
+
+# Genera config
+doxygen -g
+
+# Genera documentazione
+doxygen Doxyfile
+
+# Apri html/index.html nel browser
+```
+
+### 3.3 Architecture Documentation
+
+**Per progetti complessi, documenta architettura:**
+
+**File: ARCHITECTURE.md**
+
+```markdown
+# Architecture
+
+## Overview
+
+Questo progetto è organizzato in 3 layer principali:
+- **Data Layer**: Gestione strutture dati (task.c)
+- **Storage Layer**: Persistenza (storage.c)
+- **UI Layer**: Interfaccia utente (ui.c)
+
+## Data Flow
+
+```
+User Input (ui.c)
+    ↓
+Validation (ui.c)
+    ↓
+Business Logic (task.c)
+    ↓
+Persistence (storage.c)
+    ↓
+File System
+```
+
+## Module Dependencies
+
+```
+main.c
+  ├── ui.c
+  │   └── task.c
+  └── storage.c
+      └── task.c
+```
+
+## Key Design Decisions
+
+### Why CSV instead of JSON for storage?
+- Semplicità parsing
+- Nessuna dipendenza esterna
+- Human-readable
+
+### Why dynamic array instead of linked list?
+- Accesso O(1) per indice
+- Migliore cache locality
+- Array piccoli (&lt;1000 elementi)
+```
+
+### 3.4 User Guide (se applicazione)
+
+**Per applicazioni end-user, includi guida:**
+
+**File: USER_GUIDE.md**
+
+```markdown
+# Task Manager - User Guide
+
+## Getting Started
+
+### First Launch
+
+Alla prima esecuzione, il programma crea automaticamente
+il file `tasks.csv` nella directory corrente.
+
+### Adding Your First Task
+
+```bash
+./taskmanager add &quot;My first task&quot;
+```
+
+## Common Workflows
+
+### Daily Review
+
+1. Visualizza task pendenti:
+   ```bash
+   ./taskmanager list --status pending
+   ```
+
+2. Completa task finiti:
+   ```bash
+   ./taskmanager complete &lt;id&gt;
+   ```
+
+3. Aggiungi nuovi task per domani
+
+### Priority Management
+
+Task con priorità HIGH vengono mostrati per primi:
+
+```bash
+./taskmanager list --sort priority
+```
+
+## Troubleshooting
+
+### &quot;File not found&quot;
+Assicurati di essere nella directory giusta o specifica
+path con `--file /path/to/tasks.csv`
+
+### &quot;Permission denied&quot;
+Controlla permessi file tasks.csv: `chmod 644 tasks.csv`
+```
+
+---
+
+## 4. GIT E VERSION CONTROL (15 minuti)
+
+### 4.1 Concetti Base
+
+**Cos&#39;è Git?**
+
+Sistema di **version control distribuito** che traccia modifiche al codice.
+
+**Perché usare Git?**
+
+1. **Storia completa**: Vedi ogni modifica mai fatta
+2. **Backup**: Codice al sicuro su GitHub/GitLab
+3. **Collaborazione**: Lavora in team senza conflitti
+4. **Esperimenti**: Prova modifiche senza rompere codice funzionante
+5. **Portfolio**: Mostra progetti a recruiter
+
+**Concetti chiave:**
+
+```
+┌──────────────────────────────────────────┐
+│          REPOSITORY (Progetto)           │
+├──────────────────────────────────────────┤
+│  main (branch principale)                │
+│    ↓                                     │
+│  [Commit 1] ← [Commit 2] ← [Commit 3]    │
+│    &quot;Initial&quot;  &quot;Add feature&quot; &quot;Fix bug&quot;    │
+│                                          │
+│  feature-branch (branch sviluppo)        │
+│    ↓                                     │
+│  [Commit 4] ← [Commit 5]                 │
+│    &quot;WIP&quot;      &quot;Feature done&quot;             │
+└──────────────────────────────────────────┘
+```
+
+**Repository:** Cartella del progetto tracciata da Git
+**Commit:** Snapshot del codice in un momento specifico
+**Branch:** Linea di sviluppo parallela
+**Remote:** Copia del repository su server (es: GitHub)
+
+### 4.2 Workflow Git Standard
+
+**Setup iniziale (una volta sola):**
+
+```bash
+# Configura identità
+git config --global user.name &quot;Mario Rossi&quot;
+git config --global user.email &quot;mario@example.com&quot;
+
+# Editor preferito
+git config --global core.editor &quot;code&quot;  # VSCode
+```
+
+**Workflow quotidiano:**
+
+```bash
+# 1. Inizializza repository (prima volta)
+git init
+
+# 2. Aggiungi file allo stage
+git add file.c file.h
+
+# 3. Crea commit
+git commit -m &quot;Add feature X&quot;
+
+# 4. Push su GitHub
+git push origin main
+```
+
+**Workflow dettagliato:**
+
+```
+┌─────────────────────────────────────────────┐
+│  Working Directory (i tuoi file)            │
+│    file.c (modificato)                      │
+└────────────┬────────────────────────────────┘
+             │ git add file.c
+             ↓
+┌─────────────────────────────────────────────┐
+│  Staging Area (pronti per commit)           │
+│    file.c (staged)                          │
+└────────────┬────────────────────────────────┘
+             │ git commit -m &quot;message&quot;
+             ↓
+┌─────────────────────────────────────────────┐
+│  Local Repository (storia locale)           │
+│    [Commit con file.c]                      │
+└────────────┬────────────────────────────────┘
+             │ git push
+             ↓
+┌─────────────────────────────────────────────┐
+│  Remote Repository (GitHub)                 │
+│    [Commit accessibile a tutti]             │
+└─────────────────────────────────────────────┘
+```
+
+**Comandi essenziali:**
+
+```bash
+# Vedere stato corrente
+git status
+
+# Vedere modifiche
+git diff
+
+# Storia commit
+git log
+git log --oneline --graph
+
+# Creare branch
+git branch feature-x
+git checkout feature-x
+# O in un comando:
+git checkout -b feature-x
+
+# Merge branch
+git checkout main
+git merge feature-x
+
+# Pull (scaricare aggiornamenti)
+git pull origin main
+
+# Clone (scaricare progetto esistente)
+git clone https://github.com/user/project.git
+```
+
+### 4.3 Best Practices per Commit Message
+
+**❌ Commit message CATTIVI:**
+
+```
+git commit -m &quot;fix&quot;
+git commit -m &quot;update&quot;
+git commit -m &quot;stuff&quot;
+git commit -m &quot;asdfasdf&quot;
+```
+
+Tra 6 mesi non capirai cosa hai fatto!
+
+**✅ Commit message BUONI:**
+
+```
+git commit -m &quot;Fix buffer overflow in parse_input()&quot;
+git commit -m &quot;Add priority filtering to task list&quot;
+git commit -m &quot;Refactor storage module for better error handling&quot;
+git commit -m &quot;Update README with installation instructions&quot;
+```
+
+**Formato standard:**
+
+```
+&lt;type&gt;: &lt;short description&gt;
+
+[optional body]
+
+[optional footer]
+```
+
+**Types comuni:**
+
+- `feat`: Nuova feature
+- `fix`: Bug fix
+- `docs`: Documentazione
+- `refactor`: Refactoring (no new feature, no bug fix)
+- `test`: Aggiunta test
+- `chore`: Task vari (build, config)
+
+**Esempi:**
+
+```
+feat: Add CSV export functionality
+
+Implemented export_to_csv() function that writes all tasks
+to a CSV file with proper escaping.
+
+Closes #42
+```
+
+```
+fix: Prevent memory leak in task_free()
+
+task_free() was not freeing the title string, causing
+a leak detected by Valgrind.
+```
+
+```
+docs: Update API documentation for storage module
+
+Added Doxygen comments to all public functions.
+```
+
+**Regole d&#39;oro:**
+
+1. **Prima riga max 50 caratteri** (titolo)
+2. **Usa imperativo**: &quot;Add feature&quot; not &quot;Added feature&quot;
+3. **Spiega il WHY**, non il WHAT (il codice mostra il WHAT)
+4. **Reference issue** se applicabile (#42)
+
+### 4.4 Branching Strategy
+
+**Per progetti personali:**
+
+```
+main (sempre funzionante)
+  │
+  ├─ feature-1 (sviluppo feature)
+  │
+  └─ bugfix-x (fix urgente)
+```
+
+**Workflow:**
+
+```bash
+# 1. Crea branch per feature
+git checkout -b feature-task-search
+# 2. Sviluppa e committa
+git add search.c search.h
+git commit -m &quot;feat: Add task search functionality&quot;
+# 3. Torna a main
+git checkout main
+# 4. Merge feature
+git merge feature-task-search
+# 5. Elimina branch (opzionale)
+git branch -d feature-task-search
+```
+
+**Per team:**
+
+Strategie comuni: Git Flow, GitHub Flow, GitLab Flow (oltre scope di questo corso).
+
+### 4.5 .gitignore
+
+**File da NON committare:**
+
+- File compilati (`*.o`, `*.exe`, `a.out`)
+- File di build (`build/`, `bin/`)
+- File dell&#39;editor (`.vscode/`, `.idea/`)
+- Dati personali/sensibili
+- File temporanei
+
+**Esempio .gitignore:**
+
+```
+# Compiled files
+*.o
+*.exe
+*.out
+a.out
+
+# Build directories
+build/
+bin/
+obj/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+lib/
+
+# Data files (se contengono dati sensibili)
+# *.csv
+# *.db
+```
+
+---
+
+---
+
+# PARTE 2: PRATICA (60 MINUTI)
+
+---
+
+## 5. WORKSHOP: PROGETTARE CON IA (15 minuti)
+
+### 5.1 Esercizio Guidato: Sistema di Biblioteca
+
+**Scenario:** Vuoi creare un sistema per gestire prestiti di libri in una biblioteca.
+
+**STEP 1: Definire Requirements con IA**
+
+**Prompt:**
+
+```
+Voglio creare un sistema di gestione biblioteca in C per un progetto ITS.
+
+Aiutami a definire requirements chiari e strutturati.
+
+Contesto:
+- Biblioteca piccola (max 1000 libri, 100 utenti)
+- Sistema CLI (non GUI)
+- Dati persistiti su file
+- Progetto didattico (semplicità priorità su performance)
+
+Dividi requirements in:
+- Must have (essenziale MVP)
+- Should have (importante)
+- Nice to have (se c&#39;è tempo)
+
+Per ogni requirement, indica stima complessità (low/medium/high).
+```
+
+**Output atteso IA:**
+
+```
+REQUIREMENTS - Sistema Gestione Biblioteca
+
+MUST HAVE (MVP):
+1. [LOW] Aggiungere libri (titolo, autore, ISBN)
+2. [MEDIUM] Registrare prestiti (chi ha preso cosa, quando)
+3. [MEDIUM] Restituire libri
+4. [LOW] Elencare libri disponibili
+5. [MEDIUM] Salvare/caricare dati da file
+
+SHOULD HAVE:
+6. [MEDIUM] Ricerca libri per titolo/autore
+7. [LOW] Visualizzare storico prestiti utente
+8. [MEDIUM] Gestione utenti (aggiungere, rimuovere)
+9. [LOW] Calcolare multe per ritardi
+
+NICE TO HAVE:
+10. [HIGH] Sistema di prenotazioni
+11. [MEDIUM] Statistiche (libri più prestati)
+12. [HIGH] Import/export CSV
+13. [LOW] Supporto multi-lingua
+
+STIMA TOTALE: ~40 ore sviluppo (solo MVP: ~20 ore)
+```
+
+**STEP 2: Design Architettura con IA**
+
+**Prompt:**
+
+```
+Per il sistema biblioteca con questi requirements:
+[incolla requirements must-have]
+
+Proponi architettura modulare in C.
+
+Specifica:
+1. Strutture dati principali
+2. Moduli (file .c/.h) e responsabilità
+3. Interfacce tra moduli
+4. Format file per persistenza
+
+Obiettivo: Codice manutenibile e testabile.
+```
+
+**Output atteso IA:**
+
+```
+ARCHITETTURA - Sistema Biblioteca
+
+STRUTTURE DATI:
+
+```c
+typedef struct {
+    char isbn[14];
+    char title[100];
+    char author[100];
+    bool is_available;
+} Book;
+
+typedef struct {
+    int user_id;
+    char name[100];
+} User;
+
+typedef struct {
+    char isbn[14];
+    int user_id;
+    time_t loan_date;
+    time_t return_date;  // 0 se non ancora restituito
+} Loan;
+
+typedef struct {
+    Book *books;
+    size_t book_count;
+    size_t book_capacity;
+} BookCatalog;
+
+typedef struct {
+    Loan *loans;
+    size_t loan_count;
+    size_t loan_capacity;
+} LoanHistory;
+```
+
+MODULI:
+
+1. **book.c/book.h**
+   - Gestione catalogo libri
+   - Funzioni: book_add(), book_find(), book_list()
+
+2. **loan.c/loan.h**
+   - Gestione prestiti
+   - Funzioni: loan_create(), loan_return(), loan_list_active()
+
+3. **user.c/user.h**
+   - Gestione utenti
+   - Funzioni: user_add(), user_find()
+
+4. **storage.c/storage.h**
+   - Persistenza dati
+   - Funzioni: save_all(), load_all()
+
+5. **ui.c/ui.h**
+   - Interfaccia utente (menu)
+   - Funzioni: show_menu(), get_user_choice()
+
+6. **main.c**
+   - Entry point, loop principale
+
+FILE PERSISTENZA:
+- books.csv: isbn,title,author,is_available
+- users.csv: id,name
+- loans.csv: isbn,user_id,loan_date,return_date
+
+FLUSSO DATI:
+main.c → ui.c → loan.c/book.c → storage.c → file system
+```
+
+**STEP 3: Generare Scheletro Progetto**
+
+**Prompt:**
+
+```
+Genera lo scheletro completo del progetto (solo header e funzioni vuote).
+
+Per book.h e book.c, implementa la struttura completa con:
+- Commenti Doxygen per ogni funzione
+- Strutture dati definite
+- Funzioni con solo firma (corpo vuoto con TODO)
+- Include guards in header
+
+Formato:
+// book.h
+[codice]
+
+// book.c
+[codice]
+```
+
+L&#39;IA genererà scheletro che puoi poi riempire.
+
+### 5.2 Task per Te
+
+**Applica lo stesso processo a uno di questi progetti:**
+
+1. **Sistema di Voti Studenti**
+   - Gestire studenti, corsi, voti
+   - Calcolare medie, statistiche
+   - Generare pagelle
+
+2. **Inventario Magazzino**
+   - Prodotti con quantità
+   - Operazioni: carico, scarico, inventario
+   - Alert per scorte basse
+
+3. **Budget Tracker**
+   - Tracciare entrate/uscite
+   - Categorie (cibo, trasporti, ecc.)
+   - Report mensili
+
+**Usa i 3 prompt visti sopra per:**
+1. Definire requirements
+2. Progettare architettura
+3. Generare scheletro
+
+---
+
+## 6. GENERARE DOCUMENTAZIONE (15 minuti)
+
+### 6.1 README.md Automatico
+
+**Prompt per generare README:**
+
+```
+Genera un README.md professionale per questo progetto:
+
+Progetto: Sistema Gestione Biblioteca
+Descrizione: CLI tool per gestire prestiti libri in biblioteca
+Linguaggio: C
+Target: Studenti ITS, uso didattico
+
+Features principali:
+- Catalogo libri
+- Gestione prestiti/restituzioni
+- Persistenza su file CSV
+- Interfaccia menu interattivo
+
+Requisiti sistema:
+- GCC o Clang
+- Make
+- Linux/macOS/Windows
+
+Includi sezioni:
+- Overview con emoji
+- Installation instructions
+- Usage examples con screenshot ASCII
+- Project structure tree
+- Testing instructions
+- Contributing guidelines
+- License (MIT)
+- Badge se appropriati
+```
+
+**L&#39;IA genererà README completo.** Tu dovrai:
+1. Verificare accuratezza
+2. Aggiungere screenshot reali
+3. Personalizzare esempi
+
+### 6.2 Commenti Doxygen Automatici
+
+**Hai questa funzione senza commenti:**
+
+```c
+int loan_create(LoanHistory *history, const char *isbn,
+                int user_id, BookCatalog *catalog) {
+    if (history == NULL || isbn == NULL || catalog == NULL) {
+        return -1;
+    }
+
+    Book *book = book_find(catalog, isbn);
+    if (book == NULL || !book-&gt;is_available) {
+        return -2;
+    }
+
+    if (history-&gt;loan_count &gt;= history-&gt;loan_capacity) {
+        size_t new_cap = history-&gt;loan_capacity * 2;
+        Loan *new_loans = realloc(history-&gt;loans, new_cap * sizeof(Loan));
+        if (new_loans == NULL) {
+            return -3;
+        }
+        history-&gt;loans = new_loans;
+        history-&gt;loan_capacity = new_cap;
+    }
+
+    Loan *loan = &amp;history-&gt;loans[history-&gt;loan_count];
+    strncpy(loan-&gt;isbn, isbn, sizeof(loan-&gt;isbn) - 1);
+    loan-&gt;user_id = user_id;
+    loan-&gt;loan_date = time(NULL);
+    loan-&gt;return_date = 0;
+
+    book-&gt;is_available = false;
+    history-&gt;loan_count++;
+
+    return 0;
+}
+```
+
+**Prompt:**
+
+```
+Genera commento Doxygen completo per questa funzione:
+
+[incolla codice]
+
+Include:
+- @brief (1 riga)
+- @param per ogni parametro (spiega vincoli)
+- @return (spiega tutti i codici ritorno)
+- @note per informazioni importanti
+- @code esempio d&#39;uso @endcode
+```
+
+**Output IA:**
+
+```c
+/**
+ * @brief Crea un nuovo prestito per un libro
+ *
+ * Registra un prestito assegnando un libro a un utente. Il libro
+ * viene marcato come non disponibile. La storia prestiti viene
+ * espansa automaticamente se necessario.
+ *
+ * @param history Puntatore alla storia prestiti (non NULL)
+ * @param isbn ISBN del libro da prestare (non NULL, 13 caratteri)
+ * @param user_id ID dell&#39;utente che prende in prestito (&gt;= 0)
+ * @param catalog Puntatore al catalogo libri (non NULL)
+ *
+ * @return Codici di ritorno:
+ *   - 0: Successo
+ *   - -1: Parametro NULL
+ *   - -2: Libro non trovato o non disponibile
+ *   - -3: Fallimento realloc (out of memory)
+ *
+ * @note history e catalog devono essere inizializzati prima della chiamata
+ * @warning Questa funzione modifica catalog (book-&gt;is_available = false)
+ *
+ * @code
+ * LoanHistory *history = loan_history_create();
+ * BookCatalog *catalog = book_catalog_create();
+ * book_add(catalog, &quot;978-0123456789&quot;, &quot;Il Signore degli Anelli&quot;, &quot;Tolkien&quot;);
+ *
+ * int result = loan_create(history, &quot;978-0123456789&quot;, 42, catalog);
+ * if (result == 0) {
+ *     printf(&quot;Prestito creato con successo\n&quot;);
+ * }
+ * @endcode
+ *
+ * @see loan_return()
+ */
+int loan_create(LoanHistory *history, const char *isbn,
+                int user_id, BookCatalog *catalog);
+```
+
+### 6.3 User Guide Automatica
+
+**Prompt:**
+
+```
+Scrivi una User Guide completa per end-user non tecnici.
+
+Applicazione: Sistema Biblioteca CLI
+
+Include:
+1. Getting Started (primi passi)
+2. Common Workflows (use case tipici)
+   - Prestare un libro
+   - Restituire un libro
+   - Cercare libri
+3. Troubleshooting (problemi comuni e soluzioni)
+4. FAQ
+
+Usa linguaggio semplice, evita termini tecnici.
+Includi esempi concreti con output simulato.
+```
+
+---
+
+## 7. GIT HANDS-ON (20 minuti)
+
+### 7.1 Inizializzare Repository
+
+**Scenario:** Hai il progetto Biblioteca. Vuoi metterlo su Git.
+
+**Step 1: Crea .gitignore**
+
+```bash
+# Crea file .gitignore
+cat &gt; .gitignore &lt;&lt; EOF
+# Compiled files
+*.o
+*.exe
+*.out
+library
+
+# Data files (se vuoi ignorare dati di test)
+# *.csv
+
+# Editor
+.vscode/
+*.swp
+EOF
+```
+
+**Step 2: Inizializza Git**
+
+```bash
+# Nella directory del progetto
+git init
+
+# Verifica
+git status
+```
+
+**Output:**
+```
+On branch main
+No commits yet
+
+Untracked files:
+  .gitignore
+  Makefile
+  src/
+  include/
+  README.md
+```
+
+**Step 3: Primo commit**
+
+```bash
+# Aggiungi tutti i file
+git add .
+
+# Controlla cosa verrà committato
+git status
+
+# Crea commit iniziale
+git commit -m &quot;Initial commit: Project skeleton
+
+Added:
+- Project structure (src/, include/)
+- Makefile
+- README.md
+- .gitignore
+&quot;
+```
+
+### 7.2 Workflow Tipico
+
+**Scenario: Aggiungi una feature**
+
+```bash
+# 1. Crea branch per feature
+git checkout -b feature-book-search
+
+# 2. Implementa feature (modifica file)
+# ... scrivi codice in book.c ...
+
+# 3. Verifica modifiche
+git diff
+
+# 4. Aggiungi file modificati
+git add src/book.c include/book.h
+
+# 5. Commit
+git commit -m &quot;feat: Add book search by title
+
+Implemented book_search_by_title() function that performs
+case-insensitive substring matching.
+&quot;
+
+# 6. Torna a main
+git checkout main
+
+# 7. Merge feature
+git merge feature-book-search
+
+# 8. (Opzionale) Elimina branch
+git branch -d feature-book-search
+```
+
+### 7.3 Push su GitHub
+
+**Step 1: Crea repository su GitHub**
+
+1. Vai su https://github.com
+2. Clicca &quot;New repository&quot;
+3. Nome: &quot;library-management&quot;
+4. Descrizione: &quot;C library management system&quot;
+5. Public o Private
+6. **NON** inizializzare con README (hai già quello locale)
+7. Clicca &quot;Create repository&quot;
+
+**Step 2: Collega local a remote**
+
+```bash
+# Aggiungi remote
+git remote add origin https://github.com/yourusername/library-management.git
+
+# Verifica
+git remote -v
+```
+
+**Step 3: Push**
+
+```bash
+# Push branch main
+git push -u origin main
+
+# -u setta upstream, prossime volte basta:
+git push
+```
+
+**Step 4: Verifica su GitHub**
+
+Apri https://github.com/yourusername/library-management
+
+Dovresti vedere:
+- README.md renderizzato
+- File del progetto
+- Commit history
+
+### 7.4 Collaborazione: Pull Request (Cenni)
+
+**Workflow collaborativo:**
+
+```
+1. Fork repository → Tua copia
+
+2. Clone tua copia:
+   git clone https://github.com/tuousername/project.git
+
+3. Crea branch feature:
+   git checkout -b fix-memory-leak
+
+4. Implementa fix, commit, push:
+   git push origin fix-memory-leak
+
+5. Su GitHub: Apri Pull Request
+   - Descrivi cosa hai fatto
+   - Owner originale rivede
+   - Se OK, fa merge
+
+6. Pull modifiche accettate:
+   git pull upstream main
+```
+
+### 7.5 Esercizio Pratico
+
+**Task:**
+
+1. Inizializza Git nel tuo progetto Task Manager (o Biblioteca)
+2. Crea almeno 3 commit significativi:
+   - Initial commit
+   - Implementazione feature X
+   - Fix bug Y
+3. Crea branch &quot;feature-test&quot; e mergea
+4. Push su GitHub
+5. Condividi link repository
+
+**Verifica finale:**
+
+```bash
+# Storia commit ben formattata?
+git log --oneline
+
+# Tutto pushato?
+git status  # Should say &quot;up to date with origin/main&quot;
+```
+
+---
+
+## 8. PROGETTO COMPLETO (10 minuti)
+
+### 8.1 Checklist Progetto Completo
+
+**Prima di considerare un progetto &quot;finito&quot;:**
+
+**✅ CODICE:**
+- [ ] Compila senza warning (`-Wall -Wextra -Werror`)
+- [ ] Tutte le features richieste implementate
+- [ ] Gestione errori completa
+- [ ] Memory-safe (Valgrind clean)
+- [ ] Codice organizzato in moduli logici
+- [ ] Naming consistente
+
+**✅ TESTING:**
+- [ ] Unit test per funzioni critiche
+- [ ] Integration test per workflow completi
+- [ ] Testato edge cases (NULL, empty, large inputs)
+- [ ] Performance accettabile
+
+**✅ DOCUMENTAZIONE:**
+- [ ] README.md completo (Installation, Usage, Examples)
+- [ ] Commenti Doxygen per API pubbliche
+- [ ] User guide (se applicazione end-user)
+- [ ] Architettura documentata (se progetto complesso)
+
+**✅ VERSION CONTROL:**
+- [ ] Repository Git inizializzato
+- [ ] Commit significativi con message descrittivi
+- [ ] .gitignore appropriato
+- [ ] Pushed su GitHub/GitLab
+- [ ] Tagged release (es: v1.0.0)
+
+**✅ BUILD SYSTEM:**
+- [ ] Makefile funzionante
+- [ ] Target: all, clean, test, install
+- [ ] Dipendenze corrette
+
+**✅ LICENSE:**
+- [ ] File LICENSE incluso (MIT, GPL, ecc.)
+
+### 8.2 Creare Release
+
+**Tag versione:**
+
+```bash
+# Tag annotato
+git tag -a v1.0.0 -m &quot;Release version 1.0.0
+
+Features:
+- Book catalog management
+- Loan tracking
+- CSV persistence
+- Interactive CLI menu
+&quot;
+
+# Push tag
+git push origin v1.0.0
+```
+
+**Su GitHub: Create Release**
+
+1. Vai su repository → Releases → &quot;Draft a new release&quot;
+2. Tag: v1.0.0
+3. Release title: &quot;Version 1.0.0 - First Stable Release&quot;
+4. Descrizione:
+   ```
+   First stable release of Library Management System.
+
+   Features:
+   - ✅ Book catalog
+   - ✅ Loan management
+   - ✅ Persistent storage
+
+   Installation:
+   ```bash
+   git clone https://github.com/user/library.git
+   cd library
+   make
+   ./library
+   ```
+
+   See README.md for full documentation.
+   ```
+5. Attach binaries se applicabile
+6. Publish release
+
+### 8.3 Portfolio-Ready Checklist
+
+**Per usare progetto in portfolio/CV:**
+
+**✅ README deve includere:**
+- [ ] Badge (build status, license, etc.)
+- [ ] Screenshot o GIF demo
+- [ ] Sezione &quot;Skills Demonstrated&quot; (C, Git, Valgrind, ecc.)
+
+**✅ Repository deve avere:**
+- [ ] Descrizione chiara (in &quot;About&quot; su GitHub)
+- [ ] Topics/tags relevanti (c, cli, library-management)
+- [ ] License badge
+- [ ] Almeno 1 release
+
+**✅ Codice deve essere:**
+- [ ] Clean (no commented-out code)
+- [ ] Consistente (formatting uniforme)
+- [ ] Ben documentato
+
+**✅ Opzionale ma impressionante:**
+- [ ] CI/CD (GitHub Actions che compila e testa)
+- [ ] Code coverage report
+- [ ] Documentazione Doxygen generata e hostata
+- [ ] Demo video su YouTube
+
+---
+
+## 🎯 RIEPILOGO LEZIONE 4
+
+### Cosa Abbiamo Imparato
+
+**Teoria:**
+- ✅ Metodologia progetto in 5 fasi (Requirements → Design → Implementation → Testing → Documentation)
+- ✅ Workflow professionale e quality assurance
+- ✅ Documentazione tecnica (README, Doxygen, User Guide)
+- ✅ Git fundamentals e best practices
+
+**Pratica:**
+- ✅ Progettazione architettura con IA
+- ✅ Generazione documentazione automatica
+- ✅ Setup repository Git completo
+- ✅ Workflow Git end-to-end (init → commit → push)
+
+### Key Takeaways
+
+1. **Design prima di codice** (evita refactoring massivo dopo)
+2. **IA accelera OGNI fase** (ma tu decidi)
+3. **Documentazione non è opzionale** (README è marketing del tuo codice)
+4. **Git è essenziale** (non solo backup, ma workflow professionale)
+5. **Portfolio conta** (progetti GitHub = CV tecnico)
+
+---
+
+## 📚 COMPITI PER CASA
+
+### Esercizio 1: Progetto Completo
+
+**Completa uno dei progetti iniziati:**
+
+1. Definisci requirements (con IA)
+2. Progetta architettura (con IA)
+3. Implementa MVP (must-have features)
+4. Testa (Valgrind clean)
+5. Documenta (README + commenti)
+6. Push su GitHub
+
+**Deliverable:**
+- Link repository GitHub pubblico
+
+### Esercizio 2: Portfolio Setup
+
+**Crea il tuo portfolio GitHub:**
+
+1. GitHub profile README (repository speciale `username/username`)
+2. Pin i tuoi 3 progetti migliori
+3. Aggiungi bio professionale
+4. Link a LinkedIn/email
+
+**Esempio README profile:**
+
+```markdown
+# Hi, I&#39;m Mario Rossi 👋
+
+🎓 ITS Student | 💻 C Programmer | 🤖 AI Enthusiast
+
+## Skills
+- Languages: C, Python
+- Tools: Git, Valgrind, Make
+- AI: ChatGPT, Claude for assisted development
+
+## Projects
+📚 [Library Management System](https://github.com/mario/library) - CLI tool in C
+📝 [Task Manager](https://github.com/mario/taskmanager) - Productivity app
+🎮 [Snake Game](https://github.com/mario/snake) - Terminal game
+
+## Stats
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=mario)
+
+## Contact
+📧 mario.rossi@example.com
+🔗 [LinkedIn](https://linkedin.com/in/mario-rossi)
+```
+
+### Esercizio 3: Contribuire a Open Source
+
+**Trova un progetto C open source su GitHub:**
+
+1. Cerca &quot;good first issue&quot; label
+2. Fork repository
+3. Implementa fix o feature
+4. Apri Pull Request
+
+**Obiettivo:** Esperienza collaborazione reale.
+
+---
+
+## 🎓 PROSSIMA LEZIONE
+
+**LEZIONE 5: Progetto Finale Integrato**
+
+**Anteprima:**
+- Implementazione sistema completo end-to-end
+- Integrazione tutti i concetti appresi
+- Testing sistematico e debugging
+- Documentazione finale professionale
+- Presentazione lavoro
+
+**Preparazione:**
+- Rivedi tutte le lezioni precedenti
+- Pensa a un progetto che ti appassiona
+- Prepara domande
+
+---
+
+**Fine Lezione 4**
+
+**📂 Ora sai gestire progetti professionalmente con IA e Git!**
+
+**Ricorda:**
+&gt; &quot;Il codice senza documentazione è come una macchina senza manuale: funziona, ma nessuno sa come usarla.&quot;
+
+**Ottimo lavoro! Prepara il progetto finale! 💻✨**
+</code></pre>
+</main>
+</body>
+</html>

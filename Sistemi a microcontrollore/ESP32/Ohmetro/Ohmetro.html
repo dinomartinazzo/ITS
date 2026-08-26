@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Ohmetro</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Ohmetro</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>Ohmetro.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Sistemi a microcontrollore/ESP32/Ohmetro</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<p><strong>ohmetro digitale con ESP32</strong></p>
+<p>Un ohmetro misura la <strong>resistenza</strong> di un componente, e per farlo con l’ESP32 (che non ha un ADC particolarmente preciso, ma sufficiente per questo uso) possiamo usare il <strong>metodo del partitore di tensione</strong> .</p>
+<hr />
+<p>🧰 <strong>Materiali necessari:</strong></p>
+<ul>
+<li><p>ESP32 Dev Board</p></li>
+<li><p>Resistenza di riferimento (ad esempio 10 kΩ, valore noto e preciso)</p></li>
+<li><p>Resistenza da misurare</p></li>
+<li><p>Breadboard e jumper</p></li>
+<li><p>Display (opzionale, tipo OLED I2C o LCD 16x2)</p></li>
+<li><p>(opzionale) Pulsante per attivare la misura</p></li>
+</ul>
+<hr />
+<p>⚙️ <strong>Principio di funzionamento:</strong><br />
+Colleghi la <strong>resistenza incognita</strong> in serie con una <strong>resistenza nota</strong> , e misuri la tensione in mezzo con l&#39;ADC dell’ESP32. Da lì, usando la legge di Ohm, ricavi il valore della resistenza incognita.<br />
+<strong>Formula:</strong><br />
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>x</mi></msub><mo>=</mo><msub><mi>R</mi><mtext mathvariant="normal">ref</mtext></msub><mo>⋅</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mi>V</mi><mtext mathvariant="normal">in</mtext></msub><msub><mi>V</mi><mtext mathvariant="normal">out</mtext></msub></mfrac><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+R_x = R_{\text{ref}} \cdot \left(\frac{V_{\text{in}}}{V_{\text{out}}} - 1\right) 
+</annotation></semantics></math></p>
+<p>Dove:</p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>x</mi></msub><annotation encoding="application/x-tex">R_x</annotation></semantics></math> = resistenza incognita</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mtext mathvariant="normal">ref</mtext></msub><annotation encoding="application/x-tex">R_{\text{ref}}</annotation></semantics></math> = resistenza di riferimento</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mtext mathvariant="normal">in</mtext></msub><annotation encoding="application/x-tex">V_{\text{in}}</annotation></semantics></math> = tensione di alimentazione (es. 3.3V)</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mtext mathvariant="normal">out</mtext></msub><annotation encoding="application/x-tex">V_{\text{out}}</annotation></semantics></math> = tensione misurata tra le due resistenze (letto via ADC)</p></li>
+</ul>
+<hr />
+<p>🔌 <strong>Schema di collegamento:</strong></p>
+<pre class="less"><code>3.3V ----[ R_ref ]----+----[ R_x ]---- GND
+                      |
+                      +-----&gt; GPIO ADC (es. GPIO34)</code></pre>
+<hr />
+<p>🧠 <strong>Codice base per ESP32 (Arduino IDE):</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> adcPin <span class="op">=</span> <span class="dv">34</span><span class="op">;</span> <span class="co">// pin ADC</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> R_ref <span class="op">=</span> <span class="fl">10000.0</span><span class="op">;</span> <span class="co">// 10k ohm</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> Vin <span class="op">=</span> <span class="fl">3.3</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  analogReadResolution<span class="op">(</span><span class="dv">12</span><span class="op">);</span> <span class="co">// ESP32 ADC a 12 bit: valori da 0 a 4095</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> adcValue <span class="op">=</span> analogRead<span class="op">(</span>adcPin<span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> Vout <span class="op">=</span> <span class="op">(</span>adcValue <span class="op">/</span> <span class="fl">4095.0</span><span class="op">)</span> <span class="op">*</span> Vin<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> R_unknown <span class="op">=</span> R_ref <span class="op">*</span> <span class="op">((</span>Vin <span class="op">/</span> Vout<span class="op">)</span> <span class="op">-</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Vout: &quot;</span><span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span>Vout<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; V - Resistenza sconosciuta: &quot;</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span>R_unknown<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; ohm&quot;</span><span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p>🧪 <strong>Note importanti:</strong></p>
+<ul>
+<li><p>Usa una <strong>resistenza di riferimento precisa</strong> (tolleranza 1% o meglio).</p></li>
+<li><p>Evita di misurare <strong>resistenze molto basse</strong> (&lt; 100 Ω) perché l&#39;ESP32 non è preciso in quell&#39;intervallo.</p></li>
+<li><p>Per migliori risultati, puoi fare <strong>medie su più letture ADC</strong> .</p></li>
+</ul>
+<hr />
+<p>🖥️ <strong>Vuoi anche visualizzarlo su display (OLED o LCD)?</strong></p>
+<p>Fammi sapere se vuoi aggiungere l’OLED I2C o un display LCD 1602 e ti preparo anche quella parte!</p>
+<p>Ti serve aiuto per montare fisicamente il circuito?</p>
+<p>You:</p>
+<p>che range di misura posso avere</p>
+<p>ChatGPT:</p>
+<p>Ottima domanda! Il <strong>range di misura</strong> che puoi ottenere con un ohmetro basato su partitore di tensione dipende principalmente da:</p>
+<ol start="2" type="1">
+<li><p>La <strong>resistenza di riferimento</strong> scelta (R_ref)</p></li>
+<li><p>La <strong>risoluzione dell&#39;ADC</strong> (sull&#39;ESP32 è di 12 bit → 4096 livelli)</p></li>
+<li><p>La <strong>precisione della lettura ADC</strong> (e delle resistenze)</p></li>
+<li><p>L’<strong>intervallo di tensione misurabile</strong> (nel nostro caso 0–3.3V)</p></li>
+</ol>
+<hr />
+<p>📏 <strong>Range pratico di misura</strong><br />
+Supponiamo di usare una <strong>R_ref da 10kΩ</strong> (comune e precisa).</p>
+<p>Con questa, in pratica puoi misurare <strong>resistenze da circa 500Ω fino a 200kΩ</strong> , con una discreta precisione.</p>
+<hr />
+<p>⚠️ <strong>Perché non funziona bene fuori da questo range:</strong></p>
+<ul>
+<li><strong>Resistenze troppo basse (&lt; 500Ω)</strong> :</li>
+</ul>
+<p>V_out si avvicina troppo a Vcc (3.3V), e quindi diventa difficile distinguere i valori ADC.</p>
+<ul>
+<li><strong>Resistenze troppo alte (&gt; 200kΩ)</strong> :</li>
+</ul>
+<p>V_out scende troppo vicino a 0V → rumore ADC + corrente troppo bassa = letture imprecise.</p>
+<hr />
+<h3 id="bar_chart-esempio-con-r_ref--10kω-e-vin--33v">📊 Esempio (con R_ref = 10kΩ e Vin = 3.3V):</h3>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>R_x (ohm)</th>
+<th>V_out (approx)</th>
+<th>ADC Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 Ω</td>
+<td>~3.27V</td>
+<td>~4060</td>
+</tr>
+<tr>
+<td>1k Ω</td>
+<td>~3.0V</td>
+<td>~3720</td>
+</tr>
+<tr>
+<td>10k Ω</td>
+<td>~1.65V</td>
+<td>~2048</td>
+</tr>
+<tr>
+<td>100k Ω</td>
+<td>~0.3V</td>
+<td>~372</td>
+</tr>
+<tr>
+<td>500k Ω</td>
+<td>~0.06V</td>
+<td>~75</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Come vedi, sotto 100Ω o sopra 200–300kΩ il valore letto cambia pochissimo → poco affidabile.</p>
+<hr />
+<h3 id="ohmetro-digitale-con-esp32-da-simulare-in-wokwi--che"><strong>ohmetro digitale con ESP32 da simulare in Wokwi</strong> , che:</h3>
+<ul>
+<li><p>Usa <strong>4 partitori di tensione</strong> con resistenze di riferimento diverse,</p></li>
+<li><p>Seleziona automaticamente il pin ADC migliore in base al valore letto,</p></li>
+<li><p>Mostra la resistenza misurata nel <strong>Serial Monitor</strong> .</p></li>
+</ul>
+<hr />
+<p>🎯 <strong>Specifiche del progetto:</strong></p>
+<ul>
+<li><p>Microcontrollore: <strong>ESP32 DevKit</strong></p></li>
+<li><p>4 GPIO impostati come <strong>input ADC</strong> (uno per ciascun partitore)</p></li>
+<li><p>Ogni partitore usa una <strong>resistenza di riferimento diversa</strong> : 100Ω, 1kΩ, 10kΩ, 100kΩ</p></li>
+<li><p>Il secondo ramo del partitore ha la <strong>resistenza da misurare</strong> (simulata con un potenziometro su Wokwi)</p></li>
+<li><p>Il codice seleziona il <strong>partitore più adatto</strong> in base al valore ADC</p></li>
+<li><p>Risultato mostrato via <code>Serial.println()</code></p></li>
+</ul>
+<hr />
+<p>🧭 <strong>Schema di principio (semplificato):</strong></p>
+<p>Hai 4 partitori tipo:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.</span><span class="er">3</span>V</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> <span class="op">|</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>R_ref<span class="op">]</span>  <span class="op">&lt;-</span> valore <span class="fu">fisso</span> <span class="op">(</span>es<span class="op">.</span> <span class="er">100</span>Ω<span class="op">,</span> <span class="er">1</span>kΩ<span class="op">,</span> etc<span class="op">.)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="op">|</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="op">+------&gt;</span> <span class="fu">ADCx</span> <span class="op">(</span>GPIO32<span class="op">,</span> <span class="dv">33</span><span class="op">,</span> <span class="dv">34</span><span class="op">,</span> <span class="dv">35</span><span class="op">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="op">|</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>R_x<span class="op">]</span>  <span class="op">&lt;-</span> resistenza da <span class="fu">misurare</span> <span class="op">(</span>simulata con potenziometro<span class="op">)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> <span class="op">|</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>GND</span></code></pre></div>
+<p>Nella simulazione colleghi lo <strong>stesso potenziometro</strong> al secondo ramo dei 4 partitori.</p>
+<hr />
+<p>🧪 <strong>Codice completo per ESP32 (Wokwi ready):</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> Vin <span class="op">=</span> <span class="fl">3.3</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> adcPins<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">32</span><span class="op">,</span> <span class="dv">33</span><span class="op">,</span> <span class="dv">34</span><span class="op">,</span> <span class="dv">35</span><span class="op">};</span> <span class="co">// ADC GPIO pins</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> rRefs<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">100.0</span><span class="op">,</span> <span class="fl">1000.0</span><span class="op">,</span> <span class="fl">10000.0</span><span class="op">,</span> <span class="fl">100000.0</span><span class="op">};</span> <span class="co">// in ohm</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> numPartitori <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  analogReadResolution<span class="op">(</span><span class="dv">12</span><span class="op">);</span> <span class="co">// 0-4095 su ESP32</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> bestIndex <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> bestReading <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> bestADC <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numPartitori<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> adcValue <span class="op">=</span> analogRead<span class="op">(</span>adcPins<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>adcValue <span class="op">&gt;</span> <span class="dv">300</span> <span class="op">&amp;&amp;</span> adcValue <span class="op">&lt;</span> <span class="dv">3700</span><span class="op">)</span> <span class="op">{</span> <span class="co">// intervallo valido</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      bestIndex <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      bestReading <span class="op">=</span> <span class="op">(</span>adcValue <span class="op">/</span> <span class="fl">4095.0</span><span class="op">)</span> <span class="op">*</span> Vin<span class="op">;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      bestADC <span class="op">=</span> adcValue<span class="op">;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span> <span class="co">// appena trovi un partitore valido, usalo</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>bestIndex <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Rref <span class="op">=</span> rRefs<span class="op">[</span>bestIndex<span class="op">];</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Vout <span class="op">=</span> bestReading<span class="op">;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Rx <span class="op">=</span> Rref <span class="op">*</span> <span class="op">((</span>Vin <span class="op">/</span> Vout<span class="op">)</span> <span class="op">-</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Partitore ADC: GPIO&quot;</span><span class="op">);</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>adcPins<span class="op">[</span>bestIndex<span class="op">]);</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; | Vout: &quot;</span><span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>Vout<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; V | ADC: &quot;</span><span class="op">);</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>bestADC<span class="op">);</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; | R_x = &quot;</span><span class="op">);</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>Rx<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; ohm&quot;</span><span class="op">);</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Resistenza fuori range!&quot;</span><span class="op">);</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<p>🧰 <strong>Schema Wokwi (collegamenti da fare):</strong><br />
+Collega 4 partitori in parallelo, tutti alimentati da 3.3V, ognuno con una resistenza diversa in serie, e <strong>lo stesso potenziometro da 10kΩ</strong> come resistenza incognita collegata a GND.<br />
+Puoi simulare in Wokwi aggiungendo 4 resistenze fisse (R_ref) e una <strong>linea comune con potenziometro</strong> :</p>
+<pre class="less"><code>3.3V
+ |
+[R_ref1] --+-- GPIO32
+[R_ref2] --+-- GPIO33
+[R_ref3] --+-- GPIO34
+[R_ref4] --+-- GPIO35
+           |
+       [ Pote ] → GND</code></pre>
+<hr />
+<p>🛠️ <strong>Componenti utilizzati:</strong></p>
+<ul>
+<li><p><strong>ESP32 DevKit</strong></p></li>
+<li><p><strong>4 Resistenze di riferimento</strong> : 100Ω, 1kΩ, 10kΩ, 100kΩ​</p></li>
+<li><p><strong>Potenziometro da 10kΩ</strong> : Simula la resistenza incognita da misurare​</p></li>
+</ul>
+<p>🔌 <strong>Schema dei collegamenti:</strong></p>
+<ol start="2" type="1">
+<li><strong>Resistenze di riferimento</strong> :</li>
+</ol>
+<ul>
+<li><p>Collega un&#39;estremità di ciascuna resistenza di riferimento (100Ω, 1kΩ, 10kΩ, 100kΩ) al pin <strong>3.3V</strong> dell&#39;ESP32.​</p></li>
+<li><p>L&#39;altra estremità di ciascuna resistenza va collegata a un pin ADC dedicato dell&#39;ESP32:​</p>
+<ul>
+<li><p>100Ω → <strong>GPIO32</strong></p></li>
+<li><p>1kΩ → <strong>GPIO33</strong></p></li>
+<li><p>10kΩ → <strong>GPIO34</strong></p></li>
+<li><p>100kΩ → <strong>GPIO35</strong></p></li>
+</ul></li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Potenziometro (Resistenza incognita)</strong> :</li>
+</ol>
+<ul>
+<li><p>Collega il terminale centrale del potenziometro al nodo comune tra le resistenze di riferimento e i rispettivi pin ADC.​</p></li>
+<li><p>Un terminale esterno del potenziometro va collegato a <strong>GND</strong> .​</p></li>
+<li><p>L&#39;altro terminale esterno può essere lasciato scollegato o collegato anch&#39;esso a GND.​</p></li>
+</ul>
+<p>🧑‍💻 <strong>Codice ESP32:</strong><br />
+Carica il seguente codice nel tuo ESP32 utilizzando l&#39;Arduino IDE o l&#39;editor di codice di Wokwi:​</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> Vin <span class="op">=</span> <span class="fl">3.3</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> adcPins<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">32</span><span class="op">,</span> <span class="dv">33</span><span class="op">,</span> <span class="dv">34</span><span class="op">,</span> <span class="dv">35</span><span class="op">};</span> <span class="co">// GPIO pins collegati ai partitori</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> rRefs<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="fl">100.0</span><span class="op">,</span> <span class="fl">1000.0</span><span class="op">,</span> <span class="fl">10000.0</span><span class="op">,</span> <span class="fl">100000.0</span><span class="op">};</span> <span class="co">// Valori delle resistenze di riferimento in ohm</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> numPartitori <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  analogReadResolution<span class="op">(</span><span class="dv">12</span><span class="op">);</span> <span class="co">// Imposta la risoluzione dell&#39;ADC a 12 bit (valori da 0 a 4095)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> bestIndex <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> bestReading <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> bestADC <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Scansiona tutti i partitori per trovare il più adatto</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numPartitori<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> adcValue <span class="op">=</span> analogRead<span class="op">(</span>adcPins<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>adcValue <span class="op">&gt;</span> <span class="dv">300</span> <span class="op">&amp;&amp;</span> adcValue <span class="op">&lt;</span> <span class="dv">3700</span><span class="op">)</span> <span class="op">{</span> <span class="co">// Se il valore ADC è nel range valido</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      bestIndex <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      bestReading <span class="op">=</span> <span class="op">(</span>adcValue <span class="op">/</span> <span class="fl">4095.0</span><span class="op">)</span> <span class="op">*</span> Vin<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      bestADC <span class="op">=</span> adcValue<span class="op">;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span> <span class="co">// Usa il primo partitore valido trovato</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>bestIndex <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Rref <span class="op">=</span> rRefs<span class="op">[</span>bestIndex<span class="op">];</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Vout <span class="op">=</span> bestReading<span class="op">;</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> Rx <span class="op">=</span> Rref <span class="op">*</span> <span class="op">((</span>Vin <span class="op">/</span> Vout<span class="op">)</span> <span class="op">-</span> <span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Partitore selezionato: GPIO&quot;</span><span class="op">);</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>adcPins<span class="op">[</span>bestIndex<span class="op">]);</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; | Vout: &quot;</span><span class="op">);</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>Vout<span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; V | ADC: &quot;</span><span class="op">);</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>bestADC<span class="op">);</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot; | Resistenza misurata: &quot;</span><span class="op">);</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>Rx<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; ohm&quot;</span><span class="op">);</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Resistenza fuori dal range misurabile!&quot;</span><span class="op">);</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="co">// Attende 1 secondo prima della prossima misura</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>📋 <strong>Istruzioni per la simulazione su Wokwi:</strong></p>
+<ol start="2" type="1">
+<li><p>Accedi a <a href="https://wokwi.com/">Wokwi</a> e crea un nuovo progetto selezionando &quot;ESP32&quot;.​</p></li>
+<li><p>Aggiungi al progetto le seguenti componenti:​</p></li>
+</ol>
+<ul>
+<li><p><strong>ESP32 DevKit</strong> ​</p></li>
+<li><p><strong>4 Resistenze</strong> con valori di 100Ω, 1kΩ, 10kΩ e 100kΩ​</p></li>
+<li><p><strong>Potenziometro</strong> da 10kΩ​</p></li>
+</ul>
+<ol start="6" type="1">
+<li><p>Collega le componenti seguendo lo schema dei collegamenti descritto sopra.​</p></li>
+<li><p>Carica il codice nell&#39;editor di Wokwi.​</p></li>
+<li><p>Avvia la simulazione.​</p></li>
+<li><p>Apri il <strong>Serial Monitor</strong> per visualizzare le letture della resistenza misurata.​</p></li>
+<li><p>Regola il potenziometro per simulare diverse resistenze e osserva come l&#39;ESP32 seleziona automaticamente il partitore più adatto e calcola il valore della resistenza.​</p></li>
+</ol>
+</main>
+</body>
+</html>

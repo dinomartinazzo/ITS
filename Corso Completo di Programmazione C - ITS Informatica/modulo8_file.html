@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Modulo 8: File e Input/Output</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Modulo 8: File e Input/Output</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>modulo8_file.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Corso Completo di Programmazione C - ITS Informatica</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="its-informatica---livello-base">ITS Informatica - Livello Base</h2>
+<hr />
+<h2 id="obiettivi-del-modulo">Obiettivi del Modulo</h2>
+<p>Al termine di questo modulo sarai in grado di:</p>
+<ul>
+<li>Capire cosa sono i file e perché sono utili</li>
+<li>Aprire, leggere e scrivere file di testo</li>
+<li>Salvare e caricare dati dai programmi</li>
+<li>Gestire errori nell&#39;apertura dei file</li>
+<li>Creare sistemi di archiviazione semplici</li>
+<li>Lavorare con file CSV per dati strutturati</li>
+</ul>
+<hr />
+<h2 id="81-perché-i-file">8.1 Perché i File?</h2>
+<p>Fino ad ora i tuoi programmi &quot;dimenticavano&quot; tutto quando finivano. I <strong>file</strong> permettono di:</p>
+<h3 id="floppy_disk-salvare-dati-permanenti">💾 <strong>Salvare Dati Permanenti</strong></h3>
+<pre><code>Senza file:          Con file:
+Programma inizia  →  Programma inizia
+Inserisci dati    →  Carica dati dal file
+Lavora sui dati   →  Lavora sui dati  
+Programma finisce →  Salva dati nel file
+TUTTO PERSO! ❌     TUTTO SALVATO! ✅</code></pre>
+<h3 id="esempi-di-utilizzo">Esempi di Utilizzo:</h3>
+<ul>
+<li>📝 Salvare la lista della spesa</li>
+<li>🎓 Memorizzare i voti degli studenti</li>
+<li>💰 Tenere traccia delle spese</li>
+<li>🎮 Salvare i progressi di un gioco</li>
+<li>📊 Esportare dati per Excel</li>
+</ul>
+<hr />
+<h2 id="82-il-primo-file-scrittura">8.2 Il Primo File: Scrittura</h2>
+<h3 id="esempio-semplicissimo">Esempio Semplicissimo:</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span>  <span class="co">// &quot;Maniglia&quot; per il file</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Apre file in scrittura (&quot;w&quot; = write)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;saluto.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore: impossibile creare il file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Scrive nel file (come printf, ma nel file)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;Ciao mondo!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;Questo è il mio primo file.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;Oggi ho imparato a scrivere file in C!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// IMPORTANTE: Chiude sempre il file!</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;File &#39;saluto.txt&#39; creato con successo!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Dopo aver eseguito il programma, troverai un file <code>saluto.txt</code> con:</strong></p>
+<pre><code>Ciao mondo!
+Questo è il mio primo file.
+Oggi ho imparato a scrivere file in C!</code></pre>
+<hr />
+<h2 id="83-leggere-da-un-file">8.3 Leggere da un File</h2>
+<h3 id="leggere-riga-per-riga">Leggere Riga per Riga:</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> riga<span class="op">[</span><span class="dv">100</span><span class="op">];</span>  <span class="co">// Buffer per leggere le righe</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Apre file in lettura (&quot;r&quot; = read)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;saluto.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore: file non trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Contenuto del file:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;===================</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Legge riga per riga finché non finisce il file</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>riga<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>riga<span class="op">),</span> file<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> riga<span class="op">);</span>  <span class="co">// Stampa la riga (già ha \n)</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="contare-le-righe-di-un-file">Contare le Righe di un File:</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> riga<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero_righe <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;saluto.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;File non trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Conta le righe</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>riga<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>riga<span class="op">),</span> file<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        numero_righe<span class="op">++;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Il file ha </span><span class="sc">%d</span><span class="st"> righe.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> numero_righe<span class="op">);</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="84-modi-di-apertura-dei-file">8.4 Modi di Apertura dei File</h2>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Significato</th>
+<th>Cosa fa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;r&quot;</code></td>
+<td>Read (lettura)</td>
+<td>Legge file esistente</td>
+</tr>
+<tr>
+<td><code>&quot;w&quot;</code></td>
+<td>Write (scrittura)</td>
+<td>Crea nuovo file (sovrascrive)</td>
+</tr>
+<tr>
+<td><code>&quot;a&quot;</code></td>
+<td>Append (aggiungi)</td>
+<td>Aggiunge alla fine</td>
+</tr>
+<tr>
+<td><code>&quot;r+&quot;</code></td>
+<td>Read+Write</td>
+<td>Legge e scrive file esistente</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="esempio-con-append">Esempio con Append:</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> messaggio<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Scrivi un messaggio da aggiungere al file: &quot;</span><span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>messaggio<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>messaggio<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Apre in modalità &quot;append&quot; - aggiunge alla fine</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;diario.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore nell&#39;apertura del file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;Data: oggi - </span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> messaggio<span class="op">);</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Messaggio aggiunto al diario!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="85-salvare-e-caricare-dati-strutturati">8.5 Salvare e Caricare Dati Strutturati</h2>
+<h3 id="salvare-array-di-numeri">Salvare Array di Numeri:</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> voti<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">8</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">10</span><span class="op">};</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dimensione <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Salva i voti nel file</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;voti.txt&quot;</span><span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore nella creazione del file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> dimensione<span class="op">);</span>  <span class="co">// Prima riga: quanti voti</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> dimensione<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> voti<span class="op">[</span>i<span class="op">]);</span>  <span class="co">// Un voto per riga</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Voti salvati nel file &#39;voti.txt&#39;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="caricare-array-di-numeri">Caricare Array di Numeri:</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> voti<span class="op">[</span><span class="dv">20</span><span class="op">];</span>  <span class="co">// Array per contenere i voti</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dimensione<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;voti.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;File voti.txt non trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Legge prima la dimensione</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>dimensione<span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Legge tutti i voti</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> dimensione<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>voti<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mostra i voti caricati</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Voti caricati dal file:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> dimensione<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Voto </span><span class="sc">%d</span><span class="st">: </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> voti<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Calcola media</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> somma <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> dimensione<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        somma <span class="op">+=</span> voti<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> media <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">)</span>somma <span class="op">/</span> dimensione<span class="op">;</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Media: </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> media<span class="op">);</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="86-sistema-semplice-di-database">8.6 Sistema Semplice di Database</h2>
+<h3 id="salvare-informazioni-studente">Salvare Informazioni Studente:</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nome<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> cognome<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> eta<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> media<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Studente<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> salva_studente<span class="op">(</span>Studente s<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;studenti.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span>  <span class="co">// Append mode</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore nell&#39;apertura del file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">,</span><span class="sc">%s</span><span class="st">,</span><span class="sc">%d</span><span class="st">,</span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> s<span class="op">.</span>nome<span class="op">,</span> s<span class="op">.</span>cognome<span class="op">,</span> s<span class="op">.</span>eta<span class="op">,</span> s<span class="op">.</span>media<span class="op">);</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Studente </span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st"> salvato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> s<span class="op">.</span>nome<span class="op">,</span> s<span class="op">.</span>cognome<span class="op">);</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    Studente nuovo_studente<span class="op">;</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;=== REGISTRAZIONE STUDENTE ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Nome: &quot;</span><span class="op">);</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%29s</span><span class="st">&quot;</span><span class="op">,</span> nuovo_studente<span class="op">.</span>nome<span class="op">);</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Cognome: &quot;</span><span class="op">);</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%29s</span><span class="st">&quot;</span><span class="op">,</span> nuovo_studente<span class="op">.</span>cognome<span class="op">);</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Età: &quot;</span><span class="op">);</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>nuovo_studente<span class="op">.</span>eta<span class="op">);</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Media voti: &quot;</span><span class="op">);</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>nuovo_studente<span class="op">.</span>media<span class="op">);</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    salva_studente<span class="op">(</span>nuovo_studente<span class="op">);</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="leggere-database-studenti">Leggere Database Studenti:</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> nome<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> cognome<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> eta<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> media<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Studente<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostra_tutti_studenti<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;studenti.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    Studente s<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Nessun file di studenti trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== ELENCO STUDENTI ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%-20s</span><span class="st"> </span><span class="sc">%-20s</span><span class="st"> Età  Media</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Nome&quot;</span><span class="op">,</span> <span class="st">&quot;Cognome&quot;</span><span class="op">);</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;================================================</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Legge ogni riga del file CSV</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;%29[^,],%29[^,],</span><span class="sc">%d</span><span class="st">,</span><span class="sc">%f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                  s<span class="op">.</span>nome<span class="op">,</span> s<span class="op">.</span>cognome<span class="op">,</span> <span class="op">&amp;</span>s<span class="op">.</span>eta<span class="op">,</span> <span class="op">&amp;</span>s<span class="op">.</span>media<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%-20s</span><span class="st"> </span><span class="sc">%-20s</span><span class="st"> </span><span class="sc">%3d</span><span class="st">  </span><span class="sc">%.2f\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>               s<span class="op">.</span>nome<span class="op">,</span> s<span class="op">.</span>cognome<span class="op">,</span> s<span class="op">.</span>eta<span class="op">,</span> s<span class="op">.</span>media<span class="op">);</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        numero<span class="op">++;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    mostra_tutti_studenti<span class="op">();</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="87-esercizi-pratici">8.7 Esercizi Pratici</h2>
+<h3 id="dart-esercizio-81-diario-personale">🎯 Esercizio 8.1: Diario Personale</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> aggiungi_al_diario<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;diario.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> messaggio<span class="op">[</span><span class="dv">200</span><span class="op">];</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">time_t</span> now<span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> <span class="op">*</span>data<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore nell&#39;apertura del diario!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Ottiene data corrente</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    time<span class="op">(&amp;</span>now<span class="op">);</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ctime<span class="op">(&amp;</span>now<span class="op">);</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    data<span class="op">[</span>strlen<span class="op">(</span>data<span class="op">)-</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">&#39;</span><span class="sc">\0</span><span class="ch">&#39;</span><span class="op">;</span>  <span class="co">// Rimuove \n dalla fine</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Cosa è successo oggi? &quot;</span><span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    getchar<span class="op">();</span>  <span class="co">// Consuma il newline precedente</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>messaggio<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>messaggio<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;[</span><span class="sc">%s</span><span class="st">] </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span> data<span class="op">,</span> messaggio<span class="op">);</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Aggiunto al diario!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> leggi_diario<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;diario.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> riga<span class="op">[</span><span class="dv">300</span><span class="op">];</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Diario vuoto o non esistente.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== IL TUO DIARIO ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>riga<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>riga<span class="op">),</span> file<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%s</span><span class="st">&quot;</span><span class="op">,</span> riga<span class="op">);</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> scelta<span class="op">;</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== DIARIO PERSONALE ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;1. Aggiungi entry</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;2. Leggi diario</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;3. Esci</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Scelta: &quot;</span><span class="op">);</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>scelta<span class="op">);</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>scelta<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>                aggiungi_al_diario<span class="op">();</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>                leggi_diario<span class="op">();</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Arrivederci!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Scelta non valida!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>scelta <span class="op">!=</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="dart-esercizio-82-contabilità-semplice">🎯 Esercizio 8.2: Contabilità Semplice</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> descrizione<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> importo<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> tipo<span class="op">;</span>  <span class="co">// &#39;E&#39; = entrata, &#39;U&#39; = uscita</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Movimento<span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> aggiungi_movimento<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;contabilita.txt&quot;</span><span class="op">,</span> <span class="st">&quot;a&quot;</span><span class="op">);</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    Movimento m<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Errore nell&#39;apertura del file!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Descrizione: &quot;</span><span class="op">);</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    getchar<span class="op">();</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>m<span class="op">.</span>descrizione<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>m<span class="op">.</span>descrizione<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    m<span class="op">.</span>descrizione<span class="op">[</span>strcspn<span class="op">(</span>m<span class="op">.</span>descrizione<span class="op">,</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">)]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Rimuove \n</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Importo: &quot;</span><span class="op">);</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%f</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>m<span class="op">.</span>importo<span class="op">);</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Tipo (E=entrata, U=uscita): &quot;</span><span class="op">);</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">&quot; </span><span class="sc">%c</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>m<span class="op">.</span>tipo<span class="op">);</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>m<span class="op">.</span>tipo <span class="op">!=</span> <span class="ch">&#39;E&#39;</span> <span class="op">&amp;&amp;</span> m<span class="op">.</span>tipo <span class="op">!=</span> <span class="ch">&#39;U&#39;</span><span class="op">);</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%s</span><span class="st">,</span><span class="sc">%.2f</span><span class="st">,</span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> m<span class="op">.</span>descrizione<span class="op">,</span> m<span class="op">.</span>importo<span class="op">,</span> m<span class="op">.</span>tipo<span class="op">);</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Movimento registrato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostra_bilancio<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span><span class="st">&quot;contabilita.txt&quot;</span><span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    Movimento m<span class="op">;</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> entrate <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> uscite <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Nessun movimento registrato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== TUTTI I MOVIMENTI ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%-30s</span><span class="st"> </span><span class="sc">%10s</span><span class="st"> </span><span class="sc">%4s\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Descrizione&quot;</span><span class="op">,</span> <span class="st">&quot;Importo&quot;</span><span class="op">,</span> <span class="st">&quot;Tipo&quot;</span><span class="op">);</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;-----------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;%49[^,],</span><span class="sc">%f</span><span class="st">,</span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>                  m<span class="op">.</span>descrizione<span class="op">,</span> <span class="op">&amp;</span>m<span class="op">.</span>importo<span class="op">,</span> <span class="op">&amp;</span>m<span class="op">.</span>tipo<span class="op">)</span> <span class="op">==</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%-30s</span><span class="st"> </span><span class="sc">%10.2f</span><span class="st">    </span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>               m<span class="op">.</span>descrizione<span class="op">,</span> m<span class="op">.</span>importo<span class="op">,</span> m<span class="op">.</span>tipo<span class="op">);</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>m<span class="op">.</span>tipo <span class="op">==</span> <span class="ch">&#39;E&#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>            entrate <span class="op">+=</span> m<span class="op">.</span>importo<span class="op">;</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>            uscite <span class="op">+=</span> m<span class="op">.</span>importo<span class="op">;</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    ៉</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;-----------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Totale entrate:  </span><span class="sc">%10.2f\n</span><span class="st">&quot;</span><span class="op">,</span> entrate<span class="op">);</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Totale uscite:   </span><span class="sc">%10.2f\n</span><span class="st">&quot;</span><span class="op">,</span> uscite<span class="op">);</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;SALDO:           </span><span class="sc">%10.2f\n</span><span class="st">&quot;</span><span class="op">,</span> entrate <span class="op">-</span> uscite<span class="op">);</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> scelta<span class="op">;</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== CONTABILITÀ PERSONALE ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;1. Aggiungi movimento</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;2. Mostra bilancio</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;3. Esci</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Scelta: &quot;</span><span class="op">);</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>scelta<span class="op">);</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>scelta<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>                aggiungi_movimento<span class="op">();</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>                mostra_bilancio<span class="op">();</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Arrivederci!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>            <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Scelta non valida!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>scelta <span class="op">!=</span> <span class="dv">3</span><span class="op">);</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="88-gestione-errori-con-i-file">8.8 Gestione Errori con i File</h2>
+<h3 id="controllo-completo-degli-errori">Controllo Completo degli Errori:</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> salva_numero_sicuro<span class="op">(</span><span class="dt">int</span> numero<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span><span class="op">*</span> nome_file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span>nome_file<span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore: impossibile creare il file &#39;</span><span class="sc">%s</span><span class="st">&#39;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> nome_file<span class="op">);</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Fallimento</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore durante la scrittura nel file</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Fallimento</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fclose<span class="op">(</span>file<span class="op">)</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore nella chiusura del file</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Fallimento</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;✅ Numero </span><span class="sc">%d</span><span class="st"> salvato con successo in &#39;</span><span class="sc">%s</span><span class="st">&#39;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">,</span> nome_file<span class="op">);</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// Successo</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> carica_numero_sicuro<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>numero<span class="op">,</span> <span class="dt">const</span> <span class="dt">char</span><span class="op">*</span> nome_file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span>nome_file<span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore: file &#39;</span><span class="sc">%s</span><span class="st">&#39; non trovato</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> nome_file<span class="op">);</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Fallimento</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> numero<span class="op">)</span> <span class="op">!=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore: formato file non valido</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Fallimento</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;✅ Numero </span><span class="sc">%d</span><span class="st"> caricato da &#39;</span><span class="sc">%s</span><span class="st">&#39;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>numero<span class="op">,</span> nome_file<span class="op">);</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// Successo</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero<span class="op">;</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="dt">const</span> <span class="dt">char</span><span class="op">*</span> nome_file <span class="op">=</span> <span class="st">&quot;numero.txt&quot;</span><span class="op">;</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Test salvataggio</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Inserisci un numero: &quot;</span><span class="op">);</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>numero<span class="op">);</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>salva_numero_sicuro<span class="op">(</span>numero<span class="op">,</span> nome_file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Test caricamento</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> numero_caricato<span class="op">;</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>carica_numero_sicuro<span class="op">(&amp;</span>numero_caricato<span class="op">,</span> nome_file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;Verifica: numero salvato=</span><span class="sc">%d</span><span class="st">, caricato=</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> </span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>                   numero<span class="op">,</span> numero_caricato<span class="op">);</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="dart-progetto-del-modulo-sistema-di-gestione-biblioteca">🎯 Progetto del Modulo: &quot;Sistema di Gestione Biblioteca&quot;</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_TITOLO </span><span class="dv">50</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX_AUTORE </span><span class="dv">30</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define NOME_FILE </span><span class="st">&quot;biblioteca.txt&quot;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> titolo<span class="op">[</span>MAX_TITOLO<span class="op">];</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> autore<span class="op">[</span>MAX_AUTORE<span class="op">];</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> disponibile<span class="op">;</span>  <span class="co">// 1 = disponibile, 0 = prestato</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Libro<span class="op">;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Funzioni</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> stampa_menu<span class="op">(</span><span class="dt">void</span><span class="op">);</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> carica_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> max_libri<span class="op">);</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> salva_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> aggiungi_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> <span class="op">*</span>numero_libri<span class="op">);</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostra_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> presta_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> restituisci_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> cerca_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> prossimo_id<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    Libro biblioteca<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numero_libri<span class="op">;</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> scelta<span class="op">;</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;=== SISTEMA GESTIONE BIBLIOTECA ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Carica libri esistenti</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    numero_libri <span class="op">=</span> carica_libri<span class="op">(</span>biblioteca<span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Caricati </span><span class="sc">%d</span><span class="st"> libri dal file.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        stampa_menu<span class="op">();</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Scegli (1-7): &quot;</span><span class="op">);</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>scelta<span class="op">);</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>scelta<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>                aggiungi_libro<span class="op">(</span>biblioteca<span class="op">,</span> <span class="op">&amp;</span>numero_libri<span class="op">);</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>                mostra_libri<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                cerca_libro<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">4</span><span class="op">:</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>                presta_libro<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">5</span><span class="op">:</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>                restituisci_libro<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">6</span><span class="op">:</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>                salva_libri<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Biblioteca salvata!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> <span class="dv">7</span><span class="op">:</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>                salva_libri<span class="op">(</span>biblioteca<span class="op">,</span> numero_libri<span class="op">);</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Biblioteca salvata. Arrivederci!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>            <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;Scelta non valida!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>scelta <span class="op">!=</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> stampa_menu<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">--- MENU BIBLIOTECA ---</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;1. Aggiungi libro</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;2. Mostra tutti i libri</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;3. Cerca libro</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;4. Presta libro</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;5. Restituisci libro</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;6. Salva biblioteca</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;7. Esci</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> carica_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> max_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span>NOME_FILE<span class="op">,</span> <span class="st">&quot;r&quot;</span><span class="op">);</span></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Nessun file biblioteca esistente. Iniziando da zero.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> max_libri <span class="op">&amp;&amp;</span> </span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>           fscanf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">,%49[^,],%29[^,],</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>                  <span class="op">&amp;</span>libri<span class="op">[</span>count<span class="op">].</span>id<span class="op">,</span></span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>                  libri<span class="op">[</span>count<span class="op">].</span>titolo<span class="op">,</span></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>                  libri<span class="op">[</span>count<span class="op">].</span>autore<span class="op">,</span></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>                  <span class="op">&amp;</span>libri<span class="op">[</span>count<span class="op">].</span>disponibile<span class="op">)</span> <span class="op">==</span> <span class="dv">4</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>        count<span class="op">++;</span></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count<span class="op">;</span></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> salva_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>file <span class="op">=</span> fopen<span class="op">(</span>NOME_FILE<span class="op">,</span> <span class="st">&quot;w&quot;</span><span class="op">);</span></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>file <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Errore nel salvataggio!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>        fprintf<span class="op">(</span>file<span class="op">,</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="st">,</span><span class="sc">%s</span><span class="st">,</span><span class="sc">%s</span><span class="st">,</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>id<span class="op">,</span></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">,</span></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>autore<span class="op">,</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>disponibile<span class="op">);</span></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> prossimo_id<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> max_id <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>id <span class="op">&gt;</span> max_id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>            max_id <span class="op">=</span> libri<span class="op">[</span>i<span class="op">].</span>id<span class="op">;</span></span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max_id <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> aggiungi_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> <span class="op">*</span>numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>numero_libri <span class="op">&gt;=</span> <span class="dv">100</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;❌ Biblioteca piena!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>    Libro <span class="op">*</span>nuovo <span class="op">=</span> <span class="op">&amp;</span>libri<span class="op">[*</span>numero_libri<span class="op">];</span></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>    nuovo<span class="op">-&gt;</span>id <span class="op">=</span> prossimo_id<span class="op">(</span>libri<span class="op">,</span> <span class="op">*</span>numero_libri<span class="op">);</span></span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Titolo: &quot;</span><span class="op">);</span></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>    getchar<span class="op">();</span>  <span class="co">// Consuma newline</span></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>nuovo<span class="op">-&gt;</span>titolo<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>nuovo<span class="op">-&gt;</span>titolo<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>    nuovo<span class="op">-&gt;</span>titolo<span class="op">[</span>strcspn<span class="op">(</span>nuovo<span class="op">-&gt;</span>titolo<span class="op">,</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">)]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Rimuove \n</span></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Autore: &quot;</span><span class="op">);</span></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>nuovo<span class="op">-&gt;</span>autore<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>nuovo<span class="op">-&gt;</span>autore<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>    nuovo<span class="op">-&gt;</span>autore<span class="op">[</span>strcspn<span class="op">(</span>nuovo<span class="op">-&gt;</span>autore<span class="op">,</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">)]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>    nuovo<span class="op">-&gt;</span>disponibile <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// Disponibile di default</span></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>    <span class="op">(*</span>numero_libri<span class="op">)++;</span></span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;✅ Libro aggiunto con ID </span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> nuovo<span class="op">-&gt;</span>id<span class="op">);</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> mostra_libri<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>numero_libri <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;📚 Nessun libro nella biblioteca.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== CATALOGO BIBLIOTECA ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID  </span><span class="sc">%-30s</span><span class="st"> </span><span class="sc">%-20s</span><span class="st"> Stato</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="st">&quot;Titolo&quot;</span><span class="op">,</span> <span class="st">&quot;Autore&quot;</span><span class="op">);</span></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;--------------------------------------------------------</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%-3d</span><span class="st"> </span><span class="sc">%-30s</span><span class="st"> </span><span class="sc">%-20s</span><span class="st"> </span><span class="sc">%s\n</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>               libri<span class="op">[</span>i<span class="op">].</span>id<span class="op">,</span></span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>               libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">,</span></span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a>               libri<span class="op">[</span>i<span class="op">].</span>autore<span class="op">,</span></span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a>               libri<span class="op">[</span>i<span class="op">].</span>disponibile <span class="op">?</span> <span class="st">&quot;Disponibile&quot;</span> <span class="op">:</span> <span class="st">&quot;Prestato&quot;</span><span class="op">);</span></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> cerca_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> termine<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> trovati <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Cerca per titolo o autore: &quot;</span><span class="op">);</span></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>    getchar<span class="op">();</span></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>    fgets<span class="op">(</span>termine<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span>termine<span class="op">),</span> stdin<span class="op">);</span></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>    termine<span class="op">[</span>strcspn<span class="op">(</span>termine<span class="op">,</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">)]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">=== RISULTATI RICERCA ===</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>strstr<span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">,</span> termine<span class="op">)</span> <span class="op">||</span> </span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>            strstr<span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>autore<span class="op">,</span> termine<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;ID </span><span class="sc">%d</span><span class="st">: </span><span class="sc">%s</span><span class="st"> di </span><span class="sc">%s</span><span class="st"> (</span><span class="sc">%s</span><span class="st">)</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>                   libri<span class="op">[</span>i<span class="op">].</span>id<span class="op">,</span></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>                   libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">,</span></span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>                   libri<span class="op">[</span>i<span class="op">].</span>autore<span class="op">,</span></span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>                   libri<span class="op">[</span>i<span class="op">].</span>disponibile <span class="op">?</span> <span class="st">&quot;Disponibile&quot;</span> <span class="op">:</span> <span class="st">&quot;Prestato&quot;</span><span class="op">);</span></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>            trovati<span class="op">++;</span></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>trovati <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;🔍 Nessun libro trovato.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;Trovati </span><span class="sc">%d</span><span class="st"> libri.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> trovati<span class="op">);</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> presta_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID del libro da prestare: &quot;</span><span class="op">);</span></span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>id<span class="op">);</span></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>id <span class="op">==</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>disponibile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>disponibile <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;✅ Libro &#39;</span><span class="sc">%s</span><span class="st">&#39; prestato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">);</span></span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;❌ Libro già prestato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;❌ Libro con ID </span><span class="sc">%d</span><span class="st"> non trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> restituisci_libro<span class="op">(</span>Libro libri<span class="op">[],</span> <span class="dt">int</span> numero_libri<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> id<span class="op">;</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;ID del libro da restituire: &quot;</span><span class="op">);</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">&amp;</span>id<span class="op">);</span></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numero_libri<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>libri<span class="op">[</span>i<span class="op">].</span>id <span class="op">==</span> id<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(!</span>libri<span class="op">[</span>i<span class="op">].</span>disponibile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a>                libri<span class="op">[</span>i<span class="op">].</span>disponibile <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;✅ Libro &#39;</span><span class="sc">%s</span><span class="st">&#39; restituito!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> libri<span class="op">[</span>i<span class="op">].</span>titolo<span class="op">);</span></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>                printf<span class="op">(</span><span class="st">&quot;❌ Libro non era prestato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;❌ Libro con ID </span><span class="sc">%d</span><span class="st"> non trovato!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> id<span class="op">);</span></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="89-riepilogo">8.9 Riepilogo</h2>
+<p>✅ <strong>Cosa hai imparato:</strong></p>
+<ul>
+<li>Come aprire, leggere e scrivere file</li>
+<li>Modi di apertura: &quot;r&quot;, &quot;w&quot;, &quot;a&quot;, &quot;r+&quot;</li>
+<li>Salvare e caricare dati strutturati</li>
+<li>Gestire errori nell&#39;accesso ai file</li>
+<li>Creare semplici database con file CSV</li>
+<li>Implementare sistemi di persistenza</li>
+</ul>
+<p>✅ <strong>Cosa sai fare ora:</strong></p>
+<ul>
+<li>Creare programmi che &quot;ricordano&quot; i dati</li>
+<li>Salvare configurazioni e preferenze</li>
+<li>Implementare sistemi di archiviazione</li>
+<li>Lavorare con file CSV per dati tabulari</li>
+<li>Gestire errori di I/O in modo professionale</li>
+</ul>
+<hr />
+<p><strong>Prossimo modulo:</strong> Metteremo tutto insieme con <strong>progetti finali completi</strong>!</p>
+</main>
+</body>
+</html>

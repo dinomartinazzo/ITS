@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>🔧 APPENDICE: ARDUINO E SISTEMI EMBEDDED CON IA</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">🔧 APPENDICE: ARDUINO E SISTEMI EMBEDDED CON IA</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>APPENDICE_ARDUINO.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="materiale-di-riferimento-opzionale---corso-its">Materiale di Riferimento Opzionale - Corso ITS</h2>
+<p><strong>Nota:</strong> Questa appendice è materiale <strong>opzionale</strong> per studenti che hanno accesso a hardware Arduino e vogliono applicare le competenze IA a sistemi embedded.</p>
+<hr />
+<h2 id="clipboard-indice">📋 Indice</h2>
+<ol type="1">
+<li><a href="#1-introduzione-ad-arduino">Introduzione ad Arduino</a></li>
+<li><a href="#2-setup-ambiente-di-sviluppo">Setup Ambiente di Sviluppo</a></li>
+<li><a href="#3-primi-passi-con-ia">Primi Passi con IA</a></li>
+<li><a href="#4-progetti-arduino-con-ia">Progetti Arduino con IA</a></li>
+<li><a href="#5-best-practices-embedded">Best Practices Embedded</a></li>
+<li><a href="#6-risorse-e-riferimenti">Risorse e Riferimenti</a></li>
+</ol>
+<hr />
+<h2 id="1-introduzione-ad-arduino">1. INTRODUZIONE AD ARDUINO</h2>
+<h3 id="11-cosè-arduino">1.1 Cos&#39;è Arduino?</h3>
+<p><strong>Arduino</strong> è una piattaforma di prototipazione elettronica open-source basata su hardware e software facili da usare.</p>
+<p><strong>Componenti principali:</strong></p>
+<ul>
+<li><strong>Microcontrollore</strong> (es: ATmega328P su Arduino Uno)</li>
+<li><strong>Pin I/O digitali e analogici</strong></li>
+<li><strong>Interfaccia USB</strong> per programmazione</li>
+<li><strong>Alimentazione</strong> (USB o batteria)</li>
+</ul>
+<p><strong>Modelli comuni:</strong></p>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Modello</th>
+<th>MCU</th>
+<th>Clock</th>
+<th>RAM</th>
+<th>Flash</th>
+<th>I/O</th>
+<th>Prezzo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Uno</strong></td>
+<td>ATmega328P</td>
+<td>16MHz</td>
+<td>2KB</td>
+<td>32KB</td>
+<td>14D/6A</td>
+<td>~€20</td>
+</tr>
+<tr>
+<td><strong>Nano</strong></td>
+<td>ATmega328P</td>
+<td>16MHz</td>
+<td>2KB</td>
+<td>32KB</td>
+<td>14D/8A</td>
+<td>~€5</td>
+</tr>
+<tr>
+<td><strong>Mega</strong></td>
+<td>ATmega2560</td>
+<td>16MHz</td>
+<td>8KB</td>
+<td>256KB</td>
+<td>54D/16A</td>
+<td>~€35</td>
+</tr>
+<tr>
+<td><strong>Due</strong></td>
+<td>AT91SAM3X8E</td>
+<td>84MHz</td>
+<td>96KB</td>
+<td>512KB</td>
+<td>54D/12A</td>
+<td>~€35</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Nota RAM:</strong> 2KB di RAM è MOLTO poco! Importanza gestione memoria.</p>
+<h3 id="12-arduino-vs-c-standard">1.2 Arduino vs C Standard</h3>
+<p><strong>Differenze chiave:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Arduino (sketch)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Esegue UNA VOLTA all&#39;avvio</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    pinMode<span class="op">(</span><span class="dv">13</span><span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Esegue INFINITAMENTE</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span><span class="dv">13</span><span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span><span class="dv">13</span><span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// C standard</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Setup</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    init_peripherals<span class="op">();</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Loop infinito</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        do_something<span class="op">();</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        delay_ms<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// Mai raggiunto in embedded</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Linguaggio:</strong> Arduino usa C++ (subset), ma molto codice è compatibile con C.</p>
+<p><strong>Librerie standard NON disponibili:</strong></p>
+<ul>
+<li>❌ <code>malloc()</code> / <code>free()</code> (sconsigliato su Arduino)</li>
+<li>❌ <code>printf()</code> (usa <code>Serial.print()</code>)</li>
+<li>❌ File I/O standard (serve SD library)</li>
+<li>✅ Stringhe limitate (classe <code>String</code>, meglio <code>char[]</code>)</li>
+</ul>
+<h3 id="13-quando-usare-arduino-per-progetti-its">1.3 Quando Usare Arduino per Progetti ITS</h3>
+<p><strong>✅ Arduino è ottimo per:</strong></p>
+<ul>
+<li>Prototipazione rapida</li>
+<li>Progetti didattici</li>
+<li>Sensori e attuatori</li>
+<li>IoT semplice</li>
+<li>Imparare embedded programming</li>
+</ul>
+<p><strong>❌ Arduino NON è ideale per:</strong></p>
+<ul>
+<li>Produzione industriale (meglio STM32, ESP32)</li>
+<li>Elaborazione pesante (poca RAM/CPU)</li>
+<li>Real-time critico (no RTOS)</li>
+<li>Progetti professionali complessi</li>
+</ul>
+<p><strong>Per ITS:</strong> Arduino è perfetto per <strong>imparare</strong> e <strong>prototipare</strong>.</p>
+<hr />
+<h2 id="2-setup-ambiente-di-sviluppo">2. SETUP AMBIENTE DI SVILUPPO</h2>
+<h3 id="21-arduino-ide-opzione-1---più-semplice">2.1 Arduino IDE (Opzione 1 - Più Semplice)</h3>
+<p><strong>Download:</strong><br />
+<a href="https://www.arduino.cc/en/software">https://www.arduino.cc/en/software</a></p>
+<p><strong>Installazione:</strong></p>
+<ol type="1">
+<li>Scarica installer per tuo OS</li>
+<li>Installa (next, next, finish)</li>
+<li>Collega Arduino via USB</li>
+<li>Tools → Board → Seleziona tuo modello</li>
+<li>Tools → Port → Seleziona porta COM/USB</li>
+</ol>
+<p><strong>Test:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// File → Examples → 01.Basics → Blink</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>LED_BUILTIN<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>LED_BUILTIN<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>LED_BUILTIN<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Upload (Ctrl+U) → LED dovrebbe lampeggiare!</p>
+<h3 id="22-platformio-opzione-2---più-professionale">2.2 PlatformIO (Opzione 2 - Più Professionale)</h3>
+<p><strong>Vantaggi:</strong></p>
+<ul>
+<li>✅ Integrato in VSCode</li>
+<li>✅ Migliore autocomplete</li>
+<li>✅ Supporto multi-board</li>
+<li>✅ Gestione librerie avanzata</li>
+<li>✅ Debugging (su board compatibili)</li>
+</ul>
+<p><strong>Installazione:</strong></p>
+<ol type="1">
+<li>Installa VSCode</li>
+<li>Extensions → Cerca &quot;PlatformIO IDE&quot;</li>
+<li>Install</li>
+<li>Restart VSCode</li>
+</ol>
+<p><strong>Nuovo progetto:</strong></p>
+<ol type="1">
+<li>PlatformIO Home → New Project</li>
+<li>Nome: &quot;MyProject&quot;</li>
+<li>Board: &quot;Arduino Uno&quot;</li>
+<li>Framework: &quot;Arduino&quot;</li>
+<li>Create</li>
+</ol>
+<p><strong>Struttura progetto:</strong></p>
+<pre><code>MyProject/
+├── src/
+│   └── main.cpp      ← Il tuo sketch
+├── lib/              ← Librerie custom
+├── include/          ← Header files
+└── platformio.ini    ← Config</code></pre>
+<h3 id="23-simulatori-senza-hardware">2.3 Simulatori (Senza Hardware)</h3>
+<p><strong>Tinkercad Circuits (Online, Gratuito)</strong></p>
+<p><a href="https://www.tinkercad.com/circuits">https://www.tinkercad.com/circuits</a></p>
+<ul>
+<li>✅ Simula Arduino + componenti</li>
+<li>✅ Visualizzazione real-time</li>
+<li>✅ Nessuna installazione</li>
+<li>✅ Perfetto per imparare</li>
+</ul>
+<p><strong>Wokwi (Online, Gratuito)</strong></p>
+<p><a href="https://wokwi.com/">https://wokwi.com/</a></p>
+<ul>
+<li>✅ Supporta ESP32, Arduino, Raspberry Pi Pico</li>
+<li>✅ Debugging integrato</li>
+<li>✅ Librerie custom</li>
+</ul>
+<p><strong>Proteus (Software, A Pagamento)</strong></p>
+<ul>
+<li>✅ Simulazione professionale</li>
+<li>✅ PCB design</li>
+<li>❌ Costoso (~€200+)</li>
+</ul>
+<hr />
+<h2 id="3-primi-passi-con-ia">3. PRIMI PASSI CON IA</h2>
+<h3 id="31-usare-ia-per-arduino">3.1 Usare IA per Arduino</h3>
+<p><strong>IA può aiutare con Arduino per:</strong></p>
+<ol type="1">
+<li><strong>Spiegare concetti embedded</strong></li>
+<li><strong>Generare codice sketch</strong></li>
+<li><strong>Debuggare problemi hardware/software</strong></li>
+<li><strong>Suggerire librerie appropriate</strong></li>
+<li><strong>Ottimizzare per memoria limitata</strong></li>
+</ol>
+<p><strong>⚠️ Attenzione:</strong> IA potrebbe suggerire codice che:</p>
+<ul>
+<li>Usa troppa RAM (overflow su Arduino Uno)</li>
+<li>Usa librerie inesistenti</li>
+<li>Non gestisce interrupt correttamente</li>
+<li>Ha timing issues</li>
+</ul>
+<p><strong>SEMPRE testare su hardware reale o simulatore!</strong></p>
+<h3 id="32-prompt-efficaci-per-arduino">3.2 Prompt Efficaci per Arduino</h3>
+<p><strong>Template base:</strong></p>
+<pre><code>Contesto: Sto programmando Arduino [modello] con [sensore/attuatore].
+
+Task: [cosa vuoi fare]
+
+Vincoli:
+- RAM disponibile: [es: 2KB per Uno]
+- Velocità richiesta: [es: lettura ogni 100ms]
+- Librerie disponibili: [lista se sai]
+
+Requisiti:
+- Codice ottimizzato per memoria
+- Gestione errori (se sensore disconnesso)
+- Commenti chiari
+
+Output: Sketch completo con setup() e loop()</code></pre>
+<p><strong>Esempio concreto:</strong></p>
+<pre><code>Contesto: Arduino Uno, sensore temperatura DHT22, LED RGB.
+
+Task: Accendi LED verde se temperatura &lt; 20°C, giallo se 20-30°C, rosso se &gt; 30°C.
+
+Vincoli:
+- DHT22 legge max ogni 2 secondi
+- Usa libreria DHT ufficiale
+- Pin DHT: 2, Pin LED RGB: 9,10,11
+
+Requisiti:
+- Stampa temperatura su Serial Monitor
+- Gestisci errore lettura DHT (timeout)
+- Smooth LED transitions (PWM fade)
+
+Output: Sketch completo testabile.</code></pre>
+<h3 id="33-validare-codice-arduino-generato-da-ia">3.3 Validare Codice Arduino Generato da IA</h3>
+<p><strong>Checklist:</strong></p>
+<p><strong>✅ Controllo Pin:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Pin usati sono disponibili su tuo board</label></li>
+<li><label><input type="checkbox"></input>Pin analogici solo per analogRead (A0-A5 su Uno)</label></li>
+<li><label><input type="checkbox"></input>Pin PWM solo se necessari (~)</label></li>
+</ul>
+<p><strong>✅ Controllo Memoria:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Aggiungi per debug RAM</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> printFreeRAM<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">extern</span> <span class="dt">int</span> __heap_start<span class="op">,</span> <span class="op">*</span>__brkval<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> v<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Free RAM: &quot;</span><span class="op">);</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">&amp;</span>v <span class="op">-</span> <span class="op">(</span>__brkval <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> <span class="op">&amp;</span>__heap_start <span class="op">:</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> __brkval<span class="op">));</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>✅ Controllo Librerie:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Librerie esistono (controlla Library Manager)</label></li>
+<li><label><input type="checkbox"></input>Versioni compatibili</label></li>
+</ul>
+<p><strong>✅ Controllo Timing:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input><code>delay()</code> non blocca troppo a lungo</label></li>
+<li><label><input type="checkbox"></input>Interrupt service routines sono veloci</label></li>
+<li><label><input type="checkbox"></input>Millis() overflow gestito (dopo 49 giorni)</label></li>
+</ul>
+<p><strong>✅ Controllo Voltage:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Sensori 3.3V o 5V compatibili con board</label></li>
+<li><label><input type="checkbox"></input>Assorbimento corrente OK (max 40mA per pin)</label></li>
+</ul>
+<hr />
+<h2 id="4-progetti-arduino-con-ia">4. PROGETTI ARDUINO CON IA</h2>
+<h3 id="41-progetto-1-termostato-intelligente">4.1 Progetto 1: Termostato Intelligente</h3>
+<p><strong>Obiettivo:</strong> Sistema che controlla temperatura ambiente e attiva riscaldamento/raffrescamento.</p>
+<p><strong>Hardware necessario:</strong></p>
+<ul>
+<li>Arduino Uno</li>
+<li>Sensore temperatura DHT22 o DS18B20</li>
+<li>2 LED (rosso = caldo, blu = freddo)</li>
+<li>2 resistenze 220Ω</li>
+</ul>
+<p><strong>Prompt per IA:</strong></p>
+<pre><code>Progetto: Termostato Arduino con isteresi
+
+Hardware:
+- Arduino Uno
+- DHT22 su pin 2
+- LED rosso (riscaldamento) su pin 8
+- LED blu (raffrescamento) su pin 9
+
+Logica:
+- Target temperatura: 22°C
+- Isteresi: ±1°C
+- Se temp &lt; 21°C → accendi LED rosso (simula riscaldamento)
+- Se temp &gt; 23°C → accendi LED blu (simula AC)
+- Altrimenti → entrambi spenti
+
+Funzionalità:
+- Leggi temperatura ogni 2 secondi
+- Stampa su Serial: &quot;Temp: 23.5C [HEATING/COOLING/OK]&quot;
+- Implementa isteresi (evita on/off rapido)
+
+Gestione errori:
+- Se DHT22 fallisce lettura → stampa &quot;Sensor error&quot;
+
+Output: Sketch completo con commenti.</code></pre>
+<p><strong>Codice atteso:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;DHT.h&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTPIN </span><span class="dv">2</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTTYPE </span>DHT22</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LED_HEAT </span><span class="dv">8</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LED_COOL </span><span class="dv">9</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>DHT dht<span class="op">(</span>DHTPIN<span class="op">,</span> DHTTYPE<span class="op">);</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> TARGET_TEMP <span class="op">=</span> <span class="fl">22.0</span><span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">float</span> HYSTERESIS <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>LED_HEAT<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>LED_COOL<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  dht<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Thermostat initialized&quot;</span><span class="op">);</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">2000</span><span class="op">);</span> <span class="co">// DHT22 richiede min 2sec tra letture</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> dht<span class="op">.</span>readTemperature<span class="op">();</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Gestione errore</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>isnan<span class="op">(</span>temp<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Sensor error!&quot;</span><span class="op">);</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Logica termostato con isteresi</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>temp <span class="op">&lt;</span> TARGET_TEMP <span class="op">-</span> HYSTERESIS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Troppo freddo → riscalda</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_HEAT<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_COOL<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temp: &quot;</span><span class="op">);</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;C [HEATING]&quot;</span><span class="op">);</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>temp <span class="op">&gt;</span> TARGET_TEMP <span class="op">+</span> HYSTERESIS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Troppo caldo → raffredda</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_HEAT<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_COOL<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temp: &quot;</span><span class="op">);</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;C [COOLING]&quot;</span><span class="op">);</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">// OK</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_HEAT<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_COOL<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temp: &quot;</span><span class="op">);</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;C [OK]&quot;</span><span class="op">);</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Test:</strong></p>
+<ol type="1">
+<li>Upload sketch</li>
+<li>Apri Serial Monitor (9600 baud)</li>
+<li>Osserva letture temperatura</li>
+<li>Scalda sensore con dita → LED rosso si accende</li>
+<li>Soffia aria fredda → LED blu si accende</li>
+</ol>
+<h3 id="42-progetto-2-data-logger-su-sd">4.2 Progetto 2: Data Logger su SD</h3>
+<p><strong>Obiettivo:</strong> Registrare dati sensori su SD card con timestamp.</p>
+<p><strong>Hardware:</strong></p>
+<ul>
+<li>Arduino Uno/Mega</li>
+<li>Modulo SD card (SPI)</li>
+<li>Sensore temperatura</li>
+<li>RTC module (opzionale, per timestamp reali)</li>
+</ul>
+<p><strong>Prompt IA:</strong></p>
+<pre><code>Progetto: Data logger temperatura su SD card
+
+Hardware:
+- Arduino Uno
+- SD card module (CS pin 10)
+- DHT22 su pin 2
+
+Funzionalità:
+- Leggi temperatura ogni 10 secondi
+- Salva su file &quot;datalog.txt&quot; formato CSV
+- CSV: timestamp,temperatura
+- Timestamp in millisecondi (millis())
+- LED integrato lampeggia ad ogni scrittura
+
+Gestione errori:
+- Se SD non inizializza → blocca e stampa errore
+- Se scrittura fallisce → stampa warning
+
+Output: Sketch con librerie SD.h e DHT.h</code></pre>
+<p><strong>Codice atteso:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;SPI.h&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;SD.h&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;DHT.h&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTPIN </span><span class="dv">2</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTTYPE </span>DHT22</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define CS_PIN </span><span class="dv">10</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>DHT dht<span class="op">(</span>DHTPIN<span class="op">,</span> DHTTYPE<span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>File dataFile<span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>LED_BUILTIN<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Init DHT</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  dht<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Init SD</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Initializing SD card...&quot;</span><span class="op">);</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>SD<span class="op">.</span>begin<span class="op">(</span>CS_PIN<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;FAILED!&quot;</span><span class="op">);</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">);</span> <span class="co">// Blocca</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;OK&quot;</span><span class="op">);</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Crea header se file non esiste</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>SD<span class="op">.</span>exists<span class="op">(</span><span class="st">&quot;datalog.txt&quot;</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    dataFile <span class="op">=</span> SD<span class="op">.</span>open<span class="op">(</span><span class="st">&quot;datalog.txt&quot;</span><span class="op">,</span> FILE_WRITE<span class="op">);</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>dataFile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;timestamp_ms,temperature_C&quot;</span><span class="op">);</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Created datalog.txt&quot;</span><span class="op">);</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Leggi temperatura</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> temp <span class="op">=</span> dht<span class="op">.</span>readTemperature<span class="op">();</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>isnan<span class="op">(</span>temp<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;DHT read error&quot;</span><span class="op">);</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Salva su SD</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    dataFile <span class="op">=</span> SD<span class="op">.</span>open<span class="op">(</span><span class="st">&quot;datalog.txt&quot;</span><span class="op">,</span> FILE_WRITE<span class="op">);</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>dataFile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>      <span class="dt">unsigned</span> <span class="dt">long</span> timestamp <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>print<span class="op">(</span>timestamp<span class="op">);</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;,&quot;</span><span class="op">);</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>println<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>      dataFile<span class="op">.</span>close<span class="op">();</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Feedback</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>      digitalWrite<span class="op">(</span>LED_BUILTIN<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>      delay<span class="op">(</span><span class="dv">50</span><span class="op">);</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>      digitalWrite<span class="op">(</span>LED_BUILTIN<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Logged: &quot;</span><span class="op">);</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span>timestamp<span class="op">);</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;ms, &quot;</span><span class="op">);</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;C&quot;</span><span class="op">);</span></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;SD write error&quot;</span><span class="op">);</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">10000</span><span class="op">);</span> <span class="co">// 10 secondi</span></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Test:</strong></p>
+<ol type="1">
+<li>Inserisci SD formattata FAT32</li>
+<li>Upload sketch</li>
+<li>Lascia girare 1 minuto</li>
+<li>Rimuovi SD, leggi con PC</li>
+<li>Apri datalog.txt → dovrebbe contenere 6 righe dati</li>
+</ol>
+<h3 id="43-progetto-3-controllo-remoto-seriale">4.3 Progetto 3: Controllo Remoto Seriale</h3>
+<p><strong>Obiettivo:</strong> Controllare Arduino da PC via comandi seriali.</p>
+<p><strong>Comandi:</strong></p>
+<ul>
+<li><code>LED ON</code> → accendi LED</li>
+<li><code>LED OFF</code> → spegni LED</li>
+<li><code>STATUS</code> → leggi sensori</li>
+<li><code>HELP</code> → mostra comandi</li>
+</ul>
+<p><strong>Prompt IA:</strong></p>
+<pre><code>Progetto: Interfaccia seriale comandi per Arduino
+
+Features:
+- Ricevi comandi via Serial (9600 baud)
+- Comandi supportati:
+  - &quot;LED ON&quot; → digitalWrite(13, HIGH)
+  - &quot;LED OFF&quot; → digitalWrite(13, LOW)
+  - &quot;STATUS&quot; → stampa temperatura DHT22
+  - &quot;HELP&quot; → lista comandi
+- Comando non valido → &quot;Unknown command&quot;
+
+Implementazione:
+- Usa Serial.readStringUntil(&#39;\n&#39;)
+- Trim whitespace
+- Case insensitive
+- Prompt &quot;&gt;&quot; per indicare pronto
+
+Codice pulito con funzioni separate per ogni comando.</code></pre>
+<p><strong>Codice atteso:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;DHT.h&quot;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTPIN </span><span class="dv">2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DHTTYPE </span>DHT22</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define LED_PIN </span><span class="dv">13</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>DHT dht<span class="op">(</span>DHTPIN<span class="op">,</span> DHTTYPE<span class="op">);</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>LED_PIN<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  dht<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;=== Arduino Command Interface ===&quot;</span><span class="op">);</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Type HELP for commands&quot;</span><span class="op">);</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;&gt; &quot;</span><span class="op">);</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>Serial<span class="op">.</span>available<span class="op">()</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    String command <span class="op">=</span> Serial<span class="op">.</span>readStringUntil<span class="op">(</span><span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">);</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    command<span class="op">.</span>trim<span class="op">();</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    command<span class="op">.</span>toUpperCase<span class="op">();</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    processCommand<span class="op">(</span>command<span class="op">);</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;&gt; &quot;</span><span class="op">);</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> processCommand<span class="op">(</span>String cmd<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>cmd <span class="op">==</span> <span class="st">&quot;LED ON&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_PIN<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;LED turned ON&quot;</span><span class="op">);</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cmd <span class="op">==</span> <span class="st">&quot;LED OFF&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED_PIN<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;LED turned OFF&quot;</span><span class="op">);</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cmd <span class="op">==</span> <span class="st">&quot;STATUS&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> temp <span class="op">=</span> dht<span class="op">.</span>readTemperature<span class="op">();</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>isnan<span class="op">(</span>temp<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Sensor error&quot;</span><span class="op">);</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temperature: &quot;</span><span class="op">);</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span>temp<span class="op">);</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; C&quot;</span><span class="op">);</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cmd <span class="op">==</span> <span class="st">&quot;HELP&quot;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;Available commands:&quot;</span><span class="op">);</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;  LED ON    - Turn LED on&quot;</span><span class="op">);</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;  LED OFF   - Turn LED off&quot;</span><span class="op">);</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;  STATUS    - Read sensors&quot;</span><span class="op">);</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;  HELP      - Show this message&quot;</span><span class="op">);</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Unknown command: &quot;</span><span class="op">);</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>println<span class="op">(</span>cmd<span class="op">);</span></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Test:</strong></p>
+<ol type="1">
+<li>Upload</li>
+<li>Serial Monitor (9600 baud)</li>
+<li>Scrivi: <code>LED ON</code> → Enter</li>
+<li>LED si accende</li>
+<li>Scrivi: <code>STATUS</code> → Mostra temperatura</li>
+<li>Scrivi: <code>HELP</code> → Lista comandi</li>
+</ol>
+<h3 id="44-progetto-4-sistema-allarme-pir">4.4 Progetto 4: Sistema Allarme PIR</h3>
+<p><strong>Hardware:</strong></p>
+<ul>
+<li>Arduino</li>
+<li>Sensore PIR (motion detection)</li>
+<li>Buzzer</li>
+<li>LED</li>
+</ul>
+<p><strong>Logica:</strong></p>
+<ul>
+<li>Se PIR rileva movimento → allarme (buzzer + LED)</li>
+<li>Bottone per armare/disarmare</li>
+<li>Stati: ARMED, DISARMED, ALARM</li>
+</ul>
+<p><strong>Prompt IA:</strong></p>
+<pre><code>Progetto: Sistema allarme con PIR
+
+Hardware:
+- PIR su pin 2
+- Buzzer su pin 8
+- LED rosso su pin 9
+- Pulsante su pin 3 (pull-up interno)
+
+Stati:
+- DISARMED: tutto spento
+- ARMED: LED lampeggia lento
+- ALARM: buzzer + LED lampeggio veloce
+
+Logica:
+- Pulsante toggle ARMED/DISARMED
+- In ARMED: se PIR rileva movimento → ALARM
+- In ALARM: buzzer per 5 secondi, poi torna ARMED
+- Debounce pulsante
+
+Serial output:
+- &quot;System ARMED&quot;
+- &quot;System DISARMED&quot;
+- &quot;ALARM! Motion detected&quot;
+
+Implementa con enum per stati e millis() per timing non-bloccante.</code></pre>
+<hr />
+<h2 id="5-best-practices-embedded">5. BEST PRACTICES EMBEDDED</h2>
+<h3 id="51-gestione-memoria-su-arduino">5.1 Gestione Memoria su Arduino</h3>
+<p><strong>Problema:</strong> Arduino Uno ha solo 2KB RAM!</p>
+<p><strong>Evitare:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ MALE - consuma troppa RAM</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>String message <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span> <span class="co">// String class usa heap</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> bigBuffer<span class="op">[</span><span class="dv">1000</span><span class="op">];</span> <span class="co">// 1KB = 50% della RAM!</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> matrix<span class="op">[</span><span class="dv">50</span><span class="op">][</span><span class="dv">50</span><span class="op">];</span> <span class="co">// 10KB - overflow!</span></span></code></pre></div>
+<p><strong>Preferire:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ BENE</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span> message<span class="op">[]</span> PROGMEM <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span> <span class="co">// In flash, non RAM</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> buffer<span class="op">[</span><span class="dv">50</span><span class="op">];</span> <span class="co">// Solo quello che serve</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Usa int invece di float se possibile (più veloce, meno RAM)</span></span></code></pre></div>
+<p><strong>Misurare RAM:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> freeRam<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">extern</span> <span class="dt">int</span> __heap_start<span class="op">,</span> <span class="op">*</span>__brkval<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> v<span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> <span class="op">&amp;</span>v <span class="op">-</span> <span class="op">(</span>__brkval <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> <span class="op">&amp;</span>__heap_start <span class="op">:</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> __brkval<span class="op">);</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Free RAM: &quot;</span><span class="op">);</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span>freeRam<span class="op">());</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="52-timing-non-bloccante">5.2 Timing Non-Bloccante</h3>
+<p><strong>❌ MALE - delay() blocca tutto:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>LED<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span> <span class="co">// ← BLOCCATO per 1 secondo!</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>LED<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Non può fare altro mentre aspetta!</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>✅ BENE - millis() non-bloccante:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> previousMillis <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">long</span> interval <span class="op">=</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">long</span> currentMillis <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>currentMillis <span class="op">-</span> previousMillis <span class="op">&gt;=</span> interval<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    previousMillis <span class="op">=</span> currentMillis<span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Toggle LED</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>LED<span class="op">,</span> <span class="op">!</span>digitalRead<span class="op">(</span>LED<span class="op">));</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Può fare altro qui senza bloccare!</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  checkSensor<span class="op">();</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  processSerial<span class="op">();</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="53-interrupt-vs-polling">5.3 Interrupt vs Polling</h3>
+<p><strong>Polling (controllo continuo):</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>digitalRead<span class="op">(</span>BUTTON<span class="op">)</span> <span class="op">==</span> LOW<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    handleButton<span class="op">();</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Potrebbe perdere press brevi!</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Interrupt (hardware trigger):</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="at">volatile</span> <span class="dt">bool</span> buttonPressed <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>BUTTON<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  attachInterrupt<span class="op">(</span>digitalPinToInterrupt<span class="op">(</span>BUTTON<span class="op">),</span> buttonISR<span class="op">,</span> FALLING<span class="op">);</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> buttonISR<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Interrupt Service Routine - BREVE!</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  buttonPressed <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>buttonPressed<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    buttonPressed <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    handleButton<span class="op">();</span> <span class="co">// Elaborazione lunga fuori da ISR</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Regole ISR:</strong></p>
+<ul>
+<li>⚡ Più breve possibile</li>
+<li>❌ NO Serial.print()</li>
+<li>❌ NO delay()</li>
+<li>❌ NO operazioni lunghe</li>
+<li>✅ Solo setta flag</li>
+</ul>
+<h3 id="54-debouncing">5.4 Debouncing</h3>
+<p><strong>Problema:</strong> Pulsanti &quot;rimbalzano&quot; (multiple trigger in ms)</p>
+<p><strong>Software debounce:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DEBOUNCE_DELAY <span class="op">=</span> <span class="dv">50</span><span class="op">;</span> <span class="co">// ms</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> buttonState<span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> lastButtonState <span class="op">=</span> HIGH<span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="dt">unsigned</span> <span class="dt">long</span> lastDebounceTime <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> reading <span class="op">=</span> digitalRead<span class="op">(</span>BUTTON<span class="op">);</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>reading <span class="op">!=</span> lastButtonState<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    lastDebounceTime <span class="op">=</span> millis<span class="op">();</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>millis<span class="op">()</span> <span class="op">-</span> lastDebounceTime<span class="op">)</span> <span class="op">&gt;</span> DEBOUNCE_DELAY<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>reading <span class="op">!=</span> buttonState<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      buttonState <span class="op">=</span> reading<span class="op">;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>buttonState <span class="op">==</span> LOW<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Pulsante premuto (stabile)</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        handleButtonPress<span class="op">();</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  lastButtonState <span class="op">=</span> reading<span class="op">;</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="55-power-management">5.5 Power Management</h3>
+<p><strong>Per progetti a batteria:</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;avr/sleep.h&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;avr/power.h&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Disabilita periferiche inutilizzate</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  power_adc_disable<span class="op">();</span> <span class="co">// ADC</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  power_spi_disable<span class="op">();</span> <span class="co">// SPI</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  power_timer1_disable<span class="op">();</span> <span class="co">// Timer1</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> goToSleep<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  set_sleep_mode<span class="op">(</span>SLEEP_MODE_PWR_DOWN<span class="op">);</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  sleep_enable<span class="op">();</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  sleep_mode<span class="op">();</span> <span class="co">// Sleep!</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... sveglia da interrupt ...</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  sleep_disable<span class="op">();</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h2 id="6-risorse-e-riferimenti">6. RISORSE E RIFERIMENTI</h2>
+<h3 id="61-documentazione-ufficiale">6.1 Documentazione Ufficiale</h3>
+<p><strong>Arduino:</strong></p>
+<ul>
+<li><a href="https://www.arduino.cc/reference/en/">https://www.arduino.cc/reference/en/</a></li>
+<li><a href="https://docs.arduino.cc/">https://docs.arduino.cc/</a></li>
+</ul>
+<p><strong>Librerie popolari:</strong></p>
+<ul>
+<li>DHT: <a href="https://github.com/adafruit/DHT-sensor-library">https://github.com/adafruit/DHT-sensor-library</a></li>
+<li>SD: <a href="https://www.arduino.cc/en/Reference/SD">https://www.arduino.cc/en/Reference/SD</a></li>
+<li>Servo: <a href="https://www.arduino.cc/en/Reference/Servo">https://www.arduino.cc/en/Reference/Servo</a></li>
+<li>LiquidCrystal: <a href="https://www.arduino.cc/en/Reference/LiquidCrystal">https://www.arduino.cc/en/Reference/LiquidCrystal</a></li>
+</ul>
+<h3 id="62-tutorial-e-guide">6.2 Tutorial e Guide</h3>
+<p><strong>Arduino Project Hub:</strong><br />
+<a href="https://create.arduino.cc/projecthub">https://create.arduino.cc/projecthub</a></p>
+<p><strong>Adafruit Learn:</strong><br />
+<a href="https://learn.adafruit.com/">https://learn.adafruit.com/</a></p>
+<p><strong>SparkFun Tutorials:</strong><br />
+<a href="https://learn.sparkfun.com/">https://learn.sparkfun.com/</a></p>
+<p><strong>DroneBot Workshop (YouTube):</strong><br />
+<a href="https://www.youtube.com/@Dronebotworkshop">https://www.youtube.com/@Dronebotworkshop</a></p>
+<h3 id="63-community">6.3 Community</h3>
+<p><strong>Forum Arduino:</strong><br />
+<a href="https://forum.arduino.cc/">https://forum.arduino.cc/</a></p>
+<p><strong>Reddit:</strong></p>
+<ul>
+<li>r/arduino</li>
+<li>r/embedded</li>
+<li>r/AskElectronics</li>
+</ul>
+<p><strong>Discord:</strong><br />
+Arduino Official Discord</p>
+<h3 id="64-componenti-e-kit">6.4 Componenti e Kit</h3>
+<p><strong>Dove comprare (Italia):</strong></p>
+<ul>
+<li><strong>Robot-Italy</strong> - <a href="https://www.robot-italy.com/">https://www.robot-italy.com/</a></li>
+<li><strong>Futura Elettronica</strong> - <a href="https://www.futurashop.it/">https://www.futurashop.it/</a></li>
+<li><strong>RS Components</strong> - <a href="https://it.rs-online.com/">https://it.rs-online.com/</a></li>
+<li><strong>Amazon</strong> - Kit starter economici</li>
+</ul>
+<p><strong>Kit consigliati per iniziare:</strong></p>
+<ul>
+<li><strong>Elegoo Uno Starter Kit</strong> (~€35) - completo</li>
+<li><strong>Arduino Official Starter Kit</strong> (~€85) - premium</li>
+<li><strong>Component Kit</strong> (~€20) - solo componenti</li>
+</ul>
+<h3 id="65-progetti-avanzati">6.5 Progetti Avanzati</h3>
+<p><strong>Dopo aver imparato le basi:</strong></p>
+<ol type="1">
+<li><p><strong>IoT con ESP32/ESP8266</strong></p>
+<ul>
+<li>WiFi integrato</li>
+<li>MQTT per comunicazione</li>
+<li>Web server</li>
+</ul></li>
+<li><p><strong>Computer Vision con OpenMV</strong></p>
+<ul>
+<li>Camera integrata</li>
+<li>MicroPython</li>
+<li>ML on-device</li>
+</ul></li>
+<li><p><strong>RTOS con STM32</strong></p>
+<ul>
+<li>Real-time OS</li>
+<li>Multi-tasking</li>
+<li>Professionale</li>
+</ul></li>
+<li><p><strong>TinyML</strong></p>
+<ul>
+<li>Machine learning su MCU</li>
+<li>TensorFlow Lite Micro</li>
+<li>Edge AI</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="dart-conclusione-appendice">🎯 CONCLUSIONE APPENDICE</h2>
+<h3 id="ricapitolando">Ricapitolando</h3>
+<p>Questa appendice ha coperto:</p>
+<ul>
+<li>✅ Introduzione ad Arduino</li>
+<li>✅ Setup ambiente sviluppo</li>
+<li>✅ Usare IA per progetti embedded</li>
+<li>✅ 4 progetti pratici completi</li>
+<li>✅ Best practices (memoria, timing, interrupt)</li>
+<li>✅ Risorse per approfondire</li>
+</ul>
+<h3 id="prossimi-passi">Prossimi Passi</h3>
+<p><strong>Se hai hardware Arduino:</strong></p>
+<ol type="1">
+<li><strong>Inizia con Blink</strong> (LED integrato)</li>
+<li><strong>Aggiungi sensore</strong> (DHT22 o ultrasonico)</li>
+<li><strong>Implementa un progetto</strong> da questa appendice</li>
+<li><strong>Usa IA per customizzare</strong> secondo tue esigenze</li>
+<li><strong>Condividi su GitHub</strong> (portfolio!)</li>
+</ol>
+<p><strong>Se NON hai hardware:</strong></p>
+<ol type="1">
+<li><strong>Usa simulatore</strong> (Tinkercad/Wokwi)</li>
+<li><strong>Impara concetti</strong> (timing, interrupt, memory)</li>
+<li><strong>Considera ESP32</strong> (~€5, WiFi integrato, più potente)</li>
+</ol>
+<h3 id="link-veloce">Link Veloce</h3>
+<p><strong>Inizia subito (senza hardware):</strong><br />
+<a href="https://www.tinkercad.com/circuits">https://www.tinkercad.com/circuits</a></p>
+<p><strong>Compra kit starter:</strong><br />
+<a href="https://store.arduino.cc/products/arduino-starter-kit-multi-language">https://store.arduino.cc/products/arduino-starter-kit-multi-language</a></p>
+<h3 id="feedback">Feedback</h3>
+<p>Questa appendice ti è stata utile? Hai suggerimenti?<br />
+[Link form feedback]</p>
+<hr />
+<p><strong>🔧 Buon making con Arduino e IA! 🤖</strong></p>
+<hr />
+<p><strong>Appendice Arduino - Corso ITS Intelligenza Artificiale 2025</strong></p>
+</main>
+</body>
+</html>

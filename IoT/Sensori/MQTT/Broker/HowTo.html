@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>HowTo</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">HowTo</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>HowTo.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/IoT/Sensori/MQTT/Broker</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h3 id="installare-mosquitto-mqtt-broker-in-locale-su-windows">Installare Mosquitto MQTT broker in locale su Windows</h3>
+<h3 id="1-scaricare-mosquitto">1. Scaricare Mosquitto</h3>
+<ul>
+<li><p>Vai al sito ufficiale: <a href><span>https://mosquitto.org/download</span></a></p></li>
+<li><p>Nella sezione Windows, scarica l’installer <code>.exe</code> (es: <code>mosquitto-2.x.x-install-windows-x64.exe</code>)</p></li>
+</ul>
+<h3 id="2-installare-mosquitto">2. Installare Mosquitto</h3>
+<ul>
+<li><p>Esegui l’installer come amministratore</p></li>
+<li><p>Durante l’installazione:</p>
+<ul>
+<li><p>Seleziona l’opzione per installare anche il servizio</p></li>
+<li><p>Consenti l’installazione dei componenti opzionali come OpenSSL se richiesto</p></li>
+</ul></li>
+</ul>
+<h3 id="3-configurare-il-file-di-configurazione">3. Configurare il file di configurazione</h3>
+<ul>
+<li>Il file <code>mosquitto.conf</code> si trova nella directory di installazione, ad esempio:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">C:</span><span class="dt">\Program Files\mosquitto\mosquitto.conf</span></span></code></pre></div>
+<ul>
+<li>Per iniziare, puoi usare una configurazione minima. Crea un file di testo con:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">listener 1883</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">allow_anonymous true</span></span></code></pre></div>
+<p>Salvalo come <code>mosquitto.conf</code> e posizionalo nella stessa directory dell’eseguibile se vuoi avviarlo manualmente.</p>
+<hr />
+<h1 id="esempi-di-configurazione-mosquitto">Esempi di configurazione Mosquitto</h1>
+<h2 id="configurazione-semplice-senza-autenticazione">Configurazione semplice (senza autenticazione)</h2>
+<p>Crea un file <code>mosquitto.conf</code> con il seguente contenuto:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode conf"><code class="sourceCode toml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">listener</span> <span class="dt">1883</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">allow_anonymous</span> <span class="dt">true</span></span></code></pre></div>
+<hr />
+<h2 id="configurazione-completa-con-autenticazione">Configurazione completa (con autenticazione)</h2>
+<ol type="1">
+<li>Crea un file <code>mosquitto.conf</code> con il seguente contenuto:</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode conf"><code class="sourceCode toml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">listener</span> <span class="dt">1883</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">allow_anonymous</span> <span class="dt">false</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">password_file</span> <span class="dt">C</span><span class="er">:/</span><span class="dt">Program</span> <span class="dt">Files</span><span class="er">/</span><span class="dt">mosquitto</span><span class="er">/</span><span class="dt">passwd.txt</span></span></code></pre></div>
+<ol start="2" type="1">
+<li>Genera il file delle password:</li>
+</ol>
+<p>Apri il prompt dei comandi nella cartella di Mosquitto e digita:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_passwd</span> <span class="at">-c</span> <span class="st">&quot;C:/Program Files/mosquitto/passwd.txt&quot;</span> nomeutente</span></code></pre></div>
+<p>Sostituisci <code>nomeutente</code> con il nome utente desiderato. Ti verrà chiesta la password.</p>
+<ol start="3" type="1">
+<li>Avvia Mosquitto normalmente.</li>
+</ol>
+<hr />
+<p>Per connetterti ora sarà necessario specificare username e password nei client MQTT.</p>
+<hr />
+<h2 id="aprire-la-porta-1883-nel-firewall-di-windows">Aprire la porta 1883 nel firewall di Windows</h2>
+<p>Per permettere le connessioni al broker Mosquitto, è necessario aprire la porta 1883 (TCP) nel firewall di Windows sia in ingresso (IN) che in uscita (OUT). Puoi usare una sola regola con lo stesso nome per entrambe le direzioni.</p>
+<h3 id="script-batch-cmd">Script batch (cmd)</h3>
+<p>Esegui come amministratore:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>netsh advfirewall firewall add rule name=<span class="st">&quot;MQTT Broker 1883&quot;</span> dir=in action=allow protocol=TCP localport=1883</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>netsh advfirewall firewall add rule name=<span class="st">&quot;MQTT Broker 1883&quot;</span> dir=out action=allow protocol=TCP localport=1883</span></code></pre></div>
+<h3 id="script-powershell">Script PowerShell</h3>
+<p>Esegui come amministratore:</p>
+<p>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;MQTT Broker 1883&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Action Allow <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">1883</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">New</span><span class="op">-</span>NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;MQTT Broker 1883&quot;</span> <span class="op">-</span>Direction Outbound <span class="op">-</span>Action Allow <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">1883</span></span></code></pre></div>
+<hr />
+<h3 id="4-avviare-mosquitto">4. Avviare Mosquitto</h3>
+<h4 id="come-servizio-se-installato-come-tale">Come servizio (se installato come tale):</h4>
+<ul>
+<li><p>Premi <code>Win + R</code>, digita <code>services.msc</code></p></li>
+<li><p>Cerca “Mosquitto Broker” e avvialo</p></li>
+</ul>
+<h4 id="manualmente-da-terminale">Manualmente da terminale:</h4>
+<ul>
+<li><p>Apri il prompt dei comandi</p></li>
+<li><p>Naviga nella cartella di installazione:</p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;C:\Program Files\mosquitto&quot;</span></span></code></pre></div>
+<ul>
+<li>Avvia il broker:</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mosquitto <span class="sc">-</span>v <span class="sc">-</span>c mosquitto.conf</span></code></pre></div>
+<h3 id="5-test-locale">5. Test locale</h3>
+<ul>
+<li><p>Apri un nuovo prompt dei comandi</p></li>
+<li><p>Pubblica un messaggio:</p></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_pub</span> <span class="at">-t</span> test/topic <span class="at">-m</span> <span class="st">&quot;ciao&quot;</span></span></code></pre></div>
+<ul>
+<li>In un altro terminale, sottoscrivi:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_sub</span> <span class="at">-t</span> test/topic</span></code></pre></div>
+<hr />
+<h2 id="gestione-della-history-e-persistenza-dei-messaggi-nel-broker-mqtt">Gestione della history e persistenza dei messaggi nel broker MQTT</h2>
+<h3 id="retained-message">Retained message</h3>
+<ul>
+<li>Ogni topic può avere solo un messaggio &quot;retained&quot; (conservato) alla volta. Non esiste una vera &quot;history&quot; multipla per topic, ma solo l’ultimo messaggio marcato come retained viene mantenuto e inviato ai nuovi client che si connettono.</li>
+</ul>
+<h3 id="persistenza-dei-messaggi">Persistenza dei messaggi</h3>
+<ul>
+<li>Mosquitto può essere configurato per salvare i messaggi QoS 1/2 non ancora consegnati ai client offline (persistent session).</li>
+<li>La dimensione massima della persistenza dipende dallo spazio disco e dai parametri di configurazione.</li>
+</ul>
+<h3 id="parametri-di-configurazione-principali-in-mosquittoconf">Parametri di configurazione principali in <code>mosquitto.conf</code></h3>
+<pre><code>persistence true
+persistence_location C:/Program Files/mosquitto/data/
+max_queued_messages 1000
+max_queued_bytes 10485760
+message_size_limit 1048576</code></pre>
+<ul>
+<li><code>persistence true/false</code>: abilita la persistenza su disco.</li>
+<li><code>persistence_location</code>: cartella dove vengono salvati i dati.</li>
+<li><code>max_queued_messages</code>: massimo numero di messaggi in coda per client offline (default: 100).</li>
+<li><code>max_queued_bytes</code>: massimo numero di byte in coda per client offline.</li>
+<li><code>message_size_limit</code>: dimensione massima di un singolo messaggio.</li>
+</ul>
+<blockquote>
+<p><strong>Nota:</strong> Mosquitto non mantiene una vera “history” per topic, ma puoi configurare la coda per client offline e la persistenza dei messaggi. La dimensione massima dipende dai parametri sopra e dallo spazio disco.</p>
+</blockquote>
+<hr />
+<h2 id="salvare-e-visualizzare-i-dati-mqtt-in-excel">Salvare e visualizzare i dati MQTT in Excel</h2>
+<p>Per visualizzare i dati ricevuti dal broker MQTT in Excel, puoi usare lo script Python <code>mqtt_to_csv.py</code> che salva i messaggi in un file CSV.</p>
+<h3 id="1-requisiti">1. Requisiti</h3>
+<ul>
+<li>Python 3 installato</li>
+<li>Modulo paho-mqtt: installa con <code>pip install paho-mqtt</code></li>
+</ul>
+<h3 id="2-configura-lo-script">2. Configura lo script</h3>
+<p>Modifica le variabili BROKER, PORT e TOPIC all&#39;inizio dello script secondo la tua configurazione.</p>
+<h3 id="3-avvia-lo-script">3. Avvia lo script</h3>
+<p>Apri un terminale nella cartella dello script e lancia:</p>
+<pre><code>python mqtt_to_csv.py</code></pre>
+<p>I messaggi ricevuti saranno salvati in <code>mqtt_data.csv</code> nella stessa cartella.</p>
+<h3 id="4-importa-in-excel">4. Importa in Excel</h3>
+<ul>
+<li>Apri Excel</li>
+<li>Vai su Dati &gt; Da testo/CSV</li>
+<li>Seleziona <code>mqtt_data.csv</code></li>
+<li>Segui la procedura guidata per importare i dati</li>
+</ul>
+<p>In questo modo puoi visualizzare e aggiornare facilmente i dati MQTT in Excel.</p>
+<hr />
+<h3 id="esempio-di-codice-python-per-salvare-dati-mqtt-in-csv">Esempio di codice Python per salvare dati MQTT in CSV</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> paho.mqtt.client <span class="im">as</span> mqtt</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>BROKER <span class="op">=</span> <span class="st">&#39;localhost&#39;</span>  <span class="co"># Cambia con l&#39;indirizzo del tuo broker</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>PORT <span class="op">=</span> <span class="dv">1883</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>TOPIC <span class="op">=</span> <span class="st">&#39;test/topic&#39;</span>  <span class="co"># Cambia con il tuo topic</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>CSV_FILE <span class="op">=</span> <span class="st">&#39;mqtt_data.csv&#39;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Callback quando si riceve un messaggio</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_message(client, userdata, msg):</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> [datetime.now().isoformat(), msg.topic, msg.payload.decode()]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(CSV_FILE, <span class="st">&#39;a&#39;</span>, newline<span class="op">=</span><span class="st">&#39;&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        writer <span class="op">=</span> csv.writer(f)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        writer.writerow(data)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Salvato: </span><span class="sc">{</span>data<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Scrivi intestazione se il file non esiste</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(CSV_FILE, <span class="st">&#39;x&#39;</span>, newline<span class="op">=</span><span class="st">&#39;&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        writer <span class="op">=</span> csv.writer(f)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        writer.writerow([<span class="st">&#39;timestamp&#39;</span>, <span class="st">&#39;topic&#39;</span>, <span class="st">&#39;payload&#39;</span>])</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">FileExistsError</span>:</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> mqtt.Client()</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>client.on_message <span class="op">=</span> on_message</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>client.<span class="ex">connect</span>(BROKER, PORT, <span class="dv">60</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>client.subscribe(TOPIC)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;In ascolto su </span><span class="sc">{</span>TOPIC<span class="sc">}</span><span class="ss">... (Ctrl+C per uscire)&quot;</span>)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>client.loop_forever()</span></code></pre></div>
+<hr />
+<h2 id="esempi-di-comando-per-inviare-e-leggere-una-temperatura-randomica">Esempi di comando per inviare e leggere una temperatura randomica</h2>
+<h3 id="inviare-una-temperatura-randomica-realistica-18c---28c-al-broker-powershell">Inviare una temperatura randomica realistica (18°C - 28°C) al broker (PowerShell)</h3>
+<p>Se <code>mosquitto_pub</code> non è nel PATH, usa il percorso completo (tutto su una riga):</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>powershell <span class="op">-</span>Command <span class="st">&quot;</span><span class="va">$temp</span><span class="st"> = Get-Random -Minimum 18 -Maximum 28; &amp; &#39;C:\Program Files\mosquitto\mosquitto_pub.exe&#39; -h localhost -t sensori/temperatura -m </span><span class="va">$temp</span><span class="st">&quot;</span></span></code></pre></div>
+<p>Oppure, se sei già in PowerShell:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="va">$temp</span> <span class="op">=</span> <span class="fu">Get-Random</span> <span class="op">-</span>Minimum <span class="dv">18</span> <span class="op">-</span>Maximum <span class="dv">28</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;</span> <span class="st">&#39;C:\Program Files\mosquitto\mosquitto_pub.exe&#39;</span> <span class="op">-</span>h localhost <span class="op">-</span>t sensori<span class="op">/</span>temperatura <span class="op">-</span>m <span class="va">$temp</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="va">$temp</span> <span class="op">=</span> <span class="dv">22.0</span>  <span class="co"># Valore iniziale realistico</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span><span class="va">$true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">$delta</span> <span class="op">=</span> <span class="op">(</span><span class="fu">Get-Random</span> <span class="op">-</span>Minimum <span class="op">-</span><span class="dv">0.3</span> <span class="op">-</span>Maximum <span class="dv">0.3</span><span class="op">)</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">$temp</span> <span class="op">+=</span> <span class="va">$delta</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="va">$temp</span> <span class="op">-lt</span> <span class="dv">18</span><span class="op">)</span> <span class="op">{</span> <span class="va">$temp</span> <span class="op">=</span> <span class="dv">18</span> <span class="op">}</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="va">$temp</span> <span class="op">-gt</span> <span class="dv">28</span><span class="op">)</span> <span class="op">{</span> <span class="va">$temp</span> <span class="op">=</span> <span class="dv">28</span> <span class="op">}</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">$temp_rounded</span> <span class="op">=</span> <span class="op">[</span>math<span class="op">]::</span>Round<span class="op">(</span><span class="va">$temp</span><span class="op">,</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span> <span class="st">&#39;C:\Program Files\mosquitto\mosquitto_pub.exe&#39;</span> <span class="op">-</span>h localhost <span class="op">-</span>t sensori<span class="op">/</span>temperatura <span class="op">-</span>m <span class="va">$temp_rounded</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Write-Host</span> <span class="st">&quot;Inviata temperatura: </span><span class="va">$temp_rounded°C</span><span class="st">&quot;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Start-Sleep</span> <span class="op">-</span>Seconds <span class="dv">1</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="leggere-la-temperatura-dal-broker-a-linea-di-comando">Leggere la temperatura dal broker a linea di comando</h3>
+<p>Esegui nel prompt dei comandi:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_sub</span> <span class="at">-h</span> localhost <span class="at">-t</span> sensori/temperatura</span></code></pre></div>
+<hr />
+<h2 id="esempio-di-programma-ino-per-esp32-arduino-ide-2--idf-54">Esempio di programma INO per ESP32 (Arduino IDE 2 / IDF 5.4)</h2>
+<p>Questo sketch connette l&#39;ESP32 a una rete WiFi, si collega a un broker MQTT, si sottoscrive a un topic e invia una temperatura simulata ogni secondo.</p>
+<h3 id="librerie-richieste">Librerie richieste</h3>
+<ul>
+<li>WiFi.h</li>
+<li>PubSubClient.h</li>
+</ul>
+<h3 id="codice-di-esempio">Codice di esempio</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;WiFi.h&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;PubSubClient.h&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> ssid <span class="op">=</span> <span class="st">&quot;TUO_SSID&quot;</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> password <span class="op">=</span> <span class="st">&quot;TUA_PASSWORD&quot;</span><span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> mqtt_server <span class="op">=</span> <span class="st">&quot;192.168.1.100&quot;</span><span class="op">;</span> <span class="co">// IP del broker MQTT</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> mqtt_port <span class="op">=</span> <span class="dv">1883</span><span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> topic_pub <span class="op">=</span> <span class="st">&quot;sensori/temperatura&quot;</span><span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">char</span><span class="op">*</span> topic_sub <span class="op">=</span> <span class="st">&quot;sensori/temperatura&quot;</span><span class="op">;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>WiFiClient espClient<span class="op">;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>PubSubClient client<span class="op">(</span>espClient<span class="op">);</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> temp <span class="op">=</span> <span class="fl">22.0</span><span class="op">;</span> <span class="co">// Valore iniziale realistico</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> callback<span class="op">(</span><span class="dt">char</span><span class="op">*</span> topic<span class="op">,</span> byte<span class="op">*</span> payload<span class="op">,</span> <span class="dt">unsigned</span> <span class="dt">int</span> length<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Messaggio ricevuto su topic: &quot;</span><span class="op">);</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span>topic<span class="op">);</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Payload: &quot;</span><span class="op">);</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">unsigned</span> <span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> length<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">((</span><span class="dt">char</span><span class="op">)</span>payload<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">();</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> reconnect<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(!</span>client<span class="op">.</span>connected<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Connessione a MQTT...&quot;</span><span class="op">);</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>client<span class="op">.</span><span class="fu">connect</span><span class="op">(</span><span class="st">&quot;ESP32Client&quot;</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot;connesso&quot;</span><span class="op">);</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>      client<span class="op">.</span>subscribe<span class="op">(</span>topic_sub<span class="op">);</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;fallito, rc=&quot;</span><span class="op">);</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>print<span class="op">(</span>client<span class="op">.</span>state<span class="op">());</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>      Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; riprovo tra 5 secondi&quot;</span><span class="op">);</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>      delay<span class="op">(</span><span class="dv">5000</span><span class="op">);</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">100</span><span class="op">);</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  WiFi<span class="op">.</span>begin<span class="op">(</span>ssid<span class="op">,</span> password<span class="op">);</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Connessione a WiFi&quot;</span><span class="op">);</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>WiFi<span class="op">.</span>status<span class="op">()</span> <span class="op">!=</span> WL_CONNECTED<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;.&quot;</span><span class="op">);</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">&quot; connesso!&quot;</span><span class="op">);</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>  client<span class="op">.</span>setServer<span class="op">(</span>mqtt_server<span class="op">,</span> mqtt_port<span class="op">);</span></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>  client<span class="op">.</span>setCallback<span class="op">(</span>callback<span class="op">);</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>client<span class="op">.</span>connected<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>    reconnect<span class="op">();</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>  client<span class="op">.</span>loop<span class="op">();</span></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Simula temperatura realistica</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>  temp <span class="op">+=</span> random<span class="op">(-</span><span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.1</span><span class="op">;</span> <span class="co">// Variazione tra -0.3 e +0.3</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>temp <span class="op">&lt;</span> <span class="fl">18.0</span><span class="op">)</span> temp <span class="op">=</span> <span class="fl">18.0</span><span class="op">;</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>temp <span class="op">&gt;</span> <span class="fl">28.0</span><span class="op">)</span> temp <span class="op">=</span> <span class="fl">28.0</span><span class="op">;</span></span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> tempStr<span class="op">[</span><span class="dv">8</span><span class="op">];</span></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>  dtostrf<span class="op">(</span>temp<span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> tempStr<span class="op">);</span></span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>  client<span class="op">.</span>publish<span class="op">(</span>topic_pub<span class="op">,</span> tempStr<span class="op">);</span></span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">&quot;Temperatura inviata: &quot;</span><span class="op">);</span></span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span>tempStr<span class="op">);</span></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="istruzioni">Istruzioni</h3>
+<ol type="1">
+<li>Sostituisci <code>TUO_SSID</code> e <code>TUA_PASSWORD</code> con i dati della tua rete WiFi.</li>
+<li>Imposta l&#39;indirizzo IP del broker MQTT (<code>mqtt_server</code>).</li>
+<li>Carica lo sketch su ESP32 tramite Arduino IDE 2 o IDF 5.4.</li>
+<li>Apri il monitor seriale per vedere i messaggi inviati e ricevuti.</li>
+</ol>
+<p>Per raccogliere, estrarre e memorizzare i valori dei sensori da un broker MQTT per analisi successive, puoi seguire una delle seguenti architetture, a seconda delle tue esigenze e risorse disponibili.</p>
+<hr />
+<h2 id="1-architettura-base-python--sqlite">1. Architettura Base: Python + SQLite</h2>
+<p><strong>Ideale per piccoli progetti o prototipi locali.</strong></p>
+<h3 id="componenti">Componenti:</h3>
+<ul>
+<li><p><strong>Broker MQTT</strong> : ad esempio Mosquitto.</p></li>
+<li><p><strong>Client MQTT</strong> : utilizzando <code>paho-mqtt</code> in Python.</p></li>
+<li><p><strong>Database</strong> : SQLite.<a href="https://dewesoft.com/it/prodotti/historian?utm_source=chatgpt.com">ioscape.io<br />
++4<br />
+Test and Measurement Solutions<br />
++4<br />
+AWS Documentation<br />
++4</a> <a href="https://www.reddit.com/r/flask/comments/fmmu00/write_sensor_data_to_db_using_mqtt_flask/?utm_source=chatgpt.com">Reddit</a> <a href="https://docs.arduino.cc/tutorials/portenta-x8/datalogging-iot?utm_source=chatgpt.com">Reddit<br />
++9<br />
+Arduino Docs<br />
++9<br />
+Steve&#39;s Internet Guide<br />
++9</a></p></li>
+</ul>
+<h3 id="passaggi">Passaggi:</h3>
+<ol start="2" type="1">
+<li><strong>Installazione delle librerie necessarie</strong> :</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install paho-mqtt sqlite3</span></code></pre></div>
+<ol start="4" type="1">
+<li><strong>Script Python per sottoscrizione e salvataggio dati</strong> :</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> paho.mqtt.client <span class="im">import</span> Client</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_message(client, userdata, msg):</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.loads(msg.payload.decode())</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&quot;sensori.db&quot;</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">&quot;INSERT INTO misurazioni (temperatura, umidita, timestamp) VALUES (?, ?, ?)&quot;</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                   (data[<span class="st">&quot;temperatura&quot;</span>], data[<span class="st">&quot;umidita&quot;</span>], data[<span class="st">&quot;timestamp&quot;</span>]))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    conn.commit()</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    conn.close()</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Client()</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>client.<span class="ex">connect</span>(<span class="st">&quot;localhost&quot;</span>, <span class="dv">1883</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>client.subscribe(<span class="st">&quot;sensori/dati&quot;</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>client.on_message <span class="op">=</span> on_message</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>client.loop_forever()</span></code></pre></div>
+<ol start="6" type="1">
+<li><strong>Creazione del database SQLite</strong> :</li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> misurazioni (</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">id</span> <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span> AUTOINCREMENT,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    temperatura <span class="dt">REAL</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    umidita <span class="dt">REAL</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">timestamp</span> TEXT</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>Questo approccio è semplice e funziona bene per progetti di piccole dimensioni. Per maggiori dettagli, puoi consultare la guida di EMQX su come memorizzare dati MQTT in SQLite. <a href="https://www.emqx.com/en/blog/mqtt-to-sqlite?utm_source=chatgpt.com"><span>www.emqx.com</span><br />
++1<br />
+<span>www.emqx.com</span><br />
++1</a></p>
+<hr />
+<h2 id="2-architettura-scalabile-node-red--influxdb--grafana">2. Architettura Scalabile: Node-RED + InfluxDB + Grafana</h2>
+<p><strong>Adatta per progetti più complessi con esigenze di visualizzazione e analisi avanzate.</strong></p>
+<h3 id="componenti-1">Componenti:</h3>
+<ul>
+<li><p><strong>Broker MQTT</strong> : ad esempio Mosquitto.</p></li>
+<li><p><strong>Node-RED</strong> : per l&#39;elaborazione dei dati.</p></li>
+<li><p><strong>InfluxDB</strong> : database per serie temporali.</p></li>
+<li><p><strong>Grafana</strong> : per la visualizzazione dei dati.<a href="https://dewesoft.com/it/prodotti/historian?utm_source=chatgpt.com">AWS Documentation<br />
++2<br />
+Test and Measurement Solutions<br />
++2<br />
+Home Assistant Community<br />
++2</a> <a href="https://www.emqx.com/en/blog/database-for-mqtt-data-storage?utm_source=chatgpt.com"><span>www.emqx.com</span></a></p></li>
+</ul>
+<h3 id="passaggi-1">Passaggi:</h3>
+<ol start="2" type="1">
+<li><strong>Installazione dei componenti</strong> :</li>
+</ol>
+<ul>
+<li>Installa Mosquitto, Node-RED, InfluxDB e Grafana sul tuo sistema.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Configurazione di Node-RED</strong> :</li>
+</ol>
+<ul>
+<li><p>Utilizza un nodo MQTT per sottoscrivere i dati dei sensori.</p></li>
+<li><p>Elabora i dati se necessario.</p></li>
+<li><p>Utilizza un nodo InfluxDB per salvare i dati nel database.</p></li>
+</ul>
+<ol start="6" type="1">
+<li><strong>Visualizzazione con Grafana</strong> :</li>
+</ol>
+<ul>
+<li>Configura Grafana per leggere i dati da InfluxDB e crea dashboard personalizzate.<a href="https://docs.arduino.cc/tutorials/portenta-x8/datalogging-iot?utm_source=chatgpt.com">Arduino Docs<br />
++1<br />
+Test and Measurement Solutions<br />
++1</a></li>
+</ul>
+<p>Questo setup è stato utilizzato, ad esempio, in un progetto con Arduino Portenta X8. <a href="https://docs.arduino.cc/tutorials/portenta-x8/datalogging-iot?utm_source=chatgpt.com">Arduino Docs</a></p>
+<hr />
+<h2 id="3-architettura-cloud-aws-iot-core--dynamodb">3. Architettura Cloud: AWS IoT Core + DynamoDB</h2>
+<p><strong>Per progetti che richiedono scalabilità e accesso remoto.</strong></p>
+<h3 id="componenti-2">Componenti:</h3>
+<ul>
+<li><p><strong>AWS IoT Core</strong> : per la gestione dei dispositivi e dei messaggi MQTT.</p></li>
+<li><p><strong>AWS Lambda</strong> : per l&#39;elaborazione dei messaggi.</p></li>
+<li><p><strong>DynamoDB</strong> : database NoSQL di AWS.<a href="https://docs.aws.amazon.com/it_it/iot/latest/developerguide/iot-ddb-rule.html?utm_source=chatgpt.com">AWS Documentation</a> <a href="https://medium.com/%40maheshwar.ramkrushna/step-by-step-guide-inserting-mqtt-data-into-a-database-using-aws-iot-core-and-lambda-ba0ec0d25b3e?utm_source=chatgpt.com">Repost<br />
++3<br />
+Medium<br />
++3<br />
+<span>www.emqx.com</span><br />
++3</a></p></li>
+</ul>
+<h3 id="passaggi-2">Passaggi:</h3>
+<ol start="2" type="1">
+<li><strong>Configurazione di AWS IoT Core</strong> :</li>
+</ol>
+<ul>
+<li>Crea una regola che instradi i messaggi MQTT a una funzione Lambda.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Creazione della funzione Lambda</strong> :</li>
+</ol>
+<ul>
+<li>Scrivi una funzione che elabori i messaggi e li salvi in DynamoDB.</li>
+</ul>
+<ol start="6" type="1">
+<li><strong>Configurazione di DynamoDB</strong> :</li>
+</ol>
+<ul>
+<li>Crea una tabella con gli attributi necessari per memorizzare i dati dei sensori.<a href="https://docs.aws.amazon.com/it_it/iot/latest/developerguide/iot-ddb-rule.html?utm_source=chatgpt.com">AWS Documentation</a></li>
+</ul>
+<p>Per un esempio dettagliato, puoi consultare la guida su come inserire dati MQTT in un database utilizzando AWS IoT Core e Lambda. <a href="https://medium.com/%40maheshwar.ramkrushna/step-by-step-guide-inserting-mqtt-data-into-a-database-using-aws-iot-core-and-lambda-ba0ec0d25b3e?utm_source=chatgpt.com">Medium</a></p>
+<hr />
+<h2 id="considerazioni-finali">Considerazioni Finali</h2>
+<ul>
+<li><p><strong>Formato dei dati</strong> : È consigliabile utilizzare JSON per il payload dei messaggi MQTT, includendo sempre un timestamp.</p></li>
+<li><p><strong>Sicurezza</strong> : Utilizza connessioni TLS/SSL e autenticazione per proteggere i dati.</p></li>
+<li><p><strong>Backup</strong> : Implementa strategie di backup regolari per il tuo database.<a href="https://docs.aws.amazon.com/it_it/iot/latest/developerguide/iot-ddb-rule.html?utm_source=chatgpt.com"><span>www.emqx.com</span><br />
++2<br />
+AWS Documentation<br />
++2<br />
+Medium<br />
++2</a></p></li>
+</ul>
+</main>
+</body>
+</html>

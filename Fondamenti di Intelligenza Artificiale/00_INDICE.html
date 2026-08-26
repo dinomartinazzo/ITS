@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>📚 CORSO ITS - INTELLIGENZA ARTIFICIALE E PROGRAMMAZIONE ASSISTITA</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">📚 CORSO ITS - INTELLIGENZA ARTIFICIALE E PROGRAMMAZIONE ASSISTITA</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>00_INDICE.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Fondamenti di Intelligenza Artificiale</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<h2 id="corso-completo-10-ore---anno-2025">Corso Completo 10 Ore - Anno 2025</h2>
+<hr />
+<h2 id="clipboard-panoramica-del-corso">📋 Panoramica del Corso</h2>
+<p>Questo corso fornisce competenze pratiche nell&#39;uso dell&#39;Intelligenza Artificiale come strumento professionale per la programmazione, con focus su sistemi embedded e applicazioni per studenti ITS.</p>
+<p><strong>Durata Totale:</strong> 10 ore<br />
+<strong>Struttura:</strong> 5 lezioni da 2 ore (1h teoria + 1h pratica)<br />
+<strong>Livello:</strong> Base-Intermedio<br />
+<strong>Prerequisiti:</strong> Conoscenze informatiche di base</p>
+<hr />
+<h2 id="dart-obiettivi-del-corso">🎯 Obiettivi del Corso</h2>
+<p>Al termine del corso sarai in grado di:</p>
+<p>✅ <strong>Comprendere</strong> i fondamenti dell&#39;Intelligenza Artificiale e dei Large Language Models<br />
+✅ <strong>Utilizzare</strong> ChatGPT, Claude e altri LLM in modo professionale<br />
+✅ <strong>Formulare</strong> prompt efficaci per generare codice e risolvere problemi<br />
+✅ <strong>Scrivere</strong> codice C sicuro con supporto IA<br />
+✅ <strong>Sviluppare</strong> progetti completi con metodologia professionale<br />
+✅ <strong>Debuggare</strong> e validare codice generato da IA<br />
+✅ <strong>Applicare</strong> best practices di programmazione assistita<br />
+✅ <strong>Documentare</strong> progetti in modo professionale</p>
+<hr />
+<h2 id="open_book-struttura-del-corso">📖 Struttura del Corso</h2>
+<h3 id="lezione-1-introduzione-allia-e-primi-prompt-2-ore"><strong>LEZIONE 1: Introduzione all&#39;IA e Primi Prompt</strong> (2 ore)</h3>
+<p><strong>Teoria (1h):</strong></p>
+<ul>
+<li>Storia dell&#39;Intelligenza Artificiale: da Turing ai LLM moderni</li>
+<li>Cos&#39;è un Large Language Model e come funziona</li>
+<li>Panoramica strumenti 2025: ChatGPT, Claude, Gemini, GitHub Copilot</li>
+<li>Limiti critici: allucinazioni, bias, knowledge cutoff</li>
+<li>Uso etico e responsabile dell&#39;IA</li>
+</ul>
+<p><strong>Pratica (1h):</strong></p>
+<ul>
+<li>Creazione account e configurazione strumenti</li>
+<li>Primi esperimenti guidati con ChatGPT</li>
+<li>Riconoscere e gestire allucinazioni</li>
+<li>Esercizi pratici: dalla domanda semplice al prompt complesso</li>
+<li>Confronto output tra diversi LLM</li>
+</ul>
+<p>📄 <strong><a href="./01_LEZIONE_1.md">Vai alla Lezione 1</a></strong></p>
+<hr />
+<h3 id="lezione-2-prompt-engineering-e-programmazione-base-2-ore"><strong>LEZIONE 2: Prompt Engineering e Programmazione Base</strong> (2 ore)</h3>
+<p><strong>Teoria (1h):</strong></p>
+<ul>
+<li>Framework CLEAR per prompt efficaci</li>
+<li>Tecniche avanzate: Zero-shot, Few-shot, Chain-of-Thought</li>
+<li>Prompt per codice: struttura e best practices</li>
+<li>Validazione critica dell&#39;output IA</li>
+<li>Gestione del contesto e iterazione</li>
+</ul>
+<p><strong>Pratica (1h):</strong></p>
+<ul>
+<li>Scrivere prompt strutturati per codice C</li>
+<li>Generare funzioni complete con IA</li>
+<li>Debug assistito: correggere errori con l&#39;IA</li>
+<li>Creare una libreria personale di prompt</li>
+<li>Casi studio: prompt falliti vs prompt efficaci</li>
+</ul>
+<p>📄 <strong><a href="./02_LEZIONE_2.md">Vai alla Lezione 2</a></strong></p>
+<hr />
+<h3 id="lezione-3-programmazione-c-sicura-con-ia-2-ore"><strong>LEZIONE 3: Programmazione C Sicura con IA</strong> (2 ore)</h3>
+<p><strong>Teoria (1h):</strong></p>
+<ul>
+<li>Problemi ricorrenti del codice generato da IA</li>
+<li>Buffer overflow, memory leak, puntatori pericolosi</li>
+<li>Funzioni non-standard e allucinazioni tecniche</li>
+<li>Gestione memoria: malloc/free, puntatori, array</li>
+<li>Validazione e testing sistematico</li>
+</ul>
+<p><strong>Pratica (1h):</strong></p>
+<ul>
+<li>Implementare strutture dati robuste con IA</li>
+<li>Debugging con Valgrind e strumenti professionali</li>
+<li>Correggere codice IA pericoloso</li>
+<li>Progetto pratico: sistema di gestione dati sicuro</li>
+<li>Code review assistita da IA</li>
+</ul>
+<p>📄 <strong><a href="./03_LEZIONE_3.md">Vai alla Lezione 3</a></strong></p>
+<hr />
+<h3 id="lezione-4-gestione-progetti-e-documentazione-2-ore"><strong>LEZIONE 4: Gestione Progetti e Documentazione</strong> (2 ore)</h3>
+<p><strong>Teoria (1h):</strong></p>
+<ul>
+<li>Metodologia di progetto con IA assistita</li>
+<li>Workflow professionale: design → implementazione → testing</li>
+<li>Documentazione tecnica: README, commenti, schemi</li>
+<li>Git e version control</li>
+<li>Best practices sviluppo collaborativo</li>
+</ul>
+<p><strong>Pratica (1h):</strong></p>
+<ul>
+<li>Progettare architettura software con IA</li>
+<li>Generare documentazione professionale</li>
+<li>Creare README.md completi</li>
+<li>Setup repository Git</li>
+<li>Workflow completo: commit, push, pull</li>
+</ul>
+<p>📄 <strong><a href="./04_LEZIONE_4.md">Vai alla Lezione 4</a></strong></p>
+<hr />
+<h3 id="lezione-5-progetto-finale-integrato-2-ore"><strong>LEZIONE 5: Progetto Finale Integrato</strong> (2 ore)</h3>
+<p><strong>Progetto Completo (2h):</strong></p>
+<ul>
+<li>Implementazione sistema completo end-to-end</li>
+<li>Integrazione di tutti i concetti appresi</li>
+<li>Testing sistematico e debugging</li>
+<li>Documentazione finale professionale</li>
+<li>Presentazione e discussione del lavoro</li>
+</ul>
+<p><strong>Tipologie di progetti:</strong></p>
+<ul>
+<li>Sistema di gestione database studenti</li>
+<li>Applicazione console interattiva</li>
+<li>Parser e analizzatore dati</li>
+<li>Sistema di logging e monitoraggio</li>
+</ul>
+<p>📄 <strong><a href="./05_LEZIONE_5_PROGETTO_FINALE.md">Vai alla Lezione 5</a></strong></p>
+<hr />
+<h2 id="books-materiali-integrativi">📚 Materiali Integrativi</h2>
+<h3 id="documenti-fondamentali">Documenti Fondamentali</h3>
+<ul>
+<li><p>📖 <strong><a href="./STORIA_IA.md">Storia dell&#39;Intelligenza Artificiale</a></strong><br />
+Panoramica storica completa da Alan Turing fino ai LLM del 2025</p></li>
+<li><p>📖 <strong><a href="./BIBLIOTECA_PROMPT.md">Biblioteca Prompt</a></strong><br />
+Raccolta completa di prompt pronti all&#39;uso per ogni situazione</p></li>
+</ul>
+<h3 id="appendici-tecniche-materiale-di-riferimento">Appendici Tecniche (Materiale di Riferimento)</h3>
+<ul>
+<li>🔧 <strong><a href="./APPENDICE_ARDUINO.md">Appendice Arduino</a></strong><br />
+Guida completa ai sistemi embedded con Arduino (opzionale, per chi ha hardware disponibile)</li>
+</ul>
+<hr />
+<h2 id="hammer_and_wrench-software-necessario">🛠️ Software Necessario</h2>
+<h3 id="obbligatorio">Obbligatorio</h3>
+<p><strong>LLM (almeno uno):</strong></p>
+<ul>
+<li><strong>ChatGPT</strong> - <a href="https://chat.openai.com">https://chat.openai.com</a> (gratuito)</li>
+<li><strong>Claude</strong> - <a href="https://claude.ai">https://claude.ai</a> (gratuito con limiti)</li>
+<li><strong>Gemini</strong> - <a href="https://gemini.google.com">https://gemini.google.com</a> (gratuito)</li>
+</ul>
+<p><strong>Ambiente Sviluppo:</strong></p>
+<ul>
+<li><strong>Visual Studio Code</strong> - <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> (gratuito)</li>
+<li><strong>Compilatore GCC:</strong>
+<ul>
+<li>Windows: MinGW o TDM-GCC</li>
+<li>Linux: <code>sudo apt install build-essential</code></li>
+<li>macOS: Xcode Command Line Tools</li>
+</ul></li>
+</ul>
+<h3 id="raccomandato">Raccomandato</h3>
+<ul>
+<li><strong>GitHub Copilot</strong> - Gratis con GitHub Student Pack (<a href="https://education.github.com/pack">https://education.github.com/pack</a>)</li>
+<li><strong>Git</strong> - Version control (<a href="https://git-scm.com/">https://git-scm.com/</a>)</li>
+<li><strong>Valgrind</strong> - Memory leak detection (Linux/Mac)</li>
+</ul>
+<h3 id="opzionale-per-progetti-avanzati">Opzionale (per progetti avanzati)</h3>
+<ul>
+<li><strong>ChatGPT Plus</strong> - Accesso a GPT-4 ($20/mese)</li>
+<li><strong>Claude Pro</strong> - Limiti più alti ($20/mese)</li>
+<li><strong>Arduino IDE</strong> - Solo se hai hardware Arduino</li>
+</ul>
+<hr />
+<h2 id="date-piano-di-studio-consigliato">📅 Piano di Studio Consigliato</h2>
+<h3 id="modalità-intensiva-3-settimane"><strong>Modalità Intensiva (3 settimane)</strong></h3>
+<p><strong>Settimana 1:</strong></p>
+<ul>
+<li>Giorno 1: Lezione 1 (2h) + ripasso (1h)</li>
+<li>Giorno 2: Lezione 2 (2h) + pratica extra (1h)</li>
+<li>Giorno 3: Ripasso e approfondimenti (2h)</li>
+</ul>
+<p><strong>Settimana 2:</strong></p>
+<ul>
+<li>Giorno 1: Lezione 3 (2h) + pratica extra (1h)</li>
+<li>Giorno 2: Lezione 4 (2h) + pratica extra (1h)</li>
+<li>Giorno 3: Ripasso complessivo (2h)</li>
+</ul>
+<p><strong>Settimana 3:</strong></p>
+<ul>
+<li>Giorno 1-2: Lezione 5 - Progetto finale (4h)</li>
+<li>Giorno 3: Finalizzazione e documentazione (2h)</li>
+</ul>
+<p><strong>Totale:</strong> 10h lezioni + 10h studio individuale = <strong>20 ore</strong></p>
+<h3 id="modalità-standard-6-settimane"><strong>Modalità Standard (6 settimane)</strong></h3>
+<ul>
+<li><strong>Settimane 1-4:</strong> Una lezione a settimana (2h) + studio (2h)</li>
+<li><strong>Settimane 5-6:</strong> Progetto finale (4h) + finalizzazione (2h)</li>
+</ul>
+<p><strong>Totale:</strong> 10h lezioni + 14h studio = <strong>24 ore</strong></p>
+<hr />
+<h2 id="mortar_board-competenze-acquisite">🎓 Competenze Acquisite</h2>
+<h3 id="competenze-tecniche">Competenze Tecniche</h3>
+<ul>
+<li>✅ Utilizzo professionale di LLM (GPT-4, Claude 3.5, Gemini 1.5)</li>
+<li>✅ Formulazione di prompt efficaci con framework strutturati</li>
+<li>✅ Programmazione C sicura (gestione memoria, puntatori, buffer)</li>
+<li>✅ Debugging e validazione critica del codice generato</li>
+<li>✅ Testing sistematico e identificazione bug</li>
+<li>✅ Documentazione tecnica professionale (README, commenti)</li>
+<li>✅ Version control con Git</li>
+<li>✅ Workflow di sviluppo con IA assistita</li>
+</ul>
+<h3 id="competenze-trasversali">Competenze Trasversali</h3>
+<ul>
+<li>✅ Pensiero critico (validazione output IA)</li>
+<li>✅ Problem solving strutturato</li>
+<li>✅ Comunicazione tecnica chiara</li>
+<li>✅ Gestione autonoma di progetti</li>
+<li>✅ Apprendimento continuo con strumenti IA</li>
+<li>✅ Etica professionale nell&#39;uso dell&#39;IA</li>
+</ul>
+<hr />
+<h2 id="link-risorse-esterne-raccomandate">🔗 Risorse Esterne Raccomandate</h2>
+<h3 id="documentazione-ufficiale">Documentazione Ufficiale</h3>
+<ul>
+<li><strong>OpenAI Documentation</strong> - <a href="https://platform.openai.com/docs">https://platform.openai.com/docs</a></li>
+<li><strong>Anthropic Claude Docs</strong> - <a href="https://docs.anthropic.com/">https://docs.anthropic.com/</a></li>
+<li><strong>C Reference</strong> - <a href="https://en.cppreference.com/w/c">https://en.cppreference.com/w/c</a></li>
+<li><strong>GitHub Student Pack</strong> - <a href="https://education.github.com/pack">https://education.github.com/pack</a></li>
+</ul>
+<h3 id="community-e-forum">Community e Forum</h3>
+<ul>
+<li><strong>Stack Overflow - C</strong> - <a href="https://stackoverflow.com/questions/tagged/c">https://stackoverflow.com/questions/tagged/c</a></li>
+<li><strong>Reddit r/learnprogramming</strong> - <a href="https://reddit.com/r/learnprogramming">https://reddit.com/r/learnprogramming</a></li>
+<li><strong>Reddit r/ChatGPT</strong> - <a href="https://reddit.com/r/ChatGPT">https://reddit.com/r/ChatGPT</a></li>
+</ul>
+<h3 id="tool-online-utili">Tool Online Utili</h3>
+<ul>
+<li><strong>ChatGPT</strong> - <a href="https://chat.openai.com">https://chat.openai.com</a></li>
+<li><strong>Claude</strong> - <a href="https://claude.ai">https://claude.ai</a></li>
+<li><strong>Gemini</strong> - <a href="https://gemini.google.com">https://gemini.google.com</a></li>
+<li><strong>Compiler Explorer</strong> - <a href="https://godbolt.org/">https://godbolt.org/</a> (analizza codice C)</li>
+<li><strong>OnlineGDB</strong> - <a href="https://www.onlinegdb.com/online_c_compiler">https://www.onlinegdb.com/online_c_compiler</a> (compila online)</li>
+<li><strong>Regex101</strong> - <a href="https://regex101.com/">https://regex101.com/</a> (testa espressioni regolari)</li>
+</ul>
+<h3 id="corsi-e-tutorial-complementari">Corsi e Tutorial Complementari</h3>
+<ul>
+<li><strong>CS50 (Harvard)</strong> - Fondamenti di programmazione</li>
+<li><strong>The Odin Project</strong> - Full-stack development</li>
+<li><strong>freeCodeCamp</strong> - Certificazioni gratuite</li>
+<li><strong>Prompt Engineering Guide</strong> - <a href="https://www.promptingguide.ai/">https://www.promptingguide.ai/</a></li>
+</ul>
+<hr />
+<h2 id="man_teacher-note-per-il-docente">👨‍🏫 Note per il Docente</h2>
+<h3 id="struttura-delle-lezioni">Struttura delle Lezioni</h3>
+<p>Ogni lezione è strutturata per massimizzare l&#39;apprendimento:</p>
+<ol type="1">
+<li><p><strong>Teoria (60 min):</strong></p>
+<ul>
+<li>Concetti fondamentali con esempi concreti</li>
+<li>Dimostrazioni live</li>
+<li>Discussione casi reali</li>
+</ul></li>
+<li><p><strong>Pratica (60 min):</strong></p>
+<ul>
+<li>Esercizi guidati step-by-step</li>
+<li>Lavoro individuale con supporto</li>
+<li>Discussione soluzioni e problemi comuni</li>
+</ul></li>
+</ol>
+<h3 id="materiale-didattico-fornito">Materiale Didattico Fornito</h3>
+<ul>
+<li>✅ Slide teoriche complete per ogni lezione</li>
+<li>✅ Esempi di codice commentati</li>
+<li>✅ Prompt template pronti all&#39;uso</li>
+<li>✅ Progetti esempio con soluzioni</li>
+<li>✅ FAQ e troubleshooting comuni</li>
+</ul>
+<h3 id="adattamenti-possibili">Adattamenti Possibili</h3>
+<p><strong>Corso compresso (8 ore):</strong></p>
+<ul>
+<li>Ridurre pratica a 40 min per lezione</li>
+<li>Combinare lezioni 1-2 e 3-4</li>
+<li>Progetto finale più breve</li>
+</ul>
+<p><strong>Corso esteso (12-15 ore):</strong></p>
+<ul>
+<li>Aggiungere lezione su Arduino/embedded</li>
+<li>Progetti avanzati multipli</li>
+<li>Approfondimenti su ML/TinyML</li>
+<li>Workshop debugging avanzato</li>
+</ul>
+<p><strong>Focus specifici:</strong></p>
+<ul>
+<li>Solo IA e prompt → Lezioni 1-2</li>
+<li>Solo programmazione C → Lezioni 3-4</li>
+<li>Solo progetti → Lezione 5 estesa</li>
+</ul>
+<h3 id="requisiti-tecnici-aula">Requisiti Tecnici Aula</h3>
+<p><strong>Hardware:</strong></p>
+<ul>
+<li>PC per ogni studente (Windows/Linux/Mac)</li>
+<li>Minimo: 4GB RAM, 10GB spazio disco</li>
+<li>Connessione Internet stabile (importante!)</li>
+</ul>
+<p><strong>Software (da installare prima):</strong></p>
+<ul>
+<li>Browser moderno (Chrome, Firefox, Edge)</li>
+<li>VSCode + estensioni C/C++</li>
+<li>Compilatore GCC</li>
+</ul>
+<p><strong>Opzionale:</strong></p>
+<ul>
+<li>Proiettore/schermo grande per demo</li>
+<li>Microfono per aule grandi</li>
+<li>Registrazione video per revisione</li>
+</ul>
+<h3 id="suggerimenti-didattici">Suggerimenti Didattici</h3>
+<p><strong>✅ Fare:</strong></p>
+<ul>
+<li>Dimostrazioni live con errori intenzionali</li>
+<li>Pause frequenti per domande</li>
+<li>Esempi dal mondo reale ITS</li>
+<li>Incoraggiare sperimentazione</li>
+<li>Creare ambiente collaborativo</li>
+</ul>
+<p><strong>❌ Evitare:</strong></p>
+<ul>
+<li>Troppa teoria consecutiva (max 20 min)</li>
+<li>Dare tutto il codice subito</li>
+<li>Saltare testing e validazione</li>
+<li>Minimizzare l&#39;importanza degli errori</li>
+<li>Procedere troppo velocemente</li>
+</ul>
+<hr />
+<h2 id="pencil-licenza-e-uso-del-materiale">📝 Licenza e Uso del Materiale</h2>
+<p>Questo materiale didattico è rilasciato sotto licenza <strong>Creative Commons BY-NC-SA 4.0</strong>.</p>
+<h3 id="permessi">Permessi</h3>
+<p>✅ <strong>Permesso di:</strong></p>
+<ul>
+<li>Usare per scopi educativi non commerciali</li>
+<li>Modificare e adattare per le proprie classi</li>
+<li>Condividere con studenti e colleghi</li>
+<li>Creare versioni derivate citando la fonte</li>
+</ul>
+<p>❌ <strong>Non permesso:</strong></p>
+<ul>
+<li>Uso commerciale senza autorizzazione scritta</li>
+<li>Vendere il materiale o corsi basati su di esso</li>
+<li>Rimuovere attribuzione dell&#39;autore originale</li>
+</ul>
+<h3 id="attribuzione">Attribuzione</h3>
+<p>Quando usi o modifichi questo materiale, include:</p>
+<pre><code>Materiale originale: &quot;Corso ITS - IA e Programmazione Assistita 2025&quot;
+Autore: [Nome Docente] con supporto Claude 3.5 Sonnet
+Licenza: CC BY-NC-SA 4.0</code></pre>
+<hr />
+<h2 id="sparkles-versione-e-aggiornamenti">✨ Versione e Aggiornamenti</h2>
+<p><strong>Versione Corrente:</strong> 1.0<br />
+<strong>Data Rilascio:</strong> Gennaio 2025<br />
+<strong>Autore:</strong> Docente ITS con supporto IA<br />
+<strong>Ultimo Aggiornamento:</strong> 2025-01-XX</p>
+<h3 id="changelog">Changelog</h3>
+<p><strong>v1.0 (Gennaio 2025):</strong></p>
+<ul>
+<li>✨ Release iniziale</li>
+<li>📚 5 lezioni complete (10 ore)</li>
+<li>📖 Storia IA e materiali integrativi</li>
+<li>🔧 Appendice Arduino come riferimento</li>
+<li>✅ Focus su programmazione C sicura</li>
+<li>🎯 Metodologia project-based</li>
+</ul>
+<h3 id="roadmap-futura">Roadmap Futura</h3>
+<p><strong>v1.1 (prevista Q2 2025):</strong></p>
+<ul>
+<li>Aggiunta sezione Python con IA</li>
+<li>Espansione progetti IoT</li>
+<li>Video tutorial integrati</li>
+<li>Quiz interattivi online</li>
+</ul>
+<p><strong>v2.0 (prevista Q3 2025):</strong></p>
+<ul>
+<li>Modulo TinyML avanzato</li>
+<li>Integrazione ESP32/WiFi</li>
+<li>Progetti machine learning</li>
+<li>Certificazione ufficiale</li>
+</ul>
+<hr />
+<h2 id="rocket-inizia-il-corso">🚀 Inizia il Corso!</h2>
+<p>Sei pronto a iniziare questo viaggio nell&#39;Intelligenza Artificiale applicata alla programmazione?</p>
+<h3 id="percorso-raccomandato">Percorso Raccomandato</h3>
+<ol type="1">
+<li><p><strong>📖 Inizia con la Storia:</strong> Leggi la <a href="./STORIA_IA.md">Storia dell&#39;Intelligenza Artificiale</a> per comprendere il contesto e l&#39;evoluzione che ha portato agli strumenti moderni.</p></li>
+<li><p><strong>🎓 Lezione 1:</strong> Passa alla <a href="./01_LEZIONE_1.md">Lezione 1</a> per i fondamenti e i primi esperimenti pratici.</p></li>
+<li><p><strong>📚 Procedi Sequenzialmente:</strong> Segui le lezioni nell&#39;ordine consigliato, completando teoria e pratica.</p></li>
+<li><p><strong>💡 Sperimenta Liberamente:</strong> Non aver paura di provare, sbagliare e imparare dagli errori.</p></li>
+<li><p><strong>🤝 Chiedi Aiuto:</strong> Usa l&#39;IA stessa come tutor personale 24/7!</p></li>
+</ol>
+<hr />
+<h3 id="speech_balloon-prima-di-iniziare-mindset-corretto">💬 Prima di Iniziare: Mindset Corretto</h3>
+<p><strong>L&#39;IA è un ASSISTENTE, non un SOSTITUTO:</strong></p>
+<ul>
+<li>Tu pensi → IA esegue</li>
+<li>Tu validi → IA suggerisce</li>
+<li>Tu decidi → IA supporta</li>
+</ul>
+<p><strong>Impara a:</strong></p>
+<ul>
+<li>✅ Essere critico con l&#39;output IA</li>
+<li>✅ Testare sempre il codice generato</li>
+<li>✅ Comprendere prima di usare</li>
+<li>✅ Documentare il tuo processo</li>
+<li>✅ Migliorare iterativamente</li>
+</ul>
+<p><strong>Ricorda:</strong></p>
+<blockquote>
+<p>&quot;L&#39;IA rende il programmatore esperto più veloce, ma non sostituisce la comprensione dei fondamenti.&quot;</p>
+</blockquote>
+<hr />
+<h2 id="telephone_receiver-supporto-e-contatti">📞 Supporto e Contatti</h2>
+<p><strong>Per domande sul corso:</strong></p>
+<ul>
+<li>Contatta il docente durante le lezioni</li>
+<li>Email: [inserire email docente]</li>
+<li>Forum/Discord: [inserire link se disponibile]</li>
+</ul>
+<p><strong>Per problemi tecnici:</strong></p>
+<ul>
+<li>Consulta prima la documentazione ufficiale</li>
+<li>Stack Overflow per problemi di codice</li>
+<li>GitHub Issues per bug degli strumenti</li>
+</ul>
+<p><strong>Per feedback sul materiale:</strong></p>
+<ul>
+<li>Suggerimenti sempre benvenuti</li>
+<li>Contributi e correzioni apprezzati</li>
+<li>Pull request su repository del corso (se disponibile)</li>
+</ul>
+<hr />
+<h2 id="tada-buono-studio">🎉 Buono Studio!</h2>
+<p>Questo corso ti darà gli strumenti per essere un programmatore moderno, che sa usare l&#39;IA in modo intelligente e critico.</p>
+<p><strong>Il futuro della programmazione è collaborativo: umano + IA.</strong></p>
+<p>Sei pronto? Inizia dalla <a href="./STORIA_IA.md">Storia dell&#39;IA</a>!</p>
+<hr />
+<p><strong>📚 Corso ITS - Intelligenza Artificiale e Programmazione Assistita 2025</strong></p>
+<p><em>&quot;Programmare con l&#39;IA è come avere un collega esperto sempre disponibile. Impara a collaborare efficacemente!&quot;</em></p>
+<hr />
+</main>
+</body>
+</html>

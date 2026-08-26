@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<!-- generated-by: md2html -->
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="md2html">
+<title>Database aziendale</title>
+<style>
+
+
+:root {
+color-scheme: light dark;
+--paper: #FAFAF7;
+--surface: #EEF0EA;
+--ink: #10243A;
+--ink-2: #4A5D70;
+--ink-3: #7A8A99;
+--rule: #C9CEC4;
+--rule-2: #E1E4DC;
+--signal: #0B5FA5;
+--annotate: #C1362F;
+--c-com: #6E7D74;
+--c-kw: #0B5FA5;
+--c-typ: #2E6B4F;
+--c-str: #8A5D14;
+--c-num: #A03E2F;
+--c-fun: #5B4494;
+--c-op: #5A6B7A;
+--c-var: #2C4A63;
+--c-pre: #7A4E8C;
+--c-err: #C1362F;
+
+--font-display: "Bahnschrift", "DIN Alternate", "Roboto Condensed",
+"Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+--font-body: "Sitka Text", "Constantia", "Charter", "Iowan Old Style",
+"Palatino Linotype", Georgia, serif;
+--font-mono: "Cascadia Mono", "Cascadia Code", Consolas, ui-monospace,
+"SFMono-Regular", monospace;
+--measure: 68ch;
+--frame: 80ch;
+--gutter: 3.75rem;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--paper: #0E1620;
+--surface: #16202C;
+--ink: #D6DEE7;
+--ink-2: #8CA0B3;
+--ink-3: #6A7E91;
+--rule: #2A3846;
+--rule-2: #1D2833;
+--signal: #6FB4EE;
+--annotate: #E8776A;
+--c-com: #7E8FA0;
+--c-kw: #7FB8F0;
+--c-typ: #79C79C;
+--c-str: #E0B267;
+--c-num: #F09080;
+--c-fun: #B49BE8;
+--c-op: #93A6B7;
+--c-var: #A9C4DC;
+--c-pre: #D3A2E8;
+--c-err: #F0796B;
+}
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+margin: 0;
+padding: 3rem 1.5rem 8rem;
+background: var(--paper);
+color: var(--ink);
+font-family: var(--font-body);
+font-size: 17px;
+line-height: 1.72;
+font-kerning: normal;
+text-rendering: optimizeLegibility;
+}
+::selection { background: color-mix(in srgb, var(--signal) 22%, transparent); }
+:focus-visible {
+outline: 2px solid var(--signal);
+outline-offset: 2px;
+}
+
+.titleblock {
+max-width: var(--frame);
+margin: 0 auto 4.5rem;
+border: 1px solid var(--ink);
+outline: 1px solid var(--rule);
+outline-offset: 3px;
+background: var(--paper);
+}
+.titleblock__title {
+margin: 0;
+padding: 1.4rem 1.5rem 1.15rem;
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: clamp(1.55rem, 1.1rem + 1.9vw, 2.3rem);
+line-height: 1.15;
+letter-spacing: -0.005em;
+text-wrap: balance;
+}
+.titleblock__meta {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+margin: 0;
+border-top: 1px solid var(--ink);
+}
+.titleblock__meta > div {
+padding: 0.6rem 1.5rem 0.7rem;
+border-left: 1px solid var(--rule);
+min-width: 0;
+}
+.titleblock__meta > div:first-child { border-left: 0; }
+.titleblock__meta dt {
+font-family: var(--font-mono);
+font-size: 0.625rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-3);
+}
+.titleblock__meta dd {
+margin: 0.15rem 0 0;
+font-family: var(--font-mono);
+font-size: 0.78rem;
+line-height: 1.45;
+color: var(--ink-2);
+overflow-wrap: anywhere;
+}
+
+.doc {
+max-width: var(--measure);
+margin: 0 auto;
+counter-reset: h2;
+}
+.doc > *:first-child { margin-top: 0; }
+p { margin: 0 0 1.15em; }
+h1, h2, h3, h4, h5, h6 {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+line-height: 1.2;
+letter-spacing: -0.005em;
+text-wrap: balance;
+position: relative;
+}
+.doc h1 {
+margin: 3.2rem 0 1.1rem;
+font-size: 1.95rem;
+}
+.doc h2 {
+margin: 3.4rem 0 1.05rem;
+padding-top: 0.9rem;
+border-top: 1px solid var(--rule);
+font-size: 1.5rem;
+counter-increment: h2;
+counter-reset: h3;
+}
+.doc h3 {
+margin: 2.3rem 0 0.75rem;
+font-size: 1.19rem;
+counter-increment: h3;
+}
+.doc h4 { margin: 1.9rem 0 0.6rem; font-size: 1.02rem; }
+
+.doc h1 + h2, .doc h2 + h2, .doc h2 + h3,
+.doc h3 + h3, .doc h3 + h4 { margin-top: 1.7rem; }
+.doc h5, .doc h6 {
+margin: 1.7rem 0 0.5rem;
+font-size: 0.86rem;
+letter-spacing: 0.09em;
+text-transform: uppercase;
+color: var(--ink-2);
+}
+
+.doc h2::before,
+.doc h3::before {
+position: absolute;
+left: calc(-1 * var(--gutter));
+width: calc(var(--gutter) - 1rem);
+text-align: right;
+font-family: var(--font-mono);
+font-weight: 400;
+font-size: 0.72rem;
+letter-spacing: 0.02em;
+color: var(--ink-3);
+}
+.doc h2::before { content: counter(h2); top: 1.35rem; }
+.doc h3::before { content: counter(h2) "." counter(h3); top: 0.32rem; }
+@media (max-width: 60rem) {
+.doc h2::before, .doc h3::before { content: none; }
+}
+
+a {
+color: var(--signal);
+text-decoration: underline;
+text-decoration-thickness: 1px;
+text-underline-offset: 0.16em;
+text-decoration-color: color-mix(in srgb, var(--signal) 40%, transparent);
+transition: text-decoration-color 120ms ease;
+overflow-wrap: break-word;
+}
+a:hover { text-decoration-color: var(--signal); }
+strong { font-weight: 700; }
+em { font-style: italic; }
+mark {
+background: color-mix(in srgb, var(--signal) 18%, transparent);
+color: inherit;
+padding: 0 0.15em;
+}
+abbr[title] { text-decoration: underline dotted; }
+hr {
+height: 0;
+margin: 2.4rem 0;
+border: 0;
+border-top: 1px solid var(--rule);
+}
+
+hr:has(+ h1), hr:has(+ h2), hr:has(+ h3), hr:has(+ h4) { display: none; }
+hr + h1, hr + h2, hr + h3, hr + h4 { margin-top: 2.2rem; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:not(pre) > code {
+padding: 0.1em 0.34em;
+font-size: 0.86em;
+background: var(--surface);
+border: 1px solid var(--rule-2);
+border-bottom-color: color-mix(in srgb, var(--annotate) 45%, var(--rule-2));
+overflow-wrap: break-word;
+}
+kbd {
+padding: 0.1em 0.4em;
+font-size: 0.8em;
+border: 1px solid var(--rule);
+border-bottom-width: 2px;
+background: var(--surface);
+}
+pre {
+margin: 1.6rem 0;
+padding: 1rem 1.15rem;
+background: var(--surface);
+border: 1px solid var(--rule);
+border-left: 2px solid var(--ink-3);
+overflow-x: auto;
+font-size: 0.83rem;
+line-height: 1.6;
+tab-size: 4;
+}
+pre > code {
+padding: 0;
+background: none;
+border: 0;
+font-size: inherit;
+white-space: pre;
+}
+div.sourceCode { margin: 0; }
+
+pre code a[aria-hidden="true"] {
+color: inherit;
+text-decoration: none;
+pointer-events: none;
+}
+
+.co, .an, .cv, .do, .in { color: var(--c-com); font-style: italic; }
+.kw, .cf { color: var(--c-kw); font-weight: 600; }
+.dt, .bu, .ex { color: var(--c-typ); }
+.st, .ss, .vs, .ch, .sc { color: var(--c-str); }
+.dv, .bn, .fl, .cn { color: var(--c-num); }
+.fu { color: var(--c-fun); }
+.op { color: var(--c-op); }
+.va, .at { color: var(--c-var); }
+.pp, .im { color: var(--c-pre); }
+.wa { color: var(--c-err); }
+.al, .er { color: var(--c-err); font-weight: 600; }
+
+.tablewrap {
+margin: 1.8rem 0;
+overflow-x: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+caption {
+margin-bottom: 0.5rem;
+font-family: var(--font-mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--ink-3);
+text-align: left;
+}
+thead th {
+font-family: var(--font-display);
+font-weight: 700;
+font-stretch: 87.5%;
+font-variation-settings: "wght" 700, "wdth" 87.5;
+font-size: 0.82rem;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+text-align: left;
+color: var(--ink-2);
+white-space: nowrap;
+}
+th, td {
+padding: 0.5rem 0.9rem 0.5rem 0;
+border-bottom: 1px solid var(--rule-2);
+vertical-align: top;
+}
+thead tr { border-bottom: 1px solid var(--ink); }
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+ul, ol { margin: 0 0 1.15em; padding-left: 1.4em; }
+li { margin: 0.28em 0; }
+li > ul, li > ol { margin-top: 0.28em; margin-bottom: 0.4em; }
+/* Elenchi "loose": markdown avvolge ogni voce in un <p>, che porterebbe con se'
+   il margine di paragrafo pieno. */
+li > p { margin-bottom: 0.35em; }
+li > p:last-child { margin-bottom: 0; }
+
+ul { list-style: none; padding-left: 1.5em; }
+ul > li::before {
+  content: "";
+  position: absolute;
+  margin-left: -1.05em;
+  margin-top: 0.72em;
+  width: 0.4em;
+  height: 1px;
+  background: var(--ink-3);
+}
+ul > li { position: relative; }
+
+ol { list-style: decimal; }
+ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: var(--ink-3);
+}
+
+ul.task-list, .task-list ul { padding-left: 1.35em; }
+ul.task-list > li::before { content: none; }
+.task-list input[type="checkbox"] {
+  margin-right: 0.45em;
+  margin-left: -1.35em;
+  accent-color: var(--signal);
+}
+
+dl { margin: 0 0 1.15em; }
+dt { font-weight: 700; }
+dd { margin: 0 0 0.7em 1.4em; }
+
+/* ------------------------------------------------------------- citazioni
+
+   Reso come nota a margine di disegno: doppio filetto e etichetta. */
+
+blockquote {
+  margin: 1.8rem 0;
+  padding: 0.15rem 0 0.15rem 1.3rem;
+  border-left: 1px solid var(--ink-3);
+  box-shadow: -4px 0 0 -3px var(--ink-3);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+blockquote > *:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------- figure */
+
+img, svg, video { max-width: 100%; height: auto; }
+
+img {
+  display: block;
+  margin: 1.8rem 0;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+
+figure { margin: 2rem 0; }
+figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Diagrammi mermaid pre-renderizzati a build time. Ogni diagramma esiste in
+   due SVG, tema chiaro e tema scuro: il CSS mostra quello che corrisponde al
+   tema di sistema. Nessun JavaScript coinvolto. */
+.mermaid-figure {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  overflow-x: auto;
+  text-align: center;
+}
+.mermaid-figure svg { display: inline-block; max-width: 100%; height: auto; }
+
+.mermaid--dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .mermaid--light { display: none; }
+  .mermaid--dark  { display: block; }
+  /* diagramma reso in un solo tema: pannello chiaro, come una lightbox */
+  .mermaid--static { background: #F3F4F0; border-color: #C9CEC4; }
+}
+
+@media print {
+  .mermaid--dark { display: none !important; }
+  .mermaid--light, .mermaid--static { display: block !important; }
+}
+
+/* ----------------------------------------------------------------- math */
+
+math { font-size: 1.04em; }
+
+math[display="block"] {
+  display: block;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* ------------------------------------------------------------ note a piè */
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+
+.footnotes hr { display: none; }
+.footnotes ol { padding-left: 1.3em; }
+
+a.footnote-ref sup {
+  font-family: var(--font-mono);
+  font-size: 0.66em;
+  padding-left: 0.1em;
+}
+
+a.footnote-back { text-decoration: none; }
+
+/* --------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------------------------------------------------------------- stampa */
+
+@media print {
+  :root {
+    --paper: #FFFFFF; --surface: #F4F4F1; --ink: #101010; --ink-2: #444444;
+    --ink-3: #6B6B6B; --rule: #B8B8B8; --rule-2: #DCDCDC; --signal: #114477;
+  }
+  body { padding: 0; font-size: 11pt; line-height: 1.5; }
+  .titleblock { margin-bottom: 2rem; break-inside: avoid; }
+  .doc { max-width: none; }
+  .doc h2, .doc h3, .doc h4 { break-after: avoid; }
+  pre, blockquote, table, img, .mermaid-figure { break-inside: avoid; }
+  a { text-decoration: none; }
+  .doc a[href^="http"]::after {
+    content: " [" attr(href) "]";
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="titleblock">
+<h1 class="titleblock__title">Database aziendale</h1>
+<dl class="titleblock__meta">
+<div><dt>Sorgente</dt><dd>Database aziendale.md</dd></div>
+<div><dt>Cartella</dt><dd>ITS/Gestione dati (e informatica)/sqlite/esercizi</dd></div>
+<div><dt>Generato</dt><dd>2026-07-28 15:06</dd></div>
+</dl>
+</header>
+<main class="doc">
+<p>Creare un database SQLite per un&#39;azienda di prodotti elettronici con le tabelle &quot;prodotti&quot;, &quot;clienti&quot; e &quot;fatture&quot; insieme alle relative associazioni referenziali, puoi utilizzare il linguaggio SQL. Ecco come potresti farlo:</p>
+<ol type="1">
+<li>Creare la tabella &quot;prodotti&quot; per memorizzare le informazioni sui prodotti:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> prodotti (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    prodotto_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    nome_prodotto TEXT,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    prezzo <span class="dt">DECIMAL</span>(<span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    descrizione TEXT</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<ol type="1">
+<li>Creare la tabella &quot;clienti&quot; per memorizzare le informazioni sui clienti:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> clienti (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    cliente_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    nome TEXT,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    cognome TEXT,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    email TEXT</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<ol type="1">
+<li>Creare la tabella &quot;fatture&quot; per memorizzare le informazioni sulle fatture e creare associazioni referenziali tra prodotti, clienti e fatture utilizzando chiavi esterne:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> fatture (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fattura_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    cliente_id <span class="dt">INTEGER</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    data_fattura <span class="dt">DATE</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    totale <span class="dt">DECIMAL</span>(<span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (cliente_id) <span class="kw">REFERENCES</span> clienti(cliente_id)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> dettaglio_fattura (</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    dettaglio_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    fattura_id <span class="dt">INTEGER</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    prodotto_id <span class="dt">INTEGER</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    quantita <span class="dt">INTEGER</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    prezzo_unitario <span class="dt">DECIMAL</span>(<span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (fattura_id) <span class="kw">REFERENCES</span> fatture(fattura_id),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (prodotto_id) <span class="kw">REFERENCES</span> prodotti(prodotto_id)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div>
+<p>Nel codice sopra:</p>
+<ul>
+<li>La tabella &quot;prodotti&quot; contiene informazioni sui prodotti, con un campo &quot;prodotto_id&quot; come chiave primaria.</li>
+<li>La tabella &quot;clienti&quot; contiene informazioni sui clienti, con un campo &quot;cliente_id&quot; come chiave primaria.</li>
+<li>La tabella &quot;fatture&quot; contiene informazioni sulle fatture e include un campo &quot;cliente_id&quot; come chiave esterna per collegare le fatture ai clienti.</li>
+<li>La tabella &quot;dettaglio_fattura&quot; è utilizzata per collegare i prodotti alle fatture. Ha chiavi esterne per collegare sia alle fatture che ai prodotti.</li>
+</ul>
+<p>Puoi utilizzare questi comandi SQL per creare il database SQLite per l&#39;azienda di prodotti elettronici e quindi inserire dati nelle tabelle secondo le esigenze della tua azienda.</p>
+<p>Ecco come puoi inserire 50 prodotti in modo completo nella tabella &quot;prodotti&quot; del database SQLite:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 50 prodotti nella tabella &quot;prodotti&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> prodotti (nome_prodotto, prezzo, descrizione) <span class="kw">VALUES</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Smartphone Modello A&#39;</span>, <span class="fl">499.99</span>, <span class="st">&#39;Smartphone di fascia alta&#39;</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tablet Modello B&#39;</span>, <span class="fl">299.99</span>, <span class="st">&#39;Tablet con schermo retina&#39;</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Laptop Modello C&#39;</span>, <span class="fl">899.99</span>, <span class="st">&#39;Laptop leggero e potente&#39;</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;TV LED 32 pollici&#39;</span>, <span class="fl">249.99</span>, <span class="st">&#39;TV LED HD con schermo da 32 pollici&#39;</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Telecamera di sicurezza&#39;</span>, <span class="fl">149.99</span>, <span class="st">&#39;Telecamera di sicurezza wireless&#39;</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Cuffie Bluetooth&#39;</span>, <span class="fl">79.99</span>, <span class="st">&#39;Cuffie stereo senza fili&#39;</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tastiera wireless&#39;</span>, <span class="fl">29.99</span>, <span class="st">&#39;Tastiera compatta senza fili&#39;</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Mouse ottico USB&#39;</span>, <span class="fl">14.99</span>, <span class="st">&#39;Mouse ottico con cavo USB&#39;</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Hard Disk Esterno 1TB&#39;</span>, <span class="fl">69.99</span>, <span class="st">&#39;Hard Disk portatile da 1TB&#39;</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Stampante Laser&#39;</span>, <span class="fl">199.99</span>, <span class="st">&#39;Stampante laser monocromatica&#39;</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Monitor 24 pollici&#39;</span>, <span class="fl">159.99</span>, <span class="st">&#39;Monitor LCD da 24 pollici&#39;</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Altoparlante Bluetooth&#39;</span>, <span class="fl">49.99</span>, <span class="st">&#39;Altoparlante portatile Bluetooth&#39;</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Webcam HD&#39;</span>, <span class="fl">39.99</span>, <span class="st">&#39;Webcam ad alta definizione&#39;</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Batteria esterna&#39;</span>, <span class="fl">34.99</span>, <span class="st">&#39;Batteria portatile da 10000mAh&#39;</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tastiera meccanica&#39;</span>, <span class="fl">89.99</span>, <span class="st">&#39;Tastiera meccanica per gaming&#39;</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Mouse da gaming&#39;</span>, <span class="fl">49.99</span>, <span class="st">&#39;Mouse da gaming con LED RGB&#39;</span>),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Auricolari senza fili&#39;</span>, <span class="fl">69.99</span>, <span class="st">&#39;Auricolari Bluetooth resistenti all acqua&#39;</span>),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Monitor 27 pollici&#39;</span>, <span class="fl">199.99</span>, <span class="st">&#39;Monitor IPS da 27 pollici&#39;</span>),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Impianto audio 5.1&#39;</span>, <span class="fl">299.99</span>, <span class="st">&#39;Impianto audio surround 5.1&#39;</span>),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;SSD 500GB&#39;</span>, <span class="fl">79.99</span>, <span class="st">&#39;Solid State Drive da 500GB&#39;</span>),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Videocamera 4K&#39;</span>, <span class="fl">299.99</span>, <span class="st">&#39;Videocamera 4K con stabilizzazione&#39;</span>),</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Forno a microonde&#39;</span>, <span class="fl">69.99</span>, <span class="st">&#39;Forno a microonde 1000W&#39;</span>),</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Frigorifero doppia porta&#39;</span>, <span class="fl">799.99</span>, <span class="st">&#39;Frigorifero con freezer doppia porta&#39;</span>),</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Lavatrice 7 kg&#39;</span>, <span class="fl">399.99</span>, <span class="st">&#39;Lavatrice carica frontale da 7 kg&#39;</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Aspirapolvere senza fili&#39;</span>, <span class="fl">149.99</span>, <span class="st">&#39;Aspirapolvere senza fili con tecnologia ciclonica&#39;</span>),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tostapane 4 fette&#39;</span>, <span class="fl">39.99</span>, <span class="st">&#39;Tostapane con 4 fessure&#39;</span>),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Macchina per il caffè&#39;</span>, <span class="fl">79.99</span>, <span class="st">&#39;Macchina per il caffè a goccia programmabile&#39;</span>),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Forno elettrico&#39;</span>, <span class="fl">129.99</span>, <span class="st">&#39;Forno elettrico con funzione di convezione&#39;</span>),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Frullatore ad immersione&#39;</span>, <span class="fl">49.99</span>, <span class="st">&#39;Frullatore ad immersione con accessori&#39;</span>),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Robot da cucina&#39;</span>, <span class="fl">199.99</span>, <span class="st">&#39;Robot da cucina multifunzione&#39;</span>),</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Forno a microonde 20 litri&#39;</span>, <span class="fl">59.99</span>, <span class="st">&#39;Forno a microonde compatto da 20 litri&#39;</span>),</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Lavastoviglie 12 coperti&#39;</span>, <span class="fl">349.99</span>, <span class="st">&#39;Lavastoviglie con 12 coperti&#39;</span>),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Asciugacapelli professionale&#39;</span>, <span class="fl">49.99</span>, <span class="st">&#39;Asciugacapelli con diffusore&#39;</span>),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Ferro da stiro a vapore&#39;</span>, <span class="fl">29.99</span>, <span class="st">&#39;Ferro da stiro con vapore regolabile&#39;</span>),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Macchina per il pane&#39;</span>, <span class="fl">79.99</span>, <span class="st">&#39;Macchina per il pane programmabile&#39;</span>),</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tostapane a convezione&#39;</span>, <span class="fl">69.99</span>, <span class="st">&#39;Tostapane a convezione con timer&#39;</span>),</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Lavatrice 9 kg&#39;</span>, <span class="fl">499.99</span>, <span class="st">&#39;Lavatrice ad alta capacità da 9 kg&#39;</span>),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Aspirapolvere robot&#39;</span>, <span class="fl">199.99</span>, <span class="st">&#39;Aspirapolvere robot con mappatura&#39;</span>),</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Macchina per il caffè espresso&#39;</span>, <span class="fl">149.99</span>, <span class="st">&#39;Macchina per il caffè espresso&#39;</span>),</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Forno a microonde 30 litri&#39;</span>, <span class="fl">79.99</span>, <span class="st">&#39;Forno a microonde con grill&#39;</span>),</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Lavastoviglie 14 coperti&#39;</span>, <span class="fl">399.99</span>, <span class="st">&#39;Lavastoviglie con 14 coperti&#39;</span>),</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Asciugatrice 8 kg&#39;</span>, <span class="fl">349.99</span>, <span class="st">&#39;Asciugatrice da 8 kg con sensori&#39;</span>),</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Bollitore elettrico&#39;</span>, <span class="fl">24.99</span>, <span class="st">&#39;Bollitore con controllo della temperatura&#39;</span>),</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Macchina per il gelato&#39;</span>, <span class="fl">59.99</span>, <span class="st">&#39;Macchina per il gelato fatta in casa&#39;</span>),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Forno a convezione 32 litri&#39;</span>, <span class="fl">149.99</span>, <span class="st">&#39;Forno a convezione da 32 litri&#39;</span>),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Tostapane a infrarossi&#39;</span>, <span class="fl">39.99</span>, <span class="st">&#39;Tostapane a infrarossi con riscaldamento uniforme&#39;</span>),</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Lavatrice 10 kg&#39;</span>, <span class="fl">599.99</span>, <span class="st">&#39;Lavatrice ad alta capacità da 10 kg&#39;</span>),</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Aspirapolvere robot WiFi&#39;</span>, <span class="fl">249.99</span>, <span class="st">&#39;Aspirapolvere robot con connessione WiFi&#39;</span>),</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Macchina per il caffè a cialde&#39;</span>, <span class="fl">89.99</span>, <span class="st">&#39;Macchina per il caffè a cialde ESE&#39;</span>);</span></code></pre></div>
+<p>Ecco come puoi inserire 10 clienti di esempio nella tabella &quot;clienti&quot; del database SQLite:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 10 clienti nella tabella &quot;clienti&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> clienti (nome, cognome, email) <span class="kw">VALUES</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Mario&#39;</span>, <span class="st">&#39;Rossi&#39;</span>, <span class="st">&#39;mario.rossi@email.com&#39;</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Luca&#39;</span>, <span class="st">&#39;Bianchi&#39;</span>, <span class="st">&#39;luca.bianchi@email.com&#39;</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Anna&#39;</span>, <span class="st">&#39;Verdi&#39;</span>, <span class="st">&#39;anna.verdi@email.com&#39;</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Giovanni&#39;</span>, <span class="st">&#39;Neri&#39;</span>, <span class="st">&#39;giovanni.neri@email.com&#39;</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Laura&#39;</span>, <span class="st">&#39;Gallo&#39;</span>, <span class="st">&#39;laura.gallo@email.com&#39;</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Roberto&#39;</span>, <span class="st">&#39;Ferrari&#39;</span>, <span class="st">&#39;roberto.ferrari@email.com&#39;</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Elena&#39;</span>, <span class="st">&#39;Russo&#39;</span>, <span class="st">&#39;elena.russo@email.com&#39;</span>),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Maria&#39;</span>, <span class="st">&#39;Martini&#39;</span>, <span class="st">&#39;maria.martini@email.com&#39;</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Paolo&#39;</span>, <span class="st">&#39;Conti&#39;</span>, <span class="st">&#39;paolo.conti@email.com&#39;</span>),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;Sara&#39;</span>, <span class="st">&#39;Caruso&#39;</span>, <span class="st">&#39;sara.caruso@email.com&#39;</span>);</span></code></pre></div>
+<p>Per inserire 5 righe di acquisto per fattura per il cliente 1, componendo 5 fatture e assicurandoti che i totali siano corretti, puoi utilizzare il seguente script SQL. Assumiamo che il cliente con ID 1 esista nella tabella &quot;clienti&quot; e che ci siano almeno 5 prodotti disponibili nella tabella &quot;prodotti&quot;. Si tratta di un esempio e i dati sono casuali:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i primi 5 prodotti abbiano ID da 1 a 5 e costino 100.00, 200.00, 300.00, 400.00, e 500.00 rispettivamente.</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">200.00</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">600.00</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="fl">800.00</span>),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">100.00</span>),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">400.00</span>);</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<ul>
+<li>cliente 2</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i prodotti abbiano ID da 6 a 10 e costino 600.00, 700.00, 800.00, 900.00, e 1000.00 rispettivamente.</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="fl">1200.00</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="fl">800.00</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="fl">2100.00</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="fl">2000.00</span>),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="fl">1000.00</span>),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="fl">600.00</span>),</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="fl">800.00</span>),</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="fl">1000.00</span>),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="fl">1600.00</span>),</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="fl">1000.00</span>);</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">2</span>;</span></code></pre></div>
+<ul>
+<li>cliente 3</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i prodotti abbiano ID da 11 a 15 e costino 1100.00, 1200.00, 1300.00, 1400.00, e 1500.00 rispettivamente.</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">2</span>, <span class="fl">2200.00</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">1</span>, <span class="fl">1300.00</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="fl">3600.00</span>),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">2</span>, <span class="fl">2800.00</span>),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">1</span>, <span class="fl">1400.00</span>),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">1</span>, <span class="fl">1100.00</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">1</span>, <span class="fl">1300.00</span>),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="fl">1500.00</span>),</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">2</span>, <span class="fl">2400.00</span>),</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">1</span>, <span class="fl">1400.00</span>);</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">3</span>;</span></code></pre></div>
+<ul>
+<li>cliente 4</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 4</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">4</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i prodotti abbiano ID da 16 a 20 e costino 1600.00, 1700.00, 1800.00, 1900.00, e 2000.00 rispettivamente.</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">2</span>, <span class="fl">3200.00</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="fl">1800.00</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">17</span>, <span class="dv">17</span>, <span class="dv">3</span>, <span class="fl">5100.00</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">2</span>, <span class="fl">3800.00</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">19</span>, <span class="dv">19</span>, <span class="dv">1</span>, <span class="fl">1900.00</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">17</span>, <span class="dv">16</span>, <span class="dv">1</span>, <span class="fl">1600.00</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">18</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="fl">1800.00</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">1</span>, <span class="fl">2000.00</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">20</span>, <span class="dv">17</span>, <span class="dv">2</span>, <span class="fl">3400.00</span>),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">1</span>, <span class="fl">1900.00</span>);</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">4</span>;</span></code></pre></div>
+<ul>
+<li>cliente 5</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 5</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">5</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i prodotti abbiano ID da 21 a 25 e costino 2100.00, 2200.00, 2300.00, 2400.00, e 2500.00 rispettivamente.</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">2</span>, <span class="fl">4200.00</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">1</span>, <span class="fl">2300.00</span>),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">22</span>, <span class="dv">22</span>, <span class="dv">3</span>, <span class="fl">6600.00</span>),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">2</span>, <span class="fl">4800.00</span>),</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">1</span>, <span class="fl">2400.00</span>),</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">1</span>, <span class="fl">2100.00</span>),</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">23</span>, <span class="dv">23</span>, <span class="dv">1</span>, <span class="fl">2300.00</span>),</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">1</span>, <span class="fl">2500.00</span>),</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">2</span>, <span class="fl">4400.00</span>),</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">25</span>, <span class="dv">24</span>, <span class="dv">1</span>, <span class="fl">2400.00</span>);</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">5</span>;</span></code></pre></div>
+<ul>
+<li>cliente 6</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 6</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto per ciascuna fattura</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id corretti e di impostare i prezzi corretti in base ai prodotti reali.</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Qui assumiamo che i prodotti abbiano ID da 26 a 30 e costino 2600.00, 2700.00, 2800.00, 2900.00, e 3000.00 rispettivamente.</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">2</span>, <span class="fl">5200.00</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">26</span>, <span class="dv">28</span>, <span class="dv">1</span>, <span class="fl">2800.00</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">3</span>, <span class="fl">8100.00</span>),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">2</span>, <span class="fl">5800.00</span>),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">29</span>, <span class="dv">29</span>, <span class="dv">1</span>, <span class="fl">2900.00</span>),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">27</span>, <span class="dv">26</span>, <span class="dv">1</span>, <span class="fl">2600.00</span>),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>, <span class="fl">2800.00</span>),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">29</span>, <span class="dv">30</span>, <span class="dv">1</span>, <span class="fl">3000.00</span>),</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">30</span>, <span class="dv">27</span>, <span class="dv">2</span>, <span class="fl">5400.00</span>),</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">30</span>, <span class="dv">29</span>, <span class="dv">1</span>, <span class="fl">2900.00</span>);</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">6</span>;</span></code></pre></div>
+<ul>
+<li>cliente 7</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 7</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">7</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">31</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">200.00</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">31</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">32</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">600.00</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">33</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">34</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">32</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">100.00</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">33</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">34</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">35</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">35</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">400.00</span>);</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">7</span>;</span></code></pre></div>
+<ul>
+<li>cliente 8</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 8</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">8</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto casuali per ciascuna fattura</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id, quantità e prezzo_unitario casuali.</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Puoi generare prodotti casuali utilizzando una funzione di generazione di numeri casuali.</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Esempio di inserimento casuale di righe di acquisto</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">36</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">200.00</span>),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">36</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">37</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">600.00</span>),</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">38</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">39</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">37</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">100.00</span>),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">38</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">39</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">40</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">40</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">400.00</span>);</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">8</span>;</span></code></pre></div>
+<ul>
+<li>cliente 9</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 9</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">9</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto casuali per ciascuna fattura</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id, quantità e prezzo_unitario casuali.</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Puoi generare prodotti casuali utilizzando una funzione di generazione di numeri casuali.</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Esempio di inserimento casuale di righe di acquisto</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">41</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">200.00</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">41</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">42</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">600.00</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">43</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">44</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">42</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">100.00</span>),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">43</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">44</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">45</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">45</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">400.00</span>);</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">9</span>;</span></code></pre></div>
+<ul>
+<li>cliente 10</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 fatture per il cliente 10</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> fatture (cliente_id, data_fattura, totale) <span class="kw">VALUES</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-01-01&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-01-02&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-01-03&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-01-04&#39;</span>, <span class="fl">0.0</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">10</span>, <span class="st">&#39;2023-01-05&#39;</span>, <span class="fl">0.0</span>);</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inserimento di 5 righe di acquisto casuali per ciascuna fattura</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Assicurati di utilizzare prodotto_id, quantità e prezzo_unitario casuali.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">-- Puoi generare prodotti casuali utilizzando una funzione di generazione di numeri casuali.</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Esempio di inserimento casuale di righe di acquisto</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> dettaglio_fattura (fattura_id, prodotto_id, quantita, prezzo_unitario) <span class="kw">VALUES</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">46</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">200.00</span>),</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">46</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">47</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">600.00</span>),</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">48</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">49</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">47</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">100.00</span>),</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">48</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fl">300.00</span>),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">49</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="fl">500.00</span>),</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">50</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">400.00</span>),</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">50</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="fl">400.00</span>);</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">-- Aggiorna i totali delle fatture in base alle righe di acquisto</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> fatture</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> totale <span class="op">=</span> (</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> df.fattura_id <span class="op">=</span> fatture.fattura_id</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">10</span>;</span></code></pre></div>
+<ul>
+<li>Per ottenere delle statistiche per cliente all&#39;interno del tuo database SQLite, puoi utilizzare le query SQL per calcolare diverse metriche basate sui dati delle fatture e dei clienti. Ecco alcune statistiche comuni che potresti voler ottenere per ciascun cliente:</li>
+</ul>
+<ol type="1">
+<li><strong>Totale delle spese per cliente</strong> : Calcola il totale delle spese di ciascun cliente sommando tutti i totali delle sue fatture.</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome, c.cognome, <span class="fu">SUM</span>(f.totale) <span class="kw">AS</span> totale_speso</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<ol type="1">
+<li><strong>Numero totale di fatture per cliente</strong> : Conta quante fatture ha emesso ciascun cliente.</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome, c.cognome, <span class="fu">COUNT</span>(f.fattura_id) <span class="kw">AS</span> numero_fatture</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<ol type="1">
+<li><strong>Media del totale delle fatture per cliente</strong> : Calcola la media dei totali delle fatture emesse da ciascun cliente.</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome, c.cognome, <span class="fu">AVG</span>(f.totale) <span class="kw">AS</span> media_totale_fatture</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<ol type="1">
+<li><strong>Fattura più alta per cliente</strong> : Trova la fattura con il totale più alto per ciascun cliente.</li>
+</ol>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome, c.cognome, <span class="fu">MAX</span>(f.totale) <span class="kw">AS</span> fattura_piu_alta</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<ol type="1">
+<li><strong>Fattura più bassa per cliente</strong> : Trova la fattura con il totale più basso per ciascun cliente.</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome, c.cognome, <span class="fu">MIN</span>(f.totale) <span class="kw">AS</span> fattura_piu_bassa</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<ul>
+<li>Se desideri ottenere un elenco di tutte le fatture raggruppate per cliente nel tuo database SQLite, puoi utilizzare la seguente query SQL. Questa query elenca tutte le fatture e le raggruppa per cliente, consentendoti di vedere quali fatture sono associate a ciascun cliente:</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome <span class="kw">AS</span> nome_cliente, c.cognome <span class="kw">AS</span> cognome_cliente, f.<span class="op">*</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.cliente_id, f.data_fattura;</span></code></pre></div>
+<p>Questa query restituirà un elenco di tutte le fatture con i dettagli dei clienti a cui sono associate, ordinati per cliente e data della fattura. Ogni riga includerà il nome e il cognome del cliente insieme a tutti i dettagli della fattura. Puoi personalizzare la query per includere solo i campi di interesse per te.</p>
+<p>Se desideri invece ottenere un elenco di tutte le fatture raggruppate per cliente in modo che ogni cliente abbia un solo record e il totale delle sue fatture, puoi utilizzare una query di somma come questa:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nome <span class="kw">AS</span> nome_cliente, c.cognome <span class="kw">AS</span> cognome_cliente, <span class="fu">SUM</span>(f.totale) <span class="kw">AS</span> totale_fatture</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<p>Questa query restituirà un elenco dei clienti con il totale delle loro fatture, senza dettagli specifici delle singole fatture.</p>
+<ul>
+<li>Per ottenere un elenco di tutte le fatture raggruppate per cliente con il conteggio delle fatture emesse, la media dei totali delle fatture e la spesa massima per ciascun cliente, puoi utilizzare la seguente query SQL:</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.cliente_id, c.nome <span class="kw">AS</span> nome_cliente, c.cognome <span class="kw">AS</span> cognome_cliente, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(f.fattura_id) <span class="kw">AS</span> conteggio_fatture, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(f.totale) <span class="kw">AS</span> media_fatture, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(f.totale) <span class="kw">AS</span> spesa_massima</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id, c.nome, c.cognome</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.cliente_id;</span></code></pre></div>
+<p>In questa query, stiamo utilizzando le funzioni di aggregazione <code>COUNT</code>, <code>AVG</code> e <code>MAX</code> per calcolare il conteggio delle fatture emesse, la media dei totali delle fatture e la spesa massima per ciascun cliente. La clausola <code>GROUP BY</code> raggruppa i risultati per cliente.</p>
+<p>Il risultato di questa query sarà un elenco dei clienti con il conteggio delle fatture, la media dei totali delle fatture e la spesa massima per ciascun cliente. Puoi personalizzare ulteriormente questa query per includere altri campi o calcolare altre statistiche in base alle tue esigenze.</p>
+<ul>
+<li>Per ottenere i prodotti più venduti insieme alle rispettive quantità dalla tabella &quot;prodotti&quot;, dovrai fare riferimento alle tabelle delle fatture e dei dettagli delle fatture per calcolare il totale delle vendite di ciascun prodotto. Ecco come puoi fare questa query:</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> p.prodotto_id, p.nome_prodotto, <span class="fu">SUM</span>(df.quantita) <span class="kw">AS</span> quantita_venduta</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> prodotti <span class="kw">AS</span> p</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> dettaglio_fattura <span class="kw">AS</span> df <span class="kw">ON</span> p.prodotto_id <span class="op">=</span> df.prodotto_id</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> p.prodotto_id, p.nome_prodotto</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> quantita_venduta <span class="kw">DESC</span>;</span></code></pre></div>
+<p>In questa query:</p>
+<ul>
+<li>Stiamo selezionando i campi <code>prodotto_id</code> e <code>nome_prodotto</code> dalla tabella &quot;prodotti&quot; (<code>p</code> è un alias per &quot;prodotti&quot;).</li>
+<li>Stiamo calcolando la somma delle quantità vendute (<code>quantita</code>) dalla tabella &quot;dettaglio_fattura&quot; per ciascun prodotto.</li>
+<li>Stiamo raggruppando i risultati per <code>prodotto_id</code> e <code>nome_prodotto</code>.</li>
+<li>Stiamo ordinando i risultati in ordine decrescente in base alle quantità vendute per determinare i prodotti più venduti.</li>
+</ul>
+<p>Questa query ti restituirà un elenco dei prodotti dalla tabella &quot;prodotti&quot; insieme alle rispettive quantità vendute, con i prodotti più venduti in cima alla lista.</p>
+<ul>
+<li>Per calcolare le statistiche sulle vendite mensili, devi considerare i dati delle tabelle &quot;fatture&quot; e &quot;dettaglio_fattura&quot; per ottenere il totale delle vendite per ciascun mese. Ecco come puoi fare questa query in SQLite:</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    strftime(<span class="st">&#39;%Y-%m&#39;</span>, f.data_fattura) <span class="kw">AS</span> mese,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario) <span class="kw">AS</span> vendite_mensili</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> fatture <span class="kw">AS</span> f</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> dettaglio_fattura <span class="kw">AS</span> df <span class="kw">ON</span> f.fattura_id <span class="op">=</span> df.fattura_id</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> mese</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> mese;</span></code></pre></div>
+<p>In questa query:</p>
+<ul>
+<li>Utilizziamo la funzione <code>strftime</code> per estrarre l&#39;anno e il mese dalla colonna &quot;data_fattura&quot; nel formato &#39;YYYY-MM&#39;.</li>
+<li>Calcoliamo il totale delle vendite moltiplicando la quantità (<code>quantita</code>) per il prezzo unitario (<code>prezzo_unitario</code>) da &quot;dettaglio_fattura&quot;.</li>
+<li>Raggruppiamo i risultati per mese.</li>
+<li>Ordiniamo i risultati in base al mese.</li>
+</ul>
+<p>Questa query restituirà un elenco delle vendite mensili con il mese e il totale delle vendite per ciascun mese, ordinato per mese. Puoi adattare questa query in base alle tue esigenze e includere ulteriori statistiche o dettagli, se necessario.</p>
+<ul>
+<li>Per calcolare le statistiche sulle vendite giornaliere, puoi utilizzare le tabelle &quot;fatture&quot; e &quot;dettaglio_fattura&quot; nel tuo database SQLite. Ecco come puoi fare una query per ottenere le vendite giornaliere:</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    f.data_fattura <span class="kw">AS</span> <span class="kw">data</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario) <span class="kw">AS</span> vendite_giornaliere</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> fatture <span class="kw">AS</span> f</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> dettaglio_fattura <span class="kw">AS</span> df <span class="kw">ON</span> f.fattura_id <span class="op">=</span> df.fattura_id</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">data</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">data</span>;</span></code></pre></div>
+<p>In questa query:</p>
+<ul>
+<li>Stiamo selezionando la colonna &quot;data_fattura&quot; dalla tabella &quot;fatture&quot; come &quot;data&quot;.</li>
+<li>Calcoliamo il totale delle vendite moltiplicando la quantità (<code>quantita</code>) per il prezzo unitario (<code>prezzo_unitario</code>) dalla tabella &quot;dettaglio_fattura&quot;.</li>
+<li>Raggruppiamo i risultati per data.</li>
+<li>Ordiniamo i risultati in base alla data.</li>
+</ul>
+<p>Questa query restituirà un elenco delle vendite giornaliere con la data e il totale delle vendite per ciascun giorno, ordinato per data. Puoi personalizzare ulteriormente questa query o includere ulteriori statistiche, se necessario.</p>
+<ul>
+<li>Per ottenere statistiche sulle vendite complessive, puoi calcolare il totale delle vendite e altre metriche basate sulle tabelle &quot;fatture&quot; e &quot;dettaglio_fattura&quot; nel tuo database SQLite. Ecco come puoi fare una query per ottenere alcune statistiche di base:</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Totale delle vendite</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario) <span class="kw">AS</span> totale_vendite</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df;</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Numero totale di fatture</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(f.fattura_id) <span class="kw">AS</span> numero_fatture</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> fatture <span class="kw">AS</span> f;</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- Media delle vendite per fattura</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">AVG</span>(df.quantita <span class="op">*</span> df.prezzo_unitario) <span class="kw">AS</span> media_vendite_per_fattura</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> dettaglio_fattura <span class="kw">AS</span> df;</span></code></pre></div>
+<p>Queste tre query ti daranno alcune statistiche di base sulle vendite:</p>
+<ol type="1">
+<li>Totale delle vendite: Calcola il totale delle vendite sommando il prodotto della quantità (<code>quantita</code>) per il prezzo unitario (<code>prezzo_unitario</code>) da &quot;dettaglio_fattura&quot;.</li>
+<li>Numero totale di fatture: Conta il numero totale di fatture nella tabella &quot;fatture&quot;.</li>
+<li>Media delle vendite per fattura: Calcola la media delle vendite per ogni fattura, prendendo il prodotto della quantità e del prezzo unitario da &quot;dettaglio_fattura&quot;.</li>
+</ol>
+<p>Puoi personalizzare ulteriormente queste query o aggiungere altre statistiche in base alle tue esigenze.</p>
+<ul>
+<li>Per calcolare le statistiche di vendita tra i clienti, puoi utilizzare le tabelle &quot;fatture&quot;, &quot;dettaglio_fattura&quot;, e &quot;clienti&quot; nel tuo database SQLite. Ecco come puoi fare una query per ottenere statistiche di vendita tra i clienti:</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Totale delle vendite per ogni cliente</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.cliente_id, c.nome <span class="kw">AS</span> nome_cliente, c.cognome <span class="kw">AS</span> cognome_cliente,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(df.quantita <span class="op">*</span> df.prezzo_unitario) <span class="kw">AS</span> totale_vendite</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> dettaglio_fattura <span class="kw">AS</span> df <span class="kw">ON</span> f.fattura_id <span class="op">=</span> df.fattura_id</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> totale_vendite <span class="kw">DESC</span>;</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Numero totale di fatture per ogni cliente</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.cliente_id, c.nome <span class="kw">AS</span> nome_cliente, c.cognome <span class="kw">AS</span> cognome_cliente,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(f.fattura_id) <span class="kw">AS</span> numero_fatture</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> clienti <span class="kw">AS</span> c</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fatture <span class="kw">AS</span> f <span class="kw">ON</span> c.cliente_id <span class="op">=</span> f.cliente_id</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.cliente_id</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> numero_fatture <span class="kw">DESC</span>;</span></code></pre></div>
+<p>Nelle prime due query, stiamo calcolando il totale delle vendite per ogni cliente e il numero totale di fatture emesse per ogni cliente. Queste query combinano le tabelle &quot;clienti&quot;, &quot;fatture&quot; e &quot;dettaglio_fattura&quot; utilizzando le clausole JOIN.</p>
+<ul>
+<li>La prima query calcola il totale delle vendite per ogni cliente, sommando il prodotto della quantità (<code>quantita</code>) per il prezzo unitario (<code>prezzo_unitario</code>) da &quot;dettaglio_fattura&quot;. I risultati sono raggruppati per cliente e ordinati per totale delle vendite in ordine decrescente.</li>
+<li>La seconda query conta il numero totale di fatture per ogni cliente. I risultati sono raggruppati per cliente e ordinati per numero di fatture in ordine decrescente.</li>
+</ul>
+<p>Queste query ti forniranno statistiche di vendita tra i clienti, consentendoti di vedere quali clienti hanno il totale delle vendite più alto e quanti ordini hanno effettuato. Puoi personalizzare ulteriormente queste query o aggiungere altre statistiche in base alle tue esigenze.</p>
+<ul>
+<li>Per salvare il risultato di una query SELECT in una nuova tabella in SQLite, puoi utilizzare la clausola <code>INSERT INTO</code> con una query SELECT. Ecco come puoi farlo:</li>
+</ul>
+<p>Supponiamo che tu voglia salvare il risultato di una query SELECT in una nuova tabella chiamata &quot;nuova_tabella&quot;. La query SELECT può essere qualcosa del genere:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> tua_tabella_originale <span class="kw">WHERE</span> condizione;</span></code></pre></div>
+<p>Per creare una nuova tabella &quot;nuova_tabella&quot; e salvarvi il risultato della query SELECT, puoi utilizzare il comando <code>CREATE TABLE</code> insieme a <code>INSERT INTO</code> con una query SELECT. Ad esempio:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Crea la nuova tabella</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> nuova_tabella <span class="kw">AS</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> tua_tabella_originale <span class="kw">WHERE</span> condizione;</span></code></pre></div>
+<p>In questa query:</p>
+<ul>
+<li><code>CREATE TABLE nuova_tabella AS</code> crea una nuova tabella chiamata &quot;nuova_tabella&quot;.</li>
+<li><code>SELECT * FROM tua_tabella_originale WHERE condizione;</code> seleziona i dati dalla tua tabella originale in base a una condizione specificata (puoi personalizzare questa parte della query in base alle tue esigenze).</li>
+</ul>
+<p>Dopo aver eseguito questa query, avrai una nuova tabella chiamata &quot;nuova_tabella&quot; con i dati risultanti dalla tua query SELECT.</p>
+<p>Ricorda di adattare il nome della nuova tabella, della tabella originale e della condizione in base alle tue esigenze specifiche.</p>
+<ul>
+<li>Per creare una nuova tabella &quot;fatture_cliente_1&quot; che contenga tutte le fatture del cliente 1 dalla tabella &quot;fatture&quot;, puoi utilizzare il seguente comando SQL:</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Crea una nuova tabella &quot;fatture_cliente_1&quot; con le fatture del cliente 1</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> fatture_cliente_1 <span class="kw">AS</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> fatture</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> cliente_id <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div>
+<p>In questa query:</p>
+<ul>
+<li><code>CREATE TABLE fatture_cliente_1 AS</code> crea una nuova tabella chiamata &quot;fatture_cliente_1&quot;.</li>
+<li><code>SELECT * FROM fatture WHERE cliente_id = 1;</code> seleziona tutte le righe dalla tabella &quot;fatture&quot; in cui il campo &quot;cliente_id&quot; è uguale a 1, corrispondente al cliente 1.</li>
+</ul>
+<p>Dopo aver eseguito questa query, avrai una nuova tabella chiamata &quot;fatture_cliente_1&quot; che conterrà solo le fatture del cliente 1 dalla tabella &quot;fatture&quot;. Puoi applicare un approccio simile per creare tabelle per altri clienti o condizioni specifiche a seconda delle tue esigenze.</p>
+</main>
+</body>
+</html>
