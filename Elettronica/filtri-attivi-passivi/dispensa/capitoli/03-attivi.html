@@ -1,0 +1,215 @@
+<div class="part" id="parte-2"><span>Parte II</span><h2 class="part-title">Filtri attivi</h2><p>Un amplificatore operazionale con reazione fornisce guadagno, bassa impedenza di uscita e, con una rete RC opportuna, poli complessi senza induttori. La topologia Sallen-Key permette di realizzare filtri del secondo ordine con un solo operazionale; le cascate di sezioni danno gli ordini superiori.</p></div>
+
+<section id="perche-attivi" class="sec-b">
+<h2><span class="num">#</span>L'operazionale e il perché dei filtri attivi</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un operazionale è un amplificatore enorme che, collegato con una rete di reazione, si comporta in modo prevedibile e preciso. Per i filtri serve soprattutto a due cose: <strong>isolare</strong> una sezione dalla successiva (buffer) e <strong>creare poli complessi</strong> senza induttori.</p></div>
+
+<h3>Che cosa è un operazionale</h3>
+<p>Ha due ingressi, uno non invertente (+) e uno invertente (−), e un'uscita. Amplifica la <em>differenza</em> tra i due ingressi di un fattore enorme (decine di migliaia o più). Da solo sarebbe inutilizzabile, perché basta una differenza minuscola per saturare l'uscita. Si usa quindi sempre con reazione: una parte dell'uscita viene riportata sull'ingresso invertente.</p>
+
+<h3>La reazione negativa, spiegata con un esempio</h3>
+<p>Si prenda un amplificatore con guadagno A molto grande e si riporti sull'ingresso, con segno meno, una frazione β dell'uscita. L'amplificatore amplifica la differenza tra l'ingresso e quella frazione. Se l'uscita cresce troppo, la parte riportata aumenta, la differenza si riduce e l'uscita torna indietro: il sistema si autoregola e si stabilizza in un punto dipendente solo da β.</p>
+{{FIG_RETROAZIONE}}
+<p>Il risultato è che il guadagno complessivo è quasi 1/β: non dipende da A (che può variare molto da un componente all'altro e con la temperatura), ma solo dalle resistenze della rete di reazione. Per questo con gli operazionali si ottengono circuiti precisi.</p>
+
+<h3>Il modello ideale</h3>
+<p>Poiché A è enorme, la differenza tra gli ingressi è praticamente nulla. Il modello ideale si riassume in tre regole:</p>
+<ul>
+<li>le correnti che entrano negli ingressi sono nulle;</li>
+<li>l'impedenza di uscita è nulla: l'uscita impone la tensione qualunque sia il carico;</li>
+<li>con reazione negativa l'uscita si porta nel punto in cui V<sub>+</sub> = V<sub>−</sub> (cortocircuito virtuale).</li>
+</ul>
+{{FIG_OPAMP}}
+<div class="card esempio"><h4>Esempio svolto: amplificatore non invertente</h4>
+<p class="passo">R<sub>f</sub> = 9 kΩ, R<sub>g</sub> = 1 kΩ, V<sub>in</sub> = 0,5 V.</p>
+<p class="passo">Cortocircuito virtuale: V<sub>−</sub> = V<sub>in</sub> = 0,5 V. La corrente in R<sub>g</sub> è 0,5/1000 = 0,5 mA.</p>
+<p class="passo">Quella corrente scorre anche in R<sub>f</sub> (l'ingresso non ne assorbe): V<sub>out</sub> = 0,5 + 9000 · 0,0005 = 5 V.</p>
+<p class="passo">Guadagno: 1 + R<sub>f</sub>/R<sub>g</sub> = 1 + 9 = 10.</p></div>
+
+<h3>Perché il buffer risolve il problema del carico</h3>
+<p>Un buffer (guadagno 1) ha impedenza di ingresso molto alta e di uscita molto bassa: è esattamente ciò che serve per isolare due stadi (capitolo {{cap:carico}}). Un filtro attivo è, in sostanza, una rete RC con reazione che usa l'operazionale per due compiti: separare le sezioni e controllare i poli.</p>
+<div class="grid2">
+<div class="callout ok"><span class="tag">Vantaggi</span><p>Isolamento dal carico (impedenza di uscita bassa), possibilità di guadagno, poli complessi senza induttori, sezioni cascabili senza che si carichino a vicenda, valori componenti scalabili su impedenze comode.</p></div>
+<div class="callout warn"><span class="tag">Costi</span><p>Alimentazione, rumore e offset dell'amplificatore, banda e velocità di variazione limitate, sensibilità alle tolleranze dei componenti, possibilità di instabilità con carichi capacitivi.</p></div>
+</div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Collegare la reazione all'ingresso sbagliato. La reazione negativa va all'ingresso invertente (−); se si collega al non invertente (+) la reazione è positiva, il circuito satura o oscilla.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Un operazionale amplifica la differenza degli ingressi di un fattore enorme.</li>
+<li>Con reazione negativa il guadagno è quasi 1/β e dipende solo dalle resistenze.</li>
+<li>Modello ideale: correnti d'ingresso nulle, V<sub>+</sub> = V<sub>−</sub>, impedenza di uscita nulla.</li>
+<li>Non invertente: guadagno 1 + R<sub>f</sub>/R<sub>g</sub>; buffer: guadagno 1.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un non invertente ha R<sub>f</sub> = 19 kΩ e R<sub>g</sub> = 1 kΩ. Quanto vale il guadagno?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>1 + 19/1 = 20.</p></div></details></li>
+<li>Perché con reazione negativa V<sub>+</sub> è uguale a V<sub>−</sub>?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>L'operazionale amplifica la loro differenza di un fattore enorme: l'uscita si stabilizza solo quando la differenza è quasi nulla.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="sk-lp" class="sec-b">
+<h2><span class="num">#</span>Sallen-Key passa-basso a guadagno unitario</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Il filtro Sallen-Key è un filtro del secondo ordine fatto con due resistenze, due condensatori e un operazionale usato come buffer. Il condensatore C<sub>1</sub> riporta all'ingresso una parte dell'uscita: questa «reazione positiva» permette di scegliere il picco della risposta, cioè Q, senza usare induttori.</p></div>
+{{FIG_SK}}
+
+<h3>Come funziona, a parole</h3>
+<p>R<sub>1</sub> e R<sub>2</sub> portano il segnale all'ingresso non invertente, con C<sub>2</sub> verso massa; C<sub>1</sub> collega il nodo intermedio all'uscita. L'operazionale è un buffer a guadagno 1: ripete sull'uscita la tensione del nodo B. Basta analizzare che cosa succede ai condensatori nelle tre zone di frequenza:</p>
+{{FIG_SK_STATI}}
+<p>La parte interessante è la zona di mezzo: C<sub>1</sub> riporta sul nodo A una parte della tensione di uscita, che a frequenze vicine a f<sub>0</sub> è circa in fase con il segnale. Quella frazione si somma all'ingresso: è una reazione positiva, e per questo la risposta si solleva vicino a f<sub>0</sub>. Il filtro non oscilla perché la reazione è parziale e si esaurisce quando C<sub>2</sub> comincia a cortocircuitare.</p>
+
+<h3>La funzione di trasferimento, passo per passo</h3>
+<p>Si indicano con V<sub>A</sub> la tensione del nodo tra R<sub>1</sub> e R<sub>2</sub> e con V<sub>B</sub> quella all'ingresso non invertente. Poiché la corrente di ingresso dell'operazionale è nulla e il buffer ha guadagno 1, V<sub>out</sub> = V<sub>B</sub>. In ogni condensatore si usa l'impedenza 1/(sC), con s = jω.</p>
+<ol class="steps">
+<li><strong>Equazione al nodo B</strong>La corrente in R<sub>2</sub> è tutta assorbita da C<sub>2</sub>: (V<sub>A</sub> − V<sub>B</sub>)/R<sub>2</sub> = sC<sub>2</sub>V<sub>B</sub>, da cui V<sub>A</sub> = V<sub>B</sub> (1 + sR<sub>2</sub>C<sub>2</sub>).</li>
+<li><strong>Equazione al nodo A</strong>La corrente in R<sub>1</sub> si divide fra R<sub>2</sub> e C<sub>1</sub>: (V<sub>in</sub> − V<sub>A</sub>)/R<sub>1</sub> = (V<sub>A</sub> − V<sub>B</sub>)/R<sub>2</sub> + sC<sub>1</sub>(V<sub>A</sub> − V<sub>out</sub>).</li>
+<li><strong>Sostituzione</strong>Sostituendo V<sub>A</sub> e V<sub>out</sub> = V<sub>B</sub>, il termine (V<sub>A</sub> − V<sub>B</sub>)/R<sub>2</sub> diventa sC<sub>2</sub>V<sub>B</sub> e rimane V<sub>in</sub>/R<sub>1</sub> = V<sub>B</sub> [(1 + sR<sub>2</sub>C<sub>2</sub>)/R<sub>1</sub> + sC<sub>2</sub> + sC<sub>1</sub>·sR<sub>2</sub>C<sub>2</sub>].</li>
+<li><strong>Risultato</strong>Moltiplicando per R<sub>1</sub> e raccogliendo, V<sub>out</sub>/V<sub>in</sub> = 1/(1 + sC<sub>2</sub>(R<sub>1</sub> + R<sub>2</sub>) + s²R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>).</li>
+</ol>
+<div class="eq"><span class="m"><i>H</i>(s) = <span class="frac"><span>1</span><span>1 + s<i>C</i><sub>2</sub>(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>) + s²<i>R</i><sub>1</sub><i>R</i><sub>2</sub><i>C</i><sub>1</sub><i>C</i><sub>2</sub></span></span><span class="note">È la forma generale di un passa-basso del secondo ordine: 1/(1 + s/(ω<sub>0</sub>Q) + s²/ω<sub>0</sub>²).</span></span><span class="eqn">(@sk_h)</span></div>
+<div class="eq"><span class="m"><i>ω</i><sub>0</sub> = <span class="frac"><span>1</span><span>√(<i>R</i><sub>1</sub><i>R</i><sub>2</sub><i>C</i><sub>1</sub><i>C</i><sub>2</sub>)</span></span>,&emsp;<i>Q</i> = <span class="frac"><span>√(<i>R</i><sub>1</sub><i>R</i><sub>2</sub><i>C</i><sub>1</sub><i>C</i><sub>2</sub>)</span><span><i>C</i><sub>2</sub>(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>)</span></span><span class="note">Confrontando i coefficienti con la forma generale: 1/(ω<sub>0</sub>Q) = C<sub>2</sub>(R<sub>1</sub> + R<sub>2</sub>) e 1/ω<sub>0</sub>² = R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>.</span></span><span class="eqn">(@sk_f0q)</span></div>
+<p>Il guadagno in continua vale 1 e il guadagno a f<sub>0</sub> vale Q.</p>
+
+<h3>Il ruolo di Q</h3>
+<p>Q regola la forma della risposta: con Q piccolo il ginocchio è smorzato, con Q = 1/√2 si ottiene la risposta piatta di Butterworth, con Q più alto compare un picco. Lo stesso parametro controlla la risposta nel tempo: più è alto Q, più il filtro «rimbalza» dopo un gradino, come un'altalena con poco attrito.</p>
+{{TAB_Q}}
+{{FIG_Q}}
+{{FIG_GRADINO_Q}}
+
+<h3>Come si dimensiona</h3>
+<p>Le due equazioni {{eq:sk_f0q}} hanno quattro incognite (R<sub>1</sub>, R<sub>2</sub>, C<sub>1</sub>, C<sub>2</sub>): se ne fissano due, i condensatori, e si ricavano le resistenze. Da R<sub>1</sub> + R<sub>2</sub> = 1/(Qω<sub>0</sub>C<sub>2</sub>) e R<sub>1</sub>R<sub>2</sub> = 1/(ω<sub>0</sub>²C<sub>1</sub>C<sub>2</sub>) si ottengono R<sub>1</sub> e R<sub>2</sub> come radici di un'equazione di secondo grado, reali solo se</p>
+<div class="eq"><span class="m"><i>C</i><sub>1</sub> ≥ 4 <i>Q</i>² <i>C</i><sub>2</sub><span class="note">Con Q = 0,707 serve C<sub>1</sub> ≥ 2 C<sub>2</sub>; con Q = 1,307 serve C<sub>1</sub> ≥ 6,8 C<sub>2</sub>.</span></span><span class="eqn">(@c1_c2)</span></div>
+<p>Per questo si sceglie C<sub>2</sub> comodo (qui 10 nF) e C<sub>1</sub> come il primo valore normalizzato maggiore o uguale a 4Q²C<sub>2</sub>. Poi si calcolano R<sub>1</sub> e R<sub>2</sub> e si arrotondano alla serie E96: l'effetto su f<sub>0</sub> e Q va sempre verificato.</p>
+<div class="card esempio"><h4>Esempio svolto: Butterworth del secondo ordine, f<sub>0</sub> = 1 kHz, Q = 1/√2</h4>
+<p class="passo">C<sub>2</sub> = 10 nF → C<sub>1</sub> ≥ {{EX_C1_MIN}}: scegliere {{EX_C1}} (serie E12).</p>
+<p class="passo">R<sub>1</sub> + R<sub>2</sub> = {{EX_SOMMA}} e R<sub>1</sub>R<sub>2</sub> = {{EX_PROD}} Ω².</p>
+<p class="passo">Le due radici: R<sub>1</sub> = {{EX_R1}} e R<sub>2</sub> = {{EX_R2}}.</p>
+<p class="passo">Valori E96: {{EX_R1N}} e {{EX_R2N}}, con risultato f<sub>0</sub> = {{EX_F0}} Hz e Q = {{EX_Q}}.</p></div>
+{{FIG_SK_ESEMPIO}}
+<div class="callout errore"><span class="tag">Errore comune</span><p>Scambiare C<sub>1</sub> e C<sub>2</sub>. Il condensatore <em>grande</em> (C<sub>1</sub>) va dal nodo intermedio all'<em>uscita</em>; quello piccolo (C<sub>2</sub>) va a massa. Se si scambiano, il Q diventa piccolo e il picco sparisce.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Sallen-Key a guadagno 1: due resistenze, due condensatori, un buffer.</li>
+<li>f<sub>0</sub> = 1/(2π√(R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>)), Q = √(R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>)/(C<sub>2</sub>(R<sub>1</sub> + R<sub>2</sub>)).</li>
+<li>Per dimensionare: C<sub>1</sub> ≥ 4Q²C<sub>2</sub>, poi R<sub>1</sub> e R<sub>2</sub> dalla somma e dal prodotto.</li>
+<li>Q alto: picco nella risposta e sovraelongazione nel gradino.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Per un Sallen-Key con Q = 1, C<sub>2</sub> = 10 nF: qual è il minimo di C<sub>1</sub>?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>4Q²C<sub>2</sub> = 4 · 1 · 10 nF = 40 nF; il primo E12 sopra è 47 nF.</p></div></details></li>
+<li>Che valore ha |H| alla frequenza f<sub>0</sub> se Q = 2?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>|H(f<sub>0</sub>)| = Q = 2, cioè +6 dB: c'è un picco.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="sk-k" class="sec-b">
+<h2><span class="num">#</span>Guadagno K, passa-alto e componenti uguali</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Se l'operazionale non è solo un buffer ma ha anche un guadagno K, il progetto si semplifica molto: bastano due resistenze uguali e due condensatori uguali, e il valore di Q si sceglie con il solo guadagno. Il prezzo è che con Q alto il circuito diventa molto sensibile alle tolleranze.</p></div>
+<p>Con un amplificatore non invertente di guadagno K = 1 + R<sub>f</sub>/R<sub>g</sub>, e con R<sub>1</sub> = R<sub>2</sub> = R, C<sub>1</sub> = C<sub>2</sub> = C, il progetto si semplifica: f<sub>0</sub> dipende solo da RC e Q solo da K.</p>
+<div class="eq"><span class="m"><i>f</i><sub>0</sub> = <span class="frac"><span>1</span><span>2π<i>RC</i></span></span>,&emsp;<i>Q</i> = <span class="frac"><span>1</span><span>3 − <i>K</i></span></span>,&emsp;<i>K</i> = 3 − <span class="frac"><span>1</span><span><i>Q</i></span></span></span><span class="eqn">(@sk_k)</span></div>
+{{FIG_SK_LP_K}}
+{{TAB_K}}
+<p>Il guadagno di banda passante è K: per ottenere Q alto il guadagno cresce, e il picco a f<sub>0</sub> sale di conseguenza (ultima colonna). Per K che tende a 3 il circuito oscilla; un amplificatore non invertente richiede K ≥ 1, quindi questa forma non realizza Q &lt; 0,5. Esempio: f<sub>0</sub> = 1 kHz, Q = 2, C = 10 nF → R = {{EQ_R}}, K = {{EQ_K}}, picco di circa {{EQ_PICCO}} dB.</p>
+{{FIG_QK}}
+<div class="callout warn"><span class="tag">Sensibilità</span><p>Con Q alto K è vicino a 3, e una piccola variazione di R<sub>f</sub>/R<sub>g</sub> sposta molto Q: Q = 1/(3 − K) con K = 2,9 vale 10, con K = 2,95 vale 20. La versione a guadagno unitario del capitolo {{cap:sk-lp}} non ha la rete R<sub>f</sub>/R<sub>g</sub> e fissa Q con il rapporto C<sub>1</sub>/C<sub>2</sub>.</p></div>
+<h3>Passa-alto</h3>
+{{FIG_SK_HP_K}}
+<p>Scambiando R e C si ottiene il passa-alto con la stessa f<sub>0</sub>, Q e K. Il comportamento è speculare: pendenza di +40 dB/decade sotto f<sub>0</sub>, guadagno K oltre. Poiché l'amplificatore ha banda finita, la risposta ad alta frequenza di un passa-alto attivo è comunque limitata dal GBW.</p>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>A componenti uguali: f<sub>0</sub> = 1/(2πRC), Q = 1/(3 − K).</li>
+<li>Per K che tende a 3, Q cresce a dismisura e il circuito oscilla.</li>
+<li>Il passa-alto si ottiene scambiando R e C.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un Sallen-Key a componenti uguali ha K = 2: quanto vale Q?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Q = 1/(3 − 2) = 1.</p></div></details></li>
+<li>Per Q = 0,707 serve K = 3 − 1/0,707 = ?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>K = 3 − 1,414 = 1,586, cioè R<sub>f</sub>/R<sub>g</sub> = 0,586.</p></div></details></li>
+</ol></div>
+</section>
+
+{{include:03b-famiglie}}
+
+<section id="cascata" class="sec-b">
+<h2><span class="num">#</span>Cascata e ordine superiore</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Per avere più di due poli si mettono in fila più sezioni del secondo ordine (più una del primo, se l'ordine è dispari). Ogni sezione ha il suo Q e la sua curva; in decibel le curve si sommano. Dato che ogni sezione ha un buffer, non si disturbano a vicenda.</p></div>
+{{FIG_CASC_BLOCCHI}}
+<p>Ogni sezione Sallen-Key a guadagno unitario ha uscita a bassa impedenza: la sezione successiva non la carica e la risposta totale è il prodotto delle risposte, cioè la somma in decibel. Quarto ordine Butterworth con f<sub>c</sub> = 1 kHz: una sezione con Q = 1,307 e una con Q = 0,541, entrambe con f<sub>0</sub> = 1 kHz.</p>
+{{FIG_CASC_SOMMA}}
+<h3>Tabella di progetto</h3>
+<p>Tutte le sezioni hanno C<sub>2</sub> = 10 nF; C<sub>1</sub> è il primo valore E12 maggiore o uguale a 4Q²C<sub>2</sub>; le resistenze sono E96. La cella del primo ordine (n dispari) usa C = 10 nF.</p>
+{{TAB_SK_PROGETTO}}
+{{FIG_SK_RISP}}
+<h3>Valori attesi con componenti normalizzati</h3>
+<p>Butterworth del secondo ordine (capitolo {{cap:lab-attivi}}, passo 3):</p>
+{{TAB_RISP_N2}}
+<p>Butterworth del quarto ordine (due sezioni in cascata):</p>
+{{TAB_RISP_N4}}
+<div class="callout note"><span class="tag">Ordine delle sezioni</span><p>Il prodotto delle risposte non dipende dall'ordine in cui si dispongono le sezioni, ma i livelli interni sì. La sezione con Q alto ha un picco: la sua uscita ({{SK4_S1_PICCO}} dB sopra il guadagno di continua, a circa {{SK4_S1_PICCO_F}} Hz) deve restare lontana dalla saturazione. Se il segnale in ingresso è grande, conviene verificare l'ampiezza nei nodi intermedi con l'oscilloscopio.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Un filtro di ordine n si costruisce con sezioni del secondo ordine (e una del primo se n è dispari).</li>
+<li>Le sezioni hanno Q diversi; in dB le risposte si sommano.</li>
+<li>Il Butterworth del quarto ordine ha sezioni con Q = 1,307 e Q = 0,541.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Quante sezioni servono per un quinto ordine?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Due del secondo ordine e una del primo (2 + 2 + 1 = 5 poli).</p></div></details></li>
+<li>Se una sezione attenua 10 dB e un'altra 14 dB a una certa frequenza, quanto attenua la cascata?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>10 + 14 = 24 dB.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="limiti-reali" class="sec-b">
+<h2><span class="num">#</span>Limiti dell'amplificatore e dei componenti</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>I componenti reali non sono ideali. L'operazionale non è veloce all'infinito, i condensatori hanno tolleranze, le resistenze fanno rumore. Questo capitolo mostra, con numeri, quanto contano questi difetti e come tenerli sotto controllo.</p></div>
+<h3>Prodotto guadagno–banda</h3>
+<p>L'amplificatore reale ha un guadagno ad anello aperto A(f) che diminuisce con la frequenza: oltre una frequenza in genere molto bassa (10 Hz nel grafico di esempio) scende di 20 dB/decade. Il prodotto del guadagno per la frequenza è costante e si chiama GBW (<em>gain-bandwidth product</em>): vale la frequenza alla quale il guadagno ad anello aperto è 1. Con reazione il guadagno si stabilizza a K, ma solo finché K è molto minore di A(f): a frequenza più alta segue A(f).</p>
+{{FIG_AO}}
+<p>In formula, come buffer a guadagno K il guadagno reale si può modellare come K/(1 + jKf/GBW): la banda utile è GBW/K. La tabella confronta, per la sezione Sallen-Key con f<sub>0</sub> = 1 kHz, l'effetto sul picco e sulla banda oscura.</p>
+{{TAB_GBW}}
+{{FIG_GBW}}
+<p>Il picco errato si sovrappone al guadagno della sezione ed è più sensibile nelle sezioni a Q alto. Nella banda oscura la pendenza aumenta rispetto all'ideale, ma questo modello <em>non</em> include l'impedenza di uscita dell'amplificatore: in pratica, ad alta frequenza, l'attenuazione di un Sallen-Key tende a peggiorare (compare un percorso diretto attraverso C<sub>1</sub>) [Probabile]. Verificare con la misura, a frequenze molto più alte di f<sub>0</sub>, che l'attenuazione di banda oscura raggiunga il valore calcolato. Scegliendo GBW di almeno 50–100 volte f<sub>0</sub>, per le sezioni a Q alto, l'errore sul picco resta entro mezzo dB nel modello.</p>
+
+<h3>Velocità di variazione (slew rate)</h3>
+<p>L'uscita dell'operazionale non può cambiare più rapidamente del suo slew rate SR (in V/µs). Per una sinusoide di ampiezza V<sub>p</sub> e frequenza f la pendenza massima è 2πfV<sub>p</sub>: se supera SR l'uscita non segue, la forma d'onda si deforma in un triangolo e l'ampiezza cala.</p>
+{{FIG_SLEW}}
+{{TAB_SLEW}}
+
+<h3>Rumore</h3>
+<p>Ogni resistenza genera una tensione di rumore termico con densità spettrale √(4kTR) V/√Hz (k = 1,38·10<sup>−23</sup> J/K, T in kelvin). Su una banda rettangolare di larghezza B, il valore efficace è v<sub>n</sub> = √(4kTRB); con un filtro reale si usa la sua banda equivalente di rumore. Valori di R più bassi riducono il rumore, ma caricano di più l'amplificatore e richiedono capacità maggiori: è un compromesso.</p>
+{{TAB_RUMORE}}
+
+<h3>Alimentazione singola</h3>
+<p>Con una sola alimentazione (per esempio 3,3 V o 5 V) l'operazionale non può dare tensioni negative: il segnale va fatto oscillare attorno a un livello intermedio, V<sub>cc</sub>/2, ricavato con un partitore e disaccoppiato con un condensatore. I ritorni a massa del filtro (C<sub>2</sub>, le polarizzazioni) vanno a questo riferimento, l'ingresso è accoppiato in alternata con un condensatore e l'operazionale deve avere ingressi e uscita compatibili con l'escursione (<em>rail-to-rail</em>).</p>
+{{FIG_MONOALIM}}
+
+<h3>Tolleranze e dielettrico</h3>
+<p>f<sub>0</sub> dipende da √(R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>): una tolleranza del 10% su un condensatore sposta f<sub>0</sub> del 5%. Q dipende anche dal rapporto dei condensatori e dei resistori, quindi un singolo componente fuori valore sposta sia la frequenza sia il picco.</p>
+{{FIG_TOLL}}
+{{TAB_TOLL}}
+<p>Con resistenze all'1% e condensatori al 5% il caso peggiore, calcolato su tutte le combinazioni degli estremi, dà f<sub>0</sub> tra {{TOLL_F0_MIN}} % e {{TOLL_F0_MAX}} % e Q tra {{TOLL_Q_MIN}} % e {{TOLL_Q_MAX}} % rispetto al nominale: sono i condensatori a dominare. Per i filtri di precisione servono condensatori C0G/NP0 (deriva dell'ordine di ±30 ppm/°C) o in film (poliestere, polipropilene) con tolleranza del 1–5%. I ceramici X7R hanno per definizione variazioni di capacità fino a ±15% nell'intervallo di temperatura, in aggiunta alla tolleranza iniziale e a una dipendenza dalla tensione continua applicata: sono accettabili solo per applicazioni non critiche.</p>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Progettare il filtro con i valori «teorici» e dimenticare le tolleranze. Un condensatore al 10 % sposta f<sub>0</sub> del 5 % e Q di altrettanto. Il progetto va sempre ricontrollato con i valori reali dei componenti.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>GBW: la banda utile di un amplificatore è GBW/K; per sezioni a Q alto serve GBW ≥ 50–100 f<sub>0</sub>.</li>
+<li>Slew rate: SR ≥ 2πfV<sub>p</sub>.</li>
+<li>Rumore termico: v<sub>n</sub> = √(4kTRB).</li>
+<li>Alimentazione singola: riferimento V<sub>cc</sub>/2 e accoppiamenti in alternata.</li>
+<li>Le tolleranze dei condensatori dominano la precisione di f<sub>0</sub> e Q.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un buffer con GBW = 10 MHz: fino a che frequenza ha guadagno unitario?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Banda ≈ GBW/K = 10 MHz/1 = 10 MHz.</p></div></details></li>
+<li>Una sinusoide da 1 V di picco a 100 kHz: quale slew rate serve?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>2π · 100000 · 1 = 0,63 V/µs almeno.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="lab-attivi" class="sec-b">
+<h2><span class="num">#</span>Laboratorio sui filtri attivi</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Si monta un Sallen-Key del secondo ordine e poi un quarto ordine, e si confrontano le misure con i valori calcolati. Il passo sulla sensibilità alle tolleranze mostra quanto un condensatore sbagliato sposta la risposta.</p></div>
+<p>Alimentare l'operazionale con ±5 V, disaccoppiare i pin con 100 nF verso massa, e usare nel generatore 1 V<sub>pp</sub> (ampiezza di picco 0,5 V, ben dentro la dinamica). Il segnale va collegato direttamente all'ingresso del filtro: la bassa resistenza R<sub>1</sub> è dell'ordine di 10 kΩ e l'impedenza del generatore, 50 Ω, la altera dello 0,3% circa. Le schede da compilare sono nell'appendice {{cap:schede}}.</p>
+<ol class="steps">
+<li><strong>Controllo della polarizzazione</strong>Montare solo l'operazionale come buffer, senza filtro. Verificare che il guadagno sia vicino a 1 e misurare l'offset d'uscita, confrontandolo con il valore massimo indicato nel datasheet del componente usato.<span class="expect">V<sub>out</sub>/V<sub>in</sub> ≈ 1 a 100 Hz; offset entro il limite del datasheet</span></li>
+<li><strong>Montaggio del secondo ordine</strong>Costruire il Butterworth con C<sub>2</sub> = 10 nF, C<sub>1</sub> = 22 nF, R<sub>1</sub> = 14,7 kΩ, R<sub>2</sub> = 7,87 kΩ. Misurare i condensatori con il LCR meter e ricalcolare f<sub>0</sub> e Q con le formule {{eq:sk_f0q}}.<span class="expect">f<sub>0</sub> ≈ 997,6 Hz, Q ≈ 0,707 con valori nominali</span></li>
+<li><strong>Risposta in ampiezza e fase</strong>Misurare ampiezza e fase alle frequenze della tabella dei valori attesi del capitolo {{cap:cascata}} e confrontare. Annotare lo scarto in dB a ogni frequenza.<span class="expect">0 dB a 100 Hz; −3,03 dB e −90,2° a 1 kHz; −12,35 dB a 2 kHz; −28,01 dB a 5 kHz; −40,04 dB a 10 kHz</span></li>
+<li><strong>Risposta al gradino</strong>Applicare un'onda quadra a 50 Hz e osservare la sovraelongazione.<span class="expect">sovraelongazione ≈ {{OVER_BW2}} % (Butterworth del secondo ordine)</span></li>
+<li><strong>Sensibilità alle tolleranze</strong>Sostituire C<sub>1</sub> con 22 nF + 2,2 nF in parallelo (+10%) e rimisurare f<sub>c</sub> e il comportamento attorno a f<sub>0</sub>. Confrontare con il calcolo.<span class="expect">f<sub>0</sub> ≈ {{SK2_C1P_F0}} Hz e Q ≈ {{SK2_C1P_Q}} con valori nominali: f<sub>0</sub> scende e il picco a f<sub>0</sub> aumenta</span></li>
+<li><strong>Quarto ordine</strong>Montare la cascata di due sezioni della tabella di progetto (sezione 1: R<sub>1</sub> = 8,66 kΩ, R<sub>2</sub> = 3,57 kΩ, C<sub>1</sub> = 82 nF, C<sub>2</sub> = 10 nF; sezione 2: R<sub>1</sub> = 16,9 kΩ, R<sub>2</sub> = 12,4 kΩ, C<sub>1</sub> = 12 nF, C<sub>2</sub> = 10 nF). Prima misurare la sola sezione 1: il picco atteso è circa {{SK4_S1_PICCO}} dB a {{SK4_S1_PICCO_F_INT}} Hz.<span class="expect">sezione 1 sola: picco ≈ {{SK4_S1_PICCO}} dB; sezione 2 sola: nessun picco ({{SK4_S2_PICCO}} dB)</span></li>
+<li><strong>Risposta del quarto ordine</strong>Collegare le due sezioni e misurare ampiezza e fase come al passo 3.<span class="expect">−3,01 dB a 1 kHz; −24,06 dB a 2 kHz; −55,86 dB a 5 kHz; −79,94 dB a 10 kHz</span></li>
+<li><strong>Confronto con il passivo</strong>Confrontare l'attenuazione a 5 kHz del quarto ordine attivo con quella di una cella RC con f<sub>c</sub> = 1 kHz.<span class="expect">attivo −55,9 dB contro RC −14,2 dB (capitolo {{cap:rc}})</span></li>
+</ol>
+<div class="callout note"><span class="tag">Misure in banda oscura</span><p>Oltre circa −60 dB il segnale di uscita è di pochi mV e rumore e diafonia dell'ambiente cominciano a pesare. Se l'oscilloscopio permette la media su più acquisizioni, usarla; altrimenti trattare i valori sotto −60 dB come indicativi.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Controllare prima il buffer da solo, poi il filtro.</li>
+<li>Misurare i componenti reali e ricalcolare f<sub>0</sub> e Q.</li>
+<li>Confrontare ampiezza e fase con la tabella dei valori attesi.</li>
+</ul></div>
+</section>

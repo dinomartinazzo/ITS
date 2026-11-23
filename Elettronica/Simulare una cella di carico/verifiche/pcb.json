@@ -1,0 +1,36 @@
+{
+  "pin_verificati": 32,
+  "componenti_inclusi_fori": 15,
+  "segmenti": 23,
+  "vie": 2,
+  "errori_controlli_geometrici_python": [],
+  "reti_schema_pcb_legacy": "coincidenti",
+  "valori_componenti": "coincidenti con il modello P3.1",
+  "PCB_rispetto_P3": "modificati solo valori e tolleranze; geometria invariata",
+  "gerber_invariati_sha256": {
+    "simulatore_ponte_348_p3-B_Cu.gbl": "20ae25a14cd37af352768ff49eaea1e0b6993c0379e0efcad3f51db8e01d03b6",
+    "simulatore_ponte_348_p3-B_Mask.gbs": "123bd08baa392c89ef38dafc76226f54ba1ea4552f11578b1416307dbda66c0e",
+    "simulatore_ponte_348_p3-B_Silkscreen.gbo": "79d8748741d1784e24c2ea27a90917f9673a54d89cdad86268afef5c723e5d9e",
+    "simulatore_ponte_348_p3-Edge_Cuts.gm1": "4590f7509e6722588eee45e23656ca17e2a397386659c505a8da621770329199",
+    "simulatore_ponte_348_p3-F_Cu.gtl": "d916f23e956e60999ee49eac91456fa2783680f8686f3c1eb0b25052968596a2",
+    "simulatore_ponte_348_p3-F_Mask.gts": "94aa3dc92cbf632a73538f4836a0b8456e67c5a53e6a83460faa7e53296c58a5",
+    "simulatore_ponte_348_p3-F_Silkscreen.gto": "a854c61d54530c08d94ecc094b9744415c8f37b051d81d90a3c994f3cf320c6e",
+    "simulatore_ponte_348_p3-NPTH.drl": "cc30c48852637c7ed431240aee31da72ca2af374c0853b8357072fba9d75eaa3",
+    "simulatore_ponte_348_p3-PTH.drl": "acb4a7444376f8134c1211be63e7db1956a9a0b7143dd2a027a3b1ea5d375668",
+    "simulatore_ponte_348_p3-job.gbrjob": "28687fc80e1eb2f056aceeb9cec137d245ffb974ff60e8951b2f9dc3edd17298"
+  },
+  "dettagli": [
+    "coppie rame verificate: 1872",
+    "rete E+   : 6 pad, connessa",
+    "rete A-   : 3 pad, connessa",
+    "rete E-   : 6 pad, connessa",
+    "rete A+   : 5 pad, connessa",
+    "rete N1   : 2 pad, connessa",
+    "rete N2   : 2 pad, connessa",
+    "rete W1   : 2 pad, connessa",
+    "rete W2   : 2 pad, connessa",
+    "rete EXC+ : 2 pad, connessa",
+    "rete EXC- : 2 pad, connessa"
+  ],
+  "limiti": "Controlli statici Python; ERC/DRC KiCad e importazione EasyEDA non eseguiti in questa revisione."
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filtri elettronici passivi e attivi — dalle basi al progetto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=STIX+Two+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in">
+  <div>
+    <p class="kicker">Dispensa di laboratorio — elettronica analogica</p>
+    <h1>Filtri elettronici passivi e attivi</h1>
+    <p class="lead">Un corso completo, dalle basi: corrente, condensatore, sinusoide, numeri complessi e decibel, poi filtri RC, RLC e Sallen-Key, fino al progetto di un filtro anti-aliasing. Linguaggio semplice, esempi con i numeri, disegni per ogni idea, riepiloghi ed esercizi svolti.</p>
+    <dl class="meta">
+      <div><dt>Livello</dt><dd>dal primo anno ITS</dd></div>
+      <div><dt>Prerequisiti</dt><dd>nessuno oltre la matematica di base</dd></div>
+      <div><dt>Circuiti</dt><dd>RC, RLC, Sallen-Key</dd></div>
+      <div><dt>Contenuto</dt><dd>{{N_CAPITOLI}} capitoli, 4 appendici</dd></div>
+    </dl>
+  </div>
+  {{HERO_ART}}
+</div></header>
+
+<div class="layout">
+<aside class="toc"><nav aria-label="Indice">
+  <p>Indice</p>
+  <ol>
+    <li class="tp"><a href="#come"><span>—</span>Inizio</a></li>
+    <li><a href="#come"><span>{{num:come}}</span>Come usare la dispensa</a></li>
+    <li class="tp"><a href="#parte-0"><span>A</span>Teoria di base</a></li>
+    <li><a href="#ohm"><span>{{num:ohm}}</span>Tensione, corrente, resistenza</a></li>
+    <li><a href="#serie-par"><span>{{num:serie-par}}</span>Serie, parallelo, partitore</a></li>
+    <li><a href="#condensatore"><span>{{num:condensatore}}</span>Il condensatore</a></li>
+    <li><a href="#induttore"><span>{{num:induttore}}</span>L'induttore</a></li>
+    <li><a href="#segnali"><span>{{num:segnali}}</span>Segnali e sinusoide</a></li>
+    <li><a href="#complessi"><span>{{num:complessi}}</span>Numeri complessi</a></li>
+    <li><a href="#impedenza"><span>{{num:impedenza}}</span>Impedenza e H(f)</a></li>
+    <li><a href="#log-db"><span>{{num:log-db}}</span>Logaritmi e decibel</a></li>
+    <li><a href="#filtro-cose"><span>{{num:filtro-cose}}</span>Che cos'è un filtro</a></li>
+    <li class="tp"><a href="#parte-1"><span>I</span>Filtri passivi</a></li>
+    <li><a href="#rc"><span>{{num:rc}}</span>La cella RC</a></li>
+    <li><a href="#carico"><span>{{num:carico}}</span>Carico e cascata</a></li>
+    <li><a href="#rlc"><span>{{num:rlc}}</span>RLC e fattore Q</a></li>
+    <li><a href="#limiti-passivi"><span>{{num:limiti-passivi}}</span>Limiti dei passivi</a></li>
+    <li><a href="#lab-passivi"><span>{{num:lab-passivi}}</span>Laboratorio passivi</a></li>
+    <li class="tp"><a href="#parte-2"><span>II</span>Filtri attivi</a></li>
+    <li><a href="#perche-attivi"><span>{{num:perche-attivi}}</span>Operazionale e filtri attivi</a></li>
+    <li><a href="#sk-lp"><span>{{num:sk-lp}}</span>Sallen-Key passa-basso</a></li>
+    <li><a href="#sk-k"><span>{{num:sk-k}}</span>Guadagno K e passa-alto</a></li>
+    <li><a href="#famiglie"><span>{{num:famiglie}}</span>Butterworth, Chebyshev, Bessel</a></li>
+    <li><a href="#cascata"><span>{{num:cascata}}</span>Cascata e ordine superiore</a></li>
+    <li><a href="#limiti-reali"><span>{{num:limiti-reali}}</span>Limiti reali</a></li>
+    <li><a href="#lab-attivi"><span>{{num:lab-attivi}}</span>Laboratorio attivi</a></li>
+    <li class="tp"><a href="#parte-3"><span>III</span>Progetto e verifica</a></li>
+    <li><a href="#progetto"><span>{{num:progetto}}</span>Dal requisito al circuito</a></li>
+    <li><a href="#guasti"><span>{{num:guasti}}</span>Diagnostica guasti</a></li>
+    <li><a href="#esercizi"><span>{{num:esercizi}}</span>Esercizi svolti</a></li>
+    <li class="tp"><a href="#formulario"><span>—</span>Appendici</a></li>
+    <li><a href="#formulario"><span>{{num:formulario}}</span>Formulario</a></li>
+    <li><a href="#glossario"><span>{{num:glossario}}</span>Glossario</a></li>
+    <li><a href="#schede"><span>{{num:schede}}</span>Schede di misura</a></li>
+    <li><a href="#riferimenti"><span>{{num:riferimenti}}</span>Riferimenti</a></li>
+  </ol>
+  <div class="tools"><button class="btn" id="theme" type="button" aria-label="Cambia tema chiaro o scuro">Tema</button></div>
+</nav></aside>
+<main>
+{{include:00-intro}}
+{{include:01a-base}}
+{{include:01b-base}}
+{{include:02-passivi}}
+{{include:03-attivi}}
+{{include:04-progetto}}
+{{include:05-appendici}}
+</main>
+</div>
+<footer>Dispensa di laboratorio per ITS — versione ottobre 2026. Valori nominali calcolati con componenti ideali e, dove indicato, con le serie E12/E96; le tolleranze reali spostano f<sub>c</sub>, f<sub>0</sub> e Q. Nessuna misura di laboratorio è riportata: i valori attesi non sono dati sperimentali.</footer>
+
+<script>
+{{JS}}
+</script>
+</body>
+</html>

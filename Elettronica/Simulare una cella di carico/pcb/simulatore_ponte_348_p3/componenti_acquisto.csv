@@ -1,0 +1,8 @@
+Riferimenti,Quantita,Valore,Tolleranza,Produttore,MPN,Distributore,Link,Note
+R1-R4,4,348 ohm,"0,1%",TE Connectivity,YR1B348RCC,Mouser 279-YR1B348RCC,https://www.mouser.com/ProductDetail/TE-Connectivity-Holsworthy/YR1B348RCC?qs=s1WWODT2SXWSTUbqk3gftw%3D%3D,"0,25 W; 15 ppm/C; corpo 6,3 x 2,3 mm"
+R5,1,"3,65 kohm","0,1%",TE Connectivity,YR1B3K65CC,RS 754-5705 / DigiKey,https://www.digikey.com/es/products/detail/te-connectivity-passive-product/YR1B3K65CC/18102024,"0,25 W; 15 ppm/C; corpo 6,3 x 2,3 mm"
+R6,1,56 kohm,1%,Yageo,MFR-25FRF52-56K,DigiKey 13-MFR-25FRF52-56KCT-ND,https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-56K/9139085,"0,25 W; corpo 6,3 x 2,4 mm; nastro tagliato"
+R7-R8,2,909 ohm,"0,1%",TE Connectivity,YR1B909RCC,Farnell 3133551,https://ee.farnell.com/neohm-te-connectivity/yr1b909rcc/res-909r-0-25w-axial-metal-film/dp/3133551,"0,25 W; 15 ppm/C; corpo 6,3 x 2,3 mm"
+R9-R10,2,0 ohm,-,-,Filo per ponticelli,-,,"Passo 5,08 mm; due resistenze da 1 ohm 1% opzionali per la prova del cavo"
+RV1,1,200 ohm,Da verificare,Disponibile presso utente,Sigla da verificare,-,,10 giri; lineare; connettere con tre fili; ±5% solo ipotesi di calcolo
+RV2,1,10 kohm,10%,Bourns,3296W-1-103LF,Codice di riferimento; stock non verificato,https://www.bourns.com/docs/product-datasheets/3296.pdf,25 giri nominali; verificare ingombri prima del montaggio diretto sul connettore 1x3

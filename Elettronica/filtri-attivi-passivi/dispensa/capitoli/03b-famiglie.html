@@ -1,0 +1,154 @@
+<section id="famiglie" class="sec-b">
+<h2><span class="num">#</span>Butterworth, Chebyshev e Bessel</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Non esiste un filtro «perfetto»: che passi tutto fino a un punto e blocchi tutto dopo, senza deformare nulla. Si può solo avvicinarsi, e ci si avvicina in modi diversi. <strong>Butterworth</strong> cerca la risposta più piatta in banda passante. <strong>Chebyshev</strong> accetta piccole ondulazioni in cambio di una discesa più ripida. <strong>Bessel</strong> privilegia un ritardo di gruppo quasi costante nella banda utile, così riduce la deformazione temporale; la discesa è più lenta. Questo capitolo spiega da dove nasce ciascuna scelta, che cosa costa e come si decide.</p></div>
+
+<h3>Prima l'idea: tre modi di avvicinarsi all'ideale</h3>
+<p>Il filtro passa-basso ideale ha una risposta «a muro»: passa tutto fino alla frequenza di taglio e blocca tutto oltre, e in più non ritarda nessuna frequenza più di un'altra. Un filtro reale, fatto con un numero finito di componenti, non può avere queste tre qualità insieme. Ogni famiglia sceglie una qualità da privilegiare e accetta di perdere sulle altre.</p>
+{{FIG_TRE_IDEE}}
+<ul>
+<li><strong>Butterworth</strong> privilegia la <em>piattezza</em>: in banda passante la risposta non ondeggia e ha una pendenza intermedia.</li>
+<li><strong>Chebyshev</strong> privilegia la <em>ripidità</em>: scende prima e più in fretta, ma in banda passante la risposta ondeggia.</li>
+<li><strong>Bessel</strong> privilegia la <em>forma d'onda</em>: il ritardo di gruppo è quasi costante nella banda utile, ma la discesa è lenta.</li>
+</ul>
+<p>Come conseguenza, per ottenere lo stesso risultato di attenuazione serve un ordine diverso: Chebyshev ne richiede meno di Butterworth, Bessel di più (o addirittura non basta, come si vedrà). La tabella riassume le caratteristiche; il resto del capitolo le spiega una per una.</p>
+<div class="tbl"><table>
+<thead><tr><th>Famiglia</th><th>Che cosa ottimizza</th><th>In banda passante</th><th>Transizione</th><th>Ritardo e forma d'onda</th></tr></thead>
+<tbody>
+<tr><td>Butterworth</td><td>Piattezza del modulo</td><td>Nessun ripple</td><td>Media</td><td>Ritardo con un rigonfiamento; sovraelongazione moderata</td></tr>
+<tr><td>Chebyshev</td><td>Ripidità con ripple fisso</td><td>Ripple costante (0,1–3 dB tipici)</td><td>La più ripida</td><td>Ritardo con un picco alto; forte sovraelongazione</td></tr>
+<tr><td>Bessel</td><td>Ritardo di gruppo quasi costante in banda</td><td>Dolce, nessun ripple</td><td>La più lenta</td><td>Ritardo quasi costante in banda; sovraelongazione contenuta</td></tr>
+</tbody></table></div>
+
+<h3>I poli decidono tutto</h3>
+<p>Una famiglia si definisce dicendo dove stanno i poli nel piano complesso s = σ + jω (capitolo {{cap:filtro-cose}}). La posizione di ogni coppia di poli complessi coniugati di una sezione del secondo ordine è legata a f<sub>0</sub> e Q:</p>
+<div class="eq"><span class="m"><i>σ</i> = − <span class="frac"><span><i>f</i><sub>0</sub></span><span>2<i>Q</i></span></span>,&emsp;<i>ω</i> = ± <i>f</i><sub>0</sub> √(1 − <span class="frac"><span>1</span><span>4<i>Q</i>²</span></span>)<span class="note">Il modulo del polo è f<sub>0</sub>: il polo sta su una circonferenza di raggio f<sub>0</sub>. Quanto più Q è alto, tanto più il polo è vicino all'asse immaginario (σ → 0) e tanto più marcato il picco.</span></span><span class="eqn">(@poli_s)</span></div>
+<p>Un filtro stabile ha tutti i poli nel semipiano sinistro (σ &lt; 0). Se il polo forma un angolo α con l'asse reale negativo, vale una relazione molto semplice con il fattore Q:</p>
+<div class="eq"><span class="m"><i>Q</i> = <span class="frac"><span>1</span><span>2 cos <i>α</i></span></span><span class="note">Polo sull'asse reale (α = 0): Q = 0,5. Polo a 45°: Q = 0,707. Polo vicino all'asse jω (α → 90°): Q → ∞.</span></span><span class="eqn">(@q_pole)</span></div>
+{{FIG_POLI}}
+
+<h3>Butterworth: la risposta più piatta</h3>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Il Butterworth è il filtro «senza sorprese»: in banda passante la risposta è pulita e non ondeggia, poi scende con una pendenza che dipende dall'ordine. È la scelta predefinita quando non c'è un requisito particolare.</p></div>
+<p>La formula del modulo è una delle più semplici di tutta la teoria dei filtri:</p>
+<div class="eq"><span class="m">|<i>H</i>(<i>f</i>)|² = <span class="frac"><span>1</span><span>1 + (<i>f</i>/<i>f</i><sub>c</sub>)<sup>2<i>n</i></sup></span></span><span class="note">Attenuazione in dB = 10 log<sub>10</sub>(1 + x<sup>2n</sup>), con x = f/f<sub>c</sub>. A f<sub>c</sub> vale sempre 3,01 dB per ogni n.</span></span><span class="eqn">(@butter_mod)</span></div>
+<h4>Perché è «la più piatta»</h4>
+<p>Per frequenze molto minori di f<sub>c</sub>, x è piccolo e x<sup>2n</sup> è piccolissimo: la risposta vale 1 meno una quantità quasi nulla. Più alto è n, più velocemente x<sup>2n</sup> si annulla quando x scende: la curva resta «incollata» a 1 più a lungo e poi precipita vicino a f<sub>c</sub>. In termini matematici, le prime 2n − 1 derivate della risposta sono nulle in f = 0: nessun altro filtro con lo stesso numero di poli è altrettanto piatto. La tabella mostra quanto poco si discosta da 0 dB in banda passante.</p>
+{{TAB_BW_BANDA}}
+<div class="card esempio"><h4>Esempio svolto: Butterworth di ordine 3 con f<sub>c</sub> = 1 kHz</h4>
+<p class="passo">I poli stanno sulla circonferenza, a intervalli di 180°/3 = 60°: un polo reale (α = 0°) e una coppia a ±60° dall'asse reale negativo.</p>
+<p class="passo">Il polo reale dà una cella del primo ordine con f<sub>0</sub> = f<sub>c</sub> = 1 kHz.</p>
+<p class="passo">La coppia complessa: Q = 1/(2 cos 60°) = 1/(2 · 0,5) = 1, con f<sub>0</sub> = f<sub>c</sub> = 1 kHz.</p>
+<p class="passo">Attenuazione a 2 kHz (x = 2): 10 log<sub>10</sub>(1 + 2<sup>6</sup>) = 10 log<sub>10</sub>(65) = 18,1 dB, come nella tabella del capitolo.</p></div>
+{{FIG_POLI_BW_N}}
+<p>La tabella dei Q delle sezioni, per ordini da 2 a 8, si ricava ripetendo il calcolo precedente con gli angoli α<sub>k</sub> = (2k − 1)·90°/n; tutte le sezioni hanno f<sub>0</sub> = f<sub>c</sub>.</p>
+{{TAB_COEFF_BW}}
+<p>La tabella seguente completa il quadro con l'attenuazione a 2 f<sub>c</sub> e a 10 f<sub>c</sub> e con la pendenza asintotica, per ordini da 1 a 6; la figura mostra le curve corrispondenti.</p>
+{{TAB_BW}}
+{{FIG_BW}}
+
+<h3>Chebyshev: più ripido, a costo di un'ondulazione</h3>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Il Chebyshev fa una scommessa: se si accetta che in banda passante la risposta ondeggi di un po' (per esempio 1 dB), si può far scendere il filtro molto più in fretta subito dopo. L'ondulazione è tutta uguale: non cresce verso un bordo, resta sempre dentro la stessa fascia.</p></div>
+<h4>L'idea matematica</h4>
+<p>Il Butterworth ha al denominatore la potenza x<sup>2n</sup>, che resta quasi zero dentro la banda e poi cresce molto. Chebyshev sostituisce quella potenza con un <strong>polinomio di Chebyshev</strong> T<sub>n</sub>(x), che ha una proprietà speciale: dentro l'intervallo da −1 a +1 oscilla tra −1 e +1 (con n oscillazioni), mentre fuori cresce ancora più in fretta di x<sup>n</sup>.</p>
+{{FIG_POLINOMI_CH}}
+<p>Il modulo del filtro è quindi</p>
+<div class="eq"><span class="m">|<i>H</i>(<i>f</i>)|² = <span class="frac"><span>1</span><span>1 + <i>ε</i>² <i>T</i><sub><i>n</i></sub>²(<i>f</i>/<i>f</i><sub>c</sub>)</span></span>,&emsp;<i>ε</i> = √(10<sup><i>R</i>/10</sup> − 1)<span class="note">R è il ripple in dB che si accetta. Con R = 1 dB: ε = {{CH1_EPS}}. In banda passante (x ≤ 1) T<sub>n</sub>² oscilla tra 0 e 1: il denominatore oscilla tra 1 e 1 + ε², cioè il modulo tra 0 e −R dB.</span></span><span class="eqn">(@cheb_mod)</span></div>
+<p>Poiché dentro la banda T<sub>n</sub> ha sempre lo stesso andamento, il ripple è <em>costante</em>: lo stesso in ogni punto di massimo e di minimo. È l'ondulazione a ampiezza uguale (<em>equiripple</em>) che dà il nome al comportamento. Più alto è l'ordine, più volte la curva tocca i bordi della fascia di ripple: i punti di contatto sono n + 1 contando i due estremi della banda (per n = 4 sono cinque, cioè due oscillazioni complete).</p>
+{{FIG_EQUIRIPPLE}}
+{{FIG_RIPPLE}}
+<h4>Dove stanno i poli</h4>
+<p>I poli del Chebyshev stanno su un'ellisse, non su un cerchio. Per un ripple R e ordine n si calcolano con</p>
+<div class="eq"><span class="m"><i>σ</i><sub><i>k</i></sub> = −sinh(<i>a</i>) sen <i>θ</i><sub><i>k</i></sub>,&emsp;<i>ω</i><sub><i>k</i></sub> = cosh(<i>a</i>) cos <i>θ</i><sub><i>k</i></sub>,&emsp;<i>a</i> = <span class="frac"><span>asinh(1/<i>ε</i>)</span><span><i>n</i></span></span>,&emsp;<i>θ</i><sub><i>k</i></sub> = <span class="frac"><span>(2<i>k</i> − 1)π</span><span>2<i>n</i></span></span><span class="note">Gli assi dell'ellisse sono sinh(a) (orizzontale) e cosh(a) (verticale), in unità di f<sub>c</sub>. Con R = 1 dB e n = 4: a = {{CH1_A}}, sinh(a) = {{CH1_SINH}}, cosh(a) = {{CH1_COSH}}.</span></span><span class="eqn">(@cheb_poli)</span></div>
+<p>Più ripple si accetta, più l'ellisse si stringe, i poli si avvicinano all'asse jω e la discesa è più ripida; ma anche il Q cresce.</p>
+{{FIG_POLI_CH_RIPPLE}}
+<h4>Frequenza di taglio e frequenza a −3 dB</h4>
+<p>Nel Chebyshev f<sub>c</sub> è il <em>limite della banda con ripple</em>, non il punto a −3 dB. La frequenza a cui la risposta scende di 3 dB dal massimo è un po' più alta:</p>
+<div class="eq"><span class="m"><i>f</i><sub>−3 dB</sub> = <i>f</i><sub>c</sub> · cosh<span class="frac" style="margin-left:.15em"><span>acosh(1/<i>ε</i>)</span><span><i>n</i></span></span><span class="note">Con R = 1 dB e n = 4: f<sub>−3 dB</sub> = {{CH1_F3DB_N4}} f<sub>c</sub>; per f<sub>c</sub> = 1 kHz sono {{CH1_F3DB_N4_HZ}} Hz. Con R = 3 dB i due valori coincidono.</span></span><span class="eqn">(@f3db_cheb)</span></div>
+<p>La tabella dà il rapporto f<sub>−3 dB</sub>/f<sub>c</sub> per i ripple più comuni e per ordini da 2 a 6: più ripple e più poli avvicinano i due valori, fino a coincidere per 3 dB.</p>
+{{TAB_F3DB_CH}}
+<p>Per progettare le sezioni servono f<sub>0</sub>/f<sub>c</sub> e Q: la tabella li riporta per i tre ripple, per ordini da 2 a 6 (ogni riga è una sezione, la cella del primo ordine compare per ordine dispari).</p>
+{{TAB_COEFF_CH}}
+<div class="callout note"><span class="tag">Normalizzazione</span><p>Le sezioni sono scalate a guadagno DC unitario: per ordine pari il ripple compare tra 0 e +R dB; per ordine dispari tra −R e 0 dB rispetto al valore di riferimento. Se un datasheet normalizza in modo diverso (massimo a 0 dB), f<sub>0</sub>/f<sub>c</sub> e il guadagno cambiano. Le attenuazioni di questo capitolo sono sempre relative al guadagno in continua.</p></div>
+
+<h3>Bessel: prima la forma del segnale</h3>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Quando un segnale impulsivo (un gradino, un impulso, un'onda quadra) attraversa un filtro, le sue componenti a frequenza diversa devono arrivare quasi insieme per conservare la forma. Il Bessel rende il ritardo di gruppo il più piatto possibile nella banda utile; non dà lo stesso ritardo a tutte le frequenze. Il prezzo è che la discesa oltre il taglio è lenta.</p></div>
+<h4>Il ritardo puro</h4>
+<p>Il filtro «perfetto» per la forma d'onda è un semplice ritardo: l'uscita è l'ingresso spostato nel tempo di T. Il suo comportamento in frequenza è H(s) = e<sup>−sT</sup>: modulo sempre 1, fase che scende linearmente con la frequenza (−ωT). Il <em>ritardo di gruppo</em> τ<sub>g</sub> = −dφ/dω vale T per tutte le frequenze. Un circuito reale non può realizzare e<sup>−sT</sup> esattamente, ma può approssimarla con un rapporto di polinomi: i polinomi di Bessel.</p>
+<div class="eq"><span class="m"><i>H</i>(s) = <span class="frac"><span><i>θ</i><sub><i>n</i></sub>(0)</span><span><i>θ</i><sub><i>n</i></sub>(s)</span></span><span class="note">θ<sub>n</sub> è il polinomio di Bessel inverso di grado n. Più alto è n, più l'approssimazione di e<sup>−s</sup> è buona su una banda più larga.</span></span><span class="eqn">(@bessel_h)</span></div>
+{{TAB_POLINOMI_BESSEL}}
+<p>Le radici di θ<sub>n</sub>(s) sono i poli. Hanno Q molto bassi (da 0,5 a poco più di 1) e per questo la risposta non ha picchi.</p>
+{{FIG_POLI_BE_N}}
+<h4>Il confronto in frequenza richiede un cambio di scala</h4>
+<p>I polinomi di Bessel «nativi» danno un ritardo di 1 secondo. Per confrontarli con le altre famiglie si scala la frequenza in modo che il taglio a −3 dB cada in f<sub>c</sub>: le frequenze f<sub>0</sub> delle sezioni risultano più alte di f<sub>c</sub> (1,43 e 1,60 volte per n = 4), e per questo la tabella dei coefficienti ha f<sub>0</sub>/f<sub>c</sub> > 1.</p>
+{{TAB_COEFF_BE}}
+<h4>La fase e il ritardo, a quarto ordine</h4>
+{{FIG_FASE_N4}}
+{{FIG_RITARDO_N4}}
+<div class="callout warn"><span class="tag">Il limite del Bessel</span><p>Al crescere dell'ordine il Bessel tende a una risposta gaussiana: l'attenuazione a 2 f<sub>c</sub> non supera mai {{BE_MAX_2FC}} dB (massimo raggiunto per n = {{BE_MAX_2FC_N}}) e tende a {{BE_GAUSS_2FC}} dB; a 3 f<sub>c</sub> non va oltre circa {{BE_MAX_3FC}} dB. Con il Bessel non si può ottenere una discesa ripida vicino al taglio, qualunque sia il numero di sezioni.</p></div>
+
+<h3>Confronto diretto a parità di ordine</h3>
+<p>Per vedere le differenze si mettono a confronto i filtri dello stesso ordine (n = 4), tutti con la stessa f<sub>c</sub>.</p>
+{{FIG_CONFR_N4}}
+<p>La zona che conta è la <em>transizione</em>, tra il taglio e la banda oscura. Ingrandita:</p>
+{{FIG_TRANS_N4}}
+{{TAB_CONFRONTO_N4}}
+<p>Il <strong>fattore di forma</strong> è il rapporto tra la frequenza a cui l'attenuazione raggiunge 40 dB e la frequenza a −3 dB: misura quanto è larga la zona di transizione. Per n = 4 vale {{N4_FORMA_CH1}} per il Chebyshev da 1 dB, {{N4_FORMA_BW}} per il Butterworth e {{N4_FORMA_BE}} per il Bessel.</p>
+{{FIG_FORMA}}
+<h4>Nel tempo: gradino e impulso</h4>
+<p>Lo stesso confronto, visto nel dominio del tempo, mostra l'effetto della fase e del ritardo di gruppo. A n = 4 la sovraelongazione al gradino è dello {{N4_OVER_BE}} % per il Bessel, del {{N4_OVER_BW}} % per il Butterworth e del {{N4_OVER_CH1}} % per il Chebyshev da 1 dB.</p>
+{{FIG_GRADINO_N4}}
+{{FIG_IMPULSO_N4}}
+<p>La tabella riassume le sovraelongazioni per n = 2 e n = 4, con i Q delle sezioni. Per completare il quadro, ecco il caso più semplice, il secondo ordine, dove i tre filtri sono descritti da una sola coppia di poli (f<sub>0</sub> e Q):</p>
+{{TAB_GRADINO_FAM}}
+{{FIG_FAMIGLIE}}
+{{TAB_FAMIGLIE}}
+
+<h3>Quanti poli servono?</h3>
+<p>Il confronto più utile per chi progetta è questo: data una specifica (attenuazione richiesta a un certo multiplo della frequenza di taglio), qual è l'ordine minimo per ciascuna famiglia? Il numero di poli decide il numero di operazionali (uno ogni due poli) e quindi costo e complessità.</p>
+{{FIG_ORDINE_MIN}}
+{{TAB_ORDINI}}
+<div class="card esempio"><h4>Esempio svolto: banda fino a 1 kHz, almeno 40 dB a 3 kHz</h4>
+<p class="passo">Rapporto di frequenze: 3 kHz/1 kHz = 3 f<sub>c</sub>; attenuazione richiesta: 40 dB.</p>
+<p class="passo">Dalla tabella, nella colonna «a 3 f<sub>c</sub>», riga 40 dB: Butterworth n = 5, Chebyshev n = 4, Bessel «—» (non raggiungibile).</p>
+<p class="passo">Operazionali: uno ogni due poli, arrotondando per eccesso: Butterworth 3, Chebyshev 2. Il Chebyshev risparmia un amplificatore, ma richiede componenti più precisi (si veda più avanti).</p></div>
+{{TAB_SPEC_TRE}}
+
+<h3>Il costo nascosto: il fattore Q</h3>
+<p>La ripidità del Chebyshev si paga con un Q molto alto nella sezione più critica. Un Q alto significa tre cose, tutte sfavorevoli: sensibilità alle tolleranze dei componenti (un piccolo errore sposta molto il picco), una banda maggiore richiesta all'amplificatore (capitolo {{cap:limiti-reali}}) e un picco di tensione interno da cui il segnale deve potersi muovere senza saturare.</p>
+{{FIG_QMAX}}
+{{TAB_QMAX}}
+<p>L'effetto sulla banda dell'amplificatore si vede bene con un confronto numerico: la tabella mostra di quanto il modulo a f<sub>0</sub> si discosta dal valore ideale per una sezione a Q basso, medio e alto, al variare del rapporto GBW/f<sub>0</sub>.</p>
+{{TAB_GBW_Q}}
+<div class="callout warn"><span class="tag">Quanto GBW serve</span><p>Per il Bessel (Q = 0,52) bastano 20 f<sub>0</sub> per un errore trascurabile; per il Butterworth (Q = 1,31) servono circa 50 f<sub>0</sub>; per la sezione a Q = 3,56 del Chebyshev anche 100 f<sub>0</sub> lasciano circa mezzo dB di errore, e ne servono circa 200 f<sub>0</sub> per scendere a 0,15 dB. In generale più è alto il Q, più banda serve.</p></div>
+
+<h3>Dalla tabella ai componenti: due esempi</h3>
+<p>Il percorso è lo stesso del capitolo {{cap:cascata}}: dalla tabella dei coefficienti si leggono f<sub>0</sub> e Q di ogni sezione, si scelgono i condensatori, si calcolano le resistenze ({{eq:c1_c2}} impone C<sub>1</sub> ≥ 4Q²C<sub>2</sub>) e si arrotonda alle serie. Con un Q alto il rapporto C<sub>1</sub>/C<sub>2</sub> diventa grande, e per questo l'esempio del Chebyshev usa C<sub>2</sub> molto più piccolo.</p>
+<h4>Bessel del quarto ordine, f<sub>c</sub> = 1 kHz (−3 dB)</h4>
+<p>Dalla tabella: sezioni con f<sub>0</sub>/f<sub>c</sub> = 1,430 e 1,603 e Q = 0,522 e 0,806. Con C<sub>2</sub> = {{ESBE_C2}}:</p>
+{{TAB_ESEMPIO_BE4}}
+<h4>Chebyshev del quarto ordine, ripple 1 dB, f<sub>c</sub> = 1 kHz</h4>
+<p>Dalla tabella: sezioni con f<sub>0</sub>/f<sub>c</sub> = 0,529 e 0,993 e Q = 0,785 e 3,559. Con C<sub>2</sub> = {{ESCH_C2}}:</p>
+{{TAB_ESEMPIO_CH4}}
+<p>La seconda sezione ha C<sub>1</sub>/C<sub>2</sub> = 120/2,2 ≈ 55, come vuole il Q alto: i condensatori sono molto diversi tra loro e le tolleranze pesano parecchio. Le risposte dei tre filtri con i componenti reali (amplificatori ideali):</p>
+{{TAB_ESEMPIO_RISP}}
+<p>A 1 kHz il Bessel ha già −3 dB, mentre il Chebyshev è ancora a 0 dB, perché 1 kHz è il bordo della sua banda con ripple; a 3 kHz il Chebyshev attenua 48 dB, il Butterworth 38, il Bessel 25.</p>
+
+<h3>Come si sceglie</h3>
+{{FIG_ALBERO}}
+<div class="callout note"><span class="tag">Quale famiglia?</span><p>Butterworth: scelta predefinita, risposta piatta e nessun ripple. Chebyshev: quando serve più selettività a parità di ordine e il ripple in banda passante è tollerabile. Bessel: quando conta la forma d'onda (impulsi, segnali che si osservano nel tempo) e non serve una discesa ripida. La scelta si fa sul requisito, non sull'abitudine.</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Confrontare i filtri come se f<sub>c</sub> avesse lo stesso significato per tutti. Nel Butterworth e nel Bessel è il punto a −3 dB; nel Chebyshev è il limite della banda con ripple, e il −3 dB cade un po' dopo. Un secondo errore è scegliere Chebyshev per un segnale impulsivo: il ritardo di gruppo non costante deforma la forma d'onda.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Non esiste il filtro perfetto: ogni famiglia sceglie tra piattezza (Butterworth), ripidità con ripple (Chebyshev) e forma d'onda (Bessel).</li>
+<li>La posizione dei poli decide la risposta: Q = 1/(2 cos α) per un polo a un angolo α dall'asse reale negativo.</li>
+<li>Butterworth: |H|² = 1/(1 + x<sup>2n</sup>); poli su una circonferenza; −3 dB in f<sub>c</sub>.</li>
+<li>Chebyshev: ripple equiampiezza in banda; poli su un'ellisse; Q alti; f<sub>c</sub> è il bordo della banda di ripple.</li>
+<li>Bessel: ritardo di gruppo quasi costante; Q bassi; non scende mai ripido (limite gaussiano ≈ 12 dB a 2 f<sub>c</sub>).</li>
+<li>A parità di specifica: Chebyshev richiede meno poli di Butterworth, Bessel più (o non basta); ma il Chebyshev ha Q alti e chiede più GBW e componenti più precisi.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un Butterworth del terzo ordine ha una coppia di poli a 60° dall'asse reale negativo. Quanto vale il suo Q?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Q = 1/(2 cos 60°) = 1/(2 · 0,5) = 1.</p></div></details></li>
+<li>Quanti estremi alternati ha il ripple in banda passante di un Chebyshev del sesto ordine, contando i bordi della banda?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>n + 1 = 7 estremi alternati: sei intervalli, cioè tre oscillazioni complete.</p></div></details></li>
+<li>Un filtro deve attenuare almeno 40 dB a 5 volte la frequenza di taglio. Quale ordine minimo servirebbe con Butterworth e con Chebyshev da 1 dB?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Dalla tabella degli ordini, colonna «a 5 f<sub>c</sub>», riga 40 dB: Butterworth 3, Chebyshev 3 (il Bessel ne richiede 4).</p></div></details></li>
+<li>Perché il Bessel non può dare 40 dB a 3 f<sub>c</sub>?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Al crescere dell'ordine tende a una risposta gaussiana: a 3 f<sub>c</sub> l'attenuazione massima è circa 34 dB, qualunque sia il numero di poli.</p></div></details></li>
+<li>Una sezione ha Q = 3,5. Che cosa comporta per l'amplificatore?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Serve molta più banda (GBW di centinaia di volte f<sub>0</sub>, come nella tabella) e i componenti vanno scelti con tolleranze strette, perché la sensibilità cresce con Q.</p></div></details></li>
+</ol></div>
+</section>

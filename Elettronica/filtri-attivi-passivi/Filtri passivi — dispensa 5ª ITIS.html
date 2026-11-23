@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filtri passivi — dispensa per la classe 5ª ITIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Fira+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf8f4; --paper2:#f1ece2; --card:#fffdf9; --ink:#1f1c18; --ink2:#4a443b; --mute:#7a7266; --rule:#ddd5c6;
+  --hero:#1e1c19; --heroInk:#f3ede1; --heroMute:#b9b0a1;
+  --lp:#1f5fa8; --lpbg:#e8eff8; --hp:#b8462e; --hpbg:#f8ebe6; --rl:#2f7a4f; --rlbg:#e6f2ea;
+  --o2:#6b4fa0; --o2bg:#efe9f6; --rlc:#a8720e; --rlcbg:#f7eedb; --gen:#4a443b; --genbg:#efebe3;
+  --warn:#b8462e; --tip:#2f7a4f;
+  --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'Fira Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --mono:'IBM Plex Mono', Consolas, 'Courier New', monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#15140f; --paper2:#1d1b16; --card:#1b1a15; --ink:#ece6d8; --ink2:#cbc3b3; --mute:#968d7f; --rule:#36322a;
+    --hero:#0f0e0b; --heroInk:#f3ede1; --heroMute:#a89f90;
+    --lp:#74a8e6; --lpbg:#16202c; --hp:#e68f78; --hpbg:#2a1a15; --rl:#72c497; --rlbg:#14241a;
+    --o2:#ad90e3; --o2bg:#211b2d; --rlc:#e3b552; --rlcbg:#2a2212; --gen:#cbc3b3; --genbg:#23211b;
+    --warn:#e68f78; --tip:#72c497;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15140f; --paper2:#1d1b16; --card:#1b1a15; --ink:#ece6d8; --ink2:#cbc3b3; --mute:#968d7f; --rule:#36322a;
+  --hero:#0f0e0b; --heroInk:#f3ede1; --heroMute:#a89f90;
+  --lp:#74a8e6; --lpbg:#16202c; --hp:#e68f78; --hpbg:#2a1a15; --rl:#72c497; --rlbg:#14241a;
+  --o2:#ad90e3; --o2bg:#211b2d; --rlc:#e3b552; --rlcbg:#2a2212; --gen:#cbc3b3; --genbg:#23211b;
+  --warn:#e68f78; --tip:#72c497;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--rlc);outline-offset:2px}
+
+/* HERO */
+.hero{background:var(--hero);color:var(--heroInk);padding:56px 22px 46px}
+.hero-in{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(2.4rem,6vw,4.1rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.01em}
+.hero p.sub{font-size:1.08rem;color:var(--heroMute);margin:0 0 20px;max-width:34em}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px}
+.hero .meta span{border:1px solid #4a453c;border-radius:999px;padding:4px 12px;font-size:.86rem;color:var(--heroInk)}
+.hero svg{width:100%;height:auto}
+.hero svg .cv{fill:none;stroke-width:3}
+@media (max-width:760px){.hero-in{grid-template-columns:1fr}}
+
+/* NAV */
+nav.toc{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
+nav.toc .in{max-width:960px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:thin}
+nav.toc a{flex:0 0 auto;text-decoration:none;font-size:.86rem;padding:5px 11px;border-radius:999px;background:var(--paper2);color:var(--ink2);white-space:nowrap}
+nav.toc a:hover{background:var(--rule);color:var(--ink)}
+
+/* LAYOUT */
+main{max-width:960px;margin:0 auto;padding:10px 20px 80px}
+section.sec{--sec:var(--gen);--secbg:var(--genbg);padding:46px 0 10px;border-top:1px solid var(--rule)}
+section.sec:first-of-type{border-top:none}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:8px}
+.sec-num{font-family:var(--serif);font-weight:800;font-size:2.6rem;line-height:1;color:var(--sec);min-width:1.4em}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3.6vw,2.15rem);line-height:1.15;margin:0}
+h3{font-family:var(--serif);font-weight:600;font-size:1.32rem;margin:34px 0 8px;color:var(--ink)}
+h3 .tag{font-family:var(--sans);font-size:.78rem;font-weight:500;color:var(--sec);border:1px solid var(--sec);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:3px}
+p,li{max-width:46em}
+p{margin:.6em 0}
+.lead{font-size:1.06rem;color:var(--ink2)}
+strong{font-weight:600}
+code,.mono{font-family:var(--mono);font-size:.9em}
+sub,sup{font-size:.72em}
+
+/* FORMULE */
+.eq{font-family:var(--serif);font-size:1.28rem;background:var(--secbg);border-left:4px solid var(--sec);padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0;display:flex;flex-wrap:wrap;gap:12px 34px;align-items:center;overflow-x:auto}
+.eq .lbl{font-family:var(--sans);font-size:.8rem;color:var(--mute);display:block;margin-bottom:2px}
+.eq>div{white-space:nowrap}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .18em;line-height:1.25}
+.fr>span:last-child{border-top:1.5px solid currentColor;padding-top:.08em}
+.rt{border-top:1.5px solid currentColor;padding:0 .12em;margin-left:.05em}
+.inl{font-family:var(--serif);font-size:1.06em}
+
+/* CALLOUT */
+.co{border:1px solid var(--rule);background:var(--card);border-radius:8px;padding:12px 16px 12px 16px;margin:18px 0;border-left:5px solid var(--sec)}
+.co>b:first-child{display:block;font-weight:600;margin-bottom:2px;color:var(--sec)}
+.co.warn{border-left-color:var(--warn)} .co.warn>b:first-child{color:var(--warn)}
+.co.tip{border-left-color:var(--tip)} .co.tip>b:first-child{color:var(--tip)}
+.co p{margin:.3em 0}
+
+/* TABELLE */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--rule);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.94rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+th{background:var(--secbg);font-weight:600;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--mono);font-size:.88rem;white-space:nowrap}
+
+/* FIGURE */
+figure{margin:20px 0;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:14px 14px 10px}
+figure svg{display:block;width:100%;height:auto}
+figure svg.sch{max-width:560px;margin:0 auto}
+figcaption{font-size:.88rem;color:var(--mute);margin-top:8px}
+figcaption b{color:var(--ink2)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.duo{grid-template-columns:1fr}}
+.duo figure{margin:0}
+
+/* SCHEMI */
+.sch .w{stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sch .t{fill:var(--card);stroke:var(--ink);stroke-width:2}
+.sch .dot{fill:var(--ink)}
+.sch text{fill:var(--ink);font:500 14px var(--mono);stroke:none}
+.sch text.pm{font-size:16px}
+.sch text.v{fill:var(--sec);font-weight:500}
+
+/* BODE */
+.bode text{font:11px var(--mono);fill:var(--mute)}
+.bode text.axt{font:500 12px var(--sans);fill:var(--ink2)}
+.bode .fr0{fill:none;stroke:var(--rule);stroke-width:1.2}
+.bode .gM{stroke:var(--rule);stroke-width:1}
+.bode .gm{stroke:var(--rule);stroke-width:.5;opacity:.6}
+.bode .g0{stroke:var(--mute);stroke-width:1}
+.bode .cv{fill:none;stroke-width:2.6;stroke-linejoin:round}
+.bode .asym{fill:none;stroke:var(--mute);stroke-width:1.6;stroke-dasharray:7 5}
+.bode .m3{stroke:var(--warn);stroke-width:1;stroke-dasharray:3 4}
+.bode text.m3t{fill:var(--warn)}
+.bode .mk{stroke:var(--ink2);stroke-width:1;stroke-dasharray:2 4}
+.bode text.mkt{fill:var(--ink2);font-weight:500}
+.bode .lgbg{fill:var(--card);stroke:var(--rule)}
+.bode text.lg{fill:var(--ink2);font:12px var(--sans)}
+.c-lp{stroke:var(--lp)} .c-hp{stroke:var(--hp)} .c-rl{stroke:var(--rl)} .c-o2{stroke:var(--o2)} .c-rlc{stroke:var(--rlc)} .c-gen{stroke:var(--ink2)}
+
+/* STEP */
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:16px 0}
+ol.steps>li{counter-increment:s;position:relative;padding:4px 0 14px 50px;max-width:none}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:2px;width:34px;height:34px;border-radius:50%;background:var(--sec);color:var(--card);font:600 .95rem/34px var(--sans);text-align:center}
+ol.steps>li b.st{display:block}
+.chk{display:block;margin-top:4px;font-size:.92rem;color:var(--tip)}
+
+/* CODICE */
+pre{background:var(--hero);color:#e9e3d6;border-radius:8px;padding:14px 16px;overflow-x:auto;font:13.5px/1.55 var(--mono);margin:14px 0}
+pre .c{color:#9a917f}
+
+/* ESERCIZI */
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:14px 18px;margin:16px 0}
+.ex h4{margin:0 0 6px;font-family:var(--serif);font-weight:600;font-size:1.1rem}
+details{margin-top:10px;border-top:1px dashed var(--rule);padding-top:8px}
+summary{cursor:pointer;color:var(--sec);font-weight:500}
+details[open] summary{margin-bottom:6px}
+
+/* CHIP */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid var(--rule);background:var(--card);border-radius:999px;padding:3px 12px;font-size:.88rem}
+.chip b{color:var(--sec);font-weight:600}
+
+/* CALCOLATORE */
+.calc{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;margin:18px 0}
+.calc-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 16px}
+.calc label{display:flex;flex-direction:column;font-size:.86rem;color:var(--ink2);gap:4px}
+.calc label.off{opacity:.38}
+.calc input,.calc select{font:500 1rem var(--mono);padding:7px 9px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink);width:100%}
+.calc-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0 6px}
+.calc-out div{background:var(--secbg);border-radius:8px;padding:8px 12px}
+.calc-out span{display:block;font-size:.78rem;color:var(--mute)}
+.calc-out b{font:500 1.08rem var(--mono)}
+.calc-err{color:var(--warn);font-size:.92rem;margin-top:8px}
+
+.foot{font-size:.85rem;color:var(--mute);border-top:1px solid var(--rule);margin-top:50px;padding-top:16px}
+
+@media print{
+  nav.toc{display:none}
+  .hero{background:none;color:#000;padding:10px 0}
+  .hero p.sub,.hero .meta span{color:#333;border-color:#999}
+  body{font-size:11.5pt}
+  section.sec,figure,.ex,.tw{break-inside:avoid}
+  .calc{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Simboli circuitali (norma CEI/IEC: resistore rettangolare) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="R_h"><path d="M0 0H15M45 0H60"/><rect x="15" y="-7" width="30" height="14"/></g>
+    <g id="R_v"><path d="M0 0V15M0 45V60"/><rect x="-7" y="15" width="14" height="30"/></g>
+    <g id="C_h"><path d="M0 0H26M34 0H60M26 -13V13M34 -13V13"/></g>
+    <g id="C_v"><path d="M0 0V26M0 34V60M-13 26H13M-13 34H13"/></g>
+    <g id="L_h"><path d="M0 0H10M50 0H60M10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0a5 5 0 0 1 10 0"/></g>
+    <g id="L_v"><path d="M0 0V10M0 50V60M0 10a5 5 0 0 1 0 10a5 5 0 0 1 0 10a5 5 0 0 1 0 10a5 5 0 0 1 0 10"/></g>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="hero-in">
+    <div>
+      <h1>Filtri passivi</h1>
+      <p class="sub">Dispensa di Elettronica per la classe quinta ITIS. Dal partitore di tensione ai circuiti risonanti RLC: schemi, formule, esempi svolti, misure di laboratorio ed esercizi con soluzione.</p>
+      <div class="meta">
+        <span>Livello base</span>
+        <span>Prerequisiti: legge di Ohm, partitore, sinusoidi</span>
+        <span>Durata indicativa: 10–12 ore</span>
+      </div>
+    </div>
+    <svg viewBox="0 0 320 200" aria-label="Andamento qualitativo di passa-basso, passa-alto e passa-banda">
+      <g stroke="#4a453c" stroke-width="1">
+        <path d="M20 20V180H310" fill="none"/>
+        <path d="M20 60H310" stroke-dasharray="3 5"/>
+      </g>
+      <path class="cv" stroke="#74a8e6" d="M20 60H95C125 60 135 70 150 95L230 180"/>
+      <path class="cv" stroke="#e68f78" d="M100 180L180 95C195 70 205 60 235 60H310"/>
+      <path class="cv" stroke="#e3b552" d="M60 180C120 150 140 62 165 60C190 62 210 150 270 180"/>
+      <text x="300" y="196" fill="#a89f90" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="end">f (scala log)</text>
+      <text x="26" y="54" fill="#a89f90" font-family="IBM Plex Mono, monospace" font-size="11">|H| = 1</text>
+    </svg>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Indice">
+  <div class="in">
+    <a href="#s1">1 · Cos'è un filtro</a>
+    <a href="#s2">2 · Strumenti</a>
+    <a href="#s3">3 · Parametri</a>
+    <a href="#s4">4 · RC passa-basso</a>
+    <a href="#s5">5 · RC passa-alto</a>
+    <a href="#s6">6 · Filtri RL</a>
+    <a href="#s7">7 · Secondo ordine</a>
+    <a href="#s8">8 · Risonanti RLC</a>
+    <a href="#s9">9 · Progetto</a>
+    <a href="#s10">10 · Laboratorio</a>
+    <a href="#s11">11 · Calcolatore</a>
+    <a href="#s12">12 · Esercizi</a>
+    <a href="#s13">13 · Formulario</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================================================ 1 -->
+<section class="sec" id="s1">
+  <div class="sec-head"><span class="sec-num">1</span><h2>Cos'è un filtro e a cosa serve</h2></div>
+  <p class="lead">Un filtro è un circuito che lascia passare i segnali di alcune frequenze e attenua quelli di altre frequenze. Si comporta come un setaccio: il setaccio separa i granelli in base alla dimensione, il filtro separa le componenti di un segnale in base alla frequenza.</p>
+  <p>Il filtro si dice <strong>passivo</strong> quando è costruito solo con resistori (R), condensatori (C) e induttori (L). Non richiede alimentazione e non può amplificare: la tensione in uscita è sempre minore o uguale a quella in ingresso. Quando nel circuito compare un amplificatore operazionale o un transistor il filtro diventa <strong>attivo</strong> (argomento successivo del programma).</p>
+
+  <h3>Perché le frequenze contano</h3>
+  <p>Qualunque segnale periodico (onda quadra, triangolare, segnale audio) si può scomporre in una somma di sinusoidi di frequenze diverse: è il risultato del teorema di Fourier. L'insieme di queste sinusoidi è lo <strong>spettro</strong> del segnale. Un filtro lineare agisce su ogni sinusoide in modo indipendente: ne riduce l'ampiezza (attenuazione) e ne sposta la posizione nel tempo (sfasamento) in misura diversa a seconda della frequenza.</p>
+  <p>Esempi concreti: il segnale di un sensore di temperatura varia lentamente (pochi hertz) ma arriva al microcontrollore sporcato da disturbi a decine di kilohertz prodotti da motori e inverter; un passa-basso li elimina. In una cassa acustica il woofer deve ricevere solo i bassi e il tweeter solo gli acuti; un crossover formato da due filtri divide il segnale.</p>
+
+  <h3>I quattro tipi fondamentali</h3>
+  <div class="tw"><table>
+    <tr><th>Tipo</th><th>Lascia passare</th><th>Attenua</th><th>Applicazione tipica</th></tr>
+    <tr><td><strong>Passa-basso</strong> (LPF)</td><td>frequenze sotto f<sub>c</sub></td><td>frequenze sopra f<sub>c</sub></td><td>filtro antidisturbo all'ingresso di un ADC, livellamento di un segnale PWM</td></tr>
+    <tr><td><strong>Passa-alto</strong> (HPF)</td><td>frequenze sopra f<sub>c</sub></td><td>frequenze sotto f<sub>c</sub> e continua</td><td>accoppiamento tra stadi audio, eliminazione della componente continua</td></tr>
+    <tr><td><strong>Passa-banda</strong> (BPF)</td><td>frequenze tra f<sub>1</sub> e f<sub>2</sub></td><td>frequenze esterne alla banda</td><td>selezione di un canale radio, banda vocale telefonica 300–3400 Hz</td></tr>
+    <tr><td><strong>Elimina-banda</strong> (BSF, notch)</td><td>tutte tranne una banda</td><td>frequenze tra f<sub>1</sub> e f<sub>2</sub></td><td>soppressione del ronzio di rete a 50 Hz in strumentazione</td></tr>
+  </table></div>
+  <div class="co"><b>Filtro ideale e filtro reale</b>
+    <p>Un filtro ideale avrebbe un taglio netto: guadagno 1 in banda passante, guadagno 0 fuori. Nessun circuito reale lo realizza. Il filtro reale ha una zona di transizione graduale, la cui ripidità dipende dall'<em>ordine</em> del filtro (paragrafo 3).</p>
+  </div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="sec" id="s2">
+  <div class="sec-head"><span class="sec-num">2</span><h2>Gli strumenti di calcolo</h2></div>
+  <p class="lead">Per studiare un filtro servono cinque strumenti: la reattanza, l'impedenza, il partitore di tensione in alternata, il decibel e la scala logaritmica. Questo capitolo li riprende in forma operativa.</p>
+
+  <h3>2.1 Reattanza capacitiva e induttiva</h3>
+  <p>In corrente alternata il condensatore e l'induttore si oppongono al passaggio della corrente con una grandezza chiamata <strong>reattanza</strong> (simbolo X, unità ohm). A differenza della resistenza, la reattanza dipende dalla frequenza.</p>
+  <div class="eq">
+    <div><span class="lbl">Condensatore</span>X<sub>C</sub> = <span class="fr"><span>1</span><span>2π f C</span></span></div>
+    <div><span class="lbl">Induttore</span>X<sub>L</sub> = 2π f L</div>
+    <div><span class="lbl">Pulsazione</span>ω = 2π f &nbsp;[rad/s]</div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Frequenza</th><th class="n">X<sub>C</sub> con C = 100 nF</th><th class="n">X<sub>L</sub> con L = 10 mH</th></tr>
+    <tr><td>0 Hz (continua)</td><td class="n">∞ (circuito aperto)</td><td class="n">0 Ω (cortocircuito)</td></tr>
+    <tr><td>50 Hz</td><td class="n">31,83 kΩ</td><td class="n">3,14 Ω</td></tr>
+    <tr><td>1 kHz</td><td class="n">1,59 kΩ</td><td class="n">62,8 Ω</td></tr>
+    <tr><td>100 kHz</td><td class="n">15,9 Ω</td><td class="n">6,28 kΩ</td></tr>
+  </table></div>
+  <div class="co tip"><b>Regola da ricordare</b>
+    <p>Il <strong>condensatore</strong> si comporta come un circuito aperto a bassa frequenza e come un cortocircuito ad alta frequenza. L'<strong>induttore</strong> fa esattamente il contrario. Con questa sola regola si capisce in pochi secondi che tipo di filtro si ha davanti.</p>
+  </div>
+
+  <h3>2.2 Impedenza e numeri complessi (il minimo indispensabile)</h3>
+  <p>Condensatore e induttore non solo limitano la corrente, ma la sfasano di 90° rispetto alla tensione. Per tenere conto contemporaneamente di ampiezza e sfasamento si usano i numeri complessi, con unità immaginaria <span class="inl">j</span> (in elettronica si usa j al posto di i per non confonderla con la corrente). L'opposizione complessa al passaggio della corrente si chiama <strong>impedenza</strong> Z.</p>
+  <div class="eq">
+    <div><span class="lbl">Resistore</span>Z<sub>R</sub> = R</div>
+    <div><span class="lbl">Condensatore</span>Z<sub>C</sub> = <span class="fr"><span>1</span><span>jωC</span></span> = −j X<sub>C</sub></div>
+    <div><span class="lbl">Induttore</span>Z<sub>L</sub> = jωL = +j X<sub>L</sub></div>
+  </div>
+  <p>Di un numero complesso <span class="inl">a + jb</span> interessano due grandezze: il <strong>modulo</strong> <span class="inl">√(a² + b²)</span>, che indica “quanto è grande”, e l'<strong>argomento</strong> (fase) <span class="inl">φ = arctan(b/a)</span>, che indica lo sfasamento. Per un quoziente vale una proprietà comoda: il modulo del quoziente è il quoziente dei moduli, la fase del quoziente è la differenza delle fasi.</p>
+
+  <h3>2.3 Il partitore di tensione in alternata</h3>
+  <p>Tutti i filtri del primo ordine sono partitori di tensione in cui almeno uno dei due elementi è un condensatore o un induttore. La formula è la stessa del partitore resistivo, con le impedenze al posto delle resistenze.</p>
+  <figure><svg class="sch" id="sch-div"></svg>
+    <figcaption><b>Figura 2.1</b> Partitore generico: l'uscita è prelevata ai capi di Z<sub>2</sub>.</figcaption></figure>
+  <div class="eq">
+    <div><span class="lbl">Funzione di trasferimento del partitore</span>H = <span class="fr"><span>V<sub>out</sub></span><span>V<sub>in</sub></span></span> = <span class="fr"><span>Z<sub>2</sub></span><span>Z<sub>1</sub> + Z<sub>2</sub></span></span></div>
+  </div>
+  <div class="co warn"><b>Ipotesi nascosta</b>
+    <p>La formula vale solo se all'uscita non è collegato nulla (uscita “a vuoto”) e se il generatore ha resistenza interna trascurabile. Un carico collegato all'uscita si mette in parallelo a Z<sub>2</sub> e cambia il comportamento del filtro. Il problema è trattato nei paragrafi 7.1 e 9.3.</p>
+  </div>
+
+  <h3>2.4 Il decibel</h3>
+  <p>Il rapporto V<sub>out</sub>/V<sub>in</sub> di un filtro può variare da 1 a 0,0001 e oltre. Per gestire numeri così diversi si usa una scala logaritmica, il <strong>decibel</strong> (dB).</p>
+  <div class="eq"><div><span class="lbl">Guadagno in tensione in dB</span>A<sub>dB</sub> = 20 · log<sub>10</sub> <span class="fr"><span>V<sub>out</sub></span><span>V<sub>in</sub></span></span></div>
+    <div><span class="lbl">Formula inversa</span><span class="fr"><span>V<sub>out</sub></span><span>V<sub>in</sub></span></span> = 10<sup>A<sub>dB</sub>/20</sup></div></div>
+  <div class="tw"><table>
+    <tr><th class="n">V<sub>out</sub>/V<sub>in</sub></th><th class="n">dB</th><th>Come leggerlo</th></tr>
+    <tr><td class="n">10</td><td class="n">+20</td><td>amplificazione per 10 (impossibile in un filtro passivo)</td></tr>
+    <tr><td class="n">1</td><td class="n">0</td><td>il segnale passa inalterato</td></tr>
+    <tr><td class="n">0,707</td><td class="n">−3</td><td>ampiezza ridotta al 70,7 %, potenza dimezzata: definisce la frequenza di taglio</td></tr>
+    <tr><td class="n">0,5</td><td class="n">−6</td><td>ampiezza dimezzata</td></tr>
+    <tr><td class="n">0,1</td><td class="n">−20</td><td>ampiezza ridotta di 10 volte</td></tr>
+    <tr><td class="n">0,01</td><td class="n">−40</td><td>ampiezza ridotta di 100 volte</td></tr>
+    <tr><td class="n">0,001</td><td class="n">−60</td><td>ampiezza ridotta di 1000 volte</td></tr>
+  </table></div>
+  <p>Vantaggio pratico: quando due stadi sono in cascata i guadagni lineari si moltiplicano, mentre i guadagni in dB si sommano. Due stadi da −20 dB danno −40 dB.</p>
+
+  <h3>2.5 La scala logaritmica delle frequenze</h3>
+  <p>Sull'asse orizzontale dei grafici dei filtri le frequenze sono disposte in scala logaritmica: ogni moltiplicazione per 10 occupa la stessa distanza. L'intervallo tra una frequenza e la frequenza dieci volte maggiore si chiama <strong>decade</strong> (100 Hz → 1 kHz); l'intervallo tra una frequenza e il suo doppio si chiama <strong>ottava</strong> (1 kHz → 2 kHz). Dentro una decade il valore 2 cade a circa il 30 % della distanza e il valore 5 a circa il 70 %, perché log<sub>10</sub>2 ≈ 0,30 e log<sub>10</sub>5 ≈ 0,70.</p>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="sec" id="s3">
+  <div class="sec-head"><span class="sec-num">3</span><h2>I parametri che descrivono un filtro</h2></div>
+
+  <h3>3.1 Funzione di trasferimento, modulo e fase</h3>
+  <p>La <strong>funzione di trasferimento</strong> H(f) è il rapporto complesso tra tensione di uscita e tensione di ingresso, calcolato per ogni frequenza. Contiene due informazioni distinte:</p>
+  <div class="tw"><table>
+    <tr><th>Grandezza</th><th>Simbolo</th><th>Significato fisico</th></tr>
+    <tr><td>Modulo (guadagno)</td><td>|H(f)|</td><td>rapporto tra le ampiezze: quanto segnale arriva in uscita</td></tr>
+    <tr><td>Fase (sfasamento)</td><td>φ(f)</td><td>di quanti gradi la sinusoide di uscita è in anticipo (φ &gt; 0) o in ritardo (φ &lt; 0) rispetto a quella di ingresso</td></tr>
+  </table></div>
+
+  <h3>3.2 Frequenza di taglio</h3>
+  <p>La <strong>frequenza di taglio</strong> f<sub>c</sub> è la frequenza alla quale il modulo scende a <span class="inl">1/√2 ≈ 0,707</span> del valore massimo, cioè −3 dB. Perché proprio questo valore? La potenza è proporzionale al quadrato della tensione: <span class="inl">(0,707)² = 0,5</span>. Alla frequenza di taglio il filtro trasferisce metà della potenza. Per questo f<sub>c</sub> si chiama anche frequenza a −3 dB o frequenza di mezza potenza.</p>
+  <p>La <strong>banda passante</strong> è l'intervallo di frequenze in cui |H| è maggiore di 0,707; la <strong>banda attenuata</strong> è il resto.</p>
+
+  <h3>3.3 Ordine e pendenza</h3>
+  <p>L'<strong>ordine</strong> n di un filtro è, per i circuiti di questa dispensa, il numero di elementi reattivi (C e L) indipendenti. L'ordine fissa la ripidità del fianco del filtro lontano da f<sub>c</sub>:</p>
+  <div class="eq"><div><span class="lbl">Pendenza asintotica</span>−20 · n dB/decade &nbsp;=&nbsp; −6 · n dB/ottava</div></div>
+  <p>Un filtro del primo ordine attenua di 20 dB (10 volte) ogni volta che la frequenza aumenta di dieci volte; un filtro del secondo ordine di 40 dB (100 volte).</p>
+
+  <h3>3.4 Il diagramma di Bode</h3>
+  <p>Il <strong>diagramma di Bode</strong> rappresenta H(f) con due grafici sovrapposti che condividono lo stesso asse delle frequenze in scala logaritmica: sopra il modulo in dB, sotto la fase in gradi. È lo strumento standard per descrivere e confrontare i filtri; nelle figure di questa dispensa la curva colorata è quella esatta, la spezzata tratteggiata è l'approssimazione asintotica.</p>
+  <div class="co"><b>Metodo del diagramma asintotico (primo ordine)</b>
+    <p>Si sostituisce la curva vera con segmenti di retta: orizzontale a 0 dB in banda passante, inclinata di 20 dB/decade nella banda attenuata, con lo spigolo esattamente in f<sub>c</sub>. L'errore massimo commesso è di 3 dB proprio in f<sub>c</sub>. Per la fase: 0° fino a f<sub>c</sub>/10, ±90° da 10·f<sub>c</sub> in poi, ±45° in f<sub>c</sub>, raccordo rettilineo tra i due estremi.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="sec" id="s4" style="--sec:var(--lp);--secbg:var(--lpbg)">
+  <div class="sec-head"><span class="sec-num">4</span><h2>Filtro RC passa-basso</h2></div>
+  <p class="lead">È il filtro più semplice e più usato: un resistore in serie e un condensatore verso massa, con l'uscita prelevata ai capi del condensatore.</p>
+  <figure><svg class="sch" id="sch-lp"></svg>
+    <figcaption><b>Figura 4.1</b> Passa-basso RC del primo ordine.</figcaption></figure>
+
+  <h3>4.1 Funzionamento qualitativo</h3>
+  <p>A bassa frequenza X<sub>C</sub> è molto grande, il condensatore è quasi un circuito aperto e quasi tutta la tensione d'ingresso compare ai suoi capi: V<sub>out</sub> ≈ V<sub>in</sub>. Ad alta frequenza X<sub>C</sub> diventa piccolissima, il condensatore cortocircuita l'uscita verso massa e V<sub>out</sub> → 0. Le frequenze basse passano, quelle alte vengono attenuate.</p>
+
+  <h3>4.2 Ricavare la funzione di trasferimento</h3>
+  <p>Si applica il partitore con Z<sub>1</sub> = R e Z<sub>2</sub> = 1/(jωC), poi si moltiplicano numeratore e denominatore per jωC:</p>
+  <div class="eq"><div>H = <span class="fr"><span>1/(jωC)</span><span>R + 1/(jωC)</span></span> = <span class="fr"><span>1</span><span>1 + jωRC</span></span> = <span class="fr"><span>1</span><span>1 + j f/f<sub>c</sub></span></span></div></div>
+  <div class="eq">
+    <div><span class="lbl">Frequenza di taglio</span>f<sub>c</sub> = <span class="fr"><span>1</span><span>2π R C</span></span></div>
+    <div><span class="lbl">Modulo</span>|H| = <span class="fr"><span>1</span><span>√<span class="rt">1 + (f/f<sub>c</sub>)²</span></span></span></div>
+    <div><span class="lbl">Fase</span>φ = −arctan(f/f<sub>c</sub>)</div>
+  </div>
+  <p>Alla frequenza di taglio la reattanza del condensatore è uguale alla resistenza: <span class="inl">X<sub>C</sub> = R</span>. Si può verificare: imponendo 1/(2πf C) = R si ottiene proprio f = 1/(2πRC). La fase è sempre negativa: l'uscita è <strong>in ritardo</strong> rispetto all'ingresso, da 0° a bassa frequenza fino a −90° ad alta frequenza.</p>
+
+  <div class="tw"><table>
+    <tr><th>f</th><th class="n">|H|</th><th class="n">dB</th><th class="n">φ</th></tr>
+    <tr><td>f<sub>c</sub>/10</td><td class="n">0,995</td><td class="n">−0,04</td><td class="n">−5,7°</td></tr>
+    <tr><td>f<sub>c</sub></td><td class="n">0,707</td><td class="n">−3,01</td><td class="n">−45°</td></tr>
+    <tr><td>10·f<sub>c</sub></td><td class="n">0,0995</td><td class="n">−20,04</td><td class="n">−84,3°</td></tr>
+    <tr><td>100·f<sub>c</sub></td><td class="n">0,0100</td><td class="n">−40,00</td><td class="n">−89,4°</td></tr>
+  </table></div>
+  <p>Questa tabella vale per <em>qualsiasi</em> passa-basso RC: basta conoscere il rapporto f/f<sub>c</sub>.</p>
+
+  <h3>4.3 Esempio svolto <span class="tag">Esempio 1</span></h3>
+  <p>Dati: R = 1 kΩ, C = 100 nF, ingresso sinusoidale di 10 V<sub>pp</sub>. Calcolare f<sub>c</sub> e la tensione di uscita a 159 Hz, 1,59 kHz, 15,9 kHz.</p>
+  <ol class="steps">
+    <li><b class="st">Frequenza di taglio</b>f<sub>c</sub> = 1 / (2π · 1000 Ω · 100·10<sup>−9</sup> F) = 1 / (6,283·10<sup>−4</sup> s) = <strong>1591,5 Hz</strong>
+      <span class="chk">Controllo: X<sub>C</sub> a 1591,5 Hz = 1/(2π · 1591,5 · 100·10<sup>−9</sup>) = 1000 Ω = R.</span></li>
+    <li><b class="st">f = 159 Hz</b>f/f<sub>c</sub> = 0,1 → |H| = 1/√1,01 = 0,995 → V<sub>out</sub> = 9,95 V<sub>pp</sub>, φ = −5,7°</li>
+    <li><b class="st">f = 1,59 kHz</b>f/f<sub>c</sub> = 1 → |H| = 1/√2 = 0,707 → V<sub>out</sub> = 7,07 V<sub>pp</sub>, φ = −45°</li>
+    <li><b class="st">f = 15,9 kHz</b>f/f<sub>c</sub> = 10 → |H| = 1/√101 = 0,0995 → V<sub>out</sub> = 0,995 V<sub>pp</sub>, φ = −84,3°</li>
+  </ol>
+  <figure><svg class="bode" id="b-lp"></svg>
+    <figcaption><b>Figura 4.2</b> Bode del passa-basso dell'esempio (R = 1 kΩ, C = 100 nF). Tratteggio grigio: diagramma asintotico.</figcaption></figure>
+
+  <h3>4.4 Il comportamento nel tempo</h3>
+  <p>Il prodotto <span class="inl">τ = RC</span> si chiama <strong>costante di tempo</strong> (nell'esempio τ = 0,1 ms) ed è legato alla frequenza di taglio da <span class="inl">f<sub>c</sub> = 1/(2πτ)</span>. Se all'ingresso si applica un gradino di tensione, l'uscita non salta istantaneamente: raggiunge il 63 % del valore finale dopo un tempo τ e circa il 99 % dopo 5τ. Per frequenze molto maggiori di f<sub>c</sub> il passa-basso approssima un <strong>integratore</strong>: un'onda quadra in ingresso diventa un'onda quasi triangolare di piccola ampiezza.</p>
+  <div class="co"><b>Per chi ha studiato la trasformata di Laplace</b>
+    <p>Sostituendo jω con s si ottiene H(s) = 1/(1 + sRC). Il filtro ha un solo polo reale in s = −1/(RC); la pulsazione di taglio ω<sub>c</sub> = 1/(RC) coincide con il modulo del polo.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 5 -->
+<section class="sec" id="s5" style="--sec:var(--hp);--secbg:var(--hpbg)">
+  <div class="sec-head"><span class="sec-num">5</span><h2>Filtro RC passa-alto</h2></div>
+  <p class="lead">Si ottiene scambiando di posto R e C: il condensatore va in serie, il resistore verso massa, l'uscita si preleva ai capi del resistore.</p>
+  <figure><svg class="sch" id="sch-hp"></svg>
+    <figcaption><b>Figura 5.1</b> Passa-alto RC del primo ordine.</figcaption></figure>
+
+  <h3>5.1 Funzionamento e formule</h3>
+  <p>A bassa frequenza (e in continua) il condensatore in serie è un circuito aperto: nessuna corrente scorre in R e l'uscita è nulla. Ad alta frequenza il condensatore è un cortocircuito e tutto l'ingresso arriva sull'uscita.</p>
+  <div class="eq"><div>H = <span class="fr"><span>R</span><span>R + 1/(jωC)</span></span> = <span class="fr"><span>jωRC</span><span>1 + jωRC</span></span> = <span class="fr"><span>j f/f<sub>c</sub></span><span>1 + j f/f<sub>c</sub></span></span></div></div>
+  <div class="eq">
+    <div><span class="lbl">Frequenza di taglio (identica al passa-basso)</span>f<sub>c</sub> = <span class="fr"><span>1</span><span>2π R C</span></span></div>
+    <div><span class="lbl">Modulo</span>|H| = <span class="fr"><span>f/f<sub>c</sub></span><span>√<span class="rt">1 + (f/f<sub>c</sub>)²</span></span></span></div>
+    <div><span class="lbl">Fase</span>φ = 90° − arctan(f/f<sub>c</sub>)</div>
+  </div>
+  <p>La fase è positiva: l'uscita è <strong>in anticipo</strong> sull'ingresso, da +90° a bassa frequenza fino a 0° ad alta frequenza, con +45° in f<sub>c</sub>.</p>
+
+  <h3>5.2 Esempio svolto <span class="tag">Esempio 2</span></h3>
+  <p>Stessi componenti dell'esempio 1 (R = 1 kΩ, C = 100 nF, f<sub>c</sub> = 1591,5 Hz), ingresso 10 V<sub>pp</sub>.</p>
+  <div class="tw"><table>
+    <tr><th>f</th><th class="n">f/f<sub>c</sub></th><th class="n">|H|</th><th class="n">dB</th><th class="n">V<sub>out</sub></th><th class="n">φ</th></tr>
+    <tr><td>15,9 Hz</td><td class="n">0,01</td><td class="n">0,0100</td><td class="n">−40,0</td><td class="n">0,10 V<sub>pp</sub></td><td class="n">+89,4°</td></tr>
+    <tr><td>159 Hz</td><td class="n">0,1</td><td class="n">0,0995</td><td class="n">−20,0</td><td class="n">0,995 V<sub>pp</sub></td><td class="n">+84,3°</td></tr>
+    <tr><td>1,59 kHz</td><td class="n">1</td><td class="n">0,707</td><td class="n">−3,0</td><td class="n">7,07 V<sub>pp</sub></td><td class="n">+45°</td></tr>
+    <tr><td>15,9 kHz</td><td class="n">10</td><td class="n">0,995</td><td class="n">−0,04</td><td class="n">9,95 V<sub>pp</sub></td><td class="n">+5,7°</td></tr>
+  </table></div>
+  <figure><svg class="bode" id="b-hp"></svg>
+    <figcaption><b>Figura 5.2</b> Bode del passa-alto (R = 1 kΩ, C = 100 nF).</figcaption></figure>
+
+  <h3>5.3 Dove si usa</h3>
+  <p>Il passa-alto RC è il classico <strong>condensatore di accoppiamento</strong> tra due stadi amplificatori: blocca la tensione continua di polarizzazione del primo stadio e lascia passare il segnale alternato. Per frequenze molto minori di f<sub>c</sub> il circuito approssima un <strong>derivatore</strong>: un'onda quadra produce in uscita impulsi stretti in corrispondenza dei fronti.</p>
+  <div class="co warn"><b>Errore tipico</b>
+    <p>Nel condensatore di accoppiamento la “R” del filtro non è un resistore disegnato: è la <strong>resistenza d'ingresso dello stadio successivo</strong>. Se lo stadio ha 10 kΩ di ingresso e si vuole f<sub>c</sub> = 20 Hz, il condensatore va calcolato con R = 10 kΩ.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 6 -->
+<section class="sec" id="s6" style="--sec:var(--rl);--secbg:var(--rlbg)">
+  <div class="sec-head"><span class="sec-num">6</span><h2>Filtri RL</h2></div>
+  <p class="lead">Al posto del condensatore si può usare un induttore. Poiché l'induttore si comporta in modo opposto al condensatore, anche la posizione nel circuito si inverte.</p>
+  <div class="duo">
+    <figure><svg class="sch" id="sch-rllp"></svg><figcaption><b>Figura 6.1</b> Passa-basso RL: induttore in serie, uscita su R.</figcaption></figure>
+    <figure><svg class="sch" id="sch-rlhp"></svg><figcaption><b>Figura 6.2</b> Passa-alto RL: resistore in serie, uscita su L.</figcaption></figure>
+  </div>
+  <div class="eq">
+    <div><span class="lbl">Frequenza di taglio</span>f<sub>c</sub> = <span class="fr"><span>R</span><span>2π L</span></span></div>
+    <div><span class="lbl">Costante di tempo</span>τ = <span class="fr"><span>L</span><span>R</span></span></div>
+    <div><span class="lbl">Passa-basso RL</span>H = <span class="fr"><span>1</span><span>1 + jωL/R</span></span></div>
+    <div><span class="lbl">Passa-alto RL</span>H = <span class="fr"><span>jωL/R</span><span>1 + jωL/R</span></span></div>
+  </div>
+  <p>Modulo e fase hanno esattamente le stesse espressioni dei filtri RC corrispondenti: cambia solo il calcolo di f<sub>c</sub>. In f<sub>c</sub> vale X<sub>L</sub> = R.</p>
+
+  <h3>6.1 Esempio svolto <span class="tag">Esempio 3</span></h3>
+  <p>Passa-basso RL con R = 100 Ω e L = 10 mH: f<sub>c</sub> = 100 / (2π · 0,01) = <strong>1591,5 Hz</strong>, τ = 0,01/100 = 0,1 ms. È lo stesso comportamento del passa-basso RC dell'esempio 1, ottenuto con componenti diversi.</p>
+
+  <h3>6.2 Confronto RC – RL</h3>
+  <div class="tw"><table>
+    <tr><th>Aspetto</th><th>Filtri RC</th><th>Filtri RL</th></tr>
+    <tr><td>Ingombro e costo</td><td>bassi, componenti standard</td><td>alti, l'induttore è voluminoso</td></tr>
+    <tr><td>Precisione</td><td>buona (R 1 %, C film 2–5 %)</td><td>scarsa: tolleranze ampie, resistenza dell'avvolgimento</td></tr>
+    <tr><td>Disturbi</td><td>poco sensibili</td><td>l'induttore capta campi magnetici esterni</td></tr>
+    <tr><td>Correnti elevate</td><td>inadatti (R dissipa)</td><td>adatti: la potenza dissipata è bassa</td></tr>
+    <tr><td>Impieghi</td><td>segnali, strumentazione, ingressi ADC</td><td>filtri di rete, uscite di inverter e convertitori, crossover dei woofer</td></tr>
+  </table></div>
+  <p>In elettronica dei segnali si preferiscono quasi sempre i filtri RC; gli induttori compaiono quando si filtrano potenze o quando servono circuiti risonanti (capitolo 8).</p>
+</section>
+
+<!-- ============================================================ 7 -->
+<section class="sec" id="s7" style="--sec:var(--o2);--secbg:var(--o2bg)">
+  <div class="sec-head"><span class="sec-num">7</span><h2>Filtri del secondo ordine con celle RC</h2></div>
+  <p class="lead">Se 20 dB/decade non bastano, si collegano due celle in cascata per ottenere 40 dB/decade. L'idea è semplice, ma nasconde il problema più importante dei filtri passivi: l'effetto di carico.</p>
+
+  <h3>7.1 Due passa-basso in cascata</h3>
+  <figure><svg class="sch" id="sch-cas"></svg>
+    <figcaption><b>Figura 7.1</b> Passa-basso RC del secondo ordine (due celle in cascata, senza separatore).</figcaption></figure>
+  <p>Ci si aspetterebbe che il guadagno totale sia il prodotto dei guadagni delle due celle. Non è così: la seconda cella assorbe corrente dalla prima, cioè la <strong>carica</strong>. Risolvendo il circuito con le leggi di Kirchhoff si ottiene:</p>
+  <div class="eq"><div>H = <span class="fr"><span>1</span><span>1 − ω² R<sub>1</sub>C<sub>1</sub>R<sub>2</sub>C<sub>2</sub> + jω (R<sub>1</sub>C<sub>1</sub> + R<sub>2</sub>C<sub>2</sub> + R<sub>1</sub>C<sub>2</sub>)</span></span></div></div>
+  <p>Il termine R<sub>1</sub>C<sub>2</sub> è proprio l'effetto di carico: se le celle fossero indipendenti mancherebbe. Tre casi con f<sub>c</sub> = 1/(2πRC) di ciascuna cella:</p>
+  <div class="tw"><table>
+    <tr><th>Configurazione</th><th class="n">|H| in f<sub>c</sub></th><th class="n">Frequenza a −3 dB</th></tr>
+    <tr><td>Celle identiche (R<sub>1</sub> = R<sub>2</sub>, C<sub>1</sub> = C<sub>2</sub>), nessun separatore</td><td class="n">1/3 = −9,54 dB</td><td class="n">0,374·f<sub>c</sub></td></tr>
+    <tr><td>Seconda cella a impedenza alta: R<sub>2</sub> = 10·R<sub>1</sub>, C<sub>2</sub> = C<sub>1</sub>/10</td><td class="n">1/2,1 = −6,44 dB</td><td class="n">≈ 0,62·f<sub>c</sub></td></tr>
+    <tr><td>Celle separate da un buffer ideale (inseguitore di tensione)</td><td class="n">1/2 = −6,02 dB</td><td class="n">0,644·f<sub>c</sub></td></tr>
+  </table></div>
+  <figure><svg class="bode" id="b-cas"></svg>
+    <figcaption><b>Figura 7.2</b> Confronto con celle da R = 1 kΩ, C = 100 nF: primo ordine, cascata senza separatore, cascata con buffer ideale. Lontano da f<sub>c</sub> le due cascate scendono a −40 dB/decade.</figcaption></figure>
+  <div class="co tip"><b>Regola pratica contro l'effetto di carico</b>
+    <p>Ogni cella deve “vedere” a valle un'impedenza almeno 10 volte maggiore della propria. Con due celle RC: R<sub>2</sub> ≥ 10·R<sub>1</sub> e C<sub>2</sub> ridotto in proporzione per mantenere la stessa costante di tempo. La soluzione completa è inserire un amplificatore operazionale come separatore: il filtro diventa attivo.</p>
+  </div>
+
+  <h3>7.2 Passa-banda RC (passa-alto + passa-basso)</h3>
+  <p>Un passa-alto seguito da un passa-basso lascia passare solo le frequenze comprese tra le due frequenze di taglio. È un passa-banda a banda larga, adatto quando f<sub>2</sub> è molto più grande di f<sub>1</sub>.</p>
+  <figure><svg class="sch" id="sch-bprc"></svg>
+    <figcaption><b>Figura 7.3</b> Passa-banda RC: cella passa-alto (C<sub>1</sub>, R<sub>1</sub>) seguita da cella passa-basso (R<sub>2</sub>, C<sub>2</sub>).</figcaption></figure>
+  <div class="eq">
+    <div><span class="lbl">Taglio inferiore</span>f<sub>1</sub> = <span class="fr"><span>1</span><span>2π R<sub>1</sub>C<sub>1</sub></span></span></div>
+    <div><span class="lbl">Taglio superiore</span>f<sub>2</sub> = <span class="fr"><span>1</span><span>2π R<sub>2</sub>C<sub>2</sub></span></span></div>
+    <div><span class="lbl">Centro banda (media geometrica)</span>f<sub>0</sub> = √<span class="rt">f<sub>1</sub> · f<sub>2</sub></span></div>
+  </div>
+  <p>Le formule sono valide in modo approssimato se f<sub>2</sub> ≥ 10·f<sub>1</sub> e R<sub>2</sub> ≥ 10·R<sub>1</sub>. Se le due frequenze sono vicine, le celle interagiscono e il guadagno a centro banda scende sensibilmente sotto 1.</p>
+  <p><strong>Esempio 4 — banda vocale 300–3400 Hz.</strong> Si sceglie R<sub>1</sub> = 10 kΩ: C<sub>1</sub> = 1/(2π · 10<sup>4</sup> · 300) = 53 nF → valore commerciale 56 nF → f<sub>1</sub> = 284 Hz. Si sceglie R<sub>2</sub> = 100 kΩ (= 10·R<sub>1</sub>): C<sub>2</sub> = 1/(2π · 10<sup>5</sup> · 3400) = 468 pF → 470 pF → f<sub>2</sub> = 3386 Hz. Centro banda: √(284 · 3386) ≈ 981 Hz.</p>
+</section>
+
+<!-- ============================================================ 8 -->
+<section class="sec" id="s8" style="--sec:var(--rlc);--secbg:var(--rlcbg)">
+  <div class="sec-head"><span class="sec-num">8</span><h2>Filtri risonanti RLC</h2></div>
+  <p class="lead">Quando nello stesso circuito ci sono un induttore e un condensatore, esiste una frequenza alla quale le loro reattanze si annullano a vicenda: la frequenza di risonanza. Su questo principio si costruiscono passa-banda selettivi ed elimina-banda.</p>
+
+  <h3>8.1 La risonanza</h3>
+  <p>In un ramo LC serie l'impedenza è <span class="inl">j(X<sub>L</sub> − X<sub>C</sub>)</span>. Sotto la risonanza prevale X<sub>C</sub> (comportamento capacitivo), sopra prevale X<sub>L</sub> (comportamento induttivo). Alla <strong>frequenza di risonanza</strong> f<sub>0</sub> le due reattanze sono uguali e il ramo LC serie diventa, idealmente, un cortocircuito.</p>
+  <div class="eq"><div><span class="lbl">Condizione X<sub>L</sub> = X<sub>C</sub></span>f<sub>0</sub> = <span class="fr"><span>1</span><span>2π √<span class="rt">L C</span></span></span></div></div>
+
+  <h3>8.2 Passa-banda RLC serie</h3>
+  <figure><svg class="sch" id="sch-bp"></svg>
+    <figcaption><b>Figura 8.1</b> Passa-banda RLC serie: uscita prelevata ai capi di R.</figcaption></figure>
+  <p>Alla risonanza L e C in serie equivalgono a un cortocircuito: tutta la tensione d'ingresso cade su R e V<sub>out</sub> = V<sub>in</sub>. Lontano da f<sub>0</sub> la reattanza del ramo LC cresce e la tensione su R diminuisce.</p>
+  <div class="eq"><div>H = <span class="fr"><span>R</span><span>R + j(ωL − 1/(ωC))</span></span></div></div>
+  <p>La selettività si misura con il <strong>fattore di merito</strong> Q: più Q è alto, più la banda è stretta.</p>
+  <div class="eq">
+    <div><span class="lbl">Fattore di merito</span>Q = <span class="fr"><span>1</span><span>R</span></span>√<span class="rt"><span class="fr"><span>L</span><span>C</span></span></span> = <span class="fr"><span>X<sub>L0</sub></span><span>R</span></span></div>
+    <div><span class="lbl">Larghezza di banda</span>B = f<sub>2</sub> − f<sub>1</sub> = <span class="fr"><span>f<sub>0</sub></span><span>Q</span></span> = <span class="fr"><span>R</span><span>2π L</span></span></div>
+  </div>
+  <div class="eq"><div><span class="lbl">Frequenze di taglio (esatte)</span>f<sub>1,2</sub> = √<span class="rt">(B/2)² + f<sub>0</sub>²</span> ∓ <span class="fr"><span>B</span><span>2</span></span></div>
+    <div><span class="lbl">Proprietà</span>f<sub>1</sub> · f<sub>2</sub> = f<sub>0</sub>²</div></div>
+
+  <h3>8.3 Esempio svolto <span class="tag">Esempio 5</span></h3>
+  <p>Dati: L = 10 mH, C = 100 nF, R = 100 Ω.</p>
+  <ol class="steps">
+    <li><b class="st">Risonanza</b>f<sub>0</sub> = 1 / (2π √(0,01 · 100·10<sup>−9</sup>)) = 1 / (2π · 3,162·10<sup>−5</sup>) = <strong>5033 Hz</strong>
+      <span class="chk">Controllo: X<sub>L</sub> = 2π·5033·0,01 = 316,2 Ω; X<sub>C</sub> = 1/(2π·5033·10<sup>−7</sup>) = 316,2 Ω.</span></li>
+    <li><b class="st">Fattore di merito</b>Q = X<sub>L0</sub>/R = 316,2/100 = <strong>3,16</strong></li>
+    <li><b class="st">Banda</b>B = f<sub>0</sub>/Q = 5033/3,162 = <strong>1591,5 Hz</strong> (verifica: R/(2πL) = 100/0,0628 = 1591,5 Hz)</li>
+    <li><b class="st">Frequenze di taglio</b>√(795,8² + 5033²) = 5095 Hz → f<sub>1</sub> = 5095 − 796 = <strong>4300 Hz</strong>, f<sub>2</sub> = 5095 + 796 = <strong>5891 Hz</strong>
+      <span class="chk">Controllo: 4300 · 5891 = 25,33·10<sup>6</sup> = f<sub>0</sub>².</span></li>
+  </ol>
+  <figure><svg class="bode" id="b-bp"></svg>
+    <figcaption><b>Figura 8.2</b> Bode del passa-banda RLC (L = 10 mH, C = 100 nF) per tre valori di R. Con R minore il picco è più stretto. In f<sub>0</sub> la fase è 0°.</figcaption></figure>
+  <div class="tw"><table>
+    <tr><th class="n">R</th><th class="n">Q</th><th class="n">B</th><th>Comportamento</th></tr>
+    <tr><td class="n">10 Ω</td><td class="n">31,6</td><td class="n">159 Hz</td><td>molto selettivo, picco stretto</td></tr>
+    <tr><td class="n">100 Ω</td><td class="n">3,16</td><td class="n">1592 Hz</td><td>selettività media (esempio 5)</td></tr>
+    <tr><td class="n">1 kΩ</td><td class="n">0,316</td><td class="n">15,9 kHz</td><td>banda molto larga, poco selettivo</td></tr>
+  </table></div>
+  <div class="co warn"><b>Induttore reale</b>
+    <p>Ogni induttore ha una resistenza dell'avvolgimento R<sub>L</sub> in serie. Essa si somma a R: il Q reale si calcola con R + R<sub>L</sub> e il guadagno in f<sub>0</sub> scende a R/(R + R<sub>L</sub>). Con un induttore da 10 mH, R<sub>L</sub> di alcuni ohm è un valore comune; il dato esatto va letto sul datasheet o misurato con un multimetro.</p>
+  </div>
+
+  <h3>8.4 Elimina-banda (notch) RLC</h3>
+  <figure><svg class="sch" id="sch-bs"></svg>
+    <figcaption><b>Figura 8.3</b> Elimina-banda: R in serie, uscita prelevata ai capi del ramo LC serie.</figcaption></figure>
+  <p>Ora l'uscita è presa ai capi del ramo LC. Alla risonanza il ramo è un cortocircuito e l'uscita, idealmente, si annulla; lontano da f<sub>0</sub> il ramo LC ha impedenza alta e il segnale passa. Frequenza di risonanza, Q e larghezza della banda eliminata si calcolano con le stesse formule del passa-banda.</p>
+  <div class="eq"><div>H = <span class="fr"><span>j(ωL − 1/(ωC))</span><span>R + j(ωL − 1/(ωC))</span></span></div></div>
+  <figure><svg class="bode" id="b-bs"></svg>
+    <figcaption><b>Figura 8.4</b> Elimina-banda con R = 100 Ω, L = 10 mH, C = 100 nF. In f<sub>0</sub> la fase salta bruscamente da −90° a +90°. Il grafico è limitato a −60 dB; nel caso ideale l'attenuazione in f<sub>0</sub> è infinita, in quello reale è limitata da R<sub>L</sub>.</figcaption></figure>
+  <div class="co"><b>Perché non si usa un notch LC a 50 Hz</b>
+    <p>Per avere f<sub>0</sub> = 50 Hz con C = 10 µF serve L = 1/((2π·50)² · 10·10<sup>−6</sup>) ≈ 1,01 H: un induttore pesante, costoso e con forte resistenza serie. A bassa frequenza si usano reti RC come il doppio T o filtri attivi.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 9 -->
+<section class="sec" id="s9" style="--sec:var(--lp);--secbg:var(--lpbg)">
+  <div class="sec-head"><span class="sec-num">9</span><h2>Progettare un filtro passivo</h2></div>
+  <p class="lead">Progettare significa partire dalle specifiche e arrivare a valori di componenti che esistono davvero a magazzino, verificando che il circuito funzioni anche quando è collegato al resto del sistema.</p>
+
+  <h3>9.1 Procedura</h3>
+  <ol class="steps">
+    <li><b class="st">Definire le specifiche</b>Tipo di filtro, frequenza di taglio, attenuazione richiesta a una frequenza di disturbo nota.</li>
+    <li><b class="st">Scegliere l'ordine</b>Un primo ordine attenua 20 dB per decade oltre f<sub>c</sub>. Se il disturbo è solo una decade sopra f<sub>c</sub> e servono 40 dB, occorre un secondo ordine.</li>
+    <li><b class="st">Fissare il condensatore</b>I condensatori hanno meno valori disponibili e tolleranze peggiori dei resistori: si sceglie C tra i valori commerciali e si calcola R = 1/(2π f<sub>c</sub> C).</li>
+    <li><b class="st">Normalizzare R</b>Si sceglie il valore della serie E12 o E24 più vicino.</li>
+    <li><b class="st">Ricalcolare</b>Si ricalcola f<sub>c</sub> con i valori reali e si valuta l'errore percentuale rispetto alla specifica.</li>
+    <li><b class="st">Verificare sorgente e carico</b>Resistenza interna del generatore e resistenza del carico modificano f<sub>c</sub> (paragrafo 9.3).</li>
+    <li><b class="st">Simulare e misurare</b>Simulazione (LTspice, Falstad) e misura in laboratorio (capitolo 10).</li>
+  </ol>
+
+  <h3>9.2 Valori commerciali e scelte pratiche</h3>
+  <div class="tw"><table>
+    <tr><th>Serie</th><th>Valori per ogni decade</th><th>Tolleranza tipica</th></tr>
+    <tr><td>E12</td><td class="mono">1,0 1,2 1,5 1,8 2,2 2,7 3,3 3,9 4,7 5,6 6,8 8,2</td><td>±10 % (C), ±5 % (R)</td></tr>
+    <tr><td>E24</td><td class="mono">1,0 1,1 1,2 1,3 1,5 1,6 1,8 2,0 2,2 2,4 2,7 3,0 3,3 3,6 3,9 4,3 4,7 5,1 5,6 6,2 6,8 7,5 8,2 9,1</td><td>±5 %, ±1 % per resistori a film metallico</td></tr>
+  </table></div>
+  <p><strong>Resistori:</strong> preferire valori tra 1 kΩ e 100 kΩ. Valori troppo bassi richiedono molta corrente alla sorgente; valori troppo alti rendono il circuito sensibile al carico, alle capacità parassite e al rumore. <strong>Condensatori:</strong> per i filtri usare ceramici C0G/NP0 (fino a qualche nF) o a film (poliestere, polipropilene); evitare gli elettrolitici, che hanno tolleranze di ±20 % e sono polarizzati. Evitare capacità sotto 1 nF, dove le capacità parassite della breadboard (alcuni pF) diventano significative.</p>
+  <p><strong>Tolleranze:</strong> per un filtro del primo ordine l'errore relativo su f<sub>c</sub> è circa la somma degli errori relativi di R e C. Con R al 1 % e C al 10 % la frequenza di taglio può spostarsi fino a circa ±11 %.</p>
+
+  <h3>9.3 Effetto della sorgente e del carico</h3>
+  <div class="tw"><table>
+    <tr><th>Situazione</th><th>Effetto sul passa-basso RC</th><th>Regola pratica</th></tr>
+    <tr><td>Generatore con resistenza interna R<sub>s</sub></td><td>R<sub>s</sub> si somma a R: f<sub>c</sub> = 1/(2π (R + R<sub>s</sub>) C)</td><td>R<sub>s</sub> ≤ R/10, oppure includerla nel calcolo</td></tr>
+    <tr><td>Carico resistivo R<sub>load</sub> in uscita</td><td>R<sub>load</sub> è in parallelo a C: guadagno in continua R<sub>load</sub>/(R + R<sub>load</sub>) e f<sub>c</sub> = 1/(2π (R ∥ R<sub>load</sub>) C)</td><td>R<sub>load</sub> ≥ 10·R</td></tr>
+  </table></div>
+
+  <h3>9.4 Esempio di progetto completo <span class="tag">Esempio 6</span></h3>
+  <p><strong>Specifica.</strong> Il segnale di un sensore contiene informazione utile fino a 200 Hz ed è disturbato da un ripple a 20 kHz prodotto da un alimentatore switching. Progettare un passa-basso RC che non alteri il segnale utile e attenui il disturbo di almeno 20 dB.</p>
+  <ol class="steps">
+    <li><b class="st">Scelta di f<sub>c</sub></b>Si pone f<sub>c</sub> = 1 kHz: cinque volte sopra la banda utile (attenuazione trascurabile a 200 Hz) e oltre una decade sotto il disturbo.</li>
+    <li><b class="st">Calcolo</b>Con C = 100 nF: R = 1/(2π · 1000 · 100·10<sup>−9</sup>) = 1591,5 Ω.</li>
+    <li><b class="st">Normalizzazione</b>Valore E12 più vicino: 1,5 kΩ → f<sub>c</sub> = 1/(2π · 1500 · 100·10<sup>−9</sup>) = 1061 Hz (+6 % rispetto alla specifica, accettabile).</li>
+    <li><b class="st">Verifica a 200 Hz</b>f/f<sub>c</sub> = 0,189 → |H| = 0,983 → −0,15 dB.
+      <span class="chk">Segnale utile praticamente inalterato.</span></li>
+    <li><b class="st">Verifica a 20 kHz</b>f/f<sub>c</sub> = 18,85 → |H| = 0,053 → −25,5 dB.
+      <span class="chk">Specifica (≥ 20 dB) rispettata: il ripple è ridotto di circa 19 volte.</span></li>
+    <li><b class="st">Vincolo sul carico</b>L'ingresso collegato all'uscita deve avere resistenza ≥ 10 · 1,5 kΩ = 15 kΩ. Un ingresso ADC di microcontrollore, che preleva brevi impulsi di corrente in fase di campionamento, richiede una verifica sul datasheet.</li>
+  </ol>
+</section>
+
+<!-- ============================================================ 10 -->
+<section class="sec" id="s10" style="--sec:var(--rl);--secbg:var(--rlbg)">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Laboratorio: rilievo della risposta in frequenza</h2></div>
+  <p class="lead">Obiettivo: misurare modulo e fase del passa-basso dell'esempio 1 e confrontarli con i valori teorici.</p>
+  <p><strong>Materiale:</strong> generatore di funzioni, oscilloscopio a due canali con sonde, breadboard, resistore da 1 kΩ (1 %), condensatore a film da 100 nF, cavetti.</p>
+
+  <h3>10.1 Procedura</h3>
+  <ol class="steps">
+    <li><b class="st">Montaggio</b>Montare il circuito della figura 4.1. Canale 1 dell'oscilloscopio su V<sub>in</sub>, canale 2 su V<sub>out</sub>, masse delle sonde sulla massa del circuito.
+      <span class="chk">Checkpoint: con il generatore spento entrambi i canali mostrano una linea piatta a 0 V.</span></li>
+    <li><b class="st">Impostare il generatore</b>Sinusoide, 10 V<sub>pp</sub>, offset 0 V, frequenza 100 Hz.
+      <span class="chk">Checkpoint: CH1 e CH2 mostrano due sinusoidi praticamente sovrapposte, circa 10 V<sub>pp</sub>.</span></li>
+    <li><b class="st">Misura del modulo</b>Per ogni frequenza della tabella leggere V<sub>in</sub> e V<sub>out</sub> picco-picco (funzione Measure). Ricontrollare ogni volta V<sub>in</sub>: alcuni generatori variano l'ampiezza con il carico.</li>
+    <li><b class="st">Misura della fase</b>Misurare il ritardo Δt tra i passaggi per lo zero delle due sinusoidi e calcolare φ = −360° · Δt · f.
+      <span class="chk">Checkpoint in f<sub>c</sub> = 1591,5 Hz: Δt atteso ≈ 78,5 µs (−45°).</span></li>
+    <li><b class="st">Ricerca sperimentale di f<sub>c</sub></b>Variare la frequenza finché V<sub>out</sub> = 0,707 · V<sub>in</sub>; annotare il valore trovato.</li>
+    <li><b class="st">Elaborazione</b>Calcolare |H| e dB, riportare i punti sul diagramma di Bode teorico (figura 4.2) e commentare gli scostamenti.</li>
+  </ol>
+
+  <h3>10.2 Valori attesi (V<sub>in</sub> = 10 V<sub>pp</sub>)</h3>
+  <div class="tw"><table>
+    <tr><th class="n">f</th><th class="n">V<sub>out</sub> teorica</th><th class="n">|H|</th><th class="n">dB</th><th class="n">φ</th><th class="n">V<sub>out</sub> misurata</th><th class="n">φ misurata</th></tr>
+    <tr><td class="n">100 Hz</td><td class="n">9,98 V<sub>pp</sub></td><td class="n">0,998</td><td class="n">−0,02</td><td class="n">−3,6°</td><td></td><td></td></tr>
+    <tr><td class="n">500 Hz</td><td class="n">9,54 V<sub>pp</sub></td><td class="n">0,954</td><td class="n">−0,41</td><td class="n">−17,4°</td><td></td><td></td></tr>
+    <tr><td class="n">1 kHz</td><td class="n">8,47 V<sub>pp</sub></td><td class="n">0,847</td><td class="n">−1,44</td><td class="n">−32,1°</td><td></td><td></td></tr>
+    <tr><td class="n">1,59 kHz</td><td class="n">7,07 V<sub>pp</sub></td><td class="n">0,707</td><td class="n">−3,01</td><td class="n">−45,0°</td><td></td><td></td></tr>
+    <tr><td class="n">3 kHz</td><td class="n">4,69 V<sub>pp</sub></td><td class="n">0,469</td><td class="n">−6,58</td><td class="n">−62,0°</td><td></td><td></td></tr>
+    <tr><td class="n">10 kHz</td><td class="n">1,57 V<sub>pp</sub></td><td class="n">0,157</td><td class="n">−16,07</td><td class="n">−81,0°</td><td></td><td></td></tr>
+    <tr><td class="n">30 kHz</td><td class="n">0,53 V<sub>pp</sub></td><td class="n">0,053</td><td class="n">−25,52</td><td class="n">−87,0°</td><td></td><td></td></tr>
+  </table></div>
+  <div class="co warn"><b>Cause di scostamento da discutere nella relazione</b>
+    <p>La resistenza d'uscita del generatore (tipicamente 50 Ω) si somma a R: f<sub>c</sub> reale ≈ 1/(2π · 1050 · 100 nF) ≈ 1516 Hz, circa −5 %. Contribuiscono anche la tolleranza di C, la capacità d'ingresso della sonda (usare sonde in posizione ×10) e l'errore di lettura sull'oscilloscopio, che cresce quando V<sub>out</sub> è piccola.</p>
+  </div>
+
+  <h3>10.3 Verifica in simulazione</h3>
+  <p>In LTspice si può incollare la netlist seguente (File → New Schematic, oppure un file di testo con estensione .cir) ed eseguire l'analisi AC: il grafico di V(out) riproduce la figura 4.2.</p>
+<pre><span class="c">* Passa-basso RC del primo ordine - esempio 1</span>
+V1 in 0 AC 1          <span class="c">; sorgente di ampiezza unitaria per l'analisi AC</span>
+R1 in out 1k
+C1 out 0 100n
+.ac dec 100 10 1Meg   <span class="c">; 100 punti per decade, da 10 Hz a 1 MHz</span>
+.end</pre>
+  <p>In alternativa, il simulatore online Falstad (falstad.com/circuit) permette di vedere in tempo reale le forme d'onda di ingresso e uscita al variare della frequenza.</p>
+</section>
+
+<!-- ============================================================ 11 -->
+<section class="sec" id="s11" style="--sec:var(--rlc);--secbg:var(--rlcbg)">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Calcolatore interattivo</h2></div>
+  <p class="lead">Scegliere il tipo di filtro e inserire i valori dei componenti: il calcolatore restituisce frequenza di taglio o di risonanza, il comportamento alla frequenza di prova e il diagramma di Bode. Serve per verificare i risultati degli esercizi, non per sostituire il calcolo a mano.</p>
+  <div class="calc">
+    <div class="calc-in">
+      <label>Tipo di filtro
+        <select id="k-type">
+          <option value="lpRC">RC passa-basso</option>
+          <option value="hpRC">RC passa-alto</option>
+          <option value="lpRL">RL passa-basso</option>
+          <option value="hpRL">RL passa-alto</option>
+          <option value="bp">RLC passa-banda</option>
+          <option value="bs">RLC elimina-banda</option>
+        </select></label>
+      <label id="l-R">R [Ω]<input id="k-R" type="number" value="1000" min="0" step="any" inputmode="decimal"></label>
+      <label id="l-C">C [nF]<input id="k-C" type="number" value="100" min="0" step="any" inputmode="decimal"></label>
+      <label id="l-L">L [mH]<input id="k-L" type="number" value="10" min="0" step="any" inputmode="decimal"></label>
+      <label>Frequenza di prova [Hz]<input id="k-f" type="number" value="1000" min="0" step="any" inputmode="decimal"></label>
+      <label>V<sub>in</sub> [V<sub>pp</sub>]<input id="k-V" type="number" value="10" min="0" step="any" inputmode="decimal"></label>
+    </div>
+    <div class="calc-out" id="k-out"></div>
+    <div class="calc-err" id="k-err" role="status"></div>
+    <svg class="bode" id="k-bode" aria-label="Diagramma di Bode calcolato"></svg>
+  </div>
+</section>
+
+<!-- ============================================================ 12 -->
+<section class="sec" id="s12" style="--sec:var(--hp);--secbg:var(--hpbg)">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Esercizi proposti</h2></div>
+  <p class="lead">Risolvere prima a mano, poi aprire la soluzione e verificare con il calcolatore.</p>
+
+  <div class="ex"><h4>Esercizio 1 — Analisi di un passa-basso</h4>
+    <p>Un passa-basso RC ha R = 4,7 kΩ e C = 10 nF. Calcolare f<sub>c</sub>, il guadagno in dB e la fase a 10 kHz.</p>
+    <details><summary>Soluzione</summary>
+      <p>f<sub>c</sub> = 1/(2π · 4700 · 10·10<sup>−9</sup>) = <strong>3386 Hz</strong>. A 10 kHz: f/f<sub>c</sub> = 2,953; |H| = 1/√(1 + 8,72) = 0,321 → <strong>−9,88 dB</strong>; φ = −arctan(2,953) = <strong>−71,3°</strong>.</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 2 — Condensatore di accoppiamento</h4>
+    <p>Uno stadio audio ha resistenza d'ingresso 10 kΩ. Dimensionare il condensatore di accoppiamento per una frequenza di taglio inferiore di circa 20 Hz, scegliendo un valore della serie E12.</p>
+    <details><summary>Soluzione</summary>
+      <p>C = 1/(2π · 10<sup>4</sup> · 20) = 796 nF. Valore E12 più vicino: <strong>820 nF</strong> → f<sub>c</sub> = 1/(2π · 10<sup>4</sup> · 820·10<sup>−9</sup>) = <strong>19,4 Hz</strong>. Scegliere il valore superiore è la scelta prudente: f<sub>c</sub> resta sotto i 20 Hz.</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 3 — Conversioni in decibel</h4>
+    <p>a) Un filtro riduce l'ampiezza da 4 V a 2 V: quanti dB? b) Un filtro attenua di 40 dB un segnale di 5 V<sub>pp</sub>: quanto vale l'uscita? c) Due celle da −6 dB e −14 dB in cascata (senza effetto di carico): attenuazione totale?</p>
+    <details><summary>Soluzione</summary>
+      <p>a) 20·log(0,5) = <strong>−6,02 dB</strong>. b) 10<sup>−40/20</sup> = 0,01 → <strong>50 mV<sub>pp</sub></strong>. c) −6 − 14 = <strong>−20 dB</strong>, cioè ampiezza ridotta di 10 volte.</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 4 — Filtro antidisturbo</h4>
+    <p>Un segnale utile a 1 kHz è sovrapposto a un disturbo a 50 kHz. Progettare un passa-basso RC con f<sub>c</sub> ≈ 5 kHz usando R = 3,3 kΩ e un C della serie E12. Calcolare l'attenuazione su segnale e disturbo e il miglioramento del rapporto segnale/disturbo.</p>
+    <details><summary>Soluzione</summary>
+      <p>C = 1/(2π · 3300 · 5000) = 9,65 nF → <strong>10 nF</strong> → f<sub>c</sub> = <strong>4823 Hz</strong>. A 1 kHz: f/f<sub>c</sub> = 0,207 → <strong>−0,18 dB</strong>. A 50 kHz: f/f<sub>c</sub> = 10,37 → <strong>−20,35 dB</strong>. Il rapporto segnale/disturbo migliora di circa <strong>20,2 dB</strong> (circa 10 volte in ampiezza).</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 5 — Passa-banda RLC</h4>
+    <p>Un passa-banda RLC serie ha L = 2,2 mH, C = 47 nF, R = 47 Ω. Calcolare f<sub>0</sub>, Q e B.</p>
+    <details><summary>Soluzione</summary>
+      <p>f<sub>0</sub> = 1/(2π √(2,2·10<sup>−3</sup> · 47·10<sup>−9</sup>)) = <strong>15,65 kHz</strong>. √(L/C) = √46809 = 216,4 Ω → Q = 216,4/47 = <strong>4,60</strong>. B = f<sub>0</sub>/Q = <strong>3,40 kHz</strong> (verifica: R/(2πL) = 47/0,01382 = 3400 Hz).</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 6 — Effetto di carico</h4>
+    <p>Due celle passa-basso identiche (R = 10 kΩ, C = 10 nF) sono collegate in cascata senza separatore. a) Quanto vale f<sub>c</sub> della singola cella? b) Quanto vale il guadagno complessivo a quella frequenza? c) A quale frequenza la cascata è a −3 dB? d) Come si modifica la seconda cella per ridurre l'effetto di carico mantenendo la stessa costante di tempo?</p>
+    <details><summary>Soluzione</summary>
+      <p>a) f<sub>c</sub> = 1/(2π · 10<sup>4</sup> · 10<sup>−8</sup>) = <strong>1591,5 Hz</strong>. b) Con celle identiche |H(f<sub>c</sub>)| = 1/3 = <strong>−9,54 dB</strong> (con buffer ideale sarebbe −6,02 dB). c) 0,374 · 1591,5 ≈ <strong>595 Hz</strong>. d) R<sub>2</sub> = 100 kΩ e C<sub>2</sub> = 1 nF: R<sub>2</sub>C<sub>2</sub> = 10<sup>−4</sup> s come prima, il guadagno in f<sub>c</sub> diventa 1/2,1 = −6,44 dB.</p>
+    </details></div>
+
+  <div class="ex"><h4>Esercizio 7 — Riconoscimento</h4>
+    <p>Per ciascun circuito indicare il tipo di filtro usando solo il ragionamento qualitativo su condensatori e induttori a bassa e alta frequenza: a) induttore in serie, condensatore verso massa, uscita sul condensatore; b) condensatore in serie, induttore verso massa, uscita sull'induttore.</p>
+    <details><summary>Soluzione</summary>
+      <p>a) Bassa frequenza: L corto, C aperto → passa. Alta frequenza: L aperto, C corto → bloccato. <strong>Passa-basso del secondo ordine</strong> (−40 dB/decade). b) Bassa frequenza: C aperto, L corto → bloccato. Alta frequenza: C corto, L aperto → passa. <strong>Passa-alto del secondo ordine</strong>.</p>
+    </details></div>
+</section>
+
+<!-- ============================================================ 13 -->
+<section class="sec" id="s13">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Formulario</h2></div>
+  <div class="tw"><table>
+    <tr><th>Circuito</th><th>Uscita su</th><th>Frequenza caratteristica</th><th>|H|</th><th>Fase</th><th class="n">Pendenza</th></tr>
+    <tr><td>RC passa-basso</td><td>C</td><td>f<sub>c</sub> = 1/(2πRC)</td><td>1/√(1+(f/f<sub>c</sub>)²)</td><td>−arctan(f/f<sub>c</sub>)</td><td class="n">−20 dB/dec</td></tr>
+    <tr><td>RC passa-alto</td><td>R</td><td>f<sub>c</sub> = 1/(2πRC)</td><td>(f/f<sub>c</sub>)/√(1+(f/f<sub>c</sub>)²)</td><td>90° − arctan(f/f<sub>c</sub>)</td><td class="n">+20 dB/dec</td></tr>
+    <tr><td>RL passa-basso</td><td>R</td><td>f<sub>c</sub> = R/(2πL)</td><td>come RC passa-basso</td><td>come RC passa-basso</td><td class="n">−20 dB/dec</td></tr>
+    <tr><td>RL passa-alto</td><td>L</td><td>f<sub>c</sub> = R/(2πL)</td><td>come RC passa-alto</td><td>come RC passa-alto</td><td class="n">+20 dB/dec</td></tr>
+    <tr><td>RLC passa-banda</td><td>R</td><td>f<sub>0</sub> = 1/(2π√(LC)), Q = √(L/C)/R, B = f<sub>0</sub>/Q</td><td>1 in f<sub>0</sub></td><td>0° in f<sub>0</sub></td><td class="n">±20 dB/dec</td></tr>
+    <tr><td>RLC elimina-banda</td><td>LC serie</td><td>come passa-banda</td><td>0 in f<sub>0</sub> (ideale)</td><td>salto ±90° in f<sub>0</sub></td><td class="n">—</td></tr>
+  </table></div>
+  <div class="chips">
+    <span class="chip"><b>X<sub>C</sub></b> = 1/(2πfC)</span>
+    <span class="chip"><b>X<sub>L</sub></b> = 2πfL</span>
+    <span class="chip"><b>dB</b> = 20·log(V<sub>out</sub>/V<sub>in</sub>)</span>
+    <span class="chip"><b>−3 dB</b> = 0,707</span>
+    <span class="chip"><b>τ</b> = RC oppure L/R</span>
+    <span class="chip"><b>f<sub>c</sub></b> = 1/(2πτ)</span>
+    <span class="chip"><b>Fase da Δt</b>: φ = 360°·Δt·f</span>
+    <span class="chip"><b>Carico</b>: R<sub>load</sub> ≥ 10·R</span>
+  </div>
+  <p class="foot">Dispensa per uso didattico, classe quinta ITIS — Elettronica ed Elettrotecnica. I valori numerici degli esempi sono arrotondati a tre o quattro cifre significative. Le figure di Bode sono calcolate in tempo reale dalle funzioni di trasferimento riportate nel testo.</p>
+</section>
+
+</main>
+
+<script>
+/* ===================== Numeri complessi e funzioni di trasferimento ===================== */
+const PI2 = 2 * Math.PI;
+const cx = (re, im) => ({ re, im });
+function cdiv(a, b) { const d = b.re * b.re + b.im * b.im; return cx((a.re * b.re + a.im * b.im) / d, (a.im * b.re - a.re * b.im) / d); }
+function cmul(a, b) { return cx(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re); }
+const mag = h => Math.hypot(h.re, h.im);
+const phs = h => Math.atan2(h.im, h.re) * 180 / Math.PI;
+
+const TF = {
+  lpRC: (R, C) => f => cdiv(cx(1, 0), cx(1, PI2 * f * R * C)),
+  hpRC: (R, C) => f => { const x = PI2 * f * R * C; return cdiv(cx(0, x), cx(1, x)); },
+  lpRL: (R, L) => f => cdiv(cx(1, 0), cx(1, PI2 * f * L / R)),
+  hpRL: (R, L) => f => { const x = PI2 * f * L / R; return cdiv(cx(0, x), cx(1, x)); },
+  bp: (R, L, C) => f => { const w = PI2 * f; return cdiv(cx(R, 0), cx(R, w * L - 1 / (w * C))); },
+  bs: (R, L, C) => f => { const w = PI2 * f, X = w * L - 1 / (w * C); return cdiv(cx(0, X), cx(R, X)); },
+  cas: (R1, C1, R2, C2) => f => { const w = PI2 * f; return cdiv(cx(1, 0), cx(1 - w * w * R1 * C1 * R2 * C2, w * (R1 * C1 + R2 * C2 + R1 * C2))); },
+  buf: (R, C) => f => { const h = TF.lpRC(R, C)(f); return cmul(h, h); }
+};
+
+/* ===================== Formattazione ===================== */
+const num = v => v.toLocaleString('it-IT', { maximumSignificantDigits: 4 });
+function eng(v, u) {
+  if (!isFinite(v)) return '—';
+  const P = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
+  const a = Math.abs(v);
+  for (const [m, s] of P) if (a >= m * 0.9999) return num(v / m) + ' ' + s + u;
+  return num(v / 1e-12) + ' p' + u;
+}
+function fmtF(f) { if (f >= 1e6) return num(f / 1e6) + 'M'; if (f >= 1e3) return num(f / 1e3) + 'k'; return num(f); }
+
+/* ===================== Schemi a scala (ladder) ===================== */
+function ladder(svg, items, vin = 'v<tspan dy="4" font-size="11">in</tspan>', vout = 'v<tspan dy="4" font-size="11">out</tspan>') {
+  const top = 40, tall = items.some(i => i.sym === 'LC'), bot = tall ? 190 : 130;
+  let s = '', dots = '', lab = '', cur = 30, x = 70;
+  for (const it of items) {
+    if (it.k === 's') {
+      s += `<path d="M${cur} ${top}H${x}"/><use href="#${it.sym}_h" x="${x}" y="${top}"/>`;
+      lab += `<text x="${x + 30}" y="${top - 18}" text-anchor="middle">${it.label}</text>`;
+      x += 60; cur = x; x += 40;
+    } else {
+      s += `<path d="M${cur} ${top}H${x}"/>`; cur = x;
+      if (it.sym === 'LC') {
+        s += `<use href="#L_v" x="${x}" y="${top}"/><use href="#C_v" x="${x}" y="${top + 60}"/><path d="M${x} ${top + 120}V${bot}"/>`;
+        lab += `<text x="${x + 16}" y="${top + 35}">${it.label[0]}</text><text x="${x + 18}" y="${top + 95}">${it.label[1]}</text>`;
+      } else {
+        s += `<use href="#${it.sym}_v" x="${x}" y="${top}"/><path d="M${x} ${top + 60}V${bot}"/>`;
+        lab += `<text x="${x + 18}" y="${top + 35}">${it.label}</text>`;
+      }
+      dots += `<circle class="dot" cx="${x}" cy="${top}" r="3.5"/><circle class="dot" cx="${x}" cy="${bot}" r="3.5"/>`;
+      x += 60;
+    }
+  }
+  const xo = Math.max(x, cur + 60), mid = (top + bot) / 2 + 5;
+  s += `<path d="M${cur} ${top}H${xo}M30 ${bot}H${xo}"/>`;
+  const term = [[30, top], [30, bot], [xo, top], [xo, bot]].map(p => `<circle class="t" cx="${p[0]}" cy="${p[1]}" r="5"/>`).join('');
+  const pm = `<text class="pm" x="24" y="${top - 12}">+</text><text class="pm" x="25" y="${bot + 24}">−</text><text class="pm" x="${xo - 6}" y="${top - 12}">+</text><text class="pm" x="${xo - 5}" y="${bot + 24}">−</text>`;
+  const vv = `<text class="v" x="40" y="${mid}">${vin}</text><text class="v" x="${xo - 10}" y="${mid}" text-anchor="end">${vout}</text>`;
+  svg.setAttribute('viewBox', `0 0 ${xo + 30} ${bot + 34}`);
+  svg.innerHTML = `<g class="w">${s}</g>${dots}${term}${lab}${pm}${vv}`;
+}
+
+/* ===================== Diagramma di Bode ===================== */
+function bode(svg, o) {
+  const W = 640, ml = 60, mr = 18, mt = 14, Hm = 220, gap = 46, Hp = 150, mb = 34;
+  const pw = W - ml - mr, yp0 = mt + Hm + gap, Ht = yp0 + Hp + mb;
+  const l0 = Math.log10(o.fmin), l1 = Math.log10(o.fmax);
+  const X = f => ml + (Math.log10(f) - l0) / (l1 - l0) * pw;
+  const Ym = d => mt + (o.dbMax - Math.max(o.dbMin, Math.min(o.dbMax, d))) / (o.dbMax - o.dbMin) * Hm;
+  const Yp = p => yp0 + (o.phMax - Math.max(o.phMin, Math.min(o.phMax, p))) / (o.phMax - o.phMin) * Hp;
+  let g = '', t = '';
+  for (let d = Math.floor(l0); d <= Math.ceil(l1); d++) for (let k = 1; k < 10; k++) {
+    const f = k * Math.pow(10, d);
+    if (f < o.fmin * 0.999 || f > o.fmax * 1.001) continue;
+    const x = X(f).toFixed(1), c = k === 1 ? 'gM' : 'gm';
+    g += `<line class="${c}" x1="${x}" y1="${mt}" x2="${x}" y2="${mt + Hm}"/><line class="${c}" x1="${x}" y1="${yp0}" x2="${x}" y2="${yp0 + Hp}"/>`;
+    if (k === 1) t += `<text x="${x}" y="${mt + Hm + 15}" text-anchor="middle">${fmtF(f)}</text><text x="${x}" y="${yp0 + Hp + 15}" text-anchor="middle">${fmtF(f)}</text>`;
+  }
+  for (let d = Math.ceil(o.dbMin / o.dbStep) * o.dbStep; d <= o.dbMax + 1e-9; d += o.dbStep) {
+    const y = Ym(d).toFixed(1);
+    g += `<line class="${d === 0 ? 'g0' : 'gM'}" x1="${ml}" y1="${y}" x2="${ml + pw}" y2="${y}"/>`;
+    t += `<text x="${ml - 7}" y="${+y + 4}" text-anchor="end">${d}</text>`;
+  }
+  for (let p = Math.ceil(o.phMin / o.phStep) * o.phStep; p <= o.phMax + 1e-9; p += o.phStep) {
+    const y = Yp(p).toFixed(1);
+    g += `<line class="${p === 0 ? 'g0' : 'gM'}" x1="${ml}" y1="${y}" x2="${ml + pw}" y2="${y}"/>`;
+    t += `<text x="${ml - 7}" y="${+y + 4}" text-anchor="end">${p}°</text>`;
+  }
+  g += `<rect class="fr0" x="${ml}" y="${mt}" width="${pw}" height="${Hm}"/><rect class="fr0" x="${ml}" y="${yp0}" width="${pw}" height="${Hp}"/>`;
+  t += `<text class="axt" transform="translate(16 ${mt + Hm / 2}) rotate(-90)" text-anchor="middle">|H| [dB]</text>`;
+  t += `<text class="axt" transform="translate(16 ${yp0 + Hp / 2}) rotate(-90)" text-anchor="middle">φ [°]</text>`;
+  t += `<text class="axt" x="${ml + pw}" y="${Ht - 2}" text-anchor="end">f [Hz]</text>`;
+  if (o.m3) {
+    const y = Ym(-3).toFixed(1);
+    g += `<line class="m3" x1="${ml}" y1="${y}" x2="${ml + pw}" y2="${y}"/>`;
+    t += `<text class="m3t" x="${ml + 6}" y="${+y + 14}">−3 dB</text>`;
+  }
+  (o.asym || []).forEach(pl => { g += `<polyline class="asym" points="${pl.map(p => X(p[0]).toFixed(1) + ',' + Ym(p[1]).toFixed(1)).join(' ')}"/>`; });
+  (o.asymP || []).forEach(pl => { g += `<polyline class="asym" points="${pl.map(p => X(p[0]).toFixed(1) + ',' + Yp(p[1]).toFixed(1)).join(' ')}"/>`; });
+  (o.marks || []).forEach(m => {
+    const x = X(m.f).toFixed(1);
+    g += `<line class="mk" x1="${x}" y1="${mt}" x2="${x}" y2="${yp0 + Hp}"/>`;
+    t += `<text class="mkt" x="${+x + 5}" y="${yp0 - 8}">${m.t}</text>`;
+  });
+  const N = 600; let lg = '';
+  o.curves.forEach((c, ci) => {
+    let dm = '', dp = '', prev = null;
+    for (let i = 0; i <= N; i++) {
+      const f = Math.pow(10, l0 + (l1 - l0) * i / N), h = c.H(f);
+      const db = 20 * Math.log10(Math.max(mag(h), 1e-12)), p = phs(h), x = X(f).toFixed(1);
+      dm += (i ? 'L' : 'M') + x + ' ' + Ym(db).toFixed(1);
+      dp += ((i && Math.abs(p - prev) < 90) ? 'L' : 'M') + x + ' ' + Yp(p).toFixed(1);
+      prev = p;
+    }
+    g += `<path class="cv ${c.cls}" d="${dm}"/><path class="cv ${c.cls}" d="${dp}"/>`;
+    if (c.label) {
+      const y = mt + 20 + ci * 18, x0 = ml + pw - 250;
+      lg += `<line class="cv ${c.cls}" x1="${x0 + 10}" y1="${y - 4}" x2="${x0 + 34}" y2="${y - 4}"/><text class="lg" x="${x0 + 42}" y="${y}">${c.label}</text>`;
+    }
+  });
+  if (lg) { const n = o.curves.filter(c => c.label).length; lg = `<rect class="lgbg" x="${ml + pw - 250}" y="${mt + 6}" width="242" height="${n * 18 + 8}" rx="4"/>` + lg; }
+  svg.setAttribute('viewBox', `0 0 ${W} ${Ht}`);
+  svg.innerHTML = g + t + lg;
+}
+
+/* ===================== Schemi della dispensa ===================== */
+const $ = id => document.getElementById(id);
+ladder($('sch-div'), [{ k: 's', sym: 'R', label: 'Z₁' }, { k: 'p', sym: 'R', label: 'Z₂' }]);
+ladder($('sch-lp'), [{ k: 's', sym: 'R', label: 'R' }, { k: 'p', sym: 'C', label: 'C' }]);
+ladder($('sch-hp'), [{ k: 's', sym: 'C', label: 'C' }, { k: 'p', sym: 'R', label: 'R' }]);
+ladder($('sch-rllp'), [{ k: 's', sym: 'L', label: 'L' }, { k: 'p', sym: 'R', label: 'R' }]);
+ladder($('sch-rlhp'), [{ k: 's', sym: 'R', label: 'R' }, { k: 'p', sym: 'L', label: 'L' }]);
+ladder($('sch-cas'), [{ k: 's', sym: 'R', label: 'R₁' }, { k: 'p', sym: 'C', label: 'C₁' }, { k: 's', sym: 'R', label: 'R₂' }, { k: 'p', sym: 'C', label: 'C₂' }]);
+ladder($('sch-bprc'), [{ k: 's', sym: 'C', label: 'C₁' }, { k: 'p', sym: 'R', label: 'R₁' }, { k: 's', sym: 'R', label: 'R₂' }, { k: 'p', sym: 'C', label: 'C₂' }]);
+ladder($('sch-bp'), [{ k: 's', sym: 'L', label: 'L' }, { k: 's', sym: 'C', label: 'C' }, { k: 'p', sym: 'R', label: 'R' }]);
+ladder($('sch-bs'), [{ k: 's', sym: 'R', label: 'R' }, { k: 'p', sym: 'LC', label: ['L', 'C'] }]);
+
+/* ===================== Diagrammi di Bode della dispensa ===================== */
+const fc1 = 1 / (PI2 * 1e3 * 100e-9);
+bode($('b-lp'), {
+  fmin: 10, fmax: 1e6, dbMin: -60, dbMax: 10, dbStep: 10, phMin: -90, phMax: 0, phStep: 30, m3: true,
+  curves: [{ H: TF.lpRC(1e3, 100e-9), cls: 'c-lp' }],
+  asym: [[[10, 0], [fc1, 0], [1e6, -20 * Math.log10(1e6 / fc1)]]],
+  asymP: [[[10, 0], [fc1 / 10, 0], [fc1 * 10, -90], [1e6, -90]]],
+  marks: [{ f: fc1, t: 'fc = 1,59 kHz' }]
+});
+bode($('b-hp'), {
+  fmin: 10, fmax: 1e6, dbMin: -60, dbMax: 10, dbStep: 10, phMin: 0, phMax: 90, phStep: 30, m3: true,
+  curves: [{ H: TF.hpRC(1e3, 100e-9), cls: 'c-hp' }],
+  asym: [[[10, -20 * Math.log10(fc1 / 10)], [fc1, 0], [1e6, 0]]],
+  asymP: [[[10, 90], [fc1 / 10, 90], [fc1 * 10, 0], [1e6, 0]]],
+  marks: [{ f: fc1, t: 'fc = 1,59 kHz' }]
+});
+bode($('b-cas'), {
+  fmin: 10, fmax: 1e6, dbMin: -80, dbMax: 10, dbStep: 10, phMin: -180, phMax: 0, phStep: 45, m3: true,
+  curves: [
+    { H: TF.lpRC(1e3, 100e-9), cls: 'c-lp', label: '1° ordine' },
+    { H: TF.cas(1e3, 100e-9, 1e3, 100e-9), cls: 'c-o2', label: '2° ordine, senza separatore' },
+    { H: TF.buf(1e3, 100e-9), cls: 'c-rl', label: '2° ordine, buffer ideale' }
+  ],
+  marks: [{ f: fc1, t: 'fc' }]
+});
+const f0 = 1 / (PI2 * Math.sqrt(10e-3 * 100e-9));
+bode($('b-bp'), {
+  fmin: 100, fmax: 1e5, dbMin: -50, dbMax: 10, dbStep: 10, phMin: -90, phMax: 90, phStep: 45, m3: true,
+  curves: [
+    { H: TF.bp(10, 10e-3, 100e-9), cls: 'c-hp', label: 'R = 10 Ω (Q = 31,6)' },
+    { H: TF.bp(100, 10e-3, 100e-9), cls: 'c-rlc', label: 'R = 100 Ω (Q = 3,16)' },
+    { H: TF.bp(1000, 10e-3, 100e-9), cls: 'c-lp', label: 'R = 1 kΩ (Q = 0,32)' }
+  ],
+  marks: [{ f: f0, t: 'f0 = 5,03 kHz' }]
+});
+bode($('b-bs'), {
+  fmin: 100, fmax: 1e5, dbMin: -60, dbMax: 10, dbStep: 10, phMin: -90, phMax: 90, phStep: 45, m3: true,
+  curves: [{ H: TF.bs(100, 10e-3, 100e-9), cls: 'c-rlc' }],
+  marks: [{ f: f0, t: 'f0 = 5,03 kHz' }]
+});
+
+/* ===================== Calcolatore ===================== */
+const NEED = { lpRC: 'RC', hpRC: 'RC', lpRL: 'RL', hpRL: 'RL', bp: 'RLC', bs: 'RLC' };
+const CLS = { lpRC: 'c-lp', hpRC: 'c-hp', lpRL: 'c-rl', hpRL: 'c-rl', bp: 'c-rlc', bs: 'c-rlc' };
+function readPos(id) { const v = parseFloat($(id).value); return (isFinite(v) && v > 0) ? v : null; }
+
+function calc() {
+  const type = $('k-type').value, need = NEED[type];
+  ['R', 'C', 'L'].forEach(k => $('l-' + k).classList.toggle('off', !need.includes(k)));
+  ['k-C', 'k-L'].forEach(id => { $(id).disabled = !need.includes(id.slice(-1)); });
+  const R = readPos('k-R'), Cn = readPos('k-C'), Lm = readPos('k-L'), f = readPos('k-f'), V = readPos('k-V');
+  const missing = [];
+  if (!R) missing.push('R');
+  if (need.includes('C') && !Cn) missing.push('C');
+  if (need.includes('L') && !Lm) missing.push('L');
+  if (!f) missing.push('frequenza di prova');
+  if (!V) missing.push('V');
+  if (missing.length) {
+    $('k-err').textContent = 'Inserire un valore maggiore di zero per: ' + missing.join(', ') + '.';
+    $('k-out').innerHTML = ''; $('k-bode').innerHTML = ''; return;
+  }
+  $('k-err').textContent = '';
+  const C = Cn * 1e-9, L = Lm * 1e-3;
+  let H, fref, cells = [], ph = [-90, 0];
+  if (type === 'lpRC' || type === 'hpRC') {
+    fref = 1 / (PI2 * R * C); H = TF[type](R, C);
+    cells.push(['Frequenza di taglio', eng(fref, 'Hz')], ['Costante di tempo τ', eng(R * C, 's')]);
+    ph = type === 'lpRC' ? [-90, 0] : [0, 90];
+  } else if (type === 'lpRL' || type === 'hpRL') {
+    fref = R / (PI2 * L); H = TF[type](R, L);
+    cells.push(['Frequenza di taglio', eng(fref, 'Hz')], ['Costante di tempo τ', eng(L / R, 's')]);
+    ph = type === 'lpRL' ? [-90, 0] : [0, 90];
+  } else {
+    fref = 1 / (PI2 * Math.sqrt(L * C)); H = TF[type](R, L, C);
+    const Q = Math.sqrt(L / C) / R, B = fref / Q, r = Math.sqrt((B / 2) ** 2 + fref ** 2);
+    cells.push(['Risonanza f0', eng(fref, 'Hz')], ['Fattore di merito Q', num(Q)], ['Banda B', eng(B, 'Hz')], ['f1 / f2', eng(r - B / 2, 'Hz') + ' / ' + eng(r + B / 2, 'Hz')]);
+    ph = [-90, 90];
+  }
+  const h = H(f), m = mag(h), db = 20 * Math.log10(Math.max(m, 1e-12));
+  cells.push(['|H| alla frequenza di prova', num(m)], ['Guadagno', num(db) + ' dB'], ['Fase', num(phs(h)) + '°'], ['Vout', eng(V * m, 'Vpp')]);
+  $('k-out').innerHTML = cells.map(c => `<div><span>${c[0]}</span><b>${c[1]}</b></div>`).join('');
+  const lo = Math.floor(Math.log10(Math.min(fref, f))) - 2, hi = Math.ceil(Math.log10(Math.max(fref, f))) + 2;
+  bode($('k-bode'), {
+    fmin: Math.pow(10, lo), fmax: Math.pow(10, hi), dbMin: -60, dbMax: 10, dbStep: 10,
+    phMin: ph[0], phMax: ph[1], phStep: ph[1] - ph[0] > 90 ? 45 : 30, m3: true,
+    curves: [{ H, cls: CLS[type] }],
+    marks: [{ f: fref, t: type.startsWith('b') ? 'f0' : 'fc' }, { f, t: 'f prova' }]
+  });
+}
+['k-type', 'k-R', 'k-C', 'k-L', 'k-f', 'k-V'].forEach(id => $(id).addEventListener('input', calc));
+calc();
+
+/* Apertura delle soluzioni in stampa */
+window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
+</script>
+</body>
+</html>

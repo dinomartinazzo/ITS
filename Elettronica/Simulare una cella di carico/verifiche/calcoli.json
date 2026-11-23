@@ -1,0 +1,79 @@
+{
+  "unita": "ohm, mA, mV/V, percento; modelli ideali, non misure",
+  "revisione_elettrica": "P3.1, R6=56 kohm 1%, R7/R8=909 ohm 0,1%",
+  "carico_centro_ohm": 288.25892371907634,
+  "carico_estremo_ohm": 288.21173219706395,
+  "corrente_3_2V_mA": 11.10113074285454,
+  "corrente_5V_mA": 17.345516785710217,
+  "uscita_eccitazione_cortocircuitata_ohm": 340.5300202863168,
+  "uscita_eccitazione_aperta_ohm": 340.53002028631676,
+  "zero_mV_V": 1.486686248060809,
+  "nonlinearita_percento_semifondo_scala": 0.04408660297683973,
+  "nonlinearita_percento_escursione_totale": 0.022043301488419865,
+  "punti": [
+    {
+      "p": 0,
+      "mV_V": 1.988612421108149,
+      "conteggi": 4270512.65653944
+    },
+    {
+      "p": 0.25,
+      "mV_V": 0.9934521297942922,
+      "conteggi": 2133422.203804016
+    },
+    {
+      "p": 0.5,
+      "mV_V": 0.0,
+      "conteggi": 0.0
+    },
+    {
+      "p": 0.75,
+      "mV_V": -0.9934521297944032,
+      "conteggi": -2133422.2038042545
+    },
+    {
+      "p": 1,
+      "mV_V": -1.9886124211082046,
+      "conteggi": -4270512.656539559
+    }
+  ],
+  "fs_RV1_5_percento": [
+    1.8994860406387204,
+    2.076777041874478
+  ],
+  "fs_R5_1_percento": [
+    2.005545552840049,
+    1.9719628334773365
+  ],
+  "fs_R5_alternative": {
+    "7870": 1.00629750505421,
+    "8060": 0.9844040091286921,
+    "43200": 0.19594791232802056
+  },
+  "offset_R7_R8_opposti_mV_V": 0.01805579162450499,
+  "errori_cavo_percento": {
+    "0.5": -0.3457674391057375,
+    "1": -0.689152014924499,
+    "2": -1.3688704317033507
+  },
+  "rumore_termico_nV_radice_Hz": 2.3752534988374183,
+  "rumore_HX711_50nV_conteggi_a_3_2V": 33.554432,
+  "confronto_zero_angoli": {
+    "P3": {
+      "casi": 1024,
+      "zero_non_raggiungibile": 32,
+      "margine_minimo_mV_V": -0.033495487095303034,
+      "offset_centro_massimo_mV_V": 1.1606379742295503,
+      "residuo_massimo_mV_V": 0.033495487095303034
+    },
+    "P3.1": {
+      "casi": 1024,
+      "zero_non_raggiungibile": 0,
+      "margine_minimo_mV_V": 0.4403029304164696,
+      "offset_centro_massimo_mV_V": 0.9967026335894746,
+      "residuo_massimo_mV_V": 0
+    }
+  },
+  "limiti_angoli_zero": "R1-R4 e R5 ±0,1%, R6 ±1%, RV1 ±5% ipotizzato, RV2 ±10%; R7/R8 ±1% P3 o ±0,1% P3.1. RV1 al centro elettrico; RV2 corsa 1–99%, 110 ohm aggiunti a R6 come margine sul contatto. Sweep agli estremi delle tolleranze, non prova hardware né garanzia di tutti i casi intermedi.",
+  "controlli_analitici": "superati"
+}

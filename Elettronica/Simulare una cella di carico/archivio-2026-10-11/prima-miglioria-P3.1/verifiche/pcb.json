@@ -1,0 +1,22 @@
+{
+  "pin_verificati": 32,
+  "componenti_inclusi_fori": 15,
+  "segmenti": 23,
+  "vie": 2,
+  "errori_controlli_geometrici_python": [],
+  "reti_schema_pcb_legacy": "coincidenti",
+  "dettagli": [
+    "coppie rame verificate: 1872",
+    "rete E+   : 6 pad, connessa",
+    "rete A-   : 3 pad, connessa",
+    "rete E-   : 6 pad, connessa",
+    "rete A+   : 5 pad, connessa",
+    "rete N1   : 2 pad, connessa",
+    "rete N2   : 2 pad, connessa",
+    "rete W1   : 2 pad, connessa",
+    "rete W2   : 2 pad, connessa",
+    "rete EXC+ : 2 pad, connessa",
+    "rete EXC- : 2 pad, connessa"
+  ],
+  "limiti": "Controlli statici Python; ERC/DRC KiCad e importazione EasyEDA non eseguiti in questa revisione."
+}

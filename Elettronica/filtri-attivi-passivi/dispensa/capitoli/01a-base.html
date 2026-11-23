@@ -1,0 +1,150 @@
+<div class="part part-d" id="parte-0"><span>Parte A</span><h2 class="part-title">Teoria di base</h2><p>Prima dei filtri servono pochi concetti, spiegati dal principio: tensione e corrente, resistenze e partitore, condensatore e induttore, segnali alternati, numeri complessi, decibel. Chi li conosce già può passare alla parte I; chi parte da zero troverà tutto quello che serve.</p></div>
+
+<section id="ohm" class="sec-d">
+<h2><span class="num">#</span>Tensione, corrente e resistenza</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>La <strong>tensione</strong> è la spinta, la <strong>corrente</strong> è il flusso che ne risulta, la <strong>resistenza</strong> è quanto il circuito si oppone al flusso. Tre grandezze, una sola regola: la legge di Ohm.</p></div>
+
+<h3>Una immagine per capire: l'acqua nei tubi</h3>
+<p>Un circuito elettrico somiglia a un impianto idraulico. Una pompa spinge l'acqua in un tubo; l'acqua scorre; un restringimento la frena. Ogni elemento del circuito ha un corrispondente:</p>
+{{FIG_IDRAULICA}}
+<div class="tbl"><table>
+<thead><tr><th>Elettricità</th><th>Acqua</th><th>Unità</th></tr></thead>
+<tbody>
+<tr><td>Tensione V (la spinta della batteria)</td><td>Pressione della pompa</td><td>volt (V)</td></tr>
+<tr><td>Corrente I (quante cariche passano al secondo)</td><td>Portata: litri al secondo</td><td>ampere (A)</td></tr>
+<tr><td>Resistenza R (quanto frena)</td><td>Restringimento del tubo</td><td>ohm (Ω)</td></tr>
+</tbody></table></div>
+
+<h3>La legge di Ohm</h3>
+<p>Georg Ohm scoprì che in una resistenza la corrente è proporzionale alla tensione applicata. Se si raddoppia la spinta, il flusso raddoppia; se si raddoppia il restringimento, il flusso dimezza.</p>
+<div class="eq"><span class="m"><i>V</i> = <i>R</i> · <i>I</i>,&emsp;<i>I</i> = <span class="frac"><span><i>V</i></span><span><i>R</i></span></span>,&emsp;<i>R</i> = <span class="frac"><span><i>V</i></span><span><i>I</i></span></span><span class="note">Tre modi di scrivere la stessa regola: si usa quello che dà la grandezza che manca.</span></span><span class="eqn">(@ohm)</span></div>
+{{FIG_OHM}}
+<div class="card esempio"><h4>Esempio svolto: una resistenza alimentata a 12 V</h4>
+<p class="passo">Dati: V = 12 V, R = 4 kΩ = 4000 Ω.</p>
+<p class="passo">Corrente: I = V/R = 12/4000 = 0,003 A = 3 mA.</p>
+<p class="passo">Potenza: P = V · I = 12 · 0,003 = 0,036 W = 36 mW. La potenza è il calore prodotto: una resistenza da ¼ W regge senza problemi.</p></div>
+
+<h3>I prefissi: nano, micro, milli, kilo</h3>
+<p>I valori in elettronica vanno da pochissimo a moltissimo. Per non scrivere troppi zeri si usano i prefissi. Imparare questa tabella è il passo più utile di tutto il capitolo.</p>
+<div class="tbl"><table>
+<thead><tr><th>Prefisso</th><th>Simbolo</th><th>Valore</th><th>Esempio</th></tr></thead>
+<tbody>
+<tr><td>pico</td><td>p</td><td>10<sup>−12</sup></td><td>22 pF = 0,000 000 000 022 F</td></tr>
+<tr><td>nano</td><td>n</td><td>10<sup>−9</sup></td><td>100 nF = 100 · 10<sup>−9</sup> F</td></tr>
+<tr><td>micro</td><td>µ</td><td>10<sup>−6</sup></td><td>47 µF = 47 · 10<sup>−6</sup> F</td></tr>
+<tr><td>milli</td><td>m</td><td>10<sup>−3</sup></td><td>10 mH = 0,01 H; 3 mA = 0,003 A</td></tr>
+<tr><td>kilo</td><td>k</td><td>10<sup>3</sup></td><td>4,7 kΩ = 4700 Ω; 20 kHz = 20 000 Hz</td></tr>
+<tr><td>mega</td><td>M</td><td>10<sup>6</sup></td><td>1 MΩ = 1 000 000 Ω</td></tr>
+</tbody></table></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Si dimenticano i prefissi nei calcoli. Prima di usare la calcolatrice, si riportano tutti i valori in unità base: 4 kΩ diventa 4000 Ω, 100 nF diventa 100·10<sup>−9</sup> F. Un risultato di 3 A al posto di 3 mA è l'errore tipico.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Tensione = spinta (V), corrente = flusso (A), resistenza = freno (Ω).</li>
+<li>Legge di Ohm: V = R · I; la potenza è P = V · I.</li>
+<li>In una resistenza la corrente è proporzionale alla tensione: il grafico è una retta, la cui pendenza è 1/R.</li>
+<li>I prefissi (n, µ, m, k, M) vanno sempre convertiti prima di calcolare.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Una resistenza da 2 kΩ è attraversata da 5 mA. Quale tensione c'è ai suoi capi?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>V = R · I = 2000 · 0,005 = 10 V.</p></div></details></li>
+<li>Con la stessa tensione, se si raddoppia la resistenza la corrente raddoppia o dimezza?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Dimezza: I = V/R, quindi R doppia dà I metà. È come stringere ancora di più il tubo.</p></div></details></li>
+<li>Quanto vale 220 nF in farad?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>220 · 10<sup>−9</sup> F = 0,000 000 22 F = 2,2 · 10<sup>−7</sup> F.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="serie-par" class="sec-d">
+<h2><span class="num">#</span>Resistenze in serie, in parallelo e il partitore</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Due resistenze una dopo l'altra (in serie) frenano di più; due affiancate (in parallelo) frenano di meno, perché il flusso ha due strade. Se si preleva la tensione tra due resistenze in serie, si ottiene una frazione della tensione di partenza: è il <strong>partitore</strong>, l'idea più usata in tutta l'elettronica.</p></div>
+
+<h3>In serie e in parallelo</h3>
+{{FIG_SERIE_PAR}}
+<div class="eq"><span class="m"><i>R</i><sub>serie</sub> = <i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>,&emsp;<i>R</i><sub>parallelo</sub> = <span class="frac"><span><i>R</i><sub>1</sub><i>R</i><sub>2</sub></span><span><i>R</i><sub>1</sub> + <i>R</i><sub>2</sub></span></span><span class="note">Per più di due resistenze in parallelo si sommano gli inversi: 1/R = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + …</span></span><span class="eqn">(@serie_par)</span></div>
+<div class="card esempio"><h4>Esempio svolto: 1 kΩ e 2 kΩ a 12 V</h4>
+<p class="passo"><strong>In serie</strong>: R = 1 + 2 = 3 kΩ. Corrente: I = 12/3000 = 4 mA, uguale in tutte e due. Tensioni: V<sub>1</sub> = 1000 · 0,004 = 4 V e V<sub>2</sub> = 2000 · 0,004 = 8 V; sommate fanno 12 V.</p>
+<p class="passo"><strong>In parallelo</strong>: R = 1000 · 2000/3000 = 667 Ω. Ogni resistenza ha 12 V: I<sub>1</sub> = 12/1000 = 12 mA, I<sub>2</sub> = 12/2000 = 6 mA. La corrente totale è 18 mA, che coincide con 12/667.</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Dimenticare il controllo del buon senso. In serie il risultato deve essere maggiore della resistenza più grande; in parallelo minore della più piccola. Se non è così, c'è un errore.</p></div>
+
+<h3>Il partitore di tensione</h3>
+<p>Si mettono due resistenze in serie fra una tensione V<sub>in</sub> e la massa (lo zero) e si prende l'uscita nel punto in mezzo. La stessa corrente attraversa entrambe, quindi la tensione si divide <strong>in proporzione alle resistenze</strong>: la più grande prende più tensione.</p>
+{{FIG_PARTITORE}}
+<div class="eq"><span class="m"><i>V</i><sub>out</sub> = <i>V</i><sub>in</sub> · <span class="frac"><span><i>R</i><sub>2</sub></span><span><i>R</i><sub>1</sub> + <i>R</i><sub>2</sub></span></span><span class="note">R<sub>2</sub> è la resistenza tra l'uscita e la massa. Il rapporto è sempre tra 0 e 1: l'uscita è una frazione dell'ingresso.</span></span><span class="eqn">(@partitore)</span></div>
+{{TAB_PARTITORI}}
+<div class="card esempio"><h4>Esempio svolto: da 5 V a 3,3 V</h4>
+<p class="passo">Serve ridurre un segnale da 5 V a un livello adatto a un ingresso da 3,3 V. Si sceglie R<sub>1</sub> = 1 kΩ e R<sub>2</sub> = 2 kΩ.</p>
+<p class="passo">V<sub>out</sub> = 5 · 2000/(1000 + 2000) = 5 · 2/3 = 3,33 V.</p>
+<p class="passo">È quello che serve, con soli due componenti.</p></div>
+
+<h3>Perché il partitore è importante per i filtri</h3>
+<p>Un filtro RC è un partitore in cui <em>una delle due resistenze cambia con la frequenza</em>. Se la seconda «resistenza» è un condensatore, la sua opposizione alla corrente cresce o diminuisce con la frequenza, e con essa la frazione di tensione che arriva all'uscita. Tutto il resto della dispensa è la conseguenza di questa idea semplice.</p>
+<div class="callout errore"><span class="tag">Errore comune</span><p>La formula del partitore vale solo se all'uscita non è collegato nulla che assorba corrente. Se si collega un carico, questo va messo <em>in parallelo</em> a R<sub>2</sub> e cambia il risultato (capitolo {{cap:carico}}).</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>In serie le resistenze si sommano e la corrente è la stessa.</li>
+<li>In parallelo si sommano gli inversi e la tensione è la stessa.</li>
+<li>Il partitore: V<sub>out</sub> = V<sub>in</sub> · R<sub>2</sub>/(R<sub>1</sub> + R<sub>2</sub>).</li>
+<li>Un filtro è un partitore con un elemento che dipende dalla frequenza.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un partitore ha R<sub>1</sub> = 9 kΩ e R<sub>2</sub> = 1 kΩ con 10 V all'ingresso. Quanto vale l'uscita?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>V<sub>out</sub> = 10 · 1/(9 + 1) = 1 V. R<sub>2</sub> è un decimo del totale e prende un decimo della tensione.</p></div></details></li>
+<li>Due resistenze uguali da 10 kΩ in parallelo: quanto fanno?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>10 · 10/(10 + 10) = 5 kΩ: la metà. Con due resistenze uguali in parallelo si divide per due.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="condensatore" class="sec-d">
+<h2><span class="num">#</span>Il condensatore</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un condensatore è un piccolo serbatoio di carica elettrica. In continua si riempie e poi smette di far passare corrente; in alternata si riempie e si svuota di continuo, e lascia passare la corrente tanto più facilmente quanto più in fretta il segnale cambia. Questa sua preferenza per i segnali veloci è il cuore di ogni filtro.</p></div>
+
+<h3>Com'è fatto e che cosa fa</h3>
+{{FIG_CONDENSATORE}}
+<p>Due piastre di metallo vicine, separate da un isolante. Applicando una tensione, su una piastra si accumulano cariche positive e sull'altra negative: la carica immagazzinata è proporzionale alla tensione. Il rapporto si chiama <strong>capacità</strong>.</p>
+<div class="eq"><span class="m"><i>Q</i> = <i>C</i> · <i>V</i><span class="note">Q è la carica (in coulomb), C la capacità (in farad), V la tensione. L'energia immagazzinata vale ½ C V².</span></span><span class="eqn">(@capacita)</span></div>
+<div class="card esempio"><h4>Esempio svolto: 100 nF a 5 V</h4>
+<p class="passo">Carica: Q = C · V = 100·10<sup>−9</sup> · 5 = 500·10<sup>−9</sup> C = 500 nC.</p>
+<p class="passo">Energia: ½ C V² = 0,5 · 100·10<sup>−9</sup> · 25 = 1,25·10<sup>−6</sup> J = 1,25 µJ. È poca: i condensatori dei filtri sono piccoli serbatoi.</p></div>
+
+<h3>Carica e scarica: la costante di tempo</h3>
+<p>Un condensatore non si carica di colpo: se lo si collega a una batteria attraverso una resistenza, la corrente all'inizio è grande, poi cala man mano che il condensatore si riempie. La tensione sale rapidamente all'inizio e sempre più lentamente poi. La rapidità è fissata dal prodotto RC, che ha le dimensioni di un tempo e si chiama <strong>costante di tempo</strong>.</p>
+<div class="eq"><span class="m"><i>τ</i> = <i>R</i> · <i>C</i><span class="note">Dopo un tempo τ il condensatore si è caricato al 63 % del valore finale; dopo 5τ è carico al 99 %.</span></span><span class="eqn">(@tau)</span></div>
+{{FIG_CARICA_C}}
+<div class="card esempio"><h4>Esempio svolto: R = 1 kΩ e C = 100 nF</h4>
+<p class="passo">τ = R · C = 1000 · 100·10<sup>−9</sup> = 100·10<sup>−6</sup> s = 100 µs.</p>
+<p class="passo">Dopo 100 µs il condensatore è al 63 % della tensione finale; dopo 500 µs (5τ) è praticamente carico.</p>
+<p class="passo">Con una resistenza dieci volte più grande (10 kΩ) la costante di tempo è dieci volte maggiore: 1 ms.</p></div>
+
+<h3>In continua e in alternata</h3>
+<p>Dopo la carica iniziale, in continua non scorre più corrente: il condensatore è come un interruttore aperto. In alternata la tensione cambia di continuo e il condensatore si carica e si scarica avanti e indietro: la corrente scorre. Se il segnale è lento, il condensatore ha tempo di riempirsi del tutto e la corrente è piccola; se il segnale è veloce, non fa in tempo, e la corrente è grande.</p>
+{{FIG_COND_DC_AC}}
+<p>Questo comportamento si riassume in una grandezza, la <strong>reattanza</strong> X<sub>C</sub>: è l'«opposizione» del condensatore alla corrente alternata, in ohm come una resistenza, ma diversa dalla resistenza perché dipende dalla frequenza.</p>
+<div class="eq"><span class="m"><i>X</i><sub>C</sub> = <span class="frac"><span>1</span><span>2π<i>fC</i></span></span><span class="note">Frequenza alta o capacità grande → reattanza piccola (il condensatore «lascia passare»). Frequenza zero → reattanza infinita (circuito aperto).</span></span><span class="eqn">(@xc)</span></div>
+{{TAB_REATT2}}
+<div class="callout errore"><span class="tag">Errore comune</span><p>«Il condensatore non lascia passare la corrente» è vero solo in continua. In alternata la lascia passare, e tanto meglio quanto più alta è la frequenza. È proprio questo che permette di costruire i filtri.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Il condensatore immagazzina carica: Q = C · V.</li>
+<li>Si carica con una curva esponenziale; la rapidità è τ = R · C (63 % dopo τ, 99 % dopo 5τ).</li>
+<li>In continua è un circuito aperto, in alternata lascia passare di più le frequenze alte.</li>
+<li>La reattanza X<sub>C</sub> = 1/(2πfC) scende all'aumentare della frequenza.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un condensatore da 10 µF e una resistenza da 1 kΩ: quanto vale τ?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>τ = 1000 · 10·10<sup>−6</sup> = 0,01 s = 10 ms.</p></div></details></li>
+<li>Quale reattanza ha un condensatore da 100 nF a 1 kHz?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>X<sub>C</sub> = 1/(2π · 1000 · 100·10<sup>−9</sup>) = 1592 Ω, cioè circa 1,6 kΩ.</p></div></details></li>
+<li>A frequenze più alte il condensatore «frena» di più o di meno?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Di meno: la reattanza scende con la frequenza.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="induttore" class="sec-d">
+<h2><span class="num">#</span>L'induttore</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>L'induttore è una bobina di filo. È il «contrario» del condensatore: lascia passare bene la corrente lenta e frena quella veloce. Lo si incontra meno nei filtri di questa dispensa, ma serve per capire la risonanza.</p></div>
+{{FIG_INDUTTORE}}
+<p>Quando in una bobina passa corrente, si crea un campo magnetico, che contiene energia. Per far cambiare la corrente occorre cambiare il campo, e questo richiede tempo: l'induttore si <em>oppone alle variazioni di corrente</em>. Più veloce è la variazione (cioè più alta la frequenza), più forte è l'opposizione.</p>
+<div class="eq"><span class="m"><i>X</i><sub>L</sub> = 2π<i>fL</i><span class="note">Frequenza alta o induttanza grande → reattanza grande. In continua la reattanza è nulla: la bobina è un filo.</span></span><span class="eqn">(@xl)</span></div>
+<div class="card esempio"><h4>Esempio svolto: 10 mH a 1 kHz</h4>
+<p class="passo">X<sub>L</sub> = 2π · 1000 · 0,01 = 62,8 Ω.</p>
+<p class="passo">A 10 kHz, con la frequenza dieci volte maggiore, la reattanza è dieci volte maggiore: 628 Ω.</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Un induttore reale non è una bobina ideale: il filo ha una resistenza (<em>DCR</em>), che si somma in serie e consuma energia. Nei calcoli precisi va misurata e inclusa.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>L'induttore si oppone alle variazioni di corrente: X<sub>L</sub> = 2πfL.</li>
+<li>In continua è un filo; ad alta frequenza è quasi un circuito aperto.</li>
+<li>Condensatore e induttore hanno comportamenti opposti: insieme danno la risonanza (capitolo {{cap:rlc}}).</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un induttore da 1 mH a 100 kHz: quale reattanza?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>X<sub>L</sub> = 2π · 100000 · 0,001 = 628 Ω.</p></div></details></li>
+<li>Quale dei due, condensatore o induttore, si comporta come filo ad alta frequenza?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Il condensatore: la sua reattanza scende con la frequenza. L'induttore, invece, ad alta frequenza ha reattanza grande.</p></div></details></li>
+</ol></div>
+</section>

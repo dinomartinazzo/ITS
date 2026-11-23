@@ -1,0 +1,21 @@
+Ripresa del lavoro — 11 ottobre 2026
+
+Tutto salvato nella cartella del progetto. Documento principale:
+dispensa_simulatore_ponte_348.html
+
+Stile confermato: Dispensa di laboratorio.
+Revisione elettrica P3.1 sul PCB P3: R6 = 56 kohm 1%, R7/R8 = 909 ohm 0,1%.
+R1–R4 = 348 ohm 0,1%, R5 = 3,65 kohm 0,1%, RV1 = 200 ohm 10 giri.
+Valori commerciali con codici e link in pcb/simulatore_ponte_348_p3/componenti_acquisto.csv.
+Schema KiCad, PCB, distinta e cinque pacchetti ZIP aggiornati.
+Geometria e Gerber P3 invariati. Versione precedente conservata in
+archivio-2026-10-11/prima-miglioria-P3.1/ (compreso il vecchio PDF dello schema).
+
+Verifiche: calcolo nodale e riduzione indipendente, 1024 combinazioni estreme
+per lo zero, coerenza di 32 pin e valori fra schema/PCB/legacy, controlli
+geometrici Python, integrità ZIP e controlli statici HTML. Risultati in verifiche/.
+
+Restano da eseguire: ERC/DRC nativi in KiCad, importazione nell'editor EasyEDA,
+controllo visivo HTML e collaudo hardware. KiCad non disponibile nell'ambiente;
+Chrome e Firefox non si avviano. Sigla e tolleranza del multigiri RV1 da verificare.
+Nessun ordine o acquisto effettuato.

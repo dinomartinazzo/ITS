@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulatore di cella di carico a ponte da 348 Ω</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=STIX+Two+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4; --paper:#fffdf9; --sunk:#f3efe7; --ink:#1d1f23; --ink-2:#3c4048; --muted:#6b6f78;
+  --rule:#e6e0d4; --rule-2:#d3cab8;
+  --a:#a8650a; --a-soft:#f8ecd6; --a-ink:#7a4a05;
+  --b:#0f7b74; --b-soft:#dcf0ed; --b-ink:#0a5a55;
+  --c3:#6b4fbb; --c3-soft:#ece7fa; --c3-ink:#4d3590;
+  --warn:#b4321f; --warn-soft:#fbebe7; --note:#2f5f9e; --note-soft:#e8eff8; --ok:#2e7d46; --ok-soft:#e5f2e8;
+  --hero:#0f1318; --hero-ink:#f1ede4; --hero-muted:#a5a9b0; --hero-line:#e3a33b;
+  --code-bg:#f6f4ef; --code-ink:#24292f;
+  --k:#b42318; --s:#0a4a8a; --c:#8a8f98; --n:#0b5cad; --f:#7041c0; --t:#9a4b00;
+  --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --math:"STIX Two Text","Cambria Math","Times New Roman",serif;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0d1117; --paper:#131920; --sunk:#181f27; --ink:#e8e6e1; --ink-2:#c9c7c1; --muted:#8e959e;
+  --rule:#262d36; --rule-2:#38414c;
+  --a:#e3a33b; --a-soft:#2a2112; --a-ink:#f1c375;
+  --b:#3cc2b6; --b-soft:#11292a; --b-ink:#7fdcd2;
+  --c3:#a690f0; --c3-soft:#1f1a33; --c3-ink:#c9bbff;
+  --warn:#f07a68; --warn-soft:#2a1714; --note:#7aa7e6; --note-soft:#152131; --ok:#6cc185; --ok-soft:#13241a;
+  --hero:#080b0f; --code-bg:#0a0e13; --code-ink:#e6edf3;
+  --k:#ff7b72; --s:#a5d6ff; --c:#7d8590; --n:#79c0ff; --f:#d2a8ff; --t:#ffa657;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --paper:#131920; --sunk:#181f27; --ink:#e8e6e1; --ink-2:#c9c7c1; --muted:#8e959e;
+  --rule:#262d36; --rule-2:#38414c;
+  --a:#e3a33b; --a-soft:#2a2112; --a-ink:#f1c375;
+  --b:#3cc2b6; --b-soft:#11292a; --b-ink:#7fdcd2;
+  --c3:#a690f0; --c3-soft:#1f1a33; --c3-ink:#c9bbff;
+  --warn:#f07a68; --warn-soft:#2a1714; --note:#7aa7e6; --note-soft:#152131; --ok:#6cc185; --ok-soft:#13241a;
+  --hero:#080b0f; --code-bg:#0a0e13; --code-ink:#e6edf3;
+  --k:#ff7b72; --s:#a5d6ff; --c:#7d8590; --n:#79c0ff; --f:#d2a8ff; --t:#ffa657;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 24px);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.7 var(--sans);font-feature-settings:"kern","liga";text-rendering:optimizeLegibility}
+a{color:var(--a-ink);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--a);outline-offset:3px;border-radius:3px}
+code{font-family:var(--mono);font-size:.86em}
+:not(pre)>code{color:var(--ink-2);background:var(--sunk);border-radius:3px;padding:.08em .32em}
+sub{font-size:.7em}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
+.hero-in{max-width:1180px;margin:0 auto;padding:72px 32px 56px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center}
+.kicker{font:500 13px/1.4 var(--mono);color:var(--hero-line);margin:0 0 18px;letter-spacing:.02em}
+.hero h1{font:500 clamp(34px,5vw,58px)/1.04 var(--serif);font-variation-settings:"opsz" 144;letter-spacing:-.015em;margin:0 0 22px}
+.hero .lead{font-size:18.5px;line-height:1.6;color:var(--hero-muted);max-width:48ch;margin:0 0 30px}
+.meta{display:flex;flex-wrap:wrap;gap:26px;margin:0;padding:22px 0 0;border-top:1px solid #2a3038}
+.meta div{min-width:0}
+.meta dt{font:400 12.5px/1.3 var(--sans);color:var(--hero-muted);margin:0 0 4px}
+.meta dd{margin:0;font:500 14.5px/1.3 var(--mono);color:var(--hero-ink)}
+.hero-art{width:100%;height:auto;display:block}
+.hero-art .hw{stroke:#9aa1a9;stroke-width:1.3;fill:none}
+.hero-art .hr{fill:#151a21;stroke:#9aa1a9;stroke-width:1.3}
+.hero-art .hp{fill:#1f1a10;stroke:var(--hero-line);stroke-width:1.6}
+.hero-art .hwp{stroke:var(--hero-line);stroke-width:1.6;fill:none}
+.hero-art .hd{fill:var(--hero-line)}
+.hero-art text{font:400 13px var(--mono);fill:var(--hero-muted)}
+.hero-art text.hl{fill:var(--hero-line)}
+
+/* layout */
+.layout{max-width:1180px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:44px 0 40px}
+.toc p{font:500 12.5px var(--sans);color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+.toc a{display:grid;grid-template-columns:28px 1fr;align-items:baseline;padding:5px 0 5px 14px;margin-left:-1px;border-left:2px solid transparent;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.35;transition:color .15s,border-color .15s}
+.toc a span{font:400 12px var(--mono);color:var(--rule-2)}
+.toc a:hover{color:var(--ink)}
+.toc a[aria-current="true"]{color:var(--ink);border-left-color:var(--a)}
+.toc a[aria-current="true"] span{color:var(--a)}
+.toc .tools{margin-top:22px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.btn{font:500 12.5px var(--sans);color:var(--ink-2);background:transparent;border:1px solid var(--rule-2);border-radius:999px;padding:6px 13px;cursor:pointer}
+.btn:hover{border-color:var(--ink-2)}
+main{min-width:0;padding:16px 0 40px}
+main section{padding:56px 0 20px;border-bottom:1px solid var(--rule)}
+main section:last-of-type{border-bottom:0}
+.prose{max-width:70ch}
+h2{font:500 clamp(26px,3vw,34px)/1.15 var(--serif);font-variation-settings:"opsz" 72;letter-spacing:-.01em;margin:0 0 22px;display:flex;align-items:baseline;gap:16px}
+h2 .num{font:400 14px var(--mono);color:var(--a);transform:translateY(-4px)}
+h3{font:600 17px/1.35 var(--sans);margin:36px 0 10px;color:var(--ink)}
+p,li{max-width:70ch}
+main p{color:var(--ink-2)}
+strong{color:var(--ink);font-weight:600}
+.sec-a h2 .num{color:var(--a)} .sec-b h2 .num{color:var(--b)}
+
+/* equazioni */
+.eq{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;margin:22px 0;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);max-width:70ch}
+.eq .m{font:400 21px/1.5 var(--math);color:var(--ink);overflow-x:auto;white-space:nowrap;padding:2px 0}
+.eq .m i{font-style:italic}
+.eq .m .op{margin:0 .22em}
+.eq .note{display:block;font:400 13.5px/1.5 var(--sans);color:var(--muted);white-space:normal;margin-top:2px}
+.eq .eqn{font:400 14px var(--mono);color:var(--muted)}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;font-size:.92em;line-height:1.25}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .2em .05em}
+.frac>span:last-child{padding:.05em .2em 0}
+
+/* tabelle */
+.tbl{overflow-x:auto;margin:22px 0;max-width:780px}
+.tbl.wide{max-width:none}
+.tbl.wide td.n{font-size:12.5px}
+.tbl.wide table{min-width:940px}
+.tbl.wide td:first-child{min-width:180px}
+.tbl.wide td:nth-last-child(-n+2){min-width:150px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+thead th{font:500 12.5px/1.3 var(--sans);color:var(--muted);text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--rule-2);white-space:nowrap}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink-2)}
+td:first-child{color:var(--ink)}
+.n{text-align:right;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+thead th.n{font-family:var(--sans);font-size:12.5px}
+td.ca{color:var(--a-ink)} td.cb{color:var(--b-ink)} td.cc{color:var(--c3-ink)}
+th.ca{color:var(--a-ink)} th.cb{color:var(--b-ink)}
+
+/* figure */
+figure.schema{margin:30px 0;padding:0}
+.sheet{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:18px 16px 8px;overflow-x:auto;position:relative}
+.sheet .stamp{position:absolute;right:14px;top:12px;font:400 11.5px var(--mono);color:var(--muted)}
+figure.schema figcaption{font-size:14px;color:var(--muted);padding:12px 2px 0;max-width:70ch}
+figure.schema figcaption b{font-weight:600;color:var(--ink-2)}
+svg.sch{display:block;width:100%;min-width:560px;height:auto}
+.sch .w{stroke:var(--ink);stroke-width:1.15;fill:none}
+.sch .cap{stroke:var(--ink);stroke-width:2.4}
+.sch .r{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+.sch .dot{fill:var(--ink)}
+.sch .mk{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sch text{font:400 12px var(--mono);fill:var(--muted)}
+.sch text.pin{fill:var(--ink)}
+.sch text.ttl{font:600 14px var(--sans);fill:var(--cfg-ink,var(--a-ink))}
+.sch .blk{fill:var(--cfg-soft,var(--a-soft));stroke:var(--cfg,var(--a));stroke-width:1}
+.sch .blk2{fill:var(--sunk);stroke:var(--rule-2);stroke-width:1}
+.cfg-b{--cfg:var(--b);--cfg-soft:var(--b-soft);--cfg-ink:var(--b-ink)}
+.sch .grid{stroke:var(--rule);stroke-width:1}
+.sch .sl{fill:none;stroke-width:1.6}
+.sch .sl.sa{stroke:var(--a)} .sch .sl.sb{stroke:var(--b)} .sch .sl.sc{stroke:var(--c3)}
+.sch .sp.sa{fill:var(--a)} .sch .sp.sb{fill:var(--b)} .sch .sp.sc{fill:var(--c3)}
+.cfg-c{--cfg:var(--c3);--cfg-soft:var(--c3-soft);--cfg-ink:var(--c3-ink)}
+.sec-c h2 .num{color:var(--c3)}
+.part.part-a{border-top-color:var(--a)} .part.part-a>span{color:var(--a-ink)}
+.part.part-c{border-top-color:var(--c3)} .part.part-c>span{color:var(--c3-ink)}
+
+/* callout */
+.callout{display:block;margin:24px 0;padding:2px 0 2px 18px;border-left:2px solid var(--note);max-width:70ch}
+.callout .tag{display:block;font:italic 400 15px/1.4 var(--serif);color:var(--note);margin:0 0 3px}
+.callout p{margin:0;color:var(--ink-2)}
+.callout p+p{margin-top:.75em}
+.callout.warn{border-color:var(--warn)} .callout.warn .tag{color:var(--warn)}
+.callout.ok{border-color:var(--ok)} .callout.ok .tag{color:var(--ok)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:none}
+.grid2 .callout{margin:16px 0}
+.card{margin:26px 0;padding:20px 22px;background:var(--paper);border:1px solid var(--rule);border-radius:10px;max-width:70ch}
+.card h4{margin:0 0 6px;font:500 19px/1.3 var(--serif)}
+.card p{margin:.2em 0}
+
+/* barre di campo */
+.ranges{margin:24px 0 8px;max-width:70ch}
+.range{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:16px;margin:0 0 14px}
+.range .lbl{font-size:14px;color:var(--ink)}
+.range .lbl small{display:block;color:var(--muted);font:400 12.5px var(--mono)}
+.track{position:relative;height:10px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule)}
+.track .fill{position:absolute;top:-1px;bottom:-1px;border-radius:999px}
+.track .zero{position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--ink-2)}
+.fill.ra{background:var(--a)} .fill.rb{background:var(--b)} .fill.rx{background:var(--rule-2)}
+.scale{position:relative;height:20px;margin-left:166px;font:400 11.5px var(--mono);color:var(--muted)}
+.scale span{position:absolute;transform:translateX(-50%)}
+
+/* procedura */
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:26px 0;position:relative;max-width:72ch}
+ol.steps::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:var(--rule-2)}
+ol.steps>li{counter-increment:s;position:relative;padding:0 0 26px 54px;max-width:none;color:var(--ink-2)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:31px;height:31px;border-radius:50%;background:var(--bg);border:1px solid var(--a);color:var(--a-ink);font:500 13px/29px var(--mono);text-align:center}
+ol.steps strong{display:block;font:500 18px/1.35 var(--serif);color:var(--ink);margin:2px 0 4px}
+.expect{display:block;margin-top:10px;padding:8px 12px;border-radius:6px;background:var(--ok-soft);font:400 13px/1.55 var(--mono);color:var(--ink-2);white-space:pre-wrap;overflow-wrap:anywhere}
+.expect::before{content:"atteso  ";color:var(--ok);font-weight:500}
+
+/* codice */
+pre.term{margin:20px 0;padding:16px 18px;background:var(--code-bg);border:1px solid var(--rule);border-radius:10px;overflow-x:auto;font:400 13px/1.6 var(--mono);color:var(--code-ink)}
+.files-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:30px 0 10px}
+.files-head h3{margin:0}
+details.file{border:1px solid var(--rule);border-radius:10px;background:var(--paper);margin:0 0 8px;overflow:hidden}
+details.file summary{list-style:none;display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:12px;padding:12px 16px;cursor:pointer}
+details.file summary::-webkit-details-marker{display:none}
+details.file summary:hover{background:var(--sunk)}
+.fname{font:500 14px var(--mono);color:var(--ink)}
+.frole{font:500 11.5px/1.6 var(--sans);color:var(--muted);border:1px solid var(--rule-2);border-radius:999px;padding:0 9px}
+.flines{font:400 12px var(--mono);color:var(--muted);text-align:right}
+.chev{width:9px;height:9px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+details[open] .chev{transform:rotate(225deg) translate(-2px,-1px)}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+.fbody{border-top:1px solid var(--rule);background:var(--code-bg)}
+.fbar{display:flex;align-items:center;gap:12px;padding:10px 16px 0}
+.fdesc{margin:0;font-size:13.5px;color:var(--muted)!important;max-width:none}
+.copy{margin-left:auto;font:500 12px var(--sans);color:var(--ink-2);background:var(--paper);border:1px solid var(--rule-2);border-radius:999px;padding:4px 12px;cursor:pointer;flex:0 0 auto}
+.fbody pre{margin:0;padding:12px 16px 18px;overflow-x:auto;font:400 13px/1.6 var(--mono);color:var(--code-ink);tab-size:2}
+a.flink{text-decoration:none}
+.hljs-keyword,.hljs-built_in,.hljs-meta .hljs-keyword{color:var(--k)} .hljs-string,.hljs-meta .hljs-string{color:var(--s)} .hljs-comment{color:var(--c);font-style:italic}
+.hljs-number,.hljs-literal{color:var(--n)} .hljs-title,.hljs-title.function_{color:var(--f)} .hljs-type,.hljs-title.class_{color:var(--t)} .hljs-meta{color:var(--n)}
+
+.part{margin:64px 0 0;padding:44px 0 34px;border-top:2px solid var(--b);border-bottom:1px solid var(--rule)}
+.part>span{font:400 13px var(--mono);color:var(--b-ink)}
+.part h2.part-title{font-size:clamp(30px,3.6vw,42px);margin:8px 0 14px}
+.part p{max-width:66ch;font-size:17.5px}
+.toc li.tp a{color:var(--ink);font-weight:500;margin-top:10px}
+.toc li.tp:first-child a{margin-top:0}
+.toc li.tp a span{color:var(--muted)}
+ol.ex{padding-left:1.4em} ol.ex li{margin:0 0 12px;color:var(--ink-2)} ol.ex li::marker{font:500 14px var(--mono);color:var(--a)}
+footer{max-width:1180px;margin:0 auto;padding:28px 32px 56px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--rule)}
+
+@media (max-width:980px){
+  .hero-in{grid-template-columns:1fr;padding:48px 22px 40px} .hero-art{max-width:520px}
+  .layout{grid-template-columns:1fr;gap:0;padding:0 22px}
+  .toc{position:sticky;top:0;z-index:5;max-height:none;padding:calc(env(safe-area-inset-top,0px) + 8px) 0 8px;background:var(--bg);border-bottom:1px solid var(--rule);margin:0 -22px;padding-left:22px;padding-right:22px}
+  .toc p,.toc .tools .btn:not(#theme){display:none}
+  .toc nav{display:flex;align-items:center;gap:8px}
+  .toc ol{display:flex;gap:2px;overflow-x:auto;border-left:0;flex:1;scrollbar-width:none}
+  .toc a{display:block;white-space:nowrap;padding:6px 10px;border-left:0;border-bottom:2px solid transparent;margin:0}
+  .toc a span{display:none}
+  .toc a[aria-current="true"]{border-bottom-color:var(--a)}
+  .toc .tools{margin:0;flex-direction:row}
+  .grid2{grid-template-columns:1fr;gap:0}
+  .range{grid-template-columns:1fr;gap:6px} .scale{margin-left:0}
+  footer{padding:24px 22px 48px}
+}
+.fill.rc{background:var(--c3)}
+.part.part-b{border-top-color:var(--b)} .part.part-b>span{color:var(--b-ink)}
+main ul{max-width:70ch;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in">
+  <div>
+    <p class="kicker">Dispensa di laboratorio — misure elettroniche</p>
+    <h1>Simulatore di cella di carico a ponte da 348 Ω</h1>
+    <p class="lead">Un ponte resistivo con impedenza d'uscita vicina a quella di una cella da 350 Ω, segnale bipolare di circa ±2 mV/V e linee sense a sei fili. Il multigiri da 200 Ω regola il segnale; il carico completo sull'eccitazione è circa 288 Ω. Progetto, calcolo, taratura e collaudo con un modulo HX711.</p>
+    <dl class="meta">
+      <div><dt>Revisione elettrica</dt><dd>P3.1 · PCB P3</dd></div>
+      <div><dt>Livello</dt><dd>ITS meccatronica</dd></div>
+      <div><dt>Segnale</dt><dd>±1,989 mV/V</dd></div>
+      <div><dt>Impedenza d'uscita</dt><dd>≈ 341 Ω</dd></div>
+      <div><dt>Lettore</dt><dd>modulo HX711</dd></div>
+      <div><dt>Contenuto</dt><dd>11 capitoli, 3 appendici</dd></div>
+    </dl>
+  </div>
+  <svg class="hero-art" viewBox="0 0 520 320" role="img" aria-label="Ponte di Wheatstone con quattro resistenze da 348 ohm e iniezione dal cursore di un potenziometro nel nodo A+">
+    <path class="hw" d="M260 20 V50"/><text x="274" y="34">E+</text>
+    <path class="hw" d="M260 50 L140 150"/><path class="hw" d="M260 50 L380 150"/>
+    <path class="hw" d="M140 150 L260 250"/><path class="hw" d="M380 150 L260 250"/>
+    <rect class="hr" x="178" y="66" width="52" height="20" rx="3" transform="rotate(-40 204 76)"/>
+    <rect class="hr" x="290" y="66" width="52" height="20" rx="3" transform="rotate(40 316 76)"/>
+    <rect class="hr" x="178" y="214" width="52" height="20" rx="3" transform="rotate(40 204 224)"/>
+    <rect class="hr" x="290" y="214" width="52" height="20" rx="3" transform="rotate(-40 316 224)"/>
+    <text x="150" y="86" text-anchor="end">R1</text><text x="370" y="86">R3</text>
+    <text x="150" y="228" text-anchor="end">R2</text><text x="370" y="228">R4</text>
+    <circle class="hd" cx="140" cy="150" r="3.5"/><circle class="hd" cx="380" cy="150" r="3.5"/>
+    <path class="hw" d="M260 250 V290"/><text x="274" y="296">E−</text>
+    <text class="hl" x="124" y="146" text-anchor="end">A+</text><text class="hl" x="396" y="146">A−</text>
+    <path class="hwp" d="M20 150 H140"/>
+    <rect class="hp" x="44" y="138" width="40" height="24" rx="3"/>
+    <path class="hwp" d="M64 100 V138"/><path class="hwp" d="M57 108 L64 96 L71 108"/>
+    <text class="hl" x="64" y="84" text-anchor="middle">RV1</text>
+    <text class="hl" x="260" y="156" text-anchor="middle" style="font-size:12px">±2 mV/V</text>
+  </svg>
+</div></header>
+
+<div class="layout">
+<aside class="toc"><nav aria-label="Indice">
+  <p>Indice</p>
+  <ol>
+    <li class="tp"><a href="#obiettivi"><span>I</span>Progetto</a></li>
+    <li><a href="#obiettivi"><span>01</span>Obiettivi e materiale</a></li>
+    <li><a href="#segnale"><span>02</span>Il segnale di una cella</a></li>
+    <li><a href="#perche"><span>03</span>Perché un ponte reale</a></li>
+    <li><a href="#schema"><span>04</span>Lo schema</a></li>
+    <li><a href="#calcoli"><span>05</span>Calcoli e valori attesi</a></li>
+    <li class="tp"><a href="#sense"><span>II</span>Costruzione</a></li>
+    <li><a href="#sense"><span>06</span>Sense a sei fili</a></li>
+    <li><a href="#montaggio"><span>07</span>Montaggio e taratura</a></li>
+    <li><a href="#hx711"><span>08</span>Collegamento all'HX711</a></li>
+    <li class="tp"><a href="#laboratorio"><span>III</span>Verifica</a></li>
+    <li><a href="#laboratorio"><span>09</span>Laboratorio</a></li>
+    <li><a href="#diagnostica"><span>10</span>Diagnostica</a></li>
+    <li><a href="#esercizi"><span>11</span>Esercizi</a></li>
+    <li class="tp"><a href="#glossario"><span>—</span>Appendici</a></li>
+    <li><a href="#glossario"><span>A</span>Glossario</a></li>
+    <li><a href="#fonti"><span>B</span>Fonti</a></li>
+    <li><a href="#stato"><span>C</span>Stato delle verifiche</a></li>
+  </ol>
+  <div class="tools"><button class="btn" id="theme" type="button" aria-label="Cambia tema chiaro o scuro">Tema</button></div>
+</nav></aside>
+<main>
+
+<div class="part part-a" id="parte-1" style="margin-top:24px"><span>Parte I</span><h2 class="part-title">Progetto</h2><p>Che cosa deve riprodurre il simulatore, perché un partitore non basta e come si arriva allo schema con il multigiri da 200 Ω.</p></div>
+
+<section id="obiettivi" class="sec-a">
+<h2><span class="num">01</span>Obiettivi e materiale</h2>
+<p>Una cella di carico reale costa, si danneggia con un sovraccarico e non permette di impostare un valore preciso e ripetibile. Per collaudare l'elettronica di condizionamento e il firmware si sostituisce la cella con un <em>simulatore</em>: un circuito passivo che produce lo stesso tipo di segnale. Un buon simulatore riproduce tre grandezze: l'ampiezza del segnale in mV/V, l'impedenza vista dal lettore e la corrente assorbita dall'eccitazione.</p>
+<p>Il circuito qui descritto è un ponte di Wheatstone con quattro resistenze da 348 Ω. Lo sbilanciamento si ottiene iniettando una piccola corrente nel nodo A+ dal cursore di un multigiri da 200 Ω, e un secondo regolatore compensa lo zero iniziale.</p>
+<div class="tbl"><table>
+<thead><tr><th>Parte</th><th>Capitoli</th><th>Al termine lo studente sa</th></tr></thead>
+<tbody>
+<tr><td class="ca">I — Progetto</td><td>1–5</td><td>Esprimere il segnale di una cella in mV/V; motivare la scelta di un ponte reale rispetto a un partitore; calcolare fondo scala, impedenza, carico e tolleranze</td></tr>
+<tr><td class="cb">II — Costruzione</td><td>6–8</td><td>Cablare le linee sense, montare e tarare il simulatore, collegarlo a un modulo HX711 e prevedere i conteggi</td></tr>
+<tr><td class="cc">III — Verifica</td><td>9–11</td><td>Eseguire le prove di laboratorio con i valori attesi, diagnosticare i guasti, risolvere gli esercizi</td></tr>
+</tbody></table></div>
+<h3>Materiale</h3>
+<div class="tbl"><table>
+<thead><tr><th>Rif.</th><th>Q.tà</th><th>Valore</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>R1–R4</td><td class="n">4</td><td>348 Ω, 0,1%, 25 ppm/°C, assiali a foro</td><td>Dello stesso lotto, montate vicine; appaiare con il multimetro</td></tr>
+<tr><td>R5</td><td class="n">1</td><td>3,65 kΩ, 0,1%</td><td>Determina il fondo scala</td></tr>
+<tr><td>R6</td><td class="n">1</td><td>56 kΩ, 1%</td><td>Amplia il campo dello zero; carica debolmente anche il segnale</td></tr>
+<tr><td>R7, R8</td><td class="n">2</td><td>909 Ω, 0,1%, 25 ppm/°C</td><td>In serie al multigiri: portano il carico della rete a circa 2 kΩ</td></tr>
+<tr><td>RV1</td><td class="n">1</td><td>200 Ω, 10 giri, legge lineare</td><td>Verificare sigla, tolleranza e linearità del multigiri disponibile; collegamento a tre fili</td></tr>
+<tr><td>RV2</td><td class="n">1</td><td>10 kΩ, 25 giri, cermet</td><td>Regolazione dello zero</td></tr>
+<tr><td>R9, R10</td><td class="n">2</td><td>Ponticello a filo (0 Ω)</td><td>Da montare sempre; sostituibili con 0,5–2 Ω per simulare la resistenza del cavo</td></tr>
+<tr><td>J1</td><td class="n">1</td><td>Morsettiera o header a 6 poli</td><td>EXC+, SENSE+, A+, A−, SENSE−, EXC−</td></tr>
+<tr><td>Modulo HX711</td><td class="n">1</td><td>—</td><td>Morsetti E+, E−, A−, A+, B−, B+</td></tr>
+<tr><td>Multimetro</td><td class="n">1</td><td>Scala DC con risoluzione ≤ 10 µV; preferibile 1 µV</td><td>Per verificare lo zero entro 10 µV servono risoluzione e accuratezza adeguate; il numero di cifre da solo non basta</td></tr>
+</tbody></table></div>
+<h3>Componenti commerciali e acquisto</h3>
+<p>348 Ω, 3,65 kΩ e 909 Ω appartengono alla serie standard E96; 56 kΩ alla E24. Sono valori commerciali, non resistenze su misura. Per i rami di precisione mantenere la tolleranza indicata: sostituire quattro resistenze allo 0,1% con comuni componenti all’1% senza selezione può rendere impossibile l’azzeramento.</p>
+<div class="tbl"><table><thead><tr><th>Rif.</th><th>Codice fabbricante</th><th>Acquisto e specifiche</th></tr></thead><tbody>
+<tr><td>R1–R4 · 4 pezzi</td><td><code>YR1B348RCC</code></td><td><a href="https://www.te.com/en/product-5-1622796-3.html">TE: 348 Ω, 0,1%, 0,25 W, 15 ppm/°C</a>; <a href="https://www.mouser.com/ProductDetail/TE-Connectivity-Holsworthy/YR1B348RCC?qs=s1WWODT2SXWSTUbqk3gftw%3D%3D">Mouser 279-YR1B348RCC</a></td></tr>
+<tr><td>R5 · 1 pezzo</td><td><code>YR1B3K65CC</code></td><td><a href="https://www.te.com/en/product-2-1676914-0.html">TE: 3,65 kΩ, 0,1%, 0,25 W, 15 ppm/°C</a>; RS 754-5705; <a href="https://www.digikey.com/es/products/detail/te-connectivity-passive-product/YR1B3K65CC/18102024">DigiKey</a></td></tr>
+<tr><td>R6 · 1 pezzo</td><td><code>MFR-25FRF52-56K</code></td><td>Yageo: 56 kΩ, 1%, 0,25 W; <a href="https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-56K/9139085">DigiKey, nastro tagliato</a></td></tr>
+<tr><td>R7, R8 · 2 pezzi</td><td><code>YR1B909RCC</code></td><td><a href="https://www.te.com/en/product-3-1676915-8.html">TE: 909 Ω, 0,1%, 0,25 W, 15 ppm/°C</a>; <a href="https://ee.farnell.com/neohm-te-connectivity/yr1b909rcc/res-909r-0-25w-axial-metal-film/dp/3133551">Farnell 3133551</a></td></tr>
+<tr><td>R9, R10 · 2 pezzi</td><td>Ponticelli a filo</td><td>Per il montaggio normale; per la prova del cavo servono anche due resistenze comuni da 1 Ω, 1%, a foro</td></tr>
+</tbody></table></div>
+<p>I corpi delle TE YR1 sono nominalmente 6,3 × 2,3 mm; la Yageo MFR-25 è 6,3 × 2,4 mm: adatti al passo di montaggio di 10,16 mm previsto per R1–R8. Le pagine di acquisto consultate indicano disponibilità anche in piccole quantità; stock, confezione e consegna in Italia vanno ricontrollati al momento dell’ordine. La <a href="pcb/simulatore_ponte_348_p3/componenti_acquisto.csv">lista di acquisto CSV</a> raccoglie i riferimenti. Il limite di 25 ppm/°C usato nei calcoli del ponte è conservativo rispetto ai 15 ppm/°C di questi codici; non garantisce però il tracking termico fra esemplari.</p>
+<div class="callout"><span class="tag">Montaggio dei regolatori</span><p>RV1 si collega con tre fili al connettore a passo 2,54 mm: non si presume che il multigiri disponibile abbia quel passo. Per RV2, il codice di riferimento è Bourns 3296W-1-103LF; l’impronta sul PCB è comunque un connettore generico 1×3. Controllare corpo, numerazione e orientamento prima del montaggio diretto oppure usare tre fili. La serigrafia del connettore non rappresenta l’ingombro completo del trimmer.</p></div>
+</section>
+
+<section id="segnale" class="sec-a">
+<h2><span class="num">02</span>Il segnale di una cella</h2>
+<p>Una cella contiene quattro estensimetri collegati a ponte. Alimentato con la tensione di eccitazione V<sub>ex</sub> tra E+ ed E−, il ponte dà tra A+ e A− una tensione differenziale proporzionale al carico. La sensibilità si esprime in <strong>mV/V</strong>: millivolt di uscita a fondo scala per ogni volt di eccitazione.</p>
+<div class="eq"><span class="m"><i>V</i><sub>diff</sub> = <i>S</i> · <i>V</i><sub>ex</sub> · <span class="frac"><span><i>F</i></span><span><i>F</i><sub>nom</sub></span></span><span class="note">Esempio: S = 2 mV/V e V<sub>ex</sub> = 3,2 V danno 6,4 mV a fondo scala.</span></span><span class="eqn">(1)</span></div>
+<p>Il modo comune vale circa V<sub>ex</sub>/2. Una cella a trazione e compressione dà tensioni di segno opposto: il simulatore deve quindi essere <strong>bipolare</strong>, con zero a metà corsa del regolatore.</p>
+<h3>Misura ratiometrica</h3>
+<p>L'HX711 usa come riferimento la stessa tensione AVDD che alimenta il ponte. Con E+ del modulo collegato ad AVDD ed E− ad AGND, e trascurando la caduta sui cavi, il codice ideale dipende dal rapporto V<sub>diff</sub>/V<sub>ex</sub>: se l'eccitazione varia, la lettura non cambia. A gain 128 il fondo scala del convertitore è ±0,5·V<sub>ex</sub>/128, cioè ±3,906 mV/V, e i conteggi valgono:</p>
+<div class="eq"><span class="m"><i>N</i> = <span class="frac"><span><i>V</i><sub>diff</sub></span><span><i>V</i><sub>ex</sub></span></span> · 128 · 2<sup>24</sup> ≈ 2,147·10<sup>6</sup> conteggi per mV/V<span class="note">Valore ideale; i codici disponibili vanno da −8 388 608 a +8 388 607 (complemento a due). Guadagno e offset reali del modulo si compensano con tara e calibrazione di span.</span></span><span class="eqn">(2)</span></div>
+<h3>Sei fili</h3>
+<p>Le celle di precisione hanno sei fili: E+ ed E− portano la corrente, A+ ed A− il segnale, SENSE+ e SENSE− misurano la tensione effettiva ai capi del ponte e non trasportano corrente. Un lettore che usa i sense compensa la caduta sui fili di eccitazione. Il modulo HX711 non ha ingressi sense: se ne tratta al capitolo 6.</p>
+</section>
+
+<section id="perche" class="sec-a">
+<h2><span class="num">03</span>Perché un ponte reale</h2>
+<p>Il partitore bipolare della versione precedente produce il segnale corretto ma presenta agli ingressi circa 23,5 kΩ e assorbe pochi microampere. Il partitore unipolare ha invece impedenza bassa, ma non genera segnali negativi. Il ponte qui proposto offre circa 341 Ω d'uscita e assorbe milliampere: mette alla prova sia l'eccitazione sia gli ingressi del lettore. Il carico complessivo è però circa 288 Ω, contro 350 Ω di una cella ideale di riferimento: a pari tensione assorbe circa il 21% in più. Riproduce quindi il comportamento elettrico in modo approssimato, senza simulare meccanica, isteresi o compensazione termica della cella.</p>
+<div class="tbl"><table>
+<thead><tr><th>Caratteristica</th><th>Partitore unipolare</th><th>Partitore bipolare</th><th class="cc">Ponte 348 Ω</th></tr></thead>
+<tbody>
+<tr><td>Campo di uscita</td><td class="n">0 … +2 mV/V</td><td class="n">±2 mV/V</td><td class="n cc">±1,989 mV/V</td></tr>
+<tr><td>Impedenza tra A+ e A−</td><td class="n">≤ 200 Ω</td><td class="n">≈ 23,5 kΩ</td><td class="n cc">≈ 341 Ω</td></tr>
+<tr><td>Corrente dall'eccitazione a 3,2 V</td><td class="n">≈ 34 µA</td><td class="n">≈ 68 µA</td><td class="n cc">≈ 11,1 mA</td></tr>
+<tr><td>Rumore termico della sorgente (4,4 Hz)</td><td class="n">≈ 3 nV</td><td class="n">≈ 41 nV</td><td class="n cc">≈ 5 nV</td></tr>
+<tr><td>Zero</td><td>Esatto</td><td>Quasi esatto</td><td class="cc">Da tarare, deriva con la temperatura</td></tr>
+</tbody></table></div>
+<p>I valori dei partitori provengono dalla dispensa precedente (archivio del progetto); quelli del ponte sono calcolati al capitolo 5.</p>
+<div class="ranges">
+  <div class="range"><div class="lbl">Fondo scala HX711<small>±3,906 mV/V</small></div><div class="track"><span class="fill rx" style="left:1.2%;width:97.6%"></span><span class="zero"></span></div></div>
+  <div class="range"><div class="lbl">Partitore unipolare<small>0 … +2 mV/V</small></div><div class="track"><span class="fill ra" style="left:50%;width:25%"></span><span class="zero"></span></div></div>
+  <div class="range"><div class="lbl">Ponte 348 Ω<small>±1,989 mV/V</small></div><div class="track"><span class="fill rc" style="left:25.1%;width:49.8%"></span><span class="zero"></span></div></div>
+  <div class="scale"><span style="left:0">−4</span><span style="left:25%">−2</span><span style="left:50%">0</span><span style="left:75%">+2</span><span style="left:100%">+4 mV/V</span></div>
+</div>
+<div class="callout warn"><span class="tag">Dallo schizzo al progetto</span><p>Lo schizzo di partenza usava due resistenze da 25 kΩ in serie al trimmer da 200 Ω più un 350 Ω in parallelo. Il fondo scala era 200 / 50 200 = 3,98 mV/V, oltre i ±3,906 mV/V dell'HX711: a fine corsa il convertitore satura, e a 2 mV/V si lavorava a metà corsa con metà risoluzione. Il 350 Ω in parallelo caricava l'eccitazione ma lasciava a circa 12,5 kΩ l'impedenza d'uscita. Il ponte vero risolve entrambi i problemi.</p></div>
+</section>
+
+<section id="schema" class="sec-a">
+<h2><span class="num">04</span>Lo schema</h2>
+<figure class="schema"><div class="sheet"><span class="stamp">Fig. 1</span>
+<svg class="sch cfg-c" viewBox="0 0 800 470" role="img" aria-labelledby="s1-t s1-d"><title id="s1-t">Simulatore a ponte da 348 ohm con regolatori RV1 e RV2</title><desc id="s1-d">Quattro resistenze da 348 ohm formano il ponte tra E+ ed E−. RV1 da 200 ohm in serie a due resistenze da 909 ohm è collegato tra E+ ed E−; il suo cursore inietta corrente nel nodo A+ attraverso R5 da 3,65 kiloohm. RV2 da 10 kiloohm con R6 da 56 kiloohm compensa lo zero. Le linee SENSE+ e SENSE− sono derivate dai nodi E+ ed E− del ponte. J1 ha sei poli; EXC+ ed EXC− sono prima di R9/R10, E+ ed E− sono i nodi interni del ponte.</desc>
+<defs><marker id="ma" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" class="mk"/></marker></defs>
+<!-- rail -->
+<path class="w" d="M130 50 H150"/><path class="w" d="M175 50 H700"/>
+<path class="w" d="M130 420 H150"/><path class="w" d="M175 420 H700"/>
+<rect class="r" x="150" y="42" width="25" height="16" rx="2" style="stroke-dasharray:3 2"/>
+<rect class="r" x="150" y="412" width="25" height="16" rx="2" style="stroke-dasharray:3 2"/>
+<text x="162" y="34" text-anchor="middle" style="font-size:10.5px">R9</text>
+<text x="162" y="448" text-anchor="middle" style="font-size:10.5px">R10</text>
+<!-- sense -->
+<circle class="dot" cx="195" cy="50" r="3"/><path class="w" d="M195 50 V115 H130"/>
+<circle class="dot" cx="195" cy="420" r="3"/><path class="w" d="M195 420 V355 H130"/>
+<!-- leg B (A-) -->
+<circle class="dot" cx="230" cy="50" r="3"/><path class="w" d="M230 50 V90"/>
+<rect class="r" x="222" y="90" width="16" height="50" rx="2"/>
+<path class="w" d="M230 140 V330"/>
+<rect class="r" x="222" y="330" width="16" height="50" rx="2"/>
+<path class="w" d="M230 380 V420"/><circle class="dot" cx="230" cy="420" r="3"/>
+<circle class="dot" cx="230" cy="270" r="3"/><path class="w" d="M230 270 H130"/>
+<!-- leg A (A+) -->
+<circle class="dot" cx="370" cy="50" r="3"/><path class="w" d="M370 50 V90"/>
+<rect class="r" x="362" y="90" width="16" height="50" rx="2"/>
+<path class="w" d="M370 140 V330"/>
+<rect class="r" x="362" y="330" width="16" height="50" rx="2"/>
+<path class="w" d="M370 380 V420"/><circle class="dot" cx="370" cy="420" r="3"/>
+<circle class="dot" cx="370" cy="190" r="3"/>
+<path class="w" d="M370 190 H236 a6 6 0 0 0 -12 0 H130"/>
+<circle class="dot" cx="370" cy="160" r="3"/>
+<circle class="dot" cx="370" cy="235" r="3"/>
+<!-- RV1 chain -->
+<circle class="dot" cx="520" cy="50" r="3"/><path class="w" d="M520 50 V90"/>
+<rect class="r" x="512" y="90" width="16" height="50" rx="2"/>
+<path class="w" d="M520 140 V185"/>
+<rect class="r" x="510" y="185" width="20" height="100" rx="2"/>
+<path class="w" d="M520 285 V330"/>
+<rect class="r" x="512" y="330" width="16" height="50" rx="2"/>
+<path class="w" d="M520 380 V420"/><circle class="dot" cx="520" cy="420" r="3"/>
+<!-- R5 e cursore RV1 -->
+<path class="w" d="M370 235 H395"/><rect class="r" x="395" y="227" width="50" height="16" rx="2"/>
+<path class="w" d="M445 235 H480"/><line class="w" x1="480" y1="235" x2="507" y2="235" marker-end="url(#ma)"/>
+<!-- R6 e RV2 -->
+<path class="w" d="M370 160 H514 a6 6 0 0 1 12 0 H570"/>
+<rect class="r" x="570" y="152" width="50" height="16" rx="2"/>
+<path class="w" d="M620 160 H640"/><line class="w" x1="640" y1="160" x2="667" y2="160" marker-end="url(#ma)"/>
+<circle class="dot" cx="680" cy="50" r="3"/><path class="w" d="M680 50 V110"/>
+<rect class="r" x="670" y="110" width="20" height="100" rx="2"/>
+<path class="w" d="M680 210 V420"/><circle class="dot" cx="680" cy="420" r="3"/>
+<!-- etichette -->
+<text x="246" y="119">R3 348</text><text x="246" y="359">R4 348</text>
+<text x="386" y="119">R1 348</text><text x="386" y="359">R2 348</text>
+<text x="538" y="119">R7 909</text><text x="538" y="359">R8 909</text>
+<text x="538" y="228">RV1 200 Ω</text><text x="538" y="244">10 giri</text>
+<text x="420" y="221" text-anchor="middle">R5 3k65</text>
+<text x="595" y="146" text-anchor="middle">R6 56k</text>
+<text x="698" y="156">RV2 10k</text><text x="698" y="172">25 giri</text>
+<text x="386" y="186">A+</text><text x="244" y="266">A−</text>
+<text x="520" y="30" text-anchor="middle" class="pin">rete di segnale</text>
+<text x="680" y="30" text-anchor="middle" class="pin">zero</text>
+<text x="300" y="30" text-anchor="middle" class="pin">ponte</text>
+<!-- J1 -->
+<rect class="blk" x="20" y="30" width="110" height="410" rx="6"/>
+<text class="ttl" x="75" y="466" text-anchor="middle" style="font-size:13px">J1</text>
+<text class="pin" x="30" y="54">EXC+</text><text class="pin" x="30" y="119">SENSE+</text><text class="pin" x="30" y="194">A+</text>
+<text class="pin" x="30" y="274">A−</text><text class="pin" x="30" y="359">SENSE−</text><text class="pin" x="30" y="424">EXC−</text>
+</svg></div>
+<figcaption><b>Fig. 1</b> — Schema del simulatore. Il filo di R6 scavalca la rete RV1 e il filo A+ scavalca il ramo di A−: le giunzioni sono solo dove compare il punto pieno. R9 e R10 sono ponticelli a filo da 0 Ω (R<sub>cavo</sub>); SENSE+ e SENSE− sono derivati dai nodi del ponte, dopo R9 e R10. Sul PCB i morsetti di alimentazione J1.1 e J1.6 sono indicati EXC+ ed EXC−; E+ ed E− sono i nodi interni.</figcaption></figure>
+
+<h3>Elenco dei collegamenti</h3>
+<div class="tbl"><table>
+<thead><tr><th>Rif.</th><th>Tra</th><th>Valore</th><th>Funzione</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>E+ — A+</td><td class="n">348 Ω</td><td>Ramo del ponte</td></tr>
+<tr><td>R2</td><td>A+ — E−</td><td class="n">348 Ω</td><td>Ramo del ponte</td></tr>
+<tr><td>R3</td><td>E+ — A−</td><td class="n">348 Ω</td><td>Ramo del ponte</td></tr>
+<tr><td>R4</td><td>A− — E−</td><td class="n">348 Ω</td><td>Ramo del ponte</td></tr>
+<tr><td>R7</td><td>E+ — estremo 1 di RV1</td><td class="n">909 Ω</td><td>Limita la corsa del cursore</td></tr>
+<tr><td>RV1</td><td>estremo 1, cursore, estremo 3</td><td class="n">200 Ω</td><td>Regolazione del segnale</td></tr>
+<tr><td>R8</td><td>estremo 3 di RV1 — E−</td><td class="n">909 Ω</td><td>Limita la corsa del cursore</td></tr>
+<tr><td>R5</td><td>cursore di RV1 — A+</td><td class="n">3,65 kΩ</td><td>Inietta la corrente di sbilanciamento</td></tr>
+<tr><td>RV2</td><td>E+, cursore, E−</td><td class="n">10 kΩ</td><td>Regolazione dello zero</td></tr>
+<tr><td>R6</td><td>cursore di RV2 — A+</td><td class="n">56 kΩ</td><td>Inietta la correzione di zero</td></tr>
+<tr><td>SENSE+, SENSE−</td><td>nodi E+ ed E− del ponte — J1</td><td>—</td><td>Linee sense</td></tr>
+</tbody></table></div>
+
+<h3>Funzionamento</h3>
+<p>Con resistenze ideali il ponte R1–R4 è bilanciato e dà 0 mV/V. R7, RV1 e R8 formano un partitore di 2018 Ω tra E+ ed E−: il cursore si muove di soli ±0,0496·V<sub>ex</sub> attorno a V<sub>ex</sub>/2, perché le due resistenze di serie limitano la corsa. Attraverso R5 il cursore inietta una corrente nel nodo A+. Quel nodo ha verso E+ ed E− una resistenza equivalente R<sub>h</sub> = 348/2 = 174 Ω, molto minore di R5: la variazione di tensione è quindi piccola e quasi lineare. A metà corsa il cursore è a V<sub>ex</sub>/2, come A+, e non inietta corrente.</p>
+<p>Perché non collegare il 200 Ω direttamente tra E+ ed E−? Il carico sull'eccitazione scenderebbe a circa 125 Ω includendo RV2 (circa 25,5 mA a 3,2 V), troppo lontano da quello di una cella. Con R7 e R8 la rete pesa circa 2 kΩ. Il ponte e questa rete valgono circa 297 Ω; aggiungendo RV2 da 10 kΩ si arriva a circa 288 Ω al centro.</p>
+<div class="eq"><span class="m"><i>V</i><sub>diff</sub> ≈ <i>V</i><sub>ex</sub> · (½ − <i>p</i>) · <span class="frac"><span><i>P</i></span><span><i>R</i><sub>tot</sub></span></span> · <span class="frac"><span><i>R</i><sub>h</sub></span><span><i>R</i><sub>h</sub> + <i>R</i><sub>5</sub> + <i>Z</i><sub>w</sub></span></span><span class="note"><i>p</i> = posizione del cursore (0 = estremo lato R7, 1 = lato R8); <i>P</i> = 200 Ω; <i>R</i><sub>tot</sub> = R7 + P + R8 = 2018 Ω; <i>R</i><sub>h</sub> = 174 Ω; <i>Z</i><sub>w</sub> ≈ (R7 + P/2)/2 ≈ 505 Ω è l'impedenza del cursore. Formula approssimata che trascura il carico del ramo R6–RV2. I valori del capitolo 5 includono entrambi i cursori e derivano dalla soluzione nodale completa.</span></span><span class="eqn">(3)</span></div>
+</section>
+
+<section id="calcoli" class="sec-a">
+<h2><span class="num">05</span>Calcoli e valori attesi</h2>
+<h3>Fondo scala</h3>
+<p>Con <i>p</i> = 0 o 1 la (3) dà ±0,0496 · 0,0402 ≈ ±1,99 mV/V. La soluzione nodale esatta del circuito completo dà <strong>±1,989 mV/V</strong>, cioè ±6,36 mV con V<sub>ex</sub> = 3,2 V. Il segno è positivo con il cursore verso R7 (lato E+).</p>
+<div class="tbl"><table>
+<thead><tr><th>Cursore p</th><th>Giri da R7</th><th class="n">mV/V</th><th class="n">mV a 3,2 V</th><th class="n">Conteggi HX711</th><th class="n">Cella 2 mV/V, 10 kg</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td class="n">+1,989</td><td class="n">+6,36</td><td class="n">+4,27·10⁶</td><td class="n">+9,94 kg</td></tr>
+<tr><td>0,25</td><td>2,5</td><td class="n">+0,993</td><td class="n">+3,18</td><td class="n">+2,13·10⁶</td><td class="n">+4,97 kg</td></tr>
+<tr><td>0,5</td><td>5</td><td class="n">0,000</td><td class="n">0,00</td><td class="n">0</td><td class="n">0,00 kg</td></tr>
+<tr><td>0,75</td><td>7,5</td><td class="n">−0,993</td><td class="n">−3,18</td><td class="n">−2,13·10⁶</td><td class="n">−4,97 kg</td></tr>
+<tr><td>1</td><td>10</td><td class="n">−1,989</td><td class="n">−6,36</td><td class="n">−4,27·10⁶</td><td class="n">−9,94 kg</td></tr>
+</tbody></table></div>
+<p>Valori a vuoto, con eccitazione ideale, RV2 al centro elettrico e componenti nominali. La corrispondenza fra giri e posizione elettrica p presuppone un potenziometro lineare ideale; la taratura di un ponte reale può spostare RV2 e modificare leggermente i valori. La sensibilità di regolazione è circa 0,40 mV/V per giro (circa 8,5·10⁵ conteggi); un grado di rotazione vale circa 1,1 µV/V, cioè circa 2400 conteggi.</p>
+
+<h3>Impedenza, carico e potenza</h3>
+<div class="tbl"><table>
+<thead><tr><th>Grandezza</th><th class="n">Valore</th><th>Come si ottiene</th></tr></thead>
+<tbody>
+<tr><td>Resistenza del ponte tra E+ ed E−</td><td class="n">348 Ω</td><td>(R1+R2) ∥ (R3+R4)</td></tr>
+<tr><td>Carico sull'eccitazione, rete inclusa</td><td class="n">≈ 288,3 Ω</td><td>348 Ω ∥ 2018 Ω ∥ 10 kΩ, cursori al centro</td></tr>
+<tr><td>Corrente a 3,2 V / 5 V</td><td class="n">11,1 mA / 17,3 mA</td><td>V<sub>ex</sub> / 288,3 Ω</td></tr>
+<tr><td>Impedenza d'uscita tra A+ e A−</td><td class="n">≈ 341 Ω</td><td>174 Ω + [174 Ω ∥ (R5 + Z<sub>w</sub>) ∥ (R6 + 2,5 kΩ)], RV2 al centro</td></tr>
+<tr><td>Potenza su ogni 348 Ω a 3,2 V / 5 V</td><td class="n">7 mW / 18 mW</td><td>348 Ω · (V<sub>ex</sub>/696 Ω)²</td></tr>
+<tr><td>Rumore termico della sorgente</td><td class="n">≈ 2,4 nV/√Hz</td><td>√(4kT · 340,53 Ω) a 300 K; ≈ 5 nV rms assumendo una banda equivalente di rumore di 4,4 Hz</td></tr>
+<tr><td>Non linearità elettrica con RV1 ideale</td><td class="n">≈ 0,044% di FS</td><td>1001 punti, scarto dalla retta fra gli estremi; FS = 1,989 mV/V. Equivale allo 0,022% dell’escursione totale di 3,977 mV/V</td></tr>
+</tbody></table></div>
+
+<div class="callout"><span class="tag">Miglioria P3.1 — più margine sullo zero</span><p>R6 passa da 71,5 a <strong>56 kΩ, 1%</strong>; R7 e R8 restano da 909 Ω, valore standard E96, ma diventano <strong>0,1%</strong>. Il campo nominale di RV2 passa da ±1,165 a ±1,487 mV/V e l’offset causato da R7/R8 scende da circa ±0,181 a ±0,018 mV/V. Il fondo scala resta vicino a ±2 mV/V e il consumo nominale al centro non cambia. Per aggiornare una scheda P3 basta sostituire queste tre resistenze: piste, fori e connettori sono gli stessi.</p><p>Lo sweep di 1024 combinazioni agli estremi delle tolleranze trova 32 casi senza zero nella P3 e nessuno nella P3.1, con margine minimo di circa 0,440 mV/V. Sono inclusi R1–R4 e R5 allo 0,1%, R6 all’1%, RV1 al ±5% ipotizzato e RV2 al ±10%, limitando la corsa di RV2 all’1–99% e aggiungendo 110 Ω al ramo del cursore come margine sul contatto. Si tratta di un controllo del modello, non di una misura né di una certificazione di tutti i casi intermedi. Script e risultati sono in <a href="verifiche/verifica_calcoli.py">verifica_calcoli.py</a> e <a href="verifiche/calcoli.json">calcoli.json</a>.</p></div>
+<h3>Tolleranze e compensazione</h3>
+<div class="tbl wide"><table>
+<thead><tr><th>Componente</th><th>Tolleranza</th><th>Effetto</th><th>Compensazione</th></tr></thead>
+<tbody>
+<tr><td>R1–R4</td><td class="n">0,1%</td><td>Offset iniziale fino a ±1,0 mV/V (caso peggiore)</td><td>RV2, campo ±1,49 mV/V</td></tr>
+<tr><td>R5</td><td class="n">0,1% / 1%</td><td>Fondo scala ±0,1% / circa ±0,85% (1,972–2,006 mV/V con R5 ±1%)</td><td>Calibrazione di span</td></tr>
+<tr><td>RV1</td><td class="n">±5% ipotizzato</td><td>Fondo scala da 1,899 a 2,077 mV/V (circa ±4,5%, variando solo RV1)</td><td>Verificare il datasheet del componente; calibrazione di span</td></tr>
+<tr><td>R7, R8</td><td class="n">0,1%, opposte</td><td>Spostamento dello zero circa ±0,018 mV/V</td><td>RV2</td></tr>
+<tr><td>R1–R4, 25 ppm/°C</td><td class="n">—</td><td>Deriva dello zero fino a 0,025 mV/V per °C (caso peggiore; essere dello stesso lotto non garantisce un coefficiente termico relativo migliore)</td><td>Attendere la stabilizzazione termica</td></tr>
+</tbody></table></div>
+<div class="callout"><span class="tag">A cosa serve RV2</span><p>Con quattro resistenze allo 0,1% lo zero iniziale del ponte può arrivare a ±1,0 mV/V. RV2 con R6 = 56 kΩ offre un campo nominale di circa ±1,49 mV/V, calcolato includendo il carico del ramo RV1–R5. Consente di tarare lo zero verso 0 ± 10 µV con il cursore di RV1 a metà corsa. Con l'HX711 non è indispensabile, perché la tara software elimina l'offset e ±1 mV/V più ±2 mV/V restano entro ±3,9 mV/V. Serve per avere fondi scala simmetrici, per verificare il segno e, volendo, per introdurre un offset noto e provare la tara.</p></div>
+<div class="callout warn"><span class="tag">Il prezzo del realismo</span><p>Nel ponte lo zero dipende dalle tolleranze di tutte e quattro le resistenze; anche nei partitori bipolari il disadattamento dei rami può spostare lo zero. Per questo serve RV2, e per questo lo zero deriva con la temperatura come quello di una cella non compensata. Con tolleranza 0,5% l'offset iniziale arriverebbe a ±5 mV/V: oltre il campo di RV2 e oltre il fondo scala dell'HX711.</p></div>
+</section>
+
+<div class="part part-b" id="parte-2" style="border-top-color:var(--b)"><span style="color:var(--b-ink)">Parte II</span><h2 class="part-title">Costruzione</h2><p>Linee sense, montaggio con controlli intermedi, taratura dello zero e collegamento al modulo HX711.</p></div>
+
+<section id="sense" class="sec-b">
+<h2><span class="num">06</span>Sense a sei fili</h2>
+<p>Su una cella a sei fili le linee SENSE+ e SENSE− sono collegate ai nodi E+ ed E− del ponte, all'interno della cella. Non portano corrente: un lettore con ingressi di riferimento separati le usa per conoscere la tensione realmente applicata al ponte, escludendo la caduta sui fili di eccitazione.</p>
+<p>Sul simulatore le linee sono derivate direttamente dai nodi E+ ed E− del ponte, a valle di R9 e R10, non dal connettore. Con R9 e R10 a 0 Ω e nessun cavo il risultato è identico a quello di una cella a quattro fili.</p>
+<div class="tbl"><table>
+<thead><tr><th>Lettore</th><th>Collegamento dei sense</th></tr></thead>
+<tbody>
+<tr><td>Modulo HX711</td><td>Il convertitore non ha ingressi sense né un riferimento separato da AVDD: lasciare SENSE+ e SENSE− scollegati. Non ponticellarli ai morsetti di eccitazione del modulo: con R9/R10 diversi da zero o con cavi resistivi si crea un percorso in parallelo che altera la prova</td></tr>
+<tr><td>Lettore con riferimento esterno</td><td>Se il lettore supporta una cella a sei fili e ammette queste tensioni di riferimento, SENSE+ al riferimento positivo e SENSE− al negativo: il codice dipende dalla tensione ai capi del ponte e non dall'eccitazione al modulo</td></tr>
+</tbody></table></div>
+<h3>Effetto della resistenza del cavo</h3>
+<p>Se ogni filo di eccitazione ha resistenza R<sub>c</sub>, il ponte vede una tensione minore di quella di riferimento del modulo e il fondo scala letto cala:</p>
+<div class="eq"><span class="m"><i>e</i> ≈ − <span class="frac"><span>2<i>R</i><sub>c</sub></span><span><i>R</i><sub>carico</sub> + 2<i>R</i><sub>c</sub></span></span><span class="note">Con R<sub>carico</sub> ≈ 288,3 Ω: R<sub>c</sub> = 0,5 Ω → −0,35%; 1 Ω → −0,69%; 2 Ω → −1,37%. Con i sense collegati al riferimento l'errore si annulla al primo ordine.</span></span><span class="eqn">(4)</span></div>
+<p>Per questo R9 e R10 sono utili: sostituendoli con 1 Ω per filo si misura un errore di span di circa −0,7% con l'HX711, e si dimostra che solo un lettore con sense lo recupera.</p>
+</section>
+
+<section id="montaggio" class="sec-b">
+<h2><span class="num">07</span>Montaggio e taratura</h2>
+<ol class="steps">
+<li><strong>Selezione delle resistenze</strong>Misurare R1–R4 fuori circuito, compensare la resistenza dei puntali (preferibilmente misura a quattro fili) e usare le quattro più vicine tra loro, dello stesso lotto. Montarle vicine, perché seguano la stessa temperatura.<span class="expect">scarto tra le quattro ≤ 0,1%</span></li>
+<li><strong>Controllo a freddo del ponte</strong>A circuito disalimentato e scollegato dal lettore, montare R1–R4, R9/R10 a 0 Ω e i collegamenti verso J1, senza R5, R6, RV1, RV2, R7, R8. Misurare E+↔E− e A+↔A−.<span class="expect">E+↔E−: 348 Ω ± 1 Ω
+A+↔A−: 348 Ω ± 1 Ω</span></li>
+<li><strong>Rete di segnale</strong>Prima di collegare RV1, individuare il cursore con l’ohmmetro e portarlo al centro elettrico: le due resistenze cursore–estremo devono essere uguali. Cinque giri sono solo un riferimento meccanico. Poi montare R7, RV1, R8 e R5; misurare a circuito disalimentato e scollegato dal lettore.<span class="expect">RV1 isolato: cursore↔ciascun estremo ≈ metà del valore totale misurato (100 Ω nominali)
+E+↔E− ≈ 297 Ω
+A+↔A− ≈ 341 Ω (± 3 Ω)</span></li>
+<li><strong>Zero</strong>Montare RV2 e R6; a circuito spento il carico E+↔E− completo deve essere circa 288 Ω, con entrambi i cursori al centro. Collegare J1 al modulo HX711 o a un alimentatore da 3,2 V e misurare V<sub>ex</sub> = E+ − E−. Con RV1 a metà corsa regolare RV2 finché A+ − A− si annulla.<span class="expect">|A+ − A−| < 10 µV (< 3,13 µV/V a 3,2 V)</span></li>
+<li><strong>Fondo scala</strong>Portare RV1 ai due estremi e annotare i due valori misurati.<span class="expect">±V<sub>ex</sub> · 1,989·10⁻³ ±4,5% considerando solo RV1 al ±5%; aggiungere le altre tolleranze
+simmetria entro 1% come obiettivo di laboratorio, da verificare sul componente reale</span></li>
+<li><strong>Eccitazione sotto carico</strong>Misurare E+ − E− con il simulatore scollegato e poi collegato.<span class="expect">obiettivo didattico: calo ≤ 1% a carico inserito (≈ 11,1 mA a 3,2 V)</span></li>
+</ol>
+<div class="callout"><span class="tag">Stabilizzazione</span><p>Dopo l'accensione attendere qualche minuto prima di tarare lo zero: le quattro resistenze dissipano 7 mW ciascuna e si portano alla temperatura di regime. Controllare nuovamente l’offset dopo la stabilizzazione: lo spostamento dipende dai coefficienti termici effettivi e dai gradienti sul montaggio.</p></div>
+</section>
+
+<section id="hx711" class="sec-b">
+<h2><span class="num">08</span>Collegamento all'HX711</h2>
+<div class="tbl"><table>
+<thead><tr><th>Simulatore (J1)</th><th>Modulo HX711</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>EXC+ (J1.1)</td><td>E+</td><td>Eccitazione prodotta dal modulo</td></tr>
+<tr><td>EXC− (J1.6)</td><td>E−</td><td></td></tr>
+<tr><td>A+</td><td>A+</td><td>Canale A, gain 128</td></tr>
+<tr><td>A−</td><td>A−</td><td>Scambiando A+ e A− il segno si inverte</td></tr>
+<tr><td>SENSE+, SENSE−</td><td>—</td><td>Non collegati (cap. 6)</td></tr>
+<tr><td>—</td><td>B+, B−</td><td>Canale B non usato</td></tr>
+</tbody></table></div>
+<p>Con il modulo alimentato a 3,3 V, la tensione di eccitazione dipende dal regolatore, dal transistor e dal carico: misurarla senza assumere che valga 3,2 V. Verificare che E+ del modulo coincida con AVDD ed E− con AGND. La misura è ratiometrica quando ponte e riferimento seguono la stessa tensione; le cadute su R9/R10 e sui cavi introducono invece l’errore del capitolo 6. I millivolt vanno sempre riferiti alla V<sub>ex</sub> misurata ai nodi del ponte (SENSE+↔SENSE−). Il simulatore assorbe circa 11,1 mA a 3,2 V: verificare E+ a vuoto e sotto carico (capitolo 7, passo 6), perché la capacità del modulo di erogare questa corrente dipende dalla scheda.</p>
+<div class="callout warn"><span class="tag">Attenzione</span><p>Alcune varianti del modulo hanno pin separati VCC (analogico) e VDD (livello logico). Controllare la serigrafia prima di applicare 5 V, e non collegare all'ESP32 un'uscita DT a 5 V.</p></div>
+<p>Nel datasheet HX711, AVDD deve rientrare in 2,6–5,5 V e il modo comune in AGND + 1,2 V … AVDD − 1,3 V. Con eccitazione di 3,2 V il ponte lavora intorno a 1,6 V, entro tale intervallo. Dopo accensione o cambio di canale/guadagno attendere almeno il tempo di assestamento dichiarato di 400 ms a 10 campioni/s; la stabilizzazione termica richiede più tempo.</p>
+<p>Per la lettura servono la tara a vuoto (cursore a metà corsa dopo lo zero) e la calibrazione di span con il fondo scala misurato al capitolo 7. I conteggi attesi sono quelli della tabella del capitolo 5, a meno di guadagno e offset reali del modulo.</p>
+</section>
+
+<div class="part part-c" id="parte-3"><span>Parte III</span><h2 class="part-title">Verifica</h2><p>Prove con valori attesi, tabella dei guasti e esercizi con soluzioni.</p></div>
+
+<section id="laboratorio" class="sec-c">
+<h2><span class="num">09</span>Laboratorio</h2>
+<ol class="steps">
+<li><strong>Prova 1 — Zero e rumore</strong>RV1 a metà corsa, zero tarato. Acquisire 100 campioni a 10 Hz e calcolare media e deviazione standard.<span class="expect">media ≈ 0 dopo la tara
+rumore tipico teorico ≈ 34 conteggi rms (≈ 50 nV rms riferiti all'ingresso a 3,2 V); il contributo termico resistivo stimato (≈ 5 nV, banda equivalente assunta 4,4 Hz) è piccolo; contatti, deriva e disturbi esterni non sono inclusi</span></li>
+<li><strong>Prova 2 — Fondo scala e simmetria</strong>RV1 agli estremi, media su 100 campioni per ciascuno.<span class="expect">±4,27·10⁶ conteggi nominali; ±4,5% da RV1 solo se la sua tolleranza è ±5%
+registrare entrambi gli estremi; obiettivo di simmetria: scarto fra i moduli ≤ 1% della loro media</span></li>
+<li><strong>Prova 3 — Linearità</strong>RV1 a 0, 2,5, 5, 7,5 e 10 giri. Dopo la calibrazione di span confrontare con la tabella del capitolo 5.<span class="expect">calcolare ε = max|valore − retta fra gli estremi| / FS, con FS = metà dell’escursione misurata
+modello ideale: ε ≈ 0,044%; sul banco non è garantito lo 0,1% senza conoscere linearità e ripetibilità di RV1</span></li>
+<li><strong>Prova 4 — Carico sull'eccitazione</strong>Misurare E+ − E− a vuoto e con il simulatore.<span class="expect">obiettivo didattico: calo ≤ 1% a 3,2 V (11,1 mA); verificare anche AVDD e modo comune</span></li>
+<li><strong>Prova 5 — Resistenza del cavo</strong>A circuito spento sostituire R9/R10 con due resistenze da 1 Ω. Lasciare i sense liberi, conservare la stessa calibrazione e ripetere la prova 2; una nuova calibrazione nasconderebbe l’errore da osservare.<span class="expect">fondo scala letto inferiore di circa 0,69% con l'HX711</span></li>
+<li><strong>Prova 6 — Cursore scollegato</strong>Con RV1 a un estremo, spegnere, scollegare il filo del cursore da R5 e riaccendere senza rifare la tara.<span class="expect">la lettura perde la componente di segnale e torna verso lo zero; può restare un offset perché cambia il carico del nodo A+
+nel circuito nominale con RV2 al centro si ottiene zero; non è una simulazione di un filo di segnale A+ interrotto</span></li>
+</ol>
+</section>
+
+<section id="diagnostica" class="sec-c">
+<h2><span class="num">10</span>Diagnostica</h2>
+<div class="tbl wide"><table>
+<thead><tr><th>Sintomo</th><th>Causa probabile</th><th>Verifica</th></tr></thead>
+<tbody>
+<tr><td>La lettura non cambia con RV1</td><td>R5 non collegata o cursore aperto</td><td>A circuito spento verificare continuità cursore–R5–A+; un R5 aperto porta l’impedenza verso 347–348 Ω</td></tr>
+<tr><td>Fondo scala molto piccolo (≈ 0,2 mV/V)</td><td>R5 da 43,2 kΩ (valore della versione precedente) invece di 3,65 kΩ</td><td>Misurare R5 fuori circuito</td></tr>
+<tr><td>Fondo scala troppo grande o saturazione</td><td>R7 o R8 mancanti o in cortocircuito; R5 troppo piccola</td><td>E+↔E− completo deve essere ≈ 288 Ω; misurare R7, R8, R5</td></tr>
+<tr><td>Zero non raggiungibile con RV2</td><td>Offset del ponte oltre ±1,49 mV/V: resistenze R1–R4 non appaiate o fuori tolleranza; R6 errata</td><td>Misurare R1–R4 (scarto ≤ 0,1%); controllare R6 = 56 kΩ</td></tr>
+<tr><td>Fondo scala diverso nei due versi</td><td>Zero spostato dopo la taratura, oppure R7 ≠ R8</td><td>Ripetere il passo 4 del capitolo 7; misurare R7 e R8</td></tr>
+<tr><td>Segno invertito</td><td>A+ e A− scambiati, o estremi di RV1 scambiati</td><td>Scambiare A+ e A− al modulo; scambiare gli estremi di RV1 inverte il verso di regolazione</td></tr>
+<tr><td>Lettura instabile o con salti</td><td>Contatto del cursore, saldature fredde, cavi lunghi, eccitazione instabile</td><td>Misurare V<sub>ex</sub> nel tempo; muovere leggermente RV1 e RV2 osservando la lettura</td></tr>
+<tr><td>Eccitazione che cala più dell'1% sotto carico</td><td>Il modulo o l'alimentazione non reggono 11,1 mA</td><td>Misurare E+ a vuoto e con il simulatore; alimentare il modulo da una sorgente più robusta</td></tr>
+<tr><td>Zero che deriva lentamente</td><td>Riscaldamento delle resistenze; tolleranza di temperatura di R1–R4</td><td>Attendere qualche minuto dopo l'accensione e ripetere la tara</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="esercizi" class="sec-c">
+<h2><span class="num">11</span>Esercizi</h2>
+<ol class="ex">
+<li>Calcolare R<sub>tot</sub> = R7 + P + R8, il carico totale sull'eccitazione e la corrente a 5 V.</li>
+<li>Dimensionare R5 per un fondo scala di ±1 mV/V, mantenendo R7 = R8 = 909 Ω e P = 200 Ω, e scegliere il valore E96 più vicino.</li>
+<li>Ogni filo di eccitazione ha 2 Ω. Calcolare l'errore di fondo scala con l'HX711 e con un lettore che usa i sense.</li>
+<li>Con R1–R4 allo 0,5% calcolare l'offset massimo. Perché RV2 non basta e che cosa si fa nella pratica?</li>
+<li>A quanti conteggi corrispondono un giro e un grado di rotazione di RV1? Qual è la sensibilità per giro?</li>
+<li>Con R5 da 43,2 kΩ invece di 3,65 kΩ calcolare il fondo scala e spiegare perché il simulatore non sembra funzionare.</li>
+</ol>
+<details class="file" id="sol"><summary><span class="fname">Soluzioni</span><span class="frole">Esercizi</span><span class="flines"></span><span class="chev" aria-hidden="true"></span></summary>
+<div class="fbody" style="padding:14px 18px 18px;background:var(--paper)"><ol class="ex">
+<li>R<sub>tot</sub> = 909 + 200 + 909 = 2018 Ω. Carico completo al centro = 348 ∥ 2018 ∥ 10 000 ≈ 288,3 Ω. Corrente a 5 V ≈ 17,3 mA.</li>
+<li>Includendo RV2 al centro: R<sub>h,eff</sub> = 174 Ω ∥ (56 kΩ + 2,5 kΩ) ≈ 173,49 Ω. All’estremo RV1: Z<sub>w</sub> = 909 Ω ∥ 1109 Ω ≈ 499,54 Ω. Quindi R5 = R<sub>h,eff</sub> · (0,049554 / 0,001 − 1) − Z<sub>w</sub> ≈ 7,924 kΩ. Valori E96: 7,87 kΩ → ±1,006 mV/V; 8,06 kΩ → ±0,984 mV/V (soluzione nodale esatta).</li>
+<li>Con l'HX711: −2·2/(288,3 + 4) ≈ −1,37%. Con i sense collegati al riferimento l'errore si annulla al primo ordine.</li>
+<li>Offset massimo = 0,5% · 1000 = ±5 mV/V. RV2 compensa solo ±1,49 mV/V e il segnale (±2 mV/V) più l'offset supera il fondo scala dell'HX711 (±3,906 mV/V). Nella pratica si selezionano e si appaiano le resistenze (0,1% o migliori) oppure si riduce l'offset con un trimmer sul ramo.</li>
+<li>0,40 mV/V per giro ≈ 8,5·10⁵ conteggi per giro; un grado = 0,40/360 ≈ 1,1 µV/V ≈ 2400 conteggi.</li>
+<li>Fondo scala ≈ ±0,196 mV/V, cioè circa un decimo dell'atteso: la lettura varia pochissimo con RV1.</li>
+</ol></div></details>
+</section>
+
+<div class="part part-a" id="appendici"><span>Appendici</span><h2 class="part-title">Glossario, fonti, stato delle verifiche</h2></div>
+
+<section id="glossario" class="sec-a">
+<h2><span class="num">A</span>Glossario</h2>
+<div class="tbl"><table>
+<thead><tr><th>Termine</th><th>Significato</th></tr></thead>
+<tbody>
+<tr><td>mV/V</td><td>Uscita di un ponte a fondo scala per ogni volt di eccitazione; unità della sensibilità di una cella</td></tr>
+<tr><td>Eccitazione (V<sub>ex</sub>)</td><td>Tensione tra E+ ed E− che alimenta il ponte</td></tr>
+<tr><td>Misura ratiometrica</td><td>Misura in cui il riferimento del convertitore è l'eccitazione stessa: il risultato dipende da V<sub>diff</sub>/V<sub>ex</sub></td></tr>
+<tr><td>Modo comune</td><td>Tensione media degli ingressi rispetto a massa; per un ponte vale circa V<sub>ex</sub>/2</td></tr>
+<tr><td>Sense</td><td>Linee SENSE+ e SENSE− che misurano la tensione ai capi del ponte senza portare corrente</td></tr>
+<tr><td>Sei fili</td><td>Cella con E+, E−, SENSE+, SENSE−, A+, A−; a quattro fili mancano i sense</td></tr>
+<tr><td>Impedenza d'uscita</td><td>Resistenza vista dal convertitore tra A+ e A−; circa 350 Ω per una cella standard</td></tr>
+<tr><td>Iniezione</td><td>Corrente immessa in un nodo del ponte attraverso una resistenza elevata per sbilanciarlo</td></tr>
+<tr><td>Tara</td><td>Memorizzazione del valore a vuoto, sottratto alle misure successive</td></tr>
+<tr><td>Calibrazione di span</td><td>Correzione del guadagno con un valore di riferimento noto</td></tr>
+<tr><td>Rumore termico</td><td>Rumore generato da ogni resistenza, densità spettrale di ampiezza √(4kTR), espressa in V/√Hz; circa 4 nV/√Hz per 1 kΩ a temperatura ambiente</td></tr>
+<tr><td>Zero (offset iniziale)</td><td>Tensione di uscita con carico nullo, dovuta alle tolleranze delle quattro resistenze del ponte</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="fonti" class="sec-a">
+<h2><span class="num">B</span>Fonti</h2>
+<div class="tbl"><table>
+<thead><tr><th>Documento</th><th>Contenuto usato</th></tr></thead>
+<tbody>
+<tr><td><a href="https://cdn.sparkfun.com/datasheets/Sensors/ForceFlex/hx711_english.pdf">Avia Semiconductor, HX711 — datasheet</a></td><td>Fondo scala, gain 128, riferimento AVDD, rumore a 10 Hz</td></tr>
+<tr><td>Dispensa precedente «Celle di carico: simulazione e acquisizione», archivio del progetto (4 ottobre 2026)</td><td>Configurazioni A, B e C a confronto, valori dei partitori, ponte da 348 Ω con RV1 da 2 kΩ</td></tr>
+<tr><td><a href="https://www.bourns.com/docs/product-datasheets/3296.pdf">Bourns 3296 — datasheet</a></td><td>RV2: tolleranza, corsa nominale, resistenza agli estremi, contatto e dimensioni; il footprint generico richiede verifica meccanica</td></tr>
+<tr><td>Schizzo a mano dell'11 ottobre 2026 (<code>IMG_20261011_115315.jpg</code>)</td><td>Punto di partenza del progetto: partitore 25 kΩ + trimmer 200 Ω, carico da 350 Ω, linee SENSE</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="stato" class="sec-a">
+<h2><span class="num">C</span>Stato delle verifiche</h2>
+<div class="callout warn"><span class="tag">Valori calcolati, non misurati</span><p>Tutti i valori della dispensa derivano da calcolo e da una soluzione nodale esatta del circuito (partitore, ponte e iniezioni), con componenti nominali ed eccitazione ideale. Non è stata eseguita alcuna misura su hardware: i valori attesi dei capitoli 7 e 9 vanno confermati sul circuito montato, e le deviazioni vanno interpretate con la tabella del capitolo 5 e con la diagnostica del capitolo 10.</p></div>
+<ul>
+<li>Controllati struttura HTML, indice, collegamenti locali, SVG come XML e corrispondenza numerica della tabella di fondo scala. Il controllo visivo aggiornato in browser non è stato eseguito: Chrome e Firefox non si avviano in questo ambiente. <a href="verifiche/documento.json">Esito dei controlli sul documento</a>.</li>
+<li>Non sono modellati il carico dell'ADC, i filtri del modulo HX711 e la resistenza interna dell'eccitazione.</li>
+<li>Il rumore dell'HX711 a 10 Hz (≈ 50 nV rms) è il valore dichiarato dal costruttore; il rumore reale dipende dal modulo e dall'alimentazione.</li>
+<li>La capacità del modulo di erogare 11,1 mA sull'eccitazione dipende dalla scheda e va verificata.</li>
+<li>Revisione elettrica <strong>P3.1</strong> su PCB <strong>P3</strong>, 51,5 × 36,5 mm: R6 = 56 kΩ 1%, R7/R8 = 909 Ω 0,1%. I file mantengono il nome <code>simulatore_ponte_348_p3</code> perché geometria, piste e fori restano quelli della scheda P3. <a href="pcb/simulatore_ponte_348_p3/simulatore_ponte_348_p3.kicad_pro">Progetto KiCad</a>, <a href="pcb/simulatore_ponte_348_p3/simulatore_ponte_348_p3-bom.csv">distinta componenti</a>, <a href="pcb/easyeda/LEGGIMI_EASYEDA.md">pacchetti EasyEDA</a>.</li>
+<li>In questa revisione: calcoli nodali confrontati con riduzione di Thévenin; confronto statico di 32 pin fra schema, PCB e file legacy; controlli Python su connessioni e geometria. Risultati: <a href="verifiche/calcoli.json">calcoli</a> e <a href="verifiche/pcb.json">PCB</a>. I controlli DRC KiCad 7.0.11 riportati nel precedente README sono storici: KiCad non è disponibile nell’ambiente usato per questa revisione, quindi ERC/DRC nativi non sono stati rieseguiti.</li>
+<li>Gerber, fori e stampe del PCB restano applicabili perché i tre cambi di componenti non modificano i livelli di fabbricazione. Il vecchio PDF dello schema è conservato nella <a href="archivio-2026-10-11/prima-miglioria-P3.1/pcb/simulatore_ponte_348_p3/schema_elettrico.pdf">versione archiviata P3</a>: contiene i valori precedenti. Per il circuito attuale usare la figura 1 e il file KiCad aggiornato. L’importazione in EasyEDA, l’ERC e il collaudo hardware restano da eseguire.</li>
+</ul>
+</section>
+
+</main>
+</div>
+<footer>Dispensa di laboratorio per ITS — revisione elettrica P3.1, ottobre 2026. Valori calcolati con componenti nominali (R1–R4 348 Ω 0,1%, R5 3,65 kΩ, R6 56 kΩ, R7 e R8 909 Ω 0,1%, RV1 200 Ω 10 giri, RV2 10 kΩ) ed eccitazione di 3,2 V; le tolleranze reali si compensano con zero, tara e calibrazione di span. Nessuna misura su hardware è riportata.</footer>
+
+<script>
+(function(){
+  try { if (window.hljs) { document.querySelectorAll('details.file pre code').forEach(function(el){ window.hljs.highlightElement(el); }); } } catch(e) {}
+
+  function fallback(text){
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'absolute'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e) {} document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var code = btn.closest('details').querySelector('code').innerText;
+      var done = function(){ btn.textContent = 'Copiato'; setTimeout(function(){ btn.textContent = 'Copia'; }, 1500); };
+      try { navigator.clipboard.writeText(code).then(done, function(){ fallback(code); done(); }); } catch(e) { fallback(code); done(); }
+    });
+  });
+
+  document.querySelectorAll('.toggle-files').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var all = document.querySelectorAll('details.file[id^="' + btn.getAttribute('data-group') + '-"]');
+      var open = Array.prototype.some.call(all, function(d){ return !d.open; });
+      all.forEach(function(d){ d.open = open; });
+      btn.textContent = open ? 'Chiudi tutti' : 'Apri tutti';
+    });
+  });
+  document.querySelectorAll('a.flink').forEach(function(a){
+    a.addEventListener('click', function(){ var d = document.querySelector(a.getAttribute('href')); if (d) d.open = true; });
+  });
+
+  var links = {};
+  document.querySelectorAll('.toc a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && links[e.target.id]) {
+          Object.keys(links).forEach(function(k){ links[k].removeAttribute('aria-current'); });
+          links[e.target.id].setAttribute('aria-current', 'true');
+          if (window.matchMedia('(max-width:980px)').matches) { links[e.target.id].scrollIntoView({block:'nearest', inline:'center'}); }
+        }
+      });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+  }
+
+  var root = document.documentElement, key = 'dispensa-ponte350-tema';
+  try { var saved = localStorage.getItem(key); if (saved) root.setAttribute('data-theme', saved); } catch(e) {}
+  document.getElementById('theme').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme');
+    var dark = cur ? cur === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(key, next); } catch(e) {}
+  });
+})();
+</script>
+</body>
+</html>

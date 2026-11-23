@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antitrasformata di Laplace — Fratti semplici</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Fira+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js" defer></script>
+<style>
+:root{
+  --paper:#faf8f4; --ink:#1f1d1a; --muted:#6b655c; --line:#e4ded3; --card:#ffffff;
+  --hero:#1c1a17; --amber:#c9821a;
+  --c1:#2f6f8f; --c1b:#e8f1f5;   /* teoria */
+  --c2:#3f7d4e; --c2b:#e9f3ec;   /* livello 1-2 */
+  --c3:#9a5a1c; --c3b:#f7eee2;   /* livello 3-4 */
+  --c4:#8c2f39; --c4b:#f6e7e9;   /* verifica */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 'Fira Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2;margin:0}
+code,.mono{font-family:'IBM Plex Mono',monospace;font-size:.9em}
+.hero{background:var(--hero);color:#f3efe7;padding:44px 20px 36px}
+.hero .wrap{max-width:860px;margin:0 auto}
+.kicker{font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.hero h1{font-size:clamp(28px,6vw,44px);margin:12px 0 10px}
+.hero p{color:#cfc8bb;margin:0;max-width:640px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font:500 12px/1 'IBM Plex Mono',monospace;padding:6px 10px;border:1px solid #4a453d;border-radius:999px;color:#e8e2d6}
+nav{position:sticky;top:0;z-index:5;background:rgba(250,248,244,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{max-width:860px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:8px 12px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:500;font-size:14px;padding:6px 10px;border-radius:6px}
+nav a:hover{background:#efe9df;color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:8px 16px 60px}
+section{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--sc);padding-bottom:8px;margin-bottom:18px}
+.sec-head .n{font:600 13px 'IBM Plex Mono',monospace;color:var(--sc)}
+.sec-head h2{font-size:clamp(22px,4.5vw,30px)}
+.t{--sc:var(--c1);--sb:var(--c1b)} .l12{--sc:var(--c2);--sb:var(--c2b)} .l34{--sc:var(--c3);--sb:var(--c3b)} .v{--sc:var(--c4);--sb:var(--c4b)}
+h3{font-size:20px;margin:28px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sc);border-radius:8px;padding:16px 18px;margin:14px 0}
+.callout{background:var(--sb);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:15px}
+.callout b{color:var(--sc)}
+.warn{--sb:#fbf1dc;--sc:#9a6a00}
+.math{overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.tbl{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+th{background:#f1ece3;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+ol.steps{counter-reset:st;list-style:none;padding:0;margin:12px 0}
+ol.steps li{counter-increment:st;position:relative;padding:4px 0 10px 42px}
+ol.steps li::before{content:counter(st);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;background:var(--sc);color:#fff;font:600 14px/28px 'IBM Plex Mono',monospace;text-align:center}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0;overflow:hidden}
+.ex-h{display:flex;gap:10px;align-items:center;padding:12px 16px 4px}
+.badge{font:600 12px/1 'IBM Plex Mono',monospace;background:var(--sc);color:#fff;padding:5px 8px;border-radius:4px}
+.tag{font-size:13px;color:var(--muted)}
+.ex .q{padding:0 16px 8px}
+details{border-top:1px dashed var(--line)}
+summary{cursor:pointer;padding:10px 16px;font-weight:600;color:var(--sc);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▸ ';}
+details[open] summary::before{content:'▾ ';}
+.sol{padding:0 16px 14px;font-size:15px}
+.sol .res{background:var(--sb);border-radius:6px;padding:8px 12px;margin-top:8px}
+.pts{margin-left:auto;font:500 12px 'IBM Plex Mono',monospace;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
+footer{max-width:860px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="kicker">Sistemi automatici · Ripasso e esercizi</div>
+  <h1>Antitrasformata di Laplace<br>con i fratti semplici</h1>
+  <p>Il metodo per passare da una \(F(s)\) razionale alla \(f(t)\) usando la tabella delle trasformate e le loro proprietà. In fondo c'è una verifica simulata da 100 minuti.</p>
+  <div class="chips"><span class="chip">poli reali semplici</span><span class="chip">poli multipli</span><span class="chip">poli complessi</span><span class="chip">proprietà</span><span class="chip">equazioni differenziali</span></div>
+</div></header>
+
+<nav><div class="wrap">
+  <a href="#metodo">Metodo</a><a href="#casi">I tre casi</a><a href="#tabelle">Tabelle</a><a href="#errori">Errori tipici</a><a href="#livello1">Esercizi 1–2</a><a href="#livello3">Esercizi 3–4</a><a href="#verifica">Verifica</a>
+</div></nav>
+
+<main>
+
+<!-- ================= TEORIA ================= -->
+<section id="metodo" class="t">
+  <div class="sec-head"><span class="n">01</span><h2>Il metodo in sintesi</h2></div>
+  <p>Si parte da una funzione razionale \(F(s)=\dfrac{N(s)}{D(s)}\). Si scrive \(F(s)\) come somma di frazioni elementari, ciascuna delle quali compare nella tabella. Poi si antitrasforma ogni termine separatamente, cosa possibile perché la trasformata è lineare.</p>
+  <ol class="steps">
+    <li><b>Controlla il grado.</b> Se \(\deg N \ge \deg D\) la funzione è impropria: prima esegui la divisione tra polinomi. La parte intera genera impulsi \(\delta(t)\) (ed eventualmente le sue derivate).</li>
+    <li><b>Fattorizza il denominatore.</b> Trova i poli, cioè le radici di \(D(s)=0\), e classificali: reali semplici, reali multipli, complessi coniugati.</li>
+    <li><b>Scrivi la forma della scomposizione</b> con i coefficienti incogniti, un termine per ogni polo. Un polo di molteplicità \(m\) richiede \(m\) termini.</li>
+    <li><b>Calcola i coefficienti</b> con i residui (metodo di Heaviside) oppure con il principio di identità dei polinomi.</li>
+    <li><b>Antitrasforma termine per termine</b> con la tabella. Il risultato vale per \(t \ge 0\): sottintendi o scrivi il fattore \(u(t)\) (gradino unitario).</li>
+    <li><b>Controlla il risultato</b> con i teoremi del valore iniziale e del valore finale, oppure ricombinando le frazioni.</li>
+  </ol>
+</section>
+
+<section id="casi" class="t">
+  <div class="sec-head"><span class="n">02</span><h2>I tre casi</h2></div>
+
+  <h3>Caso A — Poli reali semplici</h3>
+  <div class="card">
+    <div class="math">\[F(s)=\frac{N(s)}{(s-p_1)(s-p_2)\cdots(s-p_n)}=\sum_{i=1}^{n}\frac{A_i}{s-p_i}\qquad A_i=\Big[(s-p_i)\,F(s)\Big]_{s=p_i}\]</div>
+    <div class="math">\[f(t)=\sum_{i=1}^{n}A_i\,e^{p_i t}\]</div>
+  </div>
+  <div class="callout"><b>Regola pratica (Heaviside):</b> per trovare \(A_i\) "copri" il fattore \((s-p_i)\) nel denominatore e sostituisci \(s=p_i\) in ciò che resta.</div>
+  <p><b>Esempio.</b> \(F(s)=\dfrac{s+3}{(s+1)(s+2)}\)</p>
+  <div class="math">\[A_1=\left.\frac{s+3}{s+2}\right|_{s=-1}=2\qquad A_2=\left.\frac{s+3}{s+1}\right|_{s=-2}=-1\qquad\Rightarrow\qquad f(t)=2e^{-t}-e^{-2t}\]</div>
+
+  <h3>Caso B — Poli reali multipli</h3>
+  <div class="card">
+    <p style="margin-top:0">Un polo \(p\) di molteplicità \(m\) genera \(m\) termini:</p>
+    <div class="math">\[\frac{A_m}{(s-p)^m}+\frac{A_{m-1}}{(s-p)^{m-1}}+\cdots+\frac{A_1}{s-p}\]</div>
+    <div class="math">\[A_k=\frac{1}{(m-k)!}\,\left.\frac{d^{\,m-k}}{ds^{\,m-k}}\Big[(s-p)^m F(s)\Big]\right|_{s=p}\]</div>
+    <div class="math">\[\mathcal{L}^{-1}\left\{\frac{1}{(s-p)^k}\right\}=\frac{t^{k-1}}{(k-1)!}\,e^{pt}\]</div>
+  </div>
+  <div class="callout"><b>Nota:</b> il coefficiente di grado massimo \(A_m\) si calcola senza derivare, come nel caso A. Per gli altri si deriva una volta per ogni grado in meno. Se le derivate diventano pesanti, conviene ricavare i coefficienti mancanti sostituendo valori comodi di \(s\) (per esempio \(s=0\)) nell'identità.</div>
+  <p><b>Esempio.</b> \(F(s)=\dfrac{s+2}{s\,(s+1)^2}=\dfrac{B}{s}+\dfrac{A_2}{(s+1)^2}+\dfrac{A_1}{s+1}\)</p>
+  <div class="math">\[B=\left.\frac{s+2}{(s+1)^2}\right|_{0}=2\qquad A_2=\left.\frac{s+2}{s}\right|_{-1}=-1\qquad A_1=\left.\frac{d}{ds}\frac{s+2}{s}\right|_{-1}=\left.-\frac{2}{s^2}\right|_{-1}=-2\]</div>
+  <div class="math">\[f(t)=2-2e^{-t}-t\,e^{-t}\]</div>
+
+  <h3>Caso C — Poli complessi coniugati</h3>
+  <p>Si presentano quando nel denominatore c'è un trinomio \(s^2+bs+c\) con \(\Delta<0\). Ci sono due strade equivalenti.</p>
+  <div class="grid2">
+    <div class="card">
+      <b>Metodo 1 — Completamento del quadrato</b> (consigliato con la tabella)
+      <div class="math">\[s^2+bs+c=(s+\alpha)^2+\omega^2,\quad \alpha=\tfrac{b}{2},\ \omega=\sqrt{c-\alpha^2}\]</div>
+      <div class="math">\[\frac{Bs+C}{(s+\alpha)^2+\omega^2}=B\,\frac{s+\alpha}{(s+\alpha)^2+\omega^2}+\frac{C-B\alpha}{\omega}\cdot\frac{\omega}{(s+\alpha)^2+\omega^2}\]</div>
+      <div class="math">\[\Rightarrow\ B\,e^{-\alpha t}\cos\omega t+\frac{C-B\alpha}{\omega}\,e^{-\alpha t}\sin\omega t\]</div>
+    </div>
+    <div class="card">
+      <b>Metodo 2 — Residuo complesso</b>
+      <p style="margin:6px 0">Si calcola il residuo \(A=|A|e^{j\varphi}\) sul polo \(p=\sigma+j\omega\). Il residuo sul polo coniugato è \(\bar A\).</p>
+      <div class="math">\[\frac{A}{s-p}+\frac{\bar A}{s-\bar p}\ \Rightarrow\ 2|A|\,e^{\sigma t}\cos(\omega t+\varphi)\]</div>
+      <p style="margin:6px 0;font-size:14px;color:var(--muted)">È più rapido con i fasori, ma richiede l'aritmetica complessa senza errori.</p>
+    </div>
+  </div>
+  <p><b>Esempio.</b> \(F(s)=\dfrac{s+3}{s^2+4s+13}=\dfrac{s+3}{(s+2)^2+9}\), quindi \(\alpha=2,\ \omega=3\)</p>
+  <div class="math">\[\frac{(s+2)+1}{(s+2)^2+9}=\frac{s+2}{(s+2)^2+9}+\frac13\cdot\frac{3}{(s+2)^2+9}\ \Rightarrow\ f(t)=e^{-2t}\cos 3t+\tfrac13 e^{-2t}\sin 3t\]</div>
+  <div class="callout"><b>Poli complessi misti a poli reali:</b> calcola prima con Heaviside i coefficienti dei poli reali. Poi sottrai i termini già noti da \(F(s)\) e lavora sulla frazione che resta, oppure usa l'identità dei polinomi per ricavare \(B\) e \(C\).</div>
+
+  <h3>Metodo alternativo — Identità dei polinomi</h3>
+  <p>Si scrive la scomposizione, si riporta tutto a denominatore comune e si eguagliano i coefficienti delle stesse potenze di \(s\). Si ottiene un sistema lineare. Funziona sempre, ma è più lento: va bene come verifica o quando i residui diventano scomodi.</p>
+</section>
+
+<section id="tabelle" class="t">
+  <div class="sec-head"><span class="n">03</span><h2>Tabelle</h2></div>
+  <h3>Trasformate notevoli</h3>
+  <div class="tbl"><table>
+    <tr><th>\(f(t),\ t\ge 0\)</th><th>\(F(s)\)</th><th>Nota</th></tr>
+    <tr><td>\(\delta(t)\)</td><td>\(1\)</td><td>impulso</td></tr>
+    <tr><td>\(u(t)\)</td><td>\(\dfrac1s\)</td><td>gradino</td></tr>
+    <tr><td>\(t\)</td><td>\(\dfrac1{s^2}\)</td><td>rampa</td></tr>
+    <tr><td>\(\dfrac{t^{n}}{n!}\)</td><td>\(\dfrac1{s^{n+1}}\)</td><td></td></tr>
+    <tr><td>\(e^{-at}\)</td><td>\(\dfrac1{s+a}\)</td><td>polo reale \(-a\)</td></tr>
+    <tr><td>\(\dfrac{t^{n}}{n!}\,e^{-at}\)</td><td>\(\dfrac1{(s+a)^{n+1}}\)</td><td>polo multiplo</td></tr>
+    <tr><td>\(\sin\omega t\)</td><td>\(\dfrac{\omega}{s^2+\omega^2}\)</td><td></td></tr>
+    <tr><td>\(\cos\omega t\)</td><td>\(\dfrac{s}{s^2+\omega^2}\)</td><td></td></tr>
+    <tr><td>\(e^{-at}\sin\omega t\)</td><td>\(\dfrac{\omega}{(s+a)^2+\omega^2}\)</td><td>poli \(-a\pm j\omega\)</td></tr>
+    <tr><td>\(e^{-at}\cos\omega t\)</td><td>\(\dfrac{s+a}{(s+a)^2+\omega^2}\)</td><td>poli \(-a\pm j\omega\)</td></tr>
+  </table></div>
+
+  <h3>Proprietà</h3>
+  <div class="tbl"><table>
+    <tr><th>Proprietà</th><th>Dominio del tempo</th><th>Dominio \(s\)</th></tr>
+    <tr><td>Linearità</td><td>\(a\,f(t)+b\,g(t)\)</td><td>\(a\,F(s)+b\,G(s)\)</td></tr>
+    <tr><td>Ritardo (traslazione nel tempo)</td><td>\(f(t-T)\,u(t-T)\)</td><td>\(e^{-sT}F(s)\)</td></tr>
+    <tr><td>Traslazione in \(s\)</td><td>\(e^{-at}f(t)\)</td><td>\(F(s+a)\)</td></tr>
+    <tr><td>Derivata prima</td><td>\(f'(t)\)</td><td>\(sF(s)-f(0^-)\)</td></tr>
+    <tr><td>Derivata seconda</td><td>\(f''(t)\)</td><td>\(s^2F(s)-s\,f(0^-)-f'(0^-)\)</td></tr>
+    <tr><td>Integrale</td><td>\(\displaystyle\int_0^t f(\tau)\,d\tau\)</td><td>\(\dfrac{F(s)}{s}\)</td></tr>
+    <tr><td>Moltiplicazione per \(t\)</td><td>\(t\,f(t)\)</td><td>\(-\dfrac{dF(s)}{ds}\)</td></tr>
+    <tr><td>Cambio di scala</td><td>\(f(at),\ a>0\)</td><td>\(\dfrac1a F\!\left(\dfrac sa\right)\)</td></tr>
+    <tr><td>Valore iniziale</td><td>\(f(0^+)\)</td><td>\(\lim\limits_{s\to\infty} sF(s)\) con \(F\) strettamente propria</td></tr>
+    <tr><td>Valore finale</td><td>\(\lim\limits_{t\to\infty} f(t)\)</td><td>\(\lim\limits_{s\to 0} sF(s)\) se i poli di \(sF(s)\) hanno \(\mathrm{Re}<0\)</td></tr>
+  </table></div>
+  <div class="callout"><b>Collegamento con la scomposizione:</b> la riga "traslazione in \(s\)" spiega le righe con \(e^{-at}\) della prima tabella. Per esempio \(\frac{\omega}{(s+a)^2+\omega^2}\) è \(\frac{\omega}{s^2+\omega^2}\) traslata di \(a\), quindi diventa \(\sin\omega t\) moltiplicato per \(e^{-at}\).</div>
+</section>
+
+<section id="errori" class="t">
+  <div class="sec-head"><span class="n">04</span><h2>Errori tipici</h2></div>
+  <div class="tbl"><table>
+    <tr><th>Errore</th><th>Correzione</th></tr>
+    <tr><td>Scomporre una \(F(s)\) impropria</td><td>Prima dividi: la parte intera è \(\delta(t)\) o le sue derivate</td></tr>
+    <tr><td>Un solo termine per un polo doppio</td><td>Polo di molteplicità \(m\) → \(m\) termini, da \((s-p)^{-1}\) a \((s-p)^{-m}\)</td></tr>
+    <tr><td>Segno del polo: \(\frac1{s+2}\to e^{2t}\)</td><td>\(\frac1{s+a}\to e^{-at}\): il polo è \(-a\)</td></tr>
+    <tr><td>Antitrasformare \(\frac{1}{(s+a)^2+\omega^2}\) direttamente come seno</td><td>Manca \(\omega\) a numeratore: moltiplica e dividi per \(\omega\)</td></tr>
+    <tr><td>Numeratore \(s\) invece di \(s+a\) nel coseno smorzato</td><td>Riscrivi \(s=(s+a)-a\) e separa in due termini</td></tr>
+    <tr><td>Applicare il valore finale con poli instabili o immaginari puri</td><td>Il teorema non vale: \(f(t)\) diverge o oscilla</td></tr>
+    <tr><td>Dimenticare \(u(t-T)\) nel ritardo</td><td>\(e^{-sT}F(s)\to f(t-T)\,u(t-T)\), nulla per \(t<T\)</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= ESERCIZI ================= -->
+<section id="livello1" class="l12">
+  <div class="sec-head"><span class="n">05</span><h2>Esercizi — Livelli 1 e 2</h2></div>
+  <p>Per ogni esercizio calcola \(f(t)=\mathcal L^{-1}\{F(s)\}\) per \(t\ge 0\). Prova da solo prima di aprire la soluzione.</p>
+
+  <h3>Livello 1 — Poli reali semplici</h3>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E1</span><span class="tag">base</span></div>
+    <div class="q">\(F(s)=\dfrac{1}{s\,(s+2)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(A=\left.\frac{1}{s+2}\right|_{0}=\frac12\), \(\quad B=\left.\frac1s\right|_{-2}=-\frac12\)
+      <div class="res">\(f(t)=\tfrac12\left(1-e^{-2t}\right)\)</div>
+      Controllo: \(\lim_{s\to0}sF=\frac12\) ✓
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E2</span><span class="tag">base</span></div>
+    <div class="q">\(F(s)=\dfrac{s+6}{s\,(s+2)(s+3)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(A_0=\left.\frac{s+6}{(s+2)(s+3)}\right|_{0}=\frac66=1\)<br>
+      \(A_{-2}=\left.\frac{s+6}{s(s+3)}\right|_{-2}=\frac{4}{(-2)(1)}=-2\)<br>
+      \(A_{-3}=\left.\frac{s+6}{s(s+2)}\right|_{-3}=\frac{3}{(-3)(-1)}=1\)
+      <div class="res">\(f(t)=1-2e^{-2t}+e^{-3t}\)</div>
+      Controllo: \(f(0)=1-2+1=0\), coerente con \(\lim_{s\to\infty}sF=0\) ✓
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E3</span><span class="tag">numeratore di 2° grado</span></div>
+    <div class="q">\(F(s)=\dfrac{3s^2+4s+2}{s\,(s+1)(s+2)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      È propria, perché il grado del numeratore (2) è minore di quello del denominatore (3).<br>
+      \(A_0=\frac{2}{1\cdot2}=1\), \(\quad A_{-1}=\frac{3-4+2}{(-1)(1)}=-1\), \(\quad A_{-2}=\frac{12-8+2}{(-2)(-1)}=3\)
+      <div class="res">\(f(t)=1-e^{-t}+3e^{-2t}\)</div>
+      Controllo: \(f(0^+)=1-1+3=3=\lim_{s\to\infty}sF(s)\) ✓
+    </div></details></div>
+
+  <h3>Livello 2 — Poli multipli</h3>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E4</span><span class="tag">polo doppio in 0</span></div>
+    <div class="q">\(F(s)=\dfrac{1}{s^2\,(s+3)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(\dfrac{A_2}{s^2}+\dfrac{A_1}{s}+\dfrac{B}{s+3}\)<br>
+      \(A_2=\left.\frac1{s+3}\right|_0=\frac13\), \(\quad A_1=\left.\frac{d}{ds}\frac1{s+3}\right|_0=\left.-\frac{1}{(s+3)^2}\right|_0=-\frac19\), \(\quad B=\left.\frac1{s^2}\right|_{-3}=\frac19\)
+      <div class="res">\(f(t)=\tfrac13 t-\tfrac19+\tfrac19 e^{-3t}\)</div>
+      La rampa \(\frac13 t\) fa divergere \(f(t)\): il valore finale non si applica, perché \(sF\) ha un polo in 0.
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E5</span><span class="tag">polo triplo</span></div>
+    <div class="q">\(F(s)=\dfrac{s^2+1}{(s+2)^3}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      Poni \(g(s)=(s+2)^3F(s)=s^2+1\).<br>
+      \(A_3=g(-2)=5\), \(\quad A_2=g'(-2)=2s\big|_{-2}=-4\), \(\quad A_1=\frac{1}{2!}g''(-2)=\frac{2}{2}=1\)
+      <div class="math">\[F(s)=\frac{1}{s+2}-\frac{4}{(s+2)^2}+\frac{5}{(s+2)^3}\]</div>
+      <div class="res">\(f(t)=e^{-2t}\left(1-4t+\tfrac52 t^2\right)\)</div>
+      Ricorda: \(\frac{1}{(s+2)^3}\to\frac{t^2}{2!}e^{-2t}\).
+    </div></details></div>
+</section>
+
+<section id="livello3" class="l34">
+  <div class="sec-head"><span class="n">06</span><h2>Esercizi — Livelli 3 e 4</h2></div>
+
+  <h3>Livello 3 — Poli complessi coniugati</h3>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E6</span><span class="tag">seno smorzato</span></div>
+    <div class="q">\(F(s)=\dfrac{10}{s^2+2s+5}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(s^2+2s+5=(s+1)^2+4\), quindi \(\alpha=1,\ \omega=2\).
+      <div class="math">\[F(s)=5\cdot\frac{2}{(s+1)^2+2^2}\]</div>
+      <div class="res">\(f(t)=5\,e^{-t}\sin 2t\)</div>
+      Verifica col residuo: \(A=\left.\frac{10}{s+1+2j}\right|_{-1+2j}=\frac{10}{4j}=-2{,}5j\), quindi \(|A|=2{,}5\) e \(\varphi=-90^\circ\). Si ottiene \(5e^{-t}\cos(2t-90^\circ)=5e^{-t}\sin2t\) ✓
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E7</span><span class="tag">risposta al gradino di un 2° ordine</span></div>
+    <div class="q">\(F(s)=\dfrac{5}{s\,(s^2+2s+5)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      Polo reale: \(A_0=\frac55=1\). Per differenza:
+      <div class="math">\[F(s)-\frac1s=\frac{5-(s^2+2s+5)}{s\,(s^2+2s+5)}=-\frac{s+2}{(s+1)^2+4}\]</div>
+      <div class="math">\[-\frac{(s+1)+1}{(s+1)^2+4}=-\frac{s+1}{(s+1)^2+4}-\frac12\cdot\frac{2}{(s+1)^2+4}\]</div>
+      <div class="res">\(f(t)=1-e^{-t}\cos2t-\tfrac12 e^{-t}\sin 2t\)</div>
+      Controlli: \(f(0)=1-1=0\) ✓; \(\lim_{s\to0}sF=1\) ✓
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E8</span><span class="tag">poli immaginari puri + reale</span></div>
+    <div class="q">\(F(s)=\dfrac{2s^2+6}{(s+1)(s^2+4)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(A=\left.\frac{2s^2+6}{s^2+4}\right|_{-1}=\frac85\). Per i poli \(\pm 2j\) scrivi \(\frac{Bs+C}{s^2+4}\) e usa l'identità:<br>
+      \(2s^2+6=A(s^2+4)+(Bs+C)(s+1)\)<br>
+      \(s^2:\ 2=A+B\Rightarrow B=\frac25\); \(\quad s^0:\ 6=4A+C\Rightarrow C=6-\frac{32}{5}=-\frac25\)
+      <div class="math">\[F(s)=\frac{8/5}{s+1}+\frac25\cdot\frac{s}{s^2+4}-\frac15\cdot\frac{2}{s^2+4}\]</div>
+      <div class="res">\(f(t)=\tfrac85 e^{-t}+\tfrac25\cos 2t-\tfrac15\sin 2t\)</div>
+      L'oscillazione non si smorza: il valore finale <b>non</b> esiste, e il teorema non si applica perché ci sono poli su \(\mathrm{Re}=0\).
+    </div></details></div>
+
+  <h3>Livello 4 — Proprietà ed equazioni differenziali</h3>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E9</span><span class="tag">funzione impropria</span></div>
+    <div class="q">\(F(s)=\dfrac{s^2+3s+3}{(s+1)(s+2)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      Numeratore e denominatore hanno lo stesso grado, quindi si divide: \(s^2+3s+3=(s^2+3s+2)+1\).
+      <div class="math">\[F(s)=1+\frac{1}{(s+1)(s+2)}=1+\frac1{s+1}-\frac1{s+2}\]</div>
+      <div class="res">\(f(t)=\delta(t)+e^{-t}-e^{-2t}\)</div>
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E10</span><span class="tag">ritardo</span></div>
+    <div class="q">\(F(s)=\dfrac{e^{-2s}}{s\,(s+1)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      Scomponi solo la parte razionale: \(\frac1{s(s+1)}=\frac1s-\frac1{s+1}\to g(t)=1-e^{-t}\).<br>
+      Il fattore \(e^{-2s}\) ritarda \(g(t)\) di 2 s.
+      <div class="res">\(f(t)=\left(1-e^{-(t-2)}\right)u(t-2)\)</div>
+      Per \(t<2\) si ha \(f(t)=0\).
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">E11</span><span class="tag">equazione differenziale</span></div>
+    <div class="q">Risolvi \(\ y''+4y'+3y=6\,u(t)\ \) con \(y(0)=0,\ y'(0)=0\).</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      Trasformi con le proprietà delle derivate (condizioni iniziali nulle):
+      <div class="math">\[(s^2+4s+3)\,Y(s)=\frac6s\ \Rightarrow\ Y(s)=\frac{6}{s\,(s+1)(s+3)}\]</div>
+      \(A_0=\frac63=2\), \(\quad A_{-1}=\frac{6}{(-1)(2)}=-3\), \(\quad A_{-3}=\frac{6}{(-3)(-2)}=1\)
+      <div class="res">\(y(t)=2-3e^{-t}+e^{-3t}\)</div>
+      Verifica: \(y(0)=0\) ✓; \(y'(0)=3-3=0\) ✓; regime \(=6/3=2\) ✓
+    </div></details></div>
+</section>
+
+<!-- ================= VERIFICA ================= -->
+<section id="verifica" class="v">
+  <div class="sec-head"><span class="n">07</span><h2>Verifica simulata</h2></div>
+  <div class="callout"><b>Regole:</b> 100 minuti, solo la tabella delle trasformate e delle proprietà, punteggio totale 10. Per ogni esercizio scrivi la scomposizione completa, il calcolo dei coefficienti e la \(f(t)\) finale, poi controlla con il valore iniziale o finale dove si può.</div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">V1</span><span class="tag">poli reali semplici</span><span class="pts">2 pt</span></div>
+    <div class="q">\(F(s)=\dfrac{4s+6}{s\,(s+1)(s+3)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(A_0=\frac63=2\), \(\quad A_{-1}=\frac{2}{(-1)(2)}=-1\), \(\quad A_{-3}=\frac{-6}{(-3)(-2)}=-1\)
+      <div class="res">\(f(t)=2-e^{-t}-e^{-3t}\)</div>
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">V2</span><span class="tag">polo doppio</span><span class="pts">2 pt</span></div>
+    <div class="q">\(F(s)=\dfrac{s+4}{(s+1)(s+2)^2}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(B=\left.\frac{s+4}{(s+2)^2}\right|_{-1}=3\), \(\quad A_2=\left.\frac{s+4}{s+1}\right|_{-2}=-2\), \(\quad A_1=\left.\frac{d}{ds}\frac{s+4}{s+1}\right|_{-2}=\left.\frac{-3}{(s+1)^2}\right|_{-2}=-3\)
+      <div class="res">\(f(t)=3e^{-t}-3e^{-2t}-2t\,e^{-2t}\)</div>
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">V3</span><span class="tag">poli complessi</span><span class="pts">2 pt</span></div>
+    <div class="q">\(F(s)=\dfrac{2s+12}{s^2+4s+20}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \((s+2)^2+16\), quindi \(\alpha=2,\ \omega=4\). \(\ 2s+12=2(s+2)+8\).
+      <div class="math">\[F(s)=2\,\frac{s+2}{(s+2)^2+16}+2\,\frac{4}{(s+2)^2+16}\]</div>
+      <div class="res">\(f(t)=2e^{-2t}\left(\cos4t+\sin4t\right)\)</div>
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">V4</span><span class="tag">reale + complessi</span><span class="pts">2,5 pt</span></div>
+    <div class="q">\(F(s)=\dfrac{8}{s\,(s^2+4s+8)}\). Verifica anche il risultato con il teorema del valore finale.</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(A_0=\frac88=1\). Per differenza: \(F-\frac1s=-\frac{s+4}{(s+2)^2+4}=-\frac{s+2}{(s+2)^2+4}-\frac{2}{(s+2)^2+4}\)
+      <div class="res">\(f(t)=1-e^{-2t}\left(\cos2t+\sin2t\right)=1-\sqrt2\,e^{-2t}\sin\!\left(2t+\tfrac\pi4\right)\)</div>
+      Valore finale: \(\lim_{s\to0}sF=1\). Vale perché i poli di \(sF\) sono \(-2\pm2j\), nel semipiano sinistro ✓
+    </div></details></div>
+
+  <div class="ex"><div class="ex-h"><span class="badge">V5</span><span class="tag">ritardo</span><span class="pts">1,5 pt</span></div>
+    <div class="q">\(F(s)=\dfrac{2\,e^{-3s}}{s\,(s+2)}\)</div>
+    <details><summary>Soluzione</summary><div class="sol">
+      \(\frac{2}{s(s+2)}=\frac1s-\frac1{s+2}\to 1-e^{-2t}\), ritardato di 3 s.
+      <div class="res">\(f(t)=\left(1-e^{-2(t-3)}\right)u(t-3)\)</div>
+    </div></details></div>
+
+  <div class="callout warn"><b>Griglia indicativa:</b> scomposizione impostata correttamente (40%), coefficienti esatti (40%), antitrasformata e controllo finale (20%).</div>
+</section>
+
+</main>
+<footer>Ho verificato tutte le scomposizioni e le antitrasformate con SymPy (<code>apart</code>, <code>inverse_laplace_transform</code>, <code>dsolve</code>).</footer>
+</body>
+</html>

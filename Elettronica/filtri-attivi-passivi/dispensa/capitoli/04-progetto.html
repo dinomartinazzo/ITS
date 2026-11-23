@@ -1,0 +1,76 @@
+<div class="part part-c" id="parte-3"><span>Parte III</span><h2 class="part-title">Progetto e verifica</h2><p>Una procedura per passare dal requisito al circuito, la diagnostica dei guasti più frequenti e gli esercizi svolti.</p></div>
+
+<section id="progetto" class="sec-c">
+<h2><span class="num">#</span>Dal requisito al circuito</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Progettare un filtro significa partire da quello che serve (che cosa deve passare, che cosa va fermato) e arrivare ai valori dei componenti. Si procede per passi: si scrive la specifica, si sceglie l'ordine, si calcolano le sezioni, si verificano i limiti reali. Il caso più comune è il filtro anti-aliasing davanti a un convertitore analogico-digitale.</p></div>
+
+<h3>Perché serve un filtro anti-aliasing</h3>
+<p>Un convertitore analogico-digitale prende una «fotografia» del segnale a intervalli regolari, f<sub>s</sub> volte al secondo. Tra una fotografia e l'altra non vede nulla. Questo ha una conseguenza sorprendente: due sinusoidi di frequenza diversa possono passare esattamente per gli stessi punti campionati, e dai campioni non si può più dire quale delle due fosse.</p>
+{{FIG_CAMPIONAMENTO}}
+<p>Con f<sub>s</sub> = 10 kHz, un'onda a 9 kHz passa per gli stessi campioni di una a 1 kHz. La frequenza alias riportata nella prima banda di Nyquist è f<sub>alias</sub> = min<sub>k∈ℤ</sub>|f − kf<sub>s</sub>|, compresa tra 0 e f<sub>s</sub>/2. Con f<sub>s</sub> = 10 kHz, un disturbo a 9 kHz appare quindi a 1 kHz, dentro la banda utile, e dai campioni non è più distinguibile dal segnale. Va attenuato <em>prima</em> del campionamento con un filtro anti-aliasing.</p>
+{{FIG_ALIAS}}
+<p>Di quanto va attenuato? Come stima conservativa, se il disturbo è una sinusoide con ampiezza pari all'intera escursione di fondo scala, portarlo sotto un LSB richiede circa 20 log<sub>10</sub>(2<sup>N</sup>) dB: {{ALIAS_12}} dB per 12 bit, {{ALIAS_16}} dB per 16 bit (6,02 dB per bit). Se il disturbo ha ampiezza inferiore, il requisito può essere ridotto della stessa differenza in dB; la specifica reale dipende dal livello del segnale utile e dal rumore ammesso.</p>
+
+<h3>La specifica come maschera</h3>
+<p>Una specifica di un filtro passa-basso si disegna come due zone vietate: nella banda passante la curva non deve scendere sotto l'attenuazione ammessa, in banda oscura non deve salire sopra l'attenuazione richiesta. Il progetto consiste nel trovare la curva più semplice che passa tra le due. Esempio: banda passante fino a 1 kHz con attenuazione ≤ 0,5 dB; attenuazione ≥ 72 dB a 9 kHz (12 bit, f<sub>s</sub> = 10 kHz).</p>
+{{FIG_MASCHERA}}
+{{TAB_MASCHERA}}
+<p>Con f<sub>c</sub> = 1 kHz il quarto ordine attenua 3 dB a 1 kHz (troppo); con f<sub>c</sub> = 1,5 kHz il quarto ordine non basta in banda oscura ({{MASK_N4_9K}} dB a 9 kHz) mentre il quinto ordine rispetta entrambe le zone: {{MASK_N5_1K}} dB a 1 kHz e {{MASK_N5_9K}} dB a 9 kHz.</p>
+
+<h3>La procedura</h3>
+{{FIG_FLUSSO_PROG}}
+<ol class="steps">
+<li><strong>Scrivere la specifica</strong>Tipo, banda utile, attenuazione consentita in banda utile, attenuazione richiesta in banda oscura e a quale frequenza, ampiezza del segnale, alimentazione.</li>
+<li><strong>Scegliere famiglia e ordine</strong>Butterworth come punto di partenza. Si sceglie l'ordine minimo che soddisfa la maschera; Chebyshev se serve più pendenza con ordine basso; Bessel se conta la forma d'onda.</li>
+<li><strong>Calcolare le sezioni</strong>Per ogni sezione: f<sub>0</sub>, Q. Fissare C<sub>2</sub>, C<sub>1</sub> ≥ 4Q²C<sub>2</sub>, ricavare R<sub>1</sub> e R<sub>2</sub>, arrotondare alla serie e <em>ricalcolare</em> f<sub>0</sub> e Q.</li>
+<li><strong>Verificare i limiti reali</strong>GBW ≥ 50–100 f<sub>0</sub> per le sezioni a Q alto, slew rate, headroom del picco, rumore delle resistenze, tipo di condensatori.</li>
+<li><strong>Misurare</strong>Confrontare ampiezza e fase con la tabella dei valori attesi e annotare gli scarti.</li>
+</ol>
+
+<h3>Esempio svolto</h3>
+<p>Specifica: 12 bit, f<sub>s</sub> = 10 kSPS, banda utile 1 kHz, attenuazione ≤ 0,5 dB a 1 kHz, ≥ 72,2 dB a 9 kHz. La maschera ha indicato un Butterworth del quinto ordine con f<sub>c</sub> = 1,5 kHz: due sezioni del secondo ordine (Q = 1,618 e Q = 0,618) e una cella del primo ordine. Con C<sub>2</sub> = 4,7 nF (E12) e resistenze E96:</p>
+{{TAB_ESEMPIO_PROG}}
+<p>Con i valori normalizzati e amplificatori ideali l'attenuazione è {{PROG_A1K}} dB a 1 kHz e {{PROG_A9K}} dB a 9 kHz: la specifica è rispettata. Restano da verificare i limiti del capitolo {{cap:limiti-reali}}: GBW di almeno 50–100 volte f<sub>0</sub> (cioè 75–150 kHz per f<sub>0</sub> = 1,5 kHz: è soddisfatto da qualsiasi operazionale con GBW di 1 MHz o più), tolleranza dei condensatori e headroom del picco della sezione a Q alto.</p>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Scegliere f<sub>c</sub> uguale alla banda utile. A f<sub>c</sub> il filtro attenua già 3 dB, che è molto più di quanto di solito si tollera in banda passante. Conviene prendere f<sub>c</sub> più alta della banda utile e usare un ordine maggiore, come nell'esempio.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Le componenti fuori banda si ripiegano nella prima banda di Nyquist; vanno attenuate prima del campionamento.</li>
+<li>Per un disturbo a fondo scala portato sotto un LSB, la stima è circa 6,02 dB per bit.</li>
+<li>La specifica è una maschera con due zone vietate; si sceglie l'ordine minimo che la rispetta.</li>
+<li>Si calcolano le sezioni, si arrotondano le serie, si ricontrolla e si misura.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Con f<sub>s</sub> = 8 kHz, a quale frequenza appare un disturbo a 7 kHz?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>|7 − 8| = 1 kHz.</p></div></details></li>
+<li>Quanti dB servono, orientativamente, per portare sotto un LSB un disturbo a fondo scala in un ADC a 10 bit?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>6,02 · 10 ≈ 60 dB, assumendo che il disturbo abbia ampiezza pari all'escursione di fondo scala.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="guasti" class="sec-c">
+<h2><span class="num">#</span>Diagnostica guasti</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Quando il filtro non fa quello che dovrebbe, conviene partire dal <em>sintomo</em> (che cosa si osserva), non dalla causa che si sospetta. Per ogni sintomo c'è una verifica semplice da fare, una per volta, annotando il risultato.</p></div>
+{{FIG_FLUSSO_DIAG}}
+<div class="tbl lungo"><table>
+<thead><tr><th>Sintomo</th><th>Causa probabile</th><th>Verifica</th></tr></thead>
+<tbody>
+<tr><td>Guadagno in banda passante diverso dal previsto</td><td>Impedenza di uscita del generatore o carico dello strumento; tolleranza di R; carico sul filtro passivo</td><td>Misurare V<sub>in</sub> a circuito collegato; calcolare il partitore con 50 Ω e con la resistenza d'ingresso dello strumento</td></tr>
+<tr><td>f<sub>c</sub> spostata di più del 10%</td><td>Tolleranza del condensatore (X7R, ±10% o più); valori non misurati</td><td>Misurare C con il LCR meter, ricalcolare f<sub>c</sub> con i valori reali</td></tr>
+<tr><td>Picco in banda superiore al calcolato</td><td>Q elevato per tolleranze; GBW insufficiente; C<sub>1</sub> troppo grande o piccolo</td><td>Ricalcolare Q con i valori misurati; consultare la tabella GBW del capitolo {{cap:limiti-reali}}</td></tr>
+<tr><td>Nessun picco dove atteso</td><td>C<sub>1</sub> e C<sub>2</sub> scambiati; collegamento di C<sub>1</sub> all'uscita errato</td><td>Controllare che C<sub>1</sub> (il maggiore) vada dal nodo intermedio all'<em>uscita</em> e C<sub>2</sub> a massa</td></tr>
+<tr><td>Attenuazione che smette di crescere in banda oscura</td><td>Accoppiamento capacitivo parassita; impedenza di uscita dell'operazionale; layout</td><td>Accorciare i collegamenti; separare ingresso e uscita; confrontare con il calcolo</td></tr>
+<tr><td>Segnale tagliato o distorto</td><td>Saturazione sul picco di sezioni a Q alto; slew rate; alimentazione bassa</td><td>Ridurre l'ampiezza di ingresso; osservare i nodi intermedi</td></tr>
+<tr><td>Oscillazione</td><td>Carico capacitivo, mancano disaccoppiamenti, Q troppo alto (K vicino a 3)</td><td>Condensatore 100 nF vicino ai pin; resistenza in serie all'uscita; ridurre K</td></tr>
+<tr><td>Offset in continua elevato</td><td>Corrente di polarizzazione su resistenze grandi; offset dell'operazionale</td><td>Misurare l'uscita senza segnale; ridurre le resistenze o scegliere un operazionale a basso offset</td></tr>
+<tr><td>Misure in banda oscura incoerenti</td><td>Rumore e diafonia; sonda; massa dell'oscilloscopio</td><td>Mediare le acquisizioni; usare lo stesso punto di massa; confrontare con il fondo rumore dello strumento</td></tr>
+<tr><td>Misure di fase incoerenti tra loro</td><td>Δt misurato su fronti di verso diverso; canali con cavi o sonde diversi</td><td>Usare lo stesso verso del fronte e sonde identiche; confrontare con la figura di Lissajous</td></tr>
+</tbody></table></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Partire dal sintomo, fare una verifica per volta.</li>
+<li>Quasi tutti i problemi vengono da: carico degli strumenti, tolleranze, collegamenti sbagliati, mancanza di disaccoppiamento.</li>
+</ul></div>
+</section>
+
+<section id="esercizi" class="sec-c">
+<h2><span class="num">#</span>Esercizi svolti</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Ogni esercizio ha uno svolgimento da aprire: conviene provare prima da soli e poi confrontare passaggio per passaggio. Si parte dalla teoria di base e si arriva al progetto completo.</p></div>
+<p>Tutti i numeri sono calcolati; se il risultato differisce, controllare l'arrotondamento dei valori normalizzati.</p>
+{{ESERCIZI_HTML}}
+</section>

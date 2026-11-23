@@ -1,0 +1,8 @@
+{
+  "ids": 23,
+  "collegamenti_locali_validi": 28,
+  "tabelle": 13,
+  "svg_xml_validi": 2,
+  "tabella_fondo_scala": "coincide con il calcolo entro gli arrotondamenti",
+  "controllo_visivo_browser": "non eseguito: Chrome e Firefox non si avviano in questo ambiente"
+}

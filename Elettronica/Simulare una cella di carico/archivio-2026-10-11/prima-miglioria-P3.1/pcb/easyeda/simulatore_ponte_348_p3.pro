@@ -1,0 +1,19 @@
+update=22/05/2015 07:44:53
+version=1
+last_client=kicad
+[general]
+version=1
+RootSch=
+BoardNm=
+[pcbnew]
+version=1
+LastNetListRead=
+UseCmpFile=1
+PadDrill=0.762000000000
+PadDrillOvalY=0.762000000000
+PadSizeH=1.524000000000
+PadSizeV=1.524000000000
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]

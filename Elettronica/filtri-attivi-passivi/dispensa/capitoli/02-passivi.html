@@ -1,0 +1,214 @@
+<div class="part part-a" id="parte-1"><span>Parte I</span><h2 class="part-title">Filtri passivi</h2><p>Un condensatore e una resistenza bastano a costruire un filtro. Aggiungendo un induttore si ottiene la risonanza. Sono i circuiti più semplici, con limiti precisi che spiegano perché poi servono i filtri attivi.</p></div>
+
+<section id="rc" class="sec-a">
+<h2><span class="num">#</span>La cella RC</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Una cella RC è un partitore in cui la seconda «resistenza» è un condensatore. A bassa frequenza il condensatore frena molto, e prende quasi tutta la tensione; ad alta frequenza frena poco, e ne prende pochissima. Prelevando l'uscita sul condensatore si ottiene un passa-basso, sulla resistenza un passa-alto.</p></div>
+{{FIG_SCHEMA_RC}}
+
+<h3>Perché la cella RC filtra</h3>
+<p>Si riprende il partitore del capitolo {{cap:serie-par}}: la tensione si divide in proporzione alle «resistenze». Qui una è R, l'altra è la reattanza X<sub>C</sub> del condensatore, che dipende dalla frequenza. Si guardi cosa succede in tre casi, con le «barre di peso» di R e X<sub>C</sub>:</p>
+{{FIG_BARRE}}
+<ul>
+<li><strong>A bassa frequenza</strong>, X<sub>C</sub> è molto più grande di R: il condensatore prende quasi tutta la tensione e l'uscita (presa su C) segue l'ingresso.</li>
+<li><strong>Alla frequenza di taglio</strong>, X<sub>C</sub> = R: i due pesano uguale, e l'uscita scende a 0,707.</li>
+<li><strong>Ad alta frequenza</strong>, X<sub>C</sub> è molto più piccola di R: il condensatore prende pochissima tensione e l'uscita è quasi azzerata.</li>
+</ul>
+{{FIG_REATT_RC}}
+
+<h3>La formula</h3>
+<p>Con le impedenze (capitolo {{cap:impedenza}}) il partitore si scrive subito. Si comincia da H = Z<sub>C</sub>/(R + Z<sub>C</sub>), con Z<sub>C</sub> = 1/(jωC):</p>
+<div class="eq"><span class="m"><i>H</i> = <span class="frac"><span><i>Z</i><sub>C</sub></span><span><i>R</i> + <i>Z</i><sub>C</sub></span></span> = <span class="frac"><span>1/(j<i>ωC</i>)</span><span><i>R</i> + 1/(j<i>ωC</i>)</span></span> = <span class="frac"><span>1</span><span>1 + j<i>ωRC</i></span></span><span class="note">Si moltiplicano numeratore e denominatore per jωC. Il termine ωRC non ha unità: confronta il prodotto RC con il periodo del segnale.</span></span><span class="eqn">(@h_rc)</span></div>
+<p>La frequenza di taglio è quella per cui il termine reale (1) e quello immaginario (ωRC) del denominatore sono uguali, cioè ωRC = 1:</p>
+<div class="eq"><span class="m"><i>f</i><sub>c</sub> = <span class="frac"><span>1</span><span>2π<i>RC</i></span></span>,&emsp;<i>τ</i> = <i>RC</i><span class="note">Con R = 1,6 kΩ e C = 100 nF: τ = {{RC_TAU}} e f<sub>c</sub> = {{RC_FC}} Hz.</span></span><span class="eqn">(@fc_rc)</span></div>
+<p>Con la frequenza di taglio la formula si scrive in una forma «normalizzata», comodissima per i conti: tutto dipende dal rapporto x = f/f<sub>c</sub>.</p>
+<div class="eq"><span class="m"><i>H</i><sub>LP</sub> = <span class="frac"><span>1</span><span>1 + j<i>x</i></span></span>,&emsp;<i>H</i><sub>HP</sub> = <span class="frac"><span>j<i>x</i></span><span>1 + j<i>x</i></span></span>,&emsp;<i>x</i> = <span class="frac"><span><i>f</i></span><span><i>f</i><sub>c</sub></span></span><span class="note">Il passa-alto ha l'uscita ai capi di R: H = R/(R + Z<sub>C</sub>).</span></span><span class="eqn">(@h_rc_norm)</span></div>
+<div class="eq"><span class="m">|<i>H</i><sub>LP</sub>| = <span class="frac"><span>1</span><span>√(1 + <i>x</i>²)</span></span>,&emsp;<i>φ</i><sub>LP</sub> = −arctan(<i>x</i>)<span class="note">Si ottengono dal modulo e dalla fase di 1/(1 + jx) (capitolo {{cap:complessi}}): il denominatore ha modulo √(1 + x²) e fase arctan(x).</span></span><span class="eqn">(@modulo_rc)</span></div>
+
+<h3>Un esempio completo con i numeri</h3>
+{{FIG_RC_ESEMPIO}}
+<h3>Valori attesi</h3>
+<p>La tabella mostra come cambiano modulo e fase al variare di x = f/f<sub>c</sub>. Sono valori da ricordare: a f<sub>c</sub> l'uscita è 0,707 (−3 dB) e la fase è −45°.</p>
+{{TAB_RC}}
+{{FIG_BODE_RC}}
+{{FIG_FASE_RC}}
+<div class="callout note"><span class="tag">Regole da ricordare</span><p>A f<sub>c</sub>: −3,01 dB e ±45°. Una decade sotto f<sub>c</sub> (passa-basso) l'attenuazione è solo 0,04 dB; una decade sopra è 20 dB. Passa-basso e passa-alto con la stessa f<sub>c</sub> sono complementari in potenza: |H<sub>LP</sub>|² + |H<sub>HP</sub>|² = 1.</p></div>
+
+<h3>Come scegliere R e C</h3>
+<p>La frequenza di taglio dipende dal prodotto RC, quindi esistono infinite coppie che danno lo stesso f<sub>c</sub>. Il metodo più semplice: si fissa C, di solito un valore comune (da 1 nF a 1 µF), e si ricava R = 1/(2π f<sub>c</sub> C). La tabella dà f<sub>c</sub> per alcune combinazioni, come guida rapida.</p>
+{{TAB_FC_RC}}
+<p>Regola pratica: resistenze tra 1 kΩ e 100 kΩ. Valori più piccoli caricano troppo la sorgente; valori più grandi sono sensibili al rumore e alle capacità parassite.</p>
+
+<h3>Il punto di vista dei fasori</h3>
+<p>Lo stesso circuito si legge anche nel piano complesso. Al variare della frequenza il punto H(jω), con ω = 2πf, descrive una semicirconferenza: parte da 1 (continua, nessuna attenuazione), passa per 0,5 − j0,5 a f<sub>c</sub> e tende a 0. La distanza dall'origine è il modulo, l'angolo con l'asse reale è la fase.</p>
+{{FIG_LUOGO}}
+<p>Il triangolo del disegno ha un significato fisico: la tensione di ingresso è la somma di quella sulla resistenza e di quella sul condensatore, e in un RC sono sempre perpendicolari (la tensione sul condensatore è in ritardo di 90° rispetto a quella sulla resistenza). A f<sub>c</sub> i due cateti sono uguali: 0,707 ciascuno.</p>
+
+<h3>Nel tempo: la risposta al gradino</h3>
+<p>Un filtro si descrive anche con la sua risposta a un ingresso che cambia di colpo da 0 a V<sub>in</sub> (un «gradino»). Il condensatore si carica attraverso R con la curva esponenziale vista nel capitolo {{cap:condensatore}}:</p>
+<div class="eq"><span class="m"><i>v</i><sub>out</sub>(<i>t</i>) = <i>V</i><sub>in</sub> (1 − e<sup>−<i>t</i>/<i>τ</i></sup>)<span class="note">Dopo τ la tensione ha percorso il 63,2 % del salto; dopo 5τ il 99,3 %.</span></span><span class="eqn">(@gradino_rc)</span></div>
+{{FIG_GRADINO_RC}}
+{{TAB_GRADINO_RC}}
+<p>Frequenza e tempo sono due viste dello stesso fenomeno. Il tempo di salita (da 10 % a 90 %) vale {{RC_TR_COEFF}} τ, cioè 0,35/f<sub>c</sub>: con τ = {{RC_TAU}} è {{RC_TR}}. Per assestarsi entro l'1 % servono {{RC_T1PC}}, entro lo 0,1 % {{RC_T01PC}}. Un filtro stretto in frequenza è quindi lento nel tempo: è un compromesso che si ritrova in tutta la dispensa.</p>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Scambiare «frequenza di taglio» con «frequenza in cui il filtro blocca». A f<sub>c</sub> l'uscita è ancora al 71 %. Un secondo errore frequente è dimenticare il 2π: f<sub>c</sub> = 1/(2πRC), non 1/(RC) (quest'ultima è la pulsazione ω<sub>c</sub> in radianti al secondo).</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>La cella RC è un partitore con un condensatore: filtra perché X<sub>C</sub> cambia con la frequenza.</li>
+<li>f<sub>c</sub> = 1/(2πRC); a f<sub>c</sub> l'uscita è 0,707 (−3 dB) con fase −45° (passa-basso).</li>
+<li>Oltre f<sub>c</sub> scende di 20 dB per decade.</li>
+<li>Nel tempo: costante τ = RC, tempo di salita 0,35/f<sub>c</sub>.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un RC ha R = 10 kΩ e C = 10 nF. Quanto vale f<sub>c</sub>?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>τ = 10000 · 10·10<sup>−9</sup> = 100 µs; f<sub>c</sub> = 1/(2π · 100·10<sup>−6</sup>) = 1592 Hz.</p></div></details></li>
+<li>Quanto vale l'attenuazione di un passa-basso a 10 f<sub>c</sub>?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>|H| = 1/√(1 + 100) = 0,0995, cioè −20 dB.</p></div></details></li>
+<li>Si vuole dimezzare f<sub>c</sub> senza cambiare R. Che cosa si fa a C?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Si raddoppia C: f<sub>c</sub> è inversamente proporzionale a RC.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="carico" class="sec-a">
+<h2><span class="num">#</span>Carico e cascata di celle</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>La formula del filtro vale solo se all'uscita non è collegato nulla che assorba corrente. Appena si collega un carico (un altro circuito, uno strumento), il filtro cambia: l'uscita scende e la frequenza di taglio si sposta. È la ragione per cui due celle RC collegate direttamente non fanno un filtro di ordine due «perfetto».</p></div>
+
+<h3>Impedenza di uscita e di ingresso</h3>
+<p>Ogni uscita ha una resistenza interna (per un filtro RC è almeno R) e ogni ingresso ha una resistenza che assorbe corrente. I due formano un partitore: se la resistenza interna dell'uscita è grande rispetto a quella dell'ingresso a valle, la tensione cala.</p>
+{{FIG_ZOUT}}
+<p>La regola pratica: l'impedenza di ingresso del carico dovrebbe essere almeno 10 volte (meglio 100) quella di uscita della sorgente.</p>
+
+<h3>Un carico resistivo: l'equivalente di Thevenin</h3>
+<p>Un carico R<sub>L</sub> in parallelo al condensatore cambia il circuito. Per capire come, si sostituisce tutto ciò che sta a sinistra del condensatore con un circuito più semplice, ma equivalente: un generatore V<sub>th</sub> con una resistenza R<sub>th</sub> in serie (equivalente di Thevenin). Il generatore V<sub>th</sub> è la tensione a vuoto (R e R<sub>L</sub> in partitore); R<sub>th</sub> è la resistenza vista dal condensatore con il generatore spento (R e R<sub>L</sub> in parallelo).</p>
+{{FIG_THEVENIN}}
+<div class="eq"><span class="m"><i>H</i><sub>0</sub> = <span class="frac"><span><i>R</i><sub>L</sub></span><span><i>R</i> + <i>R</i><sub>L</sub></span></span>,&emsp;<i>f</i><sub>c</sub>′ = <span class="frac"><span>1</span><span>2π (<i>R</i> ∥ <i>R</i><sub>L</sub>) <i>C</i></span></span><span class="note">Il guadagno in continua scende sotto 1 e la frequenza di taglio sale: il condensatore «vede» una resistenza equivalente più bassa.</span></span><span class="eqn">(@carico_rc)</span></div>
+<div class="card esempio"><h4>Esempio svolto: RC con carico uguale a R</h4>
+<p class="passo">Dati: R = 1,6 kΩ, C = 100 nF, R<sub>L</sub> = 1,6 kΩ. Senza carico f<sub>c</sub> = 995 Hz.</p>
+<p class="passo">Guadagno in continua: R<sub>L</sub>/(R + R<sub>L</sub>) = 1600/3200 = 0,5, cioè −6 dB.</p>
+<p class="passo">Resistenza di Thevenin: R ∥ R<sub>L</sub> = 800 Ω.</p>
+<p class="passo">Nuova frequenza di taglio: 1/(2π · 800 · 100·10<sup>−9</sup>) = 1989 Hz, il doppio.</p></div>
+{{TAB_CARICO}}
+
+<h3>Due celle in cascata</h3>
+<p>Per avere una pendenza di 40 dB/decade si può pensare di collegare due celle RC. Ma la seconda è un carico per la prima, e le due non sono più indipendenti: la funzione di trasferimento reale non è il prodotto di quelle delle singole celle.</p>
+{{FIG_CASCATA_RC}}
+<div class="eq"><span class="m"><i>H</i> = <span class="frac"><span>1</span><span>1 + s(<i>R</i><sub>1</sub><i>C</i><sub>1</sub> + <i>R</i><sub>2</sub><i>C</i><sub>2</sub> + <i>R</i><sub>1</sub><i>C</i><sub>2</sub>) + s²<i>R</i><sub>1</sub><i>C</i><sub>1</sub><i>R</i><sub>2</sub><i>C</i><sub>2</sub></span></span><span class="note">Il termine R<sub>1</sub>C<sub>2</sub> è l'effetto del carico; senza di esso si otterrebbe il prodotto di due celle isolate.</span></span><span class="eqn">(@doppio)</span></div>
+{{TAB_DOPPIO}}
+{{FIG_DOPPIO}}
+<p>Con due celle uguali la frequenza di taglio a −3 dB cade a {{DOPPIO_RAPP}} f<sub>c</sub> della singola cella; con le celle isolate da un buffer sarebbe {{DOPPIO_ISO_RAPP}} f<sub>c</sub>. In ogni caso le due celle passive non possono formare un polo complesso: la pendenza ripida si ottiene a spese della forma del ginocchio, che resta «morbido». Per un ginocchio netto servono poli complessi, e per averli senza induttori serve un elemento attivo (parte II).</p>
+
+<h3>Il buffer come soluzione</h3>
+<p>Un <em>buffer</em> è un amplificatore a guadagno 1 con ingresso ad alta impedenza e uscita a bassa: non cambia il segnale, ma separa un circuito dall'altro. Inserito tra due celle le rende indipendenti; messo dopo un filtro lo protegge dal carico.</p>
+{{FIG_BUFFER}}
+<div class="callout errore"><span class="tag">Errore comune</span><p>Dimenticare che anche l'oscilloscopio è un carico. Con R di decine di kΩ, la resistenza di 1 MΩ dell'ingresso cambia già i risultati; la capacità dello strumento aggiunge un altro condensatore in parallelo.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Un carico cambia il filtro: calcolare con l'equivalente di Thevenin (R<sub>th</sub> = R ∥ R<sub>L</sub>).</li>
+<li>Due celle RC collegate direttamente si influenzano: f<sub>c</sub> complessiva = {{DOPPIO_RAPP}} della singola.</li>
+<li>Un buffer rende le celle indipendenti.</li>
+<li>L'impedenza di ingresso del carico deve essere molto maggiore di quella di uscita.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un RC con R = 1 kΩ alimenta un carico di 1 kΩ. Di quanto scende il guadagno in continua?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>A 1000/(1000 + 1000) = 0,5, cioè −6 dB: l'uscita dimezza.</p></div></details></li>
+<li>Perché un buffer aiuta?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Ha ingresso ad alta impedenza (non carica la cella precedente) e uscita a bassa (non risente della successiva).</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="rlc" class="sec-a">
+<h2><span class="num">#</span>Circuiti RLC e fattore Q</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Mettendo insieme un induttore e un condensatore si ottiene un circuito che <em>risuona</em>: c'è una frequenza a cui oscilla con grande facilità, come un'altalena spinta al ritmo giusto. Il fattore Q dice quanto è «affilata» quella risonanza: più è alto, più il circuito è selettivo.</p></div>
+
+<h3>Perché L e C risuonano</h3>
+<p>La reattanza dell'induttore cresce con la frequenza, quella del condensatore scende. A una certa frequenza f<sub>0</sub> sono uguali. In serie, le due impedenze hanno segno opposto (+jωL e −j/(ωC)) e si cancellano: il circuito si comporta come se ci fosse solo la resistenza.</p>
+{{FIG_REATT_LC}}
+<div class="eq"><span class="m"><i>ωL</i> = <span class="frac"><span>1</span><span><i>ωC</i></span></span> ⟹ <i>f</i><sub>0</sub> = <span class="frac"><span>1</span><span>2π√(<i>LC</i>)</span></span><span class="note">Con L = 10 mH e C = 100 nF: f<sub>0</sub> = {{RLC_F0}} Hz e √(L/C) = {{RLC_Z0}} Ω.</span></span><span class="eqn">(@f0_lc)</span></div>
+
+<h3>Il passa-banda serie</h3>
+{{FIG_SCHEMA_RLC}}
+<p>Con l'uscita ai capi della resistenza, alla risonanza passa tutta la tensione (la corrente è massima, limitata solo da R); lontano da f<sub>0</sub> l'induttore o il condensatore bloccano la corrente. Il risultato è un passa-banda:</p>
+<div class="eq"><span class="m"><i>H</i> = <span class="frac"><span><i>R</i></span><span><i>R</i> + j<i>ωL</i> + 1/(j<i>ωC</i>)</span></span> = <span class="frac"><span>j<i>x</i>/<i>Q</i></span><span>1 − <i>x</i>² + j<i>x</i>/<i>Q</i></span></span>,&emsp;<i>x</i> = <i>f</i>/<i>f</i><sub>0</sub><span class="note">Alla risonanza x = 1 e H = 1.</span></span><span class="eqn">(@h_rlc)</span></div>
+
+<h3>Il fattore Q</h3>
+<p>Q confronta la reattanza alla risonanza con la resistenza. Se R è piccola rispetto alla reattanza, il Q è alto.</p>
+<div class="eq"><span class="m"><i>Q</i> = <span class="frac"><span>√(<i>L</i>/<i>C</i>)</span><span><i>R</i></span></span>,&emsp;<i>B</i> = <span class="frac"><span><i>f</i><sub>0</sub></span><span><i>Q</i></span></span><span class="note">B è la larghezza di banda a −3 dB.</span></span><span class="eqn">(@q_rlc)</span></div>
+<p>Alla risonanza la corrente è I = V<sub>in</sub>/R e le tensioni su L e C valgono X·I = Q·V<sub>in</sub>. Sono uguali e opposte, quindi si annullano, ma ciascuna è Q volte più grande della tensione applicata: con Q alto, le tensioni sui componenti possono essere molto maggiori di quella di ingresso. Il fenomeno ha un nome: sovratensione di risonanza.</p>
+{{FIG_FASORI_RIS}}
+{{TAB_RLC_TENSIONI}}
+
+<h3>Banda e selettività</h3>
+<p>Un Q alto significa un circuito molto selettivo: la banda a −3 dB è B = f<sub>0</sub>/Q. Diminuendo R, Q aumenta e la banda si restringe.</p>
+{{TAB_RLC}}
+{{FIG_RLC}}
+<div class="card esempio"><h4>Esempio svolto: L = 10 mH, C = 100 nF, R = 100 Ω</h4>
+<p class="passo">f<sub>0</sub> = 1/(2π√(LC)) = 1/(2π · √(0,01 · 100·10<sup>−9</sup>)) = 1/(2π · 31,6·10<sup>−6</sup>) = {{RLC_F0}} Hz.</p>
+<p class="passo">√(L/C) = √(0,01/(100·10<sup>−9</sup>)) = {{RLC_Z0}} Ω.</p>
+<p class="passo">Q = {{RLC_Z0}}/100 = 3,16; banda B = f<sub>0</sub>/Q ≈ 1592 Hz.</p>
+<p class="passo">Con R = 33 Ω: Q = 9,6 e B ≈ 525 Hz.</p></div>
+<div class="callout warn"><span class="tag">Induttore reale</span><p>L'induttore ha una resistenza serie (DCR) che si somma a R e abbassa il Q reale: con R = 10 Ω e un DCR di 5 Ω il Q passa da {{RLC_Q_NOM}} a {{RLC_Q_DCR}}. Per Q alti la perdita dell'induttore domina; inoltre induttori con nucleo possono saturare e distorcere. Misurare sempre il DCR e inserirlo nel calcolo.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>L e C risuonano a f<sub>0</sub> = 1/(2π√(LC)): lì le reattanze si annullano.</li>
+<li>Q = √(L/C)/R; la banda è B = f<sub>0</sub>/Q.</li>
+<li>Alla risonanza V<sub>L</sub> = V<sub>C</sub> = Q·V<sub>in</sub>: possibile sovratensione.</li>
+<li>L'induttore reale ha DCR, che abbassa Q.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Che cosa succede a Q se si dimezza R?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Q raddoppia (Q = √(L/C)/R): il circuito diventa più selettivo e la banda si dimezza.</p></div></details></li>
+<li>Un circuito risonante ha Q = 20 e riceve 1 V alla risonanza. Quale tensione c'è sul condensatore?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>V<sub>C</sub> = Q · V<sub>in</sub> = 20 V.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="limiti-passivi" class="sec-a">
+<h2><span class="num">#</span>Limiti dei filtri passivi</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>I filtri passivi sono semplici ed economici, ma hanno cinque limiti. Sono questi limiti a rendere utili i filtri attivi.</p></div>
+<ul>
+<li><strong>Nessun guadagno</strong>: il segnale in banda passante può solo essere conservato o attenuato.</li>
+<li><strong>Dipendenza dal carico e dalla sorgente</strong>: l'impedenza di uscita del generatore si somma a R, quella del carico altera guadagno e f<sub>c</sub> (capitolo {{cap:carico}}).</li>
+<li><strong>Poli reali con sole R e C</strong>: per un ginocchio netto servono poli complessi, che richiedono induttori o un elemento attivo.</li>
+<li><strong>Induttori ingombranti e imperfetti</strong>: a frequenze basse i valori richiesti sono grandi, con DCR elevata, accoppiamenti parassiti e possibile saturazione.</li>
+<li><strong>Ordine alto impraticabile</strong>: la cascata diretta di celle passive carica ogni stadio dal successivo e peggiora la forma della risposta.</li>
+</ul>
+<p>Sono limiti di funzionamento, non difetti di principio: un filtro RC resta la soluzione più economica per rumore ad alta frequenza o per un anti-aliasing poco spinto. La parte II mostra come l'amplificatore operazionale li supera.</p>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Passivi: semplici, ma senza guadagno e sensibili al carico.</li>
+<li>Ordine alto e ginocchio netto richiedono elementi attivi.</li>
+</ul></div>
+</section>
+
+<section id="lab-passivi" class="sec-a">
+<h2><span class="num">#</span>Laboratorio sui filtri passivi</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Si montano un RC e un RLC, si misurano ampiezza e fase a diverse frequenze con generatore e oscilloscopio, e si confrontano i risultati con i valori calcolati. Se ci sono differenze di pochi punti percentuali è normale; se sono più grandi, si cerca l'errore.</p></div>
+<p>Ogni passo termina con un valore atteso <em>nominale</em>, calcolato con i dati di progetto. Tolleranze, capacità degli strumenti e impedenza del generatore spostano i risultati. Le schede da compilare sono nell'appendice {{cap:schede}}.</p>
+
+<h3>Preparazione degli strumenti</h3>
+{{FIG_LAB_COLL}}
+<ul>
+<li><strong>Massa</strong>: collegare le masse di generatore, circuito e oscilloscopio in un solo punto.</li>
+<li><strong>Sonde</strong>: compensare la sonda con il segnale quadro dell'oscilloscopio; usare lo stesso attenuatore (1:1 o 10:1) su entrambi i canali.</li>
+<li><strong>Ampiezza di ingresso</strong>: misurarla <em>sul punto P a circuito collegato</em>; il generatore ha un'impedenza di uscita e l'ampiezza cala quando carica il circuito.</li>
+<li><strong>Frequenza</strong>: leggerla dal contatore dell'oscilloscopio, non solo dalla manopola del generatore.</li>
+</ul>
+
+<h3>Come si legge lo schermo dell'oscilloscopio</h3>
+<p>Lo schermo è una griglia di divisioni. Si moltiplica il numero di divisioni per la scala impostata (volt per divisione sull'asse verticale, secondi per divisione su quello orizzontale). Un esempio completo con il filtro RC a 1 kHz:</p>
+{{FIG_SCOPE}}
+<h3>Come si misurano ampiezza, frequenza di taglio e fase</h3>
+<ul>
+<li><strong>Ampiezza</strong>: si legge V<sub>pp</sub> di ingresso e di uscita e si calcola 20 log<sub>10</sub>(V<sub>out</sub>/V<sub>in</sub>).</li>
+<li><strong>Frequenza di taglio</strong>: si varia la frequenza finché V<sub>out</sub> vale 0,707 V<sub>in</sub> (−3 dB).</li>
+<li><strong>Fase, metodo del ritardo</strong>: si misura Δt tra i passaggi per lo zero (nello stesso verso) e si calcola φ = −360 · f · Δt.</li>
+<li><strong>Fase, figura di Lissajous</strong>: in modo XY, l'ingresso su X e l'uscita su Y danno un'ellisse; sen φ = a/b, con a l'intercetta sull'asse Y e b il massimo di Y.</li>
+</ul>
+{{FIG_LISS}}
+
+<h3>Procedura</h3>
+<ol class="steps">
+<li><strong>Misura dei componenti</strong>Misurare R e C reali con il multimetro o con il LCR meter e calcolare la frequenza di taglio con i valori misurati. Usare questa f<sub>c</sub> come riferimento per i passi seguenti.<span class="expect">R ≈ 1,6 kΩ ±1%, C ≈ 100 nF (tolleranza tipica ±5…10%); f<sub>c</sub> nominale {{RC_FC}} Hz</span></li>
+<li><strong>Montaggio del passa-basso</strong>Collegare il generatore all'ingresso (canale 1 dell'oscilloscopio in parallelo) e l'oscilloscopio sull'uscita (canale 2). Impostare 1 V<sub>pp</sub>, sinusoide, 100 Hz. Controllare l'ampiezza di ingresso <em>a circuito collegato</em>: se il generatore ha un'impedenza di uscita di 50 Ω la resistenza equivalente sale a 1,65 kΩ e f<sub>c</sub> scende del 3% circa.<span class="expect">V<sub>out</sub>/V<sub>in</sub> ≈ 0,995 a 100 Hz (−0,04 dB)</span></li>
+<li><strong>Risposta in ampiezza</strong>Impostare le frequenze della tabella del capitolo {{cap:rc}} (multipli di f<sub>c</sub> misurata), mantenendo costante V<sub>in</sub>, e annotare V<sub>out</sub> picco-picco. Calcolare il rapporto in dB.<span class="expect">−0,97 dB a 0,5 f<sub>c</sub>; −3,01 dB a f<sub>c</sub>; −6,99 dB a 2 f<sub>c</sub>; −20,04 dB a 10 f<sub>c</sub></span></li>
+<li><strong>Misura di fase</strong>Misurare il ritardo Δt tra ingresso e uscita e verificare con la figura di Lissajous.<span class="expect">−45° a f<sub>c</sub> (Δt = T/8); −26,6° a 0,5 f<sub>c</sub>; −63,4° a 2 f<sub>c</sub></span></li>
+<li><strong>Passa-alto</strong>Scambiare R e C (uscita ai capi di R) e ripetere i passi 3 e 4.<span class="expect">−3,01 dB e +45° a f<sub>c</sub>; −6,99 dB e +63,4° a 0,5 f<sub>c</sub></span></li>
+<li><strong>Risposta al gradino</strong>Impostare l'onda quadra a una frequenza molto minore di f<sub>c</sub> (circa 50 Hz) e misurare il tempo di salita tra il 10 % e il 90 % sul passa-basso.<span class="expect">t<sub>r</sub> ≈ {{RC_TR}} (cioè 0,35/f<sub>c</sub>)</span></li>
+<li><strong>Carico</strong>Collegare R<sub>L</sub> = 1,6 kΩ in parallelo al condensatore del passa-basso, misurare il guadagno a 100 Hz e la nuova f<sub>c</sub> (frequenza in cui il modulo vale 0,707 del guadagno a 100 Hz).<span class="expect">guadagno ≈ 0,5 (−6,0 dB); f<sub>c</sub> ≈ 1989 Hz</span></li>
+<li><strong>Due celle collegate</strong>Montare due celle RC uguali in cascata diretta e misurare f<sub>c</sub> a −3 dB e l'attenuazione a f<sub>c</sub> della singola cella.<span class="expect">f<sub>c</sub> ≈ {{DOPPIO_RAPP}} · {{RC_FC_INT}} Hz ≈ 372 Hz; −9,5 dB a {{RC_FC_INT}} Hz (non −6,0 dB)</span></li>
+<li><strong>Passa-banda RLC</strong>Montare L = 10 mH, C = 100 nF e R = 100 Ω con uscita su R. Cercare f<sub>0</sub> come frequenza di massima ampiezza (fase 0° tra ingresso e uscita) e misurare le due frequenze a −3 dB. Ripetere con R = 33 Ω.<span class="expect">f<sub>0</sub> ≈ 5033 Hz, banda ≈ 1592 Hz con R = 100 Ω (Q ≈ 3,2); banda ≈ 525 Hz con R = 33 Ω (Q ≈ 9,6). Con la DCR reale dell'induttore Q e banda variano: confrontare con il calcolo che include il DCR.</span></li>
+</ol>
+<div class="callout note"><span class="tag">Capacità degli strumenti</span><p>Una sonda 1:1 e l'ingresso diretto dell'oscilloscopio hanno tipicamente una resistenza di 1 MΩ in parallelo a qualche decina di pF; una sonda 10:1 ha 10 MΩ e una capacità più bassa. Con R di 10 kΩ o più, e frequenze di qualche kHz, il carico dello strumento diventa visibile nelle misure. I valori vanno verificati sulle caratteristiche dello strumento disponibile.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Misurare V<sub>in</sub> sul punto di ingresso a circuito collegato.</li>
+<li>Ampiezza dai V<sub>pp</sub>; f<sub>c</sub> dove V<sub>out</sub> = 0,707 V<sub>in</sub>; fase dal ritardo Δt o dalla figura di Lissajous.</li>
+<li>I valori attesi sono quelli calcolati: scarti di pochi % sono normali.</li>
+</ul></div>
+</section>

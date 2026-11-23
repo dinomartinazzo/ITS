@@ -1,0 +1,97 @@
+<div class="part" id="appendici"><span>Appendici</span><h2 class="part-title">Formulario, glossario, schede, riferimenti</h2></div>
+
+<section id="formulario">
+<h2><span class="num">@</span>Formulario</h2>
+<p>Tutte le formule della dispensa in una pagina, con il capitolo dove sono spiegate.</p>
+<div class="formula-box"><div class="m">
+<b>Ohm e potenza</b> (cap. {{cap:ohm}}): V = R·I; P = V·I<br>
+<b>Serie e parallelo</b> (cap. {{cap:serie-par}}): R<sub>s</sub> = R<sub>1</sub> + R<sub>2</sub>; R<sub>p</sub> = R<sub>1</sub>R<sub>2</sub>/(R<sub>1</sub> + R<sub>2</sub>)<br>
+<b>Partitore</b> (cap. {{cap:serie-par}}): V<sub>out</sub> = V<sub>in</sub> R<sub>2</sub>/(R<sub>1</sub> + R<sub>2</sub>)<br>
+<b>Condensatore</b> (cap. {{cap:condensatore}}): Q = CV; τ = RC; X<sub>C</sub> = 1/(2πfC)<br>
+<b>Induttore</b> (cap. {{cap:induttore}}): X<sub>L</sub> = 2πfL<br>
+<b>Sinusoide</b> (cap. {{cap:segnali}}): T = 1/f; V<sub>rms</sub> = 0,707 V<sub>p</sub>; V<sub>pp</sub> = 2 V<sub>p</sub>; φ = −360° f Δt<br>
+<b>Complessi</b> (cap. {{cap:complessi}}): j² = −1; |a + jb| = √(a² + b²); φ = atan2(b, a)<br>
+<b>Impedenze</b> (cap. {{cap:impedenza}}): Z<sub>R</sub> = R; Z<sub>C</sub> = 1/(jωC); Z<sub>L</sub> = jωL; ω = 2πf<br>
+<b>Decibel</b> (cap. {{cap:log-db}}): |H|<sub>dB</sub> = 20 log<sub>10</sub>|H|; 0,707 → −3,01 dB; 0,5 → −6,02 dB; 0,1 → −20 dB<br>
+<b>RC</b> (cap. {{cap:rc}}): f<sub>c</sub> = 1/(2πRC); |H<sub>LP</sub>| = 1/√(1+(f/f<sub>c</sub>)²); φ = −arctan(f/f<sub>c</sub>); t<sub>r</sub> = 0,35/f<sub>c</sub><br>
+<b>Carico</b> (cap. {{cap:carico}}): V<sub>th</sub>/V<sub>in</sub> = R<sub>L</sub>/(R+R<sub>L</sub>); R<sub>th</sub> = R∥R<sub>L</sub>; f<sub>c</sub>′ = 1/(2πR<sub>th</sub>C)<br>
+<b>RLC serie</b> (cap. {{cap:rlc}}): f<sub>0</sub> = 1/(2π√(LC)); Q = √(L/C)/R; B = f<sub>0</sub>/Q; V<sub>L</sub> = V<sub>C</sub> = Q V<sub>in</sub> a f<sub>0</sub><br>
+<b>Operazionale</b> (cap. {{cap:perche-attivi}}): non invertente K = 1 + R<sub>f</sub>/R<sub>g</sub>; con reazione G ≈ 1/β<br>
+<b>Secondo ordine</b> (cap. {{cap:sk-lp}}): H = 1/(1 − x² + jx/Q), x = f/f<sub>0</sub>; |H(f<sub>0</sub>)| = Q; poli σ = −f<sub>0</sub>/(2Q)<br>
+<b>Sallen-Key, K = 1</b> (cap. {{cap:sk-lp}}): f<sub>0</sub> = 1/(2π√(R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>)); Q = √(R<sub>1</sub>R<sub>2</sub>C<sub>1</sub>C<sub>2</sub>)/(C<sub>2</sub>(R<sub>1</sub>+R<sub>2</sub>)); C<sub>1</sub> ≥ 4Q²C<sub>2</sub><br>
+<b>Sallen-Key a componenti uguali</b> (cap. {{cap:sk-k}}): f<sub>0</sub> = 1/(2πRC); Q = 1/(3−K)<br>
+<b>Butterworth</b> (cap. {{cap:famiglie}}): Q<sub>k</sub> = 1/(2 sin((2k−1)π/(2n))); attenuazione = 10 log<sub>10</sub>(1+(f/f<sub>c</sub>)<sup>2n</sup>)<br>
+<b>Sovraelongazione</b> (2° ordine): exp(−πζ/√(1−ζ²)), ζ = 1/(2Q)<br>
+<b>Limiti reali</b> (cap. {{cap:limiti-reali}}): banda ≈ GBW/K; SR ≥ 2πfV<sub>p</sub>; v<sub>n</sub> = √(4kTRB)<br>
+<b>Anti-aliasing</b> (cap. {{cap:progetto}}): f<sub>alias</sub> = min<sub>k∈ℤ</sub>|f − kf<sub>s</sub>| in [0, f<sub>s</sub>/2]; per disturbo a fondo scala sotto un LSB: ≈ 6,02 N dB
+</div></div>
+</section>
+
+<section id="glossario">
+<h2><span class="num">@</span>Glossario</h2>
+<div class="tbl lungo"><table>
+<thead><tr><th>Termine</th><th>Significato</th></tr></thead>
+<tbody>
+<tr><td>Tensione</td><td>La «spinta» che muove le cariche; si misura in volt</td></tr>
+<tr><td>Corrente</td><td>Quantità di carica che passa al secondo; si misura in ampere</td></tr>
+<tr><td>Resistenza</td><td>Opposizione al passaggio della corrente; si misura in ohm</td></tr>
+<tr><td>Legge di Ohm</td><td>V = R·I: in una resistenza la corrente è proporzionale alla tensione</td></tr>
+<tr><td>Partitore di tensione</td><td>Due resistenze in serie che dividono la tensione in proporzione ai loro valori</td></tr>
+<tr><td>Condensatore</td><td>Componente che immagazzina carica; blocca la continua, lascia passare l'alternata</td></tr>
+<tr><td>Induttore</td><td>Bobina che si oppone alle variazioni di corrente</td></tr>
+<tr><td>Reattanza</td><td>Modulo dell'impedenza di un condensatore o di un induttore, in ohm</td></tr>
+<tr><td>Costante di tempo τ</td><td>Tempo caratteristico di un circuito RC: τ = RC; dopo τ il condensatore ha percorso il 63,2 % di un salto</td></tr>
+<tr><td>Frequenza, periodo</td><td>Oscillazioni al secondo (Hz) e durata di un'oscillazione (s): T = 1/f</td></tr>
+<tr><td>Valore di picco, picco-picco, efficace</td><td>Massimo, distanza tra massimo e minimo e valore equivalente in continua per la potenza (0,707 del picco)</td></tr>
+<tr><td>Fase</td><td>Posizione di una sinusoide rispetto a un riferimento; ritardo e fase sono legati</td></tr>
+<tr><td>Numero complesso</td><td>Numero a + jb, punto del piano; modulo = distanza dall'origine, fase = angolo</td></tr>
+<tr><td>Fasore</td><td>Numero complesso con modulo pari all'ampiezza e argomento pari alla fase di una sinusoide</td></tr>
+<tr><td>Impedenza</td><td>Rapporto complesso tensione/corrente di un componente; R, 1/(jωC), jωL</td></tr>
+<tr><td>Funzione di trasferimento</td><td>Rapporto tra uscita e ingresso; risposta in frequenza H(jω), con ω = 2πf</td></tr>
+<tr><td>Logaritmo, decibel</td><td>Il logaritmo conta i fattori 10; il decibel è 20 log<sub>10</sub> del rapporto tra ampiezze; −3 dB corrisponde a un fattore 0,707</td></tr>
+<tr><td>Frequenza di taglio f<sub>c</sub></td><td>Frequenza a cui l'ampiezza scende di 3 dB rispetto alla banda passante</td></tr>
+<tr><td>Decade, ottava</td><td>Rapporto 10:1 o 2:1 tra frequenze; 20 dB/decade ≈ 6 dB/ottava</td></tr>
+<tr><td>Polo, zero</td><td>Radici del denominatore e del numeratore di H(s); per un passa-basso senza zeri l'ordine n dà una pendenza asintotica di −20n dB/decade</td></tr>
+<tr><td>Ordine</td><td>Numero di poli del filtro; per un passa-basso senza zeri la pendenza asintotica è −20n dB/decade</td></tr>
+<tr><td>Fattore Q</td><td>Parametro di smorzamento di una coppia di poli complessi; per un passa-banda Q = f<sub>0</sub>/B</td></tr>
+<tr><td>Equivalente di Thevenin</td><td>Generatore di tensione con resistenza serie che sostituisce una rete vista da due morsetti</td></tr>
+<tr><td>Ritardo di gruppo</td><td>−dφ/dω: tempo con cui un gruppo di frequenze vicine attraversa il filtro</td></tr>
+<tr><td>Sovraelongazione</td><td>Eccesso del valore massimo rispetto al valore finale in risposta a un gradino</td></tr>
+<tr><td>Butterworth</td><td>Famiglia con banda passante massimamente piatta</td></tr>
+<tr><td>Chebyshev</td><td>Famiglia con ripple costante in banda passante e pendenza maggiore</td></tr>
+<tr><td>Bessel</td><td>Famiglia con ritardo di gruppo quasi costante</td></tr>
+<tr><td>Operazionale</td><td>Amplificatore differenziale ad alto guadagno, usato con reazione negativa</td></tr>
+<tr><td>Buffer</td><td>Amplificatore a guadagno 1 con ingresso ad alta impedenza e uscita a bassa</td></tr>
+<tr><td>Sallen-Key</td><td>Topologia di filtro attivo del secondo ordine con un operazionale non invertente</td></tr>
+<tr><td>GBW</td><td>Prodotto guadagno–banda dell'amplificatore operazionale</td></tr>
+<tr><td>Slew rate</td><td>Massima velocità di variazione dell'uscita (V/µs)</td></tr>
+<tr><td>Anti-aliasing</td><td>Filtro passa-basso prima del campionamento per impedire che componenti oltre f<sub>s</sub>/2 si ripieghino in banda</td></tr>
+<tr><td>Maschera di specifica</td><td>Zone vietate della risposta (banda passante e banda oscura) tra le quali deve passare la curva del filtro</td></tr>
+<tr><td>Serie E12, E24, E96</td><td>Valori normalizzati dei componenti (IEC 60063), rispettivamente 12, 24 e 96 valori per decade</td></tr>
+<tr><td>DCR</td><td>Resistenza in continua dell'avvolgimento di un induttore</td></tr>
+<tr><td>Rail-to-rail</td><td>Operazionale i cui ingressi e/o uscita raggiungono le tensioni di alimentazione</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="schede">
+<h2><span class="num">@</span>Schede di misura</h2>
+<p>Le colonne «Atteso» sono calcolate; le colonne a destra sono da compilare in laboratorio. Annotare data, strumenti e valori reali dei componenti. Lo scarto accettabile è di pochi punti percentuali; oltre il 10% si cerca l'errore.</p>
+<h3>Filtro RC passa-basso (R = 1,6 kΩ, C = 100 nF)</h3>
+{{SCHEDA_RC}}
+<h3>Sallen-Key Butterworth del secondo ordine (f<sub>c</sub> = 1 kHz)</h3>
+{{SCHEDA_N2}}
+<h3>Sallen-Key Butterworth del quarto ordine (f<sub>c</sub> = 1 kHz)</h3>
+{{SCHEDA_N4}}
+</section>
+
+<section id="riferimenti">
+<h2><span class="num">@</span>Riferimenti</h2>
+<div class="tbl"><table>
+<thead><tr><th>Documento</th><th>Contenuto usato nella dispensa</th></tr></thead>
+<tbody>
+<tr><td>J. Karki, Texas Instruments, <em>Active Low-Pass Filter Design</em>, SLOA049B, settembre 2002 (<a href="https://ti.com/lit/SLOA049">ti.com</a>)</td><td>Progetto di filtri passa-basso Sallen-Key e MFB di Bessel, Butterworth e Chebyshev a sezioni in cascata; tabelle di f<sub>0</sub> e Q</td></tr>
+<tr><td>J. Karki, Texas Instruments, <em>Analysis of the Sallen-Key Architecture</em>, SLOA024B, settembre 2002 (<a href="https://ti.com/lit/pdf/SLOA024">ti.com</a>)</td><td>Funzione di trasferimento Sallen-Key passa-basso e passa-alto, comportamento reale dell'amplificatore</td></tr>
+<tr><td>R. Mancini (a cura di), Texas Instruments, <em>Op Amps for Everyone</em>, SLOD006B, agosto 2002</td><td>Fondamenti sugli operazionali e sui filtri attivi</td></tr>
+</tbody></table></div>
+<p>Il testo e le tabelle sono stati ricavati da formule standard e verificati con i test del codice di calcolo. I valori indicati come stime o con [Probabile] non sono stati controllati su documenti specifici e vanno confermati con la misura. Non sono state eseguite misure di laboratorio per questa dispensa: i valori attesi sono calcolati. Nel grafico del guadagno dell'operazionale (capitolo {{cap:limiti-reali}}) i valori A<sub>0</sub> = 100 dB e GBW = 1 MHz sono illustrativi, non di un componente reale.</p>
+</section>

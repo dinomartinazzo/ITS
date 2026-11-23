@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Simulatore")(type "KiCad")(uri "${KIPRJMOD}/Simulatore.pretty")(options "")(descr "Footprint del simulatore di cella di carico"))
+)

@@ -1,0 +1,237 @@
+<section id="segnali" class="sec-d">
+<h2><span class="num">#</span>Segnali alternati e sinusoide</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un segnale <strong>continuo</strong> resta fermo (una batteria). Un segnale <strong>alternato</strong> oscilla avanti e indietro, e la forma di oscillazione più semplice e più importante è la <strong>sinusoide</strong>. Per descriverla bastano tre numeri: quanto è alta, quanto è veloce, da dove parte.</p></div>
+
+<h3>Da dove nasce la sinusoide</h3>
+<p>Si immagini un vettore (una freccia) che gira in cerchio con velocità costante, come la lancetta di un orologio. Se si guarda solo la sua altezza, e si segna quell'altezza nel tempo, si ottiene una sinusoide. È la forma d'onda della tensione di rete, del suono di un diapason, di una portante radio.</p>
+{{FIG_SIN_CERCHIO}}
+<p>Questo è il motivo per cui le sinusoidi sono così importanti: una rotazione regolare è il movimento più semplice possibile, e qualunque circuito fatto di resistenze, condensatori e induttori risponde a una sinusoide con un'altra sinusoide della stessa frequenza. Cambiano solo ampiezza e fase.</p>
+
+<h3>Le tre grandezze</h3>
+{{FIG_PARAM_SIN}}
+<ul>
+<li><strong>Ampiezza</strong> V<sub>p</sub>: l'altezza massima. Si misura in volt.</li>
+<li><strong>Frequenza</strong> f: quante oscillazioni complete in un secondo. Si misura in hertz (Hz). Il <strong>periodo</strong> T è la durata di una oscillazione.</li>
+<li><strong>Fase</strong> φ: dove la curva parte rispetto a un riferimento. Si misura in gradi (o radianti): un periodo intero è 360°.</li>
+</ul>
+<div class="eq"><span class="m"><i>v</i>(<i>t</i>) = <i>V</i><sub>p</sub> sen(2π<i>ft</i> + <i>φ</i>),&emsp;<i>T</i> = <span class="frac"><span>1</span><span><i>f</i></span></span><span class="note">La frequenza e il periodo sono l'uno l'inverso dell'altro: 1 kHz ↔ 1 ms.</span></span><span class="eqn">(@sinusoide)</span></div>
+<div class="tbl"><table>
+<thead><tr><th>Frequenza</th><th>Periodo</th><th>Dove si incontra</th></tr></thead>
+<tbody>
+<tr><td>50 Hz</td><td>20 ms</td><td>Tensione di rete in Europa</td></tr>
+<tr><td>440 Hz</td><td>2,27 ms</td><td>La nota «la» del diapason</td></tr>
+<tr><td>1 kHz</td><td>1 ms</td><td>Frequenza tipica di prova nei laboratori</td></tr>
+<tr><td>20 kHz</td><td>50 µs</td><td>Limite alto dell'udito</td></tr>
+<tr><td>1 MHz</td><td>1 µs</td><td>Segnali radio a onde medie</td></tr>
+</tbody></table></div>
+
+<h3>Picco, picco-picco, efficace</h3>
+<p>Per dire «quanto è grande» una sinusoide si usano tre misure diverse, e conviene non confonderle. Il valore di <strong>picco</strong> è il massimo; il <strong>picco-picco</strong> è la distanza fra massimo e minimo (il doppio del picco); il valore <strong>efficace</strong> (rms) è quello di una tensione continua che scalderebbe una resistenza allo stesso modo.</p>
+{{FIG_PICCO_RMS}}
+<div class="card esempio"><h4>Esempio svolto: la tensione di rete</h4>
+<p class="passo">La rete è «230 V»: è il valore efficace.</p>
+<p class="passo">Picco: V<sub>p</sub> = V<sub>rms</sub> · √2 = 230 · 1,414 = 325 V.</p>
+<p class="passo">Picco-picco: 2 · 325 = 650 V. Un oscilloscopio mostrerebbe una sinusoide che oscilla tra −325 V e +325 V.</p></div>
+
+<h3>La fase e il ritardo</h3>
+<p>La fase dice <em>quando</em> una sinusoide parte rispetto a un'altra. Se due sinusoidi hanno la stessa frequenza ma una è in ritardo, la differenza di fase è proporzionale al ritardo nel tempo: un periodo intero di ritardo è 360°.</p>
+{{FIG_FASORI_RITARDO}}
+<div class="eq"><span class="m"><i>φ</i> = −360° · <span class="frac"><span>Δ<i>t</i></span><span><i>T</i></span></span> = −360° · <i>f</i> · Δ<i>t</i><span class="note">Il segno meno indica ritardo (l'uscita arriva dopo l'ingresso). Con anticipo il segno è più.</span></span><span class="eqn">(@fase_ritardo)</span></div>
+<div class="card esempio"><h4>Esempio svolto: un ritardo di 125 µs a 1 kHz</h4>
+<p class="passo">Periodo: T = 1/1000 = 1 ms = 1000 µs.</p>
+<p class="passo">Frazione di periodo: 125/1000 = 1/8.</p>
+<p class="passo">Fase: φ = −360° · 1/8 = −45°. L'uscita è in ritardo di 45°. È proprio ciò che si misura all'uscita di un filtro RC alla frequenza di taglio.</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Confondere il picco con l'efficace. Una sinusoide «di 1 V» può essere 1 V di picco, 1 V picco-picco o 1 V rms: va sempre specificato. Un oscilloscopio mostra di solito il picco-picco.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>La sinusoide è la proiezione di un vettore che ruota; ha ampiezza, frequenza e fase.</li>
+<li>T = 1/f. Un periodo intero è 360°.</li>
+<li>V<sub>rms</sub> = 0,707 V<sub>p</sub>; V<sub>pp</sub> = 2 V<sub>p</sub>.</li>
+<li>Sfasamento e ritardo sono la stessa cosa: φ = −360° · f · Δt.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Quanto dura un periodo a 2 kHz?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>T = 1/2000 = 0,5 ms = 500 µs.</p></div></details></li>
+<li>Una sinusoide ha 5 V di picco. Quanto vale il picco-picco? E l'efficace?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Picco-picco: 10 V. Efficace: 5 · 0,707 = 3,54 V.</p></div></details></li>
+<li>A 500 Hz un segnale ritarda di 0,5 ms. Di quanti gradi è sfasato?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>T = 2 ms; 0,5/2 = 1/4 di periodo, quindi −90°.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="complessi" class="sec-d">
+<h2><span class="num">#</span>I numeri complessi senza paura</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un <strong>numero complesso</strong> è una coppia di numeri, uno «reale» e uno «immaginario», che si disegna come un punto su un piano. È il modo più comodo di tenere insieme <em>due</em> informazioni (ampiezza e fase) in un solo oggetto. Non è difficile: basta ricordare che moltiplicare per j significa ruotare di 90°.</p></div>
+
+<h3>Perché servono</h3>
+<p>Un circuito in alternata cambia due cose di un segnale: l'ampiezza (diventa più piccola o più grande) e la fase (si sposta nel tempo). Con i numeri normali servirebbero due calcoli separati. Con i numeri complessi basta un'unica moltiplicazione. Non si fa per eleganza: si fa perché semplifica davvero i conti.</p>
+
+<h3>Che cos'è j</h3>
+<p>Il numero j (in matematica si scrive i, ma in elettronica i è la corrente) è definito da una proprietà sola:</p>
+<div class="eq"><span class="m"><i>j</i> × <i>j</i> = <i>j</i>² = −1<span class="note">Nessun numero reale ha un quadrato negativo, quindi j non sta sull'asse dei numeri normali: sta su un asse a parte, perpendicolare, detto asse immaginario.</span></span><span class="eqn">(@j)</span></div>
+<p>Un numero complesso si scrive z = a + jb: a è la <strong>parte reale</strong>, b la <strong>parte immaginaria</strong>. Si disegna come il punto di coordinate (a, b) nel piano.</p>
+{{FIG_NUM_COMPLESSO}}
+<h3>Modulo e fase</h3>
+<p>Il punto z si può descrivere in due modi: con le coordinate (a, b), oppure con la distanza dall'origine (<strong>modulo</strong>) e l'angolo con l'asse reale (<strong>fase</strong>). Il secondo modo è quello che interessa ai filtri, perché modulo e fase sono ampiezza e sfasamento.</p>
+<div class="eq"><span class="m">|<i>z</i>| = √(<i>a</i>² + <i>b</i>²),&emsp;<i>φ</i> = atan2(<i>b</i>, <i>a</i>)<span class="note">atan2 usa entrambi i componenti e restituisce l'angolo nel quadrante giusto. Per z = 3 + j4: modulo = 5, fase = 53,1°.</span></span><span class="eqn">(@modulo)</span></div>
+
+<h3>Le operazioni che servono</h3>
+<ul>
+<li><strong>Somma</strong>: si sommano separatamente le parti reali e le parti immaginarie. (3 + j4) + (1 − j2) = 4 + j2.</li>
+<li><strong>Moltiplicazione per j</strong>: ruota il punto di +90°. j · (3 + j4) = j3 + j²4 = −4 + j3: stesso modulo (5), fase aumentata di 90°.</li>
+<li><strong>Prodotto di due numeri complessi</strong>: i moduli si moltiplicano, le fasi si sommano.</li>
+<li><strong>Divisione</strong>: i moduli si dividono, le fasi si sottraggono.</li>
+</ul>
+<div class="card esempio"><h4>Esempio svolto: 1/(1 + j), il filtro RC alla frequenza di taglio</h4>
+<p class="passo">Denominatore: 1 + j ha modulo √(1 + 1) = 1,414 e fase 45°.</p>
+<p class="passo">Numeratore: 1 ha modulo 1 e fase 0°.</p>
+<p class="passo">Divisione: modulo = 1/1,414 = 0,707; fase = 0° − 45° = −45°.</p>
+<p class="passo">Risultato: ampiezza ridotta a 0,707 e ritardo di 45°. È esattamente ciò che fa un filtro RC alla sua frequenza di taglio (capitolo {{cap:rc}}).</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Il modulo di 3 + j4 non è 3 + 4 = 7, ma √(3² + 4²) = 5. Le due parti non si sommano come numeri, perché stanno su assi perpendicolari: è il teorema di Pitagora.</p></div>
+
+<h3>Dal numero complesso al segnale: il fasore</h3>
+<p>Un segnale sinusoidale si può rappresentare con un numero complesso, detto <strong>fasore</strong>: il suo modulo è l'ampiezza, la sua fase è la fase del segnale. Moltiplicare il fasore di ingresso per un numero complesso H dà il fasore di uscita: il modulo di H è il guadagno, la fase di H è lo sfasamento. Il fasore è come una fotografia del vettore rotante, scattata a un istante fisso: la rotazione comune a tutti i segnali (tutti hanno la stessa frequenza) si può ignorare.</p>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>j² = −1; un numero complesso a + jb è un punto del piano.</li>
+<li>Modulo = distanza dall'origine; fase = angolo.</li>
+<li>Moltiplicare per j ruota di 90°; nei prodotti i moduli si moltiplicano e le fasi si sommano.</li>
+<li>Un fasore rappresenta una sinusoide: modulo = ampiezza, fase = fase.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Modulo e fase di 6 + j8?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Modulo √(36 + 64) = 10; fase arctan(8/6) = 53,1°.</p></div></details></li>
+<li>Quanto vale j · j · j?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>j · j = −1, poi −1 · j = −j: tre rotazioni di 90° fanno 270°, cioè −j.</p></div></details></li>
+<li>Se un numero complesso con modulo 2 e fase 30° è moltiplicato per uno con modulo 3 e fase 40°, che cosa si ottiene?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Modulo 2 · 3 = 6 e fase 30° + 40° = 70°.</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="impedenza" class="sec-d">
+<h2><span class="num">#</span>Impedenza e funzione di trasferimento</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>L'<strong>impedenza</strong> è la «resistenza» di un componente in alternata. È un numero complesso: il suo modulo dice quanto frena, la sua fase dice di quanto sfasa tensione e corrente. Con le impedenze, i circuiti in alternata si calcolano esattamente come quelli in continua. La <strong>funzione di trasferimento</strong> H dice, per ogni frequenza, che cosa esce di ciò che entra.</p></div>
+
+<h3>Tensione e corrente nei tre componenti</h3>
+<p>In una resistenza la corrente segue la tensione senza ritardo. Nel condensatore la corrente è massima quando la tensione sta cambiando più in fretta, cioè passa per lo zero: la corrente <em>anticipa</em> la tensione di un quarto di periodo (90°). Nell'induttore è il contrario: la corrente è in ritardo di 90°.</p>
+{{FIG_FASE_RCL}}
+<h3>L'impedenza</h3>
+<p>Il rapporto complesso tensione/corrente si chiama impedenza e si indica con Z. Dai disegni si legge subito la fase: 0° per la resistenza, −90° per il condensatore (la tensione è in ritardo di 90° sulla corrente), +90° per l'induttore. Moltiplicare per −j ruota di −90°, quindi:</p>
+<div class="tbl"><table>
+<thead><tr><th>Componente</th><th>Impedenza Z</th><th>Modulo</th><th>Fase</th></tr></thead>
+<tbody>
+<tr><td>Resistenza R</td><td>R</td><td>R</td><td>0°</td></tr>
+<tr><td>Condensatore C</td><td>1/(jωC) = −j/(ωC)</td><td>1/(2πfC)</td><td>−90°</td></tr>
+<tr><td>Induttore L</td><td>jωL</td><td>2πfL</td><td>+90°</td></tr>
+</tbody></table></div>
+<p>Con ω = 2πf. Si vede che il modulo è la reattanza già incontrata, mentre il segno di j dice in quale verso sfasa.</p>
+
+<h3>Le regole del continuo valgono ancora</h3>
+<p>Con le impedenze si usano le stesse regole viste per le resistenze: in serie si sommano, in parallelo si sommano gli inversi, il partitore di tensione si calcola con il rapporto delle impedenze. La differenza è che i numeri sono complessi.</p>
+<div class="card esempio"><h4>Esempio svolto: partitore RC a 1 kHz</h4>
+<p class="passo">Si prende R = 1 kΩ in serie a un condensatore con reattanza 1 kΩ a 1 kHz (C ≈ 159 nF). L'uscita è presa ai capi del condensatore.</p>
+<p class="passo">Impedenze: Z<sub>R</sub> = 1000 Ω, Z<sub>C</sub> = −j1000 Ω.</p>
+<p class="passo">Partitore: H = Z<sub>C</sub>/(Z<sub>R</sub> + Z<sub>C</sub>) = −j1000/(1000 − j1000) = −j/(1 − j).</p>
+<p class="passo">Si moltiplicano numeratore e denominatore per (1 + j): −j(1 + j)/((1 − j)(1 + j)) = (−j + 1)/2 = 0,5 − j0,5.</p>
+<p class="passo">Modulo: √(0,25 + 0,25) = 0,707. Fase: arctan(−0,5/0,5) = −45°. Come nell'esempio del capitolo precedente.</p></div>
+
+<h3>La funzione di trasferimento</h3>
+<p>Il rapporto tra il fasore di uscita e quello di ingresso è la <strong>funzione di trasferimento</strong>. Dipende dalla frequenza. Il suo modulo dice di quanto il circuito amplifica o attenua; la sua fase dice di quanto sfasa.</p>
+<div class="eq"><span class="m"><i>H</i>(j<i>f</i>) = <span class="frac"><span><i>V</i><sub>out</sub></span><span><i>V</i><sub>in</sub></span></span>,&emsp;|<i>H</i>| = <span class="frac"><span>ampiezza di uscita</span><span>ampiezza di ingresso</span></span>,&emsp;<i>φ</i> = arg <i>H</i><span class="note">Per un filtro, |H| vicino a 1 significa «passa»; |H| vicino a 0 significa «bloccato».</span></span><span class="eqn">(@h_def)</span></div>
+{{FIG_SCATOLA}}
+<div class="callout errore"><span class="tag">Errore comune</span><p>Si usa H = V<sub>out</sub>/V<sub>in</sub> senza accorgersi che il circuito ha un carico: la formula calcolata «a vuoto» non vale più. Il carico fa parte del circuito e va incluso (capitolo {{cap:carico}}).</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Impedenze: R, 1/(jωC), jωL. Il condensatore sfasa di −90°, l'induttore di +90°.</li>
+<li>Con le impedenze valgono serie, parallelo e partitore, con numeri complessi.</li>
+<li>H(f) = V<sub>out</sub>/V<sub>in</sub>: il suo modulo è il guadagno, la sua fase è lo sfasamento.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Qual è l'impedenza di un condensatore da 1 µF a 159 Hz?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>X<sub>C</sub> = 1/(2π · 159 · 10<sup>−6</sup>) ≈ 1000 Ω, quindi Z<sub>C</sub> = −j1000 Ω (modulo 1 kΩ, fase −90°).</p></div></details></li>
+<li>In un partitore RC con R grande e X<sub>C</sub> piccola, l'uscita presa sul condensatore è grande o piccola?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Piccola: il condensatore ha poca impedenza e prende poca tensione (è quasi un corto circuito).</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="log-db" class="sec-d">
+<h2><span class="num">#</span>Logaritmi, decibel e diagramma di Bode</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Il <strong>logaritmo</strong> conta quante volte si moltiplica per 10. Il <strong>decibel</strong> trasforma un rapporto di tensioni in un numero comodo, e fa sì che «moltiplicare» diventi «sommare». Il <strong>diagramma di Bode</strong> è il grafico in decibel contro la frequenza, su un asse logaritmico: è l'immagine con cui si descrive un filtro.</p></div>
+
+<h3>Il logaritmo in due righe</h3>
+<p>Il logaritmo in base 10 di un numero risponde alla domanda: «quante volte devo moltiplicare 10 per se stesso per ottenerlo?». log<sub>10</sub>(100) = 2 perché 10 · 10 = 100. log<sub>10</sub>(1000) = 3. log<sub>10</sub>(0,1) = −1 perché 0,1 = 1/10. La proprietà più utile: log(a · b) = log a + log b. Un prodotto diventa una somma.</p>
+{{FIG_SCALA_LOG}}
+<p>Su una scala <strong>lineare</strong> i passi sono uguali in valore (1, 2, 3...). Su una scala <strong>logaritmica</strong> i passi sono uguali in rapporto (×10, ×10...). Quando una grandezza varia di molti ordini di grandezza, come la frequenza (da 10 Hz a 100 kHz), la scala logaritmica è l'unica che mostra tutto.</p>
+
+<h3>Il decibel</h3>
+<p>Il guadagno di un filtro è un rapporto tra tensioni. Per comodità lo si esprime in <strong>decibel</strong>:</p>
+<div class="eq"><span class="m">|<i>H</i>|<sub>dB</sub> = 20 · log<sub>10</sub>|<i>H</i>|<span class="note">Il fattore 20 (e non 10) viene dal fatto che la potenza è proporzionale al quadrato della tensione. Per un rapporto di potenze si usa 10 log.</span></span><span class="eqn">(@db)</span></div>
+{{FIG_SCALA_DB}}
+{{TAB_DB}}
+<p>Bastano pochi valori a memoria. 0 dB significa nessun cambiamento (×1). Ogni +6 dB è un raddoppio, ogni −6 dB è un dimezzamento. Ogni 20 dB sono un fattore 10. E −3 dB è la metà della <em>potenza</em> (×0,707 sulla tensione): è il valore che definisce la frequenza di taglio.</p>
+<div class="card esempio"><h4>Esempio svolto: quanto vale un filtro che attenua di 26 dB?</h4>
+<p class="passo">−26 dB significa 20 · log<sub>10</sub>(H) = −26, quindi log<sub>10</sub>(H) = −1,3.</p>
+<p class="passo">H = 10<sup>−1,3</sup> = 0,0501: l'uscita è un ventesimo dell'ingresso.</p>
+<p class="passo">Se due filtri in cascata attenuano 12 dB e 14 dB, i decibel si sommano: 26 dB in totale (le tensioni si moltiplicano: 0,251 · 0,200 = 0,0501).</p></div>
+
+<h3>Decade, ottava e diagramma di Bode</h3>
+<p>Per la frequenza vale lo stesso ragionamento: si usa la scala logaritmica. Un fattore 10 si chiama <em>decade</em>, un fattore 2 <em>ottava</em>. Un filtro si descrive con il <strong>diagramma di Bode</strong>: due grafici, uno del modulo in dB e uno della fase in gradi, entrambi contro la frequenza su scala logaritmica.</p>
+{{FIG_LIN_VS_LOG}}
+<p>Ogni polo di un filtro fa scendere il modulo di 20 dB per decade (circa 6 dB per ottava) oltre la sua frequenza. Con questo si può disegnare a mano il diagramma di un filtro: sono due rette che si incontrano alla frequenza di taglio, con uno scarto massimo di 3 dB nel punto d'incontro.</p>
+{{FIG_ASINT}}
+<div class="callout errore"><span class="tag">Errore comune</span><p>Usare 10 log invece di 20 log per le tensioni, sbagliando di un fattore 2. Oppure sommare i rapporti invece dei decibel: in cascata i rapporti si moltiplicano, i decibel si sommano.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Il logaritmo trasforma prodotti in somme; la scala logaritmica mostra molti ordini di grandezza.</li>
+<li>dB = 20 log<sub>10</sub>(rapporto di tensioni): ×2 = +6 dB, ×10 = +20 dB, ×0,707 = −3 dB.</li>
+<li>In cascata i decibel si sommano.</li>
+<li>Per un passa-basso senza zeri, la pendenza asintotica è −20 dB/decade per ordine.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Che rapporto di tensione corrisponde a +40 dB?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>40 = 20 · 2, quindi 10<sup>2</sup> = 100.</p></div></details></li>
+<li>Un'attenuazione di 0,1 quanti dB è?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>20 · log<sub>10</sub>(0,1) = −20 dB.</p></div></details></li>
+<li>Un filtro scende di 20 dB da 1 kHz a 10 kHz. Di quanto scende da 1 kHz a 100 kHz?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Due decadi: 2 · 20 = 40 dB (con pendenza costante di 20 dB/decade).</p></div></details></li>
+</ol></div>
+</section>
+
+<section id="filtro-cose" class="sec-d">
+<h2><span class="num">#</span>Che cos'è un filtro, tipi e specifiche</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un filtro è un circuito che tratta in modo diverso frequenze diverse: ne lascia passare alcune quasi intatte e ne attenua molto altre. Si descrive con una curva che dice, per ogni frequenza, quanto passa.</p></div>
+
+<h3>Il setaccio delle frequenze</h3>
+<p>Un segnale reale è spesso una somma: un segnale utile, a una certa frequenza, più disturbi a frequenze diverse. Un filtro passa-basso lascia passare le frequenze basse e attenua le alte. Si vede bene con un esempio: un segnale utile a 100 Hz con due disturbi, uno a 3 kHz e uno a 12 kHz.</p>
+{{FIG_SETACCIO}}
+<p>Il filtro RC con frequenza di taglio 500 Hz lascia passare il 98 % del segnale a 100 Hz, ma riduce i disturbi: a 3 kHz resta il 16 %, a 12 kHz il 4 %. Con un filtro più ripido (di ordine più alto) i disturbi sarebbero ancora più ridotti.</p>
+
+<h3>I quattro tipi</h3>
+{{FIG_TIPI}}
+<div class="tbl"><table>
+<thead><tr><th>Tipo</th><th>Lascia passare</th><th>Uso tipico</th></tr></thead>
+<tbody>
+<tr><td>Passa-basso (LP)</td><td>Le frequenze sotto f<sub>c</sub></td><td>Anti-aliasing, riduzione del rumore ad alta frequenza, filtro su sensori lenti</td></tr>
+<tr><td>Passa-alto (HP)</td><td>Le frequenze sopra f<sub>c</sub></td><td>Eliminazione dell'offset e delle derive lente, accoppiamento in alternata</td></tr>
+<tr><td>Passa-banda (BP)</td><td>Un intervallo attorno a f<sub>0</sub></td><td>Selezione di una portante, analisi in banda stretta</td></tr>
+<tr><td>Elimina-banda (notch)</td><td>Tutto tranne un intervallo ristretto</td><td>Eliminazione dei 50 Hz di rete</td></tr>
+</tbody></table></div>
+
+<h3>Il vocabolario di un filtro</h3>
+<p>Per parlare di un filtro serve un po' di vocabolario. Tutto si legge su una sola curva, come quella di un passa-basso:</p>
+{{FIG_SPECIFICHE}}
+<ul>
+<li><strong>Banda passante</strong>: la zona dove il segnale passa quasi intatto.</li>
+<li><strong>Frequenza di taglio f<sub>c</sub></strong>: dove l'uscita è scesa a 0,707 (−3 dB, metà potenza). Convenzionalmente segna il bordo della banda passante.</li>
+<li><strong>Banda di transizione</strong>: dove la curva scende.</li>
+<li><strong>Banda oscura</strong>: dove il segnale è fortemente attenuato.</li>
+<li><strong>Pendenza</strong>: quanto ripida è la discesa, in dB per decade. Un filtro ideale scende a picco; uno reale scende con una pendenza finita.</li>
+</ul>
+
+<h3>Ordine e poli: perché un filtro scende più o meno ripido</h3>
+<p>Nel modello lineare, ogni polo aggiunge asintoticamente 20 dB per decade alla pendenza oltre la propria frequenza caratteristica; gli zeri possono compensare questa pendenza. Un filtro con un polo è del <em>primo ordine</em>; con due poli è del <em>secondo ordine</em>, e così via. Per un passa-basso senza zeri la pendenza finale è −20n dB/decade, con n pari all'ordine.</p>
+{{FIG_POLI_PEND}}
+<p>Quando due poli sono «complessi» (compaiono con un induttore, o con la reazione di un amplificatore), la curva può avere un picco prima di scendere. Il parametro che misura quanto è marcato il picco è il fattore <strong>Q</strong>: è come un'altalena. Con poco attrito (Q alto) oscilla a lungo e va molto in alto; con molto attrito (Q basso) si ferma subito. Q = 0,707 è il valore per cui non c'è picco e la curva è la più piatta possibile.</p>
+
+<h3>Passivo o attivo</h3>
+<div class="callout note"><span class="tag">Passivo o attivo</span><p>Un filtro <em>passivo</em> usa solo resistenze, condensatori e induttori: non amplifica e dipende dal carico. Un filtro <em>attivo</em> aggiunge un amplificatore operazionale, che permette guadagno, isolamento dal carico e poli complessi senza induttori. Le parti I e II sviluppano i due approcci; il capitolo {{cap:progetto}} spiega come scegliere.</p></div>
+<h3>Come si legge una specifica</h3>
+<p>Una specifica completa dice: il tipo di filtro; fino a quale frequenza il segnale deve passare e con quale attenuazione massima tollerata; da quale frequenza in poi deve essere bloccato e con quale attenuazione minima. Da queste cifre si ricava quanto ripido deve essere il filtro, cioè l'ordine. Il capitolo {{cap:progetto}} mostra come disegnare la specifica come una «maschera».</p>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Pensare che la frequenza di taglio sia il punto in cui il filtro «blocca». A f<sub>c</sub> l'uscita è ancora il 71 %: il filtro comincia solo allora a scendere. Per bloccare davvero serve una frequenza molto maggiore.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Un filtro lascia passare certe frequenze e ne attenua altre; i tipi sono passa-basso, passa-alto, passa-banda, elimina-banda.</li>
+<li>Si descrive con banda passante, f<sub>c</sub> (−3 dB), banda di transizione e banda oscura.</li>
+<li>L'ordine è il numero di poli; per un passa-basso senza zeri la pendenza asintotica è −20n dB/decade.</li>
+<li>Q misura il picco: Q = 0,707 è la risposta più piatta.</li>
+</ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol>
+<li>Un disturbo a 50 Hz si può eliminare con un filtro passa-basso?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>Solo se il segnale utile è molto più lento: il passa-basso toglie le frequenze alte. Per togliere proprio 50 Hz si usa un elimina-banda (notch) oppure, se il segnale è molto più veloce, un passa-alto.</p></div></details></li>
+<li>Un filtro del terzo ordine scende di quanto per decade?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>3 · 20 = 60 dB per decade.</p></div></details></li>
+<li>Alla frequenza di taglio, a quanto è ridotta l'uscita?<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>A 0,707 dell'ingresso, cioè −3 dB.</p></div></details></li>
+</ol></div>
+</section>

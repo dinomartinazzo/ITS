@@ -1,0 +1,64 @@
+{
+  "unita": "ohm, mA, mV/V, percento; modelli ideali, non misure",
+  "carico_centro_ohm": 288.2589237190763,
+  "carico_estremo_ohm": 288.21173337392923,
+  "corrente_3_2V_mA": 11.101130742854542,
+  "corrente_5V_mA": 17.34551678571022,
+  "uscita_eccitazione_cortocircuitata_ohm": 340.6293749396846,
+  "uscita_eccitazione_aperta_ohm": 340.62937493968457,
+  "zero_mV_V": 1.16514864917594,
+  "nonlinearita_percento_semifondo_scala": 0.04408550420071509,
+  "punti": [
+    {
+      "p": 0,
+      "mV_V": 1.9897988044067505,
+      "conteggi": 4273060.395273447
+    },
+    {
+      "p": 0.25,
+      "mV_V": 0.9940448332057539,
+      "conteggi": 2134695.024688244
+    },
+    {
+      "p": 0.5,
+      "mV_V": -1.1102230246251565e-13,
+      "conteggi": -2.384185791015625e-07
+    },
+    {
+      "p": 0.75,
+      "mV_V": -0.9940448332059759,
+      "conteggi": -2134695.0246887207
+    },
+    {
+      "p": 1,
+      "mV_V": -1.9897988044068615,
+      "conteggi": -4273060.395273685
+    }
+  ],
+  "fs_RV1_5_percento": [
+    1.9006192297926772,
+    2.078016047367015
+  ],
+  "fs_R5_1_percento": [
+    2.006741612051277,
+    1.9731396958687641
+  ],
+  "fs_R5_alternative": {
+    "7870": 1.0069102563843302,
+    "8060": 0.9850036996285061,
+    "43200": 0.19606922111214953
+  },
+  "offset_R7_R8_opposti_mV_V": 0.18066733227606324,
+  "errori_cavo_percento": {
+    "0.5": -0.3457674377074671,
+    "1": -0.6891520121310446,
+    "2": -1.368870426180191
+  },
+  "rumore_termico_nV_radice_Hz": 2.3755999811780617,
+  "rumore_HX711_50nV_conteggi_a_3_2V": 33.554432,
+  "angoli_tolleranze_zero_esaminati": 128,
+  "angoli_zero_non_raggiungibile": 2,
+  "residuo_zero_massimo_angoli_mV_V": 0.0058127490303316875,
+  "limiti_angoli_zero": "R1-R4 ±0,1%, R7-R8 ±1%, R6 ±1%; altri nominali, cursori ideali",
+  "controlli_analitici": "superati"
+}

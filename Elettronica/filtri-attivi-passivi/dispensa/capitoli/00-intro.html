@@ -1,0 +1,58 @@
+<section id="come">
+<h2><span class="num">#</span>Come usare la dispensa</h2>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Un <strong>filtro</strong> è un circuito che lascia passare certe frequenze e ne ferma altre. È come un setaccio: i pezzi piccoli passano, quelli grossi restano. In elettronica i «pezzi» sono le oscillazioni del segnale, e la loro «grandezza» è la frequenza.</p></div>
+
+<h3>A che cosa servono i filtri</h3>
+<p>Quasi ogni misura elettrica contiene, insieme al segnale utile, qualcosa che non serve: il ronzio a 50 Hz della rete, il fruscio dei componenti, i disturbi dei motori vicini. Un filtro serve a tenere ciò che interessa e a scartare il resto. Qualche esempio che si incontra davvero:</p>
+<ul>
+<li><strong>Prima di un convertitore analogico-digitale (ADC)</strong>: toglie le frequenze troppo alte che il convertitore non sa leggere e che altrimenti si confondono con il segnale (si chiama <em>anti-aliasing</em>, capitolo {{cap:progetto}}).</li>
+<li><strong>Su un sensore lento</strong> (temperatura, peso, pressione): elimina il rumore veloce e lascia il valore che cambia piano.</li>
+<li><strong>In un amplificatore audio</strong>: separa i bassi dagli acuti, o elimina il ronzio.</li>
+<li><strong>In un ricevitore radio</strong>: seleziona una stazione e ignora le altre.</li>
+</ul>
+
+<h3>Il percorso</h3>
+<p>La dispensa parte da zero. Prima si ripassano le idee di base dell'elettricità (corrente, resistenza, condensatore) e quelle dei segnali alternati (sinusoide, numeri complessi, decibel). Poi si costruiscono i filtri più semplici, con resistenze e condensatori. Infine si aggiunge l'amplificatore operazionale, che permette filtri molto migliori. Ogni parte si appoggia alla precedente.</p>
+{{FIG_PERCORSO}}
+
+<h3>Come è fatto ogni capitolo</h3>
+<p>Ogni capitolo ha gli stessi elementi, riconoscibili dal colore, così si trovano subito:</p>
+<div class="callout simple"><span class="tag">In parole semplici</span><p>Il riquadro verde riassume un'idea con parole di tutti i giorni, senza formule. Da leggere per primo.</p></div>
+<div class="card esempio"><h4>Esempio svolto</h4><p class="passo">La scheda con il bordo ambra mostra un calcolo con i numeri, passo dopo passo.</p><p class="passo">Conviene rifarlo con la calcolatrice prima di andare avanti.</p></div>
+<div class="callout errore"><span class="tag">Errore comune</span><p>Il riquadro rosso segnala uno sbaglio che si fa spesso, con il modo per evitarlo.</p></div>
+<div class="riepilogo"><h4>Riepilogo</h4><ul><li>Alla fine di ogni capitolo, i punti da ricordare in poche righe.</li></ul></div>
+<div class="quiz"><h4>Controlla di aver capito</h4><ol><li>Qualche domanda per verificarsi. Prima si prova a rispondere, poi si apre la risposta.<details class="sv"><summary>Risposta</summary><div class="sv-b"><p>La risposta spiega anche il perché.</p></div></details></li></ol></div>
+
+<h3>I simboli</h3>
+<p>Ecco i simboli che compaiono più spesso. Non serve impararli a memoria: si possono consultare qui (e nel glossario, appendice {{cap:glossario}}) ogni volta.</p>
+<div class="tbl lungo"><table>
+<thead><tr><th>Simbolo</th><th>Che cosa è</th><th>Unità</th></tr></thead>
+<tbody>
+<tr><td>V, v</td><td>Tensione, la «spinta» che muove le cariche</td><td>volt (V)</td></tr>
+<tr><td>I, i</td><td>Corrente, quante cariche passano al secondo</td><td>ampere (A)</td></tr>
+<tr><td>R</td><td>Resistenza, quanto il componente «frena» la corrente</td><td>ohm (Ω)</td></tr>
+<tr><td>C</td><td>Capacità del condensatore</td><td>farad (F); si usano nF e µF</td></tr>
+<tr><td>L</td><td>Induttanza dell'induttore</td><td>henry (H); si usano mH</td></tr>
+<tr><td>f</td><td>Frequenza: quante oscillazioni al secondo</td><td>hertz (Hz)</td></tr>
+<tr><td>T</td><td>Periodo: durata di un'oscillazione, T = 1/f</td><td>secondo (s)</td></tr>
+<tr><td>ω</td><td>Pulsazione, ω = 2πf</td><td>radianti al secondo</td></tr>
+<tr><td>j</td><td>Unità immaginaria, j² = −1 (capitolo {{cap:complessi}})</td><td>—</td></tr>
+<tr><td>H</td><td>Funzione di trasferimento: uscita diviso ingresso</td><td>—</td></tr>
+<tr><td>f<sub>c</sub></td><td>Frequenza di taglio del filtro</td><td>Hz</td></tr>
+<tr><td>Q</td><td>Fattore di qualità: quanto è «affilata» una risonanza</td><td>—</td></tr>
+<tr><td>τ</td><td>Costante di tempo, τ = RC</td><td>secondo (s)</td></tr>
+<tr><td>dB</td><td>Decibel, scala logaritmica per i rapporti</td><td>dB</td></tr>
+</tbody></table></div>
+<h3>Qualche consiglio</h3>
+<ul>
+<li><strong>Disegnare</strong>: ricopiare a mano gli schemi aiuta a ricordarli molto più che leggerli.</li>
+<li><strong>Rifare i conti</strong>: ogni esempio svolto è fatto per essere rifatto con la calcolatrice.</li>
+<li><strong>Non saltare le basi</strong> se qualcosa dopo non torna: quasi sempre l'idea mancante è nella parte A.</li>
+<li><strong>Provare in laboratorio</strong>: i capitoli di laboratorio dicono quali valori aspettarsi, così si capisce subito se la misura è giusta.</li>
+</ul>
+<div class="riepilogo"><h4>Riepilogo</h4><ul>
+<li>Un filtro lascia passare certe frequenze e ne ferma altre.</li>
+<li>Serve a togliere rumore, a preparare un segnale per un convertitore, a separare segnali diversi.</li>
+<li>Il percorso: teoria di base, filtri passivi, filtri attivi, progetto.</li>
+</ul></div>
+</section>
